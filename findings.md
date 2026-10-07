@@ -5,14 +5,15 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-No measured baseline perplexity yet. The original download is running as job
-511918 on one H200 and eight CPUs, with 1,831/6,081 checkpointed shards
-at 2026-10-08 00:42 Asia/Taipei. Storage has approximately 9.9 TB
-available after the earlier capacity failure. Complete download import into
-`dolma-dclm10-002` remains the prerequisite for production split/filter/packing.
+No measured baseline perplexity yet. Original download job 511918 remains RUNNING
+on one verified H200 and eight CPUs, with 2,827/6,081 checkpointed shards
+at 2026-10-08 01:05 Asia/Taipei. The completion manifest is absent.
+Storage reports approximately 9.9 TB available. Import into `dolma-dclm10-002`
+remains blocked until this stage terminates successfully and is reconciled.
+All four preserved continuation source hashes still match the original identity.
 Synthetic preprocessing/resume/retirement and four/eight-GPU distributed correctness
-checks passed. These checks do not establish full-model throughput or perplexity.
-The lightweight suite now passes 50 tests.
+checks passed; full-model throughput and perplexity remain unmeasured.
+The lightweight suite passes 55 tests.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
@@ -67,3 +68,27 @@ No stage advanced because the download has no completion manifest. Baseline <=20
 before 2026-10-09 remains an unachieved target; roughly
 23.3 hours
 remain at this observation, and preprocessing/training time is not yet measured.
+
+## Heartbeat update (2026-10-08 01:05 Asia/Taipei)
+Download continues to progress; no new or newly terminated allocation was found.
+Eight terminated jobs still match sacct: 1.0716667 H200-hours reconciled.
+The active download has 0.8788889 H200-hours observed provisionally; retain its
+24-hour allocation ceiling, giving 25.0716667 measured-plus-reserved hours.
+There are still zero full runs committed and zero production training tokens.
+Shard counts indicate progress, not byte-volume completion or a timing forecast.
+
+The preprocessing shell wrapper previously saved only a post-reply TSV entry and
+used no recovery tag. It now delegates to a metadata-only Python helper which
+persists the unique intent in central state and a /work receipt before dispatch,
+retains a 24-H200-hour reservation for uncertain replies, prevents overlapping
+stages for that preparation until recovery/accounting, and binds returned job IDs.
+Training and preprocessing share bounded metadata recovery with receipt fallback
+for nano4's absent sacct comments. Five additional small regression tests pass;
+55 total, shell syntax and diff checks pass. Existing download source and geometry
+remain unchanged; no heavy runtime check or production submission was needed.
+
+Approximately 22.9 hours remain before 2026-10-09 Asia/Taipei. Baseline
+perplexity <=20 is still an unachieved target; production preprocessing and full
+model training have not begun. Advance only after completion, artifact checks,
+and accounting. No cleanup is authorized before the independent full eval archive
+and production verification seal exist.

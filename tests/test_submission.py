@@ -94,5 +94,93 @@ class SubmissionTests(unittest.TestCase):
             query.assert_not_called()
 
 
+class PreprocessingSubmissionTests(unittest.TestCase):
+    def setUp(self):
+        from training_state import atomic_json
+        from slurm import submit_preprocessing
+        self.helper = submit_preprocessing
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.state_path = self.root / 'research-state.yaml'
+        atomic_json(self.state_path, {'jobs': [], 'submission_intents': [],
+            'accounting': {'shared_measured_plus_outstanding_reservations_upper_bound': 1.5}})
+
+    def submit(self, response):
+        with patch.object(self.helper.subprocess, 'run', return_value=response):
+            return self.helper.submit('download', 'prep', ['--reuse-download-from', 'old'],
+                                      self.root, self.state_path)
+
+    def test_intent_is_durable_before_dispatch_and_success_binds(self):
+        def dispatch(command, **kwargs):
+            state = read_json(self.state_path)
+            item = state['submission_intents'][0]
+            self.assertEqual(item['status'], 'submission_uncertain')
+            self.assertEqual(state['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'], 25.5)
+            self.assertIn('--comment=' + item['tag'], command)
+            self.assertEqual(read_json(self.helper.receipt_path(self.root, item['tag'])), item)
+            self.assertEqual(command[-2:], ['--reuse-download-from', 'old'])
+            return subprocess.CompletedProcess([], 0, '123;cluster\n', '')
+        with patch.object(self.helper.subprocess, 'run', side_effect=dispatch):
+            self.assertEqual(self.helper.submit('download','prep',['--reuse-download-from','old'],
+                                              self.root,self.state_path), '123')
+        state = read_json(self.state_path)
+        self.assertEqual(state['jobs'][0]['job_id'], '123')
+        self.assertEqual(state['submission_intents'][0]['returned_job_id'], '123')
+        with self.assertRaisesRegex(ValueError, 'recovered/reconciled'):
+            self.submit(subprocess.CompletedProcess([],0,'124',''))
+
+    def test_uncertain_reply_retains_reservation_and_blocks_other_stage(self):
+        for response in [subprocess.CompletedProcess([],1,'','connection lost'),
+                         subprocess.CompletedProcess([],0,'invalid','')]:
+            with self.subTest(response=response), self.assertRaisesRegex(RuntimeError, 'Do not resubmit'):
+                self.submit(response)
+            state = read_json(self.state_path)
+            self.assertEqual(state['submission_intents'][0]['status'], 'submission_uncertain')
+            self.assertEqual(state['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'],25.5)
+            with patch.object(self.helper.subprocess, 'run') as dispatch, self.assertRaises(ValueError):
+                self.helper.submit('split','prep',[],self.root,self.state_path)
+            dispatch.assert_not_called()
+            from training_state import atomic_json
+            atomic_json(self.state_path, {'jobs': [], 'submission_intents': [],
+                'accounting': {'shared_measured_plus_outstanding_reservations_upper_bound': 1.5}})
+
+    def test_returned_receipt_recovers_crash_without_query_or_resubmission(self):
+        with patch.object(self.helper, 'bind', side_effect=RuntimeError('interrupted')):
+            with self.assertRaises(RuntimeError):
+                self.submit(subprocess.CompletedProcess([],0,'123',''))
+        tag = read_json(self.state_path)['submission_intents'][0]['tag']
+        with patch.object(self.helper.subprocess, 'run') as query:
+            self.assertEqual(self.helper.recover(tag,self.root,self.state_path),'123')
+            query.assert_not_called()
+        self.assertEqual(read_json(self.state_path)['jobs'][0]['job_id'],'123')
+        self.assertEqual(read_json(self.state_path)['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'],25.5)
+
+    def test_reconciled_intent_allows_next_stage_and_legacy_active_intent_blocks(self):
+        from training_state import atomic_json
+        self.submit(subprocess.CompletedProcess([],0,'123',''))
+        atomic_json(self.root/'preprocessing-ledger.json', {'jobs': {'123': {'h200_hours':0.1}}})
+        with patch.object(self.helper.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'124','')):
+            self.assertEqual(self.helper.submit('split','prep',[],self.root,self.state_path),'124')
+        state=read_json(self.state_path)
+        state['submission_intents']=[{'prep_id':'other','job_id':'125','status':'submitted','tag':'legacy'}]
+        atomic_json(self.state_path,state)
+        with patch.object(self.helper.subprocess,'run') as dispatch, self.assertRaises(ValueError):
+            self.helper.submit('download','other',[],self.root,self.state_path)
+        dispatch.assert_not_called()
+
+    def test_timeout_is_uncertain_but_exec_failure_releases_only_undispatched_intent(self):
+        with patch.object(self.helper.subprocess, 'run', side_effect=subprocess.TimeoutExpired('sbatch',60)), \
+             self.assertRaisesRegex(RuntimeError, 'retain intent'):
+            self.helper.submit('download','prep',[],self.root,self.state_path)
+        self.assertEqual(read_json(self.state_path)['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'],25.5)
+        with patch.object(self.helper.subprocess, 'run', side_effect=FileNotFoundError('sbatch')), \
+             self.assertRaises(FileNotFoundError):
+            self.helper.submit('download','another-prep',[],self.root,self.state_path)
+        state=read_json(self.state_path)
+        self.assertEqual(state['submission_intents'][-1]['status'],'not_dispatched')
+        self.assertEqual(state['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'],25.5)
+
+
 if __name__ == '__main__':
     unittest.main()

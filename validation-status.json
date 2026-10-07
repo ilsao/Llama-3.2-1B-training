@@ -47,7 +47,7 @@
       "state": "FAILED"
     }
   ],
-  "blocker": null,
+  "blocker": "Production download incomplete; no sealed real corpus for full model validation/scaling",
   "download_continuation_job": "511918",
   "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
   "gpu_runtime_checks": {
@@ -68,22 +68,22 @@
     "interval_minutes": 20
   },
   "lightweight_tests": {
-    "count": 50,
+    "count": 55,
     "passed": true
   },
-  "original_download_shards_recorded": 1831,
+  "original_download_shards_recorded": 2827,
   "original_download_shards_total": 6081,
   "preserved_download_worktree": ".download-continuation",
   "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
   "production_cleanup": "not submitted; full corpus and verify are prerequisites",
-  "recorded_at": "2026-10-07T16:42:51.300676+00:00",
+  "recorded_at": "2026-10-07T17:05:51.138250+00:00",
   "runtime_checks": "511939 and 511949 passed: worker/native/shuffle/selection/packing/resume equivalence, eval original archive/resume, offline loader after intermediate retirement",
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "storage": "Expanded; df reports approximately 10 TB available",
-  "submission_recovery": "mocked fail/malformed/success/recovery/ambiguity/receipt tests passed; no production submission needed",
+  "storage": "df: 10T total, approximately 9.9T available",
+  "submission_recovery": "Training and preprocessing mocked lost reply, malformed response, recovery, receipt and timeout checks passed; no production allocation submitted",
   "training_environment": "completed job 511940; pip check passed; actual cost reconciled"
 }

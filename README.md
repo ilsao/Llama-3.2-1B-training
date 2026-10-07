@@ -153,7 +153,7 @@ IDs 是範例；新實驗須使用唯一 ID，同一資料流程的正式階段�
 正式 preparation 修改程式、設定或環境後也須換新 ID，不能混用不同 revision 的產物。
 
 上述資料 jobs 也可改用 `slurm/submit.sh`；它會建立 logs、呼叫 `sbatch`，並把 job ID
-寫入 `logs/submissions.tsv`。它不會自動串接下游或自動核銷。各列的對應指令如下，
+寫入 `research-state.yaml` 與 `logs/preprocessing-*.json`。它不會自動串接下游或自動核銷。各列的對應指令如下，
 同樣須逐一等待完成：
 
 ```bash
@@ -226,6 +226,20 @@ exit status 與 accounting snapshot 另存於 `logs/job-JOB_ID/`。
 它與訓練 experiment ledger 分開，不能將訓練 allocation 改記為資料前處理。
 
 ### 4. 資料階段續跑與下載重用
+
+`bash slurm/submit.sh STAGE PREPARATION_ID [dataset arguments]` now persists a unique
+submission intent in `research-state.yaml` before dispatch and tags the Slurm job.
+It requests eight CPUs total and the authorized one-H200 preprocessing allocation,
+with a 24-hour ceiling. Returned receipts live under `DATA_ROOT/logs/preprocessing-*.json`.
+A lost, timed-out, or malformed reply retains its 24 H200-hour reservation and blocks
+another stage for that preparation. Recover once with
+`bash slurm/submit.sh recover preprocessing-TAG`; recovery checks queue/accounting
+and startup allocation receipts without submitting or polling. Reconcile the recovered
+job with `slurm/accounting.py` after termination. Stage exit/artifact checks still apply.
+The wrapper updates durable state under a submission lock; invoke it only from the
+single heartbeat controller (or a foreground maintenance lease), not concurrently
+with state edits. The preserved `.download-continuation` remains unchanged.
+
 
 前處理依實際 Slurm end time 保留 **15 分鐘**停止餘裕，在已提交的 batches／shards
 保存進度。Exit **75** 時，核銷後重新提交同一階段與同一 preparation ID，例如：

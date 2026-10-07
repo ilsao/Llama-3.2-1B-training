@@ -35,3 +35,12 @@
   comments; startup allocation receipts provide terminal fallback. 50 lightweight
   tests, shell syntax and diff checks pass. Full model/resume/scaling remain blocked
   on sealed real data. Durable report: to_human/heartbeat-20261008-0043.md.
+
+- 2026-10-08T01:05:51.138250+08:00 bounded heartbeat: download 511918 still RUNNING,
+  2827/6081 checkpointed shards, no completion manifest. Audited eight
+  terminated jobs; 1.0716667 reconciled H200-hours; active observed
+  0.8788889 separate from its 24-hour reservation. No new jobs or stage
+  advancement. Preserved four source hashes still match. Fixed preprocessing
+  lost-reply safety with durable central intents, /work receipts, unique tags,
+  retained reservations and bounded recovery shared with training. 55 lightweight
+  tests and shell/diff checks passed. Report: to_human/heartbeat-20261008-0105.md.

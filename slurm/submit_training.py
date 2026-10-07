@@ -2,7 +2,6 @@
 """Lightweight submission/reconciliation; never loads torch or corpus data."""
 import argparse
 import datetime as dt
-import getpass
 import os
 import re
 from pathlib import Path
@@ -11,6 +10,7 @@ import sys
 import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from slurm.submission import find_submission_job
 from training_state import (DEFAULT_ROOT, PROJECT, ExperimentLedger, identifier,
                             load_config, storage_root)
 
@@ -21,37 +21,7 @@ def recover_submission(ledger, reservation):
         item = dict(data['jobs'][reservation])
     if item['status'] not in {'reserved', 'submission_uncertain'} or not item.get('submission_tag'):
         raise ValueError('Expected an unbound reservation with a durable submission tag')
-    if item.get('returned_job_id'):
-        ledger.bind(reservation, item['returned_job_id'])
-        return item['returned_job_id']
-    query_start = (dt.datetime.fromisoformat(item['submission_started_utc'])
-                   - dt.timedelta(minutes=1)).astimezone().strftime('%Y-%m-%dT%H:%M:%S')
-    commands = [
-        ['squeue', '--noheader', '--user', getpass.getuser(), '--format=%i|%k'],
-        ['sacct', '-X', '--noheader', '--parsable2', '--user', getpass.getuser(),
-         '--starttime', query_start, '--format=JobIDRaw,Comment%128'],
-    ]
-    matches = set()
-    for command in commands:
-        result = subprocess.run(command, capture_output=True, text=True)
-        if result.returncode:
-            raise RuntimeError('Slurm recovery query failed; reservation remains charged')
-        for row in result.stdout.splitlines():
-            fields = row.strip().split('|')
-            if len(fields) >= 2 and fields[1].strip() == item['submission_tag']:
-                if not re.fullmatch(r'\d+', fields[0].strip()):
-                    raise ValueError('Unexpected tagged Slurm job ID; reservation remains charged')
-                matches.add(fields[0].strip())
-    # nano4 does not retain job comments in sacct (AccountingStoreFlags=null).
-    # Startup scontrol allocation receipts retain the exact submission tag.
-    for receipt in (ledger.path.parent / 'logs').glob('job-*/allocation.txt'):
-        comment = re.search(r'\bComment=(\S+)', receipt.read_text())
-        job_id = receipt.parent.name[len('job-'):]
-        if comment and comment[1] == item['submission_tag'] and re.fullmatch(r'\d+', job_id):
-            matches.add(job_id)
-    if len(matches) != 1:
-        raise ValueError(f'Recovery found {len(matches)} matching jobs; reservation remains charged; do not retry submission')
-    job_id = matches.pop()
+    job_id = find_submission_job(item, ledger.path.parent)
     ledger.bind(reservation, job_id)
     return job_id
 
