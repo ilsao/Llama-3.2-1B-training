@@ -5,20 +5,21 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Spawn recovery validation 512718 completed exit 0 in 68 seconds on 1 H200/8 CPUs,
-with passed result.json: compressed native 1/7-worker loading after threaded prelude,
-original fields/order, canonical seed-42 shuffle, dedup/filter/token/packing masks,
-archive/resume and offline retirement/reload all passed. Cost 0.0188889 H200-hours
-reconciled; shared total 3.9397222. This supports the synthetic recovery recipe,
-not the exact root cause of cancelled 512532 or real-corpus split completion.
-New preparation dolma-dclm10-003 imports the completed download via job 513010,
-RUNNING on 1 H200/8 CPUs. Spawn methods are recorded in its source-bound identity.
-Reserve 24 H200-hours; shared measured plus reserved upper bound 27.9397222.
-Original corpus, complete 001/002 manifests and cancelled 002 files remain intact.
-Next: import completion/accounting, then full split on 003, followed by filtering.
-Full 50,000-doc eval preservation and production verify remain pending; no cleanup,
-training or perplexity result yet. 57 lightweight tests previously passed, not repeated
-this metadata cycle. Heartbeat reports directly in the visible thread.
+Spawn recovery validation 512718 passed all compressed native 1/7-worker order,
+shuffle, archive/resume and offline retirement contracts. New 003 import/checksum
+job 513010 completed exit 0 in 41 seconds with all 6081 artifacts; its cost
+0.0113889 H200-hours is reconciled. Shared reconciled total 3.9511111.
+Split 513322 is RUNNING on 1 H200/8 CPUs for dolma-dclm10-003, preserving fingerprint
+730e2e01d60dd490658c690a5b36b4fb30605c67813d884aa299faf8afc36671.
+Startup confirms both process libraries use spawn; native full train loading with
+seven workers has started. Canonical source lineage, seed-42 global shuffle,
+last-50,000 eval, fixed first-10,000 subset and independent original eval archive
+remain pending real split completion. Filtering waits for split success/accounting.
+Reserve 24 H200-hours; shared measured plus reserved upper bound 27.9511111.
+All earlier files/identities remain intact. No cleanup, production training tokens
+or perplexity result. 57 lightweight tests previously passed, not repeated this
+metadata cycle. Exact root cause of cancelled 512532 remains unconfirmed;
+new split has phase logs and periodic Python stacks for diagnosis.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
