@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from training_state import DEFAULT_ROOT, PROJECT, atomic_json, identifier, locked, read_json, storage_root
 from slurm.submission import find_submission_job
 
-STAGES = {'setup', 'download', 'split', 'clean', 'score', 'select', 'pack', 'verify', 'smoke', 'parallel-check'}
+STAGES = {'setup', 'download', 'split', 'clean', 'score', 'select', 'pack', 'verify', 'smoke', 'parallel-check', 'cache-audit'}
 
 
 def receipt_path(root, tag):
@@ -65,8 +65,8 @@ def submit(stage, prep_id, extra, root, state_path):
                     and old.get('job_id') not in accounted):
                 raise ValueError('Existing preprocessing intent must be recovered/reconciled before submission')
         tag = 'preprocessing-' + uuid.uuid4().hex
-        wall_time = '00:30:00' if stage == 'parallel-check' else '24:00:00'
-        reserved_hours = 0.5 if stage == 'parallel-check' else 24
+        wall_time = '00:30:00' if stage in {'parallel-check', 'cache-audit'} else '24:00:00'
+        reserved_hours = 0.5 if stage in {'parallel-check', 'cache-audit'} else 24
         script = 'setup.sbatch' if stage == 'setup' else 'score.sbatch' if stage == 'score' else 'prepare.sbatch'
         command = ['sbatch', '--parsable', '--cpus-per-task=8', '--gpus-per-node=1',
                    f'--time={wall_time}', f'--comment={tag}',

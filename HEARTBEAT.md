@@ -63,6 +63,16 @@ dolma-dclm10-004. Preserve 001/002/003; import only the completed 001 download.
 After successful split manifest/full eval archive/accounting, submit clean;
 never let a failed split trigger filtering or cleanup.
 
+Full generation split 513955 subsequently failed on zstd data corruption without
+a shard filename. Follow experiments/compressed-corpus-audit/protocol.md and use
+`cache-audit` through the durable wrapper: seven workers plus coordinator,
+one H200/eight CPUs, 30-minute ceiling and ten-minute runtime timeout. Save exact
+per-shard hashes/decoding failures and an ordered resumable cursor. Exit 75
+continues the same audit only after accounting. Read only; do not skip documents,
+change canonical revision/order, overwrite previous manifests or delete artifacts.
+Locate failed shards, then authenticate against pinned upstream metadata and an
+independent decoder/new separate copy before selecting any production repair.
+
 ## Controls
 
 `python3 slurm/heartbeat.py status|install|run-once|disable`

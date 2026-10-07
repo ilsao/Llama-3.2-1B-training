@@ -132,8 +132,8 @@ class PreprocessingSubmissionTests(unittest.TestCase):
 
     def test_validation_time_and_reservation_agree_even_if_reply_is_lost(self):
         from training_state import atomic_json
-        for reply_ok in (True, False):
-            with self.subTest(reply_ok=reply_ok):
+        for stage, reply_ok in [(stage, ok) for stage in ('parallel-check', 'cache-audit') for ok in (True, False)]:
+            with self.subTest(stage=stage, reply_ok=reply_ok):
                 atomic_json(self.state_path, {'jobs': [], 'submission_intents': [],
                     'accounting': {'shared_measured_plus_outstanding_reservations_upper_bound': 1.5}})
                 def dispatch(command, **kwargs):
@@ -142,10 +142,10 @@ class PreprocessingSubmissionTests(unittest.TestCase):
                     return subprocess.CompletedProcess([], 0 if reply_ok else 1, '123' if reply_ok else '', '')
                 with patch.object(self.helper.subprocess, 'run', side_effect=dispatch):
                     if reply_ok:
-                        self.helper.submit('parallel-check', 'validation', [], self.root, self.state_path)
+                        self.helper.submit(stage, 'validation', [], self.root, self.state_path)
                     else:
                         with self.assertRaisesRegex(RuntimeError, 'retain 0.5'):
-                            self.helper.submit('parallel-check', 'validation', [], self.root, self.state_path)
+                            self.helper.submit(stage, 'validation', [], self.root, self.state_path)
                 state = read_json(self.state_path)
                 self.assertEqual(state['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'], 2.0)
                 if reply_ok:

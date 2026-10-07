@@ -15,9 +15,14 @@ set -euo pipefail
 source /home/asciibase64/Llama-3.2-1B-training/slurm/common.sh
 STAGE=${1:?Supply download, split, clean, select, pack, verify, smoke, or parallel-check}
 PREPARATION_ID=${2:?Supply a unique preparation ID; reuse it only for identical continuations}
-case "$STAGE" in download|split|clean|select|pack|verify|smoke|parallel-check) ;; *) echo 'Use score.sbatch for score' >&2; exit 1;; esac
+case "$STAGE" in download|split|clean|select|pack|verify|smoke|parallel-check|cache-audit) ;; *) echo 'Use score.sbatch for score' >&2; exit 1;; esac
 printf '%s\n' "$PREPARATION_ID" > "$JOB_RECORD/preparation-id.txt"
 printf '%s\n' "$STAGE" > "$JOB_RECORD/stage.txt"
+if [[ "$STAGE" == cache-audit ]]; then
+    timeout --signal=TERM --kill-after=30s 600s srun --ntasks=1 \
+        python "$REPO/slurm/cache_audit.py" --run-id "$PREPARATION_ID" --root "$DATA_ROOT" "${@:3}"
+    exit
+fi
 if [[ "$STAGE" == parallel-check ]]; then
     timeout --signal=TERM --kill-after=30s 600s srun --ntasks=1 \
         python "$REPO/tests/preparation_runtime.py" --run-id "$PREPARATION_ID" --root "$DATA_ROOT"
