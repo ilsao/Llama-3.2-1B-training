@@ -50,3 +50,8 @@
   changed normal ticks from hidden codex exec sessions to visible-thread queue.
   Kept cron interval and project-only controls. Read-only --check-only remains
   available; normal progress is now reported directly in the bound chat.
+
+- 2026-10-08T01:20:07.801786+08:00 visible heartbeat: download 511918 RUNNING, 3389/6081
+  shards; complete manifest absent. Eight terminated allocations match Slurm,
+  1.0716667 reconciled H200-hours; active download 1.1166667 provisional.
+  No new jobs, no production cleanup, no repeated tests. Saved to_human/heartbeat-20261008-0120.md.

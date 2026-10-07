@@ -5,15 +5,14 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-No measured baseline perplexity yet. Original download job 511918 remains RUNNING
-on one verified H200 and eight CPUs, with 2,827/6,081 checkpointed shards
-at 2026-10-08 01:05 Asia/Taipei. The completion manifest is absent.
-Storage reports approximately 9.9 TB available. Import into `dolma-dclm10-002`
-remains blocked until this stage terminates successfully and is reconciled.
-All four preserved continuation source hashes still match the original identity.
-Synthetic preprocessing/resume/retirement and four/eight-GPU distributed correctness
-checks passed; full-model throughput and perplexity remain unmeasured.
-The lightweight suite passes 55 tests.
+No measured baseline perplexity yet. Download 511918 is RUNNING on one H200 and
+8 CPUs, with 3389/6081 checkpointed shards at 2026-10-08 01:20 Asia/Taipei.
+No completion manifest exists. Source hashes match the preserved identity.
+Eight terminated jobs match sacct and authoritative ledgers: 1.0716667 H200-hours
+reconciled. Active download has 1.1166667 provisional H200-hours observed.
+Synthetic archive/resume/retirement and 4/8-GPU correctness checks passed; actual
+full-model throughput and perplexity remain unmeasured. Latest lightweight suite:
+56 passed. Heartbeat now continues and reports in this visible Codex thread.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
