@@ -63,3 +63,6 @@ slurm-*.err
 
 # Original download continuation worktree
 /.download-continuation/
+
+.heartbeat-disabled
+.heartbeat-maintenance.json

@@ -226,8 +226,8 @@ sbatch slurm/prepare.sbatch split dolma-dclm10-001
 中斷的來源核對 shard 或 split-index 建置會於重啟時重新檢查；全域 SQL 排名、索引建置、
 checksum 或 verify pass 可能須重新執行該操作。Verify 沒有部分成功的封存紀錄。
 慢速檔案操作或單次原生 loader 操作仍可能超過停止餘裕，Slurm wall-time 是最後上限。
-每個 preparation 使用檔案鎖防止同時寫入；已提交的產物不可修改，也不可刪除 manifest
-所引用的原生 caches。
+每個 preparation 使用檔案鎖防止同時寫入；已提交的產物不可修改。只有完成完整驗證、保存獨立 eval 全集後，才可透過
+下述 cleanup 工具釋放冗餘產物；禁止手動刪除仍被引用的 caches。
 
 如果修改前處理配方，但 dataset ID／revision 未變，可用新 preparation ID 重用舊流程
 **已完成**的 download。程式會重新核對來源 manifest、檔案順序與全部 checksums，
@@ -246,7 +246,10 @@ checksums、來源關係與統計。清理階段的不可變 SQLite 索引記錄
 文字雜湊、來源與 shuffle position；`empty` table 記錄空白文件，其餘原始訓練列是
 重複文件。評分階段保存全部符合條件的網頁評分。選取階段保存前 10% 候選索引、
 選中文件 IDs、文字雜湊、token IDs 與 evaluation slots；預算跳過行為可由候選順序
-與總數重現。評估文件的原始 ID／文字仍完整保留於固定 revision 的原生 Arrow cache。
+與總數重現。split 階段將全部 50,000 篇評估文件的原始欄位獨立保存於
+`split/evaluation-raw/`，附原始 row index、shuffle position、evaluation slot、來源及
+文字 checksum；不依賴完整原生 Arrow cache。所有 eval document tokens 與 packed
+sequences 均保留，固定子集仍為 reserved order 的前 10,000 篇。
 
 Packed Arrow 包含 `input_ids`、`attention_mask`、`labels`、`document_spans`
 （原始 row 與 token offsets）及 `evaluation_slot`（訓練為 -1）。完整 verify 會獨立
@@ -513,3 +516,52 @@ sbatch --test-only slurm/template.sbatch
 真實 1B validation 和 4／8 GPU scaling 尚未完成。既有 caches／資料未刪除，
 原下載 job 511170 已失敗（最後紀錄 1072／6081 shards），其 allocation 也已核銷。
 恢復可用空間後以新的 validation/run IDs 重新提交；舊下載 ID 使用保留 worktree 續跑。
+
+
+## Autoresearch heartbeat 與資料清理
+
+Heartbeat 每 20 分鐘透過 cron 啟動已登入的 Codex CLI；以獨立新回合讀取
+`HEARTBEAT.md`、`research-state.yaml`、`findings.md` 與 `research-log.md` 接續工作。
+它不是目前聊天室的定時喚醒。排程用專案鎖避免重疊，維持既有 login-node／Slurm
+分工。每次執行最多 18 分鐘，逾時終止 agent process group；Slurm jobs 獨立執行，
+下一次 heartbeat 查證並接續，不能重複提交。
+
+```bash
+python3 slurm/heartbeat.py install
+python3 slurm/heartbeat.py status
+python3 slurm/heartbeat.py run-once --check-only
+python3 slurm/heartbeat.py disable
+```
+
+Install／disable 只修改本專案標記的 cron entry，保留其他 entries。Heartbeat logs、
+執行摘要與 `last-run.json` 位於 `DATA_ROOT/runs/heartbeat/`。短期 foreground lease
+會讓 cron 跳過同時修改的回合，到期後自動恢復。
+
+本次原下載以 `.download-continuation/slurm/prepare.sbatch` 接續
+`dolma-dclm10-001`；完成及核銷後，主流程使用新 ID `dolma-dclm10-002`：
+
+```bash
+sbatch .download-continuation/slurm/prepare.sbatch download dolma-dclm10-001
+bash slurm/submit.sh download dolma-dclm10-002 --reuse-download-from dolma-dclm10-001
+```
+
+新版 verify 封存完整 eval 原文及 packed 資料。完整驗證後、没有其他本專案 jobs
+執行或排隊時，用獨立 Slurm job 預覽及清理：
+
+```bash
+sbatch slurm/cleanup.sbatch dolma-dclm10-002 --dry-run --retire-download-source
+# 預覽 job 成功並完成核銷後：
+sbatch slurm/cleanup.sbatch dolma-dclm10-002 --apply --retire-download-source
+```
+
+Cleanup 僅釋放本專案內由 manifests 證實的原始下載、native raw Arrow cache 與
+重複的 training document tokens；其餘未知檔案保留。其他 preparation（含未完成
+state）的引用、完整 eval 原文／tokens／packed、training packed、tokenizer、索引、
+設定、帳本、logs 及 checkpoints 都受到保護。拒絕越界路徑、symlink 刪除路徑及
+hardlinks。所有 data jobs 與 cleanup 共用 retention lock。
+
+只有來源 preparation 尚未開始下游工作時，才可使用 `--retire-download-source`。
+原始 manifests 保持不變，`retention.json` 記錄釋放的路徑／checksum／原因，
+`cleanup-result.json` 記錄本次回收量與清理後離線 reload 結果。已 retired 的
+preparation 保持可載入 sealed packed 資料，不能續跑已釋放的歷史階段；重做前處理
+須使用新 ID 並重新取得原始資料。Exit 75 的 cleanup 可重送同一命令。

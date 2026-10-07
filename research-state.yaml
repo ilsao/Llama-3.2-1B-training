@@ -1,0 +1,61 @@
+{
+  "project": {
+    "title": "Llama 3.2 1B from scratch",
+    "status": "active",
+    "timezone": "Asia/Taipei",
+    "baseline_deadline": "2026-10-09",
+    "lab_deadline": "2026-10-20"
+  },
+  "continuity": {
+    "interval_minutes": 20,
+    "controller": "slurm/heartbeat.py",
+    "state": "enabled",
+    "check_only_passed": true
+  },
+  "workspace": {
+    "storage": "/work/asciibase64/Llama-3.2-1B-training",
+    "findings": "findings.md",
+    "log": "research-log.md",
+    "reports": "to_human/"
+  },
+  "pipeline": {
+    "download_preparation": "dolma-dclm10-001",
+    "downstream_preparation": "dolma-dclm10-002",
+    "recorded_download_shards": 1072,
+    "total_download_shards": 6081,
+    "recipe": "exact native global shuffle, dedup, CC top 10 percent",
+    "eval_raw_archive": "implementing",
+    "safe_cleanup": "implementing"
+  },
+  "jobs": [
+    {
+      "job_id": "511918",
+      "stage": "download",
+      "prep_id": "dolma-dclm10-001",
+      "ledger": "preprocessing",
+      "status": "submitted",
+      "tag": "autoresearch-download-e1b915ee148c"
+    }
+  ],
+  "submission_intents": [
+    {
+      "tag": "autoresearch-download-e1b915ee148c",
+      "stage": "download",
+      "prep_id": "dolma-dclm10-001",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:13:05.949397+00:00",
+      "job_id": "511918"
+    }
+  ],
+  "experiments": {
+    "proxy_metric": "eval/perplexity",
+    "baseline_value": null,
+    "best_value": null,
+    "trajectory": []
+  },
+  "next_actions": [
+    "Monitor/reconcile original download.",
+    "Complete independent full eval archive and guarded cleanup.",
+    "Rerun worker equivalence and training environment checks."
+  ]
+}

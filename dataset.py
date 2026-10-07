@@ -261,6 +261,8 @@ class Preparation:
         return path
 
     def manifest(self, stage, full=False):
+        if (self.path / 'retention.json').exists():
+            raise ValueError('Preparation intermediates retired; load sealed packed data or use a new preparation ID')
         path = self.path / stage / 'manifest.json'
         value = read_json(path)
         if value['fingerprint'] != self.key or value['stage'] != stage:
@@ -542,16 +544,59 @@ def stage_split(prep):
     np.save(eval_path, permutation[-cfg['evaluation_documents']:])
     np.save(subset_path, permutation[-cfg['evaluation_documents']:
                                      -cfg['evaluation_documents'] + cfg['evaluation_subset_documents']])
+    eval_raw_files = archive_evaluation(prep, raw, np.load(eval_path), state['ranges'], inverse)
     cache_files = [artifact(Path(item['filename'])) for item in raw.cache_files]
     if not cache_files:
         raise ValueError('Expected disk-backed native Arrow cache files')
     prep.finish('split', [permutation_path, inverse_path, eval_path, subset_path] +
-                [item['path'] for item in cache_files],
+                [item['path'] for item in cache_files + eval_raw_files],
                 {'row_count': n, 'train_document_count': n - cfg['evaluation_documents'],
                  'ranges': state['ranges'], 'raw_cache_files': cache_files,
+                 'evaluation_raw_files': eval_raw_files,
+                 'evaluation_raw_documents': cfg['evaluation_documents'],
+                 'evaluation_raw_format': 'Arrow; original document fields nested unchanged; reserved shuffle order',
                  'raw_fingerprint': raw._fingerprint, 'features': raw.features.to_dict(),
                  'shuffle': 'datasets.Dataset.shuffle(seed=42), then index selection',
                  'seed': cfg['shuffle_seed'], 'evaluation_subset': 'first 10000 of reserved ordered documents'})
+
+
+
+def archive_evaluation(prep, raw, evaluation, ranges, inverse):
+    """Persist every reserved original document independently of native raw caches."""
+    import pyarrow as pa
+    directory = prep.directory('split') / 'evaluation-raw'
+    directory.mkdir(exist_ok=True)
+    state_path = directory / 'state.json'
+    state = state_for(state_path, {'files': [], 'next_slot': 0})
+    if state['next_slot'] != sum(item['rows'] for item in state['files']):
+        raise ValueError('Evaluation archive cursor mismatch')
+    for item in state['files']:
+        check_artifact(item, True)
+    schema = pa.schema([pa.field('row_index', pa.uint64()),
+                        pa.field('shuffle_position', pa.uint64()),
+                        pa.field('evaluation_slot', pa.int32()),
+                        pa.field('source', pa.string()),
+                        pa.field('text_sha256', pa.binary(32)),
+                        pa.field('document', pa.struct(list(raw.features.arrow_schema)))])
+    ends = [item['end'] for item in ranges]
+    batch_size = prep.config['document_batch_size']
+    for start in range(state['next_slot'], len(evaluation), batch_size):
+        stop_if_requested()
+        rows = []
+        for slot in range(start, min(start + batch_size, len(evaluation))):
+            index = int(evaluation[slot])
+            original = raw[index]
+            rows.append({'row_index': index, 'shuffle_position': int(inverse[index]),
+                         'evaluation_slot': slot, 'source': source_at(ranges, ends, index),
+                         'text_sha256': hashlib.sha256(original['text'].encode()).digest(),
+                         'document': original})
+        target = directory / f'original-{len(state["files"]):06d}.arrow'
+        state['files'].append(write_arrow(target, rows, schema))
+        state['next_slot'] = start + len(rows)
+        atomic_json(state_path, state)
+    if state['next_slot'] != len(evaluation):
+        raise ValueError('Incomplete evaluation original archive')
+    return state['files']
 
 
 def compare_raw_chunk(raw, offset, docs):
@@ -993,6 +1038,26 @@ def stage_verify(prep):
         raise ValueError('Evaluation is not the last 50000 shuffled documents')
     if not np.array_equal(subset, evaluation[:cfg['evaluation_subset_documents']]):
         raise ValueError('Evaluation subset membership changed')
+    eval_raw_files = split.get('evaluation_raw_files', [])
+    if not eval_raw_files:
+        raise ValueError('Missing independent full evaluation original archive')
+    raw_count = 0
+    ranges, ends = split['ranges'], [item['end'] for item in split['ranges']]
+    for archived, _ in iter_arrow(eval_raw_files):
+        stop_if_requested()
+        if raw_count >= len(evaluation):
+            raise ValueError('Extra evaluation original documents')
+        index = int(evaluation[raw_count])
+        original = raw[index]
+        if (archived['row_index'] != index or archived['evaluation_slot'] != raw_count
+                or archived['shuffle_position'] != int(inverse[index])
+                or archived['source'] != source_at(ranges, ends, index)
+                or archived['document'] != original
+                or archived['text_sha256'] != hashlib.sha256(original['text'].encode()).digest()):
+            raise ValueError('Evaluation original archive provenance/order/content mismatch')
+        raw_count += 1
+    if raw_count != cfg['evaluation_documents']:
+        raise ValueError('Incomplete evaluation original archive')
     selected = prep.manifest('select')['details']
     packed = prep.manifest('pack')['details']
     raw = load_raw(prep)
@@ -1076,11 +1141,13 @@ def stage_verify(prep):
     report = prep.directory('verify') / 'report.json'
     atomic_json(report, {'fingerprint': prep.key, 'pack_manifest_sha256': sha256(prep.path / 'pack/manifest.json'),
                         'training': train, 'evaluation': evaluation_stats,
-                        'evaluation_documents': eval_docs, 'subset_documents': len(subset),
+                        'evaluation_documents': eval_docs, 'evaluation_raw_documents': raw_count,
+                        'evaluation_raw_files': eval_raw_files, 'subset_documents': len(subset),
                         'training_limit': cfg['max_training_tokens'],
                         'scope': 'artifact checksums, split bijection, provenance, global quality ranking, '
                                  'budget, full sequence reconstruction and loss masks'})
-    prep.finish('verify', [report, prep.path / 'verify/canonical-shuffle.arrow'], read_json(report))
+    prep.finish('verify', [report, prep.path / 'verify/canonical-shuffle.arrow'] +
+                [item['path'] for item in eval_raw_files], read_json(report))
     print(json.dumps(read_json(report), indent=2), flush=True)
 
 
@@ -1203,7 +1270,8 @@ def main():
         STOP = True
     signal.signal(signal.SIGUSR1, handler)
     signal.signal(signal.SIGTERM, handler)
-    with (prep.path / '.lock').open('a') as lock:
+    with (root / '.retention.lock').open('a') as retention, (prep.path / '.lock').open('a') as lock:
+        fcntl.flock(retention, fcntl.LOCK_SH | fcntl.LOCK_NB)
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         if args.stage != 'smoke' and prep.done(args.stage):
             return 0

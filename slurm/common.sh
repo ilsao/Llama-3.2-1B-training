@@ -28,6 +28,10 @@ export NUMEXPR_NUM_THREADS=1
 export VECLIB_MAXIMUM_THREADS=1
 export RAYON_NUM_THREADS=1
 export HF_ENABLE_PARALLEL_LOADING=false
+if [[ ${RETENTION_EXCLUSIVE:-0} != 1 ]]; then
+    exec 9>"$DATA_ROOT/.retention.lock"
+    flock -s -n 9 || { echo 'Project cleanup is active; defer data job' >&2; exit 1; }
+fi
 JOB_RECORD="$DATA_ROOT/logs/job-${SLURM_JOB_ID}"
 mkdir -p "$JOB_RECORD"
 date -u +%FT%TZ > "$JOB_RECORD/start.txt"

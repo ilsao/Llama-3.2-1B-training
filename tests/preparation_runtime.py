@@ -131,6 +131,30 @@ def main():
     cfg = pipeline.read_json(pipeline.PROJECT / 'configs/dataset.json')
     cfg.update(max_training_tokens=30000, document_batch_size=4, document_shard_tokens=4096,
                sequence_shard_rows=2, evaluation_documents=5, evaluation_subset_documents=2)
+    archives = []
+    for interrupted in (False, True):
+        archive_prep = Fixture(path / f'archive-resume-{interrupted}', cfg, split, evaluation, inverse)
+        if interrupted:
+            counter = {'calls': 0}
+            def interrupt_archive():
+                counter['calls'] += 1
+                if counter['calls'] == 2:
+                    raise pipeline.StopRequested('interrupt archive after first shard')
+            with patch.object(pipeline, 'stop_if_requested', side_effect=interrupt_archive):
+                try:
+                    pipeline.archive_evaluation(archive_prep, raw, evaluation, split['ranges'], inverse)
+                except pipeline.StopRequested:
+                    pass
+                else:
+                    raise AssertionError('archive did not reach interruption boundary')
+        files = pipeline.archive_evaluation(archive_prep, raw, evaluation, split['ranges'], inverse)
+        restored = [row for row, _ in pipeline.iter_arrow(files)]
+        assert [row['row_index'] for row in restored] == evaluation.tolist()
+        assert [row['document'] for row in restored] == [raw[int(i)] for i in evaluation]
+        assert [row['evaluation_slot'] for row in restored] == list(range(len(evaluation)))
+        archives.append({'rows': restored, 'hashes': [item['sha256'] for item in files]})
+    assert archives[0] == archives[1], 'Evaluation original archive resume changed content/order'
+
     expected = None
     for workers, resume in ((1, False), (7, False), (7, True)):
         recipe = {**cfg, 'preprocessing_workers': workers, 'score_workers': workers}
@@ -158,7 +182,8 @@ def main():
     result = {'passed': True, 'job_id': os.environ['SLURM_JOB_ID'], 'allocated_cpus': int(os.environ['SLURM_CPUS_PER_TASK']),
               'workers': [1, 7], 'checks': ['native ordering', 'canonical shuffle', 'split disjointness',
               'dedup winners', 'official scores', 'candidate order', 'token IDs and budget',
-              'packing and masks', 'Arrow checksums', 'committed resume', 'worker failure cursor']}
+              'packing and masks', 'Arrow checksums', 'committed resume', 'worker failure cursor',
+              'full original evaluation archive and interrupted resume']}
     pipeline.atomic_json(path / 'result.json', result)
     print(json.dumps(result), flush=True)
 
