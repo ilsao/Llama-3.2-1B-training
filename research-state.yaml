@@ -1,18 +1,27 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 24,
-    "active_preprocessing_h200_hours_observed": 0.005555555555555556,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
+    "active_preprocessing_h200_hours_observed": 0,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T19:02:23.682216+00:00",
-    "preprocessing_h200_hours_reconciled": 3.3738888888888896,
-    "shared_h200_hours_reconciled": 3.5275000000000007,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 27.5275,
+    "observed_utc": "2026-10-07T19:28:33.511421+00:00",
+    "preprocessing_h200_hours_reconciled": 3.767222222222223,
+    "shared_h200_hours_reconciled": 3.9208333333333343,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 3.9208333333333343,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
   },
+  "cancellation_intents": [
+    {
+      "end": "2026-10-08T03:25:39",
+      "job_id": "512532",
+      "reason": "No split cache/output progress for >20 minutes; main wait4 waits on futex-blocked child, another zombie; suspected multiprocessing deadlock",
+      "status": "cancelled and reconciled",
+      "timestamp": "2026-10-07T19:25:39.187540+00:00"
+    }
+  ],
   "continuity": {
     "check_only_passed": true,
     "controller": "slurm/heartbeat.py",
@@ -164,49 +173,49 @@
       "tag": "preprocessing-3e4865d586f44700aac43bce2eb1e57e"
     },
     {
-      "accounting_status": "reserved; reconcile after termination",
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 24,
-      "elapsed_seconds_observed": 20,
-      "h200_hours_observed": 0.005555555555555556,
+      "elapsed_seconds_observed": 1416,
+      "h200_hours": 0.3933333333333333,
+      "h200_hours_observed": 0.3933333333333333,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512532/gpus.txt",
       "job_id": "512532",
-      "last_observed_utc": "2026-10-07T19:02:23.682216+00:00",
+      "last_observed_utc": "2026-10-07T19:28:33.511421+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-002",
-      "result": "native raw dataset construction, canonical shuffle, split lineage and independent eval archive in progress",
+      "reconciled": true,
+      "result": "cancelled after >20min no progress; suspected multiprocessing deadlock, root cause unconfirmed",
       "stage": "split",
-      "status": "RUNNING",
+      "status": "CANCELLED by 44781",
       "tag": "preprocessing-a67e2147bc1d414f9cd22b348d0bf84d"
     }
   ],
   "last_heartbeat": {
-    "blocker": "Split RUNNING; clean/filtering waits for split completion",
+    "blocker": "Native split loader stalled; cancelled and charged, repair/validation required before resubmission",
     "delivery": "visible_thread_queue",
     "lightweight_tests_passed": 56,
-    "local_time": "2026-10-08T03:02:23.682216+08:00",
-    "new_jobs_submitted": [
+    "local_time": "2026-10-08T03:28:33.511421+08:00",
+    "new_jobs_submitted": [],
+    "new_terminated_jobs_reconciled": [
       "512532"
     ],
-    "new_terminated_jobs_reconciled": [
-      "512500"
-    ],
-    "observed_utc": "2026-10-07T19:02:23.682216+00:00",
-    "ready_stage_advanced": true,
-    "report": "to_human/heartbeat-20261008-0302.md",
-    "tests_this_cycle": "source/config/manifest metadata and git diff checks; no code changes or repeated runtime tests"
+    "observed_utc": "2026-10-07T19:28:33.511421+00:00",
+    "ready_stage_advanced": false,
+    "report": "to_human/heartbeat-20261008-0328.md",
+    "tests_this_cycle": "bounded process/cgroup/cache metadata diagnostics; no runtime tests or code changes"
   },
   "next_actions": [
-    "Observe split job 512532 at next heartbeat and reconcile only on termination; do not duplicate it.",
-    "After split exit 0, completed manifest, full evaluation raw archive and accounting, submit clean dolma-dclm10-002 using the durable wrapper.",
-    "Advance score/select/pack/verify one stage at a time after completion/accounting; retain exact source/environment identity and canonical split/filtering semantics.",
-    "After full 50,000-doc independent eval raw/tokens/packed preservation and verify seal, run project-only cleanup dry-run then apply.",
-    "Run full 1B/context8192 resume validation and matched-global-batch 4/8-GPU scaling on sealed real data before AdamW baseline."
+    "Investigate/repair native loader startup with spawn for both stdlib multiprocessing and multiprocess before threaded libraries; root cause remains inferred.",
+    "Run a registered Slurm validation using native compressed JSON loading at 1/7 workers after threaded prelude; compare native order, seed-42 indices and resume/archive contracts.",
+    "If preparation source changes, use dolma-dclm10-003 with completed-download reuse; never mutate dolma-dclm10-002 identity or delete retained artifacts.",
+    "After passing validation, completed import and accounting, submit canonical full split, then clean/score/select/pack/verify sequentially.",
+    "Preserve full 50,000 eval raw/tokens/packed and fixed subset; cleanup only after production verification; full-model validation/scaling/AdamW follow sealed data."
   ],
   "pipeline": {
-    "blocked_stage": "clean/filtering awaits completed split manifest",
+    "blocked_stage": "native loader multiprocessing startup repair and Slurm validation",
     "download_complete": true,
     "download_manifest_sha256": "673484b5a3527655957325ea38ad67e3cfdeb1f49ee4d9d7fc93fde8608172e8",
     "download_preparation": "dolma-dclm10-001",
@@ -219,8 +228,18 @@
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
     "recorded_download_shards": 6081,
     "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify",
+    "split_diagnostic": {
+      "child_wait": "futex",
+      "log_last_modified_utc": "2026-10-07T19:02:23+00:00",
+      "native_cache_incomplete": true,
+      "observed_compute_step_cpu_seconds": 9,
+      "other_child": "zombie, exit 0",
+      "parent_wait": "wait4 on child 642463",
+      "root_cause_confirmed": false,
+      "split_state_present": false
+    },
     "split_job_id": "512532",
-    "split_status": "RUNNING",
+    "split_status": "CANCELLED; suspected multiprocessing deadlock",
     "total_download_shards": 6081
   },
   "project": {

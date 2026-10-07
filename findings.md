@@ -5,19 +5,20 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Download 511918 completed all 6081 shards successfully. Import/checksum job 512500
-also completed exit 0, with a full 6081-artifact manifest in dolma-dclm10-002;
-corpus files are reused without copying. Import cost 31 seconds / one H200 =
-0.0086111 H200-hours, reconciled. Shared reconciled cost is now 3.5275000.
-Split job 512532 is RUNNING on one H200 and 8 CPUs, using the unchanged source,
-configuration and preparation identity. It constructs the native full-train dataset,
-authenticates canonical lineage, applies seed-42 Dataset.shuffle, reserves the last
-50,000 docs and persists independent original eval files and fixed first 10,000 subset.
-Real split completion and eval preservation remain pending; filtering awaits them.
-No production cleanup or training has started. No baseline perplexity measurement.
-Synthetic archive/resume/retirement and 4/8-GPU correctness passed; full-model scaling
-remains pending sealed real data. 56 lightweight tests previously passed; no repeated
-runtime tests this cycle. Heartbeat reports directly in the visible thread.
+Complete download 511918 and completed checksum import 512500 remain intact.
+Split job 512532 was cancelled at 2026-10-08 03:25:39 Asia/Taipei after >20 minutes
+without new logs or native Arrow/split state. Bounded compute-node diagnostics found
+main Python waiting for a futex-blocked child and another zombie child (exit 0),
+with only about 9 CPU seconds on the compute step. This suggests a multiprocessing
+deadlock; the exact Python stack/root cause is not yet confirmed. No split/eval
+archive completion is claimed. Cancelled cost 1416 seconds x 1 H200 = 0.3933333
+H200-hours, reconciled; shared total 3.9208333, no outstanding allocation.
+All corpus and preparation files are retained. Next: validate spawn startup for
+both multiprocessing (HF download pool) and multiprocess (native Arrow builder),
+including a threaded prelude and compressed input. Source changes require a new
+preparation identity; do not mutate dolma-dclm10-002. Filtering, production cleanup,
+full-model checks and training remain pending. No perplexity measurement yet.
+Heartbeat reports directly in the visible thread; this cycle launches no extra job.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
