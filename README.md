@@ -287,6 +287,18 @@ sbatch slurm/prepare.sbatch download dolma-dclm10-002 \
 # 成功、核銷後，split → verify 全部改用 dolma-dclm10-002
 ```
 
+若已定位損壞 shard，先以 `cache-audit`／`cache-repair` 在 Slurm 驗證獨立
+副本，再用新的 preparation 匯入。必須指定已核銷且通過的 repair run 與
+結果 checksum；來源 manifest、原檔案與其他 shard 均保留。下列匯入以
+30 分鐘 allocation／10 分鐘 runtime 重驗完整 checksum，成功核銷後才能 split：
+
+```bash
+bash slurm/submit.sh download dolma-dclm10-005 \
+    --reuse-download-from dolma-dclm10-004 \
+    --repair-download-from pinned-shard-repair-001 \
+    --repair-result-sha256 a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d
+```
+
 ## 資料產物與訓練整合
 
 每個階段在 `DATA_ROOT/preprocessed/PREPARATION_ID/STAGE/` 寫入 manifest，保存

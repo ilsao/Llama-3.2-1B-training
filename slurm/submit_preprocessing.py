@@ -65,8 +65,10 @@ def submit(stage, prep_id, extra, root, state_path):
                     and old.get('job_id') not in accounted):
                 raise ValueError('Existing preprocessing intent must be recovered/reconciled before submission')
         tag = 'preprocessing-' + uuid.uuid4().hex
-        wall_time = '00:30:00' if stage in {'parallel-check', 'cache-audit', 'cache-repair'} else '24:00:00'
-        reserved_hours = 0.5 if stage in {'parallel-check', 'cache-audit', 'cache-repair'} else 24
+        short_job = (stage in {'parallel-check', 'cache-audit', 'cache-repair'}
+                     or (stage == 'download' and '--repair-download-from' in extra))
+        wall_time = '00:30:00' if short_job else '24:00:00'
+        reserved_hours = 0.5 if short_job else 24
         script = 'setup.sbatch' if stage == 'setup' else 'score.sbatch' if stage == 'score' else 'prepare.sbatch'
         command = ['sbatch', '--parsable', '--cpus-per-task=8', '--gpus-per-node=1',
                    f'--time={wall_time}', f'--comment={tag}',

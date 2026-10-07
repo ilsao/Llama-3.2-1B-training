@@ -33,5 +33,11 @@ if [[ "$STAGE" == parallel-check ]]; then
         python "$REPO/tests/preparation_runtime.py" --run-id "$PREPARATION_ID" --root "$DATA_ROOT"
     exit
 fi
-srun --ntasks=1 python "$REPO/dataset.py" "$STAGE" --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
+RUNTIME_LIMIT=()
+for argument in "${@:3}"; do
+    if [[ "$STAGE" == download && "$argument" == --repair-download-from ]]; then
+        RUNTIME_LIMIT=(timeout --signal=TERM --kill-after=30s 600s)
+    fi
+done
+"${RUNTIME_LIMIT[@]}" srun --ntasks=1 python "$REPO/dataset.py" "$STAGE" --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
     --config "${DATA_CONFIG:-$REPO/configs/dataset.json}" "${@:3}"

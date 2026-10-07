@@ -395,14 +395,50 @@ def check_full_artifact(item):
     check_artifact(item, True)
 
 
+def validated_repair_files(files, result, source_id, source_fingerprint,
+                           manifest_sha256, config, repair_root):
+    """Validate immutable repair metadata without reading corpus bytes."""
+    identity = result['identity']
+    if (not result.get('passed') or not result.get('approved_for_new_preparation_import')
+            or result.get('old_artifacts_modified') is not False
+            or result.get('document_count', 0) <= 0
+            or identity['source_preparation'] != source_id
+            or identity['source_fingerprint'] != source_fingerprint
+            or identity['source_manifest_sha256'] != manifest_sha256
+            or any(identity[key] != config[key] for key in ('dataset_id', 'dataset_revision'))):
+        raise ValueError('Repair result is incomplete or belongs to another source')
+    first, second = result['replacement_decoders']
+    if ({first['backend'], second['backend']} != {'python-zstandard', 'arrow-zstd'}
+            or not first['passed'] or not second['passed'] or first['decoded_bytes'] <= 0
+            or first['decoded_bytes'] != second['decoded_bytes']
+            or first['decoded_sha256'] != second['decoded_sha256']):
+        raise ValueError('Independent complete decoder checks required')
+    old, new, upstream = result['original'], result['replacement'], result['upstream']
+    matches = [i for i, item in enumerate(files) if item['repo_filename'] == old['repo_filename']]
+    if len(matches) != 1 or files[matches[0]] != old:
+        raise ValueError('Original repair artifact differs from source manifest')
+    if (new['repo_filename'] != old['repo_filename'] or new['source'] != old['source']
+            or new['path'] == old['path']
+            or not Path(new['path']).resolve().is_relative_to(repair_root.resolve() / 'hub')
+            or new['sha256'] != upstream['sha256'] or new['size'] != upstream['size']
+            or not re.fullmatch(r'[0-9a-f]{64}', upstream['sha256']) or new['size'] <= 0):
+        raise ValueError('Replacement path, membership or pinned upstream hash/size mismatch')
+    repaired = list(files)
+    repaired[matches[0]] = dict(new)
+    return repaired
+
+
 def reuse_download(prep, names):
     source_id = prep.reuse_download_from
     if (not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,95}', source_id)
             or source_id in {'.', '..'} or source_id == prep.path.name):
         raise ValueError('Use a different, valid completed preparation ID')
     source = prep.root / 'preprocessed' / source_id
-    with (source / '.lock').open('a') as lock:
+    with contextlib.ExitStack() as stack:
+        lock = stack.enter_context((source / '.lock').open('a'))
         fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
+        if (source / 'retention.json').exists():
+            raise ValueError('Cannot import a retired source preparation')
         configuration = read_json(source / 'configuration.json')
         identity = {k: v for k, v in configuration.items()
                     if k not in {'fingerprint', 'code_commit', 'git_status'}}
@@ -426,13 +462,49 @@ def reuse_download(prep, names):
                     or item['source'] != source_for_path(item['repo_filename'])
                     or any(item[key] != recorded[key] for key in ('path', 'size', 'sha256'))):
                 raise ValueError('Source download artifact metadata mismatch')
+        repair_provenance = None
+        if getattr(prep, 'repair_download_from', None):
+            repair_id = prep.repair_download_from
+            if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,95}', repair_id):
+                raise ValueError('Invalid isolated repair ID')
+            repair_root = prep.root / 'runs/cache-repair' / repair_id
+            repair_lock = stack.enter_context((repair_root / '.lock').open('r'))
+            fcntl.flock(repair_lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
+            result_path = repair_root / 'result.json'
+            result_sha256 = sha256(result_path)
+            if result_sha256 != prep.repair_result_sha256:
+                raise ValueError('Repair result checksum changed')
+            result = read_json(result_path)
+            if result['identity']['code_sha256'] != sha256(PROJECT / 'slurm/cache_repair.py'):
+                raise ValueError('Repair validator source changed')
+            ledger = read_json(prep.root / 'preprocessing-ledger.json')['jobs']
+            if (result['job_id'] not in result['jobs'] or not result['jobs']
+                    or any(ledger.get(job, {}).get('state') != 'COMPLETED'
+                           or ledger[job].get('stage') != 'cache-repair'
+                           or ledger[job].get('preparation-id') != repair_id for job in result['jobs'])):
+                raise ValueError('Repair allocation success/accounting required before import')
+            files = validated_repair_files(files, result, source_id, configuration['fingerprint'],
+                                           sha256(manifest_path), prep.config, repair_root)
+            check_full_artifact(result['original'])
+            repair_provenance = {'run_id': repair_id, 'result_sha256': result_sha256,
+                                 'identity': result['identity'], 'original': result['original'],
+                                 'replacement': result['replacement'], 'job_id': result['job_id']}
+            request = {'source_id': source_id, 'source_manifest_sha256': sha256(manifest_path),
+                       'repair': repair_provenance}
+            request_path = prep.directory('download') / 'import-request.json'
+            if request_path.exists() and read_json(request_path) != request:
+                raise ValueError('Repair import request changed; use a new preparation')
+            atomic_json(request_path, request)
         with ordered_executor(worker_count(prep.config), threads=True, check=stop_if_requested) as ordered:
             for _ in ordered(check_full_artifact, files):
                 pass
         provenance = {'preparation_id': source_id, 'fingerprint': configuration['fingerprint'],
                       'manifest_sha256': sha256(manifest_path), 'files_copied': False}
+        if repair_provenance:
+            provenance['authenticated_repair'] = repair_provenance
+        records = [{key: item[key] for key in ('path', 'size', 'sha256')} for item in files]
         prep.finish('download', [item['path'] for item in files],
-                    {**details, 'reused_download': provenance}, records=manifest['artifacts'])
+                    {**details, 'files': files, 'reused_download': provenance}, records=records)
 
 
 def stage_download(prep):
@@ -1299,11 +1371,17 @@ def main():
     parser.add_argument('stage', choices=(*STAGES, 'smoke'))
     parser.add_argument('--prep-id', required=True)
     parser.add_argument('--reuse-download-from', help='Import a completed, verified download from an older preparation')
+    parser.add_argument('--repair-download-from', help='Use one authenticated isolated repair result during download import')
+    parser.add_argument('--repair-result-sha256', help='Required immutable checksum of the approved repair result')
     parser.add_argument('--root', type=Path, default=DEFAULT_ROOT)
     parser.add_argument('--config', type=Path, default=PROJECT / 'configs/dataset.json')
     args = parser.parse_args()
     if args.reuse_download_from and args.stage != 'download':
         parser.error('--reuse-download-from is valid only for download')
+    if args.repair_download_from or args.repair_result_sha256:
+        if (args.stage != 'download' or not args.reuse_download_from or not args.repair_download_from
+                or not args.repair_result_sha256 or not re.fullmatch(r'[0-9a-f]{64}', args.repair_result_sha256)):
+            parser.error('Repair requires download, --reuse-download-from, repair ID and a SHA256')
     require_compute()
     config = read_json(args.config)
     validate_config(config)
@@ -1320,6 +1398,8 @@ def main():
     pa.set_io_thread_count(1)
     prep = Preparation(root, args.prep_id, config)
     prep.reuse_download_from = args.reuse_download_from
+    prep.repair_download_from = args.repair_download_from
+    prep.repair_result_sha256 = args.repair_result_sha256
     def handler(signum, frame):
         global STOP
         STOP = True
