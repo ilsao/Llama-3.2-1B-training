@@ -1143,6 +1143,8 @@ def stage_verify(prep):
                         'training': train, 'evaluation': evaluation_stats,
                         'evaluation_documents': eval_docs, 'evaluation_raw_documents': raw_count,
                         'evaluation_raw_files': eval_raw_files, 'subset_documents': len(subset),
+                        'manifest_sha256': {stage: sha256(prep.path / stage / 'manifest.json')
+                                            for stage in STAGES[:-1]},
                         'training_limit': cfg['max_training_tokens'],
                         'scope': 'artifact checksums, split bijection, provenance, global quality ranking, '
                                  'budget, full sequence reconstruction and loss masks'})

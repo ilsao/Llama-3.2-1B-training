@@ -69,6 +69,11 @@ def cleanup_plan(root, prep_id, retire_download_source=False):
             or split['details'].get('evaluation_raw_documents') != cfg['config']['evaluation_documents']
             or not verified['details'].get('evaluation_raw_files')):
         raise ValueError('Require complete, sealed, independent evaluation originals')
+    for stage, expected in verified['details'].get('manifest_sha256', {}).items():
+        if stage not in ('download', 'split', 'clean', 'score', 'select', 'pack'):
+            raise ValueError('Unknown sealed manifest stage')
+        if sha256(prep / stage / 'manifest.json') != expected:
+            raise ValueError('Historical manifest changed after verification: ' + stage)
     eligible = {}
     def add(items, reason):
         for item in items:

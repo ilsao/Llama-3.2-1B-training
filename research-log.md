@@ -10,3 +10,9 @@
   independent eval original archive/resume passed. Reconciled cost: 55 seconds,
   one H200 = 0.0152778 H200-hours. Added a separate synthetic offline-retirement
   reload scenario; this requires a new validation allocation.
+
+- Validation 511949 passed offline train/full-eval/subset reload after retirement;
+  cost 65 seconds / one H200 = 0.0180556 H200-hours. Training environment setup
+  511940 passed pip check; cost 200 seconds / one H200 = 0.0555556 H200-hours.
+  Both reconciled. Added historical-manifest hashes to production verification
+  receipts so cleanup rejects modified provenance. Lightweight suite: 44 passed.

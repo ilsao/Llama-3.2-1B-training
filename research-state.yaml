@@ -25,7 +25,7 @@
     "total_download_shards": 6081,
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
     "eval_raw_archive": "implemented; synthetic archive/resume passed",
-    "safe_cleanup": "implemented; offline Slurm fixture check pending"
+    "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify"
   },
   "jobs": [
     {
@@ -52,8 +52,22 @@
       "stage": "setup",
       "id": "train-env-002",
       "ledger": "training",
-      "status": "submitted",
-      "tag": "autoresearch-setup-dc866eecf3d2"
+      "status": "COMPLETED",
+      "tag": "autoresearch-setup-dc866eecf3d2",
+      "reconciled": true,
+      "h200_hours": 0.05555555555555555,
+      "result": "training environment installed; pip check passed"
+    },
+    {
+      "job_id": "511949",
+      "stage": "parallel-check",
+      "id": "prep-parallel-003",
+      "ledger": "preprocessing",
+      "status": "COMPLETED",
+      "tag": "autoresearch-offline-7f9d9e9f9639",
+      "reconciled": true,
+      "h200_hours": 0.018055555555555554,
+      "result": "offline train/full-eval/subset reload after retirement passed"
     }
   ],
   "submission_intents": [
@@ -80,6 +94,14 @@
       "status": "submitted",
       "timestamp": "2026-10-07T16:22:43.063252+00:00",
       "job_id": "511940"
+    },
+    {
+      "tag": "autoresearch-offline-7f9d9e9f9639",
+      "stage": "parallel-check",
+      "id": "prep-parallel-003",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:26:53.701809+00:00",
+      "job_id": "511949"
     }
   ],
   "experiments": {
@@ -89,8 +111,10 @@
     "trajectory": []
   },
   "next_actions": [
-    "Monitor/reconcile original download.",
-    "Complete independent full eval archive and guarded cleanup.",
-    "Rerun worker equivalence and training environment checks."
+    "Monitor/reconcile original download 511918; never duplicate it.",
+    "Submit 4-GPU runtime checks then 8-GPU checks.",
+    "After complete download and accounting, import into dolma-dclm10-002 and advance stages.",
+    "After full verify and independent eval archive, preview/apply project-only cleanup.",
+    "Full-model resume validation and matched-batch GPU scaling follow sealed real data."
   ]
 }

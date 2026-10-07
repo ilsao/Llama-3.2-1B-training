@@ -126,6 +126,19 @@ class CleanupTests(unittest.TestCase):
             dataset.atomic_json(manifest,value)
             with self.assertRaises(ValueError):cleanup.cleanup_plan(root,'example')
 
+    def test_historical_manifest_mutation_blocks_retirement(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); prep, *_ = self.fixture(root)
+            sealed = dataset.read_json(prep / 'verify/manifest.json')
+            sealed['details']['manifest_sha256'] = {'select': dataset.sha256(prep / 'select/manifest.json')}
+            dataset.atomic_json(prep / 'verify/manifest.json', sealed)
+            self.assertTrue(cleanup.cleanup_plan(root, 'example')['candidates'])
+            selected = dataset.read_json(prep / 'select/manifest.json')
+            selected['details']['train_files'] = []
+            dataset.atomic_json(prep / 'select/manifest.json', selected)
+            with self.assertRaisesRegex(ValueError, 'Historical manifest changed'):
+                cleanup.cleanup_plan(root, 'example')
+
     def test_active_project_job_blocks_cleanup(self):
         from types import SimpleNamespace
         with patch('slurm.cleanup.subprocess.run',return_value=SimpleNamespace(stdout=f'123|{cleanup.PROJECT}\n')), \

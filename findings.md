@@ -33,3 +33,7 @@ and measured 4/8-GPU scaling efficiency remain unknown.
 Job 511939 passed native/worker equivalence and independent eval original archive
 resume checks. It used 0.0152778 H200-hours. Real-corpus verification and training
 measurements remain pending.
+
+Job 511949 confirms synthetic sealed data loads identically after intermediate
+retirement, including full eval and subset. Training environment is installed and
+pip check passed (511940). Production cleanup must still await real-corpus verify.

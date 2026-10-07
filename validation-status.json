@@ -1,15 +1,15 @@
 {
-  "recorded_at": "2026-10-07T16:26:08.527412+00:00",
+  "recorded_at": "2026-10-07T16:30:58.103268+00:00",
   "lightweight_tests": {
     "passed": true,
-    "count": 43
+    "count": 44
   },
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "runtime_checks": "Job 511939 passed 1/7-worker equivalence, committed resume, eval original archive/resume; offline retirement check pending",
+  "runtime_checks": "511939 and 511949 passed: worker/native/shuffle/selection/packing/resume equivalence, eval original archive/resume, offline loader after intermediate retirement",
   "allocated_jobs": [
     {
       "job_id": "511170",
@@ -71,6 +71,7 @@
     "interval_minutes": 20,
     "check_only_passed": true
   },
-  "training_environment": "setup job 511940 running",
-  "download_continuation_job": "511918"
+  "training_environment": "completed job 511940; pip check passed; actual cost reconciled",
+  "download_continuation_job": "511918",
+  "production_cleanup": "not submitted; full corpus and verify are prerequisites"
 }
