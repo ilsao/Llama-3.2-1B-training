@@ -88,26 +88,57 @@ snapshots; provision storage for both raw caches and the complete native Arrow
 corpus, plus indexes and the final token artifacts. Full native materialization
 and document-level scoring can take substantial time; no throughput is assumed.
 
-The submission wrapper creates log directories **before** `sbatch`. Submit setup,
-wait for completion, then submit each stage after the previous one completes:
+### sbatch 執行順序
+
+順序是 **setup → smoke → download → split → clean → score → select → pack → verify**。
+**每個 job 成功完成後，才提交下一個。**
+
+先進入 repository 並建立 logs 目錄；Slurm 會在執行腳本前開啟 log 檔案：
 
 ```bash
-bash slurm/submit.sh setup
-# Wait for setup and check its exit status.
-bash slurm/submit.sh smoke dolma-smoke-001
-# Wait for smoke to pass; it loads the real classifier/tokenizer in Slurm.
-bash slurm/submit.sh download dolma-dclm10-001
-bash slurm/submit.sh split    dolma-dclm10-001
-bash slurm/submit.sh clean    dolma-dclm10-001
-bash slurm/submit.sh score    dolma-dclm10-001
-bash slurm/submit.sh select   dolma-dclm10-001
-bash slurm/submit.sh pack     dolma-dclm10-001
-bash slurm/submit.sh verify   dolma-dclm10-001
+cd /home/asciibase64/Llama-3.2-1B-training
+mkdir -p /work/asciibase64/Llama-3.2-1B-training/logs
 ```
 
-**These commands are separate submissions; wait between them.** No full jobs are
-submitted by implementation or by the lightweight tests. Existing user-provided
-`slurm/template.sbatch` is preserved.
+依序執行下表的命令：
+
+| 順序 | 提交命令 | 工作內容 |
+|---|---|---|
+| 1 | `sbatch slurm/setup.sbatch` | 建立 Python 環境、安裝依賴 |
+| 2 | `sbatch slurm/prepare.sbatch smoke dolma-smoke-001` | 小型檢查：分類器、tokenizer、Arrow |
+| 3 | `sbatch slurm/prepare.sbatch download dolma-dclm10-001` | 下載完整資料集 |
+| 4 | `sbatch slurm/prepare.sbatch split dolma-dclm10-001` | seed 42 shuffle，保留最後 50,000 篇 |
+| 5 | `sbatch slurm/prepare.sbatch clean dolma-dclm10-001` | training 空白文件清除與完全去重 |
+| 6 | `sbatch slurm/score.sbatch dolma-dclm10-001` | DCLM fastText 品質評分 |
+| 7 | `sbatch slurm/prepare.sbatch select dolma-dclm10-001` | 保留 CC 前 10%，選取最多 6B tokens |
+| 8 | `sbatch slurm/prepare.sbatch pack dolma-dclm10-001` | packing 成 8192-token 序列 |
+| 9 | `sbatch slurm/prepare.sbatch verify dolma-dclm10-001` | 驗證 split、token 上限、packing 與 checksums |
+
+`dolma-dclm10-001` 是這次資料處理的 ID，**正式流程所有階段都使用同一個 ID**。
+修改程式、設定或環境後，應使用新的 preparation ID。
+
+每次 `sbatch` 回傳 job ID 後，用以下命令確認狀態；將 `JOB_ID` 換成實際編號：
+
+```bash
+squeue -j JOB_ID
+sacct -X -j JOB_ID --format=JobID,State,ExitCode,Elapsed
+```
+
+- **`COMPLETED`、`ExitCode=0:0`**：可以提交下一階段。
+- **`ExitCode=75:0`**：程式已保存進度；重新提交同一個命令、同一個 ID。
+- **其他失敗**：先查看 `/work/asciibase64/Llama-3.2-1B-training/logs/` 裡的 `.out`、`.err`。
+
+每個 job 結束後，另外記錄實際 allocation 成本：
+
+```bash
+python3 slurm/accounting.py JOB_ID
+```
+
+`verify` 成功後，資料才可供後續 trainer 使用；上述流程尚未包含訓練。
+
+也可使用 `bash slurm/submit.sh STAGE PREPARATION_ID` 提交；wrapper 會先建立 logs
+目錄，再呼叫 `sbatch`，同樣必須等上一階段成功完成才提交下一階段。
+`setup` 不需 preparation ID。既有的 `slurm/template.sbatch` 保留不變。
 
 A 15-minute stopping margin derives from the actual Slurm job end time. Normal
 stage work checkpoints at committed batches/shards; exit **75** means resubmit
@@ -121,11 +152,7 @@ confirmed the account requires at most 12 CPUs and 200 GiB per allocated GPU.
 Do not modify committed artifacts or delete native caches referenced by manifests.
 
 Jobs record IDs, timestamps, allocation/node details, exit status and an accounting
-snapshot. After each job terminates, reconcile **actual Slurm allocation duration**:
-
-```bash
-python3 slurm/accounting.py JOB_ID
-```
+snapshot. The accounting command above reconciles actual Slurm allocation duration.
 
 This small metadata command is suitable for the login node. The shared
 `/work/asciibase64/Llama-3.2-1B-training/preprocessing-ledger.json` is idempotent by
