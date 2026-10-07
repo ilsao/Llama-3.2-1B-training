@@ -14,9 +14,11 @@ versions/process methods match validated source and identity
 52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b.
 
 Split 513955 is RUNNING on one H200/eight CPUs, seven workers plus coordinator,
-using both process libraries with spawn. Generation log last reports 549963
-examples at 05:21 Asia/Taipei; this is progress, not final row count or split
-completion. Canonical full-train generation, all-field source authentication,
+using both process libraries with spawn. Generation log last reports 42793721
+examples at 05:40 Asia/Taipei, up from 549963 at 05:21; stderr is fresh.
+This is progress, not final row count or split completion. Split/eval archive
+manifests are absent; active observed cost is 0.3219444 H200-hours,
+provisional until termination/accounting. No new allocation this cycle. Canonical full-train generation, all-field source authentication,
 native seed-42 global shuffle and last-50,000 original eval archive are in this
 job. Fixed first 10,000 reserved eval subset stays unchanged. Keep 24 H200-hour
 reservation; shared measured plus reserved upper bound 27.9900000. Filtering

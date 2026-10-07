@@ -1,5 +1,5 @@
 {
-  "accounting": "All 16 terminated allocations agree with sacct and authoritative ledgers; active split 513955 retains 24 H200-hour reservation until reconciliation",
+  "accounting": "All 16 terminated allocations still agree with Slurm/ledgers; split 513955 active, fresh generation progress, 24 H200-hour reservation retained",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -367,8 +367,17 @@
   "production_import_preparation": "dolma-dclm10-004",
   "production_import_status": "COMPLETED",
   "production_split_job": "513955",
+  "production_split_progress": {
+    "counts_are_completion_claim": false,
+    "evaluation_archive_state_present": false,
+    "generation_examples_last_log": 42793721,
+    "observed_utc": "2026-10-07T21:40:23.188500+00:00",
+    "phase": "lossless full train generation",
+    "split_manifest_present": false,
+    "stderr_last_modified_utc": "2026-10-07T21:40:20.380355+00:00"
+  },
   "production_split_status": "RUNNING",
-  "recorded_at": "2026-10-07T21:22:43.814085+00:00",
+  "recorded_at": "2026-10-07T21:41:45.115179+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
