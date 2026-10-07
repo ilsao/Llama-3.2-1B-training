@@ -1,5 +1,5 @@
 {
-  "accounting": "All 19 terminated allocations agree with Slurm/ledgers; audit and isolated repair reconciled; shared 5.0233333333 H200-hours, no outstanding allocation",
+  "accounting": "19 terminated allocations match Slurm/ledgers; shared 5.0233333333 H200-hours; new import514094 reserves0.5, shared upper 5.5233333333",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -363,7 +363,25 @@
       "status": "reconciled"
     }
   ],
-  "blocker": "authenticated repair import into new preparation 005 must be implemented and validated before complete canonical split",
+  "authenticated_repair_import": {
+    "allocation_upper_bound_h200_hours": 0.5,
+    "code_commit": "9e9cd2a",
+    "configuration_sha256": "eeb7479eb86929bb09f3e9f245116e28364fba8b03fcff4692435f9cfb5acd84",
+    "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+    "job_id": "514094",
+    "manifest_present": false,
+    "observed_utc": "2026-10-07T23:23:48.373361+00:00",
+    "preparation_id": "dolma-dclm10-005",
+    "protocol": "experiments/compressed-corpus-audit/import-protocol.md",
+    "protocol_commit": "4e7054c",
+    "repair_result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
+    "repair_run_id": "pinned-shard-repair-001",
+    "runtime_timeout_seconds": 600,
+    "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+    "source_preparation": "dolma-dclm10-004",
+    "status": "RUNNING"
+  },
+  "blocker": "Slurm 514094 authenticated repaired import completion, manifest and accounting required before canonical split",
   "compressed_corpus_diagnostic": {
     "allocation_upper_bound_h200_hours": 0.5,
     "blob_name_hash_mismatches": [
@@ -439,10 +457,10 @@
     "interval_minutes": 20
   },
   "lightweight_tests": {
-    "count": 66,
-    "last_run": "2026-10-08T07:10:13.148840+08:00",
+    "count": 72,
+    "last_run": "2026-10-08T07:24:50.887511+08:00",
     "passed": true,
-    "scope": "tiny decoder/hash acceptance and durable reservation tests; no model/corpus/workers on login"
+    "scope": "tiny metadata/authenticated replacement/import checksum and immutable manifest/mocked budget cases; no corpus/models/workers on login"
   },
   "lossless_schema_validation": {
     "allocation_upper_bound_h200_hours": 0.5,
@@ -534,23 +552,35 @@
   },
   "preserved_download_worktree": ".download-continuation",
   "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
-  "production_cleanup": "not submitted; full corpus and verify are prerequisites",
-  "production_import_job": "513930",
-  "production_import_preparation": "dolma-dclm10-004",
-  "production_import_status": "COMPLETED",
-  "production_split_job": "513955",
-  "production_split_progress": {
-    "counts_are_completion_claim": false,
-    "evaluation_archive_state_present": false,
-    "generation_examples_last_log": 72380721,
-    "observed_utc": "2026-10-07T22:20:24.444883+00:00",
-    "phase": "FAILED on corrupt local blob; authenticated isolated replacement ready for new preparation import",
-    "previous_generation_examples": 57842721,
-    "split_manifest_present": false,
-    "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
+  "previous_corrupt_preparation": {
+    "downstream_preparation": "dolma-dclm10-004",
+    "import_job_id": "513930",
+    "import_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+    "import_status": "COMPLETED",
+    "preparation_fingerprint": "52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b",
+    "split_job_id": "513955",
+    "split_progress": {
+      "counts_are_completion_claim": false,
+      "evaluation_archive_state_present": false,
+      "generation_examples_last_log": 72380721,
+      "observed_utc": "2026-10-07T22:20:24.444883+00:00",
+      "phase": "FAILED on corrupt local blob; authenticated isolated replacement ready for new preparation import",
+      "previous_generation_examples": 57842721,
+      "split_manifest_present": false,
+      "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
+    },
+    "split_status": "FAILED"
   },
-  "production_split_status": "FAILED",
-  "recorded_at": "2026-10-07T23:10:13.148840+00:00",
+  "production_cleanup": "not submitted; full corpus and verify are prerequisites",
+  "production_import_job": "514094",
+  "production_import_preparation": "dolma-dclm10-005",
+  "production_import_status": "RUNNING",
+  "production_split_job": null,
+  "production_split_progress": {
+    "phase": "waiting for authenticated repair import; no new split or eval archive"
+  },
+  "production_split_status": "not submitted; authenticated import completion/accounting required",
+  "recorded_at": "2026-10-07T23:24:50.887511+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {

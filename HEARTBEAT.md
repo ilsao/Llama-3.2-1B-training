@@ -77,10 +77,13 @@ Audit 514055 completed all 6081 shards and identified one corrupt local blob.
 Isolated replacement validation 514077 passed pinned upstream LFS hash/size,
 both complete decoder byte hashes, and all 47,233 JSON documents. Both jobs are
 reconciled. Follow experiments/compressed-corpus-audit/replacement-protocol.md:
-implement an explicit authenticated repair import into new dolma-dclm10-005,
-preserving the remaining 6080 artifacts and canonical ordering. Old blobs and
-001/002/003/004 manifests remain immutable. Validate import before rerunning
-canonical split; filtering still requires the complete independent eval archive.
+The authenticated import is implemented in 9e9cd2a following protocol 4e7054c
+(experiments/compressed-corpus-audit/import-protocol.md). Job 514094 imports into
+new dolma-dclm10-005, preserving the remaining 6080 artifacts and canonical
+ordering. Inspect it once and reconcile after termination; validate the complete
+manifest, identity and single replacement lineage before submitting split.
+Old blobs and 001/002/003/004 manifests remain immutable. Filtering still requires
+the complete independent eval archive. Never resubmit an uncertain/live import.
 
 ## Controls
 

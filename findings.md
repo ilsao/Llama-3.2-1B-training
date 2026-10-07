@@ -28,10 +28,25 @@ Replacement job completed in 11 seconds on one H200/eight CPUs, costing
 0.0030556 H200-hours. All 19 allocations agree with Slurm and ledgers:
 preprocessing 4.8697222222, training/environment/runtime
 0.1536111111, shared 5.0233333333 H200-hours.
-No outstanding allocation; 66 lightweight tests and syntax/CLI/AST/diff pass.
+The earlier isolated-replacement cycle had no outstanding allocation; its 66
+lightweight tests passed. Current import allocation is described below.
 
-The verified replacement is ready for an explicitly authenticated new 005
-preparation import, which remains to be implemented/validated. Failed 004 split
+Authenticated repaired import protocol4e7054c precedes implementation9e9cd2a.
+72 lightweight tests pass, covering immutable source manifests, exact replacement
+membership/order, pinned hash/size, identity/decoder/path rejection, actual tiny
+file checksum failure and retained reservations for uncertain replies. Repair
+import pins result checksum, successful terminal repair accounting, source004
+manifest and validator code; an immutable import request prevents changed resumes.
+
+New005 authenticated import514094 was submitted once through the durable wrapper.
+At 2026-10-07T23:23:48.373361+00:00 it is RUNNING on one H200/eight CPUs;
+30-minute allocation reserves0.5 H200-hours, ten-minute runtime timeout.
+Configuration fingerprint 3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a matches current
+four source hashes, unchanged config/environment and spawn methods.
+Complete new005 manifest was absent at the single post-submit snapshot.
+Shared reconciled 5.0233333333; upper with reservation
+5.5233333333. Production
+success and checksum/order evidence remain pending; no split/filtering yet. Failed 004 split
 513955 and all previous preparations are preserved. Complete canonical split,
 independent 50000 eval originals, fixed 10000 subset, filtering, sealed training
 data and safe cleanup remain pending. Synthetic lossless loader 513790 passed,
