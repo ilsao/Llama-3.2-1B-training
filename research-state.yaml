@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0.5,
-    "active_preprocessing_h200_hours_observed": 0.0033333333333333335,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
+    "active_preprocessing_h200_hours_observed": 0,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T20:48:00.959977+00:00",
-    "preprocessing_h200_hours_reconciled": 3.8052777777777784,
-    "shared_h200_hours_reconciled": 3.9588888888888896,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 4.45888888888889,
+    "observed_utc": "2026-10-07T21:00:32.381004+00:00",
+    "preprocessing_h200_hours_reconciled": 3.826944444444445,
+    "shared_h200_hours_reconciled": 3.980555555555556,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 3.980555555555556,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -253,21 +253,23 @@
       "tag": "preprocessing-dbbc576ebbd848c9b9718ed82ca51d3e"
     },
     {
-      "accounting_status": "reserved; reconcile after termination",
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 0.5,
-      "elapsed_seconds_observed": 12,
-      "h200_hours_observed": 0.0033333333333333335,
+      "elapsed_seconds_observed": 78,
+      "h200_hours": 0.021666666666666667,
+      "h200_hours_observed": 0.021666666666666667,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513790/gpus.txt",
       "job_id": "513790",
-      "last_observed_utc": "2026-10-07T20:48:00.959977+00:00",
+      "last_observed_utc": "2026-10-07T21:00:32.381004+00:00",
       "ledger": "preprocessing",
       "prep_id": "lossless-schema-001",
-      "result": "bounded lossless adapter/full-split/archive/resume and real-source sample validation pending",
+      "reconciled": true,
+      "result": "heterogeneous lossless 1/7 loader, native shuffle indices, full split entrypoint, 12 real docs/6 sources, archive/resume and offline contracts passed",
       "stage": "parallel-check",
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "tag": "preprocessing-077aca3f5d43484fb674d1ee9d0d8a60"
     }
   ],
@@ -295,7 +297,7 @@
     "Preserve full eval raw/tokens/packed; no production cleanup until complete verify, then model/resume checks, matched-batch 4/8 GPU scaling and AdamW baseline within shared/token/run limits."
   ],
   "pipeline": {
-    "blocked_stage": "schema adapter validation required before new full split; filtering remains gated",
+    "blocked_stage": "completed-download import into new 004 is ready; full split and production eval pending",
     "download_complete": true,
     "download_manifest_sha256": "673484b5a3527655957325ea38ad67e3cfdeb1f49ee4d9d7fc93fde8608172e8",
     "download_preparation": "dolma-dclm10-001",
@@ -343,15 +345,26 @@
       "cause": "dataset card metadata string vs actual nested JSON",
       "code_commit": "fdaa233",
       "failed_job": "513322",
+      "h200_hours": 0.021666666666666667,
       "job_id": "513790",
       "lightweight_tests_passed": 59,
       "next_preparation": "dolma-dclm10-004",
       "protocol": "experiments/lossless-schema-loader/protocol.md",
       "protocol_commit": "a0594fc",
+      "real_sample_documents": 12,
+      "real_sample_sources": [
+        "common_crawl",
+        "dolma1_7",
+        "finemath",
+        "olmocr_science_pdfs",
+        "rpj",
+        "stack_edu"
+      ],
       "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/preparation-validation/lossless-schema-001/result.json",
+      "result_sha256": "410b5d7102128f9e11a57e3383f3bd253ecd31b5f8e79d5801c5ca48ee46c27e",
       "run_id": "lossless-schema-001",
       "runtime_timeout_seconds": 600,
-      "status": "Slurm validation RUNNING; production promotion gated"
+      "status": "registered synthetic and bounded real-source validation passed and reconciled; complete-corpus split pending"
     },
     "split_job_id": "513322",
     "split_status": "FAILED",
