@@ -33,6 +33,28 @@ class HeartbeatTests(unittest.TestCase):
                     self.assertEqual(heartbeat.run_once(True), 0)
                     launch.assert_not_called()
 
+    def test_normal_tick_queues_visible_thread_without_hidden_agent(self):
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            directory = root / 'runs/heartbeat'
+            directory.mkdir(parents=True)
+            thread = '11111111-1111-1111-1111-111111111111'
+            (directory / 'target.json').write_text(json.dumps({'thread_id': thread}))
+            result = SimpleNamespace(returncode=0, stdout='Queued message abc-123 for thread '+thread, stderr='')
+            with patch.object(heartbeat, 'ROOT', root), patch.object(heartbeat, 'PROJECT', root), \
+                 patch.object(heartbeat, 'STOP', root/'disabled'), \
+                 patch('slurm.heartbeat.subprocess.run', return_value=result) as queue, \
+                 patch('slurm.heartbeat.subprocess.Popen') as hidden, contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(heartbeat.run_once(), 0)
+                command = queue.call_args.args[0]
+                self.assertEqual(command[1:4], ['queue', '--thread', thread])
+                self.assertEqual(queue.call_args.kwargs['stdin'], heartbeat.subprocess.DEVNULL)
+                hidden.assert_not_called()
+            record = json.loads((directory/'last-run.json').read_text())
+            self.assertEqual(record['delivery'], 'visible_thread_queue')
+            self.assertEqual(record['queued_message_id'], 'abc-123')
+
     def test_disabled_skips_agent_launch(self):
         with tempfile.TemporaryDirectory() as temporary:
             flag = Path(temporary) / 'disabled'

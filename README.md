@@ -546,11 +546,11 @@ sbatch --test-only slurm/template.sbatch
 
 ## Autoresearch heartbeat 與資料清理
 
-Heartbeat 每 20 分鐘透過 cron 啟動已登入的 Codex CLI；以獨立新回合讀取
-`HEARTBEAT.md`、`research-state.yaml`、`findings.md` 與 `research-log.md` 接續工作。
-它不是目前聊天室的定時喚醒。排程用專案鎖避免重疊，維持既有 login-node／Slurm
-分工。每次執行最多 18 分鐘，逾時終止 agent process group；Slurm jobs 獨立執行，
-下一次 heartbeat 查證並接續，不能重複提交。
+Heartbeat 每 20 分鐘透過 cron 執行 `codex queue`，接續綁定的**目前 Codex
+聊天室**。Agent 讀取 `HEARTBEAT.md`、`research-state.yaml`、`findings.md` 與
+`research-log.md`，推進已授權工作並直接在聊天室回報；不再建立輸出僅寫入檔案的
+獨立研究回合。排程使用專案鎖避免重複投遞，維持 login-node／Slurm 分工。
+Queue client 最多等待 30 秒；投遞逾時會記錄未確定的結果，不能當成工作已完成。
 
 ```bash
 python3 slurm/heartbeat.py install
@@ -559,7 +559,9 @@ python3 slurm/heartbeat.py run-once --check-only
 python3 slurm/heartbeat.py disable
 ```
 
-Install／disable 只修改本專案標記的 cron entry，保留其他 entries。Heartbeat logs、
+Install／disable 只修改本專案標記的 cron entry，保留其他 entries。Install 預設綁定
+`CODEX_THREAD_ID`，也可使用 `install --thread UUID` 明確指定聊天室。目標與投遞
+receipt 保存於 `DATA_ROOT/runs/heartbeat/target.json`／`last-run.json`。Heartbeat logs、
 執行摘要與 `last-run.json` 位於 `DATA_ROOT/runs/heartbeat/`。短期 foreground lease
 會讓 cron 跳過同時修改的回合，到期後自動恢復。
 

@@ -44,3 +44,9 @@
   lost-reply safety with durable central intents, /work receipts, unique tags,
   retained reservations and bounded recovery shared with training. 55 lightweight
   tests and shell/diff checks passed. Report: to_human/heartbeat-20261008-0105.md.
+
+- 2026-10-07T17:15:52.812764+00:00: User reported missing visible
+  heartbeat outputs. Verified codex queue delivery to the current thread, then
+  changed normal ticks from hidden codex exec sessions to visible-thread queue.
+  Kept cron interval and project-only controls. Read-only --check-only remains
+  available; normal progress is now reported directly in the bound chat.

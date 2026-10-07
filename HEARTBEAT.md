@@ -5,7 +5,8 @@ Use the existing pinned environment, Slurm submission helpers and experiment led
 This controller runs on nano4's login node: only small metadata reads, edits, Git,
 accounting and job submissions are allowed here. All heavy work runs through sbatch.
 Never print credentials, use broad deletion, bypass sandbox approvals, or launch
-another heartbeat agent. The controller lock prevents overlapping cron cycles.
+another heartbeat agent. The controller lock prevents overlapping cron deliveries. Cron queues a prompt into
+the bound visible Codex thread; each research cycle reports directly in that chat.
 
 ## Work on each tick
 
@@ -48,4 +49,8 @@ another heartbeat agent. The controller lock prevents overlapping cron cycles.
 `python3 slurm/heartbeat.py status|install|run-once|disable`
 `python3 slurm/heartbeat.py run-once --check-only` validates agent access without jobs.
 Logs and last-run metadata live under the project work root's runs/heartbeat/.
-Cron creates new Codex sessions; durable state, not the current chat, carries context.
+Normal ticks use codex queue to continue the bound visible thread. Target UUID and
+delivery receipts live in runs/heartbeat/target.json and last-run.json. Install
+defaults to CODEX_THREAD_ID; use --thread UUID only to intentionally bind another
+user-selected task. Do not launch hidden codex exec research cycles. The manual
+--check-only option remains a standalone read-only CLI-access check.

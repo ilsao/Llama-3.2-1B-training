@@ -17,7 +17,9 @@
     "check_only_passed": true,
     "controller": "slurm/heartbeat.py",
     "interval_minutes": 20,
-    "state": "enabled; bounded heartbeat completed under controller lock"
+    "state": "enabled; future ticks continue and report in current chat",
+    "delivery": "visible_thread_queue",
+    "thread_id": "01a116b6-da3a-79d1-bda9-eccaac331d39"
   },
   "experiments": {
     "baseline_value": null,
