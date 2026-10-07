@@ -5,18 +5,19 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Download 511918 completed successfully at 2026-10-08 02:39:57 Asia/Taipei:
-all 6081 shards and a complete manifest. Its 8810 seconds on one H200 cost
-2.4472222 H200-hours, reconciled. Shared reconciled cost is now 3.5188889.
-New import/checksum job 512500 is RUNNING on one H200 and 8 CPUs, reusing
-completed dolma-dclm10-001 in dolma-dclm10-002 without copying corpus files.
-The durable wrapper stored submission intent, reservation, tag and job receipt.
-Split/filtering await successful full-checksum import and accounting.
-Full 50,000-doc eval raw/tokens/packed preservation and production cleanup remain
-pending real split/pack/verify; synthetic archive/resume/retirement and 4/8-GPU
-correctness checks passed. No measured baseline perplexity or production training
-tokens yet. Latest lightweight suite: 56 passed; no repeated runtime tests this cycle.
-Heartbeat continues reporting in the visible thread.
+Download 511918 completed all 6081 shards successfully. Import/checksum job 512500
+also completed exit 0, with a full 6081-artifact manifest in dolma-dclm10-002;
+corpus files are reused without copying. Import cost 31 seconds / one H200 =
+0.0086111 H200-hours, reconciled. Shared reconciled cost is now 3.5275000.
+Split job 512532 is RUNNING on one H200 and 8 CPUs, using the unchanged source,
+configuration and preparation identity. It constructs the native full-train dataset,
+authenticates canonical lineage, applies seed-42 Dataset.shuffle, reserves the last
+50,000 docs and persists independent original eval files and fixed first 10,000 subset.
+Real split completion and eval preservation remain pending; filtering awaits them.
+No production cleanup or training has started. No baseline perplexity measurement.
+Synthetic archive/resume/retirement and 4/8-GPU correctness passed; full-model scaling
+remains pending sealed real data. 56 lightweight tests previously passed; no repeated
+runtime tests this cycle. Heartbeat reports directly in the visible thread.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
