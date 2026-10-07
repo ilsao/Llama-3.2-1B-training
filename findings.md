@@ -5,42 +5,39 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-New 004 import/checksum 513930 completed exit 0 in 34 seconds. All 6081 artifact
-records match completed original 001 download, canonical file order and pinned
-revision. Full compute-node checksums passed; corpus files reused without copies.
-Cost 0.0094444 H200-hours is reconciled. All 16 terminated allocations agree with
-Slurm/ledgers; shared measured total 3.9900000. 004 config/source hashes/environment
-versions/process methods match validated source and identity
-52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b.
+Full read-only audit 514055 scanned all 6081 canonical shards. Exactly one
+compressed stream failed: data/common_crawl-science_math_and_technology-0015/
+shard_00001148.jsonl.zst. The other 6080 streams decoded completely and matched
+historical manifest hashes. Recorded download checksum alone had accepted the
+corrupt local bytes; the blob filename differed from actual SHA256 only here.
+Audit cost 0.0286111 H200-hours is reconciled.
 
-Split 513955 FAILED exit 1 after 3606 seconds (one H200/eight CPUs), with zstd
-"Data corruption detected" while generating full map-style data. Error stack
-omits the shard filename. No canonical split/state/eval archive was produced.
-Cost 1.0016667 H200-hours is reconciled; shared measured total 4.9916667 across
-17 terminated allocations, all matching Slurm/ledgers. Earlier import checksums
-matched recorded downloaded bytes; this did not validate all compressed streams
-or independently authenticate upstream LFS hashes. Do not skip records/files.
+Protocol 1efd4ef preceded code 7889201 and isolated replacement validation 514077.
+The exact pinned upstream LFS SHA256 is
+c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3;
+original local SHA256 was
+7ec222880366d0dc111b22f369a797ddad2be070026c4f6dde0e8f594ac06564.
+A separate new copy matches upstream hash and size. Full Python-zstandard and
+Arrow-zstd decoded byte hashes agree (432076050 bytes), and all 47233 JSON
+documents passed id/text validation. Original Arrow decoding also failed,
+confirming local corruption rather than a Python-only decoder failure.
+Old blobs and all historical manifests remain unchanged. Result SHA256:
+a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d.
 
-Protocol 692e6b0 and diagnostic code 64175a7 precede read-only cache-audit 514055,
-RUNNING on one H200/eight CPUs with seven spawn workers. It hashes and fully
-streams each canonical compressed shard, preserving exact filenames/errors and
-an ordered resumable cursor under runs/cache-audit/corpus-audit-001. At 06:46,
-500/6081 committed shard checks showed no failure; complete result and failed
-shard remain pending. Ten-minute runtime timeout, nine-minute worker deadline,
-30-minute allocation (0.5 H200-hour reservation); shared upper 5.4916667.
-62 lightweight tests pass; substantial audit is pending, no corpus repair,
-production retry, filtering, cleanup or training. Retain all identities/files.
-Compare any failed files to pinned upstream metadata and independent decode/new
-separate copy before choosing a repair; preserve canonical revision/order/split.
+Replacement job completed in 11 seconds on one H200/eight CPUs, costing
+0.0030556 H200-hours. All 19 allocations agree with Slurm and ledgers:
+preprocessing 4.8697222222, training/environment/runtime
+0.1536111111, shared 5.0233333333 H200-hours.
+No outstanding allocation; 66 lightweight tests and syntax/CLI/AST/diff pass.
 
-Lossless schema validation 513790 passed heterogeneous fields, verbatim JSON,
-native projection order/indices, one/seven-worker full split entrypoint,
-archive/resume/downstream/offline contracts and bounded real-source samples
-(12 documents across six families). This is not complete-corpus verification.
-No production split/eval archive, cleanup, production training tokens, committed
-full runs or measured perplexity yet. Prior 59 lightweight tests passed;
-no source changes or repeated tests this metadata cycle. Baseline remains an
-unachieved target; actual preprocessing completion/training throughput is unknown.
+The verified replacement is ready for an explicitly authenticated new 005
+preparation import, which remains to be implemented/validated. Failed 004 split
+513955 and all previous preparations are preserved. Complete canonical split,
+independent 50000 eval originals, fixed 10000 subset, filtering, sealed training
+data and safe cleanup remain pending. Synthetic lossless loader 513790 passed,
+but it does not establish complete-corpus split correctness. No production
+training tokens, committed full runs or measured perplexity. Baseline <=20
+before 2026-10-09 remains unachieved.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.

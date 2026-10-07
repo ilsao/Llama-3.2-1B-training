@@ -5,10 +5,10 @@
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T22:46:40.414947+00:00",
-    "preprocessing_h200_hours_reconciled": 4.866666666666667,
-    "shared_h200_hours_reconciled": 5.020277777777778,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 5.020277777777778,
+    "observed_utc": "2026-10-07T23:10:13.148840+00:00",
+    "preprocessing_h200_hours_reconciled": 4.869722222222222,
+    "shared_h200_hours_reconciled": 5.023333333333333,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 5.023333333333333,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -48,7 +48,7 @@
       "h200_hours_observed": 2.4472222222222224,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511918/node.txt",
       "job_id": "511918",
-      "last_observed_utc": "2026-10-07T18:40:44.774931+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-001",
       "reconciled": true,
@@ -58,10 +58,13 @@
       "tag": "autoresearch-download-e1b915ee148c"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 55,
       "h200_hours": 0.015277777777777777,
+      "h200_hours_observed": 0.015277777777777777,
       "id": "prep-parallel-002",
       "job_id": "511939",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "reconciled": true,
       "result": "1/7-worker equivalence and full eval archive/resume passed",
@@ -70,10 +73,13 @@
       "tag": "autoresearch-parallel-check-38ee4bb5f4af"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 200,
       "h200_hours": 0.05555555555555555,
+      "h200_hours_observed": 0.05555555555555555,
       "id": "train-env-002",
       "job_id": "511940",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "training",
       "reconciled": true,
       "result": "training environment installed; pip check passed",
@@ -82,10 +88,13 @@
       "tag": "autoresearch-setup-dc866eecf3d2"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 65,
       "h200_hours": 0.018055555555555554,
+      "h200_hours_observed": 0.018055555555555554,
       "id": "prep-parallel-003",
       "job_id": "511949",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "reconciled": true,
       "result": "offline train/full-eval/subset reload after retirement passed",
@@ -94,11 +103,14 @@
       "tag": "autoresearch-offline-7f9d9e9f9639"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 20,
       "gpus": 4,
       "h200_hours": 0.022222222222222223,
+      "h200_hours_observed": 0.022222222222222223,
       "id": "gpu-runtime-4-002",
       "job_id": "511971",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "training",
       "reconciled": true,
       "result": "4-GPU distributed training correctness passed",
@@ -107,11 +119,14 @@
       "tag": "autoresearch-runtime-5498dc7777cc"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 32,
       "gpus": 8,
       "h200_hours": 0.07111111111111111,
+      "h200_hours_observed": 0.07111111111111111,
       "id": "gpu-runtime-8-002",
       "job_id": "511980",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "training",
       "reconciled": true,
       "result": "8-GPU distributed training correctness passed",
@@ -120,10 +135,13 @@
       "tag": "autoresearch-runtime8-ea996e0aa261"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 3167,
       "h200_hours": 0.8797222222222222,
+      "h200_hours_observed": 0.8797222222222222,
       "id": "dolma-dclm10-001",
       "job_id": "511170",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "reconciled": true,
       "result": "historical failure; charged in authoritative ledger",
@@ -131,10 +149,13 @@
       "status": "FAILED"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 18,
       "h200_hours": 0.005,
+      "h200_hours_observed": 0.005,
       "id": "prep-parallel-001",
       "job_id": "511509",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "reconciled": true,
       "result": "historical failure; charged in authoritative ledger",
@@ -142,10 +163,13 @@
       "status": "FAILED"
     },
     {
+      "accounting_status": "reconciled",
+      "elapsed_seconds_observed": 17,
       "h200_hours": 0.004722222222222222,
+      "h200_hours_observed": 0.004722222222222222,
       "id": "train-env-par8-001",
       "job_id": "511510",
-      "last_observed_utc": "2026-10-07T17:05:51.138250+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "training",
       "reconciled": true,
       "result": "historical failure; charged in authoritative ledger",
@@ -163,7 +187,7 @@
       "h200_hours_observed": 0.008611111111111111,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512500/gpus.txt",
       "job_id": "512500",
-      "last_observed_utc": "2026-10-07T19:00:44.327256+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-002",
       "reconciled": true,
@@ -183,7 +207,7 @@
       "h200_hours_observed": 0.3933333333333333,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512532/gpus.txt",
       "job_id": "512532",
-      "last_observed_utc": "2026-10-07T19:28:33.511421+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-002",
       "reconciled": true,
@@ -203,7 +227,7 @@
       "h200_hours_observed": 0.01888888888888889,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512718/gpus.txt",
       "job_id": "512718",
-      "last_observed_utc": "2026-10-07T20:00:22.663883+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "native-loader-spawn-001",
       "reconciled": true,
@@ -223,7 +247,7 @@
       "h200_hours_observed": 0.01138888888888889,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513010/gpus.txt",
       "job_id": "513010",
-      "last_observed_utc": "2026-10-07T20:20:20.056537+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-003",
       "reconciled": true,
@@ -243,7 +267,7 @@
       "h200_hours_observed": 0.0077777777777777776,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513322/gpus.txt",
       "job_id": "513322",
-      "last_observed_utc": "2026-10-07T20:40:31.844044+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-003",
       "reconciled": true,
@@ -263,7 +287,7 @@
       "h200_hours_observed": 0.021666666666666667,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513790/gpus.txt",
       "job_id": "513790",
-      "last_observed_utc": "2026-10-07T21:00:32.381004+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "lossless-schema-001",
       "reconciled": true,
@@ -283,7 +307,7 @@
       "h200_hours_observed": 0.009444444444444445,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513930/gpus.txt",
       "job_id": "513930",
-      "last_observed_utc": "2026-10-07T21:20:19.316055+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
       "reconciled": true,
@@ -304,7 +328,7 @@
       "h200_hours_observed": 1.0016666666666667,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513955/gpus.txt",
       "job_id": "513955",
-      "last_observed_utc": "2026-10-07T22:40:22.900758+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
       "reconciled": true,
@@ -324,7 +348,7 @@
       "h200_hours_observed": 0.02861111111111111,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514055/gpus.txt",
       "job_id": "514055",
-      "last_observed_utc": "2026-10-07T22:46:40.414947+00:00",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
       "ledger": "preprocessing",
       "prep_id": "corpus-audit-001",
       "reconciled": true,
@@ -332,33 +356,53 @@
       "stage": "cache-audit",
       "status": "COMPLETED",
       "tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0"
+    },
+    {
+      "accounting_status": "reconciled",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 0.5,
+      "elapsed_seconds_observed": 11,
+      "h200_hours": 0.0030555555555555557,
+      "h200_hours_observed": 0.0030555555555555557,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514077/gpus.txt",
+      "job_id": "514077",
+      "last_observed_utc": "2026-10-07T23:10:13.148840+00:00",
+      "ledger": "preprocessing",
+      "prep_id": "pinned-shard-repair-001",
+      "reconciled": true,
+      "result": "pinned upstream replacement hash/size, independent decoded hashes, all 47233 documents passed; old artifacts preserved",
+      "stage": "cache-repair",
+      "status": "COMPLETED",
+      "tag": "preprocessing-a78dbd561aeb4b81ad3da354cc7cc67d"
     }
   ],
   "last_heartbeat": {
-    "blocker": "full split zstd data corruption; read-only audit must identify exact shard before repair/split/filtering",
+    "blocker": "authenticated repair import into new preparation 005 must be implemented and validated before complete canonical split",
     "delivery": "visible_thread_queue",
-    "lightweight_tests_passed": 62,
-    "local_time": "2026-10-08T06:47:50.089364+08:00",
+    "lightweight_tests_passed": 66,
+    "local_time": "2026-10-08T07:10:13.148840+08:00",
     "new_jobs_submitted": [
-      "514055"
+      "514077"
     ],
     "new_terminated_jobs_reconciled": [
-      "513955"
+      "514055",
+      "514077"
     ],
-    "observed_utc": "2026-10-07T22:47:50.089364+00:00",
+    "observed_utc": "2026-10-07T23:10:13.148840+00:00",
     "ready_stage_advanced": true,
-    "report": "to_human/heartbeat-20261008-0647.md",
-    "tests_this_cycle": "62 lightweight tests passed, including diagnostic file/error/hash/cursor/deadline and wrapper reservation cases; syntax/CLI/AST/diff checked; 17 terminated allocations audited"
+    "report": "to_human/heartbeat-20261008-0710.md",
+    "tests_this_cycle": "66 tiny metadata/mocked unit tests, shell syntax, CLI/AST and diff checks; full 19-allocation Slurm/ledger reconciliation; isolated pinned replacement checks passed on compute node"
   },
   "next_actions": [
-    "Inspect cache-audit 514055 once next heartbeat; require result/cursor/identity checks and reconcile terminated allocation before promotion or continuation. Do not poll/duplicate.",
-    "For audit exit 75 resume same corpus-audit-001 code/source/identity/cursor after accounting; complete 6081 shard decoding/hash records. A partial scan is not an integrity seal.",
-    "For failed shards compare current compressed bytes against pinned upstream LFS metadata and an independent decoder or separate newly downloaded copy in a Slurm job. Preserve existing corpus/manifests; do not skip records or change revision/canonical order.",
-    "Select validated repair from diagnostic evidence before another production split; source/data identity changes require a new preparation. Full canonical seed42 split and independent 50,000 eval originals/fixed 10,000 subset gate clean/filtering.",
-    "No cleanup before production verify and full eval raw/tokens/packed; no baseline/scaling claims before sealed real data/model-resume checks. Preserve 6B tokens, run geometry, cumulative costs and three-run limits."
+    "Implement authenticated repaired-download import into new dolma-dclm10-005 using immutable 004 manifest plus pinned-shard-repair-001 result SHA and verified replacement; preserve every other artifact and canonical file ordering. Do not overwrite old blobs/manifests.",
+    "Run import/full checksum and provenance validation through Slurm durable wrapper; charge reservation then actual allocation and advance only after success/accounting. New preparation identity must reflect code and repaired artifact lineage.",
+    "After validated new import, submit complete lossless native global seed42 split. Save independent full 50000 eval originals and fixed first10000 subset/provenance before clean/filtering/tokenization/packing.",
+    "No production cleanup until complete verification, independent eval raw/tokens/packed and reference-safe project-only retention. Baseline/model/scaling tests and training require verified real data; preserve 6B token, 64H200h/run, geometry and pair limits."
   ],
   "pipeline": {
-    "blocked_stage": "pinned upstream metadata and separate verified replacement/independent decoder checks required",
+    "blocked_stage": "authenticated repair import into new preparation 005 must be implemented and validated before complete canonical split",
     "compressed_corpus_diagnostic": {
       "allocation_upper_bound_h200_hours": 0.5,
       "blob_name_hash_mismatches": [
@@ -437,6 +481,66 @@
       "runtime_timeout_seconds": 600,
       "status": "synthetic spawn validation passed; real split failed separately on heterogeneous metadata schema"
     },
+    "pinned_shard_replacement": {
+      "code_commit": "7889201",
+      "document_count": 47233,
+      "h200_hours": 0.0030555555555555557,
+      "identity": {
+        "audit_result_sha256": "3c9302e87eff4cb0327ae65645dec0c5cb464f621b56bfe524df964edb8c8d96",
+        "code_sha256": "fee37c37cf87c2eb1a0a330d3a342e6bf70f4ac8576f76ed73e7da256c3f4e7d",
+        "dataset_id": "allenai/dolma3_mix-150B-1025",
+        "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+        "process_start_methods": {
+          "multiprocess": "spawn",
+          "multiprocessing": "spawn"
+        },
+        "source_fingerprint": "52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b",
+        "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+        "source_preparation": "dolma-dclm10-004"
+      },
+      "job_id": "514077",
+      "next_preparation": "dolma-dclm10-005",
+      "observed_utc": "2026-10-07T23:10:13.148840+00:00",
+      "old_artifacts_modified": false,
+      "original_arrow_decode": {
+        "backend": "arrow-zstd",
+        "decoded_bytes": 100663296,
+        "error_type": "OSError",
+        "passed": false
+      },
+      "production_split_validated": false,
+      "protocol": "experiments/compressed-corpus-audit/replacement-protocol.md",
+      "protocol_commit": "1efd4ef",
+      "replacement": {
+        "path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-repair/pinned-shard-repair-001/hub/datasets--allenai--dolma3_mix-150B-1025/blobs/c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
+        "repo_filename": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst",
+        "sha256": "c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
+        "size": 84203717,
+        "source": "common_crawl"
+      },
+      "replacement_decoders": [
+        {
+          "backend": "python-zstandard",
+          "decoded_bytes": 432076050,
+          "decoded_sha256": "0b55f33fdd0aeb693ab28b58cd683a5f792ab33668d3e0e2a620954a6d42edeb",
+          "passed": true
+        },
+        {
+          "backend": "arrow-zstd",
+          "decoded_bytes": 432076050,
+          "decoded_sha256": "0b55f33fdd0aeb693ab28b58cd683a5f792ab33668d3e0e2a620954a6d42edeb",
+          "passed": true
+        }
+      ],
+      "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-repair/pinned-shard-repair-001/result.json",
+      "result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
+      "run_id": "pinned-shard-repair-001",
+      "status": "complete isolated replacement validation passed and reconciled; production import still pending",
+      "upstream": {
+        "sha256": "c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
+        "size": 84203717
+      }
+    },
     "preparation_fingerprint": "52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b",
     "previous_downstream_preparation": "dolma-dclm10-002",
     "previous_import_job_id": "512500",
@@ -496,7 +600,7 @@
       "evaluation_archive_state_present": false,
       "generation_examples_last_log": 72380721,
       "observed_utc": "2026-10-07T22:20:24.444883+00:00",
-      "phase": "FAILED during generation; compressed corpus diagnosis pending",
+      "phase": "FAILED on corrupt local blob; authenticated isolated replacement ready for new preparation import",
       "previous_generation_examples": 57842721,
       "split_manifest_present": false,
       "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
@@ -513,63 +617,77 @@
   },
   "submission_intents": [
     {
+      "accounting_status": "reconciled",
       "job_id": "511918",
       "prep_id": "dolma-dclm10-001",
+      "reconciled_h200_hours": 2.4472222222222224,
       "stage": "download",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-download-e1b915ee148c",
       "timestamp": "2026-10-07T16:13:05.949397+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "id": "prep-parallel-002",
       "job_id": "511939",
+      "reconciled_h200_hours": 0.015277777777777777,
       "stage": "parallel-check",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-parallel-check-38ee4bb5f4af",
       "timestamp": "2026-10-07T16:22:42.403849+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "id": "train-env-002",
       "job_id": "511940",
+      "reconciled_h200_hours": 0.05555555555555555,
       "stage": "setup",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-setup-dc866eecf3d2",
       "timestamp": "2026-10-07T16:22:43.063252+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "id": "prep-parallel-003",
       "job_id": "511949",
+      "reconciled_h200_hours": 0.018055555555555554,
       "stage": "parallel-check",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-offline-7f9d9e9f9639",
       "timestamp": "2026-10-07T16:26:53.701809+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "id": "gpu-runtime-4-002",
       "job_id": "511971",
+      "reconciled_h200_hours": 0.022222222222222223,
       "stage": "runtime",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-runtime-5498dc7777cc",
       "timestamp": "2026-10-07T16:30:58.379232+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "id": "gpu-runtime-8-002",
       "job_id": "511980",
+      "reconciled_h200_hours": 0.07111111111111111,
       "stage": "runtime",
-      "status": "submitted",
+      "status": "reconciled",
       "tag": "autoresearch-runtime8-ea996e0aa261",
       "timestamp": "2026-10-07T16:33:21.551334+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "512500",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-002",
+      "reconciled_h200_hours": 0.008611111111111111,
       "reserved_h200_hours": 24,
       "returned_job_id": "512500",
       "stage": "download",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -591,15 +709,17 @@
       "timestamp": "2026-10-07T18:42:09.250489+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "512532",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-002",
+      "reconciled_h200_hours": 0.3933333333333333,
       "reserved_h200_hours": 24,
       "returned_job_id": "512532",
       "stage": "split",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -619,15 +739,17 @@
       "timestamp": "2026-10-07T19:02:02.223263+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "512718",
       "ledger": "preprocessing",
       "prep_id": "native-loader-spawn-001",
+      "reconciled_h200_hours": 0.01888888888888889,
       "reserved_h200_hours": 0.5,
       "returned_job_id": "512718",
       "stage": "parallel-check",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -647,15 +769,17 @@
       "timestamp": "2026-10-07T19:43:40.608964+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "513010",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-003",
+      "reconciled_h200_hours": 0.01138888888888889,
       "reserved_h200_hours": 24,
       "returned_job_id": "513010",
       "stage": "download",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -677,15 +801,17 @@
       "timestamp": "2026-10-07T20:01:27.694189+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "513322",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-003",
+      "reconciled_h200_hours": 0.0077777777777777776,
       "reserved_h200_hours": 24,
       "returned_job_id": "513322",
       "stage": "split",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -705,15 +831,17 @@
       "timestamp": "2026-10-07T20:21:01.240869+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "513790",
       "ledger": "preprocessing",
       "prep_id": "lossless-schema-001",
+      "reconciled_h200_hours": 0.021666666666666667,
       "reserved_h200_hours": 0.5,
       "returned_job_id": "513790",
       "stage": "parallel-check",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -733,15 +861,17 @@
       "timestamp": "2026-10-07T20:47:47.254149+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "513930",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
+      "reconciled_h200_hours": 0.009444444444444445,
       "reserved_h200_hours": 24,
       "returned_job_id": "513930",
       "stage": "download",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -763,15 +893,17 @@
       "timestamp": "2026-10-07T21:01:49.989607+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "513955",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
+      "reconciled_h200_hours": 1.0016666666666667,
       "reserved_h200_hours": 24,
       "returned_job_id": "513955",
       "stage": "split",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -791,15 +923,17 @@
       "timestamp": "2026-10-07T21:21:02.813318+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "514055",
       "ledger": "preprocessing",
       "prep_id": "corpus-audit-001",
+      "reconciled_h200_hours": 0.02861111111111111,
       "reserved_h200_hours": 0.5,
       "returned_job_id": "514055",
       "stage": "cache-audit",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -819,6 +953,40 @@
       "submission_tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0",
       "tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0",
       "timestamp": "2026-10-07T22:46:14.119708+00:00"
+    },
+    {
+      "accounting_status": "reconciled",
+      "allocated_cpus": 8,
+      "gpu_count": 1,
+      "job_id": "514077",
+      "ledger": "preprocessing",
+      "prep_id": "pinned-shard-repair-001",
+      "reconciled_h200_hours": 0.0030555555555555557,
+      "reserved_h200_hours": 0.5,
+      "returned_job_id": "514077",
+      "stage": "cache-repair",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--cpus-per-task=8",
+        "--gpus-per-node=1",
+        "--time=00:30:00",
+        "--comment=preprocessing-a78dbd561aeb4b81ad3da354cc7cc67d",
+        "--output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out",
+        "--error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/prepare.sbatch",
+        "cache-repair",
+        "pinned-shard-repair-001",
+        "--source-prep",
+        "dolma-dclm10-004",
+        "--audit-run",
+        "corpus-audit-001"
+      ],
+      "submission_started_utc": "2026-10-07T23:05:02.572932+00:00",
+      "submission_tag": "preprocessing-a78dbd561aeb4b81ad3da354cc7cc67d",
+      "tag": "preprocessing-a78dbd561aeb4b81ad3da354cc7cc67d",
+      "timestamp": "2026-10-07T23:05:02.572932+00:00"
     }
   ],
   "workspace": {
