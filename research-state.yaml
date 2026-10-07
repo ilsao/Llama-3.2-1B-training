@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0.5,
-    "active_preprocessing_h200_hours_observed": 0.0011111111111111111,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
+    "active_preprocessing_h200_hours_observed": 0,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T23:23:48.373361+00:00",
-    "preprocessing_h200_hours_reconciled": 4.869722222222222,
-    "shared_h200_hours_reconciled": 5.023333333333333,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 5.523333333333333,
+    "observed_utc": "2026-10-07T23:40:18.772865+00:00",
+    "preprocessing_h200_hours_reconciled": 4.8805555555555555,
+    "shared_h200_hours_reconciled": 5.034166666666667,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 5.034166666666667,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -378,21 +378,22 @@
       "tag": "preprocessing-a78dbd561aeb4b81ad3da354cc7cc67d"
     },
     {
-      "accounting_status": "reserved; reconcile after termination",
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "allocated_gpu_count": 1,
       "allocation_h200_hours_upper_bound": 0.5,
-      "elapsed_seconds_observed": 4,
-      "h200_hours_observed": 0.0011111111111111111,
+      "elapsed_seconds_observed": 39,
+      "h200_hours": 0.010833333333333334,
+      "h200_hours_observed": 0.010833333333333334,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514094/gpus.txt",
       "job_id": "514094",
-      "last_observed_utc": "2026-10-07T23:23:48.373361+00:00",
+      "last_observed_utc": "2026-10-07T23:40:18.772865+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-005",
-      "reconciled": false,
-      "result": "authenticated repair import RUNNING; complete manifest pending",
+      "reconciled": true,
+      "result": "full6081 checksum and authenticated replacement import completed;6080 unchanged,canonical order retained",
       "stage": "download",
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "tag": "preprocessing-bf731a7356f9474f8d8eb5b00f4fd8d8"
     }
   ],
@@ -411,7 +412,7 @@
     "tests_this_cycle": "72 tiny metadata/file/mocked tests, shell syntax/CLI/AST/diff; 19 terminated allocations match Slurm/ledgers; one post-submit snapshot of514094 RUNNING"
   },
   "next_actions": [
-    "Inspect 514094 once next heartbeat; no polling/duplicate dispatch. If terminal reconcile actual allocation before promotion. If failed diagnose exact error and preserve every artifact.",
+    "Submit canonical005 split once through durable wrapper; successful import514094 and all manifest/config/lineage/accounting checks are complete.",
     "Require completed005 download manifest, new identity/config/source checks, source004 manifest SHA and approved repair result SHA; verify canonical order and exactly one changed artifact with 6080 identical records. No modified old manifest or dropped documents.",
     "After successful import checks/accounting submit canonical full split on005 through durable wrapper. Preserve native global seed42 shuffle, last50000 eval originals and fixedfirst10000 subset; no filtering before production split archive.",
     "Only complete verified real data permits model/scaling/AdamW baseline; only reference-safe production verification permits project cleanup. Preserve6B training tokens,64H200h logical runs,8GPU/8CPU total and three-run cumulative ledger limits."
@@ -422,9 +423,11 @@
       "code_commit": "9e9cd2a",
       "configuration_sha256": "eeb7479eb86929bb09f3e9f245116e28364fba8b03fcff4692435f9cfb5acd84",
       "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "h200_hours": 0.010833333333333334,
       "job_id": "514094",
-      "manifest_present": false,
-      "observed_utc": "2026-10-07T23:23:48.373361+00:00",
+      "manifest_present": true,
+      "manifest_sha256": "237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53",
+      "observed_utc": "2026-10-07T23:40:18.772865+00:00",
       "preparation_id": "dolma-dclm10-005",
       "protocol": "experiments/compressed-corpus-audit/import-protocol.md",
       "protocol_commit": "4e7054c",
@@ -433,9 +436,25 @@
       "runtime_timeout_seconds": 600,
       "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
       "source_preparation": "dolma-dclm10-004",
-      "status": "RUNNING"
+      "status": "COMPLETED",
+      "verification": {
+        "available_bytes": 10826748772352,
+        "canonical_file_count": 6081,
+        "changed_filename": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst",
+        "changed_index": 1072,
+        "configuration_source_environment_matches": true,
+        "corpus_checksums_verified_in": "completed Slurm514094",
+        "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+        "new_manifest_sha256": "237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53",
+        "old_manifest_unchanged": true,
+        "passed": true,
+        "repair_result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
+        "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+        "total_bytes": 10995116277760,
+        "unchanged_artifact_count": 6080
+      }
     },
-    "blocked_stage": "Slurm 514094 authenticated repaired import completion, manifest and accounting required before canonical split",
+    "blocked_stage": "ready for canonical005 split; complete eval archive and split not produced yet",
     "compressed_corpus_diagnostic": {
       "allocation_upper_bound_h200_hours": 0.5,
       "blob_name_hash_mismatches": [
@@ -497,8 +516,8 @@
     "downstream_preparation": "dolma-dclm10-005",
     "eval_raw_archive": "heterogeneous synthetic and 12 real-source full-field validation passed; production 50,000 originals still pending complete split",
     "import_job_id": "514094",
-    "import_manifest_sha256": null,
-    "import_status": "RUNNING",
+    "import_manifest_sha256": "237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53",
+    "import_status": "COMPLETED",
     "native_loader_recovery": {
       "allocation_upper_bound_h200_hours": 0.5,
       "code_commit": "5f1d4e7",
@@ -568,7 +587,7 @@
       "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-repair/pinned-shard-repair-001/result.json",
       "result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
       "run_id": "pinned-shard-repair-001",
-      "status": "complete isolated replacement validation passed and reconciled; production import still pending",
+      "status": "isolated replacement passed and reconciled; authenticated005 import also completed and reconciled",
       "upstream": {
         "sha256": "c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
         "size": 84203717
@@ -1034,15 +1053,17 @@
       "timestamp": "2026-10-07T23:05:02.572932+00:00"
     },
     {
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "gpu_count": 1,
       "job_id": "514094",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-005",
+      "reconciled_h200_hours": 0.010833333333333334,
       "reserved_h200_hours": 0.5,
       "returned_job_id": "514094",
       "stage": "download",
-      "status": "submitted",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",

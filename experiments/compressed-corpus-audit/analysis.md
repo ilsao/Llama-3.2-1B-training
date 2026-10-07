@@ -16,3 +16,16 @@ Audit and repair costs are reconciled at 0.0286111111 and 0.0030555556 H200-hour
 A verified isolated replacement is not a complete production split. New005
 repair import must verify lineage, current hashes and unchanged canonical order
 before rerunning split, eval archival and filtering. No production cleanup yet.
+
+## Authenticated production import result
+
+Registered import protocol4e7054c and implementation9e9cd2a preceded514094.
+It completed exit0 in39s on1H200/8CPUs; cost0.0108333333 H200-hours reconciled.
+Manifest SHA256 237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53 authenticates6081
+ordered artifact records:6080 remain identical and only canonical slot1072 uses
+the verified replacement. Source004 manifest and approved repair result checksums
+remain unchanged. Current005 config/source/environment/spawn identity matches.
+Full corpus checksum validation ran on compute node; this heartbeat inspected
+metadata only. All20 allocations agree with Slurm/ledgers; shared5.0341666667
+H200-hours. Ready for canonical full split and independent eval archive; neither
+has completed yet. Preserve all old artifacts.
