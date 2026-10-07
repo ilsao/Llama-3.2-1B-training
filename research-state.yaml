@@ -1,11 +1,11 @@
 {
   "accounting": {
     "active_preprocessing_h200_hours_allocation_upper_bound": 24,
-    "active_preprocessing_h200_hours_observed": 1.4636111111111112,
+    "active_preprocessing_h200_hours_observed": 1.791111111111111,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T17:40:56+00:00",
+    "observed_utc": "2026-10-07T18:00:35+00:00",
     "preprocessing_h200_hours_reconciled": 0.9180555555555555,
     "shared_h200_hours_reconciled": 1.0716666666666665,
     "shared_measured_plus_outstanding_reservations_upper_bound": 25.071666666666665,
@@ -34,11 +34,11 @@
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 24,
-      "elapsed_seconds_observed": 5269,
-      "h200_hours_observed": 1.4636111111111112,
+      "elapsed_seconds_observed": 6448,
+      "h200_hours_observed": 1.791111111111111,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511918/node.txt",
       "job_id": "511918",
-      "last_observed_utc": "2026-10-07T17:40:56+00:00",
+      "last_observed_utc": "2026-10-07T18:00:35+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-001",
       "stage": "download",
@@ -142,16 +142,15 @@
     }
   ],
   "last_heartbeat": {
-    "artifacts_observed_utc": "2026-10-07T17:43:22.428841+00:00",
     "blocker": "Download RUNNING; completion manifest absent",
     "delivery": "visible_thread_queue",
     "lightweight_tests_passed": 56,
-    "local_time": "2026-10-08T01:43:22.428841+08:00",
+    "local_time": "2026-10-08T02:02:19.084697+08:00",
     "new_jobs_submitted": [],
     "new_terminated_jobs_reconciled": [],
-    "observed_utc": "2026-10-07T17:40:56+00:00",
+    "observed_utc": "2026-10-07T18:00:35+00:00",
     "ready_stage_advanced": false,
-    "report": "to_human/heartbeat-20261008-0143.md",
+    "report": "to_human/heartbeat-20261008-0202.md",
     "tests_this_cycle": "not repeated; no code changes"
   },
   "next_actions": [
@@ -170,7 +169,7 @@
     "downstream_preparation": "dolma-dclm10-002",
     "eval_raw_archive": "implemented; synthetic archive/resume passed",
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
-    "recorded_download_shards": 3936,
+    "recorded_download_shards": 4523,
     "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify",
     "total_download_shards": 6081
   },
