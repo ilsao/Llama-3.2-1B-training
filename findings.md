@@ -5,21 +5,20 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Complete download 511918 and completed import 512500 remain intact. Cancelled split
-512532 is charged: shared reconciled cost 3.9208333 H200-hours. Its parent wait4,
-futex-blocked child and zombie suggest multiprocessing deadlock; exact cause remains
-unconfirmed. Implemented spawn startup for both stdlib multiprocessing and multiprocess
-before Arrow/HF threading, recorded methods in preparation identity/job logs, added
-five-minute stack dumps and native-load phase logs. This changes source hashes:
-planned downstream preparation is dolma-dclm10-003; retain 002 identity and files.
-Recovery validation 512718 is RUNNING on 1 H200 and 8 CPUs (30-minute allocation,
-10-minute runtime timeout). Logs show both compressed native 1/7-worker loaders
-completed to the dataset-save phase after threaded prelude; full archive/resume/
-retirement result remains pending. Reserve 0.5 H200-hours; shared measured plus
-reservation upper bound 4.4208333. No production resubmission or cleanup this cycle.
-57 lightweight tests passed; runtime validation must pass and be charged before
-new import/split. Full 50,000-doc eval preservation, filtering, real-model checks,
-training and baseline perplexity remain pending. Heartbeat reports in this chat.
+Spawn recovery validation 512718 completed exit 0 in 68 seconds on 1 H200/8 CPUs,
+with passed result.json: compressed native 1/7-worker loading after threaded prelude,
+original fields/order, canonical seed-42 shuffle, dedup/filter/token/packing masks,
+archive/resume and offline retirement/reload all passed. Cost 0.0188889 H200-hours
+reconciled; shared total 3.9397222. This supports the synthetic recovery recipe,
+not the exact root cause of cancelled 512532 or real-corpus split completion.
+New preparation dolma-dclm10-003 imports the completed download via job 513010,
+RUNNING on 1 H200/8 CPUs. Spawn methods are recorded in its source-bound identity.
+Reserve 24 H200-hours; shared measured plus reserved upper bound 27.9397222.
+Original corpus, complete 001/002 manifests and cancelled 002 files remain intact.
+Next: import completion/accounting, then full split on 003, followed by filtering.
+Full 50,000-doc eval preservation and production verify remain pending; no cleanup,
+training or perplexity result yet. 57 lightweight tests previously passed, not repeated
+this metadata cycle. Heartbeat reports directly in the visible thread.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
