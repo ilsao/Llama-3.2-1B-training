@@ -1,5 +1,5 @@
 {
-  "accounting": "19 terminated allocations match Slurm/ledgers; shared 5.0233333333 H200-hours; new import514094 reserves0.5, shared upper 5.5233333333",
+  "accounting": "20 terminated allocations match Slurm/ledgers; shared5.0341666667H200-hours, split514101 reserves24 (shared upper29.0341666667)",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -288,6 +288,25 @@
     },
     {
       "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 39,
+      "end": "2026-10-08T07:24:23",
+      "gpu_count": 1,
+      "gpu_hours": 0.010833333333333334,
+      "gpu_type_evidence": {
+        "sha256": "a048c5ea629e4084cf7bc066df3c4853a3f7992b6d7452db97b1e4b8f6724a13",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.010833333333333334,
+      "job_id": "514094",
+      "nodes": "25a-hgpn029",
+      "preparation-id": "dolma-dclm10-005",
+      "stage": "download",
+      "start": "2026-10-08T07:23:44",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
       "elapsed_seconds": 17,
       "end": "2026-10-07T22:38:40",
       "gpu_count": 1,
@@ -368,9 +387,11 @@
     "code_commit": "9e9cd2a",
     "configuration_sha256": "eeb7479eb86929bb09f3e9f245116e28364fba8b03fcff4692435f9cfb5acd84",
     "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+    "h200_hours": 0.010833333333333334,
     "job_id": "514094",
-    "manifest_present": false,
-    "observed_utc": "2026-10-07T23:23:48.373361+00:00",
+    "manifest_present": true,
+    "manifest_sha256": "237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53",
+    "observed_utc": "2026-10-07T23:40:18.772865+00:00",
     "preparation_id": "dolma-dclm10-005",
     "protocol": "experiments/compressed-corpus-audit/import-protocol.md",
     "protocol_commit": "4e7054c",
@@ -379,9 +400,25 @@
     "runtime_timeout_seconds": 600,
     "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
     "source_preparation": "dolma-dclm10-004",
-    "status": "RUNNING"
+    "status": "COMPLETED",
+    "verification": {
+      "available_bytes": 10826748772352,
+      "canonical_file_count": 6081,
+      "changed_filename": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst",
+      "changed_index": 1072,
+      "configuration_source_environment_matches": true,
+      "corpus_checksums_verified_in": "completed Slurm514094",
+      "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "new_manifest_sha256": "237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53",
+      "old_manifest_unchanged": true,
+      "passed": true,
+      "repair_result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
+      "source_manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+      "total_bytes": 10995116277760,
+      "unchanged_artifact_count": 6080
+    }
   },
-  "blocker": "Slurm 514094 authenticated repaired import completion, manifest and accounting required before canonical split",
+  "blocker": "full canonical005 split and independent50000 eval raw archive completion/accounting required before clean/filtering",
   "compressed_corpus_diagnostic": {
     "allocation_upper_bound_h200_hours": 0.5,
     "blob_name_hash_mismatches": [
@@ -544,7 +581,7 @@
     "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-repair/pinned-shard-repair-001/result.json",
     "result_sha256": "a9050e57c6ae06615795420232a13bb635ac3c71630ac28488db8e2d7160bc4d",
     "run_id": "pinned-shard-repair-001",
-    "status": "complete isolated replacement validation passed and reconciled; production import still pending",
+    "status": "isolated replacement passed and reconciled; authenticated005 import also completed and reconciled",
     "upstream": {
       "sha256": "c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
       "size": 84203717
@@ -574,20 +611,29 @@
   "production_cleanup": "not submitted; full corpus and verify are prerequisites",
   "production_import_job": "514094",
   "production_import_preparation": "dolma-dclm10-005",
-  "production_import_status": "RUNNING",
-  "production_split_job": null,
+  "production_import_status": "COMPLETED",
+  "production_split_job": "514101",
   "production_split_progress": {
-    "phase": "waiting for authenticated repair import; no new split or eval archive"
+    "counts_are_completion_claim": false,
+    "evaluation_archive_state_present": false,
+    "observed_utc": "2026-10-07T23:41:43.244392+00:00",
+    "phase": "RUNNING; complete canonical split/eval archive pending",
+    "split_manifest_present": false,
+    "split_state_present": false
   },
-  "production_split_status": "not submitted; authenticated import completion/accounting required",
-  "recorded_at": "2026-10-07T23:24:50.887511+00:00",
+  "production_split_status": "RUNNING",
+  "recorded_at": "2026-10-07T23:42:57.703692+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "storage": "10T total/approximately 9.9T free at earlier observation; not remeasured this cycle",
+  "storage": {
+    "available_bytes": 10826748772352,
+    "observation": "lightweight statvfs metadata; compute node access already verified at import/startup",
+    "total_bytes": 10995116277760
+  },
   "submission_recovery": "Training/preprocessing mocked recovery cases passed; production submissions use durable intents/tags/receipts with reservations retained until accounting",
   "training_environment": "completed job 511940; pip check passed; actual cost reconciled"
 }

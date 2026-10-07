@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
-    "active_preprocessing_h200_hours_observed": 0,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 24,
+    "active_preprocessing_h200_hours_observed": 0.002777777777777778,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T23:40:18.772865+00:00",
+    "observed_utc": "2026-10-07T23:41:43.244392+00:00",
     "preprocessing_h200_hours_reconciled": 4.8805555555555555,
     "shared_h200_hours_reconciled": 5.034166666666667,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 5.034166666666667,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 29.034166666666668,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -395,27 +395,48 @@
       "stage": "download",
       "status": "COMPLETED",
       "tag": "preprocessing-bf731a7356f9474f8d8eb5b00f4fd8d8"
+    },
+    {
+      "accounting_status": "reserved; reconcile after termination",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 24,
+      "elapsed_seconds_observed": 10,
+      "h200_hours_observed": 0.002777777777777778,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514101/gpus.txt",
+      "job_id": "514101",
+      "last_observed_utc": "2026-10-07T23:41:43.244392+00:00",
+      "ledger": "preprocessing",
+      "prep_id": "dolma-dclm10-005",
+      "reconciled": false,
+      "result": "canonical full split RUNNING; no completed split/eval archive",
+      "stage": "split",
+      "status": "RUNNING",
+      "tag": "preprocessing-8f5514aa63744586a71647633696895d"
     }
   ],
   "last_heartbeat": {
-    "blocker": "Slurm 514094 authenticated repaired import completion, manifest and accounting required before canonical split",
+    "blocker": "full canonical005 split and independent50000 eval raw archive completion/accounting required before clean/filtering",
     "delivery": "visible_thread_queue",
     "lightweight_tests_passed": 72,
-    "local_time": "2026-10-08T07:24:50.887511+08:00",
+    "local_time": "2026-10-08T07:42:57.703692+08:00",
     "new_jobs_submitted": [
+      "514101"
+    ],
+    "new_terminated_jobs_reconciled": [
       "514094"
     ],
-    "new_terminated_jobs_reconciled": [],
-    "observed_utc": "2026-10-07T23:24:50.887511+00:00",
+    "observed_utc": "2026-10-07T23:42:57.703692+00:00",
     "ready_stage_advanced": true,
-    "report": "to_human/heartbeat-20261008-0724.md",
-    "tests_this_cycle": "72 tiny metadata/file/mocked tests, shell syntax/CLI/AST/diff; 19 terminated allocations match Slurm/ledgers; one post-submit snapshot of514094 RUNNING"
+    "report": "to_human/heartbeat-20261008-0742.md",
+    "tests_this_cycle": "No repeated unit tests or source changes; prior72 tests valid. Shell syntax, manifest/config/source/environment/repair lineage metadata and all20 terminated allocation Slurm/ledger checks passed; one post-submit split snapshot"
   },
   "next_actions": [
-    "Submit canonical005 split once through durable wrapper; successful import514094 and all manifest/config/lineage/accounting checks are complete.",
-    "Require completed005 download manifest, new identity/config/source checks, source004 manifest SHA and approved repair result SHA; verify canonical order and exactly one changed artifact with 6080 identical records. No modified old manifest or dropped documents.",
-    "After successful import checks/accounting submit canonical full split on005 through durable wrapper. Preserve native global seed42 shuffle, last50000 eval originals and fixedfirst10000 subset; no filtering before production split archive.",
-    "Only complete verified real data permits model/scaling/AdamW baseline; only reference-safe production verification permits project cleanup. Preserve6B training tokens,64H200h logical runs,8GPU/8CPU total and three-run cumulative ledger limits."
+    "Inspect split514101 once next heartbeat; record small log/manifest/cursor progress. Do not poll or duplicate submission. Preserve005 source/environment/fingerprint for continuations.",
+    "If terminal reconcile actual1H200 allocation before promotion. Exit75 continues same005 only after accounting; other failures require diagnosis and preservation of old files.",
+    "After exit0 and accounting validate complete split manifest, canonical rowcount/native seed42 shuffle indices, disjoint train/eval membership and independent full50000 original eval archive with fixedfirst10000 subset before clean/filtering.",
+    "Advance clean/score/select/pack/verify through durable Slurm wrappers and cumulative ledgers. No cleanup before full production verify and independent raw/tokenized/packed eval; no baseline/model/scaling claims before verified real data."
   ],
   "pipeline": {
     "authenticated_repair_import": {
@@ -454,7 +475,7 @@
         "unchanged_artifact_count": 6080
       }
     },
-    "blocked_stage": "ready for canonical005 split; complete eval archive and split not produced yet",
+    "blocked_stage": "full canonical005 split and independent50000 eval raw archive completion/accounting required before clean/filtering",
     "compressed_corpus_diagnostic": {
       "allocation_upper_bound_h200_hours": 0.5,
       "blob_name_hash_mismatches": [
@@ -665,11 +686,16 @@
       "runtime_timeout_seconds": 600,
       "status": "registered synthetic and bounded real-source validation passed and reconciled; complete-corpus split pending"
     },
-    "split_job_id": null,
+    "split_job_id": "514101",
     "split_progress": {
-      "phase": "waiting for authenticated repair import; no new split or eval archive"
+      "counts_are_completion_claim": false,
+      "evaluation_archive_state_present": false,
+      "observed_utc": "2026-10-07T23:41:43.244392+00:00",
+      "phase": "RUNNING; complete canonical split/eval archive pending",
+      "split_manifest_present": false,
+      "split_state_present": false
     },
-    "split_status": "not submitted; authenticated import completion/accounting required",
+    "split_status": "RUNNING",
     "total_download_shards": 6081
   },
   "project": {
@@ -1087,6 +1113,34 @@
       "submission_tag": "preprocessing-bf731a7356f9474f8d8eb5b00f4fd8d8",
       "tag": "preprocessing-bf731a7356f9474f8d8eb5b00f4fd8d8",
       "timestamp": "2026-10-07T23:23:34.772315+00:00"
+    },
+    {
+      "allocated_cpus": 8,
+      "gpu_count": 1,
+      "job_id": "514101",
+      "ledger": "preprocessing",
+      "prep_id": "dolma-dclm10-005",
+      "reserved_h200_hours": 24,
+      "returned_job_id": "514101",
+      "stage": "split",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--cpus-per-task=8",
+        "--gpus-per-node=1",
+        "--time=24:00:00",
+        "--comment=preprocessing-8f5514aa63744586a71647633696895d",
+        "--output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out",
+        "--error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/prepare.sbatch",
+        "split",
+        "dolma-dclm10-005"
+      ],
+      "submission_started_utc": "2026-10-07T23:41:32.127066+00:00",
+      "submission_tag": "preprocessing-8f5514aa63744586a71647633696895d",
+      "tag": "preprocessing-8f5514aa63744586a71647633696895d",
+      "timestamp": "2026-10-07T23:41:32.127066+00:00"
     }
   ],
   "workspace": {

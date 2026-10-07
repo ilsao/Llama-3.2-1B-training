@@ -85,6 +85,14 @@ manifest, identity and single replacement lineage before submitting split.
 Old blobs and 001/002/003/004 manifests remain immutable. Filtering still requires
 the complete independent eval archive. Never resubmit an uncertain/live import.
 
+Import 514094 is complete and reconciled (39s, 0.0108333333 H200-hours).
+New005 manifest SHA256 is
+237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53:
+all6081 canonical records, only slot1072 replaced,6080 unchanged. Split514101
+was submitted once on005. Inspect/account it on later ticks without polling or
+duplicating submissions. Require its complete split manifest, native seed42
+indices and independent split/evaluation-raw archive before clean/filter stages.
+
 ## Controls
 
 `python3 slurm/heartbeat.py status|install|run-once|disable`

@@ -31,28 +31,31 @@ preprocessing 4.8697222222, training/environment/runtime
 The earlier isolated-replacement cycle had no outstanding allocation; its 66
 lightweight tests passed. Current import allocation is described below.
 
-Authenticated repaired import protocol4e7054c precedes implementation9e9cd2a.
-72 lightweight tests pass, covering immutable source manifests, exact replacement
-membership/order, pinned hash/size, identity/decoder/path rejection, actual tiny
-file checksum failure and retained reservations for uncertain replies. Repair
-import pins result checksum, successful terminal repair accounting, source004
-manifest and validator code; an immutable import request prevents changed resumes.
+Authenticated repaired import514094 completed exit0 in39s on1H200/eight CPUs;
+cost0.0108333333 H200-hours is reconciled. Completed new005 manifest SHA256
+237fcc984b19261dea4bb765ebb279cd4849d9a71119c8421a7c548a4f825d53 preserves6081
+canonical file records: only slot1072 uses the authenticated replacement;
+6080 remain identical. Source004 manifest, repair result, immutable import request,
+configuration/source/environment/spawn identity and completed job event match.
+Full corpus checksums ran on compute node; current cycle checked metadata only.
+No corpus copies or old manifest rewrites. All20 terminated allocations match
+Slurm/ledgers: preprocessing4.8805555556, training/runtime
+0.1536111111, shared5.0341666667 H200-hours.
 
-New005 authenticated import514094 was submitted once through the durable wrapper.
-At 2026-10-07T23:23:48.373361+00:00 it is RUNNING on one H200/eight CPUs;
-30-minute allocation reserves0.5 H200-hours, ten-minute runtime timeout.
-Configuration fingerprint 3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a matches current
-four source hashes, unchanged config/environment and spawn methods.
-Complete new005 manifest was absent at the single post-submit snapshot.
-Shared reconciled 5.0233333333; upper with reservation
-5.5233333333. Production
-success and checksum/order evidence remain pending; no split/filtering yet. Failed 004 split
-513955 and all previous preparations are preserved. Complete canonical split,
-independent 50000 eval originals, fixed 10000 subset, filtering, sealed training
-data and safe cleanup remain pending. Synthetic lossless loader 513790 passed,
-but it does not establish complete-corpus split correctness. No production
-training tokens, committed full runs or measured perplexity. Baseline <=20
-before 2026-10-09 remains unachieved.
+New005 canonical full split514101 was submitted once with durable intent/tag/
+receipt/reservation. At2026-10-07T23:41:43.244392+00:00 RUNNING on1H200/eight CPUs,
+seven configured spawn workers;24-hour allocation reservation gives shared upper
+29.0341666667. Fingerprint remains3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a.
+Complete split/state/evaluation-raw archive are not present at startup observation;
+filtering remains gated. Current cycle changes only documentation/state, so prior
+72 lightweight tests stand; shell syntax and promotion metadata checks passed.
+
+The native full-train seed42 shuffle, last50000 eval originals and fixed10000
+subset must complete before clean/filtering. Full production raw/tokenized/packed
+eval preservation and reference-safe cleanup remain pending. Previous001-004
+identities and damaged files are preserved. No production training tokens,
+committed full runs or measured perplexity. Baseline<=20 before2026-10-09 remains
+unachieved; completion time and training throughput are not measured.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
