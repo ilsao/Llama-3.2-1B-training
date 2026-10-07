@@ -6,6 +6,20 @@ import multiprocessing
 import os
 
 
+def configure_processes():
+    """Choose fresh processes before Arrow/HF start threads; compute entrypoints only."""
+    import multiprocess
+    methods = {}
+    for name, module in (('multiprocessing', multiprocessing), ('multiprocess', multiprocess)):
+        current = module.get_start_method(allow_none=True)
+        if current is None:
+            module.set_start_method('spawn')
+        elif current != 'spawn':
+            raise RuntimeError(f'{name} already uses {current}; start a fresh spawn-configured job')
+        methods[name] = module.get_start_method()
+    return methods
+
+
 def worker_count(config, *, scoring=False):
     cpus = int(os.environ.get('SLURM_CPUS_PER_TASK', '1'))
     if not 1 <= cpus <= 8:

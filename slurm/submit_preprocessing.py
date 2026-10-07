@@ -43,7 +43,7 @@ def bind(state_path, root, state, item, job_id):
         jobs.append({'job_id': job_id, 'tag': item['tag'], 'prep_id': item['prep_id'],
                      'stage': item['stage'], 'ledger': 'preprocessing', 'status': 'SUBMITTED',
                      'allocated_cpus': 8, 'allocated_gpu_count': 1,
-                     'allocation_h200_hours_upper_bound': 24,
+                     'allocation_h200_hours_upper_bound': item.get('reserved_h200_hours', 24),
                      'accounting_status': 'reserved; reconcile after termination'})
     save_intent(state_path, root, state, item)
     return job_id
@@ -65,9 +65,11 @@ def submit(stage, prep_id, extra, root, state_path):
                     and old.get('job_id') not in accounted):
                 raise ValueError('Existing preprocessing intent must be recovered/reconciled before submission')
         tag = 'preprocessing-' + uuid.uuid4().hex
+        wall_time = '00:30:00' if stage == 'parallel-check' else '24:00:00'
+        reserved_hours = 0.5 if stage == 'parallel-check' else 24
         script = 'setup.sbatch' if stage == 'setup' else 'score.sbatch' if stage == 'score' else 'prepare.sbatch'
         command = ['sbatch', '--parsable', '--cpus-per-task=8', '--gpus-per-node=1',
-                   '--time=24:00:00', f'--comment={tag}',
+                   f'--time={wall_time}', f'--comment={tag}',
                    f'--output={root}/logs/%x-%j.out', f'--error={root}/logs/%x-%j.err',
                    str(PROJECT / 'slurm' / script)]
         command += [] if stage == 'setup' else [prep_id] if stage == 'score' else [stage, prep_id, *extra]
@@ -77,10 +79,10 @@ def submit(stage, prep_id, extra, root, state_path):
         item = {'tag': tag, 'submission_tag': tag, 'prep_id': prep_id, 'stage': stage,
                 'ledger': 'preprocessing', 'status': 'submission_uncertain', 'timestamp': now,
                 'submission_started_utc': now, 'submission_command': command,
-                'reserved_h200_hours': 24, 'gpu_count': 1, 'allocated_cpus': 8}
+                'reserved_h200_hours': reserved_hours, 'gpu_count': 1, 'allocated_cpus': 8}
         accounting = state.setdefault('accounting', {})
         key = 'shared_measured_plus_outstanding_reservations_upper_bound'
-        accounting[key] = accounting.get(key, 0) + 24
+        accounting[key] = accounting.get(key, 0) + reserved_hours
         save_intent(state_path, root, state, item)  # before dispatch
         try:
             result = subprocess.run(command, env={**os.environ, 'DATA_ROOT': str(root)},
@@ -91,12 +93,12 @@ def submit(stage, prep_id, extra, root, state_path):
         except OSError:
             # The child did not execute. Leave explicit evidence, without a reservation.
             item['status'] = 'not_dispatched'
-            accounting[key] -= 24
+            accounting[key] -= reserved_hours
             save_intent(state_path, root, state, item)
             raise
         job_id = result.stdout.strip().split(';')[0]
         if result.returncode or not re.fullmatch(r'\d+', job_id):
-            raise RuntimeError(f'Sbatch outcome uncertain; retain 24 H200-hour reservation. '
+            raise RuntimeError(f'Sbatch outcome uncertain; retain {reserved_hours} H200-hour reservation. '
                                f'Do not resubmit; use: bash slurm/submit.sh recover {tag}')
         item['returned_job_id'] = job_id
         atomic_json(receipt_path(root, tag), item)

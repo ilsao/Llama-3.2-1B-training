@@ -44,6 +44,16 @@ the bound visible Codex thread; each research cycle reports directly in that cha
   precede experiments; do not stage unrelated user changes. Target perplexity <=20
   before 2026-10-09; report measured results and remaining deadline honestly.
 
+## Native loader recovery
+
+Split 512532 was cancelled and charged after a suspected multiprocessing stall;
+the exact root cause remains unconfirmed. Follow the committed
+experiments/native-loader-recovery/protocol.md. Configure spawn for both Python
+process libraries, validate native compressed JSON with a threaded prelude and
+1/7-worker equivalence in Slurm, then reconcile before production promotion.
+Source changes require dolma-dclm10-003, reusing only a completed download.
+Retain dolma-dclm10-002 identity and files; do not resubmit its changed sources.
+
 ## Controls
 
 `python3 slurm/heartbeat.py status|install|run-once|disable`

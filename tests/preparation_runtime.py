@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import dataset as pipeline
-from preparation_parallel import configure_threads, ordered_executor
+from preparation_parallel import configure_processes, configure_threads, ordered_executor
 
 
 class Fixture:
@@ -84,6 +84,10 @@ def main():
     args = parser.parse_args()
     pipeline.require_compute()
     configure_threads()
+    process_start_methods = configure_processes()
+    import faulthandler
+    faulthandler.enable()
+    faulthandler.dump_traceback_later(300, repeat=True)
     root = pipeline.setup_storage(args.root)
     if not 1 <= len(args.run_id) <= 96 or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._' for c in args.run_id) or args.run_id in {'.', '..'}:
         parser.error('Use a valid unique run ID')
@@ -105,14 +109,23 @@ def main():
             text = 'A repeated document for exact deduplication.'
         rows.append({'id': str(i), 'text': text})
     shard_paths = []
+    import zstandard as zstd
     for shard in range(8):
-        target = path / f'fixture-{shard}.jsonl'
-        target.write_text(''.join(json.dumps(row) + '\n' for row in rows[shard * 16:(shard + 1) * 16]))
+        target = path / f'fixture-{shard}.jsonl.zst'
+        payload = ''.join(json.dumps(row) + '\n' for row in rows[shard * 16:(shard + 1) * 16]).encode()
+        target.write_bytes(zstd.ZstdCompressor().compress(payload))
         shard_paths.append(str(target))
+    # Exercise native loading after the same kind of threaded hash prelude as
+    # completed-download reuse. Every subsequent child must start fresh.
+    with ordered_executor(7, threads=True) as ordered:
+        assert len(list(ordered(pipeline.artifact, map(Path, shard_paths)))) == 8
+    print('native-loader validation: compressed shards and threaded prelude ready', flush=True)
     native = []
     for workers in (1, 7):
+        print(f'native-loader validation: loading with {workers} workers', flush=True)
         native.append(load_dataset('json', data_files={'train': shard_paths}, split='train',
                                    num_proc=workers, cache_dir=str(path / f'native-{workers}')))
+    assert native[0].to_list() == rows, 'Native loader changed original fixture fields/order'
     assert native[0].to_dict() == native[1].to_dict(), 'Native parallel loader changed canonical order'
     permutations = [np.asarray(ds.shuffle(seed=42)._indices.column(0), dtype=np.uint64) for ds in native]
     assert np.array_equal(*permutations), 'Parallel construction changed canonical shuffle indices'
@@ -232,6 +245,8 @@ def main():
         assert pipeline.progress(db, 'next_row', 0) == 0
     assert not (bad.path / 'clean/manifest.json').exists()
     result = {'passed': True, 'job_id': os.environ['SLURM_JOB_ID'], 'allocated_cpus': int(os.environ['SLURM_CPUS_PER_TASK']),
+              'process_start_methods': process_start_methods,
+              'compressed_native_input': True, 'threaded_prelude': True,
               'workers': [1, 7], 'checks': ['native ordering', 'canonical shuffle', 'split disjointness',
               'dedup winners', 'official scores', 'candidate order', 'token IDs and budget',
               'packing and masks', 'Arrow checksums', 'committed resume', 'worker failure cursor',

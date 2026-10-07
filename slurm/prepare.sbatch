@@ -19,7 +19,8 @@ case "$STAGE" in download|split|clean|select|pack|verify|smoke|parallel-check) ;
 printf '%s\n' "$PREPARATION_ID" > "$JOB_RECORD/preparation-id.txt"
 printf '%s\n' "$STAGE" > "$JOB_RECORD/stage.txt"
 if [[ "$STAGE" == parallel-check ]]; then
-    srun --ntasks=1 python "$REPO/tests/preparation_runtime.py" --run-id "$PREPARATION_ID" --root "$DATA_ROOT"
+    timeout --signal=TERM --kill-after=30s 600s srun --ntasks=1 \
+        python "$REPO/tests/preparation_runtime.py" --run-id "$PREPARATION_ID" --root "$DATA_ROOT"
     exit
 fi
 srun --ntasks=1 python "$REPO/dataset.py" "$STAGE" --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \

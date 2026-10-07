@@ -75,6 +75,9 @@ shuffle／split、清理、tokenization、packing、模型載入、訓練與評�
 取得 8 張 GPU，也不能單靠名稱判定 GPU 型號；工作啟動時會記錄並檢查實際 H200。
 CPU 前處理與 GPU 訓練使用不同 jobs，前處理 allocation 成本另記於資料帳本。
 
+資料 wrapper 對 `parallel-check` 使用 30 分鐘上限並保留 0.5 H200-hours；
+其餘資料階段仍為 24 小時。這些上限包含環境啟動與驗證成本，結束後按實際 allocation 核銷。
+
 | 腳本 | 用途 | 預設 GPU 數 | 預設 wall-time | 提交方式 |
 | --- | --- | ---: | --- | --- |
 | `slurm/setup.sbatch` | 安裝資料環境 | 1 | 24 小時 | 直接 `sbatch` 或資料 wrapper |
@@ -87,6 +90,12 @@ CPU 前處理與 GPU 訓練使用不同 jobs，前處理 allocation 成本另記
 前處理預設最多 7 個 workers，保留 1 個 CPU 給協調程序；各 worker 的底層套件執行緒
 限制為 1。訓練由一個 `srun` task 啟動一次 Accelerate，再建立對應 GPU 數的 ranks，
 避免每個 Slurm task 各啟動一整套分散式訓練。
+
+資料入口在 Arrow／HF 啟動執行緒前，將 `multiprocessing` 與 `multiprocess`
+都設為 `spawn`，並將方法寫入 preparation identity 與 job log。Split 每 5 分鐘
+輸出 Python stack，便於診斷卡住的位置。`parallel-check` 使用壓縮 JSON shards
+及 threaded checksum 前置步驟，比較 1／7 workers 的原生文件順序與 shuffle。
+此次 source 變更後使用新 preparation `dolma-dclm10-003`；保留 `002` 的原身分與檔案。
 
 資料環境使用叢集既有 Miniconda 安裝，位於
 `/work/asciibase64/Llama-3.2-1B-training/environments/data-py311`，Python 版本為 3.11。

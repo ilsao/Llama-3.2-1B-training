@@ -25,7 +25,7 @@ import sys
 import time
 from typing import Iterator
 
-from preparation_parallel import configure_threads, ordered_executor, worker_count
+from preparation_parallel import configure_processes, configure_threads, ordered_executor, worker_count
 
 from third_party.dclm_fasttext import classify_fasttext_hq_prob
 
@@ -240,6 +240,7 @@ class Preparation:
         distribution_versions = sorted((d.metadata['Name'], d.version)
                                        for d in importlib.metadata.distributions())
         self.identity = {'config': config, 'versions': versions, 'python': sys.version,
+                         'process_start_methods': {'multiprocessing': 'spawn', 'multiprocess': 'spawn'},
                          'all_distribution_versions': distribution_versions,
                          'source_sha256': {p: sha256(PROJECT / p) for p in
                             ('dataset.py', 'preparation_parallel.py', 'third_party/dclm_fasttext.py', 'requirements-data.txt')}}
@@ -489,9 +490,11 @@ def stage_split(prep):
     builder = load_dataset_builder(cfg['dataset_id'], revision=cfg['dataset_revision'])
     if [repo_filename(url) for url in builder.config.data_files['train']] != download['canonical_files']:
         raise ValueError('Native builder canonical order differs from download manifest')
+    print(f'split: building native full train with {worker_count(cfg)} workers', flush=True)
     raw = load_dataset(cfg['dataset_id'], revision=cfg['dataset_revision'], split='train',
                        num_proc=worker_count(cfg))
     n = len(raw)
+    print(f'split: native full train ready, {n} documents', flush=True)
     if n <= cfg['evaluation_documents'] or raw._indices is not None:
         raise ValueError('Expected complete, unindexed train document split')
     directory = prep.directory('split')
@@ -1261,6 +1264,10 @@ def main():
     if sys.version_info[:2] != (3, 11):
         raise RuntimeError('Use the documented Python 3.11 data environment')
     configure_threads()
+    process_start_methods = configure_processes()
+    import faulthandler
+    faulthandler.enable()
+    faulthandler.dump_traceback_later(300, repeat=True)
     root = setup_storage(args.root)
     import pyarrow as pa
     pa.set_cpu_count(1)
@@ -1281,6 +1288,7 @@ def main():
             prep.manifest(STAGES[STAGES.index(args.stage) - 1])
         prep.event(args.stage, 'started')
         print(json.dumps({'configuration': config, 'fingerprint': prep.key,
+                          'process_start_methods': process_start_methods,
                           'job_id': os.environ.get('SLURM_JOB_ID')}, indent=2), flush=True)
         try:
             (smoke if args.stage == 'smoke' else globals()['stage_' + args.stage])(prep)
