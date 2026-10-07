@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
-    "active_preprocessing_h200_hours_observed": 0,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0.5,
+    "active_preprocessing_h200_hours_observed": 0.006944444444444444,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T22:20:24.444883+00:00",
+    "observed_utc": "2026-10-07T22:46:40.414947+00:00",
     "preprocessing_h200_hours_reconciled": 4.838055555555556,
     "shared_h200_hours_reconciled": 4.991666666666667,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 4.991666666666667,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 5.491666666666667,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -304,7 +304,7 @@
       "h200_hours_observed": 1.0016666666666667,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513955/gpus.txt",
       "job_id": "513955",
-      "last_observed_utc": "2026-10-07T22:20:24.444883+00:00",
+      "last_observed_utc": "2026-10-07T22:40:22.900758+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
       "reconciled": true,
@@ -312,35 +312,80 @@
       "stage": "split",
       "status": "FAILED",
       "tag": "preprocessing-4574a3c059134cfc81e260737a86d37b"
+    },
+    {
+      "accounting_status": "reserved; reconcile after termination",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 0.5,
+      "elapsed_seconds_observed": 25,
+      "h200_hours_observed": 0.006944444444444444,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514055/gpus.txt",
+      "job_id": "514055",
+      "last_observed_utc": "2026-10-07T22:46:40.414947+00:00",
+      "ledger": "preprocessing",
+      "prep_id": "corpus-audit-001",
+      "result": "read-only checksum/zstd audit in progress; 500/6081 shards committed with no failures so far",
+      "stage": "cache-audit",
+      "status": "RUNNING",
+      "tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0"
     }
   ],
   "last_heartbeat": {
-    "blocker": "canonical full split still generating; full split/eval archive/accounting gate filtering",
+    "blocker": "full split zstd data corruption; read-only audit must identify exact shard before repair/split/filtering",
     "delivery": "visible_thread_queue",
-    "lightweight_tests_passed": 59,
-    "local_time": "2026-10-08T06:21:27.277098+08:00",
-    "new_jobs_submitted": [],
-    "new_terminated_jobs_reconciled": [],
-    "observed_utc": "2026-10-07T22:21:27.277098+00:00",
-    "ready_stage_advanced": false,
-    "report": "to_human/heartbeat-20261008-0621.md",
-    "tests_this_cycle": "16 terminated allocations and current source/config/preparation identity checked; no source changes/repeated tests"
+    "lightweight_tests_passed": 62,
+    "local_time": "2026-10-08T06:47:50.089364+08:00",
+    "new_jobs_submitted": [
+      "514055"
+    ],
+    "new_terminated_jobs_reconciled": [
+      "513955"
+    ],
+    "observed_utc": "2026-10-07T22:47:50.089364+00:00",
+    "ready_stage_advanced": true,
+    "report": "to_human/heartbeat-20261008-0647.md",
+    "tests_this_cycle": "62 lightweight tests passed, including diagnostic file/error/hash/cursor/deadline and wrapper reservation cases; syntax/CLI/AST/diff checked; 17 terminated allocations audited"
   },
   "next_actions": [
-    "Inspect split 513955 once next heartbeat with small log tails/phase progress and periodic stacks; no polling or duplicate submission.",
-    "On exit 0, confirm full canonical row/source/order split manifest and independent 50,000-document original JSON eval archive, fixed 10,000 subset provenance; reconcile allocation, then submit clean dolma-dclm10-004.",
-    "For exit 75 continue same preparation/code/environment/config and cumulative accounting; diagnose other failures before another allocation. Retain 001/002/003 identities/files.",
-    "Advance score/select/pack/verify sequentially; preserve canonical split, global dedup/CC top10%, whole-document order, 6B cap and context8192.",
-    "No cleanup until complete production verify and independent full eval raw/tokens/packed; then model/resume validation, matched-batch 4/8 GPU scaling and reproducible AdamW baseline within shared budget/run limits."
+    "Inspect cache-audit 514055 once next heartbeat; require result/cursor/identity checks and reconcile terminated allocation before promotion or continuation. Do not poll/duplicate.",
+    "For audit exit 75 resume same corpus-audit-001 code/source/identity/cursor after accounting; complete 6081 shard decoding/hash records. A partial scan is not an integrity seal.",
+    "For failed shards compare current compressed bytes against pinned upstream LFS metadata and an independent decoder or separate newly downloaded copy in a Slurm job. Preserve existing corpus/manifests; do not skip records or change revision/canonical order.",
+    "Select validated repair from diagnostic evidence before another production split; source/data identity changes require a new preparation. Full canonical seed42 split and independent 50,000 eval originals/fixed 10,000 subset gate clean/filtering.",
+    "No cleanup before production verify and full eval raw/tokens/packed; no baseline/scaling claims before sealed real data/model-resume checks. Preserve 6B tokens, run geometry, cumulative costs and three-run limits."
   ],
   "pipeline": {
     "blocked_stage": "compressed shard integrity diagnosis required before another split or filtering",
     "compressed_corpus_diagnostic": {
+      "allocation_upper_bound_h200_hours": 0.5,
       "cause": "zstd decompress error: Data corruption detected",
+      "checked_files_observed": 500,
+      "code_commit": "64175a7",
       "failed_job": "513955",
       "failed_shard": "not yet identified",
+      "failures_observed": 0,
+      "identity": {
+        "code_sha256": "e1f3ac117c6025a68da0868f286a90a3353a8be58d503292e16f213e11f595a0",
+        "manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+        "process_start_methods": {
+          "multiprocess": "spawn",
+          "multiprocessing": "spawn"
+        },
+        "source_fingerprint": "52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b",
+        "source_preparation": "dolma-dclm10-004",
+        "zstandard_version": "0.23.0"
+      },
+      "job_id": "514055",
+      "observed_utc": "2026-10-07T22:46:40.414947+00:00",
       "protocol": "experiments/compressed-corpus-audit/protocol.md",
-      "status": "implementing bounded read-only audit"
+      "protocol_commit": "692e6b0",
+      "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/result.json",
+      "run_id": "corpus-audit-001",
+      "runtime_timeout_seconds": 600,
+      "state_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/state.json",
+      "status": "Slurm read-only audit RUNNING; failed shard not yet identified",
+      "worker_deadline_seconds": 540
     },
     "download_complete": true,
     "download_manifest_sha256": "673484b5a3527655957325ea38ad67e3cfdeb1f49ee4d9d7fc93fde8608172e8",
@@ -425,7 +470,7 @@
       "evaluation_archive_state_present": false,
       "generation_examples_last_log": 72380721,
       "observed_utc": "2026-10-07T22:20:24.444883+00:00",
-      "phase": "lossless full train generation",
+      "phase": "FAILED during generation; compressed corpus diagnosis pending",
       "previous_generation_examples": 57842721,
       "split_manifest_present": false,
       "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
@@ -718,6 +763,36 @@
       "submission_tag": "preprocessing-4574a3c059134cfc81e260737a86d37b",
       "tag": "preprocessing-4574a3c059134cfc81e260737a86d37b",
       "timestamp": "2026-10-07T21:21:02.813318+00:00"
+    },
+    {
+      "allocated_cpus": 8,
+      "gpu_count": 1,
+      "job_id": "514055",
+      "ledger": "preprocessing",
+      "prep_id": "corpus-audit-001",
+      "reserved_h200_hours": 0.5,
+      "returned_job_id": "514055",
+      "stage": "cache-audit",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--cpus-per-task=8",
+        "--gpus-per-node=1",
+        "--time=00:30:00",
+        "--comment=preprocessing-ba6915964e4f40cc933dc4596640c9e0",
+        "--output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out",
+        "--error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/prepare.sbatch",
+        "cache-audit",
+        "corpus-audit-001",
+        "--source-prep",
+        "dolma-dclm10-004"
+      ],
+      "submission_started_utc": "2026-10-07T22:46:14.119708+00:00",
+      "submission_tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0",
+      "tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0",
+      "timestamp": "2026-10-07T22:46:14.119708+00:00"
     }
   ],
   "workspace": {

@@ -13,18 +13,25 @@ Slurm/ledgers; shared measured total 3.9900000. 004 config/source hashes/environ
 versions/process methods match validated source and identity
 52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b.
 
-Split 513955 is RUNNING on one H200/eight CPUs, seven workers plus coordinator,
-using both process libraries with spawn. Generation log last reports 72380721
-examples at 06:20 Asia/Taipei, up from 57842721 at 06:00;
-stderr is fresh. This is generation progress, not a final document count or
-completed canonical split. Split/state/eval archive manifests are absent.
-Active observed cost 0.9888889 H200-hours is provisional until allocation
-termination/accounting. No new allocation this cycle. Complete source ordering/
-full-field authentication, native seed-42 shuffle and independent last-50,000
-eval original archive remain in this job; fixed first 10,000 subset unchanged.
-Keep 24 H200-hour reservation; shared measured plus reserved upper bound 27.9900000.
-Filtering waits for complete split/archive/accounting. Source identity/config
-matches; previous preparations and files remain intact.
+Split 513955 FAILED exit 1 after 3606 seconds (one H200/eight CPUs), with zstd
+"Data corruption detected" while generating full map-style data. Error stack
+omits the shard filename. No canonical split/state/eval archive was produced.
+Cost 1.0016667 H200-hours is reconciled; shared measured total 4.9916667 across
+17 terminated allocations, all matching Slurm/ledgers. Earlier import checksums
+matched recorded downloaded bytes; this did not validate all compressed streams
+or independently authenticate upstream LFS hashes. Do not skip records/files.
+
+Protocol 692e6b0 and diagnostic code 64175a7 precede read-only cache-audit 514055,
+RUNNING on one H200/eight CPUs with seven spawn workers. It hashes and fully
+streams each canonical compressed shard, preserving exact filenames/errors and
+an ordered resumable cursor under runs/cache-audit/corpus-audit-001. At 06:46,
+500/6081 committed shard checks showed no failure; complete result and failed
+shard remain pending. Ten-minute runtime timeout, nine-minute worker deadline,
+30-minute allocation (0.5 H200-hour reservation); shared upper 5.4916667.
+62 lightweight tests pass; substantial audit is pending, no corpus repair,
+production retry, filtering, cleanup or training. Retain all identities/files.
+Compare any failed files to pinned upstream metadata and independent decode/new
+separate copy before choosing a repair; preserve canonical revision/order/split.
 
 Lossless schema validation 513790 passed heterogeneous fields, verbatim JSON,
 native projection order/indices, one/seven-worker full split entrypoint,

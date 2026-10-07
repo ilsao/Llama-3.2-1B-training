@@ -102,6 +102,14 @@ CPU 前處理與 GPU 訓練使用不同 jobs，前處理 allocation 成本另記
 shuffle indices、完整 split 入口、eval archive/resume，並在 compute node 有界抽查各來源。
 此次 source 變更後使用新 preparation `dolma-dclm10-004`；保留 `002`／`003` 身分與檔案。
 
+若 full split 遇到壓縮檔解碼錯誤，可提交唯讀稽核：
+`bash slurm/submit.sh cache-audit corpus-audit-001 --source-prep dolma-dclm10-004`。
+Wrapper 預留 0.5 H200-hours（30 分鐘），runtime timeout 為 10 分鐘；7 workers
+逐項比對 manifest checksum 並解壓，將檔名、錯誤與續跑 cursor 保存至
+`/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/<run-id>/`。
+結束後先核銷，exit 75 使用同一 run ID 續跑；診斷後確認 pinned 上游資料與 decoder
+再選擇修復方式。完整 split 與 eval 保存確認後才接 filtering。
+
 資料環境使用叢集既有 Miniconda 安裝，位於
 `/work/asciibase64/Llama-3.2-1B-training/environments/data-py311`，Python 版本為 3.11。
 原始資料、原生 Arrow cache、fastText 權重、tokenizer、SQLite 索引、packed Arrow

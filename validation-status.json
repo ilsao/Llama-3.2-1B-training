@@ -1,5 +1,5 @@
 {
-  "accounting": "All 16 terminated allocations match Slurm/ledgers; active split 513955 has fresh generation progress, 24 H200-hour reservation retained",
+  "accounting": "17 terminated allocations match Slurm/ledgers; failed split 513955 charged; active read-only audit 514055 reserves 0.5 H200-hours",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -231,6 +231,25 @@
     },
     {
       "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 3606,
+      "end": "2026-10-08T06:21:10",
+      "gpu_count": 1,
+      "gpu_hours": 1.0016666666666667,
+      "gpu_type_evidence": {
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 1.0016666666666667,
+      "job_id": "513955",
+      "nodes": "25a-hgpn001",
+      "preparation-id": "dolma-dclm10-004",
+      "stage": "split",
+      "start": "2026-10-08T05:21:04",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
       "elapsed_seconds": 17,
       "end": "2026-10-07T22:38:40",
       "gpu_count": 1,
@@ -306,7 +325,37 @@
       "status": "reconciled"
     }
   ],
-  "blocker": "clean/filtering awaits completed canonical full split, independent 50,000 original eval archive and accounting",
+  "blocker": "compressed shard integrity diagnosis required before another split or filtering",
+  "compressed_corpus_diagnostic": {
+    "allocation_upper_bound_h200_hours": 0.5,
+    "cause": "zstd decompress error: Data corruption detected",
+    "checked_files_observed": 500,
+    "code_commit": "64175a7",
+    "failed_job": "513955",
+    "failed_shard": "not yet identified",
+    "failures_observed": 0,
+    "identity": {
+      "code_sha256": "e1f3ac117c6025a68da0868f286a90a3353a8be58d503292e16f213e11f595a0",
+      "manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
+      "process_start_methods": {
+        "multiprocess": "spawn",
+        "multiprocessing": "spawn"
+      },
+      "source_fingerprint": "52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b",
+      "source_preparation": "dolma-dclm10-004",
+      "zstandard_version": "0.23.0"
+    },
+    "job_id": "514055",
+    "observed_utc": "2026-10-07T22:46:40.414947+00:00",
+    "protocol": "experiments/compressed-corpus-audit/protocol.md",
+    "protocol_commit": "692e6b0",
+    "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/result.json",
+    "run_id": "corpus-audit-001",
+    "runtime_timeout_seconds": 600,
+    "state_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/state.json",
+    "status": "Slurm read-only audit RUNNING; failed shard not yet identified",
+    "worker_deadline_seconds": 540
+  },
   "download_complete": true,
   "download_continuation_job": "511918",
   "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
@@ -328,9 +377,10 @@
     "interval_minutes": 20
   },
   "lightweight_tests": {
-    "count": 59,
+    "count": 62,
+    "last_run": "2026-10-08T06:47:50.089364+08:00",
     "passed": true,
-    "scope": "dependency-free; last run 2026-10-08 04:49 Asia/Taipei; not repeated this metadata cycle"
+    "scope": "tiny mocked diagnostic/cursor/deadline/hash and submission reservation tests; no models/corpus/workers on login"
   },
   "lossless_schema_validation": {
     "allocation_upper_bound_h200_hours": 0.5,
@@ -372,13 +422,13 @@
     "evaluation_archive_state_present": false,
     "generation_examples_last_log": 72380721,
     "observed_utc": "2026-10-07T22:20:24.444883+00:00",
-    "phase": "lossless full train generation",
+    "phase": "FAILED during generation; compressed corpus diagnosis pending",
     "previous_generation_examples": 57842721,
     "split_manifest_present": false,
     "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
   },
-  "production_split_status": "RUNNING",
-  "recorded_at": "2026-10-07T22:21:27.277098+00:00",
+  "production_split_status": "FAILED",
+  "recorded_at": "2026-10-07T22:47:50.089364+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
