@@ -14,24 +14,14 @@ args = parser.parse_args()
 root = args.root.resolve()
 if not root.is_relative_to(Path('/work/asciibase64')) or not re.fullmatch(r'\d+', args.job_id):
     parser.error('Use the project /work storage and a numeric job ID')
-raw = subprocess.check_output(['sacct', '-j', args.job_id, '-X', '--noheader', '--parsable2',
-       '--format=JobIDRaw,State,ElapsedRaw,AllocTRES%500,Start,End,NodeList%128'], text=True)
-records = [line.split('|') for line in raw.splitlines() if line.split('|')[0] == args.job_id]
-if len(records) != 1:
-    raise SystemExit('Expected exactly one allocation accounting record')
-job, state, elapsed, tres, start, end, nodes = records[0][:7]
-if state.split()[0] not in {'COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY', 'NODE_FAIL', 'PREEMPTED'}:
-    raise SystemExit('Allocation has not terminated; reconcile after it ends')
-resources = dict(part.split('=', 1) for part in tres.split(',') if '=' in part)
-gpus = int(resources.get('gres/gpu', '0'))
-typed = {key[9:]: int(value) for key, value in resources.items() if key.startswith('gres/gpu:')}
-if gpus and (not typed or sum(typed.values()) != gpus):
-    raise SystemExit('GPU type/count unavailable in AllocTRES; obtain typed Slurm accounting before recording H200-hours')
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from training_state import slurm_record
+measured = slurm_record(args.job_id, root)
+job = measured['job_id']
 record_dir = root / 'logs' / f'job-{job}'
-record = {'job_id': job, 'state': state, 'elapsed_seconds': int(elapsed), 'alloc_tres': tres,
-          'gpu_count': gpus, 'gpu_types': typed, 'gpu_hours': gpus * int(elapsed) / 3600,
-          'h200_hours': sum(value for key, value in typed.items() if key.lower() == 'h200') * int(elapsed) / 3600,
-          'start': start, 'end': end, 'nodes': nodes, 'category': 'data_preprocessing'}
+record = {**measured, 'gpu_hours': measured['h200_hours'],
+          'category': 'data_preprocessing'}
 for name in ('stage', 'preparation-id'):
     path = record_dir / f'{name}.txt'
     record[name] = path.read_text().strip() if path.exists() else 'setup'

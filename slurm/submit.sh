@@ -11,14 +11,14 @@ if [[ "$STAGE" != setup ]]; then
     [[ "$PREPARATION_ID" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$ ]] || { echo 'Supply a valid preparation ID' >&2; exit 1; }
 fi
 mkdir -p "$DATA_ROOT/logs"
-SUBMIT_ARGS=(--parsable --output="$DATA_ROOT/logs/%x-%j.out" --error="$DATA_ROOT/logs/%x-%j.err")
+SUBMIT_ARGS=(--cpus-per-task=8 --parsable --output="$DATA_ROOT/logs/%x-%j.out" --error="$DATA_ROOT/logs/%x-%j.err")
 if [[ "$STAGE" == setup ]]; then
     JOB_ID=$(sbatch "${SUBMIT_ARGS[@]}" "$REPO/slurm/setup.sbatch")
 elif [[ "$STAGE" == score ]]; then
     JOB_ID=$(sbatch "${SUBMIT_ARGS[@]}" "$REPO/slurm/score.sbatch" "$PREPARATION_ID")
 else
-    case "$STAGE" in download|split|clean|select|pack|verify|smoke) ;; *) echo 'Invalid stage' >&2; exit 1;; esac
-    JOB_ID=$(sbatch "${SUBMIT_ARGS[@]}" "$REPO/slurm/prepare.sbatch" "$STAGE" "$PREPARATION_ID")
+    case "$STAGE" in download|split|clean|select|pack|verify|smoke|parallel-check) ;; *) echo 'Invalid stage' >&2; exit 1;; esac
+    JOB_ID=$(sbatch "${SUBMIT_ARGS[@]}" "$REPO/slurm/prepare.sbatch" "$STAGE" "$PREPARATION_ID" "${@:3}")
 fi
 printf '%s\t%s\t%s\t%s\n' "$(date -u +%FT%TZ)" "$JOB_ID" "$STAGE" "$PREPARATION_ID" >> "$DATA_ROOT/logs/submissions.tsv"
 printf 'Submitted job %s (%s, preparation=%s)\n' "$JOB_ID" "$STAGE" "$PREPARATION_ID"

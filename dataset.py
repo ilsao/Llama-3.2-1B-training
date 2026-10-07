@@ -25,6 +25,8 @@ import sys
 import time
 from typing import Iterator
 
+from preparation_parallel import configure_threads, ordered_executor, worker_count
+
 from third_party.dclm_fasttext import classify_fasttext_hq_prob
 
 PROJECT = Path(__file__).resolve().parent
@@ -240,7 +242,7 @@ class Preparation:
         self.identity = {'config': config, 'versions': versions, 'python': sys.version,
                          'all_distribution_versions': distribution_versions,
                          'source_sha256': {p: sha256(PROJECT / p) for p in
-                            ('dataset.py', 'third_party/dclm_fasttext.py', 'requirements-data.txt')}}
+                            ('dataset.py', 'preparation_parallel.py', 'third_party/dclm_fasttext.py', 'requirements-data.txt')}}
         self.key = fingerprint(self.identity)
         existing = self.path / 'configuration.json'
         if existing.exists():
@@ -268,7 +270,11 @@ class Preparation:
             if value['parent_sha256'] != sha256(self.path / parent / 'manifest.json'):
                 raise ValueError(f'Parent manifest changed: {stage}')
         for item in value['artifacts']:
-            check_artifact(item, full)
+            check_artifact(item)
+        if full:
+            with ordered_executor(worker_count(self.config), threads=True, check=stop_if_requested) as ordered:
+                for _ in ordered(check_full_artifact, value['artifacts']):
+                    pass
         return value
 
     def done(self, stage):
@@ -278,20 +284,25 @@ class Preparation:
             return True
         return False
 
-    def finish(self, stage, paths, details):
+    def finish(self, stage, paths, details, records=None):
         parent = STAGES[STAGES.index(stage) - 1] if stage != 'download' else None
+        if records is None:
+            with ordered_executor(worker_count(self.config), threads=True, check=stop_if_requested) as ordered:
+                records = list(ordered(artifact, map(Path, paths)))
         atomic_json(self.directory(stage) / 'manifest.json',
                     {'stage': stage, 'fingerprint': self.key,
                      'parent_sha256': sha256(self.path / parent / 'manifest.json') if parent else None,
                      'completed_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
-                     'artifacts': [artifact(Path(p)) for p in paths], 'details': details})
+                     'artifacts': records, 'details': details})
 
     def event(self, stage, status):
         with (self.path / 'jobs.jsonl').open('a') as stream:
             stream.write(json.dumps({'stage': stage, 'status': status, 'timestamp': time.time(),
                                      'job_id': os.environ.get('SLURM_JOB_ID'),
                                      'node': os.environ.get('SLURMD_NODENAME'),
-                                     'fingerprint': self.key}) + '\n')
+                                     'fingerprint': self.key,
+                                     'allocated_cpus': int(os.environ.get('SLURM_CPUS_PER_TASK', '1')),
+                                     'workers': 1 if stage == 'smoke' else worker_count(self.config, scoring=stage == 'score')}) + '\n')
 
 
 def database(path):
@@ -377,6 +388,50 @@ def load_raw(prep):
     return raw
 
 
+def check_full_artifact(item):
+    check_artifact(item, True)
+
+
+def reuse_download(prep, names):
+    source_id = prep.reuse_download_from
+    if (not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,95}', source_id)
+            or source_id in {'.', '..'} or source_id == prep.path.name):
+        raise ValueError('Use a different, valid completed preparation ID')
+    source = prep.root / 'preprocessed' / source_id
+    with (source / '.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
+        configuration = read_json(source / 'configuration.json')
+        identity = {k: v for k, v in configuration.items()
+                    if k not in {'fingerprint', 'code_commit', 'git_status'}}
+        if fingerprint(identity) != configuration['fingerprint']:
+            raise ValueError('Source preparation identity was modified')
+        for key in ('dataset_id', 'dataset_revision'):
+            if configuration['config'][key] != prep.config[key]:
+                raise ValueError(f'Download reuse changed {key}')
+        manifest_path = source / 'download/manifest.json'
+        manifest = read_json(manifest_path)  # An incomplete state is never importable.
+        details = manifest['details']
+        files = details['files']
+        if (manifest['stage'] != 'download' or manifest['parent_sha256'] is not None
+                or manifest['fingerprint'] != configuration['fingerprint']
+                or details['canonical_files'] != names
+                or [item['repo_filename'] for item in files] != names
+                or len(manifest['artifacts']) != len(files)):
+            raise ValueError('Completed download membership or provenance mismatch')
+        for item, recorded in zip(files, manifest['artifacts']):
+            if (not Path(item['path']).resolve().is_relative_to(prep.root.resolve())
+                    or item['source'] != source_for_path(item['repo_filename'])
+                    or any(item[key] != recorded[key] for key in ('path', 'size', 'sha256'))):
+                raise ValueError('Source download artifact metadata mismatch')
+        with ordered_executor(worker_count(prep.config), threads=True, check=stop_if_requested) as ordered:
+            for _ in ordered(check_full_artifact, files):
+                pass
+        provenance = {'preparation_id': source_id, 'fingerprint': configuration['fingerprint'],
+                      'manifest_sha256': sha256(manifest_path), 'files_copied': False}
+        prep.finish('download', [item['path'] for item in files],
+                    {**details, 'reused_download': provenance}, records=manifest['artifacts'])
+
+
 def stage_download(prep):
     from datasets import load_dataset_builder
     from huggingface_hub import hf_hub_download
@@ -388,13 +443,17 @@ def stage_download(prep):
     names = [repo_filename(url) for url in splits['train']]
     if len(names) != len(set(names)) or not names:
         raise ValueError('Duplicate or missing canonical shard names')
+    if getattr(prep, 'reuse_download_from', None):
+        reuse_download(prep, names)
+        return
     directory = prep.directory('download')
     state_path = directory / 'state.json'
     state = state_for(state_path, {'canonical_files': names, 'files': []})
     if state['canonical_files'] != names:
         raise ValueError('Canonical dataset file order changed')
-    for item in state['files']:
-        check_artifact(item, True)
+    with ordered_executor(worker_count(cfg), threads=True, check=stop_if_requested) as ordered:
+        for _ in ordered(check_full_artifact, state['files']):
+            pass
     for name in names[len(state['files']):]:
         stop_if_requested()
         path = Path(hf_hub_download(cfg['dataset_id'], name, repo_type='dataset',
@@ -405,7 +464,8 @@ def stage_download(prep):
         print(f'download: {len(state["files"])}/{len(names)}', flush=True)
     prep.finish('download', [item['path'] for item in state['files']],
                 {'canonical_files': names, 'files': state['files'],
-                 'builder': type(builder).__name__, 'builder_config': builder.config.name})
+                 'builder': type(builder).__name__, 'builder_config': builder.config.name},
+                records=[{k: item[k] for k in ('path', 'size', 'sha256')} for item in state['files']])
 
 
 def raw_json_documents(path):
@@ -427,7 +487,8 @@ def stage_split(prep):
     builder = load_dataset_builder(cfg['dataset_id'], revision=cfg['dataset_revision'])
     if [repo_filename(url) for url in builder.config.data_files['train']] != download['canonical_files']:
         raise ValueError('Native builder canonical order differs from download manifest')
-    raw = load_dataset(cfg['dataset_id'], revision=cfg['dataset_revision'], split='train')
+    raw = load_dataset(cfg['dataset_id'], revision=cfg['dataset_revision'], split='train',
+                       num_proc=worker_count(cfg))
     n = len(raw)
     if n <= cfg['evaluation_documents'] or raw._indices is not None:
         raise ValueError('Expected complete, unindexed train document split')
@@ -509,6 +570,19 @@ def source_at(ranges, ends, index):
     return ranges[position]['source']
 
 
+def clean_batch(task):
+    next_row, records = task
+    winners, empty = [], []
+    for row, pos, text, source in records:
+        if not isinstance(text, str):
+            raise ValueError(f'Non-string training text at row {row}')
+        if not text.strip():
+            empty.append(row)
+        else:
+            winners.append((hashlib.sha256(text.encode('utf-8')).digest(), row, pos, source))
+    return next_row, winners, empty
+
+
 def stage_clean(prep):
     import numpy as np
     raw = load_raw(prep)
@@ -525,27 +599,26 @@ def stage_clean(prep):
                    'position INTEGER NOT NULL, source TEXT NOT NULL) WITHOUT ROWID')
         db.execute('CREATE TABLE IF NOT EXISTS empty (row_index INTEGER PRIMARY KEY)')
         start = progress(db, 'next_row', 0)
-        for batch in raw.select(range(start, len(raw))).iter(batch_size=cfg['document_batch_size']):
-            stop_if_requested()
-            with db:
+        def inputs():
+            offset = start
+            for batch in raw.select(range(start, len(raw))).iter(batch_size=cfg['document_batch_size']):
+                records = []
                 for i, text in enumerate(batch['text']):
-                    row = start + i
-                    pos = int(inverse[row])
-                    if pos >= train_count:
-                        continue  # evaluation never enters cleaning or hashing
-                    if not isinstance(text, str):
-                        raise ValueError(f'Non-string training text at row {row}')
-                    if not text.strip():
-                        db.execute('INSERT OR IGNORE INTO empty VALUES (?)', (row,))
-                        continue
-                    digest = hashlib.sha256(text.encode('utf-8')).digest()
-                    source = source_at(ranges, ends, row)
-                    db.execute('INSERT INTO winners VALUES (?, ?, ?, ?) '
-                               'ON CONFLICT(digest) DO UPDATE SET row_index=excluded.row_index, '
-                               'position=excluded.position, source=excluded.source '
-                               'WHERE excluded.position < winners.position', (digest, row, pos, source))
-                start += len(batch['text'])
-                set_progress(db, 'next_row', start)
+                    row, pos = offset + i, int(inverse[offset + i])
+                    if pos < train_count:  # Exclude evaluation before hashing or dispatch.
+                        records.append((row, pos, text, source_at(ranges, ends, row)))
+                offset += len(batch['text'])
+                yield offset, records
+        with ordered_executor(worker_count(cfg), check=stop_if_requested) as ordered:
+            for next_row, winners, empty in ordered(clean_batch, inputs()):
+                stop_if_requested()
+                with db:
+                    db.executemany('INSERT OR IGNORE INTO empty VALUES (?)', [(row,) for row in empty])
+                    db.executemany('INSERT INTO winners VALUES (?, ?, ?, ?) '
+                                   'ON CONFLICT(digest) DO UPDATE SET row_index=excluded.row_index, '
+                                   'position=excluded.position, source=excluded.source '
+                                   'WHERE excluded.position < winners.position', winners)
+                    set_progress(db, 'next_row', next_row)
         db.execute('CREATE UNIQUE INDEX IF NOT EXISTS winner_rows ON winners(row_index)')
         db.execute('CREATE UNIQUE INDEX IF NOT EXISTS winner_positions ON winners(position)')
         db.execute('CREATE INDEX IF NOT EXISTS winner_sources ON winners(source, row_index)')
@@ -578,9 +651,9 @@ def score_texts(texts):
 
 def stage_score(prep):
     from huggingface_hub import hf_hub_download
-    import multiprocessing
     cfg = prep.config
     raw = load_raw(prep)
+    workers = worker_count(cfg, scoring=True)
     model_path = hf_hub_download(cfg['classifier_id'], cfg['classifier_filename'],
                                  revision=cfg['classifier_revision'])
     path = prep.directory('score') / 'scores.sqlite'
@@ -590,18 +663,17 @@ def stage_score(prep):
         last = progress(db, 'last_row', -1)
         query = clean.execute("SELECT row_index, position FROM winners WHERE source='common_crawl' "
                               'AND row_index>? ORDER BY row_index', (last,))
-        with concurrent.futures.ProcessPoolExecutor(
-                max_workers=cfg['score_workers'], mp_context=multiprocessing.get_context('spawn'),
-                initializer=initialize_scorer, initargs=(model_path,)) as pool:
+        with ordered_executor(workers, initializer=initialize_scorer,
+                              initargs=(model_path,), check=stop_if_requested) as ordered:
             while True:
                 stop_if_requested()
-                rows = query.fetchmany(cfg['document_batch_size'] * cfg['score_workers'])
+                rows = query.fetchmany(cfg['document_batch_size'] * workers)
                 if not rows:
                     break
                 texts = raw.select([row[0] for row in rows])['text']
                 size = cfg['document_batch_size']
                 batches = [texts[i:i + size] for i in range(0, len(texts), size)]
-                scores = [score for batch in pool.map(score_texts, batches) for score in batch]
+                scores = [score for batch in ordered(score_texts, batches) for score in batch]
                 if len(scores) != len(rows):
                     raise ValueError('Missing fastText scores')
                 with db:
@@ -614,7 +686,7 @@ def stage_score(prep):
         if count != expected:
             raise ValueError('Not every eligible Common Crawl document was scored')
     prep.finish('score', [path, model_path], {'scored_documents': count,
-                'workers': cfg['score_workers'], 'input': 'full text; official strip and splitlines join',
+                'workers': workers, 'input': 'full text; official strip and splitlines join',
                 'classifier_sha256': sha256(Path(model_path)), 'device': 'CPU',
                 'score': 'official DCLM high-quality probability; no rounding or clamping'})
 
@@ -669,6 +741,38 @@ def make_document(raw_doc, row, position, source, tokenizer, evaluation_slot=-1)
             'tokens': tokens, 'evaluation_slot': evaluation_slot}
 
 
+_TOKENIZER = None
+
+
+def initialize_tokenizer(config):
+    global _TOKENIZER
+    from types import SimpleNamespace
+    configure_threads()
+    import pyarrow as pa
+    pa.set_cpu_count(1)
+    pa.set_io_thread_count(1)
+    _TOKENIZER = load_tokenizer(SimpleNamespace(config=config))
+    import torch
+    torch.set_num_threads(1)
+
+
+def tokenize_document(task):
+    original, row, position, source, slot = task
+    return make_document(original, row, position, source, _TOKENIZER, slot)
+
+
+def tokenize_documents(ordered, tokenizer, tasks, workers):
+    if workers == 1:
+        return (make_document(original, row, pos, source, tokenizer, slot)
+                for original, row, pos, source, slot in tasks)
+    return ordered(tokenize_document, tasks)
+
+
+def evaluation_pack_task(task):
+    doc, cursor, length, pad_id = task
+    return cursor, doc['evaluation_slot'], list(pack_evaluation_document(doc, length, pad_id))
+
+
 def stage_select(prep):
     import numpy as np
     cfg = prep.config
@@ -683,61 +787,65 @@ def stage_select(prep):
     for item in state['train_files'] + state['eval_files']:
         check_artifact(item, True)
     schema = document_schema()
-    with contextlib.closing(readonly(candidates_path)) as db:
-        cursor = db.execute('SELECT row_index, position, source FROM candidates WHERE position>? '
-                            'ORDER BY position', (state['last_position'],))
-        rows_buffer, tokens_buffer = [], 0
-        while cfg['max_training_tokens'] - state['train_tokens'] >= 2:
-            stop_if_requested()
-            rows = cursor.fetchmany(32)
-            if not rows:
-                break
-            documents = raw.select([row[0] for row in rows])
-            for (row, position, source), original in zip(rows, documents):
-                doc = make_document(original, row, position, source, tokenizer)
-                count = len(doc['tokens'])
-                if fits_document(count, cfg['max_training_tokens'] - state['train_tokens']):
-                    rows_buffer.append(doc)
-                    tokens_buffer += count
-                    state['train_tokens'] += count
-                    state['train_documents'] += 1
-                else:
-                    state['budget_skipped_documents'] += 1
-                state['last_position'] = position
-                if tokens_buffer >= cfg['document_shard_tokens']:
-                    path = directory / f'train-documents-{len(state["train_files"]):06d}.arrow'
-                    state['train_files'].append(write_arrow(path, rows_buffer, schema))
-                    rows_buffer, tokens_buffer = [], 0
-                    atomic_json(state_path, state)
-                if state['train_tokens'] == cfg['max_training_tokens']:
+    workers = worker_count(cfg)
+    with ordered_executor(workers, initializer=initialize_tokenizer if workers > 1 else None,
+                          initargs=(cfg,), check=stop_if_requested) as ordered:
+        with contextlib.closing(readonly(candidates_path)) as db:
+            cursor = db.execute('SELECT row_index, position, source FROM candidates WHERE position>? '
+                                'ORDER BY position', (state['last_position'],))
+            rows_buffer, tokens_buffer = [], 0
+            while cfg['max_training_tokens'] - state['train_tokens'] >= 2:
+                stop_if_requested()
+                rows = cursor.fetchmany(32)
+                if not rows:
                     break
-            # Never checkpoint a cursor beyond documents still in memory.
-            if not rows_buffer:
-                atomic_json(state_path, state)
-        if rows_buffer:
-            path = directory / f'train-documents-{len(state["train_files"]):06d}.arrow'
-            state['train_files'].append(write_arrow(path, rows_buffer, schema))
-        atomic_json(state_path, state)
-    if state['train_documents'] == 0:
-        raise ValueError('No complete training document fits the token budget')
-    split = prep.manifest('split')['details']
-    ranges = split['ranges']
-    ends = [item['end'] for item in ranges]
-    evaluation = np.load(prep.path / 'split/evaluation.npy', mmap_mode='r')
-    for offset in range(state['next_evaluation_slot'], len(evaluation), 32):
-        stop_if_requested()
-        indices = [int(row) for row in evaluation[offset:offset + 32]]
-        rows_buffer = []
-        for i, (row, original) in enumerate(zip(indices, raw.select(indices))):
-            slot = offset + i
-            doc = make_document(original, row, split['train_document_count'] + slot,
-                                source_at(ranges, ends, row), tokenizer, slot)
-            rows_buffer.append(doc)
-            state['evaluation_tokens'] += len(doc['tokens'])
-        path = directory / f'eval-documents-{len(state["eval_files"]):06d}.arrow'
-        state['eval_files'].append(write_arrow(path, rows_buffer, schema))
-        state['next_evaluation_slot'] = offset + len(indices)
-        atomic_json(state_path, state)
+                documents = raw.select([row[0] for row in rows])
+                tasks = ((original, row, pos, source, -1) for (row, pos, source), original in zip(rows, documents))
+                for doc in tokenize_documents(ordered, tokenizer, tasks, workers):
+                    position = doc['shuffle_position']
+                    count = len(doc['tokens'])
+                    if fits_document(count, cfg['max_training_tokens'] - state['train_tokens']):
+                        rows_buffer.append(doc)
+                        tokens_buffer += count
+                        state['train_tokens'] += count
+                        state['train_documents'] += 1
+                    else:
+                        state['budget_skipped_documents'] += 1
+                    state['last_position'] = position
+                    if tokens_buffer >= cfg['document_shard_tokens']:
+                        path = directory / f'train-documents-{len(state["train_files"]):06d}.arrow'
+                        state['train_files'].append(write_arrow(path, rows_buffer, schema))
+                        rows_buffer, tokens_buffer = [], 0
+                        atomic_json(state_path, state)
+                    if state['train_tokens'] == cfg['max_training_tokens']:
+                        break
+                # Never checkpoint a cursor beyond documents still in memory.
+                if not rows_buffer:
+                    atomic_json(state_path, state)
+            if rows_buffer:
+                path = directory / f'train-documents-{len(state["train_files"]):06d}.arrow'
+                state['train_files'].append(write_arrow(path, rows_buffer, schema))
+            atomic_json(state_path, state)
+        if state['train_documents'] == 0:
+            raise ValueError('No complete training document fits the token budget')
+        split = prep.manifest('split')['details']
+        ranges = split['ranges']
+        ends = [item['end'] for item in ranges]
+        evaluation = np.load(prep.path / 'split/evaluation.npy', mmap_mode='r')
+        for offset in range(state['next_evaluation_slot'], len(evaluation), 32):
+            stop_if_requested()
+            indices = [int(row) for row in evaluation[offset:offset + 32]]
+            rows_buffer = []
+            tasks = ((original, row, split['train_document_count'] + offset + i,
+                      source_at(ranges, ends, row), offset + i)
+                     for i, (row, original) in enumerate(zip(indices, raw.select(indices))))
+            for doc in tokenize_documents(ordered, tokenizer, tasks, workers):
+                rows_buffer.append(doc)
+                state['evaluation_tokens'] += len(doc['tokens'])
+            path = directory / f'eval-documents-{len(state["eval_files"]):06d}.arrow'
+            state['eval_files'].append(write_arrow(path, rows_buffer, schema))
+            state['next_evaluation_slot'] = offset + len(indices)
+            atomic_json(state_path, state)
     with contextlib.closing(readonly(candidates_path)) as db:
         selection = {'candidate_documents': db.execute('SELECT COUNT(*) FROM candidates').fetchone()[0],
                      'common_crawl_kept': progress(db, 'common_crawl_kept'),
@@ -792,21 +900,23 @@ def stage_pack(prep):
     if state['training_tokens'] != selected['train_tokens']:
         raise ValueError('Packing changed the non-padding training token count')
     buffer = []
-    for doc, cursor in iter_arrow(selected['eval_files'], state['eval_cursor']):
-        stop_if_requested()
-        sequences = list(pack_evaluation_document(doc, length, pad_id))
-        buffer.extend(sequences)
-        state['evaluation_input_tokens'] += sum(sum(row['attention_mask']) for row in sequences)
-        predictions = sum(sum(label != -100 for label in row['labels'][1:]) for row in sequences)
-        state['evaluation_prediction_tokens'] += predictions
-        if doc['evaluation_slot'] < cfg['evaluation_subset_documents']:
-            state['subset_prediction_tokens'] += predictions
-        state['eval_cursor'] = cursor
-        if len(buffer) >= cfg['sequence_shard_rows']:
-            path = directory / f'eval-{len(state["eval_files"]):06d}.arrow'
-            state['eval_files'].append(write_arrow(path, buffer, schema))
-            buffer = []
-            atomic_json(state_path, state)
+    tasks = ((doc, cursor, length, pad_id)
+             for doc, cursor in iter_arrow(selected['eval_files'], state['eval_cursor']))
+    with ordered_executor(worker_count(cfg), check=stop_if_requested) as ordered:
+        for cursor, slot, sequences in ordered(evaluation_pack_task, tasks):
+            stop_if_requested()
+            buffer.extend(sequences)
+            state['evaluation_input_tokens'] += sum(sum(row['attention_mask']) for row in sequences)
+            predictions = sum(sum(label != -100 for label in row['labels'][1:]) for row in sequences)
+            state['evaluation_prediction_tokens'] += predictions
+            if slot < cfg['evaluation_subset_documents']:
+                state['subset_prediction_tokens'] += predictions
+            state['eval_cursor'] = cursor
+            if len(buffer) >= cfg['sequence_shard_rows']:
+                path = directory / f'eval-{len(state["eval_files"]):06d}.arrow'
+                state['eval_files'].append(write_arrow(path, buffer, schema))
+                buffer = []
+                atomic_json(state_path, state)
     if buffer:
         path = directory / f'eval-{len(state["eval_files"]):06d}.arrow'
         state['eval_files'].append(write_arrow(path, buffer, schema))
@@ -1055,9 +1165,12 @@ def validate_config(config):
             raise ValueError(f'This recipe requires {name}={required[name]}')
     if not isinstance(config['max_training_tokens'], int) or not 2 <= config['max_training_tokens'] <= 6_000_000_000:
         raise ValueError('max_training_tokens must be between 2 and 6000000000')
-    for name in ('score_workers', 'document_batch_size', 'document_shard_tokens', 'sequence_shard_rows'):
+    for name in ('preprocessing_workers', 'score_workers', 'document_batch_size', 'document_shard_tokens', 'sequence_shard_rows'):
         if not isinstance(config[name], int) or config[name] <= 0:
             raise ValueError(f'{name} must be a positive integer')
+    for name in ('preprocessing_workers', 'score_workers'):
+        if config[name] > 7:
+            raise ValueError(f'{name} must be at most 7 (plus coordinator)')
     for name in ('dataset_revision', 'classifier_revision', 'tokenizer_revision'):
         if not re.fullmatch(r'[0-9a-f]{40}', config[name]):
             raise ValueError(f'{name} must be an immutable commit SHA')
@@ -1067,16 +1180,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('stage', choices=(*STAGES, 'smoke'))
     parser.add_argument('--prep-id', required=True)
+    parser.add_argument('--reuse-download-from', help='Import a completed, verified download from an older preparation')
     parser.add_argument('--root', type=Path, default=DEFAULT_ROOT)
     parser.add_argument('--config', type=Path, default=PROJECT / 'configs/dataset.json')
     args = parser.parse_args()
+    if args.reuse_download_from and args.stage != 'download':
+        parser.error('--reuse-download-from is valid only for download')
     require_compute()
     config = read_json(args.config)
     validate_config(config)
     if sys.version_info[:2] != (3, 11):
         raise RuntimeError('Use the documented Python 3.11 data environment')
+    configure_threads()
     root = setup_storage(args.root)
+    import pyarrow as pa
+    pa.set_cpu_count(1)
+    pa.set_io_thread_count(1)
     prep = Preparation(root, args.prep_id, config)
+    prep.reuse_download_from = args.reuse_download_from
     def handler(signum, frame):
         global STOP
         STOP = True

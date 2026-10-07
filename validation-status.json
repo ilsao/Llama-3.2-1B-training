@@ -1,0 +1,67 @@
+{
+  "recorded_at": "2026-10-07T14:46:23.745417+00:00",
+  "lightweight_tests": {
+    "passed": true,
+    "count": 35
+  },
+  "shell_syntax": "passed",
+  "slurm_test_only": {
+    "cpu_8_gpu_1": "passed",
+    "cpu_8_gpu_8": "passed"
+  },
+  "runtime_checks": "not validated: preprocessing check and environment setup allocations failed",
+  "blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
+  "allocated_jobs": [
+    {
+      "job_id": "511170",
+      "state": "FAILED",
+      "elapsed_seconds": 3167,
+      "gpu_count": 1,
+      "h200_hours": 0.8797222222222222,
+      "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup scontrol node with exclusively H200 GPUs",
+        "sha256": "8943d6334c8aeb46be57644de236b68207155f3fa4a4548e5e9d1ea605a446ea"
+      },
+      "start": "2026-10-07T21:30:44",
+      "end": "2026-10-07T22:23:31",
+      "nodes": "25a-hgpn003"
+    },
+    {
+      "job_id": "511509",
+      "state": "FAILED",
+      "elapsed_seconds": 18,
+      "gpu_count": 1,
+      "h200_hours": 0.005,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3"
+      },
+      "start": "2026-10-07T22:38:20",
+      "end": "2026-10-07T22:38:38",
+      "nodes": "25a-hgpn001"
+    },
+    {
+      "job_id": "511510",
+      "state": "FAILED",
+      "elapsed_seconds": 17,
+      "gpu_count": 1,
+      "h200_hours": 0.004722222222222222,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "c2dcf95ec5e6f896107b43aa7747d81ba99ca13a846641ac18d6f7c11de4f04c"
+      },
+      "start": "2026-10-07T22:38:23",
+      "end": "2026-10-07T22:38:40",
+      "nodes": "25a-hgpn011"
+    }
+  ],
+  "gpu_runtime_checks": "not submitted: ledger reservations failed with ENOSPC",
+  "full_model_validation_and_scaling": "unrun; require storage, training environment and verified corpus",
+  "preserved_download_worktree": ".download-continuation",
+  "original_download_shards_recorded": 1072,
+  "original_download_shards_total": 6081,
+  "accounting": "All three terminated allocations reconciled in their respective ledgers"
+}

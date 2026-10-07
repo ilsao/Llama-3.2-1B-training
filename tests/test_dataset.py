@@ -231,7 +231,13 @@ class ResumeTests(unittest.TestCase):
                                    manifest=lambda stage: {'details': details}, finish=finish)
             fake_np = SimpleNamespace(load=lambda *args, **kwargs: inverse)
             with patch.dict('sys.modules', {'numpy': fake_np}), patch.object(pipeline, 'load_raw', return_value=raw):
-                with patch.object(pipeline, 'stop_if_requested', side_effect=[None, pipeline.StopRequested()]):
+                def stop_after_committed_batch():
+                    path = root / 'clean/documents.sqlite'
+                    if path.exists():
+                        with sqlite3.connect(path) as db:
+                            if pipeline.progress(db, 'next_row', 0) == 2:
+                                raise pipeline.StopRequested()
+                with patch.object(pipeline, 'stop_if_requested', side_effect=stop_after_committed_batch):
                     with self.assertRaises(pipeline.StopRequested):
                         pipeline.stage_clean(prep)
                 with sqlite3.connect(root / 'clean/documents.sqlite') as db:

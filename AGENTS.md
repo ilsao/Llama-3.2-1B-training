@@ -66,6 +66,22 @@ resource-consuming jobs merely to verify this guidance file. When a requested
 implementation needs a heavy check, prepare its batch script and report whether
 the check was submitted, completed, or remains unrun.
 
+## Authorized parallel resources
+
+The user authorizes up to **8 H200 GPUs and 8 CPUs total per job** for subsequent
+work. This is a per-job limit, not a per-rank CPU allowance. Allocate one Slurm
+launcher task on one node; GPU training uses one rank per allocated GPU and one
+CPU thread per rank. CPU preprocessing defaults to seven workers plus a
+coordinator, with bounded ordered results and one library thread per worker.
+Keep canonical split, document selection, packing and resume semantics unchanged.
+
+The existing one-H200 exception for CPU preprocessing remains authorized because
+this account has no verified CPU-only partition access. Record these allocations
+as preprocessing costs. Do not allocate extra GPUs for CPU-only algorithms.
+Compare 4/8-GPU training at matched global batch and charge every validation and
+scaling allocation to the shared ledger. GPU count changes require new runs;
+resumes retain their original geometry and cumulative budgets.
+
 ## Large-file storage
 
 **Save all large files under `/work/asciibase64/`.** Keep source code, small
@@ -156,9 +172,8 @@ same subset across comparable runs. The OJ evaluates the full reserved set.
 - Prefer starting with a reproducible AdamW baseline. Then compare Muon or custom update
   rules, momentum, weight decay, learning rates, schedules, and parameter-group
   assignments. Treat effective batch size as a tunable hyperparameter.
-- Prefer a planned ladder: short pilots of roughly 1–2 hours, selected scaling
-  trials of roughly 8–16 hours, then a few committed full-budget runs. These are
-  planning durations; every allocation must still respect its GPU-hour limit.
+- Follow the staged experiment ladder below to progressively prune candidates
+  before committing full-budget runs.
 - Document global batch size, per-device microbatch size, gradient accumulation,
   GPU count, and actual non-padding tokens per update. Changing GPU count can
   change batch size unless accumulation is adjusted deliberately.
@@ -170,6 +185,23 @@ same subset across comparable runs. The OJ evaluates the full reserved set.
 - Compare recipes using matched split/evaluation settings and token budgets.
   Record both perplexity versus tokens and compute/throughput. Do not promote an
   experiment solely because its training loss is lower.
+
+### Staged experiment ladder
+
+| Stage | 單次時間 | 目的 | 候選數建議 |
+| ----- | -------: | ---- | ---------: |
+| 超短期 | 15–20 min | 排除明顯爛設定 | 15–30 → 5–8 |
+| 短期 | 45–60 min | 粗略 ranking | 5–8 → 3–4 |
+| 中期 | 2 hr | optimizer × scheduler × data 等 interaction | 3–6 組 → 2–3 |
+| 長期 | 4–5 hr | 確認 ranking 是否保持 | 2–3 → 1–2 |
+| 最終 | 64 H200-hours | 正式結果 | 1–2 |
+
+前四個階段的「單次時間」是每個候選的 wall-clock duration；最終階段的
+64 H200-hours 是每個正式 run 的 GPU-hours 上限，按 GPU 數量 × allocation
+時間計算，包含初始化、evaluation、checkpointing 與 idle time。
+候選數是建議的篩選目標，須依共享 experiment ledger 的剩餘預算調整。
+所有 pilot、scaling trial、正式 run 與續跑成本都要記帳，並遵守上面的
+training-token、GPU-hours、同時 GPU 數量及 pair 的正式 run 數量限制。
 
 Save model, optimizer(s), scheduler(s), RNG states, data cursor/sampler state,
 global step, W&B run identity, and cumulative token/resource accounting for a

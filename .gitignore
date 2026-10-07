@@ -60,3 +60,6 @@ slurm-*.err
 *.swo
 *~
 .DS_Store
+
+# Original download continuation worktree
+/.download-continuation/

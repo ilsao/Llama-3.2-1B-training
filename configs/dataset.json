@@ -13,8 +13,9 @@
   "tokenizer_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
   "max_training_tokens": 6000000000,
   "sequence_length": 8192,
-  "score_workers": 4,
+  "score_workers": 7,
   "document_batch_size": 256,
   "document_shard_tokens": 1048576,
-  "sequence_shard_rows": 128
+  "sequence_shard_rows": 128,
+  "preprocessing_workers": 7
 }
