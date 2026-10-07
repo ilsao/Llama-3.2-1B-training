@@ -28,3 +28,8 @@ and their allocated costs have been reconciled; see validation-status.json.
 ## Open Questions
 Actual remaining download/preprocessing time, baseline throughput, held-out perplexity,
 and measured 4/8-GPU scaling efficiency remain unknown.
+
+## Runtime validation update
+Job 511939 passed native/worker equivalence and independent eval original archive
+resume checks. It used 0.0152778 H200-hours. Real-corpus verification and training
+measurements remain pending.

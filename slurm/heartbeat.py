@@ -19,7 +19,7 @@ MARKER = '# llama-1b-autoresearch-heartbeat'
 STOP = PROJECT / '.heartbeat-disabled'
 
 def cron_entry():
-    return f'*/20 * * * * /usr/bin/python3 {shlex.quote(str(Path(__file__).resolve()))} run-once {MARKER}'
+    return f'*/20 * * * * /usr/bin/python3 {shlex.quote(str(Path(__file__).resolve()))} run-once >> {shlex.quote(str(ROOT / 'runs/heartbeat/cron.log'))} 2>&1 {MARKER}'
 
 def read_cron():
     result = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
@@ -110,6 +110,8 @@ def main():
         enabled = args.action == 'install'
         if not enabled:
             STOP.touch()
+        if enabled:
+            (ROOT / 'runs/heartbeat').mkdir(parents=True, exist_ok=True)
         desired = update_cron(current, enabled)
         subprocess.run(['crontab', '-'], input=desired, text=True, check=True)
         if enabled:

@@ -1,16 +1,15 @@
 {
-  "recorded_at": "2026-10-07T14:46:23.745417+00:00",
+  "recorded_at": "2026-10-07T16:26:08.527412+00:00",
   "lightweight_tests": {
     "passed": true,
-    "count": 35
+    "count": 43
   },
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "runtime_checks": "not validated: preprocessing check and environment setup allocations failed",
-  "blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
+  "runtime_checks": "Job 511939 passed 1/7-worker equivalence, committed resume, eval original archive/resume; offline retirement check pending",
   "allocated_jobs": [
     {
       "job_id": "511170",
@@ -63,5 +62,15 @@
   "preserved_download_worktree": ".download-continuation",
   "original_download_shards_recorded": 1072,
   "original_download_shards_total": 6081,
-  "accounting": "All three terminated allocations reconciled in their respective ledgers"
+  "accounting": "All three terminated allocations reconciled in their respective ledgers",
+  "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
+  "blocker": null,
+  "storage": "Expanded; df reports approximately 10 TB available",
+  "heartbeat": {
+    "enabled": true,
+    "interval_minutes": 20,
+    "check_only_passed": true
+  },
+  "training_environment": "setup job 511940 running",
+  "download_continuation_job": "511918"
 }

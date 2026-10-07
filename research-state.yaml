@@ -24,8 +24,8 @@
     "recorded_download_shards": 1072,
     "total_download_shards": 6081,
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
-    "eval_raw_archive": "implementing",
-    "safe_cleanup": "implementing"
+    "eval_raw_archive": "implemented; synthetic archive/resume passed",
+    "safe_cleanup": "implemented; offline Slurm fixture check pending"
   },
   "jobs": [
     {
@@ -35,6 +35,25 @@
       "ledger": "preprocessing",
       "status": "submitted",
       "tag": "autoresearch-download-e1b915ee148c"
+    },
+    {
+      "job_id": "511939",
+      "stage": "parallel-check",
+      "id": "prep-parallel-002",
+      "ledger": "preprocessing",
+      "status": "COMPLETED",
+      "tag": "autoresearch-parallel-check-38ee4bb5f4af",
+      "reconciled": true,
+      "h200_hours": 0.015277777777777777,
+      "result": "1/7-worker equivalence and full eval archive/resume passed"
+    },
+    {
+      "job_id": "511940",
+      "stage": "setup",
+      "id": "train-env-002",
+      "ledger": "training",
+      "status": "submitted",
+      "tag": "autoresearch-setup-dc866eecf3d2"
     }
   ],
   "submission_intents": [
@@ -45,6 +64,22 @@
       "status": "submitted",
       "timestamp": "2026-10-07T16:13:05.949397+00:00",
       "job_id": "511918"
+    },
+    {
+      "tag": "autoresearch-parallel-check-38ee4bb5f4af",
+      "stage": "parallel-check",
+      "id": "prep-parallel-002",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:22:42.403849+00:00",
+      "job_id": "511939"
+    },
+    {
+      "tag": "autoresearch-setup-dc866eecf3d2",
+      "stage": "setup",
+      "id": "train-env-002",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:22:43.063252+00:00",
+      "job_id": "511940"
     }
   ],
   "experiments": {

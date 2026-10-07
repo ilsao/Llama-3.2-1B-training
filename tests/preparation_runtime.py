@@ -164,6 +164,58 @@ def main():
             expected = actual
         else:
             assert actual == expected, f'Worker/resume result changed: {workers}/{resume}'
+    # Isolated synthetic sealed fixture: prove offline load still works after
+    # manifest-owned intermediate retirement. This is not a real-corpus verify seal.
+    from slurm.cleanup import cleanup_plan, apply_plan
+    offline_root = path / 'offline-cleanup'
+    copied_raw_path = offline_root / 'caches/datasets/raw'
+    raw.save_to_disk(str(copied_raw_path))
+    copied_raw = load_from_disk(str(copied_raw_path))
+    offline_split = {**split, 'raw_cache_files': [pipeline.artifact(Path(i['filename']))
+                                                for i in copied_raw.cache_files]}
+    offline = Fixture(offline_root / 'preprocessed/fixture', cfg, offline_split, evaluation, inverse)
+    with patch.object(pipeline, 'load_raw', return_value=copied_raw):
+        run_fixture(offline, False)
+    originals = pipeline.archive_evaluation(offline, copied_raw, evaluation, split['ranges'], inverse)
+    seal_id = 'synthetic-fixture-only'
+    pipeline.atomic_json(offline.path / 'configuration.json', {'fingerprint': seal_id, 'config': cfg})
+    corpus = offline_root / 'caches/hub/fixture.jsonl.zst'
+    corpus.parent.mkdir(parents=True, exist_ok=True)
+    corpus.write_bytes(b'synthetic download ownership fixture')
+    manifests = {
+        'download': {'details': {}, 'artifacts': [pipeline.artifact(corpus)]},
+        'split': {'details': {**offline_split, 'evaluation_raw_files': originals,
+                             'evaluation_raw_documents': len(evaluation)},
+                  'artifacts': offline_split['raw_cache_files'] + originals},
+        'select': {'details': offline.manifest('select')['details']},
+        'pack': {'details': offline.manifest('pack')['details']},
+    }
+    selected_offline = manifests['select']['details']
+    manifests['select']['artifacts'] = (selected_offline['train_files'] + selected_offline['eval_files'] +
+        [pipeline.artifact(p) for p in Path(selected_offline['tokenizer_directory']).iterdir() if p.is_file()])
+    manifests['pack']['artifacts'] = manifests['pack']['details']['train_files'] + manifests['pack']['details']['eval_files']
+    for stage, value in manifests.items():
+        value.update(fingerprint=seal_id, stage=stage)
+        pipeline.atomic_json(offline.directory(stage) / 'manifest.json', value)
+    packed_digest = pipeline.sha256(offline.path / 'pack/manifest.json')
+    report = offline.directory('verify') / 'fixture-report.json'
+    pipeline.atomic_json(report, {'scope': 'synthetic offline retirement contract only'})
+    pipeline.atomic_json(offline.path / 'verify/manifest.json',
+        {'fingerprint': seal_id, 'stage': 'verify', 'parent_sha256': packed_digest,
+         'details': {'pack_manifest_sha256': packed_digest, 'evaluation_raw_documents': len(evaluation),
+                     'evaluation_raw_files': originals},
+         'artifacts': [pipeline.artifact(report)] + originals})
+    before = {key: pipeline.load_prepared(offline.path, key).to_dict()
+              for key in ('train', 'evaluation', 'evaluation_subset')}
+    retirement = cleanup_plan(offline_root, 'fixture')
+    assert retirement['candidates'], 'Offline cleanup fixture selected no intermediates'
+    apply_plan(offline_root, retirement)
+    for key, expected_rows in before.items():
+        assert pipeline.load_prepared(offline.path, key).to_dict() == expected_rows, \
+            f'Offline loader changed after retirement: {key}'
+    assert all(not Path(item['path']).exists() for item in retirement['candidates'])
+    assert all(Path(item['path']).exists() for item in originals + selected_offline['eval_files'])
+
     # A worker failure in the first physical batch must commit no cursor or manifest.
     bad = Fixture(path / 'worker-failure', {**cfg, 'preprocessing_workers': 7}, split, evaluation, inverse)
     invalid = list(rows)
@@ -183,7 +235,8 @@ def main():
               'workers': [1, 7], 'checks': ['native ordering', 'canonical shuffle', 'split disjointness',
               'dedup winners', 'official scores', 'candidate order', 'token IDs and budget',
               'packing and masks', 'Arrow checksums', 'committed resume', 'worker failure cursor',
-              'full original evaluation archive and interrupted resume']}
+              'full original evaluation archive and interrupted resume',
+              'offline training/full-eval/subset reload after intermediate retirement']}
     pipeline.atomic_json(path / 'result.json', result)
     print(json.dumps(result), flush=True)
 

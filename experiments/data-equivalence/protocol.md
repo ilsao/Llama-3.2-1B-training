@@ -10,3 +10,9 @@ Use the synthetic 128-document fixture, reserved five-document eval and subset t
 full real-corpus verification remains a separate required check. Pass only if all
 assertions pass and result.json says passed. Charge actual allocation, even on failure.
 Earlier lightweight tests do not constitute this runtime result.
+
+Follow-up validation (registered before the next allocation): create an isolated
+synthetic sealed fixture, record training/full-eval/subset loader output, retire only
+manifest-owned redundant inputs, and require identical offline loader outputs with
+all eval originals/tokens preserved. This is a loader/retention contract fixture,
+not evidence of complete real-corpus verification.
