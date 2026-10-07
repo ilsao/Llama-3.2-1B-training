@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
-    "active_preprocessing_h200_hours_observed": 0,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0.5,
+    "active_preprocessing_h200_hours_observed": 0.008055555555555555,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T19:28:33.511421+00:00",
+    "observed_utc": "2026-10-07T19:44:11.098175+00:00",
     "preprocessing_h200_hours_reconciled": 3.767222222222223,
     "shared_h200_hours_reconciled": 3.9208333333333343,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 3.9208333333333343,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 4.420833333333334,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -191,40 +191,72 @@
       "stage": "split",
       "status": "CANCELLED by 44781",
       "tag": "preprocessing-a67e2147bc1d414f9cd22b348d0bf84d"
+    },
+    {
+      "accounting_status": "reserved; reconcile after termination",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 0.5,
+      "elapsed_seconds_observed": 29,
+      "h200_hours_observed": 0.008055555555555555,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512718/gpus.txt",
+      "job_id": "512718",
+      "last_observed_utc": "2026-10-07T19:44:11.098175+00:00",
+      "ledger": "preprocessing",
+      "prep_id": "native-loader-spawn-001",
+      "result": "spawn recovery validation running; native 1/7 compressed JSON reached dataset save; full result pending",
+      "stage": "parallel-check",
+      "status": "RUNNING",
+      "tag": "preprocessing-7da6dc65cfa145c1b44eaa2a3a8d8781"
     }
   ],
   "last_heartbeat": {
-    "blocker": "Native split loader stalled; cancelled and charged, repair/validation required before resubmission",
+    "blocker": "Recovery validation RUNNING; full result/accounting required before production",
     "delivery": "visible_thread_queue",
-    "lightweight_tests_passed": 56,
-    "local_time": "2026-10-08T03:28:33.511421+08:00",
-    "new_jobs_submitted": [],
-    "new_terminated_jobs_reconciled": [
-      "512532"
+    "lightweight_tests_passed": 57,
+    "local_time": "2026-10-08T03:44:11.098175+08:00",
+    "new_jobs_submitted": [
+      "512718"
     ],
-    "observed_utc": "2026-10-07T19:28:33.511421+00:00",
-    "ready_stage_advanced": false,
-    "report": "to_human/heartbeat-20261008-0328.md",
-    "tests_this_cycle": "bounded process/cgroup/cache metadata diagnostics; no runtime tests or code changes"
+    "new_terminated_jobs_reconciled": [],
+    "observed_utc": "2026-10-07T19:44:11.098175+00:00",
+    "ready_stage_advanced": true,
+    "report": "to_human/heartbeat-20261008-0344.md",
+    "tests_this_cycle": "57 small unit tests passed; shell syntax, CLI help and git diff checks passed; runtime submitted to Slurm"
   },
   "next_actions": [
-    "Investigate/repair native loader startup with spawn for both stdlib multiprocessing and multiprocess before threaded libraries; root cause remains inferred.",
-    "Run a registered Slurm validation using native compressed JSON loading at 1/7 workers after threaded prelude; compare native order, seed-42 indices and resume/archive contracts.",
-    "If preparation source changes, use dolma-dclm10-003 with completed-download reuse; never mutate dolma-dclm10-002 identity or delete retained artifacts.",
-    "After passing validation, completed import and accounting, submit canonical full split, then clean/score/select/pack/verify sequentially.",
-    "Preserve full 50,000 eval raw/tokens/packed and fixed subset; cleanup only after production verification; full-model validation/scaling/AdamW follow sealed data."
+    "Inspect recovery validation 512718 once next heartbeat; require exit 0 and passed result.json including compressed/native start methods, then reconcile actual allocation.",
+    "After passing validation, import completed dolma-dclm10-001 into new preparation dolma-dclm10-003 through durable wrapper; never mutate 002 fingerprints or delete its files.",
+    "After import success/accounting, submit split on 003 using spawn startup; periodic stacks are available if it stalls.",
+    "Advance clean/score/select/pack/verify sequentially after completion/accounting, preserving exact global shuffle/filter/selection/packing semantics.",
+    "Preserve all 50,000 eval originals/tokens/packed and fixed 10,000 subset; project-only cleanup requires full production verify; full-model/scaling/AdamW await sealed data."
   ],
   "pipeline": {
-    "blocked_stage": "native loader multiprocessing startup repair and Slurm validation",
+    "blocked_stage": "recovery validation result/accounting before new preparation import",
     "download_complete": true,
     "download_manifest_sha256": "673484b5a3527655957325ea38ad67e3cfdeb1f49ee4d9d7fc93fde8608172e8",
     "download_preparation": "dolma-dclm10-001",
     "download_source_hash_check": "preserved continuation matches all three original source hashes recorded in configuration.json",
-    "downstream_preparation": "dolma-dclm10-002",
+    "downstream_preparation": "dolma-dclm10-003",
     "eval_raw_archive": "implemented; synthetic archive/resume passed",
     "import_job_id": "512500",
     "import_manifest_sha256": "52ba18cce08a7353817a147eb2eafb1635047f56d86324960fef767c77673411",
     "import_status": "COMPLETED",
+    "native_loader_recovery": {
+      "allocation_upper_bound_h200_hours": 0.5,
+      "code_commit": "5f1d4e7",
+      "job_id": "512718",
+      "process_start_methods": {
+        "multiprocess": "spawn",
+        "multiprocessing": "spawn"
+      },
+      "root_cause_confirmed": false,
+      "run_id": "native-loader-spawn-001",
+      "runtime_timeout_seconds": 600,
+      "status": "implemented; Slurm full validation pending"
+    },
+    "previous_downstream_preparation": "dolma-dclm10-002",
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
     "recorded_download_shards": 6081,
     "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify",
@@ -355,6 +387,34 @@
       "submission_tag": "preprocessing-a67e2147bc1d414f9cd22b348d0bf84d",
       "tag": "preprocessing-a67e2147bc1d414f9cd22b348d0bf84d",
       "timestamp": "2026-10-07T19:02:02.223263+00:00"
+    },
+    {
+      "allocated_cpus": 8,
+      "gpu_count": 1,
+      "job_id": "512718",
+      "ledger": "preprocessing",
+      "prep_id": "native-loader-spawn-001",
+      "reserved_h200_hours": 0.5,
+      "returned_job_id": "512718",
+      "stage": "parallel-check",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--cpus-per-task=8",
+        "--gpus-per-node=1",
+        "--time=00:30:00",
+        "--comment=preprocessing-7da6dc65cfa145c1b44eaa2a3a8d8781",
+        "--output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out",
+        "--error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/prepare.sbatch",
+        "parallel-check",
+        "native-loader-spawn-001"
+      ],
+      "submission_started_utc": "2026-10-07T19:43:40.608964+00:00",
+      "submission_tag": "preprocessing-7da6dc65cfa145c1b44eaa2a3a8d8781",
+      "tag": "preprocessing-7da6dc65cfa145c1b44eaa2a3a8d8781",
+      "timestamp": "2026-10-07T19:43:40.608964+00:00"
     }
   ],
   "workspace": {

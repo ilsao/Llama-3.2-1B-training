@@ -5,20 +5,21 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Complete download 511918 and completed checksum import 512500 remain intact.
-Split job 512532 was cancelled at 2026-10-08 03:25:39 Asia/Taipei after >20 minutes
-without new logs or native Arrow/split state. Bounded compute-node diagnostics found
-main Python waiting for a futex-blocked child and another zombie child (exit 0),
-with only about 9 CPU seconds on the compute step. This suggests a multiprocessing
-deadlock; the exact Python stack/root cause is not yet confirmed. No split/eval
-archive completion is claimed. Cancelled cost 1416 seconds x 1 H200 = 0.3933333
-H200-hours, reconciled; shared total 3.9208333, no outstanding allocation.
-All corpus and preparation files are retained. Next: validate spawn startup for
-both multiprocessing (HF download pool) and multiprocess (native Arrow builder),
-including a threaded prelude and compressed input. Source changes require a new
-preparation identity; do not mutate dolma-dclm10-002. Filtering, production cleanup,
-full-model checks and training remain pending. No perplexity measurement yet.
-Heartbeat reports directly in the visible thread; this cycle launches no extra job.
+Complete download 511918 and completed import 512500 remain intact. Cancelled split
+512532 is charged: shared reconciled cost 3.9208333 H200-hours. Its parent wait4,
+futex-blocked child and zombie suggest multiprocessing deadlock; exact cause remains
+unconfirmed. Implemented spawn startup for both stdlib multiprocessing and multiprocess
+before Arrow/HF threading, recorded methods in preparation identity/job logs, added
+five-minute stack dumps and native-load phase logs. This changes source hashes:
+planned downstream preparation is dolma-dclm10-003; retain 002 identity and files.
+Recovery validation 512718 is RUNNING on 1 H200 and 8 CPUs (30-minute allocation,
+10-minute runtime timeout). Logs show both compressed native 1/7-worker loaders
+completed to the dataset-save phase after threaded prelude; full archive/resume/
+retirement result remains pending. Reserve 0.5 H200-hours; shared measured plus
+reservation upper bound 4.4208333. No production resubmission or cleanup this cycle.
+57 lightweight tests passed; runtime validation must pass and be charged before
+new import/split. Full 50,000-doc eval preservation, filtering, real-model checks,
+training and baseline perplexity remain pending. Heartbeat reports in this chat.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
