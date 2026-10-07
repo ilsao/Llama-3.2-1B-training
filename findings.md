@@ -5,15 +5,18 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-No measured baseline perplexity yet. Download 511918 is RUNNING on one H200 and
-8 CPUs, with 5375/6081 checkpointed shards at 2026-10-08 02:20 Asia/Taipei.
-Completion manifest is absent. Reconciled cost remains 1.0716667 H200-hours;
-active download has 2.1261111 provisional H200-hours observed this cycle.
-Eight terminated allocations match Slurm and both ledgers. Synthetic archive/resume/
-retirement and 4/8-GPU correctness checks passed; full-model scaling and perplexity
-remain unmeasured. Latest lightweight suite: 56 passed; not repeated this metadata
-cycle. Heartbeat reports in this visible thread. No downstream submission;
-completed download import precedes split and data filtering.
+Download 511918 completed successfully at 2026-10-08 02:39:57 Asia/Taipei:
+all 6081 shards and a complete manifest. Its 8810 seconds on one H200 cost
+2.4472222 H200-hours, reconciled. Shared reconciled cost is now 3.5188889.
+New import/checksum job 512500 is RUNNING on one H200 and 8 CPUs, reusing
+completed dolma-dclm10-001 in dolma-dclm10-002 without copying corpus files.
+The durable wrapper stored submission intent, reservation, tag and job receipt.
+Split/filtering await successful full-checksum import and accounting.
+Full 50,000-doc eval raw/tokens/packed preservation and production cleanup remain
+pending real split/pack/verify; synthetic archive/resume/retirement and 4/8-GPU
+correctness checks passed. No measured baseline perplexity or production training
+tokens yet. Latest lightweight suite: 56 passed; no repeated runtime tests this cycle.
+Heartbeat continues reporting in the visible thread.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.

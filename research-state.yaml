@@ -1,14 +1,14 @@
 {
   "accounting": {
     "active_preprocessing_h200_hours_allocation_upper_bound": 24,
-    "active_preprocessing_h200_hours_observed": 2.1261111111111113,
+    "active_preprocessing_h200_hours_observed": 0.005,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T18:20:41.545718+00:00",
-    "preprocessing_h200_hours_reconciled": 0.9180555555555555,
-    "shared_h200_hours_reconciled": 1.0716666666666665,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 25.071666666666665,
+    "observed_utc": "2026-10-07T18:42:28+00:00",
+    "preprocessing_h200_hours_reconciled": 3.365277777777778,
+    "shared_h200_hours_reconciled": 3.518888888888889,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 27.51888888888889,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -29,20 +29,23 @@
   },
   "jobs": [
     {
-      "accounting_status": "running; final reconciliation deferred",
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 24,
-      "elapsed_seconds_observed": 7654,
-      "h200_hours_observed": 2.1261111111111113,
+      "elapsed_seconds_observed": 8810,
+      "h200_hours": 2.4472222222222224,
+      "h200_hours_observed": 2.4472222222222224,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511918/node.txt",
       "job_id": "511918",
-      "last_observed_utc": "2026-10-07T18:20:41.545718+00:00",
+      "last_observed_utc": "2026-10-07T18:40:44.774931+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-001",
+      "reconciled": true,
+      "result": "all 6081 shards downloaded; complete manifest emitted",
       "stage": "download",
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "tag": "autoresearch-download-e1b915ee148c"
     },
     {
@@ -139,37 +142,61 @@
       "result": "historical failure; charged in authoritative ledger",
       "stage": "setup",
       "status": "FAILED"
+    },
+    {
+      "accounting_status": "reserved; reconcile after termination",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 24,
+      "elapsed_seconds_observed": 18,
+      "h200_hours_observed": 0.005,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-512500/gpus.txt",
+      "job_id": "512500",
+      "last_observed_utc": "2026-10-07T18:42:28+00:00",
+      "ledger": "preprocessing",
+      "prep_id": "dolma-dclm10-002",
+      "result": "completed-download import and full checksum verification in progress",
+      "stage": "download",
+      "status": "RUNNING",
+      "tag": "preprocessing-3e4865d586f44700aac43bce2eb1e57e"
     }
   ],
   "last_heartbeat": {
-    "blocker": "Download RUNNING; completion manifest absent",
+    "blocker": "Import/checksum verification RUNNING; split waits for import completion",
     "delivery": "visible_thread_queue",
     "lightweight_tests_passed": 56,
-    "local_time": "2026-10-08T02:20:41.545718+08:00",
-    "new_jobs_submitted": [],
-    "new_terminated_jobs_reconciled": [],
-    "observed_utc": "2026-10-07T18:20:41.545718+00:00",
-    "ready_stage_advanced": false,
-    "report": "to_human/heartbeat-20261008-0220.md",
-    "tests_this_cycle": "not repeated; no code changes"
+    "local_time": "2026-10-08T02:44:19.253432+08:00",
+    "new_jobs_submitted": [
+      "512500"
+    ],
+    "new_terminated_jobs_reconciled": [
+      "511918"
+    ],
+    "observed_utc": "2026-10-07T18:44:19.253432+00:00",
+    "ready_stage_advanced": true,
+    "report": "to_human/heartbeat-20261008-0244.md",
+    "tests_this_cycle": "shell syntax and git diff checks; no code changes or repeated runtime tests"
   },
   "next_actions": [
-    "Observe download 511918 at next heartbeat and reconcile only on termination; do not duplicate it.",
-    "Use the durable preprocessing wrapper for new stages; recover any uncertain tagged intent before retrying. Retain the original continuation source for exit-75 download resumes.",
-    "Import completed download into dolma-dclm10-002 using --reuse-download-from dolma-dclm10-001.",
-    "Advance split/clean/score/select/pack/verify one stage at a time after completion/accounting.",
-    "After full independent eval archive and verify, run cleanup dry-run then apply; retain all durable eval/packed/provenance artifacts.",
+    "Observe import/checksum job 512500 at next heartbeat; reconcile on termination, never duplicate uncertain submissions.",
+    "After import exit 0 and manifest completion/accounting, submit split dolma-dclm10-002 through the durable preprocessing wrapper.",
+    "Advance clean/score/select/pack/verify one stage at a time after completion/accounting; preserve preparation source/environment identity.",
+    "After full independent 50,000-doc eval archive and verify seal, run cleanup dry-run then apply; retain all durable eval/packed/provenance artifacts.",
     "Run full 1B/context8192 resume validation and matched-global-batch 4/8-GPU scaling after real data is sealed."
   ],
   "pipeline": {
-    "blocked_stage": "import completed download",
-    "download_complete": false,
+    "blocked_stage": "split awaits completed import manifest",
+    "download_complete": true,
+    "download_manifest_sha256": "673484b5a3527655957325ea38ad67e3cfdeb1f49ee4d9d7fc93fde8608172e8",
     "download_preparation": "dolma-dclm10-001",
     "download_source_hash_check": "preserved continuation matches all three original source hashes recorded in configuration.json",
     "downstream_preparation": "dolma-dclm10-002",
     "eval_raw_archive": "implemented; synthetic archive/resume passed",
+    "import_job_id": "512500",
+    "import_status": "RUNNING",
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
-    "recorded_download_shards": 5375,
+    "recorded_download_shards": 6081,
     "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify",
     "total_download_shards": 6081
   },
@@ -228,6 +255,36 @@
       "status": "submitted",
       "tag": "autoresearch-runtime8-ea996e0aa261",
       "timestamp": "2026-10-07T16:33:21.551334+00:00"
+    },
+    {
+      "allocated_cpus": 8,
+      "gpu_count": 1,
+      "job_id": "512500",
+      "ledger": "preprocessing",
+      "prep_id": "dolma-dclm10-002",
+      "reserved_h200_hours": 24,
+      "returned_job_id": "512500",
+      "stage": "download",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--cpus-per-task=8",
+        "--gpus-per-node=1",
+        "--time=24:00:00",
+        "--comment=preprocessing-3e4865d586f44700aac43bce2eb1e57e",
+        "--output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out",
+        "--error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/prepare.sbatch",
+        "download",
+        "dolma-dclm10-002",
+        "--reuse-download-from",
+        "dolma-dclm10-001"
+      ],
+      "submission_started_utc": "2026-10-07T18:42:09.250489+00:00",
+      "submission_tag": "preprocessing-3e4865d586f44700aac43bce2eb1e57e",
+      "tag": "preprocessing-3e4865d586f44700aac43bce2eb1e57e",
+      "timestamp": "2026-10-07T18:42:09.250489+00:00"
     }
   ],
   "workspace": {
