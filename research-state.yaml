@@ -9,7 +9,7 @@
   "continuity": {
     "interval_minutes": 20,
     "controller": "slurm/heartbeat.py",
-    "state": "enabled",
+    "state": "enabled; foreground handoff ready",
     "check_only_passed": true
   },
   "workspace": {
@@ -21,7 +21,7 @@
   "pipeline": {
     "download_preparation": "dolma-dclm10-001",
     "downstream_preparation": "dolma-dclm10-002",
-    "recorded_download_shards": 1072,
+    "recorded_download_shards": 1632,
     "total_download_shards": 6081,
     "recipe": "exact native global shuffle, dedup, CC top 10 percent",
     "eval_raw_archive": "implemented; synthetic archive/resume passed",
@@ -33,7 +33,7 @@
       "stage": "download",
       "prep_id": "dolma-dclm10-001",
       "ledger": "preprocessing",
-      "status": "submitted",
+      "status": "RUNNING",
       "tag": "autoresearch-download-e1b915ee148c"
     },
     {
@@ -68,6 +68,30 @@
       "reconciled": true,
       "h200_hours": 0.018055555555555554,
       "result": "offline train/full-eval/subset reload after retirement passed"
+    },
+    {
+      "job_id": "511971",
+      "stage": "runtime",
+      "id": "gpu-runtime-4-002",
+      "gpus": 4,
+      "ledger": "training",
+      "status": "COMPLETED",
+      "tag": "autoresearch-runtime-5498dc7777cc",
+      "reconciled": true,
+      "h200_hours": 0.022222222222222223,
+      "result": "4-GPU distributed training correctness passed"
+    },
+    {
+      "job_id": "511980",
+      "stage": "runtime",
+      "id": "gpu-runtime-8-002",
+      "gpus": 8,
+      "ledger": "training",
+      "status": "COMPLETED",
+      "tag": "autoresearch-runtime8-ea996e0aa261",
+      "reconciled": true,
+      "h200_hours": 0.07111111111111111,
+      "result": "8-GPU distributed training correctness passed"
     }
   ],
   "submission_intents": [
@@ -102,6 +126,22 @@
       "status": "submitted",
       "timestamp": "2026-10-07T16:26:53.701809+00:00",
       "job_id": "511949"
+    },
+    {
+      "tag": "autoresearch-runtime-5498dc7777cc",
+      "stage": "runtime",
+      "id": "gpu-runtime-4-002",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:30:58.379232+00:00",
+      "job_id": "511971"
+    },
+    {
+      "tag": "autoresearch-runtime8-ea996e0aa261",
+      "stage": "runtime",
+      "id": "gpu-runtime-8-002",
+      "status": "submitted",
+      "timestamp": "2026-10-07T16:33:21.551334+00:00",
+      "job_id": "511980"
     }
   ],
   "experiments": {
@@ -111,10 +151,10 @@
     "trajectory": []
   },
   "next_actions": [
-    "Monitor/reconcile original download 511918; never duplicate it.",
-    "Submit 4-GPU runtime checks then 8-GPU checks.",
-    "After complete download and accounting, import into dolma-dclm10-002 and advance stages.",
-    "After full verify and independent eval archive, preview/apply project-only cleanup.",
-    "Full-model resume validation and matched-batch GPU scaling follow sealed real data."
+    "Monitor and reconcile download 511918 on termination; do not duplicate it.",
+    "Import completed download into dolma-dclm10-002 using --reuse-download-from dolma-dclm10-001.",
+    "Advance split/clean/score/select/pack/verify one stage at a time after completion/accounting.",
+    "After full independent eval archive and verify, run cleanup dry-run then apply; retain all durable eval/packed/provenance artifacts.",
+    "Run full 1B/context8192 resume validation and matched-global-batch 4/8-GPU scaling after real data is sealed."
   ]
 }

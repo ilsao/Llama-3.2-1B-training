@@ -10,3 +10,8 @@
 - These costs are reconciled; running download cost remains pending termination.
 - GPU runtime checks are next. Full corpus processing, real-model checks, scaling,
   production cleanup and perplexity measurements are still pending.
+
+- Both 4/8-GPU runtime checks passed (511971 / 511980), costs reconciled.
+- Download currently records 1632/6081 shards.
+- No actual held-out perplexity, full-model validation, real scaling result or
+  production cleanup completion is claimed. Heartbeat will advance eligible stages.

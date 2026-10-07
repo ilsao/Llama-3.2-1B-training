@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-07T16:30:58.103268+00:00",
+  "recorded_at": "2026-10-07T16:36:25.637136+00:00",
   "lightweight_tests": {
     "passed": true,
     "count": 44
@@ -57,10 +57,21 @@
       "nodes": "25a-hgpn011"
     }
   ],
-  "gpu_runtime_checks": "not submitted: ledger reservations failed with ENOSPC",
-  "full_model_validation_and_scaling": "unrun; require storage, training environment and verified corpus",
+  "gpu_runtime_checks": {
+    "4gpu": {
+      "job_id": "511971",
+      "passed": true,
+      "h200_hours": 0.022222222222222223
+    },
+    "8gpu": {
+      "job_id": "511980",
+      "passed": true,
+      "h200_hours": 0.07111111111111111
+    }
+  },
+  "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
   "preserved_download_worktree": ".download-continuation",
-  "original_download_shards_recorded": 1072,
+  "original_download_shards_recorded": 1632,
   "original_download_shards_total": 6081,
   "accounting": "All three terminated allocations reconciled in their respective ledgers",
   "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",

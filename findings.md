@@ -37,3 +37,7 @@ measurements remain pending.
 Job 511949 confirms synthetic sealed data loads identically after intermediate
 retirement, including full eval and subset. Training environment is installed and
 pip check passed (511940). Production cleanup must still await real-corpus verify.
+
+Four/eight-GPU distributed correctness checks passed (511971 and 511980).
+These are synthetic runtime checks; full 1B/context-8192 training and actual
+throughput scaling on real sealed data remain unvalidated. Costs are reconciled.

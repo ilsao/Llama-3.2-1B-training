@@ -16,3 +16,10 @@
   511940 passed pip check; cost 200 seconds / one H200 = 0.0555556 H200-hours.
   Both reconciled. Added historical-manifest hashes to production verification
   receipts so cleanup rejects modified provenance. Lightweight suite: 44 passed.
+
+- Four-GPU runtime correctness 511971 passed; actual 20 seconds x four H200s
+  = 0.0222222 H200-hours, reconciled. Eight-GPU runtime submitted as 511980.
+
+- Eight-GPU runtime correctness 511980 passed; 32 seconds x eight H200s =
+  0.0711111 H200-hours, reconciled. Handing continuation to the installed heartbeat.
+  Original download remains running at 1632/6081 recorded shards.
