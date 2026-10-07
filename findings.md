@@ -6,14 +6,14 @@ under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
 No measured baseline perplexity yet. Download 511918 is RUNNING on one H200 and
-8 CPUs, with 4523/6081 checkpointed shards at 2026-10-08 02:02 Asia/Taipei.
+8 CPUs, with 5375/6081 checkpointed shards at 2026-10-08 02:20 Asia/Taipei.
 Completion manifest is absent. Reconciled cost remains 1.0716667 H200-hours;
-active download has 1.7911111 provisional H200-hours observed at 02:00:35.
+active download has 2.1261111 provisional H200-hours observed this cycle.
 Eight terminated allocations match Slurm and both ledgers. Synthetic archive/resume/
 retirement and 4/8-GPU correctness checks passed; full-model scaling and perplexity
 remain unmeasured. Latest lightweight suite: 56 passed; not repeated this metadata
-cycle. Heartbeat continues and reports in this visible thread. No downstream
-submission; completed download import precedes split and data filtering.
+cycle. Heartbeat reports in this visible thread. No downstream submission;
+completed download import precedes split and data filtering.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.

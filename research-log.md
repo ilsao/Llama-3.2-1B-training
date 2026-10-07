@@ -66,3 +66,5 @@
 - Provenance clarification: the original configuration records three source hash entries (dataset.py, requirements-data.txt, third_party/dclm_fasttext.py), all checked and matching this cycle. Earlier state wording counted four; no preparation configuration or source was changed.
 
 - 2026-10-08T02:02:19.084697+08:00 bounded visible heartbeat: download 511918 RUNNING, 4523/6081 shards; completion manifest absent. Eight terminated allocations still match Slurm/ledgers; 1.0716667 H200-hours reconciled, 1.7911111 active provisional at 02:00:35. No new allocations or cleanup, no polling, no repeated tests. Next action remains complete-download import followed by split/filter pipeline. Saved to_human/heartbeat-20261008-0202.md.
+
+- 2026-10-08T02:20:41.545718+08:00 bounded visible heartbeat: download 511918 RUNNING, 5375/6081 shards; completion manifest absent. Eight terminated allocations match Slurm/ledgers; 1.0716667 H200-hours reconciled, 2.1261111 active provisional. No new allocations or cleanup, no polling, no repeated tests. Saved to_human/heartbeat-20261008-0220.md.
