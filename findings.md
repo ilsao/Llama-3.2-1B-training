@@ -5,31 +5,31 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Lossless schema validation 513790 completed exit 0 in 78 seconds on one H200/
-eight CPUs. Cost 0.0216667 H200-hours is charged. All 15 terminated allocations
-agree with Slurm and the ledgers; shared measured total 3.9805556. Sources match
-registered implementation fdaa233. Heterogeneous original fields/absent keys,
-verbatim JSON, native projection order/seed-42 indices, one/seven-worker full
-split entrypoint and archive/resume/downstream/offline contracts passed.
-Bounded real samples: 12 documents across all six source families; HF used six
-workers for the six real sample shards. This is not complete-corpus verification.
+New 004 import/checksum 513930 completed exit 0 in 34 seconds. All 6081 artifact
+records match completed original 001 download, canonical file order and pinned
+revision. Full compute-node checksums passed; corpus files reused without copies.
+Cost 0.0094444 H200-hours is reconciled. All 16 terminated allocations agree with
+Slurm/ledgers; shared measured total 3.9900000. 004 config/source hashes/environment
+versions/process methods match validated source and identity
+52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b.
 
-New dolma-dclm10-004 completed-download import/checksum job 513930 was observed
-RUNNING at 05:02 Asia/Taipei on one H200/eight CPUs. It authenticates all 6081
-artifacts on the compute node and reuses corpus files without copies. New identity
-52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b
-matches current pinned config/sources/spawn methods. Keep 24 H200-hour reservation;
-shared measured plus reserved upper bound 27.9805556. Preserve 001/002/003 identities
-and artifacts. No production split or full eval archive, cleanup, production
-training tokens, committed full runs or measured perplexity yet.
+Split 513955 is RUNNING on one H200/eight CPUs, seven workers plus coordinator,
+using both process libraries with spawn. Generation log last reports 549963
+examples at 05:21 Asia/Taipei; this is progress, not final row count or split
+completion. Canonical full-train generation, all-field source authentication,
+native seed-42 global shuffle and last-50,000 original eval archive are in this
+job. Fixed first 10,000 reserved eval subset stays unchanged. Keep 24 H200-hour
+reservation; shared measured plus reserved upper bound 27.9900000. Filtering
+awaits complete split/archive and accounting. Preserve all earlier identities/files.
 
-Next: complete import/provenance/accounting, full canonical file/line Dataset,
-authenticate every original field/order, native seed-42 shuffle, final 50,000 eval
-original JSON documents and fixed first-10,000 subset. Clean/filtering remains
-authorized and sequenced after complete split/archive/accounting. No duplicate
-job, polling or new heartbeat. Previous schema failure 513322 is charged and
-resolved by the bounded adapter checks; complete-corpus behavior remains pending.
-59 lightweight tests previously passed; no code change or repeated tests this cycle.
+Lossless schema validation 513790 passed heterogeneous fields, verbatim JSON,
+native projection order/indices, one/seven-worker full split entrypoint,
+archive/resume/downstream/offline contracts and bounded real-source samples
+(12 documents across six families). This is not complete-corpus verification.
+No production split/eval archive, cleanup, production training tokens, committed
+full runs or measured perplexity yet. Prior 59 lightweight tests passed;
+no source changes or repeated tests this metadata cycle. Baseline remains an
+unachieved target; actual preprocessing completion/training throughput is unknown.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.

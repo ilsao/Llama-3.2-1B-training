@@ -1,5 +1,5 @@
 {
-  "accounting": "All 15 terminated allocations agree with sacct and authoritative ledgers; new import 513930 awaits final accounting",
+  "accounting": "All 16 terminated allocations agree with sacct and authoritative ledgers; active split 513955 retains 24 H200-hour reservation until reconciliation",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -212,6 +212,25 @@
     },
     {
       "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 34,
+      "end": "2026-10-08T05:02:25",
+      "gpu_count": 1,
+      "gpu_hours": 0.009444444444444445,
+      "gpu_type_evidence": {
+        "sha256": "f3a0b611b1cb3079b5aecec41ec6939a7aced2863c916d050af1b1c40baf0230",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.009444444444444445,
+      "job_id": "513930",
+      "nodes": "25a-hgpn009",
+      "preparation-id": "dolma-dclm10-004",
+      "stage": "download",
+      "start": "2026-10-08T05:01:51",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
       "elapsed_seconds": 17,
       "end": "2026-10-07T22:38:40",
       "gpu_count": 1,
@@ -287,7 +306,7 @@
       "status": "reconciled"
     }
   ],
-  "blocker": "complete-corpus split awaits new 004 completed import/checksum/accounting",
+  "blocker": "clean/filtering awaits completed canonical full split, independent 50,000 original eval archive and accounting",
   "download_complete": true,
   "download_continuation_job": "511918",
   "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
@@ -346,7 +365,10 @@
   "production_cleanup": "not submitted; full corpus and verify are prerequisites",
   "production_import_job": "513930",
   "production_import_preparation": "dolma-dclm10-004",
-  "recorded_at": "2026-10-07T21:03:42.762082+00:00",
+  "production_import_status": "COMPLETED",
+  "production_split_job": "513955",
+  "production_split_status": "RUNNING",
+  "recorded_at": "2026-10-07T21:22:43.814085+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
