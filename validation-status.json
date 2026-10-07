@@ -1,11 +1,13 @@
 {
-  "accounting": "All eight terminated allocations match authoritative ledgers and sacct; running 511918 awaits final reconciliation",
+  "accounting": "All 15 terminated allocations agree with sacct and authoritative ledgers; new import 513930 awaits final accounting",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
       "elapsed_seconds": 3167,
       "end": "2026-10-07T22:23:31",
       "gpu_count": 1,
+      "gpu_hours": 0.8797222222222222,
       "gpu_type_evidence": {
         "sha256": "8943d6334c8aeb46be57644de236b68207155f3fa4a4548e5e9d1ea605a446ea",
         "source": "startup scontrol node with exclusively H200 GPUs"
@@ -13,14 +15,18 @@
       "h200_hours": 0.8797222222222222,
       "job_id": "511170",
       "nodes": "25a-hgpn003",
+      "preparation-id": "dolma-dclm10-001",
+      "stage": "download",
       "start": "2026-10-07T21:30:44",
       "state": "FAILED"
     },
     {
       "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
       "elapsed_seconds": 18,
       "end": "2026-10-07T22:38:38",
       "gpu_count": 1,
+      "gpu_hours": 0.005,
       "gpu_type_evidence": {
         "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
         "source": "startup nvidia-smi for allocated devices"
@@ -28,8 +34,181 @@
       "h200_hours": 0.005,
       "job_id": "511509",
       "nodes": "25a-hgpn001",
+      "preparation-id": "prep-parallel-001",
+      "stage": "parallel-check",
       "start": "2026-10-07T22:38:20",
       "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 8810,
+      "end": "2026-10-08T02:39:57",
+      "gpu_count": 1,
+      "gpu_hours": 2.4472222222222224,
+      "gpu_type_evidence": {
+        "sha256": "00c70be28424b47ca13d8a54bcef5f2596acba43adde64b7ff3ffb35ee4097c4",
+        "source": "startup scontrol node with exclusively H200 GPUs"
+      },
+      "h200_hours": 2.4472222222222224,
+      "job_id": "511918",
+      "nodes": "25a-hgpn016",
+      "preparation-id": "dolma-dclm10-001",
+      "stage": "download",
+      "start": "2026-10-08T00:13:07",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 55,
+      "end": "2026-10-08T00:23:39",
+      "gpu_count": 1,
+      "gpu_hours": 0.015277777777777777,
+      "gpu_type_evidence": {
+        "sha256": "8682028dc56e40436124cbd56e75de823a7f1d2f595a06e582fbc75f107a6d90",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.015277777777777777,
+      "job_id": "511939",
+      "nodes": "25a-hgpn009",
+      "preparation-id": "prep-parallel-002",
+      "stage": "parallel-check",
+      "start": "2026-10-08T00:22:44",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 65,
+      "end": "2026-10-08T00:28:50",
+      "gpu_count": 1,
+      "gpu_hours": 0.018055555555555554,
+      "gpu_type_evidence": {
+        "sha256": "2ba98a9d49bc6608393e56c1db0d644753a31fbf5ebfc32e5704123851ade8e9",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.018055555555555554,
+      "job_id": "511949",
+      "nodes": "25a-hgpn003",
+      "preparation-id": "prep-parallel-003",
+      "stage": "parallel-check",
+      "start": "2026-10-08T00:27:45",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 31,
+      "end": "2026-10-08T02:42:41",
+      "gpu_count": 1,
+      "gpu_hours": 0.008611111111111111,
+      "gpu_type_evidence": {
+        "sha256": "2a7896736fcad1cab5509a30821fb85c9f077a63521bcbf0f0997988e9a92a6a",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.008611111111111111,
+      "job_id": "512500",
+      "nodes": "25a-hgpn009",
+      "preparation-id": "dolma-dclm10-002",
+      "stage": "download",
+      "start": "2026-10-08T02:42:10",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 1416,
+      "end": "2026-10-08T03:25:39",
+      "gpu_count": 1,
+      "gpu_hours": 0.3933333333333333,
+      "gpu_type_evidence": {
+        "sha256": "dd36f7066ea21f28f9d63824620c461acbd1aeaf02f4447c985afe1e2cfd0178",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.3933333333333333,
+      "job_id": "512532",
+      "nodes": "25a-hgpn019",
+      "preparation-id": "dolma-dclm10-002",
+      "stage": "split",
+      "start": "2026-10-08T03:02:03",
+      "state": "CANCELLED by 44781"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 68,
+      "end": "2026-10-08T03:44:50",
+      "gpu_count": 1,
+      "gpu_hours": 0.01888888888888889,
+      "gpu_type_evidence": {
+        "sha256": "2ba98a9d49bc6608393e56c1db0d644753a31fbf5ebfc32e5704123851ade8e9",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.01888888888888889,
+      "job_id": "512718",
+      "nodes": "25a-hgpn003",
+      "preparation-id": "native-loader-spawn-001",
+      "stage": "parallel-check",
+      "start": "2026-10-08T03:43:42",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 41,
+      "end": "2026-10-08T04:02:29",
+      "gpu_count": 1,
+      "gpu_hours": 0.01138888888888889,
+      "gpu_type_evidence": {
+        "sha256": "852551e97fd708864e7d74088c3cf03e809ddb3c339a6cc5784cbacffd5c5858",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.01138888888888889,
+      "job_id": "513010",
+      "nodes": "25a-hgpn035",
+      "preparation-id": "dolma-dclm10-003",
+      "stage": "download",
+      "start": "2026-10-08T04:01:48",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 28,
+      "end": "2026-10-08T04:21:30",
+      "gpu_count": 1,
+      "gpu_hours": 0.0077777777777777776,
+      "gpu_type_evidence": {
+        "sha256": "115285bf69b8a448b9e10709857510897467f6732de749ba99a910dd8dcd92a2",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.0077777777777777776,
+      "job_id": "513322",
+      "nodes": "25a-hgpn019",
+      "preparation-id": "dolma-dclm10-003",
+      "stage": "split",
+      "start": "2026-10-08T04:21:02",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "category": "data_preprocessing",
+      "elapsed_seconds": 78,
+      "end": "2026-10-08T04:49:06",
+      "gpu_count": 1,
+      "gpu_hours": 0.021666666666666667,
+      "gpu_type_evidence": {
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.021666666666666667,
+      "job_id": "513790",
+      "nodes": "25a-hgpn001",
+      "preparation-id": "lossless-schema-001",
+      "stage": "parallel-check",
+      "start": "2026-10-08T04:47:48",
+      "state": "COMPLETED"
     },
     {
       "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
@@ -43,11 +222,73 @@
       "h200_hours": 0.004722222222222222,
       "job_id": "511510",
       "nodes": "25a-hgpn011",
+      "requested_seconds": 3600,
+      "reserved_h200_hours": 1.0,
+      "run_id": "train-env-par8-001",
       "start": "2026-10-07T22:38:23",
-      "state": "FAILED"
+      "state": "FAILED",
+      "status": "reconciled"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 200,
+      "end": "2026-10-08T00:26:04",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "61170d0ef52591c9fd0f1002e5c65928ee7635af28deb03a16118423ab901704",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.05555555555555555,
+      "job_id": "511940",
+      "nodes": "25a-hgpn009",
+      "requested_seconds": 3600,
+      "reserved_h200_hours": 1.0,
+      "run_id": "train-env-002",
+      "start": "2026-10-08T00:22:44",
+      "state": "COMPLETED",
+      "status": "reconciled"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=4,mem=200G,node=1",
+      "elapsed_seconds": 20,
+      "end": "2026-10-08T00:31:19",
+      "gpu_count": 4,
+      "gpu_type_evidence": {
+        "sha256": "57ea972d1f89c6a7f10a74529adf0a79689bb0f6e3b23d28b078004e83337d71",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.022222222222222223,
+      "job_id": "511971",
+      "nodes": "25a-hgpn003",
+      "requested_seconds": 600,
+      "reserved_h200_hours": 0.6666666666666666,
+      "run_id": "gpu-runtime-4-002",
+      "start": "2026-10-08T00:30:59",
+      "state": "COMPLETED",
+      "status": "reconciled"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 32,
+      "end": "2026-10-08T00:33:55",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "31a714d7f4d894edeae93a5f724e8a0425b96fc33c9b91caccc61d9578013cb4",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.07111111111111111,
+      "job_id": "511980",
+      "nodes": "25a-hgpn024",
+      "requested_seconds": 600,
+      "reserved_h200_hours": 1.3333333333333333,
+      "run_id": "gpu-runtime-8-002",
+      "start": "2026-10-08T00:33:23",
+      "state": "COMPLETED",
+      "status": "reconciled"
     }
   ],
-  "blocker": "Production download incomplete; no sealed real corpus for full model validation/scaling",
+  "blocker": "complete-corpus split awaits new 004 completed import/checksum/accounting",
+  "download_complete": true,
   "download_continuation_job": "511918",
   "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
   "gpu_runtime_checks": {
@@ -68,22 +309,51 @@
     "interval_minutes": 20
   },
   "lightweight_tests": {
-    "count": 55,
-    "passed": true
+    "count": 59,
+    "passed": true,
+    "scope": "dependency-free; last run 2026-10-08 04:49 Asia/Taipei; not repeated this metadata cycle"
   },
-  "original_download_shards_recorded": 2827,
+  "lossless_schema_validation": {
+    "allocation_upper_bound_h200_hours": 0.5,
+    "cause": "dataset card metadata string vs actual nested JSON",
+    "code_commit": "fdaa233",
+    "failed_job": "513322",
+    "h200_hours": 0.021666666666666667,
+    "job_id": "513790",
+    "lightweight_tests_passed": 59,
+    "next_preparation": "dolma-dclm10-004",
+    "protocol": "experiments/lossless-schema-loader/protocol.md",
+    "protocol_commit": "a0594fc",
+    "real_sample_documents": 12,
+    "real_sample_sources": [
+      "common_crawl",
+      "dolma1_7",
+      "finemath",
+      "olmocr_science_pdfs",
+      "rpj",
+      "stack_edu"
+    ],
+    "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/preparation-validation/lossless-schema-001/result.json",
+    "result_sha256": "410b5d7102128f9e11a57e3383f3bd253ecd31b5f8e79d5801c5ca48ee46c27e",
+    "run_id": "lossless-schema-001",
+    "runtime_timeout_seconds": 600,
+    "status": "registered synthetic and bounded real-source validation passed and reconciled; complete-corpus split pending"
+  },
+  "original_download_shards_recorded": 6081,
   "original_download_shards_total": 6081,
   "preserved_download_worktree": ".download-continuation",
   "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
   "production_cleanup": "not submitted; full corpus and verify are prerequisites",
-  "recorded_at": "2026-10-07T17:05:51.138250+00:00",
-  "runtime_checks": "511939 and 511949 passed: worker/native/shuffle/selection/packing/resume equivalence, eval original archive/resume, offline loader after intermediate retirement",
+  "production_import_job": "513930",
+  "production_import_preparation": "dolma-dclm10-004",
+  "recorded_at": "2026-10-07T21:03:42.762082+00:00",
+  "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "storage": "df: 10T total, approximately 9.9T available",
-  "submission_recovery": "Training and preprocessing mocked lost reply, malformed response, recovery, receipt and timeout checks passed; no production allocation submitted",
+  "storage": "10T total/approximately 9.9T free at earlier observation; not remeasured this cycle",
+  "submission_recovery": "Training/preprocessing mocked recovery cases passed; production submissions use durable intents/tags/receipts with reservations retained until accounting",
   "training_environment": "completed job 511940; pip check passed; actual cost reconciled"
 }

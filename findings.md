@@ -5,27 +5,31 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-Real split 513322 failed in 28 seconds: actual nested metadata cannot be cast to
-the string feature declared by the pinned dataset card. The completed 6081-shard
-download remains intact. Spawn initialization succeeded; this new failure does
-not establish the root cause of the previous 512532 stall. All 14 terminated
-allocations are now charged, including 0.0077778 H200-hours for this failure.
-Shared reconciled total is 3.9588889 H200-hours; no production training tokens,
-full runs or measured perplexity. No production split/eval archive or cleanup.
+Lossless schema validation 513790 completed exit 0 in 78 seconds on one H200/
+eight CPUs. Cost 0.0216667 H200-hours is charged. All 15 terminated allocations
+agree with Slurm and the ledgers; shared measured total 3.9805556. Sources match
+registered implementation fdaa233. Heterogeneous original fields/absent keys,
+verbatim JSON, native projection order/seed-42 indices, one/seven-worker full
+split entrypoint and archive/resume/downstream/offline contracts passed.
+Bounded real samples: 12 documents across all six source families; HF used six
+workers for the six real sample shards. This is not complete-corpus verification.
 
-Protocol a0594fc and implementation fdaa233 introduce a lossless canonical-file/
-line adapter into a disk-backed HF map-style Dataset, preserving original JSON
-verbatim and authenticating every full document before native seed-42 shuffle.
-Eval archive stores document_json with full field/key fidelity. New production
-identity must be dolma-dclm10-004; preserve 001/002/003 without overwriting.
-59 lightweight tests passed. Substantial validation 513790 is RUNNING on
-1 H200/8 CPUs: heterogeneous fields, 1/7-worker/native projection indices,
-production split entrypoint, archive/resume/downstream contracts and bounded
-samples from each real source family. Results are pending, no promotion claim.
-Reservation 0.5 H200-hours (30-minute allocation; runtime timeout 10 minutes).
-Shared measured plus reserved upper bound 4.4588889 H200-hours.
-Filtering remains queued in the controller plan after validated import and full
-split/archive/accounting, not submitted prematurely or as a duplicate job.
+New dolma-dclm10-004 completed-download import/checksum job 513930 was observed
+RUNNING at 05:02 Asia/Taipei on one H200/eight CPUs. It authenticates all 6081
+artifacts on the compute node and reuses corpus files without copies. New identity
+52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b
+matches current pinned config/sources/spawn methods. Keep 24 H200-hour reservation;
+shared measured plus reserved upper bound 27.9805556. Preserve 001/002/003 identities
+and artifacts. No production split or full eval archive, cleanup, production
+training tokens, committed full runs or measured perplexity yet.
+
+Next: complete import/provenance/accounting, full canonical file/line Dataset,
+authenticate every original field/order, native seed-42 shuffle, final 50,000 eval
+original JSON documents and fixed first-10,000 subset. Clean/filtering remains
+authorized and sequenced after complete split/archive/accounting. No duplicate
+job, polling or new heartbeat. Previous schema failure 513322 is charged and
+resolved by the bounded adapter checks; complete-corpus behavior remains pending.
+59 lightweight tests previously passed; no code change or repeated tests this cycle.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
