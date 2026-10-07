@@ -1,0 +1,62 @@
+# Python bytecode, environments, and tooling caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+/env/
+/environments/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# Local credentials; keep shareable environment templates
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.netrc
+/.aws/
+/.huggingface/
+
+# Large artifacts belong under /work/asciibase64/, not in this repository
+/datasets/
+/data/
+/caches/
+/.cache/
+/preprocessed/
+/runs/
+/checkpoints/
+/outputs/
+/tmp/
+wandb/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.arrow
+*.parquet
+*.npy
+*.npz
+*.zst
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+
+# Runtime and Slurm logs; keep .sbatch scripts
+/logs/
+*.log
+slurm-*.out
+slurm-*.err
+
+# Editor and operating-system temporary files
+*.swp
+*.swo
+*~
+.DS_Store
