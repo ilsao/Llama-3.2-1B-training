@@ -1,14 +1,14 @@
 {
   "accounting": {
-    "active_preprocessing_h200_hours_allocation_upper_bound": 0.5,
-    "active_preprocessing_h200_hours_observed": 0.006944444444444444,
+    "active_preprocessing_h200_hours_allocation_upper_bound": 0,
+    "active_preprocessing_h200_hours_observed": 0,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
     "observed_utc": "2026-10-07T22:46:40.414947+00:00",
-    "preprocessing_h200_hours_reconciled": 4.838055555555556,
-    "shared_h200_hours_reconciled": 4.991666666666667,
-    "shared_measured_plus_outstanding_reservations_upper_bound": 5.491666666666667,
+    "preprocessing_h200_hours_reconciled": 4.866666666666667,
+    "shared_h200_hours_reconciled": 5.020277777777778,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 5.020277777777778,
     "training_h200_hours_reconciled": 0.15361111111111111,
     "training_h200_hours_reserved_or_measured": 0.15361111111111111,
     "training_tokens_processed": 0
@@ -314,21 +314,23 @@
       "tag": "preprocessing-4574a3c059134cfc81e260737a86d37b"
     },
     {
-      "accounting_status": "reserved; reconcile after termination",
+      "accounting_status": "reconciled",
       "allocated_cpus": 8,
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 0.5,
-      "elapsed_seconds_observed": 25,
-      "h200_hours_observed": 0.006944444444444444,
+      "elapsed_seconds_observed": 103,
+      "h200_hours": 0.02861111111111111,
+      "h200_hours_observed": 0.02861111111111111,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-514055/gpus.txt",
       "job_id": "514055",
       "last_observed_utc": "2026-10-07T22:46:40.414947+00:00",
       "ledger": "preprocessing",
       "prep_id": "corpus-audit-001",
-      "result": "read-only checksum/zstd audit in progress; 500/6081 shards committed with no failures so far",
+      "reconciled": true,
+      "result": "full 6081-shard audit completed, one zstd error; 6080 streams decode and hashes match manifests",
       "stage": "cache-audit",
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "tag": "preprocessing-ba6915964e4f40cc933dc4596640c9e0"
     }
   ],
@@ -356,15 +358,38 @@
     "No cleanup before production verify and full eval raw/tokens/packed; no baseline/scaling claims before sealed real data/model-resume checks. Preserve 6B tokens, run geometry, cumulative costs and three-run limits."
   ],
   "pipeline": {
-    "blocked_stage": "compressed shard integrity diagnosis required before another split or filtering",
+    "blocked_stage": "pinned upstream metadata and separate verified replacement/independent decoder checks required",
     "compressed_corpus_diagnostic": {
       "allocation_upper_bound_h200_hours": 0.5,
+      "blob_name_hash_mismatches": [
+        {
+          "actual_sha256": "7ec222880366d0dc111b22f369a797ddad2be070026c4f6dde0e8f594ac06564",
+          "blob_name": "c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
+          "repo_filename": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst"
+        }
+      ],
       "cause": "zstd decompress error: Data corruption detected",
-      "checked_files_observed": 500,
+      "checked_files_observed": 6081,
       "code_commit": "64175a7",
+      "failed_artifact": {
+        "actual_sha256": "7ec222880366d0dc111b22f369a797ddad2be070026c4f6dde0e8f594ac06564",
+        "actual_size": 84203717,
+        "compressed_position_at_error": null,
+        "compressed_position_before_last_read": 19661250,
+        "decoded_bytes": 100663296,
+        "error": "zstd decompress error: Data corruption detected",
+        "error_type": "ZstdError",
+        "expected_sha256": "7ec222880366d0dc111b22f369a797ddad2be070026c4f6dde0e8f594ac06564",
+        "expected_size": 84203717,
+        "manifest_hash_matches": true,
+        "path": "/work/asciibase64/Llama-3.2-1B-training/caches/hub/datasets--allenai--dolma3_mix-150B-1025/blobs/c624bddd1c7f810c737b4cb0a75a6d7b6a45c9667ce19a4441b26e22d98e9ec3",
+        "repo_filename": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst",
+        "status": "decode_or_io_error"
+      },
       "failed_job": "513955",
-      "failed_shard": "not yet identified",
-      "failures_observed": 0,
+      "failed_shard": "data/common_crawl-science_math_and_technology-0015/shard_00001148.jsonl.zst",
+      "failures_observed": 1,
+      "h200_hours": 0.02861111111111111,
       "identity": {
         "code_sha256": "e1f3ac117c6025a68da0868f286a90a3353a8be58d503292e16f213e11f595a0",
         "manifest_sha256": "e623096483bff3e27b9710e5c3056e110e5de88d8f274ba6ab4edfbdfe924df7",
@@ -381,10 +406,11 @@
       "protocol": "experiments/compressed-corpus-audit/protocol.md",
       "protocol_commit": "692e6b0",
       "result_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/result.json",
+      "result_sha256": "3c9302e87eff4cb0327ae65645dec0c5cb464f621b56bfe524df964edb8c8d96",
       "run_id": "corpus-audit-001",
       "runtime_timeout_seconds": 600,
       "state_path": "/work/asciibase64/Llama-3.2-1B-training/runs/cache-audit/corpus-audit-001/state.json",
-      "status": "Slurm read-only audit RUNNING; failed shard not yet identified",
+      "status": "complete read-only scan; one damaged compressed shard identified and accounting reconciled",
       "worker_deadline_seconds": 540
     },
     "download_complete": true,
