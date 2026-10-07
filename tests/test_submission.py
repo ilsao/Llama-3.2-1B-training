@@ -132,7 +132,7 @@ class PreprocessingSubmissionTests(unittest.TestCase):
 
     def test_validation_time_and_reservation_agree_even_if_reply_is_lost(self):
         from training_state import atomic_json
-        for stage, reply_ok in [(stage, ok) for stage in ('parallel-check', 'cache-audit') for ok in (True, False)]:
+        for stage, reply_ok in [(stage, ok) for stage in ('parallel-check', 'cache-audit', 'cache-repair') for ok in (True, False)]:
             with self.subTest(stage=stage, reply_ok=reply_ok):
                 atomic_json(self.state_path, {'jobs': [], 'submission_intents': [],
                     'accounting': {'shared_measured_plus_outstanding_reservations_upper_bound': 1.5}})
