@@ -54,6 +54,15 @@ process libraries, validate native compressed JSON with a threaded prelude and
 Source changes require dolma-dclm10-003, reusing only a completed download.
 Retain dolma-dclm10-002 identity and files; do not resubmit its changed sources.
 
+Real split 513322 failed and was charged: declared string metadata conflicts with
+actual nested JSON. Follow experiments/lossless-schema-loader/protocol.md:
+validate the lossless canonical file/line adapter, all original fields, native
+shuffle equivalence, complete split entrypoint and bounded real-source samples
+in Slurm. Reconcile validation before production promotion to new preparation
+dolma-dclm10-004. Preserve 001/002/003; import only the completed 001 download.
+After successful split manifest/full eval archive/accounting, submit clean;
+never let a failed split trigger filtering or cleanup.
+
 ## Controls
 
 `python3 slurm/heartbeat.py status|install|run-once|disable`

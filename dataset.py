@@ -471,7 +471,7 @@ def stage_download(prep):
                 records=[{k: item[k] for k in ('path', 'size', 'sha256')} for item in state['files']])
 
 
-def raw_json_documents(path):
+def raw_json_records(path):
     import zstandard as zstd
     import io
     with open(path, 'rb') as compressed:
@@ -479,20 +479,60 @@ def raw_json_documents(path):
             with io.TextIOWrapper(reader, encoding='utf-8') as lines:
                 for line in lines:
                     if line.strip():
-                        yield json.loads(line)
+                        yield line, json.loads(line)
+
+
+def raw_json_documents(path):
+    for _, document in raw_json_records(path):
+        yield document
+
+
+def lossless_record(line, document):
+    if not isinstance(document, dict) or not isinstance(document.get('text'), str):
+        raise ValueError('Expected an original JSON object with string text')
+    if document.get('id') is not None and not isinstance(document['id'], str):
+        raise ValueError('Expected string or missing/null document id')
+    return {'id': document.get('id'), 'text': document['text'], 'document_json': line}
+
+
+def original_document(row):
+    """Decode the full original record, including absent keys and heterogeneous fields."""
+    return json.loads(row['document_json'])
+
+
+def lossless_documents(files):
+    # HF 3.6 partitions this ordered list into contiguous groups and concatenates
+    # completed groups in job order. Full source comparison below authenticates it.
+    for path in files:
+        stop_if_requested()
+        for count, (line, document) in enumerate(raw_json_records(path)):
+            if count % 256 == 0:
+                stop_if_requested()
+            yield lossless_record(line, document)
+
+
+def load_lossless_raw(files, workers, cache_dir):
+    from datasets import Dataset, Features, Value
+    return Dataset.from_generator(
+        lossless_documents, gen_kwargs={'files': list(map(str, files))},
+        features=Features({'id': Value('string'), 'text': Value('large_string'),
+                           'document_json': Value('large_string')}),
+        num_proc=workers, cache_dir=str(cache_dir), keep_in_memory=False)
 
 
 def stage_split(prep):
     import numpy as np
-    from datasets import load_dataset, load_dataset_builder
+    from datasets import load_dataset_builder
     cfg = prep.config
     download = prep.manifest('download')['details']
     builder = load_dataset_builder(cfg['dataset_id'], revision=cfg['dataset_revision'])
     if [repo_filename(url) for url in builder.config.data_files['train']] != download['canonical_files']:
         raise ValueError('Native builder canonical order differs from download manifest')
-    print(f'split: building native full train with {worker_count(cfg)} workers', flush=True)
-    raw = load_dataset(cfg['dataset_id'], revision=cfg['dataset_revision'], split='train',
-                       num_proc=worker_count(cfg))
+    if [item['repo_filename'] for item in download['files']] != download['canonical_files']:
+        raise ValueError('Downloaded paths differ from canonical full-train ordering')
+    print(f'split: building lossless full train with {worker_count(cfg)} workers', flush=True)
+    raw = load_lossless_raw([item['path'] for item in download['files']], worker_count(cfg),
+                            prep.root / 'caches/datasets' / prep.path.name / 'lossless-raw')
     n = len(raw)
     print(f'split: native full train ready, {n} documents', flush=True)
     if n <= cfg['evaluation_documents'] or raw._indices is not None:
@@ -557,7 +597,8 @@ def stage_split(prep):
                  'ranges': state['ranges'], 'raw_cache_files': cache_files,
                  'evaluation_raw_files': eval_raw_files,
                  'evaluation_raw_documents': cfg['evaluation_documents'],
-                 'evaluation_raw_format': 'Arrow; original document fields nested unchanged; reserved shuffle order',
+                 'evaluation_raw_format': 'Arrow document_json: original UTF-8 JSON line unchanged; reserved shuffle order',
+                 'loader': 'datasets.Dataset.from_generator; canonical files/lines; all original fields authenticated',
                  'raw_fingerprint': raw._fingerprint, 'features': raw.features.to_dict(),
                  'shuffle': 'datasets.Dataset.shuffle(seed=42), then index selection',
                  'seed': cfg['shuffle_seed'], 'evaluation_subset': 'first 10000 of reserved ordered documents'})
@@ -580,7 +621,7 @@ def archive_evaluation(prep, raw, evaluation, ranges, inverse):
                         pa.field('evaluation_slot', pa.int32()),
                         pa.field('source', pa.string()),
                         pa.field('text_sha256', pa.binary(32)),
-                        pa.field('document', pa.struct(list(raw.features.arrow_schema)))])
+                        pa.field('document_json', pa.large_string())])
     ends = [item['end'] for item in ranges]
     batch_size = prep.config['document_batch_size']
     for start in range(state['next_slot'], len(evaluation), batch_size):
@@ -588,11 +629,12 @@ def archive_evaluation(prep, raw, evaluation, ranges, inverse):
         rows = []
         for slot in range(start, min(start + batch_size, len(evaluation))):
             index = int(evaluation[slot])
-            original = raw[index]
+            record = raw[index]
+            original = original_document(record)
             rows.append({'row_index': index, 'shuffle_position': int(inverse[index]),
                          'evaluation_slot': slot, 'source': source_at(ranges, ends, index),
                          'text_sha256': hashlib.sha256(original['text'].encode()).digest(),
-                         'document': original})
+                         'document_json': record['document_json']})
         target = directory / f'original-{len(state["files"]):06d}.arrow'
         state['files'].append(write_arrow(target, rows, schema))
         state['next_slot'] = start + len(rows)
@@ -609,6 +651,8 @@ def compare_raw_chunk(raw, offset, docs):
     for i, doc in enumerate(docs):
         if actual['text'][i] != doc['text'] or actual['id'][i] != doc.get('id'):
             raise ValueError(f'Canonical ordering mismatch at original row {offset + i}')
+        if json.loads(actual['document_json'][i]) != doc:
+            raise ValueError(f'Original document fields changed at row {offset + i}')
 
 
 def source_at(ranges, ends, index):
@@ -1051,11 +1095,13 @@ def stage_verify(prep):
         if raw_count >= len(evaluation):
             raise ValueError('Extra evaluation original documents')
         index = int(evaluation[raw_count])
-        original = raw[index]
+        record = raw[index]
+        original = original_document(record)
         if (archived['row_index'] != index or archived['evaluation_slot'] != raw_count
                 or archived['shuffle_position'] != int(inverse[index])
                 or archived['source'] != source_at(ranges, ends, index)
-                or archived['document'] != original
+                or archived['document_json'] != record['document_json']
+                or original_document(archived) != original
                 or archived['text_sha256'] != hashlib.sha256(original['text'].encode()).digest()):
             raise ValueError('Evaluation original archive provenance/order/content mismatch')
         raw_count += 1

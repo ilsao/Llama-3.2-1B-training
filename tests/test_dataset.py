@@ -37,6 +37,27 @@ class OfficialScoringTests(unittest.TestCase):
 
 
 class PolicyTests(unittest.TestCase):
+    def test_lossless_fields_missing_keys_and_invalid_text(self):
+        document = {'text': '臺灣', 'metadata': {'nested': [None, {'x': 2**60}]}, 'extra': False}
+        line = json.dumps(document, ensure_ascii=False) + '\n'
+        record = pipeline.lossless_record(line, document)
+        self.assertEqual(record['document_json'], line)
+        self.assertIsNone(record['id'])
+        self.assertEqual(pipeline.original_document(record), document)
+        with self.assertRaises(ValueError):
+            pipeline.lossless_record('{}', {'text': None})
+        with self.assertRaises(ValueError):
+            pipeline.lossless_record('{}', {'text': 'ok', 'id': 1})
+
+    def test_source_comparison_checks_all_original_fields(self):
+        document = {'id': 'a', 'text': 'same', 'metadata': {'quality': 0.7}}
+        class Raw:
+            def __getitem__(self, key):
+                return {'id': ['a'], 'text': ['same'], 'document_json': [json.dumps(document)]}
+        pipeline.compare_raw_chunk(Raw(), 0, [document])
+        with self.assertRaises(ValueError):
+            pipeline.compare_raw_chunk(Raw(), 0, [{**document, 'metadata': 'lost'}])
+
     def test_global_document_count_fraction_and_small_populations(self):
         self.assertEqual(pipeline.top_count(19, 0.1), 1)
         self.assertEqual(pipeline.top_count(9, 0.1), 0)

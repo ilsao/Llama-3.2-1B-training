@@ -95,7 +95,12 @@ CPU 前處理與 GPU 訓練使用不同 jobs，前處理 allocation 成本另記
 都設為 `spawn`，並將方法寫入 preparation identity 與 job log。Split 每 5 分鐘
 輸出 Python stack，便於診斷卡住的位置。`parallel-check` 使用壓縮 JSON shards
 及 threaded checksum 前置步驟，比較 1／7 workers 的原生文件順序與 shuffle。
-此次 source 變更後使用新 preparation `dolma-dclm10-003`；保留 `002` 的原身分與檔案。
+實際資料的巢狀 metadata 與 dataset card 宣告的 string schema 不符。讀取 adapter
+依 pinned builder 的 canonical 檔案順序逐行建立磁碟上的 HF map-style Dataset，
+保留原始 JSON line 與 id/text；逐份核對全部欄位後才執行原生 seed-42 shuffle。
+`parallel-check` 比較異質欄位的 1／7-worker 輸出、原生 id/text projection 的
+shuffle indices、完整 split 入口、eval archive/resume，並在 compute node 有界抽查各來源。
+此次 source 變更後使用新 preparation `dolma-dclm10-004`；保留 `002`／`003` 身分與檔案。
 
 資料環境使用叢集既有 Miniconda 安裝，位於
 `/work/asciibase64/Llama-3.2-1B-training/environments/data-py311`，Python 版本為 3.11。
@@ -282,7 +287,8 @@ checksums、來源關係與統計。清理階段的不可變 SQLite 索引記錄
 重複文件。評分階段保存全部符合條件的網頁評分。選取階段保存前 10% 候選索引、
 選中文件 IDs、文字雜湊、token IDs 與 evaluation slots；預算跳過行為可由候選順序
 與總數重現。split 階段將全部 50,000 篇評估文件的原始欄位獨立保存於
-`split/evaluation-raw/`，附原始 row index、shuffle position、evaluation slot、來源及
+`split/evaluation-raw/` 的 `document_json` large-string 欄位，逐行保留全部原始 JSON，
+可用 `json.loads` 還原異質巢狀欄位及缺省 keys；附原始 row index、shuffle position、evaluation slot、來源及
 文字 checksum；不依賴完整原生 Arrow cache。所有 eval document tokens 與 packed
 sequences 均保留，固定子集仍為 reserved order 的前 10,000 篇。
 
