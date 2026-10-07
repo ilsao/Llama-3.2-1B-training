@@ -1,154 +1,156 @@
 {
-  "project": {
-    "title": "Llama 3.2 1B from scratch",
-    "status": "active",
-    "timezone": "Asia/Taipei",
-    "baseline_deadline": "2026-10-09",
-    "lab_deadline": "2026-10-20"
+  "accounting": {
+    "active_preprocessing_h200_hours_allocation_upper_bound": 24,
+    "active_preprocessing_h200_hours_observed": 0.4955555555555556,
+    "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
+    "full_run_limit": 3,
+    "full_runs_committed": 0,
+    "observed_utc": "2026-10-07T16:42:51.300676+00:00",
+    "preprocessing_h200_hours_reconciled": 0.9180555555555555,
+    "shared_h200_hours_reconciled": 1.0716666666666665,
+    "shared_measured_plus_outstanding_reservations_upper_bound": 25.071666666666665,
+    "training_h200_hours_reconciled": 0.15361111111111111,
+    "training_h200_hours_reserved_or_measured": 0.15361111111111111,
+    "training_tokens_processed": 0
   },
   "continuity": {
-    "interval_minutes": 20,
+    "check_only_passed": true,
     "controller": "slurm/heartbeat.py",
-    "state": "enabled; foreground handoff ready",
-    "check_only_passed": true
+    "interval_minutes": 20,
+    "state": "enabled; bounded heartbeat completed under controller lock"
   },
-  "workspace": {
-    "storage": "/work/asciibase64/Llama-3.2-1B-training",
-    "findings": "findings.md",
-    "log": "research-log.md",
-    "reports": "to_human/"
-  },
-  "pipeline": {
-    "download_preparation": "dolma-dclm10-001",
-    "downstream_preparation": "dolma-dclm10-002",
-    "recorded_download_shards": 1632,
-    "total_download_shards": 6081,
-    "recipe": "exact native global shuffle, dedup, CC top 10 percent",
-    "eval_raw_archive": "implemented; synthetic archive/resume passed",
-    "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify"
+  "experiments": {
+    "baseline_value": null,
+    "best_value": null,
+    "proxy_metric": "eval/perplexity",
+    "trajectory": []
   },
   "jobs": [
     {
+      "accounting_status": "running; final reconciliation deferred",
+      "allocated_cpus": 8,
+      "allocated_gpu_count": 1,
+      "allocated_gpu_type": "H200",
+      "allocation_h200_hours_upper_bound": 24,
+      "elapsed_seconds_observed": 1784,
+      "h200_hours_observed": 0.4955555555555556,
+      "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511918/node.txt",
       "job_id": "511918",
-      "stage": "download",
-      "prep_id": "dolma-dclm10-001",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
       "ledger": "preprocessing",
+      "prep_id": "dolma-dclm10-001",
+      "stage": "download",
       "status": "RUNNING",
       "tag": "autoresearch-download-e1b915ee148c"
     },
     {
-      "job_id": "511939",
-      "stage": "parallel-check",
-      "id": "prep-parallel-002",
-      "ledger": "preprocessing",
-      "status": "COMPLETED",
-      "tag": "autoresearch-parallel-check-38ee4bb5f4af",
-      "reconciled": true,
       "h200_hours": 0.015277777777777777,
-      "result": "1/7-worker equivalence and full eval archive/resume passed"
-    },
-    {
-      "job_id": "511940",
-      "stage": "setup",
-      "id": "train-env-002",
-      "ledger": "training",
-      "status": "COMPLETED",
-      "tag": "autoresearch-setup-dc866eecf3d2",
-      "reconciled": true,
-      "h200_hours": 0.05555555555555555,
-      "result": "training environment installed; pip check passed"
-    },
-    {
-      "job_id": "511949",
-      "stage": "parallel-check",
-      "id": "prep-parallel-003",
-      "ledger": "preprocessing",
-      "status": "COMPLETED",
-      "tag": "autoresearch-offline-7f9d9e9f9639",
-      "reconciled": true,
-      "h200_hours": 0.018055555555555554,
-      "result": "offline train/full-eval/subset reload after retirement passed"
-    },
-    {
-      "job_id": "511971",
-      "stage": "runtime",
-      "id": "gpu-runtime-4-002",
-      "gpus": 4,
-      "ledger": "training",
-      "status": "COMPLETED",
-      "tag": "autoresearch-runtime-5498dc7777cc",
-      "reconciled": true,
-      "h200_hours": 0.022222222222222223,
-      "result": "4-GPU distributed training correctness passed"
-    },
-    {
-      "job_id": "511980",
-      "stage": "runtime",
-      "id": "gpu-runtime-8-002",
-      "gpus": 8,
-      "ledger": "training",
-      "status": "COMPLETED",
-      "tag": "autoresearch-runtime8-ea996e0aa261",
-      "reconciled": true,
-      "h200_hours": 0.07111111111111111,
-      "result": "8-GPU distributed training correctness passed"
-    }
-  ],
-  "submission_intents": [
-    {
-      "tag": "autoresearch-download-e1b915ee148c",
-      "stage": "download",
-      "prep_id": "dolma-dclm10-001",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:13:05.949397+00:00",
-      "job_id": "511918"
-    },
-    {
-      "tag": "autoresearch-parallel-check-38ee4bb5f4af",
-      "stage": "parallel-check",
       "id": "prep-parallel-002",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:22:42.403849+00:00",
-      "job_id": "511939"
-    },
-    {
-      "tag": "autoresearch-setup-dc866eecf3d2",
-      "stage": "setup",
-      "id": "train-env-002",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:22:43.063252+00:00",
-      "job_id": "511940"
-    },
-    {
-      "tag": "autoresearch-offline-7f9d9e9f9639",
+      "job_id": "511939",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
+      "ledger": "preprocessing",
+      "reconciled": true,
+      "result": "1/7-worker equivalence and full eval archive/resume passed",
       "stage": "parallel-check",
+      "status": "COMPLETED",
+      "tag": "autoresearch-parallel-check-38ee4bb5f4af"
+    },
+    {
+      "h200_hours": 0.05555555555555555,
+      "id": "train-env-002",
+      "job_id": "511940",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
+      "ledger": "training",
+      "reconciled": true,
+      "result": "training environment installed; pip check passed",
+      "stage": "setup",
+      "status": "COMPLETED",
+      "tag": "autoresearch-setup-dc866eecf3d2"
+    },
+    {
+      "h200_hours": 0.018055555555555554,
       "id": "prep-parallel-003",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:26:53.701809+00:00",
-      "job_id": "511949"
+      "job_id": "511949",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
+      "ledger": "preprocessing",
+      "reconciled": true,
+      "result": "offline train/full-eval/subset reload after retirement passed",
+      "stage": "parallel-check",
+      "status": "COMPLETED",
+      "tag": "autoresearch-offline-7f9d9e9f9639"
     },
     {
-      "tag": "autoresearch-runtime-5498dc7777cc",
-      "stage": "runtime",
+      "gpus": 4,
+      "h200_hours": 0.022222222222222223,
       "id": "gpu-runtime-4-002",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:30:58.379232+00:00",
-      "job_id": "511971"
+      "job_id": "511971",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
+      "ledger": "training",
+      "reconciled": true,
+      "result": "4-GPU distributed training correctness passed",
+      "stage": "runtime",
+      "status": "COMPLETED",
+      "tag": "autoresearch-runtime-5498dc7777cc"
     },
     {
-      "tag": "autoresearch-runtime8-ea996e0aa261",
-      "stage": "runtime",
+      "gpus": 8,
+      "h200_hours": 0.07111111111111111,
       "id": "gpu-runtime-8-002",
-      "status": "submitted",
-      "timestamp": "2026-10-07T16:33:21.551334+00:00",
-      "job_id": "511980"
+      "job_id": "511980",
+      "last_observed_utc": "2026-10-07T16:42:51.300676+00:00",
+      "ledger": "training",
+      "reconciled": true,
+      "result": "8-GPU distributed training correctness passed",
+      "stage": "runtime",
+      "status": "COMPLETED",
+      "tag": "autoresearch-runtime8-ea996e0aa261"
+    },
+    {
+      "h200_hours": 0.8797222222222222,
+      "id": "dolma-dclm10-001",
+      "job_id": "511170",
+      "ledger": "preprocessing",
+      "reconciled": true,
+      "result": "historical failure; charged in authoritative ledger",
+      "stage": "download",
+      "status": "FAILED"
+    },
+    {
+      "h200_hours": 0.005,
+      "id": "prep-parallel-001",
+      "job_id": "511509",
+      "ledger": "preprocessing",
+      "reconciled": true,
+      "result": "historical failure; charged in authoritative ledger",
+      "stage": "parallel-check",
+      "status": "FAILED"
+    },
+    {
+      "h200_hours": 0.004722222222222222,
+      "id": "train-env-par8-001",
+      "job_id": "511510",
+      "ledger": "training",
+      "reconciled": true,
+      "result": "historical failure; charged in authoritative ledger",
+      "stage": "setup",
+      "status": "FAILED"
     }
   ],
-  "experiments": {
-    "proxy_metric": "eval/perplexity",
-    "baseline_value": null,
-    "best_value": null,
-    "trajectory": []
+  "last_heartbeat": {
+    "accounting_snapshot": "/work/asciibase64/Llama-3.2-1B-training/runs/heartbeat/accounting-20261007T164251Z.txt",
+    "blocker": "Original download incomplete; downstream import cannot begin.",
+    "diff_check": "passed",
+    "fix": "Training submission ambiguity retains reservation; durable tag/receipt and one-shot recovery added.",
+    "ledger_audit": "all eight terminated allocations match sacct; no duplicate reconciliation required",
+    "lightweight_tests_passed": 50,
+    "local_time": "2026-10-08T00:42:51.300676+08:00",
+    "new_jobs_submitted": [],
+    "new_terminated_jobs_reconciled": [],
+    "observed_utc": "2026-10-07T16:42:51.300676+00:00",
+    "ready_stage_advanced": false,
+    "report": "to_human/heartbeat-20261008-0043.md",
+    "shell_syntax": "passed",
+    "started_utc": "2026-10-07T16:36:25.907682+00:00"
   },
   "next_actions": [
     "Monitor and reconcile download 511918 on termination; do not duplicate it.",
@@ -156,5 +158,79 @@
     "Advance split/clean/score/select/pack/verify one stage at a time after completion/accounting.",
     "After full independent eval archive and verify, run cleanup dry-run then apply; retain all durable eval/packed/provenance artifacts.",
     "Run full 1B/context8192 resume validation and matched-global-batch 4/8-GPU scaling after real data is sealed."
-  ]
+  ],
+  "pipeline": {
+    "blocked_stage": "import completed download",
+    "download_complete": false,
+    "download_preparation": "dolma-dclm10-001",
+    "downstream_preparation": "dolma-dclm10-002",
+    "eval_raw_archive": "implemented; synthetic archive/resume passed",
+    "recipe": "exact native global shuffle, dedup, CC top 10 percent",
+    "recorded_download_shards": 1831,
+    "safe_cleanup": "implemented; synthetic offline retirement/reload passed; production cleanup awaits full corpus verify",
+    "total_download_shards": 6081
+  },
+  "project": {
+    "baseline_deadline": "2026-10-09",
+    "lab_deadline": "2026-10-20",
+    "status": "active",
+    "timezone": "Asia/Taipei",
+    "title": "Llama 3.2 1B from scratch"
+  },
+  "submission_intents": [
+    {
+      "job_id": "511918",
+      "prep_id": "dolma-dclm10-001",
+      "stage": "download",
+      "status": "submitted",
+      "tag": "autoresearch-download-e1b915ee148c",
+      "timestamp": "2026-10-07T16:13:05.949397+00:00"
+    },
+    {
+      "id": "prep-parallel-002",
+      "job_id": "511939",
+      "stage": "parallel-check",
+      "status": "submitted",
+      "tag": "autoresearch-parallel-check-38ee4bb5f4af",
+      "timestamp": "2026-10-07T16:22:42.403849+00:00"
+    },
+    {
+      "id": "train-env-002",
+      "job_id": "511940",
+      "stage": "setup",
+      "status": "submitted",
+      "tag": "autoresearch-setup-dc866eecf3d2",
+      "timestamp": "2026-10-07T16:22:43.063252+00:00"
+    },
+    {
+      "id": "prep-parallel-003",
+      "job_id": "511949",
+      "stage": "parallel-check",
+      "status": "submitted",
+      "tag": "autoresearch-offline-7f9d9e9f9639",
+      "timestamp": "2026-10-07T16:26:53.701809+00:00"
+    },
+    {
+      "id": "gpu-runtime-4-002",
+      "job_id": "511971",
+      "stage": "runtime",
+      "status": "submitted",
+      "tag": "autoresearch-runtime-5498dc7777cc",
+      "timestamp": "2026-10-07T16:30:58.379232+00:00"
+    },
+    {
+      "id": "gpu-runtime-8-002",
+      "job_id": "511980",
+      "stage": "runtime",
+      "status": "submitted",
+      "tag": "autoresearch-runtime8-ea996e0aa261",
+      "timestamp": "2026-10-07T16:33:21.551334+00:00"
+    }
+  ],
+  "workspace": {
+    "findings": "findings.md",
+    "log": "research-log.md",
+    "reports": "to_human/",
+    "storage": "/work/asciibase64/Llama-3.2-1B-training"
+  }
 }

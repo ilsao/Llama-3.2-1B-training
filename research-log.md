@@ -23,3 +23,15 @@
 - Eight-GPU runtime correctness 511980 passed; 32 seconds x eight H200s =
   0.0711111 H200-hours, reconciled. Handing continuation to the installed heartbeat.
   Original download remains running at 1632/6081 recorded shards.
+
+- 2026-10-08T00:42:51.300676+08:00 bounded heartbeat: download 511918 RUNNING,
+  1831/6081 checkpointed shards; no completed manifest, no downstream submission.
+  Audited eight terminated allocations against sacct: 1.0716667 reconciled
+  H200-hours across both ledgers; active download 0.4955556 hours
+  observed separately, 24-hour allocation upper bound retained. No new allocation.
+  Fixed ambiguous sbatch replies releasing training reservations. Persist unique
+  comment/intents and returned receipts, retain uncertain budget, and recover one
+  matching allocation without retry. Verified nano4 does not store accounting
+  comments; startup allocation receipts provide terminal fallback. 50 lightweight
+  tests, shell syntax and diff checks pass. Full model/resume/scaling remain blocked
+  on sealed real data. Durable report: to_human/heartbeat-20261008-0043.md.

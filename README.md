@@ -200,6 +200,18 @@ python3 slurm/accounting.py JOB_ID
 python3 slurm/submit_training.py accounting JOB_ID
 ```
 
+若訓練提交的回應不確定，wrapper 會保留預算 reservation，禁止直接重送。
+每次提交前保存唯一 Slurm comment、時間與命令；使用錯誤訊息提供的 ID 復原：
+
+```bash
+python3 slurm/submit_training.py recover submission-RESERVATION_ID
+```
+
+復原只查一次 queue、accounting 與 startup allocation receipts，找到唯一 job 後
+綁定原 reservation；未找到或有多筆時仍保留預算。nano4 的 accounting 不保存
+job comments，因此終止 jobs 可能須依 startup receipt 辨識。已確認無 job 的失敗
+須記錄證據再釋放 reservation，不能因 client error 自動判定沒有提交。
+
 兩個指令都只查詢小型 Slurm metadata，可在 login node 執行。即使 job 失敗，已配置的
 GPU 時間仍須核銷。Slurm accounting 尚未提供完整紀錄時，稍後再查；不要自行填入估計。
 

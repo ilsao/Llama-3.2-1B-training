@@ -1,88 +1,89 @@
 {
-  "recorded_at": "2026-10-07T16:36:25.637136+00:00",
-  "lightweight_tests": {
-    "passed": true,
-    "count": 44
+  "accounting": "All eight terminated allocations match authoritative ledgers and sacct; running 511918 awaits final reconciliation",
+  "allocated_jobs": [
+    {
+      "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 3167,
+      "end": "2026-10-07T22:23:31",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "8943d6334c8aeb46be57644de236b68207155f3fa4a4548e5e9d1ea605a446ea",
+        "source": "startup scontrol node with exclusively H200 GPUs"
+      },
+      "h200_hours": 0.8797222222222222,
+      "job_id": "511170",
+      "nodes": "25a-hgpn003",
+      "start": "2026-10-07T21:30:44",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 18,
+      "end": "2026-10-07T22:38:38",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.005,
+      "job_id": "511509",
+      "nodes": "25a-hgpn001",
+      "start": "2026-10-07T22:38:20",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 17,
+      "end": "2026-10-07T22:38:40",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "c2dcf95ec5e6f896107b43aa7747d81ba99ca13a846641ac18d6f7c11de4f04c",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.004722222222222222,
+      "job_id": "511510",
+      "nodes": "25a-hgpn011",
+      "start": "2026-10-07T22:38:23",
+      "state": "FAILED"
+    }
+  ],
+  "blocker": null,
+  "download_continuation_job": "511918",
+  "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
+  "gpu_runtime_checks": {
+    "4gpu": {
+      "h200_hours": 0.022222222222222223,
+      "job_id": "511971",
+      "passed": true
+    },
+    "8gpu": {
+      "h200_hours": 0.07111111111111111,
+      "job_id": "511980",
+      "passed": true
+    }
   },
+  "heartbeat": {
+    "check_only_passed": true,
+    "enabled": true,
+    "interval_minutes": 20
+  },
+  "lightweight_tests": {
+    "count": 50,
+    "passed": true
+  },
+  "original_download_shards_recorded": 1831,
+  "original_download_shards_total": 6081,
+  "preserved_download_worktree": ".download-continuation",
+  "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
+  "production_cleanup": "not submitted; full corpus and verify are prerequisites",
+  "recorded_at": "2026-10-07T16:42:51.300676+00:00",
+  "runtime_checks": "511939 and 511949 passed: worker/native/shuffle/selection/packing/resume equivalence, eval original archive/resume, offline loader after intermediate retirement",
   "shell_syntax": "passed",
   "slurm_test_only": {
     "cpu_8_gpu_1": "passed",
     "cpu_8_gpu_8": "passed"
   },
-  "runtime_checks": "511939 and 511949 passed: worker/native/shuffle/selection/packing/resume equivalence, eval original archive/resume, offline loader after intermediate retirement",
-  "allocated_jobs": [
-    {
-      "job_id": "511170",
-      "state": "FAILED",
-      "elapsed_seconds": 3167,
-      "gpu_count": 1,
-      "h200_hours": 0.8797222222222222,
-      "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
-      "gpu_type_evidence": {
-        "source": "startup scontrol node with exclusively H200 GPUs",
-        "sha256": "8943d6334c8aeb46be57644de236b68207155f3fa4a4548e5e9d1ea605a446ea"
-      },
-      "start": "2026-10-07T21:30:44",
-      "end": "2026-10-07T22:23:31",
-      "nodes": "25a-hgpn003"
-    },
-    {
-      "job_id": "511509",
-      "state": "FAILED",
-      "elapsed_seconds": 18,
-      "gpu_count": 1,
-      "h200_hours": 0.005,
-      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
-      "gpu_type_evidence": {
-        "source": "startup nvidia-smi for allocated devices",
-        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3"
-      },
-      "start": "2026-10-07T22:38:20",
-      "end": "2026-10-07T22:38:38",
-      "nodes": "25a-hgpn001"
-    },
-    {
-      "job_id": "511510",
-      "state": "FAILED",
-      "elapsed_seconds": 17,
-      "gpu_count": 1,
-      "h200_hours": 0.004722222222222222,
-      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
-      "gpu_type_evidence": {
-        "source": "startup nvidia-smi for allocated devices",
-        "sha256": "c2dcf95ec5e6f896107b43aa7747d81ba99ca13a846641ac18d6f7c11de4f04c"
-      },
-      "start": "2026-10-07T22:38:23",
-      "end": "2026-10-07T22:38:40",
-      "nodes": "25a-hgpn011"
-    }
-  ],
-  "gpu_runtime_checks": {
-    "4gpu": {
-      "job_id": "511971",
-      "passed": true,
-      "h200_hours": 0.022222222222222223
-    },
-    "8gpu": {
-      "job_id": "511980",
-      "passed": true,
-      "h200_hours": 0.07111111111111111
-    }
-  },
-  "full_model_validation_and_scaling": "pending complete verified real corpus; runtime correctness does not validate full 1B training/scaling",
-  "preserved_download_worktree": ".download-continuation",
-  "original_download_shards_recorded": 1632,
-  "original_download_shards_total": 6081,
-  "accounting": "All three terminated allocations reconciled in their respective ledgers",
-  "previous_blocker": "/work storage reports 100% usage; writes raise OSError ENOSPC",
-  "blocker": null,
   "storage": "Expanded; df reports approximately 10 TB available",
-  "heartbeat": {
-    "enabled": true,
-    "interval_minutes": 20,
-    "check_only_passed": true
-  },
-  "training_environment": "completed job 511940; pip check passed; actual cost reconciled",
-  "download_continuation_job": "511918",
-  "production_cleanup": "not submitted; full corpus and verify are prerequisites"
+  "submission_recovery": "mocked fail/malformed/success/recovery/ambiguity/receipt tests passed; no production submission needed",
+  "training_environment": "completed job 511940; pip check passed; actual cost reconciled"
 }

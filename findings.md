@@ -5,10 +5,14 @@ Train random-initialized Llama 3.2 1B at context 8192, optimizing held-out perpl
 under strict token and H200-hour limits. Start with AdamW.
 
 ## Current Understanding
-No measured baseline perplexity yet. The previous download stopped at 1072/6081
-shards because /work was full. Capacity now reports approximately 10 TB available.
-The prior worker-equivalence and training-environment jobs failed before validation;
-35 lightweight tests passed, which is not full runtime validation.
+No measured baseline perplexity yet. The original download is running as job
+511918 on one H200 and eight CPUs, with 1,831/6,081 checkpointed shards
+at 2026-10-08 00:42 Asia/Taipei. Storage has approximately 9.9 TB
+available after the earlier capacity failure. Complete download import into
+`dolma-dclm10-002` remains the prerequisite for production split/filter/packing.
+Synthetic preprocessing/resume/retirement and four/eight-GPU distributed correctness
+checks passed. These checks do not establish full-model throughput or perplexity.
+The lightweight suite now passes 50 tests.
 
 ## Lessons and Constraints
 - Use sbatch for heavy work. Per-job limit: 8 CPUs total, 8 H200s maximum.
@@ -41,3 +45,25 @@ pip check passed (511940). Production cleanup must still await real-corpus verif
 Four/eight-GPU distributed correctness checks passed (511971 and 511980).
 These are synthetic runtime checks; full 1B/context-8192 training and actual
 throughput scaling on real sealed data remain unvalidated. Costs are reconciled.
+
+## Heartbeat accounting and submission safety (2026-10-08 00:42 Asia/Taipei)
+All eight terminated allocations agree with sacct and the authoritative ledgers:
+preprocessing 0.9180556, training/environment/runtime
+0.1536111, total 1.0716667 H200-hours.
+Job 511918 is still accruing costs (0.4955556 H200-hours observed,
+24 H200-hours maximum for this allocation); its observed cost is provisional.
+There are 0 committed full runs and no processed production training tokens.
+
+Training submission previously cancelled budget on every nonzero sbatch response.
+A lost client reply could therefore discard a live allocation's reservation.
+The wrapper now records a unique tag before dispatch, retains uncertain reservations,
+saves returned job receipts before binding, and offers bounded recovery using queue,
+accounting and saved startup allocation metadata. Zero/multiple matches or query
+failure retain the charge and prevent resubmission. Nano4 reports
+`AccountingStoreFlags=(null)`, so terminal comment recovery relies on receipts.
+Mocked regression tests cover these cases; no extra Slurm job was needed.
+
+No stage advanced because the download has no completion manifest. Baseline <=20
+before 2026-10-09 remains an unachieved target; roughly
+23.3 hours
+remain at this observation, and preprocessing/training time is not yet measured.
