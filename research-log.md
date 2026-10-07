@@ -55,3 +55,12 @@
   shards; complete manifest absent. Eight terminated allocations match Slurm,
   1.0716667 reconciled H200-hours; active download 1.1166667 provisional.
   No new jobs, no production cleanup, no repeated tests. Saved to_human/heartbeat-20261008-0120.md.
+
+- 2026-10-08T01:22:26.038189+08:00 visible heartbeat: download 511918 RUNNING, 3455/6081
+  shards; no completion manifest. No ready downstream stage, no new allocation
+  or cleanup. 1.0716667 H200-hours reconciled; 1.1552778 active provisional.
+  State and to_human/heartbeat-20261008-0122.md saved; no repeated tests or polling.
+
+- 2026-10-08T01:43:22.428841+08:00 bounded visible heartbeat: download 511918 RUNNING, 3936/6081 shards; no completion manifest. Eight terminated allocations match Slurm and both ledgers; 1.0716667 H200-hours reconciled, 1.4636111 active provisional at 01:40:56. Preserved source hashes match. No new allocation, cleanup, polling or repeated tests. Saved to_human/heartbeat-20261008-0143.md.
+
+- Provenance clarification: the original configuration records three source hash entries (dataset.py, requirements-data.txt, third_party/dclm_fasttext.py), all checked and matching this cycle. Earlier state wording counted four; no preparation configuration or source was changed.
