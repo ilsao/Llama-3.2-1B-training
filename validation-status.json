@@ -1,5 +1,5 @@
 {
-  "accounting": "All 16 terminated allocations still match Slurm/ledgers; active split 513955 generation advances, no new allocation, 24 H200-hour reservation retained",
+  "accounting": "All 16 terminated allocations match Slurm/ledgers; active split 513955 has fresh generation progress, 24 H200-hour reservation retained",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -370,15 +370,15 @@
   "production_split_progress": {
     "counts_are_completion_claim": false,
     "evaluation_archive_state_present": false,
-    "generation_examples_last_log": 57842721,
-    "observed_utc": "2026-10-07T22:00:25.952242+00:00",
+    "generation_examples_last_log": 72380721,
+    "observed_utc": "2026-10-07T22:20:24.444883+00:00",
     "phase": "lossless full train generation",
-    "previous_generation_examples": 42793721,
+    "previous_generation_examples": 57842721,
     "split_manifest_present": false,
-    "stderr_last_modified_utc": "2026-10-07T22:00:23.594749+00:00"
+    "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
   },
   "production_split_status": "RUNNING",
-  "recorded_at": "2026-10-07T22:01:34.245705+00:00",
+  "recorded_at": "2026-10-07T22:21:27.277098+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {

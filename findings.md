@@ -14,17 +14,17 @@ versions/process methods match validated source and identity
 52f00b18ade1299ea55e96b61dfcb8e7a3a9fa491759d7c8e606f3f3b5ca426b.
 
 Split 513955 is RUNNING on one H200/eight CPUs, seven workers plus coordinator,
-using both process libraries with spawn. Generation log last reports 57842721
-examples at 06:00 Asia/Taipei, up from 42793721 at 05:40;
-stderr is fresh. This is progress, not final row count or split completion.
-Split/eval archive manifests are absent; active observed cost 0.6558333
-H200-hours is provisional until termination/accounting. No new allocation this
-cycle. Canonical full-train generation, all-field source authentication, native
-seed-42 global shuffle and last-50,000 original eval archive remain in this job.
-Fixed first 10,000 subset stays unchanged. Keep 24 H200-hour reservation; shared
-measured plus reserved upper bound 27.9900000. Filtering awaits completed
-split/archive/accounting. Current identity/source hashes match; earlier files
-and identities remain intact.
+using both process libraries with spawn. Generation log last reports 72380721
+examples at 06:20 Asia/Taipei, up from 57842721 at 06:00;
+stderr is fresh. This is generation progress, not a final document count or
+completed canonical split. Split/state/eval archive manifests are absent.
+Active observed cost 0.9888889 H200-hours is provisional until allocation
+termination/accounting. No new allocation this cycle. Complete source ordering/
+full-field authentication, native seed-42 shuffle and independent last-50,000
+eval original archive remain in this job; fixed first 10,000 subset unchanged.
+Keep 24 H200-hour reservation; shared measured plus reserved upper bound 27.9900000.
+Filtering waits for complete split/archive/accounting. Source identity/config
+matches; previous preparations and files remain intact.
 
 Lossless schema validation 513790 passed heterogeneous fields, verbatim JSON,
 native projection order/indices, one/seven-worker full split entrypoint,
@@ -51,7 +51,7 @@ No training or scaling claims are justified yet. Jobs 511170, 511509 and 511510 
 and their allocated costs have been reconciled; see validation-status.json.
 
 ## Open Questions
-Actual remaining download/preprocessing time, baseline throughput, held-out perplexity,
+Remaining full preprocessing time, complete canonical row count, baseline throughput, held-out perplexity,
 and measured 4/8-GPU scaling efficiency remain unknown.
 
 ## Runtime validation update

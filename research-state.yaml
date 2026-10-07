@@ -1,11 +1,11 @@
 {
   "accounting": {
     "active_preprocessing_h200_hours_allocation_upper_bound": 24,
-    "active_preprocessing_h200_hours_observed": 0.6558333333333334,
+    "active_preprocessing_h200_hours_observed": 0.9888888888888889,
     "aggregate_budget_interpretation": "Preprocessing, failed allocations, validation and pilots remain charged; do not infer a fresh budget from separate ledgers.",
     "full_run_limit": 3,
     "full_runs_committed": 0,
-    "observed_utc": "2026-10-07T22:00:25.952242+00:00",
+    "observed_utc": "2026-10-07T22:20:24.444883+00:00",
     "preprocessing_h200_hours_reconciled": 3.8363888888888895,
     "shared_h200_hours_reconciled": 3.9900000000000007,
     "shared_measured_plus_outstanding_reservations_upper_bound": 27.990000000000002,
@@ -298,31 +298,31 @@
       "allocated_gpu_count": 1,
       "allocated_gpu_type": "H200",
       "allocation_h200_hours_upper_bound": 24,
-      "elapsed_seconds_observed": 2361,
-      "generation_examples_last_log": 57842721,
-      "h200_hours_observed": 0.6558333333333334,
+      "elapsed_seconds_observed": 3560,
+      "generation_examples_last_log": 72380721,
+      "h200_hours_observed": 0.9888888888888889,
       "hardware_evidence": "/work/asciibase64/Llama-3.2-1B-training/logs/job-513955/gpus.txt",
       "job_id": "513955",
-      "last_observed_utc": "2026-10-07T22:00:25.952242+00:00",
+      "last_observed_utc": "2026-10-07T22:20:24.444883+00:00",
       "ledger": "preprocessing",
       "prep_id": "dolma-dclm10-004",
-      "result": "lossless full-train generation advancing; complete split and independent official eval archive still pending",
+      "result": "lossless full-train generation progressing; split manifest/original full eval archive still pending",
       "stage": "split",
       "status": "RUNNING",
       "tag": "preprocessing-4574a3c059134cfc81e260737a86d37b"
     }
   ],
   "last_heartbeat": {
-    "blocker": "full split RUNNING with fresh generation progress; no completed split/eval archive for filtering yet",
+    "blocker": "canonical full split still generating; full split/eval archive/accounting gate filtering",
     "delivery": "visible_thread_queue",
     "lightweight_tests_passed": 59,
-    "local_time": "2026-10-08T06:01:34.245705+08:00",
+    "local_time": "2026-10-08T06:21:27.277098+08:00",
     "new_jobs_submitted": [],
     "new_terminated_jobs_reconciled": [],
-    "observed_utc": "2026-10-07T22:01:34.245705+00:00",
+    "observed_utc": "2026-10-07T22:21:27.277098+00:00",
     "ready_stage_advanced": false,
-    "report": "to_human/heartbeat-20261008-0601.md",
-    "tests_this_cycle": "no source edits or repeated tests; state/config/source identity and 16 terminated Slurm/ledger allocations checked"
+    "report": "to_human/heartbeat-20261008-0621.md",
+    "tests_this_cycle": "16 terminated allocations and current source/config/preparation identity checked; no source changes/repeated tests"
   },
   "next_actions": [
     "Inspect split 513955 once next heartbeat with small log tails/phase progress and periodic stacks; no polling or duplicate submission.",
@@ -414,12 +414,12 @@
     "split_progress": {
       "counts_are_completion_claim": false,
       "evaluation_archive_state_present": false,
-      "generation_examples_last_log": 57842721,
-      "observed_utc": "2026-10-07T22:00:25.952242+00:00",
+      "generation_examples_last_log": 72380721,
+      "observed_utc": "2026-10-07T22:20:24.444883+00:00",
       "phase": "lossless full train generation",
-      "previous_generation_examples": 42793721,
+      "previous_generation_examples": 57842721,
       "split_manifest_present": false,
-      "stderr_last_modified_utc": "2026-10-07T22:00:23.594749+00:00"
+      "stderr_last_modified_utc": "2026-10-07T22:20:21.917192+00:00"
     },
     "split_status": "RUNNING",
     "total_download_shards": 6081
