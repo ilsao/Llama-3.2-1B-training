@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=200G
 #SBATCH --gpus-per-node=1
-#SBATCH --time=24:00:00
+#SBATCH --time=16:00:00
 #SBATCH --signal=B:USR1@900
 #SBATCH --output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out
 #SBATCH --error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err
@@ -18,5 +18,5 @@ printf '%s\n' "$PREPARATION_ID" > "$JOB_RECORD/preparation-id.txt"
 printf '%s\n' score > "$JOB_RECORD/stage.txt"
 # fastText is CPU inference; the H200 allocation is the explicitly approved
 # resource exception, not a GPU implementation of fastText.
-srun --ntasks=1 python "$REPO/dataset.py" score --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
+srun --ntasks=1 python "$REPO/slurm/filtering_entry.py" score --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
     --config "${DATA_CONFIG:-$REPO/configs/dataset.json}"

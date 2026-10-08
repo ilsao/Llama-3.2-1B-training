@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=200G
 #SBATCH --gpus-per-node=1
-#SBATCH --time=24:00:00
+#SBATCH --time=16:00:00
 #SBATCH --signal=B:USR1@900
 #SBATCH --output=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.out
 #SBATCH --error=/work/asciibase64/Llama-3.2-1B-training/logs/%x-%j.err
@@ -39,5 +39,7 @@ for argument in "${@:3}"; do
         RUNTIME_LIMIT=(timeout --signal=TERM --kill-after=30s 600s)
     fi
 done
-"${RUNTIME_LIMIT[@]}" srun --ntasks=1 python "$REPO/dataset.py" "$STAGE" --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
+ENTRY="$REPO/dataset.py"
+if [[ "$STAGE" == select ]]; then ENTRY="$REPO/slurm/filtering_entry.py"; fi
+"${RUNTIME_LIMIT[@]}" srun --ntasks=1 python "$ENTRY" "$STAGE" --prep-id "$PREPARATION_ID" --root "$DATA_ROOT" \
     --config "${DATA_CONFIG:-$REPO/configs/dataset.json}" "${@:3}"

@@ -49,9 +49,11 @@ def bind(state_path, root, state, item, job_id):
     return job_id
 
 
-def submit(stage, prep_id, extra, root, state_path, minutes=None):
+def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None):
     if stage not in STAGES:
         raise ValueError('Invalid preprocessing stage')
+    if after_job is not None and not re.fullmatch(r'\d+', str(after_job)):
+        raise ValueError('Continuation dependency requires a numeric job ID')
     if stage != 'setup':
         identifier(prep_id)
     with locked(root / '.preprocessing-submission.lock', blocking=False):
@@ -67,8 +69,9 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None):
         tag = 'preprocessing-' + uuid.uuid4().hex
         short_job = (stage in {'parallel-check', 'cache-audit', 'cache-repair'}
                      or (stage == 'download' and '--repair-download-from' in extra))
-        wall_time = '00:30:00' if short_job else '24:00:00'
-        reserved_hours = 0.5 if short_job else 24
+        filtering_job = stage in {'clean', 'score', 'select', 'pack', 'verify'}
+        wall_time = '00:30:00' if short_job else '16:00:00' if filtering_job else '24:00:00'
+        reserved_hours = 0.5 if short_job else 16 if filtering_job else 24
         if minutes is not None:
             if type(minutes) is not int or not 20 <= minutes <= 1440:
                 raise ValueError('CPU preprocessing requires 20..1440 minutes')
@@ -79,6 +82,8 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None):
                    f'--time={wall_time}', f'--comment={tag}',
                    f'--output={root}/logs/%x-%j.out', f'--error={root}/logs/%x-%j.err',
                    str(PROJECT / 'slurm' / script)]
+        if after_job is not None:
+            command.insert(2, f'--dependency=afterany:{after_job}')
         command += [] if stage == 'setup' else [prep_id] if stage == 'score' else [stage, prep_id, *extra]
         if stage in {'setup', 'score'} and extra:
             raise ValueError('setup/score do not accept dataset arguments')

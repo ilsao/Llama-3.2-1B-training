@@ -324,3 +324,24 @@ The existing filtering job may finish, but its completion is no longer a baselin
 prerequisite and no further filtered preparation stages are auto-submitted.
 Charge the one-H200 CPU producer separately as preprocessing; retain every prior
 allocation and the same 16 H200-hour/7200-second combined GPU campaign limits.
+
+## Filtering continuation wall-time override (2026-10-09)
+
+The user explicitly requested pausing the scoring job and restarting filtering
+with a16-hour sbatch limit. CPU filtering stages (clean, score, select, pack,
+verify) default to16 hours per allocation, retaining1 H200 and8 CPUs total,
+seven workers plus coordinator, immutable preparation/split, and faithful
+checkpoint continuation. This supersedes the120-minute preprocessing choice
+and does not change the optimizer-sweep allocation caps. Reconcile stopped
+allocations before submitting the continuation; no artifact cleanup.
+
+## Bounded filtering recovery
+
+For score005 recovery, use the explicit `slurm/filtering_entry.py` execution
+overlay and `filtering_reader.py`, recording their hashes separately from the
+immutable original preparation identity. Do not modify dataset.py or existing
+split/clean manifests to bypass fingerprint checks. The overlay must verify real
+archived originals, native bounded selection,1/7-worker official scores and saved
+scoring rows before any score continuation writes. Retain at most two cached raw
+shards; score/selection order and checkpoint semantics remain canonical.
+See experiments/filtering-recovery/protocol.md.
