@@ -23,7 +23,7 @@ import uuid
 
 from training_state import (DEFAULT_ROOT, PROJECT, ExperimentLedger, TokenJournal,
                             atomic_json, digest, file_digest, identifier, load_config,
-                            locked, lr_multiplier, read_json, storage_root, window_indices)
+                            locked, schedule_multiplier, read_json, storage_root, window_indices)
 
 STOP = False
 
@@ -297,18 +297,20 @@ def evaluate(model, evaluation, cfg, accelerator):
                 totals[1] += (batch['labels'][:, 1:] != -100).sum().double()
         totals = accelerator.reduce(totals, reduction='sum')
         nll, predictions = totals.cpu().tolist()
-        if predictions <= 0 or not math.isfinite(nll):
-            raise ValueError('Held-out NLL must be finite with positive prediction token count')
+        if predictions <= 0:
+            raise ValueError('Invalid held-out prediction-token count')
+        if not math.isfinite(nll):
+            raise FloatingPointError('Nonfinite held-out NLL')
         perplexity = math.exp(nll / predictions) if nll / predictions < 700 else float('inf')
         if not math.isfinite(perplexity):
-            raise ValueError('Non-finite held-out perplexity')
+            raise FloatingPointError('Non-finite held-out perplexity')
         return {'eval/perplexity': perplexity, 'eval/nll': nll, 'eval/prediction_tokens': int(predictions),
                 'eval/documents': cfg['eval_documents'], 'eval/sequences': len(evaluation)}
     finally:
         model.train(was_training)
 
 
-def save_checkpoint(accelerator, run_path, state, mark_best=False):
+def save_checkpoint(accelerator, run_path, state, mark_best=False, retain_all=False):
     name = on_main(accelerator, lambda: f'checkpoint-{state["global_step"]:06d}-{uuid.uuid4().hex[:12]}')
     pending = run_path / 'checkpoints' / (name + '.partial')
     final = pending.with_name(name)
@@ -328,7 +330,7 @@ def save_checkpoint(accelerator, run_path, state, mark_best=False):
         protected = read_json(best_path)['checkpoint'] if best_path.exists() else None
         complete = sorted((path for path in final.parent.glob('checkpoint-*')
                            if (path / 'complete.json').exists()), key=lambda p: p.stat().st_mtime_ns)
-        for old in complete[:-2]:
+        for old in ([] if retain_all else complete[:-2]):
             if old.name != protected:
                 shutil.rmtree(old)
         return str(final)
@@ -400,6 +402,7 @@ def export_model(accelerator, model, run_path, metadata, validate=False):
 
 def run(args, cfg):
     require_compute()
+    invocation_started = time.monotonic()
     import torch
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
@@ -455,9 +458,8 @@ def run(args, cfg):
         raise RuntimeError('Initialization/data verification exhausted this allocation; no training started')
     model, initialization = build_model(cfg, run_path, provenance, accelerator)
     raw_optimizers, group_metadata = build_optimizers(model, cfg)
-    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: lr_multiplier(
-        step, cfg.get('scheduler_steps', cfg['max_steps']), cfg['warmup_steps'], cfg['min_lr_ratio']))
-        for optimizer in raw_optimizers]
+    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: schedule_multiplier(step, cfg))
+                  for optimizer in raw_optimizers]
     prepared = accelerator.prepare(model, *raw_optimizers)
     model, optimizers = prepared[0], list(prepared[1:])
     accelerator.register_for_checkpointing(*schedulers)
@@ -478,6 +480,8 @@ def run(args, cfg):
         source['raw_baseline.py'] = file_digest(PROJECT / 'raw_baseline.py')
     code_digest = digest(source)
     environment = {dist.metadata['Name']: dist.version for dist in importlib.metadata.distributions()}
+    if cfg.get('sweep_environment_digest', digest(environment)) != digest(environment):
+        raise ValueError('Sweep environment differs from native calibration')
     def execution_identity():
         identity = {'source_hashes': source, 'environment': environment, 'config_digest': digest(cfg)}
         path = run_path / 'execution-identity.json'
@@ -503,6 +507,10 @@ def run(args, cfg):
                 raise ValueError(f'Resume changed {key}; use the original code/config/environment')
         accelerator.load_state(checkpoint)  # restores all rank RNG and registered scheduler
         state = saved
+    timings = state.setdefault('timing_totals', {'initialization_seconds': 0.0,
+        'initialization_max_seconds': 0.0, 'data_seconds': 0.0, 'journal_seconds': 0.0,
+        'logging_seconds': 0.0, 'optimizer_seconds': 0.0, 'training_seconds': 0.0,
+        'evaluation_seconds': 0.0, 'checkpoint_seconds': 0.0, 'checkpoint_count': 0})
     journal = None
     def open_journal():
         nonlocal journal
@@ -542,6 +550,7 @@ def run(args, cfg):
         set_seed(cfg['seed'] + accelerator.process_index)
 
     def log(metrics):
+        logging_started = time.monotonic()
         payload = {**metrics, 'train/global_step': state['global_step']}
         if accelerator.is_main_process:
             import wandb
@@ -549,6 +558,11 @@ def run(args, cfg):
             with (run_path / 'metrics.jsonl').open('a') as stream:
                 stream.write(json.dumps({**payload, 'job_id': job_id, 'timestamp': time.time()}, allow_nan=False) + '\n')
             print(json.dumps(payload, allow_nan=False), flush=True)
+        timings['logging_seconds'] += time.monotonic() - logging_started
+
+    initialization_seconds = time.monotonic() - invocation_started
+    timings['initialization_seconds'] += initialization_seconds
+    timings['initialization_max_seconds'] = max(timings['initialization_max_seconds'], initialization_seconds)
 
     def compute_used():
         return allocation['previous_h200_hours'] + cfg['world_size'] * (time.time() - job_start) / 3600
@@ -562,16 +576,27 @@ def run(args, cfg):
                                         'accounting': 'running estimate; reconcile actual allocation with sacct after termination'}
         if hasattr(train, 'commit_receipt'):
             on_main(accelerator, lambda: train.commit_receipt(state['cursor']))
-        path = save_checkpoint(accelerator, run_path, state, mark_best=mark_best)
-        state['checkpoint_seconds'] = max(state['checkpoint_seconds'], time.monotonic() - started)
+        path = save_checkpoint(accelerator, run_path, state, mark_best=mark_best,
+                               retain_all=cfg.get('retain_all_checkpoints', False))
+        elapsed = time.monotonic() - started
+        state['checkpoint_seconds'] = max(state['checkpoint_seconds'], elapsed)
+        timings['checkpoint_seconds'] += elapsed
+        timings['checkpoint_count'] += 1
         return path
 
     def held_out():
         torch.cuda.synchronize()
         started = time.monotonic()
-        metrics = evaluate(model, evaluation, cfg, accelerator)
+        try:
+            metrics = evaluate(model, evaluation, cfg, accelerator)
+        except FloatingPointError:
+            state['evaluation_failed'] = True
+            state['new_best'] = False
+            log({'eval/nonfinite': 1, 'eval/total_training_tokens_seen': journal_data['confirmed_tokens']})
+            return False
         elapsed = time.monotonic() - started
         state['evaluation_seconds'] = max(state['evaluation_seconds'], elapsed)
+        timings['evaluation_seconds'] += elapsed
         state['last_eval_step'] = state['global_step']
         state['last_evaluation'] = metrics
         average_nll = metrics['eval/nll'] / metrics['eval/prediction_tokens']
@@ -579,24 +604,30 @@ def run(args, cfg):
         if state['new_best']:
             state['best_eval_nll'] = average_nll
         log({**metrics, 'eval/seconds': elapsed, 'eval/total_training_tokens_seen': journal_data['confirmed_tokens']})
+        return True
 
     width = cfg['world_size'] * cfg['microbatch_size'] * cfg['gradient_accumulation_steps']
     stop_reason = 'max_steps'
     last_evaluation_time = time.monotonic()
     last_checkpoint_time = time.monotonic()
     while state['global_step'] < cfg['max_steps']:
-        reserve_seconds = max(cfg['stop_margin_seconds'], state['evaluation_seconds'] +
-                              2 * state['checkpoint_seconds'] + 60)
+        window_started = time.monotonic()
+        reserve_seconds = (max(cfg['stop_margin_seconds'], state['evaluation_seconds'] +
+                               state['checkpoint_seconds'] + 30)
+                           if cfg.get('checkpoint_policy') == 'final_only' else
+                           max(cfg['stop_margin_seconds'], state['evaluation_seconds'] +
+                               2 * state['checkpoint_seconds'] + 60))
         remaining = job_end - time.time() - reserve_seconds
         stop_tensor = torch.tensor(int(STOP or remaining <= max(state['step_seconds'], 1)), device=accelerator.device)
         if int(reduce_max(stop_tensor, accelerator).item()):
             stop_reason = 'wall_time_or_signal'
             break
-        if state['step_seconds'] > 0:
+        if state['step_seconds'] > 0 and not cfg.get('fixed_horizon', False):
             # Revisit the planned length as actual step/eval/checkpoint costs become known.
             per_update = state['step_seconds'] + (state['evaluation_seconds'] + state['checkpoint_seconds']) / cfg['eval_steps']
             planned = min(cfg['max_steps'], state['global_step'] + max(1, int(remaining / per_update)))
             state['planned_steps'] = broadcast(planned if accelerator.is_main_process else None, accelerator)
+        data_started = time.monotonic()
         batches = window_indices(state['cursor'], len(train), cfg['world_size'], accelerator.process_index,
                                  cfg['microbatch_size'], cfg['gradient_accumulation_steps'])
         if not batches:
@@ -625,8 +656,11 @@ def run(args, cfg):
             break
         state['planned_steps'] = min(state['planned_steps'], state['global_step'] +
                                      max(1, (cfg['max_training_tokens'] - journal_data['charged_tokens']) // inputs))
+        timings['data_seconds'] += time.monotonic() - data_started
+        journal_started = time.monotonic()
         transaction = on_main(accelerator, lambda: journal.reserve(inputs))
         journal_data = on_main(accelerator, lambda: journal.data)
+        timings['journal_seconds'] += time.monotonic() - journal_started
         for optimizer in optimizers:
             optimizer.zero_grad(set_to_none=True)
         nll = torch.zeros((), dtype=torch.float64, device=accelerator.device)
@@ -645,18 +679,26 @@ def run(args, cfg):
                 nll += loss.detach().double()
                 accelerator.backward(loss * (cfg['world_size'] / targets))
         grad_norm = accelerator.clip_grad_norm_(model.parameters(), cfg['max_grad_norm'])
-        nonfinite = torch.tensor(int(not bool(torch.isfinite(grad_norm).item())), device=accelerator.device)
+        nonfinite = torch.tensor(int(not bool(torch.isfinite(grad_norm).item()) or
+                                     not bool(torch.isfinite(nll).item())), device=accelerator.device)
         finite = not bool(reduce_max(nonfinite, accelerator).item())
+        torch.cuda.synchronize()
+        optimizer_started = time.monotonic()
         if finite:
             for optimizer in optimizers:
                 optimizer.step()
         torch.cuda.synchronize()
+        optimizer_elapsed = time.monotonic() - optimizer_started
+        timings['optimizer_seconds'] += optimizer_elapsed
         elapsed = time.monotonic() - started
+        timings['training_seconds'] += elapsed
         duration = float(reduce_max(torch.tensor(elapsed, device=accelerator.device), accelerator).item())
         total_nll = float(accelerator.reduce(nll, reduction='sum').item())
         # Forward/backward has processed all reserved inputs, even if update skipped.
+        journal_started = time.monotonic()
         on_main(accelerator, lambda: journal.confirm(transaction))
         journal_data = on_main(accelerator, lambda: journal.data)
+        timings['journal_seconds'] += time.monotonic() - journal_started
         state['cursor'] += width
         state['attempted_updates'] += 1
         state['step_seconds'] = max(state['step_seconds'], duration)
@@ -676,6 +718,8 @@ def run(args, cfg):
         state['last_step_metrics'] = {
                  'train/grad_norm': float(grad_norm), 'train/learning_rate': learning_rates[primary_lr_index],
                  **{f"train/lr_{group['name']}": lr for group, lr in zip(learning_groups, learning_rates)},
+                 **{f"train/decay_factor_{group['name']}": 1 - lr * group['weight_decay']
+                    for group, lr in zip(learning_groups, learning_rates)},
                  'train/tokens_per_second': inputs / duration, 'train/step_seconds': duration,
                  'train/total_tokens_seen': journal_data['confirmed_tokens'],
                  'train/budget_tokens_charged': journal_data['charged_tokens'],
@@ -684,16 +728,28 @@ def run(args, cfg):
         if state['global_step'] % cfg['logging_steps'] == 0:
             log({**state['last_step_metrics'], 'train/loss': state['interval_nll'] / state['interval_predictions']})
             state['interval_nll'], state['interval_predictions'] = 0.0, 0
-        interval = min(cfg['eval_steps'], max(1, state['planned_steps'] // 10))
+        window_seconds = float(reduce_max(torch.tensor(time.monotonic() - window_started,
+                                  dtype=torch.float64, device=accelerator.device), accelerator).item())
+        if accelerator.is_main_process:
+            with (run_path / 'timing-steps.jsonl').open('a') as stream:
+                stream.write(json.dumps({'step': state['global_step'], 'job_id': job_id,
+                    'update_seconds': window_seconds, 'compute_seconds': duration,
+                    'optimizer_seconds': optimizer_elapsed}) + '\n')
+        interval = (cfg['eval_steps'] if cfg.get('fixed_horizon', False) else
+                    min(cfg['eval_steps'], max(1, state['planned_steps'] // 10)))
         time_interval = max(1, (job_end - job_start - reserve_seconds) / 10)
         should_evaluate = (state['global_step'] - max(0, state['last_eval_step']) >= interval or
-                           time.monotonic() - last_evaluation_time >= time_interval)
+                           (not cfg.get('fixed_horizon', False) and
+                            time.monotonic() - last_evaluation_time >= time_interval))
         should_evaluate = broadcast(should_evaluate if accelerator.is_main_process else None, accelerator)
         if should_evaluate:
-            held_out()
+            if not held_out():
+                stop_reason = 'nonfinite_or_skipped_update'
+                break
             new_best = state.pop('new_best', False)
-            if ((new_best and cfg['category'] != 'validation') or 'checkpoint_interval_seconds' not in cfg or
-                    time.monotonic() - last_checkpoint_time >= cfg['checkpoint_interval_seconds']):
+            if (cfg.get('checkpoint_policy', 'best_and_interval') != 'final_only' and
+                    ((new_best and cfg['category'] != 'validation') or 'checkpoint_interval_seconds' not in cfg or
+                     time.monotonic() - last_checkpoint_time >= cfg['checkpoint_interval_seconds'])):
                 checkpoint(mark_best=new_best)
                 last_checkpoint_time = time.monotonic()
             last_evaluation_time = time.monotonic()
@@ -703,8 +759,9 @@ def run(args, cfg):
     if state['interval_predictions']:
         log({**state['last_step_metrics'], 'train/loss': state['interval_nll'] / state['interval_predictions']})
         state['interval_nll'], state['interval_predictions'] = 0.0, 0
-    if state['last_eval_step'] != state['global_step']:
-        held_out()
+    if state['last_eval_step'] != state['global_step'] and not state.get('evaluation_failed'):
+        if not held_out():
+            stop_reason = 'nonfinite_or_skipped_update'
     latest = checkpoint(mark_best=state.pop('new_best', False))
     summary = {**state, 'stop_reason': stop_reason, 'initialization': initialization,
                'configuration': cfg, 'data_provenance': provenance, 'wandb_url': wandb_url,
@@ -713,7 +770,7 @@ def run(args, cfg):
                'unused_training_sequences': len(train) - state['cursor'], 'checkpoint': latest,
                'h200_hours_so_far_estimate': compute_used(), 'slurm_job_id': job_id,
                'h200_hours_final': 'pending Slurm accounting reconciliation'}
-    if stop_reason != 'validation_pause':
+    if stop_reason != 'validation_pause' and cfg.get('export_on_completion', True):
         export_metadata = summary
         if cfg['category'] != 'validation' and (run_path / 'best.json').exists():
             best = on_main(accelerator, lambda: read_json(run_path / 'best.json'))

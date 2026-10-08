@@ -15,13 +15,14 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from train import (causal_loss_sum, checkpoint_state, collate_rows, evaluate,
                    on_main, build_optimizers, reduce_max, require_compute, restore_rng, save_checkpoint)
-from training_state import atomic_json, storage_root
+from training_state import atomic_json, storage_root, schedule_multiplier, read_json
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run-id', required=True)
     parser.add_argument('--optimizer', choices=('adamw', 'muon'), default='adamw')
+    parser.add_argument('--scheduler', choices=('linear', 'cosine', 'wsd'), default='cosine')
     args = parser.parse_args()
     require_compute()
     import torch
@@ -55,7 +56,9 @@ def main():
         muon_names = metadata['parameter_names']['muon']
         assert muon_names and all('.layers.' in name for name in muon_names)
         assert all('embed_tokens' not in name and 'lm_head' not in name for name in muon_names)
-    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: 1 / (step + 1))
+    schedule_cfg = dict(max_steps=10, warmup_steps=1, min_lr_ratio=.1,
+                        lr_scheduler=args.scheduler, wsd_decay_ratio=.2)
+    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: schedule_multiplier(step, schedule_cfg))
                   for optimizer in raw_optimizers]
     prepared = accelerator.prepare(model, *raw_optimizers)
     model, optimizers = prepared[0], list(prepared[1:])
@@ -123,9 +126,15 @@ def main():
     torch.testing.assert_close(torch.tensor(metrics['eval/nll']), reference_eval_nll.detach().float().cpu(), rtol=0.015, atol=0.05)
 
     root = storage_root(os.environ.get('DATA_ROOT', '/work/asciibase64/Llama-3.2-1B-training'))
-    run_path = root / 'runs/runtime-validation' / args.run_id
+    run_path = root / 'runs/runtime-validation' / args.run_id / args.scheduler
     on_main(accelerator, lambda: run_path.mkdir(parents=True, exist_ok=True))
-    state = {'global_step': 1, 'cursor': input_count, 'total_tokens': input_count}
+    # Checkpoint immediately before the final decay update, including WSD's cooldown.
+    for _ in range(7):
+        clear_gradients()
+        accelerator.backward(causal_loss_sum(model, batch) / expected_predictions)
+        update()
+    clear_gradients()
+    state = {'global_step': 8, 'cursor': input_count, 'total_tokens': input_count}
     checkpoint = save_checkpoint(accelerator, run_path, state)
     expected_rng = torch.rand(8, device=accelerator.device)
     # Reference second update, then restore and recompute exactly the same batch.
@@ -155,6 +164,14 @@ def main():
         'checks': ['tied parameter coverage', 'padding and structural masks',
                    'token-weighted accumulation gradients', 'global MAX',
                    'uneven held-out evaluation', 'checkpoint weights/optimizer/scheduler/RNG resume']}))
+    def record_scheduler():
+        path = run_path.parent / 'result.json'
+        previous = read_json(path) if path.exists() else {'schedulers': []}
+        previous.update(passed=True, optimizer=args.optimizer, world_size=accelerator.num_processes)
+        previous['schedulers'] = sorted(set(previous['schedulers'] + [args.scheduler]),
+                                        key=('linear', 'cosine', 'wsd').index)
+        atomic_json(path, previous)
+    on_main(accelerator, record_scheduler)
     accelerator.print('Distributed training correctness checks passed')
     accelerator.end_training()
 

@@ -33,7 +33,7 @@ def mark_uncertain(ledger, reservation):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['setup', 'runtime', 'validate', 'pilot', 'scaling', 'resume', 'accounting', 'recover'])
+    parser.add_argument('action', choices=['setup', 'runtime', 'validate', 'pilot', 'scaling', 'resume', 'accounting', 'recover', 'sweep-calibration'])
     parser.add_argument('id', help='Run ID, numeric accounting job ID, or recover reservation ID')
     parser.add_argument('--prep-id')
     parser.add_argument('--root', default=os.environ.get('DATA_ROOT', str(DEFAULT_ROOT)), type=Path)
@@ -61,10 +61,14 @@ def main():
         'train-smoke.json' if args.action == 'validate' else
         'train-scaling-4.json' if args.action == 'scaling' else 'train-pilot.json')).resolve()
     cfg = load_config(config_path)
-    minutes = args.minutes if args.minutes is not None else {'setup': 60, 'runtime': 10, 'scaling': 10}.get(args.action, 30)
+    minutes = args.minutes if args.minutes is not None else {'setup': 60, 'runtime': 10, 'scaling': 10, 'sweep-calibration': 10}.get(args.action, 30)
+    if minutes > 120 and args.action != 'setup':
+        parser.error('Training/validation allocations are limited to 120 minutes per sbatch')
+    if cfg.get('sweep_stage') in ('initial', 'short', 'medium') and not cfg.get('sweep_calibration_digest'):
+        parser.error('Sweep templates are uncalibrated; freeze the stage through optimizer_sweep.py')
     if minutes <= 0:
         parser.error('minutes must be positive')
-    if args.action in {'pilot', 'scaling', 'resume', 'validate'}:
+    if args.action in {'pilot', 'scaling', 'resume', 'validate', 'sweep-calibration'}:
         if not args.prep_id:
             parser.error('--prep-id is required after dataset verify completes')
         identifier(args.prep_id)
@@ -87,6 +91,8 @@ def main():
         parser.error('validate requires a validation configuration')
     if args.action == 'scaling' and (cfg['category'] != 'scaling' or minutes > 10 or cfg['max_steps'] > 100):
         parser.error('Scaling requires category=scaling, at most 10 minutes and 100 updates')
+    if args.action == 'sweep-calibration' and (cfg['category'] != 'validation' or minutes > 10):
+        parser.error('Sweep calibration needs a validation config and at most 10 minutes')
     root.joinpath('logs').mkdir(parents=True, exist_ok=True)
     reservation = 'submission-' + uuid.uuid4().hex
     if not args.test_only:
@@ -95,10 +101,13 @@ def main():
         with ledger.transaction() as data:
             data['jobs'][reservation]['allocation_kind'] = 'dependency_installation'
             data['jobs'][reservation]['source_root'] = str(PROJECT)
-    script = 'setup-training.sbatch' if args.action == 'setup' else 'train.sbatch'
+    script = ('setup-training.sbatch' if args.action == 'setup' else
+              'sweep-calibration.sbatch' if args.action == 'sweep-calibration' else 'train.sbatch')
     command = ['sbatch', '--parsable', '--cpus-per-task=8', f'--time={minutes}', f'--gpus-per-node={cfg["world_size"]}',
-               f'--job-name=llama-{args.action}', f'--output={root}/logs/%x-%j.out',
+               f'--job-name=llama-{args.action}', f'--signal=B:USR1@{cfg["stop_margin_seconds"]}', f'--output={root}/logs/%x-%j.out',
                f'--error={root}/logs/%x-%j.err']
+    if args.action == 'sweep-calibration':
+        command.append('--exclude=25a-hgpn062')
     if not args.test_only:
         command.append(f'--comment={reservation}')
     if args.dependency:

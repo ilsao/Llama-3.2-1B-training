@@ -60,7 +60,7 @@ def muon_groups(model, cfg):
                     torch_version=torch.__version__,
                     distribution='replicated DDP, complete identical optimizer state on each rank',
                     state_dtype='native PyTorch optimizer states; BF16 autocast training',
-                    scheduler='same cosine/warmup multiplier on AdamW and Muon base learning rates',
+                    scheduler=f"same {cfg.get('lr_scheduler', 'cosine')}/warmup multiplier on AdamW and Muon base learning rates",
                     weight_decay='decoupled using each group learning rate before its update')
     return groups, metadata
 

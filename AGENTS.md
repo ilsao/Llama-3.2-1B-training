@@ -324,3 +324,34 @@ The existing filtering job may finish, but its completion is no longer a baselin
 prerequisite and no further filtered preparation stages are auto-submitted.
 Charge the one-H200 CPU producer separately as preprocessing; retain every prior
 allocation and the same 16 H200-hour/7200-second combined GPU campaign limits.
+
+## Latest optimizer/scheduler sweep overrides (2026-10-08)
+
+The user's latest instructions supersede the earlier combined baseline-campaign
+budget interpretation for subsequent allocations: **16 H200-hours and 7200 seconds
+are per sbatch**, not an amount reduced by baseline spending. Continue recording
+all allocations in the shared ledger and preserving cumulative limits for logical
+run continuations. This change does not rewrite historical baseline accounting.
+
+For `optimizer-scheduler-raw-20261008`, use the explicitly selected staged limits:
+5 minutes/candidate initially, 15 minutes/candidate for short ranking, and only
+when needed 20 minutes/candidate for medium ranking. These entire-allocation caps
+include initialization, evaluation and checkpointing. Use 8 H200/8 CPU jobs,
+matched training tokens and completed scheduler cooldowns. Preserve the complete
+18-candidate optimizer/LR/scheduler matrix; use native PyTorch Muon and keep its
+LR-times-weight-decay product fixed across its LR candidates. Warmup is at least
+50 updates. See `experiments/optimizer-sweep/README.md` for exact configurations,
+promotion rules, calibration and stage activation commands.
+
+The user subsequently authorized implementation and launch of the full automatic
+sweep. `slurm/auto_optimizer_sweep.py` is its sole submission owner. Its dedicated
+minute cron preserves other schedules, submits four sequential 4/8-H200 native
+calibrations, then initial and short stages; only the recorded ranking ambiguity
+criteria authorize medium. Reconcile before each promotion and stop after ranking,
+without automatic formal training, cleanup, or HF upload. Calibration failure,
+source/evaluation identity changes, or fewer than 100 updates fitting the initial
+allocation stop new submissions. Incomplete/unstable sweep candidates are excluded;
+uncertain submissions remain reserved and are recovered, never automatically retried.
+Disable stops new submissions while accounting continues. See the README for
+launch, status and disable commands. Earlier prepared-only/manual-stage text is
+superseded by this explicit user authorization.
