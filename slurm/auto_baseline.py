@@ -45,6 +45,9 @@ def load_campaign(path):
         raise ValueError('This baseline campaign must retain the 16-hour/7200-second caps')
     if cfg['learning_rates'] != [3e-4, 6e-4] or cfg['lr_minutes'] != 15:
         raise ValueError('Use the approved two-candidate, 15-minute LR stage')
+    for node in cfg.get('exclude_nodes',[]):
+        if not re.fullmatch(r'25a-hgpn[0-9]{3}',node):
+            raise ValueError('Use verified nano4 node names for exclusions')
     for key in ('allocation_cutoff', 'delivery_deadline'):
         if dt.datetime.fromisoformat(cfg[key]).tzinfo is None:
             raise ValueError('Deadline must include timezone')
@@ -212,6 +215,8 @@ def submit_worker(cfg, state, phase, train_cfg, minutes, gpus, resume=False):
                str(PROJECT/'slurm/auto-baseline.sbatch'), run_id, phase,
                cfg.get('raw_preparation_id', cfg['preparation_id']), str(config_path), state['config_path'],
                'resume' if resume else 'new']
+    if cfg.get('exclude_nodes'):
+        command.insert(1, '--exclude='+','.join(cfg['exclude_nodes']))
     job['submission_command'] = command; job['status'] = 'submission_uncertain'; save(cfg, state)
     with ledger.transaction() as data:
         data['jobs'][tag].update(submission_tag=tag, submission_started_utc=job['submission_started_utc'], allocation_kind=kind)

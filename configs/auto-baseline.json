@@ -20,5 +20,8 @@
   "raw_preparation_id": "dolma-raw-baseline-20261008",
   "raw_prepare_minutes": 30,
   "skip_lr_search": true,
-  "raw_max_h200_hours": 6
+  "raw_max_h200_hours": 6,
+  "exclude_nodes": [
+    "25a-hgpn062"
+  ]
 }
