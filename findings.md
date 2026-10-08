@@ -42,13 +42,21 @@ No corpus copies or old manifest rewrites. All20 terminated allocations match
 Slurm/ledgers: preprocessing4.8805555556, training/runtime
 0.1536111111, shared5.0341666667 H200-hours.
 
-New005 canonical full split514101 was submitted once with durable intent/tag/
-receipt/reservation. At2026-10-07T23:41:43.244392+00:00 RUNNING on1H200/eight CPUs,
-seven configured spawn workers;24-hour allocation reservation gives shared upper
-29.0341666667. Fingerprint remains3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a.
-Complete split/state/evaluation-raw archive are not present at startup observation;
-filtering remains gated. Current cycle changes only documentation/state, so prior
-72 lightweight tests stand; shell syntax and promotion metadata checks passed.
+New005 canonical full split514101 remains RUNNING on one H200/eight CPUs.
+At 2026-10-08T00:00:20.613413+00:00 full map-style generation log reached
+45076522 examples, with fresh stderr at 2026-10-08T00:00:19.686687+00:00.
+Seven spawn workers are active in the native lossless loader. This count records
+generation progress, not completed corpus/split/eval or a completion forecast.
+Split manifest/state and independent evaluation-raw state are still absent.
+Filtering remains gated; no downstream allocation was submitted this cycle.
+
+Elapsed1127s gives 0.3130555556 H200-hours observed provisionally. Twenty
+terminated allocations still match Slurm and ledgers; reconciled shared total
+5.0341666667, active reservation24, shared upper29.0341666667 H200-hours.
+Current005 identity, config, four source hashes and repaired download manifest
+match unchanged pinned provenance. statvfs reports 10119828045824
+bytes available in project /work storage. No code changes or repeated tests;
+prior72 lightweight tests remain valid. No cleanup or production training.
 
 The native full-train seed42 shuffle, last50000 eval originals and fixed10000
 subset must complete before clean/filtering. Full production raw/tokenized/packed
