@@ -1,5 +1,5 @@
 {
-  "accounting": "20 terminated allocations agree with Slurm/ledgers; shared5.0341666667 H200-hours reconciled; split514101 observed0.9808333333 provisional,24-hour reservation retained; shared upper29.0341666667",
+  "accounting": "20 terminated allocations agree with Slurm/ledgers; shared5.0341666667 H200-hours reconciled; split514101 observed1.3138888889 provisional,24-hour reservation retained; shared upper29.0341666667",
   "allocated_jobs": [
     {
       "alloc_tres": "billing=12,cpu=12,gres/gpu=1,mem=200G,node=1",
@@ -614,18 +614,25 @@
   "production_import_status": "COMPLETED",
   "production_split_job": "514101",
   "production_split_progress": {
+    "canonical_row_count_fully_authenticated": false,
     "counts_are_completion_claim": false,
     "evaluation_archive_state_present": false,
-    "generation_examples_last_log": 102970649,
-    "observed_utc": "2026-10-08T00:40:24.732011+00:00",
-    "phase": "RUNNING; full map-style train generation with seven spawn workers",
-    "previous_generation_examples": 74415313,
+    "generation_complete_observed": true,
+    "last_generation_examples_observed": 102970649,
+    "native_row_count_observed": 104020922,
+    "observed_utc": "2026-10-08T01:00:23.782000+00:00",
+    "phase": "RUNNING; full map-style cache generated; checking original source fields/order before native shuffle",
+    "source_rows_checked": 13833131,
+    "source_shards_checked": 251,
+    "source_shards_total": 6081,
     "split_manifest_present": false,
-    "split_state_present": false,
-    "stderr_last_modified_utc": "2026-10-08T00:40:23.843383+00:00"
+    "split_state_present": true,
+    "stderr_last_modified_utc": "2026-10-08T00:56:35.724001+00:00",
+    "stderr_timeout_message": "expected periodic faulthandler stack dump; not Slurm timeout or stage failure",
+    "stdout_last_modified_utc": "2026-10-08T01:00:22.807675+00:00"
   },
   "production_split_status": "RUNNING",
-  "recorded_at": "2026-10-08T00:41:13.673833+00:00",
+  "recorded_at": "2026-10-08T01:02:09.000995+00:00",
   "runtime_checks": "Synthetic worker/order/shuffle/selection/packing/archive/resume/offline contracts passed; lossless schema 513790 also checks complete split entrypoint and bounded real-source samples",
   "shell_syntax": "passed",
   "slurm_test_only": {
@@ -633,7 +640,7 @@
     "cpu_8_gpu_8": "passed"
   },
   "storage": {
-    "available_bytes": 9295654879232,
+    "available_bytes": 9285219889152,
     "observation": "lightweight statvfs metadata this cycle",
     "total_bytes": 10995116277760
   },
