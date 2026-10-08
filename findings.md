@@ -43,22 +43,21 @@ Slurm/ledgers: preprocessing4.8805555556, training/runtime
 0.1536111111, shared5.0341666667 H200-hours.
 
 New005 canonical full split514101 remains RUNNING on one H200/eight CPUs.
-Full map-style cache contains 104020922 observed rows; original source field/order
-validation advances from 251 to 524/6081 canonical shards,
-covering 28344326 contiguous rows at 2026-10-08T01:20:27.966202+00:00.
-Cursor order/names/range contiguity match the immutable download manifest.
-Full source authentication still precedes native seed42 shuffle/eval construction.
+Full map-style cache contains 104020922 observed rows. Original source field/order
+validation advances from 524 to 805/6081 canonical shards,
+covering 42214136 contiguous rows at 2026-10-08T01:40:28.644599+00:00.
+Cursor order/names/contiguous ranges match immutable download metadata.
+Complete source authentication still precedes native seed42 shuffle/eval archive.
 Split manifest and independent evaluation-raw state remain absent; filtering is
-not ready. This is partial validation, not authenticated complete membership.
+not ready. Partial progress does not authenticate complete canonical membership.
 
-stdout is fresh at 2026-10-08T01:20:24.633972+00:00; periodic five-minute
-stack dumps show active raw JSON/Arrow comparison. Elapsed 5934s gives
-1.6483333333 H200-hours observed provisionally.20 terminated allocations agree
-with Slurm/ledgers; reconciled shared5.0341666667, reservation24, shared upper
+stdout is fresh at 2026-10-08T01:40:27.767224+00:00. Elapsed 7135s gives
+1.9819444444 H200-hours observed provisionally;20 terminated allocations agree
+with Slurm/ledgers, shared reconciled5.0341666667, reservation24, shared upper
 29.0341666667. Current005 identity/config/four source hashes/repaired manifest
-remain unchanged. Storage reports 9285219803136 available bytes.
+remain unchanged. Storage reports 9285219717120 available bytes.
 No new jobs, source changes, repeated tests, cleanup or training; prior72 tests
-remain valid. Continue bounded checks and preserve all old identities/artifacts.
+remain valid. Continue bounded checks and preserve old identities/artifacts.
 
 The native full-train seed42 shuffle, last50000 eval originals and fixed10000
 subset must complete before clean/filtering. Full production raw/tokenized/packed
