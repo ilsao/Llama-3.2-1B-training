@@ -70,9 +70,29 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps'}
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs'}
     if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
+    optimizer = cfg.get('optimizer', 'adamw')
+    if optimizer not in {'adamw', 'muon'}:
+        raise ValueError('optimizer must be adamw or muon')
+    if optimizer == 'muon':
+        muon = cfg.get('muon', {})
+        if set(muon) != {'learning_rate', 'momentum', 'nesterov', 'ns_steps', 'weight_decay', 'adjust_lr_fn', 'epsilon', 'ns_coefficients'}:
+            raise ValueError('Muon requires an explicit complete configuration')
+        for key in ('learning_rate', 'momentum', 'weight_decay', 'epsilon'):
+            if type(muon[key]) not in (int, float) or not math.isfinite(muon[key]):
+                raise ValueError(f'Invalid Muon {key}')
+        if muon['learning_rate'] <= 0 or not 0 <= muon['momentum'] < 1 or muon['weight_decay'] < 0 or muon['epsilon'] <= 0:
+            raise ValueError('Invalid Muon learning rate, momentum or decay')
+        if type(muon['ns_steps']) is not int or not 1 <= muon['ns_steps'] <= 10:
+            raise ValueError('Muon ns_steps must be an integer in [1, 10]')
+        if type(muon['nesterov']) is not bool or muon['adjust_lr_fn'] not in {'original', 'match_rms_adamw'}:
+            raise ValueError('Unsupported native Muon Nesterov/LR adjustment')
+        if len(muon['ns_coefficients']) != 3 or any(type(x) not in (int, float) or not math.isfinite(x) for x in muon['ns_coefficients']):
+            raise ValueError('Muon requires three finite Newton-Schulz coefficients')
+    elif 'muon' in cfg:
+        raise ValueError('Muon options are only valid with optimizer=muon')
     if cfg.get('attention_backend', 'sdpa') not in {'sdpa', 'flash_attention_3'}:
         raise ValueError('Unsupported attention backend')
     for key in ('checkpoint_interval_seconds', 'final_evaluation_reserve_seconds'):

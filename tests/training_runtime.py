@@ -2,7 +2,7 @@
 """GPU-only distributed correctness checks; submit through Slurm, never discover.
 
 Uses a tiny randomly initialized Llama to test the real HF causal loss, DDP,
-AdamW, checkpoint/RNG restoration and unequal-length distributed evaluation.
+native AdamW/Muon, checkpoint/RNG restoration and unequal-length distributed evaluation.
 The validate Slurm action additionally runs the full 1B/8192 packed-data smoke.
 """
 import argparse
@@ -14,13 +14,14 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from train import (causal_loss_sum, checkpoint_state, collate_rows, evaluate,
-                   on_main, optimizer_groups, reduce_max, require_compute, restore_rng, save_checkpoint)
+                   on_main, build_optimizers, reduce_max, require_compute, restore_rng, save_checkpoint)
 from training_state import atomic_json, storage_root
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run-id', required=True)
+    parser.add_argument('--optimizer', choices=('adamw', 'muon'), default='adamw')
     args = parser.parse_args()
     require_compute()
     import torch
@@ -40,13 +41,35 @@ def main():
                          use_cache=False)
     model = LlamaForCausalLM(config).to(accelerator.device)
     reference = copy.deepcopy(model)
-    groups, metadata = optimizer_groups(model, 0.1)
+    optimizer_cfg = dict(optimizer=args.optimizer, learning_rate=1e-3, betas=[0.9, 0.95],
+                         epsilon=1e-8, weight_decay=0.1)
+    if args.optimizer == 'muon':
+        optimizer_cfg['muon'] = dict(learning_rate=0.02, momentum=0.95, nesterov=True,
+            ns_steps=5, weight_decay=0.1, adjust_lr_fn='original', epsilon=1e-7, ns_coefficients=[3.4445, -4.775, 2.0315])
+    raw_optimizers, metadata = build_optimizers(model, optimizer_cfg)
     assert metadata['tied_aliases']
+    groups = [group for optimizer in raw_optimizers for group in optimizer.param_groups]
     assert sum(len(g['params']) for g in groups) == len(list(model.parameters()))
-    optimizer = torch.optim.AdamW(groups, lr=1e-3, betas=(0.9, 0.95))
-    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: 1 / (step + 1))
-    model, optimizer = accelerator.prepare(model, optimizer)
-    accelerator.register_for_checkpointing(scheduler)
+    if args.optimizer == 'muon':
+        assert isinstance(raw_optimizers[1], torch.optim.Muon)
+        muon_names = metadata['parameter_names']['muon']
+        assert muon_names and all('.layers.' in name for name in muon_names)
+        assert all('embed_tokens' not in name and 'lm_head' not in name for name in muon_names)
+    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: 1 / (step + 1))
+                  for optimizer in raw_optimizers]
+    prepared = accelerator.prepare(model, *raw_optimizers)
+    model, optimizers = prepared[0], list(prepared[1:])
+    accelerator.register_for_checkpointing(*schedulers)
+    def rates():
+        return [group['lr'] for optimizer in optimizers for group in optimizer.param_groups]
+    def update():
+        for optimizer in optimizers:
+            optimizer.step()
+        for scheduler in schedulers:
+            scheduler.step()
+    def clear_gradients():
+        for optimizer in optimizers:
+            optimizer.zero_grad(set_to_none=True)
 
     rows = []
     for index in range(accelerator.num_processes * 2 + 1):
@@ -84,9 +107,9 @@ def main():
     # MAX must use MAX, not the Accelerate helper's SUM fallback.
     maximum = reduce_max(torch.tensor(accelerator.process_index + 1, device=accelerator.device), accelerator)
     assert int(maximum) == accelerator.num_processes
-    optimizer.step()
-    scheduler.step()
-    optimizer.zero_grad(set_to_none=True)
+    update()
+    assert all(torch.isfinite(p).all() for p in accelerator.unwrap_model(model).parameters())
+    clear_gradients()
 
     # Uneven evaluation partition (2W+1 rows) must have no duplicated targets.
     metrics = evaluate(model, rows, {'sequence_length': 16, 'eval_documents': len(rows)}, accelerator)
@@ -107,30 +130,28 @@ def main():
     expected_rng = torch.rand(8, device=accelerator.device)
     # Reference second update, then restore and recompute exactly the same batch.
     current = copy.deepcopy(accelerator.unwrap_model(model).state_dict())
-    saved_lr = optimizer.param_groups[0]['lr']
+    saved_lr = rates()
     loss = causal_loss_sum(model, batch) / expected_predictions
     accelerator.backward(loss)
-    optimizer.step()
-    scheduler.step()
+    update()
     expected_parameters = copy.deepcopy(accelerator.unwrap_model(model).state_dict())
-    expected_next_lr = optimizer.param_groups[0]['lr']
+    expected_next_lr = rates()
     loaded_path, loaded_state = on_main(accelerator, lambda: checkpoint_state(run_path))
     assert loaded_path == checkpoint and loaded_state == state
     accelerator.load_state(checkpoint)
     restore_rng(checkpoint, accelerator)
-    assert optimizer.param_groups[0]['lr'] == saved_lr
+    assert rates() == saved_lr
     for key, value in accelerator.unwrap_model(model).state_dict().items():
         torch.testing.assert_close(value, current[key], rtol=0, atol=0)
     torch.testing.assert_close(torch.rand(8, device=accelerator.device), expected_rng, rtol=0, atol=0)
-    optimizer.zero_grad(set_to_none=True)
+    clear_gradients()
     accelerator.backward(causal_loss_sum(model, batch) / expected_predictions)
-    optimizer.step()
-    scheduler.step()
-    assert optimizer.param_groups[0]['lr'] == expected_next_lr
+    update()
+    assert rates() == expected_next_lr
     for key, value in accelerator.unwrap_model(model).state_dict().items():
         torch.testing.assert_close(value, expected_parameters[key], rtol=0, atol=0)
     on_main(accelerator, lambda: atomic_json(run_path / 'result.json', {
-        'passed': True, 'world_size': accelerator.num_processes,
+        'passed': True, 'optimizer': args.optimizer, 'world_size': accelerator.num_processes,
         'checks': ['tied parameter coverage', 'padding and structural masks',
                    'token-weighted accumulation gradients', 'global MAX',
                    'uneven held-out evaluation', 'checkpoint weights/optimizer/scheduler/RNG resume']}))

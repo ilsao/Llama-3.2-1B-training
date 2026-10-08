@@ -1,0 +1,68 @@
+{
+  "sweep_id": "optimizer-lr-raw-20261008",
+  "status": "prepared_not_submitted",
+  "variables": {
+    "optimizer": [
+      "adamw",
+      "muon"
+    ],
+    "muon.learning_rate": [
+      0.02,
+      0.04
+    ]
+  },
+  "purpose": "optimizer learning-rate and numerical-stability screening",
+  "stage": "ultrashort",
+  "preparation_id": "dolma-raw-baseline-20261008",
+  "training_environment": "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9",
+  "global_batch_sequences": 16,
+  "input_tokens_per_full_update": 131072,
+  "candidates": [
+    {
+      "id": "adamw",
+      "config": "configs/train-sweep-adamw.json",
+      "allocation_minutes": 15,
+      "gpus": 8,
+      "reserved_h200_hours": 2,
+      "planned_training_tokens": 786432000
+    },
+    {
+      "id": "muon-lr0.02",
+      "config": "configs/train-sweep-muon-lr0.02.json",
+      "allocation_minutes": 15,
+      "gpus": 8,
+      "reserved_h200_hours": 2,
+      "planned_training_tokens": 786432000
+    },
+    {
+      "id": "muon-lr0.04",
+      "config": "configs/train-sweep-muon-lr0.04.json",
+      "allocation_minutes": 15,
+      "gpus": 8,
+      "reserved_h200_hours": 2,
+      "planned_training_tokens": 786432000
+    }
+  ],
+  "parent_runs": [],
+  "automatic_submission": false,
+  "promotion_criteria": [
+    "finite loss and global gradients",
+    "compare held-out NLL at the largest shared measured training-token checkpoint",
+    "identical split, evaluation subset, masks, random initialization and global batch",
+    "record throughput, all allocated GPU costs and remaining shared ledger budget"
+  ],
+  "next_stage": {
+    "purpose": "optimizer x scheduler x data interactions",
+    "stage": "medium",
+    "allocation_minutes_per_candidate": 120,
+    "automatic_promotion": false
+  },
+  "campaign_constraint": "baseline-fa3-20261009 cap remains 16 H200-hours AND 7200 allocation-seconds; do not relabel or reset it",
+  "launch_condition": "only after recorded campaign/shared budget allows runtime validation and full stage allocations",
+  "runtime_validation": {
+    "command": "TRAIN_ENV_PREFIX=/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9 python3 slurm/submit_training.py runtime muon-runtime-8 --optimizer muon --gpus 8 --minutes 5",
+    "status": "prepared_not_submitted",
+    "h200_hours": 0.6666666666666666
+  },
+  "implementation": "torch.optim.Muon (native PyTorch 2.9.1)"
+}

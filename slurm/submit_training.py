@@ -39,6 +39,8 @@ def main():
     parser.add_argument('--root', default=os.environ.get('DATA_ROOT', str(DEFAULT_ROOT)), type=Path)
     parser.add_argument('--config', type=Path)
     parser.add_argument('--dependency', help='Slurm afterok:JOB_ID dependency for validated prerequisites')
+    parser.add_argument('--optimizer', choices=('adamw', 'muon'), default='adamw',
+                        help='Optimizer for the built-in runtime correctness check')
     parser.add_argument('--gpus', type=int, choices=(4, 8), help='Runtime correctness-check GPU count; configs govern training')
     parser.add_argument('--minutes', type=int, help='Override allocation duration; must fit remaining budget')
     parser.add_argument('--test-only', action='store_true', help='Slurm validation only; no reservation or execution')
@@ -66,15 +68,21 @@ def main():
         if not args.prep_id:
             parser.error('--prep-id is required after dataset verify completes')
         identifier(args.prep_id)
-        if not (root / 'preprocessed' / args.prep_id / 'verify/manifest.json').is_file():
+        if not ((root / 'preprocessed' / args.prep_id / 'verify/manifest.json').is_file() or
+                (root / 'preprocessed' / args.prep_id / 'raw/ready.json').is_file()):
             parser.error('Preparation has no verification seal; complete dataset verify first')
     elif args.config:
         parser.error('setup/runtime use their built-in allocation contracts, without --config')
+    if args.optimizer != 'adamw' and args.action != 'runtime':
+        parser.error('--optimizer is for runtime checks; training uses the config')
     if args.gpus is not None and args.action != 'runtime':
         parser.error('--gpus is only for runtime; change the config for a new training run')
     if args.action in {'setup', 'runtime'}:
         cfg.update(world_size=1 if args.action == 'setup' else (args.gpus or 4), category='validation',
                    max_h200_hours=64, wandb_mode='offline')
+        if args.action == 'runtime' and args.optimizer == 'muon':
+            cfg.update(optimizer='muon', muon=dict(learning_rate=0.02, momentum=0.95,
+                nesterov=True, ns_steps=5, weight_decay=0.1, adjust_lr_fn='original', epsilon=1e-7, ns_coefficients=[3.4445,-4.775,2.0315]))
     if args.action == 'validate' and cfg['category'] != 'validation':
         parser.error('validate requires a validation configuration')
     if args.action == 'scaling' and (cfg['category'] != 'scaling' or minutes > 10 or cfg['max_steps'] > 100):
@@ -83,6 +91,10 @@ def main():
     reservation = 'submission-' + uuid.uuid4().hex
     if not args.test_only:
         ledger.reserve(reservation, args.id, cfg, minutes * 60, cfg['world_size'], args.action == 'resume')
+    if not args.test_only and args.action == 'setup':
+        with ledger.transaction() as data:
+            data['jobs'][reservation]['allocation_kind'] = 'dependency_installation'
+            data['jobs'][reservation]['source_root'] = str(PROJECT)
     script = 'setup-training.sbatch' if args.action == 'setup' else 'train.sbatch'
     command = ['sbatch', '--parsable', '--cpus-per-task=8', f'--time={minutes}', f'--gpus-per-node={cfg["world_size"]}',
                f'--job-name=llama-{args.action}', f'--output={root}/logs/%x-%j.out',
@@ -102,7 +114,8 @@ def main():
                 submission_tag=reservation,
                 submission_started_utc=dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
                 submission_command=command)
-    environment = {**os.environ, 'DATA_ROOT': str(root)}
+    environment = {**os.environ, 'DATA_ROOT': str(root), 'TRAIN_SOURCE_ROOT': str(PROJECT),
+                   'RUNTIME_OPTIMIZER': cfg.get('optimizer', args.optimizer)}
     try:
         result = subprocess.run(command, env=environment, capture_output=True, text=True)
     except OSError:

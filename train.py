@@ -95,6 +95,16 @@ def optimizer_groups(model, weight_decay):
             {'params': groups['no_decay'], 'weight_decay': 0.0, 'name': 'no_decay'}], metadata
 
 
+def build_optimizers(model, cfg):
+    import torch
+    if cfg.get('optimizer', 'adamw') == 'muon':
+        from optimizers import build_muon_optimizers
+        return build_muon_optimizers(model, cfg)
+    groups, metadata = optimizer_groups(model, cfg['weight_decay'])
+    return [torch.optim.AdamW(groups, lr=cfg['learning_rate'], betas=tuple(cfg['betas']),
+                              eps=cfg['epsilon'], fused=True)], metadata
+
+
 def collate_rows(rows, sequence_length):
     import torch
     batch = {name: torch.tensor([row[name] for row in rows], dtype=torch.int64)
@@ -444,17 +454,22 @@ def run(args, cfg):
     if time.time() >= job_end - cfg['stop_margin_seconds']:
         raise RuntimeError('Initialization/data verification exhausted this allocation; no training started')
     model, initialization = build_model(cfg, run_path, provenance, accelerator)
-    groups, group_metadata = optimizer_groups(model, cfg['weight_decay'])
-    raw_optimizer = torch.optim.AdamW(groups, lr=cfg['learning_rate'], betas=tuple(cfg['betas']),
-                                     eps=cfg['epsilon'], fused=True)
-    scheduler = torch.optim.lr_scheduler.LambdaLR(raw_optimizer, lambda step: lr_multiplier(
+    raw_optimizers, group_metadata = build_optimizers(model, cfg)
+    schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: lr_multiplier(
         step, cfg.get('scheduler_steps', cfg['max_steps']), cfg['warmup_steps'], cfg['min_lr_ratio']))
-    model, optimizer = accelerator.prepare(model, raw_optimizer)
-    accelerator.register_for_checkpointing(scheduler)
+        for optimizer in raw_optimizers]
+    prepared = accelerator.prepare(model, *raw_optimizers)
+    model, optimizers = prepared[0], list(prepared[1:])
+    accelerator.register_for_checkpointing(*schedulers)
+    all_groups = [group for optimizer in optimizers for group in optimizer.param_groups]
+    primary_lr_index = next(i for i, group in enumerate(all_groups)
+                            if group['name'] == group_metadata['primary_learning_rate_group'])
     set_seed(cfg['seed'] + accelerator.process_index)
     source = {str(path.relative_to(PROJECT)): file_digest(path) for path in (
         PROJECT / 'train.py', PROJECT / 'training_state.py', PROJECT / 'dataset.py',
         PROJECT / 'requirements-training.txt', PROJECT / 'preparation_parallel.py')}
+    if cfg.get('optimizer', 'adamw') == 'muon':
+        source['optimizers.py'] = file_digest(PROJECT / 'optimizers.py')
     if cfg.get('attention_backend') == 'flash_attention_3':
         source['attention_backend.py'] = file_digest(PROJECT / 'attention_backend.py')
         build = Path(os.environ['TRAIN_ENV_PREFIX']) / 'fa3-build.json'
@@ -612,9 +627,12 @@ def run(args, cfg):
                                      max(1, (cfg['max_training_tokens'] - journal_data['charged_tokens']) // inputs))
         transaction = on_main(accelerator, lambda: journal.reserve(inputs))
         journal_data = on_main(accelerator, lambda: journal.data)
-        optimizer.zero_grad(set_to_none=True)
+        for optimizer in optimizers:
+            optimizer.zero_grad(set_to_none=True)
         nll = torch.zeros((), dtype=torch.float64, device=accelerator.device)
-        learning_rates = [group['lr'] for group in optimizer.param_groups]
+        # Native load_state_dict replaces group dictionaries; resolve current groups per step.
+        learning_groups = [group for optimizer in optimizers for group in optimizer.param_groups]
+        learning_rates = [group['lr'] for group in learning_groups]
         torch.cuda.synchronize()
         started = time.monotonic()
         for micro, batch in enumerate(local):
@@ -630,7 +648,8 @@ def run(args, cfg):
         nonfinite = torch.tensor(int(not bool(torch.isfinite(grad_norm).item())), device=accelerator.device)
         finite = not bool(reduce_max(nonfinite, accelerator).item())
         if finite:
-            optimizer.step()
+            for optimizer in optimizers:
+                optimizer.step()
         torch.cuda.synchronize()
         elapsed = time.monotonic() - started
         duration = float(reduce_max(torch.tensor(elapsed, device=accelerator.device), accelerator).item())
@@ -643,7 +662,8 @@ def run(args, cfg):
         state['step_seconds'] = max(state['step_seconds'], duration)
         if finite and not accelerator.optimizer_step_was_skipped:
             state['global_step'] += 1
-            scheduler.step()
+            for scheduler in schedulers:
+                scheduler.step()
         else:
             stop_reason = 'nonfinite_or_skipped_update'
             # Tokens remain confirmed; weights/step/LR have not advanced.
@@ -654,8 +674,8 @@ def run(args, cfg):
         state['interval_nll'] += total_nll
         state['interval_predictions'] += targets
         state['last_step_metrics'] = {
-                 'train/grad_norm': float(grad_norm), 'train/learning_rate': learning_rates[0],
-                 'train/lr_decay': learning_rates[0], 'train/lr_no_decay': learning_rates[1],
+                 'train/grad_norm': float(grad_norm), 'train/learning_rate': learning_rates[primary_lr_index],
+                 **{f"train/lr_{group['name']}": lr for group, lr in zip(learning_groups, learning_rates)},
                  'train/tokens_per_second': inputs / duration, 'train/step_seconds': duration,
                  'train/total_tokens_seen': journal_data['confirmed_tokens'],
                  'train/budget_tokens_charged': journal_data['charged_tokens'],
