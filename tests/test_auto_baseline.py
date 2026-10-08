@@ -89,7 +89,7 @@ class CampaignTests(unittest.TestCase):
         cfg=auto.load_campaign(auto.PROJECT/'configs/auto-baseline.json')
         cfg.pop('raw_preparation_id',None)
         state={'jobs':[{'phase':'data-clean','status':'submitted'}]}
-        with patch.object(auto,'manifest_ready') as ready:
+        with patch.object(auto,'manifest_ready') as ready, patch.object(auto,'save',side_effect=AssertionError('Live-state write attempted by test')):
             auto.data_advance(cfg,state)
             ready.assert_not_called()
 

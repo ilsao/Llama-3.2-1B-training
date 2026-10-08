@@ -56,6 +56,8 @@ def directory(cfg):
 
 
 def save(cfg, state):
+    if not {'status','config_digest','config_path','jobs'} <= set(state):
+        raise ValueError('Refuse to overwrite campaign with incomplete state')
     state['updated_utc'] = now().isoformat()
     atomic_json(directory(cfg) / 'state.json', state)
 

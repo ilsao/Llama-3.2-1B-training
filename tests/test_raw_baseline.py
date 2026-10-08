@@ -10,6 +10,15 @@ from dataset import TrainingPacker, pack_evaluation_document
 
 
 class RawBaselineTests(unittest.TestCase):
+    def test_malformed_controller_state_cannot_overwrite_file(self):
+        from slurm import auto_baseline as auto
+        with tempfile.TemporaryDirectory() as t:
+            cfg=auto.load_campaign(auto.PROJECT/'configs/auto-baseline.json'); cfg['root']=t
+            path=auto.directory(cfg)/'state.json'; path.parent.mkdir(parents=True)
+            path.write_text('existing snapshot')
+            with self.assertRaises(ValueError): auto.save(cfg,{'jobs':[]})
+            self.assertEqual(path.read_text(),'existing snapshot')
+
     def test_raw_producer_running_does_not_duplicate_or_wait_for_clean(self):
         from slurm import auto_baseline as auto
         cfg=auto.load_campaign(auto.PROJECT/'configs/auto-baseline.json')
