@@ -60,3 +60,10 @@ including failed checks and continuations, require Slurm reconciliation.
 
 References: [PyTorch 2.9 Muon API](https://docs.pytorch.org/docs/2.9/generated/torch.optim.Muon.html),
 [official 2.9.1 CUDA install command](https://pytorch.org/get-started/previous-versions/#v291).
+
+Dependency job **516510** was submitted and was PENDING at recording time.
+The existing baseline controller adopted it for terminal Slurm reconciliation
+only. Its separately charged cost does not change the baseline campaign
+reservation (15.35 H200-hours / 7,027 allocation-seconds). Installation completion
+and FA3 runtime compatibility are not yet verified. Lightweight configuration,
+budget and submission checks passed (30 tests); model checks remain unrun.

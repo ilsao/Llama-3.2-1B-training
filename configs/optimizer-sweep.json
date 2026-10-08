@@ -64,5 +64,14 @@
     "status": "prepared_not_submitted",
     "h200_hours": 0.6666666666666666
   },
-  "implementation": "torch.optim.Muon (native PyTorch 2.9.1)"
+  "implementation": "torch.optim.Muon (native PyTorch 2.9.1)",
+  "dependency_installation": {
+    "job_id": "516510",
+    "status_at_recording": "PENDING",
+    "gpus": 1,
+    "cpus": 8,
+    "requested_seconds": 3600,
+    "reserved_h200_hours": 1,
+    "accounting_owner": "baseline-fa3-20261009 controller (accounting-only adoption; excluded from training campaign cap)"
+  }
 }
