@@ -43,23 +43,22 @@ Slurm/ledgers: preprocessing4.8805555556, training/runtime
 0.1536111111, shared5.0341666667 H200-hours.
 
 New005 canonical full split514101 remains RUNNING on one H200/eight CPUs.
-Full map-style cache generation finished with 104020922 observed rows. Source
-field/order validation is now active: at 2026-10-08T01:00:23.782000+00:00,
-251/6081 canonical shards and 13833131 contiguous source rows
-are committed in split/state.json. Cursor names/order/contiguity match download
-metadata. This is an observed native row count, not fully authenticated canonical
-membership or completed split. Full source authentication precedes native global
-shuffle/eval construction. Split manifest and evaluation-raw state remain absent.
+Full map-style cache contains 104020922 observed rows; original source field/order
+validation advances from 251 to 524/6081 canonical shards,
+covering 28344326 contiguous rows at 2026-10-08T01:20:27.966202+00:00.
+Cursor order/names/range contiguity match the immutable download manifest.
+Full source authentication still precedes native seed42 shuffle/eval construction.
+Split manifest and independent evaluation-raw state remain absent; filtering is
+not ready. This is partial validation, not authenticated complete membership.
 
-stdout is fresh at 2026-10-08T01:00:22.807675+00:00. Periodic five-minute
-faulthandler Timeout stack dumps show active compare_raw_chunk JSON work, not a
-Slurm wall-time failure or a stalled job. No cancellation or new job is warranted.
-Elapsed 4730s gives 1.3138888889 H200-hours observed provisionally;20 terminated
-allocations agree with Slurm/ledgers, shared reconciled5.0341666667, reservation24,
-shared upper29.0341666667. Current005 identity/config/four source hashes/repaired
-manifest unchanged. Storage reports 9285219889152 available bytes.
-No source changes, repeated tests, downstream allocation, cleanup or training.
-Prior72 lightweight tests remain valid. Continue bounded checks on later ticks.
+stdout is fresh at 2026-10-08T01:20:24.633972+00:00; periodic five-minute
+stack dumps show active raw JSON/Arrow comparison. Elapsed 5934s gives
+1.6483333333 H200-hours observed provisionally.20 terminated allocations agree
+with Slurm/ledgers; reconciled shared5.0341666667, reservation24, shared upper
+29.0341666667. Current005 identity/config/four source hashes/repaired manifest
+remain unchanged. Storage reports 9285219803136 available bytes.
+No new jobs, source changes, repeated tests, cleanup or training; prior72 tests
+remain valid. Continue bounded checks and preserve all old identities/artifacts.
 
 The native full-train seed42 shuffle, last50000 eval originals and fixed10000
 subset must complete before clean/filtering. Full production raw/tokenized/packed
