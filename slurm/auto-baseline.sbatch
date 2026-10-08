@@ -69,6 +69,8 @@ case "$PHASE" in
         set -e
         [[ "$RESULT" == 0 || "$RESULT" == 75 ]] || exit "$RESULT"
         if [[ "$PHASE" == baseline ]]; then
+            STOP_REASON=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["stop_reason"])' "$DATA_ROOT/runs/experiments/$RUN_ID/summary.json")
+            [[ "$STOP_REASON" != data_unavailable ]] || exit 75
             [[ $(date +%s) -lt $((CAMPAIGN_END_EPOCH - 60)) ]] || exit 75
             launch "$REPO/slurm/full_evaluation.py" "$CONFIG" "$RUN_ID" "${3}"
             exit 0

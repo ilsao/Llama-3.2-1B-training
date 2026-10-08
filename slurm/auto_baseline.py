@@ -237,6 +237,7 @@ def data_advance(cfg, state):
         minutes = min(cfg['raw_prepare_minutes'], remaining//60-5)
         if minutes < 5: raise ValueError('Insufficient raw preparation allocation time')
         value = base_config(cfg, 'raw-prepare', 1, minutes)
+        value['max_h200_hours'] = cfg['raw_max_h200_hours']
         if raw_job:
             value = load_config(raw_job['config_path'])
             used = sum(j.get('elapsed_seconds',j['requested_seconds']) for j in state['jobs'] if j['phase']=='raw-prepare')
@@ -394,6 +395,13 @@ def training_advance(cfg, state):
             state['status'] = 'achieved' if result['eval/perplexity'] < 20 and spent['h200_hours'] <= 16 and spent['allocation_seconds']<=7200 else 'not_achieved'
             state['result'] = result
         elif baseline['exit_code']==75:
+            if cfg.get('raw_preparation_id'):
+                progress = read_json(root/'preprocessed'/cfg['raw_preparation_id']/'raw/progress.json')
+                summary_path = root/'runs/experiments'/baseline['run_id']/'summary.json'
+                summary = read_json(summary_path) if summary_path.exists() else {}
+                available = sum(i['rows'] for i in progress['train_files'])
+                if summary.get('stop_reason')=='data_unavailable' and progress['status']!='complete' and available < summary['cursor']+1024:
+                    return
             remaining_phase = baseline['phase_limit_seconds'] - sum(j.get('elapsed_seconds', j['requested_seconds']) for j in state['jobs'] if j['phase']=='baseline')
             minutes = min(remaining_phase//60, int((7200-budget(state['jobs'])['allocation_seconds'])//60), cutoff_seconds//60)
             if minutes > 5 and (root/'runs/experiments'/baseline['run_id']/'latest.json').exists():
