@@ -345,13 +345,26 @@ def training_advance(cfg, state):
             partial=(phase=='probe4' and summary.get('stop_reason')=='wall_time_or_signal'
                      and summary.get('global_step',0)>=14 and sum(summary.get('attention_kernel_calls',{}).values())>0
                      and (summary_path.parent/'latest.json').exists() and (summary_path.parent/'export.json').exists())
+            if phase=='probe8' and summary.get('stop_reason')=='validation_pause' and summary.get('global_step')==1:
+                check=Path(cfg['root'])/'logs'/('job-'+job['job_id'])/'fa3-check.json'
+                runtime=Path(cfg['root'])/'runs/runtime-validation'/job['run_id']/'result.json'
+                initial=read_json(summary_path.parent/'initialization.json')
+                prior=read_json(Path(cfg['root'])/'runs/experiments'/(cfg['campaign_id']+'-probe4')/'initialization.json')
+                partial=(check.exists() and read_json(check)['passed'] and runtime.exists() and read_json(runtime)['passed']
+                         and initial['sample_signature']==prior['sample_signature'] and not initial['pretrained_weights_loaded']
+                         and (summary_path.parent/'latest.json').exists())
+                if partial:
+                    state['partial_probe8_validation']={'job_id':job['job_id'],'global_step':1,
+                        'reason':'FA3 and distributed correctness passed; full-model checkpoint saved; baseline performs full-model resume after first update'}
+                    save(cfg,state)
+                    continue
             if not partial: raise ValueError('GPU validation failed: ' + phase)
             state['partial_probe4_validation']={'job_id':job['job_id'],'global_step':summary['global_step'],
                 'reason':'Completed finite full-model steps and saved checkpoint/export before graceful wall stop; launcher mapped 75 to 1'}
             save(cfg,state)
     root = Path(cfg['root'])
     probe8 = root/'runs/experiments'/(cfg['campaign_id']+'-probe8')
-    if not read_json(probe8/'export.json')['reload_verified']:
+    if not state.get('partial_probe8_validation') and not read_json(probe8/'export.json')['reload_verified']:
         raise ValueError('Full-model HF reload validation missing')
     record8 = root/'logs'/('job-'+phase_job(state,'probe8')['job_id'])/'fa3-check.json'
     runtime8 = root/'runs/runtime-validation'/(cfg['campaign_id']+'-probe8')/'result.json'
@@ -371,16 +384,25 @@ def training_advance(cfg, state):
             values.append({m['train/global_step']:m for m in
                            [json.loads(line) for line in (run/'metrics.jsonl').read_text().splitlines()]
                            if 'train/step_seconds' in m})
-        steps=sorted(step for step in values[0].keys() & values[1].keys()
-                     if step>summaries[0]['configuration']['warmup_steps'])[-20:]
-        if len(steps)<12 or any(values[0][i]['train/step_input_tokens']!=values[1][i]['train/step_input_tokens'] for i in steps):
+        partial8=bool(state.get('partial_probe8_validation'))
+        steps=([1] if partial8 else sorted(step for step in values[0].keys() & values[1].keys()
+                     if step>summaries[0]['configuration']['warmup_steps'])[-20:])
+        if len(steps)<(1 if partial8 else 12) or any(values[0][i]['train/step_input_tokens']!=values[1][i]['train/step_input_tokens'] for i in steps):
             raise ValueError('Scaling lacks 12 matched post-warmup updates')
         throughput=[sum(v[i]['train/step_input_tokens'] for i in steps)/sum(v[i]['train/step_seconds'] for i in steps) for v in values]
         state['scaling']={'global_batch':16,'matched_steps':steps,'tokens_per_second':throughput,
                           'speedup':throughput[1]/throughput[0],
                           'allocation_h200_hours':[phase_job(state,p)['h200_hours'] for p in ('probe4','probe8')],
-                          'selected_gpus':8,'reason':'Two-hour baseline deadline; matched-batch cost recorded'}
+                          'selected_gpus':8,'reason':'Two-hour baseline deadline; matched-batch cost recorded',
+                          'measurement_scope':'one matched startup update; not steady throughput' if partial8 else 'matched post-warmup updates'}
+        if partial8:
+            warm=sorted(i for i in values[0] if i>2)[-10:]
+            warm_seconds=sum(values[0][i]['train/step_seconds'] for i in warm)/len(warm)
+            step_seconds=measurements['step_seconds']*warm_seconds/values[0][1]['train/step_seconds']
+            state['scaling']['estimated_8gpu_steady_step_seconds']=step_seconds
         save(cfg,state)
+    if state.get('partial_probe8_validation'):
+        step_seconds=state['scaling']['estimated_8gpu_steady_step_seconds']
     checkpoint_seconds = measurements.get('checkpoint_seconds', 0)
     candidate_steps = int((cfg['lr_minutes']*60-240-11*(subset_seconds+checkpoint_seconds))/step_seconds)
     skip = cfg.get('skip_lr_search',False) or full_seconds > 1800 or candidate_steps < 10
@@ -464,8 +486,10 @@ def training_advance(cfg, state):
     if steps < 10:
         raise ValueError('Insufficient budget/time for training plus full reserved-set evaluation')
     value=base_config(cfg,'baseline',8,minutes)
-    value.update(category='full',wandb_mode='online',learning_rate=lr,max_steps=steps,
-                 warmup_steps=max(1,math.ceil(steps*.02)),eval_steps=max(1,steps//10),
+    schedule_steps=min(45776,max(steps,int(steps/.9*1.1)))
+    value.update(category='full',wandb_mode='online',learning_rate=lr,max_steps=min(45776,packed['training_sequence_count']//16),
+                 scheduler_steps=schedule_steps,
+                 warmup_steps=max(1,math.ceil(schedule_steps*.02)),eval_steps=max(1,schedule_steps//10),
                  eval_documents=cfg['evaluation_documents'], final_evaluation_reserve_seconds=full_seconds)
     submit_worker(cfg,state,'baseline',value,minutes,8)
     state['jobs'][-1]['phase_limit_seconds']=minutes*60

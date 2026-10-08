@@ -250,6 +250,9 @@ def build_model(cfg, run_path, provenance, accelerator):
         record = {'method': 'AutoModelForCausalLM.from_config', 'seed': cfg['seed'],
                   'sample_signature': signature, 'num_parameters': sum(p.numel() for p in model.parameters()),
                   'architecture': asset_metadata, 'pretrained_weights_loaded': False}
+        # Persisted JSON converts integer mapping keys (HF id2label) to strings.
+        # Compare the same representation; random-weight signature remains strict.
+        record = json.loads(json.dumps(record, allow_nan=False))
         path = run_path / 'initialization.json'
         if path.exists() and read_json(path) != record:
             raise ValueError('Random initialization or model configuration changed on resume')
@@ -445,7 +448,7 @@ def run(args, cfg):
     raw_optimizer = torch.optim.AdamW(groups, lr=cfg['learning_rate'], betas=tuple(cfg['betas']),
                                      eps=cfg['epsilon'], fused=True)
     scheduler = torch.optim.lr_scheduler.LambdaLR(raw_optimizer, lambda step: lr_multiplier(
-        step, cfg['max_steps'], cfg['warmup_steps'], cfg['min_lr_ratio']))
+        step, cfg.get('scheduler_steps', cfg['max_steps']), cfg['warmup_steps'], cfg['min_lr_ratio']))
     model, optimizer = accelerator.prepare(model, raw_optimizer)
     accelerator.register_for_checkpointing(scheduler)
     set_seed(cfg['seed'] + accelerator.process_index)
@@ -722,6 +725,7 @@ def main():
     parser.add_argument('--root', type=Path, default=os.environ.get('DATA_ROOT', str(DEFAULT_ROOT)))
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--stop-after-step', type=int, help='Validation-only deliberate checkpoint pause')
+    parser.add_argument('--pause-after-step', type=int, help='Save a faithful checkpoint and pause this logical run')
     parser.add_argument('--validate-export', action='store_true', help='Validation-only HF reload and weight equality')
     args = parser.parse_args()
     cfg = load_config(args.config)
@@ -729,6 +733,10 @@ def main():
         parser.error('Validation controls are restricted to validation configurations')
     if args.stop_after_step is not None and not 0 < args.stop_after_step < cfg['max_steps']:
         parser.error('stop-after-step must be within the planned run')
+    if args.pause_after_step is not None:
+        if args.stop_after_step is not None or not 0 < args.pause_after_step < cfg['max_steps']:
+            parser.error('pause-after-step must be within planned steps and cannot combine with stop-after-step')
+        args.stop_after_step = args.pause_after_step
     raise SystemExit(run(args, cfg))
 
 

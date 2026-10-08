@@ -75,3 +75,23 @@ updates. The 8-GPU FA3/padding/backward/resume/export checks remain prerequisite
 checkpointed 75 to launcher success. Validation jobs save at the configured
 checkpoint interval, deliberate pause and end, avoiding a full 1B checkpoint at
 every improved validation loss; baseline best-checkpoint behavior is unchanged.
+
+The eight-H200 checks passed FA3 forward/backward/masking and distributed
+weights/optimizer/scheduler/RNG correctness. A full 1B update and checkpoint also
+completed, with the same random-initialization signature as the 4-GPU model.
+The subsequent full-model resume exposed a JSON metadata mismatch: numeric
+`id2label` keys become strings when saved. Initialization metadata is now compared
+in its persisted JSON representation, retaining strict random-weight signature
+and architecture checks. The failed allocations remain charged; they are not
+resumed with changed training code.
+
+Baseline now proves its own full-model resume inside the same allocation: one
+optimizer update, an end evaluation and faithful checkpoint, then a fresh
+launcher restores that logical run and continues. FA3 and tiny correctness
+receipts are reused with their real original job IDs. The 4/8 comparison has only
+one matched startup update; its limitations are recorded and it is not reported
+as steady throughput. A conservative planning estimate uses the observed 4-GPU
+cold/warm ratio. Baseline runs until the wall-time/token stopping margin, with a
+separately pinned `scheduler_steps` horizon so an estimated step count cannot
+cause it to stop early. Actual costs and the same original campaign caps remain
+in force. Final full-set evaluation reloads the exported HF model.

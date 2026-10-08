@@ -70,7 +70,7 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage'}
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps'}
     if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
     if cfg.get('attention_backend', 'sdpa') not in {'sdpa', 'flash_attention_3'}:
@@ -96,6 +96,8 @@ def load_config(path):
         raise ValueError('Evaluate at least once per 10% of planned optimizer updates')
     if cfg['max_steps'] < 10 and cfg['eval_steps'] != 1:
         raise ValueError('Very short pilots must evaluate each update')
+    if 'scheduler_steps' in cfg and (type(cfg['scheduler_steps']) is not int or not cfg['warmup_steps'] < cfg['scheduler_steps'] <= cfg['max_steps']):
+        raise ValueError('Scheduler steps must lie between warmup and the hard step ceiling')
     if not 0 <= cfg['warmup_steps'] < cfg['max_steps'] or not 0 <= cfg['min_lr_ratio'] <= 1:
         raise ValueError('Invalid warmup or cosine floor')
     if len(cfg['betas']) != 2 or any(not 0 <= x < 1 for x in cfg['betas']):

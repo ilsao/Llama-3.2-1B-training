@@ -63,6 +63,10 @@ case "$PHASE" in
     lr-low|lr-high|baseline)
         EXTRA=()
         [[ ${6:-new} != resume ]] || EXTRA+=(--resume)
+        if [[ "$PHASE" == baseline && ${6:-new} != resume ]]; then
+            launch "$REPO/slurm/training_entry.py" "${COMMON[@]}" --pause-after-step 1
+            EXTRA+=(--resume)
+        fi
         set +e
         launch "$REPO/slurm/training_entry.py" "${COMMON[@]}" "${EXTRA[@]}"
         RESULT=$?
