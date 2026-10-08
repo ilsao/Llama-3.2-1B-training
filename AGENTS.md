@@ -310,3 +310,17 @@ preprocessing identity immutable; uncertain submissions retain reservations and
 are recovered rather than retried. Disabling stops new submissions while terminal
 allocations are still reconciled. No autonomous artifact cleanup or HF upload is
 authorized by this campaign.
+
+The user's subsequent baseline-first instruction authorizes an unfiltered raw
+baseline from the existing downloads, without waiting for clean/score/select.
+For this campaign use dolma-raw-baseline-20261008, derived from the already built
+complete canonical seed-42 split of dolma-dclm10-005. Preserve all 50,000 reserved
+original evaluation documents, the fixed subset, 8192-token packing and masks.
+Publish immutable packed shards in canonical training order as an append-only
+stream; persist and check the consumed prefix on faithful resumes. Start GPU
+validation once the reserved evaluation cache and initial training buffer are
+ready, then start AdamW baseline directly, skipping the LR sweep for this campaign.
+The existing filtering job may finish, but its completion is no longer a baseline
+prerequisite and no further filtered preparation stages are auto-submitted.
+Charge the one-H200 CPU producer separately as preprocessing; retain every prior
+allocation and the same 16 H200-hour/7200-second combined GPU campaign limits.

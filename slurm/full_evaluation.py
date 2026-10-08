@@ -30,7 +30,11 @@ def main():
     model.config.use_cache = False
     configure_attention(model, cfg['attention_backend'])
     model.to(accelerator.device)
-    packed = read_json(prep / 'pack/manifest.json')
+    if (prep / 'raw/ready.json').exists():
+        from raw_baseline import packed_details
+        packed = {'details': packed_details(prep)}
+    else:
+        packed = read_json(prep / 'pack/manifest.json')
     rows = datasets.concatenate_datasets([datasets.Dataset.from_file(item['path'])
                                           for item in packed['details']['eval_files']])
     result = evaluate(model, rows, {**cfg, 'eval_documents': 50000}, accelerator)

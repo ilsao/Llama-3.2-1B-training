@@ -87,6 +87,7 @@ class CampaignTests(unittest.TestCase):
 
     def test_live_data_job_prevents_duplicate_submission(self):
         cfg=auto.load_campaign(auto.PROJECT/'configs/auto-baseline.json')
+        cfg.pop('raw_preparation_id',None)
         state={'jobs':[{'phase':'data-clean','status':'submitted'}]}
         with patch.object(auto,'manifest_ready') as ready:
             auto.data_advance(cfg,state)

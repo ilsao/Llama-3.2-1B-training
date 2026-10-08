@@ -657,3 +657,11 @@ The deadline is 2026-10-09 23:59 Asia/Taipei with allocation cutoff23:30. Data
 verification, queue availability and measured convergence determine feasibility;
 PPL<20 is only reported after full50000-document evaluation. No automatic budget
 extension, cleanup or upload occurs.
+
+The active baseline campaign uses the existing downloaded raw dataset directly:
+`raw_baseline.py` preserves the sealed canonical split, produces immutable packed
+shards progressively, and lets training begin after the initial buffer is ready.
+It bypasses quality filtering for this baseline and skips the LR sweep. The
+original filtered preparation remains separate. See
+[the automatic protocol](experiments/adamw-baseline/automatic-protocol.md) for
+resume, validation and budget details.

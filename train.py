@@ -119,6 +119,9 @@ def causal_loss_sum(model, batch):
 
 def prepare_data(prep, run_path, cfg, accelerator):
     """Verify once on rank zero, then memory-map the same sealed immutable files."""
+    if (prep / "raw/ready.json").exists():
+        from raw_baseline import prepare_data as prepare_raw
+        return prepare_raw(prep, run_path, cfg, accelerator)
     from dataset import check_artifact, load_prepared
 
     def verify():
@@ -453,6 +456,8 @@ def run(args, cfg):
         source['attention_backend.py'] = file_digest(PROJECT / 'attention_backend.py')
         build = Path(os.environ['TRAIN_ENV_PREFIX']) / 'fa3-build.json'
         source['fa3-build.json'] = file_digest(build)
+    if (prep / 'raw/ready.json').exists():
+        source['raw_baseline.py'] = file_digest(PROJECT / 'raw_baseline.py')
     code_digest = digest(source)
     environment = {dist.metadata['Name']: dist.version for dist in importlib.metadata.distributions()}
     def execution_identity():
@@ -537,6 +542,8 @@ def run(args, cfg):
         state['resource_accounting'] = {'job_id': job_id, 'previous_h200_hours': allocation['previous_h200_hours'],
                                         'current_allocation_h200_hours_so_far': compute_used() - allocation['previous_h200_hours'],
                                         'accounting': 'running estimate; reconcile actual allocation with sacct after termination'}
+        if hasattr(train, 'commit_receipt'):
+            on_main(accelerator, lambda: train.commit_receipt(state['cursor']))
         path = save_checkpoint(accelerator, run_path, state, mark_best=mark_best)
         state['checkpoint_seconds'] = max(state['checkpoint_seconds'], time.monotonic() - started)
         return path
@@ -578,7 +585,16 @@ def run(args, cfg):
             stop_reason = 'dataset_tail'
             break
         # Prepare/count every microbatch before processing any of this window.
-        local = [collate_rows([train[index] for index in indices], cfg['sequence_length']) for indices in batches]
+        from raw_baseline import DataUnavailable
+        unavailable = False
+        try:
+            local = [collate_rows([train[index] for index in indices], cfg['sequence_length']) for indices in batches]
+        except DataUnavailable:
+            unavailable = True
+        waiting = torch.tensor(int(unavailable), device=accelerator.device)
+        if int(reduce_max(waiting, accelerator).item()):
+            stop_reason = 'data_unavailable'
+            break
         local_inputs = sum(int(batch['attention_mask'].sum()) for batch in local)
         local_targets = sum(int((batch['labels'][:, 1:] != -100).sum()) for batch in local)
         counts = accelerator.reduce(torch.tensor([local_inputs, local_targets], dtype=torch.int64,
@@ -695,7 +711,7 @@ def run(args, cfg):
     accelerator.end_training()
     if stop_reason == 'nonfinite_or_skipped_update':
         return 2
-    return 75 if stop_reason == 'wall_time_or_signal' else 0
+    return 75 if stop_reason in ('wall_time_or_signal', 'data_unavailable') else 0
 
 
 def main():

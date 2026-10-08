@@ -12,6 +12,12 @@
   "lr_minutes": 15,
   "baseline_minutes": 80,
   "evaluation_documents": 1000,
-  "learning_rates": [0.0003, 0.0006],
-  "environment": "/work/asciibase64/Llama-3.2-1B-training/environments/training-fa3-py311-94e22c9"
+  "learning_rates": [
+    0.0003,
+    0.0006
+  ],
+  "environment": "/work/asciibase64/Llama-3.2-1B-training/environments/training-fa3-py311-94e22c9",
+  "raw_preparation_id": "dolma-raw-baseline-20261008",
+  "raw_prepare_minutes": 360,
+  "skip_lr_search": true
 }

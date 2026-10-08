@@ -29,7 +29,7 @@ def source_hashes():
              'slurm/submit_preprocessing.py', 'slurm/submission.py', 'slurm/accounting.py',
              'train.py', 'training_state.py', 'attention_backend.py', 'requirements-training.txt', 'requirements-fa3-build.txt',
              'dataset.py', 'preparation_parallel.py', 'requirements-data.txt',
-             'tests/fa3_runtime.py', 'tests/training_runtime.py')
+             'tests/fa3_runtime.py', 'tests/training_runtime.py', 'raw_baseline.py')
     return {name: file_digest(PROJECT/name) for name in files}
 
 
@@ -145,7 +145,7 @@ def reconcile(cfg, state):
         if job['status'] == 'submission_uncertain':
             job_id = find_submission_job(job, root)
             job['job_id'] = job_id
-            if job['kind'] in ('training', 'setup'):
+            if job['kind'] in ('training', 'setup', 'preprocessing'):
                 jobs = read_json(ledger.path)['jobs']
                 if job['tag'] in jobs:
                     ledger.bind(job['tag'], job_id)
@@ -158,7 +158,7 @@ def reconcile(cfg, state):
         except (ValueError, subprocess.SubprocessError, OSError):
             # Running, absent or delayed accounting: reservation remains charged.
             continue
-        if job['kind'] in ('training', 'setup'):
+        if job['kind'] in ('training', 'setup', 'preprocessing'):
             measured = ledger.reconcile(job['job_id'])
         else:
             subprocess.run([sys.executable, str(PROJECT/'slurm/accounting.py'), job['job_id'],
@@ -181,7 +181,7 @@ def phase_done(state, phase):
 
 def submit_worker(cfg, state, phase, train_cfg, minutes, gpus, resume=False):
     seconds = minutes*60
-    kind = 'setup' if phase == 'setup' else 'training'
+    kind = 'setup' if phase == 'setup' else 'preprocessing' if phase == 'raw-prepare' else 'training'
     if kind == 'training':
         check_budget(state['jobs'], seconds, gpus)
     if shared_cost(cfg) + gpus*seconds/3600 > cfg['shared_h200_hours_limit']:
@@ -208,11 +208,11 @@ def submit_worker(cfg, state, phase, train_cfg, minutes, gpus, resume=False):
                f'--time={minutes}', f'--comment={tag}', f'--job-name=auto-{phase}',
                f'--output={root}/logs/%x-%j.out', f'--error={root}/logs/%x-%j.err',
                str(PROJECT/'slurm/auto-baseline.sbatch'), run_id, phase,
-               cfg['preparation_id'], str(config_path), state['config_path'],
+               cfg.get('raw_preparation_id', cfg['preparation_id']), str(config_path), state['config_path'],
                'resume' if resume else 'new']
     job['submission_command'] = command; job['status'] = 'submission_uncertain'; save(cfg, state)
     with ledger.transaction() as data:
-        data['jobs'][tag].update(submission_tag=tag, submission_started_utc=job['submission_started_utc'])
+        data['jobs'][tag].update(submission_tag=tag, submission_started_utc=job['submission_started_utc'], allocation_kind=kind)
     try:
         result = subprocess.run(command, capture_output=True, text=True, timeout=30)
     except OSError:
@@ -227,6 +227,23 @@ def submit_worker(cfg, state, phase, train_cfg, minutes, gpus, resume=False):
 
 
 def data_advance(cfg, state):
+    if cfg.get('raw_preparation_id'):
+        raw_job = phase_job(state, 'raw-prepare')
+        if raw_job and not terminal(raw_job): return
+        if raw_job and raw_job['status'] == 'complete': return
+        if raw_job and raw_job.get('exit_code') != 75:
+            raise ValueError('Raw baseline producer failed; inspect before retry')
+        remaining = int((dt.datetime.fromisoformat(cfg['allocation_cutoff'])-now()).total_seconds())
+        minutes = min(cfg['raw_prepare_minutes'], remaining//60-5)
+        if minutes < 5: raise ValueError('Insufficient raw preparation allocation time')
+        value = base_config(cfg, 'raw-prepare', 1, minutes)
+        if raw_job:
+            value = load_config(raw_job['config_path'])
+            used = sum(j.get('elapsed_seconds',j['requested_seconds']) for j in state['jobs'] if j['phase']=='raw-prepare')
+            minutes = min(minutes,int((value['max_h200_hours']*3600-used)//60))
+            if minutes < 5: raise ValueError('Raw preparation cumulative allocation exhausted')
+        submit_worker(cfg,state,'raw-prepare',value,minutes,1,resume=raw_job is not None)
+        return
     root = Path(cfg['root'])
     for stage in DATA_STAGES:
         job = phase_job(state, 'data-' + stage)
@@ -265,7 +282,7 @@ def base_config(cfg, phase, gpus, minutes):
                  max_h200_hours=gpus*minutes/60, stop_margin_seconds=60 if phase.startswith('probe') else 180,
                  max_steps=32, warmup_steps=2, eval_steps=3, eval_documents=100,
                  category='validation', wandb_mode='offline')
-    if phase == 'setup':
+    if phase in ('setup','raw-prepare'):
         value.update(gradient_accumulation_steps=1)
     return value
 
@@ -273,8 +290,12 @@ def base_config(cfg, phase, gpus, minutes):
 def probe_measurements(cfg):
     run = Path(cfg['root'])/'runs/experiments'/(cfg['campaign_id']+'-probe8')
     summary = read_json(run/'summary.json')
-    prep = Path(cfg['root'])/'preprocessed'/cfg['preparation_id']
-    packed = read_json(prep/'pack/manifest.json')['details']
+    prep = Path(cfg['root'])/'preprocessed'/cfg.get('raw_preparation_id',cfg['preparation_id'])
+    if cfg.get('raw_preparation_id'):
+        from raw_baseline import packed_details
+        packed = packed_details(prep)
+    else:
+        packed = read_json(prep/'pack/manifest.json')['details']
     evaluation = summary['last_evaluation']
     subset_seconds = max(1, summary['evaluation_seconds'])*10*1.5
     full_seconds = math.ceil(max(1, summary['evaluation_seconds'])*
@@ -292,7 +313,14 @@ def training_advance(cfg, state):
         return
     if setup['status'] != 'complete' or not (environment/'fa3-build.json').exists():
         raise ValueError('FA3 installation failed; no automatic fallback/reinstall')
-    if not manifest_ready(cfg, 'verify'):
+    if cfg.get('raw_preparation_id'):
+        ready = Path(cfg['root'])/'preprocessed'/cfg['raw_preparation_id']/'raw/ready.json'
+        if not ready.exists(): return
+        sealed = read_json(ready)
+        identity = ready.parents[1]/'configuration.json'
+        if sealed['identity_sha256'] != file_digest(identity):
+            raise ValueError('Raw baseline identity seal changed')
+    elif not manifest_ready(cfg, 'verify'):
         return
     for phase, gpus in (('probe4', 4), ('probe8', 8)):
         job = phase_job(state, phase)
@@ -312,7 +340,7 @@ def training_advance(cfg, state):
     if not read_json(record8)['passed'] or not read_json(runtime8)['passed']:
         raise ValueError('FA3 kernel or resume correctness checks missing')
     measurements, packed, subset_seconds, full_seconds = probe_measurements(cfg)
-    step_seconds = max(1, measurements['step_seconds'])
+    step_seconds = max(.001, measurements['step_seconds'])
     if 'scaling' not in state:
         runs=[root/'runs/experiments'/(cfg['campaign_id']+'-'+p) for p in ('probe4','probe8')]
         summaries=[read_json(r/'summary.json') for r in runs]
@@ -337,7 +365,7 @@ def training_advance(cfg, state):
         save(cfg,state)
     checkpoint_seconds = measurements.get('checkpoint_seconds', 0)
     candidate_steps = int((cfg['lr_minutes']*60-240-11*(subset_seconds+checkpoint_seconds))/step_seconds)
-    skip = full_seconds > 1800 or candidate_steps < 10
+    skip = cfg.get('skip_lr_search',False) or full_seconds > 1800 or candidate_steps < 10
     cutoff_seconds = int((dt.datetime.fromisoformat(cfg['allocation_cutoff'])-now()).total_seconds())
     if cutoff_seconds < (cfg['baseline_minutes'] + 2*cfg['lr_minutes'] + 5)*60:
         skip = True
@@ -470,7 +498,7 @@ def main():
                 raise ValueError('Campaign budget exceeded before worker startup')
         print(int(dt.datetime.fromisoformat(cfg['allocation_cutoff']).timestamp())); return
     if args.action=='status':
-        state=read_state(cfg); print(json.dumps({'directory':str(path),'status':state['status'],'budget':budget(state['jobs']),'jobs':state['jobs'],'last_error':state.get('last_error')},indent=2)); return
+        state=read_state(cfg); print(json.dumps({'directory':str(path),'status':state['status'],'budget':budget(state['jobs']),'jobs':state['jobs'],'reason':state.get('reason'),'last_error':state.get('last_error')},indent=2)); return
     path.mkdir(parents=True,exist_ok=True)
     with locked(path/'controller.lock',blocking=False):
         if args.action=='install':

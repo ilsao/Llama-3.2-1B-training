@@ -15,7 +15,7 @@
 set -euo pipefail
 PHASE=${2:?Supply phase}
 export TRAIN_ENV_PREFIX=/work/asciibase64/Llama-3.2-1B-training/environments/training-fa3-py311-94e22c9
-[[ "$PHASE" != setup ]] || SETUP_TRAINING_ENV=1
+[[ "$PHASE" != setup && "$PHASE" != raw-prepare ]] || SETUP_TRAINING_ENV=1
 source /home/asciibase64/Llama-3.2-1B-training/slurm/training-common.sh
 export DATA_ROOT TRAIN_ENV_PREFIX JOB_RECORD
 export TORCH_EXTENSIONS_DIR="$DATA_ROOT/caches/torch-extensions"
@@ -29,6 +29,15 @@ if [[ "$PHASE" == setup ]]; then
     [[ $(type -t module || true) == function ]] || source /etc/profile.d/lmod.sh
     module load cuda/12.6
     srun --ntasks=1 "$DATA_ROOT/environments/training-py311/bin/python" "$REPO/slurm/fa3_setup.py"
+    exit
+fi
+if [[ "$PHASE" == raw-prepare ]]; then
+    export PREP_STOP_EPOCH=$((TRAIN_END_EPOCH - 180))
+    printf '%s\n' raw-prepare > "$JOB_RECORD/stage.txt"
+    printf '%s\n' "${3}" > "$JOB_RECORD/preparation-id.txt"
+    SOURCE_ID=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["preparation_id"])' "$CAMPAIGN_CONFIG")
+    srun --ntasks=1 "$DATA_ROOT/environments/training-py311/bin/python" "$REPO/raw_baseline.py" \
+        --root "$DATA_ROOT" --source-id "$SOURCE_ID" --prep-id "${3}"
     exit
 fi
 launch() {

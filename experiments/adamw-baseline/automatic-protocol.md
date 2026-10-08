@@ -31,3 +31,35 @@ Data identity is dolma-dclm10-005, unchanged native seed42 split, global CC top1
 whole-document6B selection,8192 packing and independent full50000 evaluation.
 Allocation cutoff2026-10-09 23:30+08:00, delivery deadline23:59+08:00. Full-set
 PPL<20 is required; never claim success from the fixed subset alone.
+
+## Baseline-first raw-data override
+
+The user requested training on the already downloaded dataset immediately rather
+than waiting for quality filtering. The campaign now builds a separate
+`dolma-raw-baseline-20261008` preparation from the sealed complete seed-42 split
+of `dolma-dclm10-005`. It skips text cleaning, deduplication and quality ranking;
+this is explicitly an unfiltered AdamW baseline. The existing filtered artifacts
+and allocation are retained and accounted for.
+
+`raw_baseline.py` runs in the `raw-prepare` Slurm phase with seven CPU workers and
+one coordinator. It first authenticates the canonical split indices and packs the
+50,000 original reserved evaluation documents with the existing evaluation
+window/loss rules. It then publishes an initial 1,024-sequence training buffer
+and a fixed input/tokenizer/packing identity. GPU checks can start at that point,
+while the producer continues publishing immutable training shards in canonical
+shuffle order, up to six billion non-padding input tokens. No full filtering or
+full training-corpus packing completion is required before launch.
+
+Consumers verify shard checksums when mapping a shard, reject changes to the
+published prefix, and save consumed-prefix receipts with checkpoints. Producer
+resumes restore its committed document cursor and exact packer carry. Training
+resumes retain weights, optimizer, scheduler, RNG, cursor, W&B identity and token
+journal. A stalled producer causes a synchronized safe checkpoint/stop instead
+of silently substituting or repeating data.
+
+This override skips LR search: matched 4/8-GPU checks run first, then the baseline
+starts at AdamW LR 3e-4 with the remaining allocation (normally 110 minutes).
+Full reserved-set evaluation remains required for the PPL target. All GPU checks,
+training and full evaluation still share the original 16 H200-hour/7,200-second
+campaign cap. CPU preparation is separately charged in the shared experiment
+ledger with allocation_kind=preprocessing.
