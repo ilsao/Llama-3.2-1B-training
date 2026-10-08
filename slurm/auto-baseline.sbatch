@@ -52,21 +52,31 @@ launch() {
 COMMON=(--config "$CONFIG" --prep-id "${3:?Supply preparation ID}" --run-id "$RUN_ID")
 case "$PHASE" in
     probe4)
-        launch "$REPO/train.py" "${COMMON[@]}"
+        launch "$REPO/slurm/training_entry.py" "${COMMON[@]}"
         ;;
     probe8)
         launch "$REPO/tests/fa3_runtime.py"
         launch "$REPO/tests/training_runtime.py" --run-id "$RUN_ID"
-        launch "$REPO/train.py" "${COMMON[@]}" --stop-after-step 1
-        launch "$REPO/train.py" "${COMMON[@]}" --resume --validate-export
+        launch "$REPO/slurm/training_entry.py" "${COMMON[@]}" --stop-after-step 1
+        launch "$REPO/slurm/training_entry.py" "${COMMON[@]}" --resume --validate-export
         ;;
     lr-low|lr-high|baseline)
         EXTRA=()
         [[ ${6:-new} != resume ]] || EXTRA+=(--resume)
         set +e
-        launch "$REPO/train.py" "${COMMON[@]}" "${EXTRA[@]}"
+        launch "$REPO/slurm/training_entry.py" "${COMMON[@]}" "${EXTRA[@]}"
         RESULT=$?
         set -e
+        if [[ "$RESULT" == 0 ]]; then
+            RESULT=$(python3 - "$JOB_RECORD" "$GPU_COUNT" <<'PYCODE'
+import json,sys
+from pathlib import Path
+codes=[json.loads((Path(sys.argv[1])/f'worker-rank-{i}-exit.json').read_text())['exit_code'] for i in range(int(sys.argv[2]))]
+if len(set(codes))!=1: raise SystemExit('Distributed ranks disagreed on training stop status')
+print(codes[0])
+PYCODE
+)
+        fi
         [[ "$RESULT" == 0 || "$RESULT" == 75 ]] || exit "$RESULT"
         if [[ "$PHASE" == baseline ]]; then
             STOP_REASON=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["stop_reason"])' "$DATA_ROOT/runs/experiments/$RUN_ID/summary.json")

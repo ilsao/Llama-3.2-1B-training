@@ -669,7 +669,7 @@ def run(args, cfg):
         if should_evaluate:
             held_out()
             new_best = state.pop('new_best', False)
-            if (new_best or 'checkpoint_interval_seconds' not in cfg or
+            if ((new_best and cfg['category'] != 'validation') or 'checkpoint_interval_seconds' not in cfg or
                     time.monotonic() - last_checkpoint_time >= cfg['checkpoint_interval_seconds']):
                 checkpoint(mark_best=new_best)
                 last_checkpoint_time = time.monotonic()

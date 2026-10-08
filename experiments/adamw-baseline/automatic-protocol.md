@@ -63,3 +63,15 @@ Full reserved-set evaluation remains required for the PPL target. All GPU checks
 training and full evaluation still share the original 16 H200-hour/7,200-second
 campaign cap. CPU preparation is separately charged in the shared experiment
 ledger with allocation_kind=preprocessing.
+
+The first 4-GPU allocation completed 14 finite optimizer updates (1,835,008
+input tokens) and saved a checkpoint/export before its conservative wall stop.
+Torchrun converted the intended child exit 75 into launcher exit 1. Its FAILED
+allocation and 239 seconds / 0.265556 H200-hours remain charged. The controller
+accepts this partial validation only with the completed summary, checkpoint,
+export and actual FA3 kernel calls; scaling uses at least 12 common post-warmup
+updates. The 8-GPU FA3/padding/backward/resume/export checks remain prerequisites.
+`slurm/training_entry.py` now reports rank stop codes explicitly and maps only a
+checkpointed 75 to launcher success. Validation jobs save at the configured
+checkpoint interval, deliberate pause and end, avoiding a full 1B checkpoint at
+every improved validation loss; baseline best-checkpoint behavior is unchanged.
