@@ -628,3 +628,32 @@ hardlinks。所有 data jobs 與 cleanup 共用 retention lock。
 `cleanup-result.json` 記錄本次回收量與清理後離線 reload 結果。已 retired 的
 preparation 保持可載入 sealed packed 資料，不能續跑已釋放的歷史階段；重做前處理
 須使用新 ID 並重新取得原始資料。Exit 75 的 cleanup 可重送同一命令。
+
+### Automatic bounded baseline campaign
+
+The deterministic controller runs without an interactive Codex session. It
+adopts the current preparation job, advances score/select/pack/verify, builds a
+separate FA3 environment, validates, runs a two-candidate ultrashort LR sweep,
+then trains and evaluates the complete held-out set. All GPU validation, sweep,
+training and evaluation allocations share 16 H200-hours and 120 allocation
+minutes. Preprocessing/build costs are separately charged to shared ledgers.
+
+```bash
+python3 slurm/auto_baseline.py install --config configs/auto-baseline.json
+python3 slurm/auto_baseline.py tick
+python3 slurm/auto_baseline.py status
+python3 slurm/auto_baseline.py disable
+```
+
+Install replaces only this project's existing cron entry with a one-minute
+metadata-only controller. Do not submit auto-baseline.sbatch directly: the
+controller registers campaign/run reservations first. Old queued Codex heartbeat
+prompts must not submit jobs. Disable prevents new submissions while existing
+allocations are reconciled. State, reports and cron log live in
+`/work/asciibase64/Llama-3.2-1B-training/runs/auto-baseline/baseline-fa3-20261009/`.
+Unknown submission outcomes remain charged; do not manually retry them.
+
+The deadline is 2026-10-09 23:59 Asia/Taipei with allocation cutoff23:30. Data
+verification, queue availability and measured convergence determine feasibility;
+PPL<20 is only reported after full50000-document evaluation. No automatic budget
+extension, cleanup or upload occurs.

@@ -70,8 +70,14 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    if set(cfg) != required:
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage'}
+    if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
+    if cfg.get('attention_backend', 'sdpa') not in {'sdpa', 'flash_attention_3'}:
+        raise ValueError('Unsupported attention backend')
+    for key in ('checkpoint_interval_seconds', 'final_evaluation_reserve_seconds'):
+        if key in cfg and (type(cfg[key]) is not int or cfg[key] < 0):
+            raise ValueError('Invalid optional interval')
     if cfg['model_id'] != 'meta-llama/Llama-3.2-1B' or cfg['sequence_length'] != 8192:
         raise ValueError('Preserve Llama 3.2 1B and the 8192-token context')
     if not re.fullmatch(r'[0-9a-f]{40}', cfg['model_revision']):
@@ -182,7 +188,7 @@ def slurm_record(job_id, root=None):
         raise ValueError('Use a numeric, non-array job ID')
     raw = subprocess.check_output([
         'sacct', '-j', str(job_id), '-X', '--noheader', '--parsable2',
-        '--format=JobIDRaw,State,ElapsedRaw,AllocTRES%500,Start,End,NodeList%128'], text=True)
+        '--format=JobIDRaw,State,ElapsedRaw,AllocTRES%500,Start,End,NodeList%128'], text=True, timeout=30)
     rows = [row.split('|') for row in raw.splitlines() if row.split('|')[0] == str(job_id)]
     if len(rows) != 1:
         raise ValueError('Expected one Slurm allocation; retain reservation until accounting is available')

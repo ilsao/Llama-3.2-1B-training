@@ -231,6 +231,8 @@ def build_model(cfg, run_path, provenance, accelerator):
     # FP32 parameter/optimizer storage; Accelerator supplies BF16 autocast.
     # This is the only initial model construction: never from_pretrained(weights).
     model = AutoModelForCausalLM.from_config(config, attn_implementation='sdpa', torch_dtype=torch.float32)
+    from attention_backend import configure_attention
+    configure_attention(model, cfg.get('attention_backend', 'sdpa'))
     if model.get_input_embeddings().weight is not model.get_output_embeddings().weight:
         raise ValueError('Lost original tied embedding/output parameter')
     if cfg['activation_checkpointing']:
@@ -290,7 +292,7 @@ def evaluate(model, evaluation, cfg, accelerator):
         model.train(was_training)
 
 
-def save_checkpoint(accelerator, run_path, state):
+def save_checkpoint(accelerator, run_path, state, mark_best=False):
     name = on_main(accelerator, lambda: f'checkpoint-{state["global_step"]:06d}-{uuid.uuid4().hex[:12]}')
     pending = run_path / 'checkpoints' / (name + '.partial')
     final = pending.with_name(name)
@@ -303,10 +305,16 @@ def save_checkpoint(accelerator, run_path, state):
         atomic_json(pending / 'complete.json', {'state_digest': digest(state), 'files': files})
         pending.rename(final)
         atomic_json(run_path / 'latest.json', {'checkpoint': name})
+        if mark_best:
+            atomic_json(run_path / 'best.json', {'checkpoint': name, 'global_step': state['global_step'],
+                        'confirmed_tokens': state.get('confirmed_tokens_at_checkpoint', 0)})
+        best_path = run_path / 'best.json'
+        protected = read_json(best_path)['checkpoint'] if best_path.exists() else None
         complete = sorted((path for path in final.parent.glob('checkpoint-*')
                            if (path / 'complete.json').exists()), key=lambda p: p.stat().st_mtime_ns)
         for old in complete[:-2]:
-            shutil.rmtree(old)
+            if old.name != protected:
+                shutil.rmtree(old)
         return str(final)
     return on_main(accelerator, commit)
 
@@ -349,7 +357,13 @@ def export_model(accelerator, model, run_path, metadata, validate=False):
     pending = run_path / (version + '.partial')
     model = accelerator.unwrap_model(model)
     def export():
-        model.save_pretrained(pending, safe_serialization=True, max_shard_size='2GB')
+        # Export standard architecture metadata; custom adapter is runtime-only.
+        backend = model.config._attn_implementation
+        model.config._attn_implementation = 'sdpa'
+        try:
+            model.save_pretrained(pending, safe_serialization=True, max_shard_size='2GB')
+        finally:
+            model.config._attn_implementation = backend
         tokenizer = AutoTokenizer.from_pretrained(run_path / 'assets', use_fast=True, local_files_only=True)
         tokenizer.save_pretrained(pending)
         atomic_json(pending / 'training-metadata.json', metadata)
@@ -395,11 +409,13 @@ def run(args, cfg):
     if allocation['config_digest'] != digest(cfg):
         raise ValueError('Training configuration differs from the ledger reservation')
     job_start = int(os.environ['TRAIN_START_EPOCH'])
-    job_end = int(os.environ['TRAIN_END_EPOCH'])
-    if job_end - job_start > allocation['requested_seconds'] or allocation['gpu_count'] != cfg['world_size']:
+    actual_job_end = int(os.environ['TRAIN_END_EPOCH'])
+    job_end = min(actual_job_end, int(os.environ.get('CAMPAIGN_END_EPOCH', actual_job_end)))
+    if actual_job_end - job_start > allocation['requested_seconds'] or allocation['gpu_count'] != cfg['world_size']:
         raise ValueError('Actual allocation exceeds reserved geometry/time')
-    if allocation['previous_h200_hours'] + cfg['world_size'] * (job_end - job_start) / 3600 > cfg['max_h200_hours'] + 1e-12:
+    if allocation['previous_h200_hours'] + cfg['world_size'] * (actual_job_end - job_start) / 3600 > cfg['max_h200_hours'] + 1e-12:
         raise ValueError('Not enough logical-run compute budget for this allocation')
+    job_end -= cfg.get('final_evaluation_reserve_seconds', 0)
     # Retain a nonblocking writer lock for the lifetime of this distributed job.
     lock_context = None
     def acquire_run():
@@ -433,6 +449,10 @@ def run(args, cfg):
     source = {str(path.relative_to(PROJECT)): file_digest(path) for path in (
         PROJECT / 'train.py', PROJECT / 'training_state.py', PROJECT / 'dataset.py',
         PROJECT / 'requirements-training.txt', PROJECT / 'preparation_parallel.py')}
+    if cfg.get('attention_backend') == 'flash_attention_3':
+        source['attention_backend.py'] = file_digest(PROJECT / 'attention_backend.py')
+        build = Path(os.environ['TRAIN_ENV_PREFIX']) / 'fa3-build.json'
+        source['fa3-build.json'] = file_digest(build)
     code_digest = digest(source)
     environment = {dist.metadata['Name']: dist.version for dist in importlib.metadata.distributions()}
     def execution_identity():
@@ -510,14 +530,14 @@ def run(args, cfg):
     def compute_used():
         return allocation['previous_h200_hours'] + cfg['world_size'] * (time.time() - job_start) / 3600
 
-    def checkpoint():
+    def checkpoint(mark_best=False):
         started = time.monotonic()
         state['confirmed_tokens_at_checkpoint'] = journal_data['confirmed_tokens']
         state['charged_tokens_at_checkpoint'] = journal_data['charged_tokens']
         state['resource_accounting'] = {'job_id': job_id, 'previous_h200_hours': allocation['previous_h200_hours'],
                                         'current_allocation_h200_hours_so_far': compute_used() - allocation['previous_h200_hours'],
                                         'accounting': 'running estimate; reconcile actual allocation with sacct after termination'}
-        path = save_checkpoint(accelerator, run_path, state)
+        path = save_checkpoint(accelerator, run_path, state, mark_best=mark_best)
         state['checkpoint_seconds'] = max(state['checkpoint_seconds'], time.monotonic() - started)
         return path
 
@@ -529,11 +549,16 @@ def run(args, cfg):
         state['evaluation_seconds'] = max(state['evaluation_seconds'], elapsed)
         state['last_eval_step'] = state['global_step']
         state['last_evaluation'] = metrics
+        average_nll = metrics['eval/nll'] / metrics['eval/prediction_tokens']
+        state['new_best'] = average_nll < state.get('best_eval_nll', float('inf'))
+        if state['new_best']:
+            state['best_eval_nll'] = average_nll
         log({**metrics, 'eval/seconds': elapsed, 'eval/total_training_tokens_seen': journal_data['confirmed_tokens']})
 
     width = cfg['world_size'] * cfg['microbatch_size'] * cfg['gradient_accumulation_steps']
     stop_reason = 'max_steps'
     last_evaluation_time = time.monotonic()
+    last_checkpoint_time = time.monotonic()
     while state['global_step'] < cfg['max_steps']:
         reserve_seconds = max(cfg['stop_margin_seconds'], state['evaluation_seconds'] +
                               2 * state['checkpoint_seconds'] + 60)
@@ -627,7 +652,11 @@ def run(args, cfg):
         should_evaluate = broadcast(should_evaluate if accelerator.is_main_process else None, accelerator)
         if should_evaluate:
             held_out()
-            checkpoint()
+            new_best = state.pop('new_best', False)
+            if (new_best or 'checkpoint_interval_seconds' not in cfg or
+                    time.monotonic() - last_checkpoint_time >= cfg['checkpoint_interval_seconds']):
+                checkpoint(mark_best=new_best)
+                last_checkpoint_time = time.monotonic()
             last_evaluation_time = time.monotonic()
         if args.stop_after_step and state['global_step'] >= args.stop_after_step:
             stop_reason = 'validation_pause'
@@ -637,15 +666,23 @@ def run(args, cfg):
         state['interval_nll'], state['interval_predictions'] = 0.0, 0
     if state['last_eval_step'] != state['global_step']:
         held_out()
-    latest = checkpoint()
+    latest = checkpoint(mark_best=state.pop('new_best', False))
     summary = {**state, 'stop_reason': stop_reason, 'initialization': initialization,
                'configuration': cfg, 'data_provenance': provenance, 'wandb_url': wandb_url,
                'total_tokens_seen': journal_data['confirmed_tokens'], 'budget_tokens_charged': journal_data['charged_tokens'],
+               'attention_kernel_calls': __import__('attention_backend').CALLS,
                'unused_training_sequences': len(train) - state['cursor'], 'checkpoint': latest,
                'h200_hours_so_far_estimate': compute_used(), 'slurm_job_id': job_id,
                'h200_hours_final': 'pending Slurm accounting reconciliation'}
     if stop_reason != 'validation_pause':
-        export = export_model(accelerator, model, run_path, summary, validate=args.validate_export)
+        export_metadata = summary
+        if cfg['category'] != 'validation' and (run_path / 'best.json').exists():
+            best = on_main(accelerator, lambda: read_json(run_path / 'best.json'))
+            accelerator.load_state(run_path / 'checkpoints' / best['checkpoint'])
+            summary['export_global_step'] = best['global_step']
+            summary['export_tokens_seen'] = best['confirmed_tokens']
+            export_metadata = {**summary, 'global_step': best['global_step'], 'training_global_step': state['global_step']}
+        export = export_model(accelerator, model, run_path, export_metadata, validate=args.validate_export)
         summary['export'] = export
     on_main(accelerator, lambda: atomic_json(run_path / 'summary.json', summary))
     def finish():

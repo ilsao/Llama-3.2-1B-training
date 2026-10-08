@@ -3,7 +3,7 @@
 set -euo pipefail
 SKIP_DATA_ENV=1
 source /home/asciibase64/Llama-3.2-1B-training/slurm/common.sh
-TRAIN_ENV_PREFIX="$DATA_ROOT/environments/training-py311"
+TRAIN_ENV_PREFIX=${TRAIN_ENV_PREFIX:-"$DATA_ROOT/environments/training-py311"}
 RUN_ID=${1:?Supply a run ID through slurm/submit_training.py}
 [[ "$RUN_ID" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$ ]] || exit 1
 printf '%s\n' "$RUN_ID" > "$JOB_RECORD/run-id.txt"

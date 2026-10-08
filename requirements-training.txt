@@ -9,3 +9,7 @@ torch==2.6.0
 accelerate==1.6.0
 wandb==0.19.10
 safetensors==0.5.3
+
+# FA3 builds use requirements-fa3-build.txt and pinned hopper source in
+# slurm/fa3_setup.py, in a separate environment. Do not install flash-attn
+# from PyPI here as a substitute for FlashAttention 3.

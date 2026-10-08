@@ -49,7 +49,7 @@ def bind(state_path, root, state, item, job_id):
     return job_id
 
 
-def submit(stage, prep_id, extra, root, state_path):
+def submit(stage, prep_id, extra, root, state_path, minutes=None):
     if stage not in STAGES:
         raise ValueError('Invalid preprocessing stage')
     if stage != 'setup':
@@ -69,8 +69,13 @@ def submit(stage, prep_id, extra, root, state_path):
                      or (stage == 'download' and '--repair-download-from' in extra))
         wall_time = '00:30:00' if short_job else '24:00:00'
         reserved_hours = 0.5 if short_job else 24
+        if minutes is not None:
+            if type(minutes) is not int or not 20 <= minutes <= 1440:
+                raise ValueError('CPU preprocessing requires 20..1440 minutes')
+            wall_time = str(minutes)
+            reserved_hours = minutes/60
         script = 'setup.sbatch' if stage == 'setup' else 'score.sbatch' if stage == 'score' else 'prepare.sbatch'
-        command = ['sbatch', '--parsable', '--cpus-per-task=8', '--gpus-per-node=1',
+        command = ['sbatch', '--parsable', '--no-requeue', '--cpus-per-task=8', '--gpus-per-node=1',
                    f'--time={wall_time}', f'--comment={tag}',
                    f'--output={root}/logs/%x-%j.out', f'--error={root}/logs/%x-%j.err',
                    str(PROJECT / 'slurm' / script)]

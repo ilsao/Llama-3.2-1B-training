@@ -1,0 +1,17 @@
+{
+  "campaign_id": "baseline-fa3-20261009",
+  "preparation_id": "dolma-dclm10-005",
+  "root": "/work/asciibase64/Llama-3.2-1B-training",
+  "allocation_cutoff": "2026-10-09T23:30:00+08:00",
+  "delivery_deadline": "2026-10-09T23:59:00+08:00",
+  "max_h200_hours": 16.0,
+  "max_allocation_seconds": 7200,
+  "shared_h200_hours_limit": 192.0,
+  "setup_minutes": 90,
+  "probe_minutes": 5,
+  "lr_minutes": 15,
+  "baseline_minutes": 80,
+  "evaluation_documents": 1000,
+  "learning_rates": [0.0003, 0.0006],
+  "environment": "/work/asciibase64/Llama-3.2-1B-training/environments/training-fa3-py311-94e22c9"
+}

@@ -277,3 +277,36 @@ completed checks; distinguish estimates, queued jobs, and unrun checks.
 - [Dolma training dataset](https://huggingface.co/datasets/allenai/dolma3_mix-150B-1025)
 - [The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783)
 - [Batch-size and hyperparameter scaling](https://sadhikamalladi.github.io/blog/2024/01/22/SDEs-ScalingRules/)
+
+## Sweep-specific stages and automatic baseline campaign
+
+Select the starting stage by sweep purpose, not by a universal progression.
+LR/numerical-stability screening starts at ultrashort (15–20 minutes/candidate);
+batch, decay or momentum ranking starts at short (45–60 minutes/candidate);
+optimizer × scheduler × data interactions use medium (2 hours/candidate);
+ranking persistence uses long (4–5 hours/candidate); final experiments have
+the existing 64 H200-hour ceiling. Runtime correctness and matched-batch scaling
+are validation allocations, not hyperparameter sweeps. Candidate counts are
+suggestions; promotion requires held-out NLL at matched tokens, stability and
+compute evidence, and a recorded remaining budget. Never automatically execute
+all stages. Record sweep ID, purpose, stage, parent runs and promotion criteria.
+
+For baseline-fa3-20261009 specifically, the user's explicit override is a hard
+combined cap of 16 H200-hours and 7200 allocation-seconds across GPU validation,
+scaling, both LR candidates, baseline, full evaluation and all continuations.
+Use at most 8 H200s and 8 CPUs per job. LR candidates get 15 minutes each; runtime
+and scaling get 10 minutes combined; baseline/export/full evaluation get the
+remaining allocation (normally 80 minutes). Skip search rather than shortening
+it below its stage duration when evaluation or deadline pressure requires it.
+Preprocessing and FA3 dependency installation are separately charged shared-ledger
+costs; model GPU checks cannot be charged as dependency installation.
+The deadline override is 2026-10-09 23:59 Asia/Taipei, with allocation cutoff at
+23:30. Success requires full reserved-set PPL <20, not subset-only evidence.
+Do not extend this campaign to 64 H200-hours or reset limits under new run IDs.
+
+The deterministic slurm/auto_baseline.py controller is the sole submission owner
+after installation. Legacy Codex heartbeat deliveries are status-only. Keep
+preprocessing identity immutable; uncertain submissions retain reservations and
+are recovered rather than retried. Disabling stops new submissions while terminal
+allocations are still reconciled. No autonomous artifact cleanup or HF upload is
+authorized by this campaign.
