@@ -32,7 +32,11 @@ if [[ "$PHASE" == setup ]]; then
     exit
 fi
 launch() {
-    srun --ntasks=1 --kill-on-bad-exit=1 accelerate launch --multi_gpu \
+    local seconds=$((CAMPAIGN_END_EPOCH - $(date +%s)))
+    [[ "$seconds" -gt 0 ]] || return 124
+    timeout --signal=TERM --kill-after=15s "$seconds" \
+        srun --ntasks=1 --kill-on-bad-exit=1 accelerate launch --multi_gpu \
+        --main_process_port "$((15000 + SLURM_JOB_ID % 40000))" \
         --num_processes "$(wc -l < "$JOB_RECORD/gpus.txt")" --num_machines 1 \
         --mixed_precision bf16 --dynamo_backend no --num_cpu_threads_per_process 1 "$@"
 }
