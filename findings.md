@@ -43,20 +43,20 @@ Slurm/ledgers: preprocessing4.8805555556, training/runtime
 0.1536111111, shared5.0341666667 H200-hours.
 
 New005 canonical full split514101 remains RUNNING on one H200/eight CPUs.
-At 2026-10-08T00:20:23.798534+00:00 full map-style generation log reached
-74415313 examples, up from 45076522; stderr is fresh at
-2026-10-08T00:20:23.404007+00:00. Seven spawn workers continue
-building the lossless native map-style train dataset. Generation counts are
-progress observations, not full split completion or an ETA. Split manifest/state
-and independent evaluation-raw state remain absent; filtering is not ready.
+At 2026-10-08T00:40:24.732011+00:00 the full map-style generation log reached
+102970649 examples, up from 74415313; stderr is fresh at
+2026-10-08T00:40:23.843383+00:00. Seven spawn workers continue
+building the lossless map-style train dataset. Generation counts are progress,
+not completed split/eval membership or an ETA. Split manifest/state and independent
+evaluation-raw state remain absent; no downstream stage is ready yet.
 
-Elapsed 2330s gives 0.6472222222 H200-hours observed provisionally. Twenty
-terminated allocations still agree with Slurm and ledgers; shared reconciled
-5.0341666667, active reservation24, shared upper29.0341666667 H200-hours.
-Current005 identity/config/four source hashes and repaired download manifest
-remain unchanged. Storage statvfs reports 9689817481216 available
-bytes. No new jobs, source changes, repeated tests, cleanup or production training;
-prior72 lightweight tests remain valid. Continue bounded checks at later ticks.
+Elapsed 3531s gives 0.9808333333 H200-hours observed provisionally. Twenty
+terminated allocations agree with Slurm and ledgers; shared reconciled5.0341666667,
+active reservation24, shared upper29.0341666667 H200-hours. Current005 config,
+identity/four source hashes and repaired download manifest remain unchanged.
+Storage statvfs reports 9295654879232 available bytes. No new
+jobs, source changes, repeated tests, cleanup or production training; prior72
+lightweight tests remain valid. Continue bounded checks at later ticks.
 
 The native full-train seed42 shuffle, last50000 eval originals and fixed10000
 subset must complete before clean/filtering. Full production raw/tokenized/packed
