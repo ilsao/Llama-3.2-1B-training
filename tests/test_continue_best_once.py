@@ -30,4 +30,3 @@ class ContinuationTests(TestCase):
                     if fail:raise ValueError('Stop before publishing a new prefix')
             except ValueError:pass
             batches.close.assert_called_once_with()
-

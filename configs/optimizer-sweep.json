@@ -1,0 +1,184 @@
+{
+  "automatic_stages": [
+    "calibration",
+    "initial",
+    "short",
+    "medium_if_needed"
+  ],
+  "automatic_submission": true,
+  "baseline_result": {
+    "full_ppl": 25.11139786762199,
+    "training_tokens": 1166934016
+  },
+  "budget_note": "Per-sbatch limit per user override; baseline spending does not reduce new job allocations. All allocations retain shared ledger accounting.",
+  "candidates": [
+    {
+      "id": "adamw-lr3e-4-linear",
+      "learning_rate": 0.0003,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr3e-4",
+      "scheduler": "linear",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr3e-4-cosine",
+      "learning_rate": 0.0003,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr3e-4",
+      "scheduler": "cosine",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr3e-4-wsd",
+      "learning_rate": 0.0003,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr3e-4",
+      "scheduler": "wsd",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr6e-4-linear",
+      "learning_rate": 0.0006,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr6e-4",
+      "scheduler": "linear",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr6e-4-cosine",
+      "learning_rate": 0.0006,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr6e-4",
+      "scheduler": "cosine",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr6e-4-wsd",
+      "learning_rate": 0.0006,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr6e-4",
+      "scheduler": "wsd",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr1.2e-3-linear",
+      "learning_rate": 0.0012,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr1.2e-3",
+      "scheduler": "linear",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr1.2e-3-cosine",
+      "learning_rate": 0.0012,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr1.2e-3",
+      "scheduler": "cosine",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "adamw-lr1.2e-3-wsd",
+      "learning_rate": 0.0012,
+      "optimizer": "adamw",
+      "recipe": "adamw-lr1.2e-3",
+      "scheduler": "wsd",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "muon-lr0.02-linear",
+      "learning_rate": 0.02,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.02",
+      "scheduler": "linear",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "muon-lr0.02-cosine",
+      "learning_rate": 0.02,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.02",
+      "scheduler": "cosine",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "muon-lr0.02-wsd",
+      "learning_rate": 0.02,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.02",
+      "scheduler": "wsd",
+      "weight_decay": 0.1
+    },
+    {
+      "id": "muon-lr0.04-linear",
+      "learning_rate": 0.04,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.04",
+      "scheduler": "linear",
+      "weight_decay": 0.05
+    },
+    {
+      "id": "muon-lr0.04-cosine",
+      "learning_rate": 0.04,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.04",
+      "scheduler": "cosine",
+      "weight_decay": 0.05
+    },
+    {
+      "id": "muon-lr0.04-wsd",
+      "learning_rate": 0.04,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.04",
+      "scheduler": "wsd",
+      "weight_decay": 0.05
+    },
+    {
+      "id": "muon-lr0.08-linear",
+      "learning_rate": 0.08,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.08",
+      "scheduler": "linear",
+      "weight_decay": 0.025
+    },
+    {
+      "id": "muon-lr0.08-cosine",
+      "learning_rate": 0.08,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.08",
+      "scheduler": "cosine",
+      "weight_decay": 0.025
+    },
+    {
+      "id": "muon-lr0.08-wsd",
+      "learning_rate": 0.08,
+      "optimizer": "muon",
+      "recipe": "muon-lr0.08",
+      "scheduler": "wsd",
+      "weight_decay": 0.025
+    }
+  ],
+  "controller": "slurm/auto_optimizer_sweep.py",
+  "dependency_installation": {
+    "h200_hours": 0.3333333333333333,
+    "job_id": "516510",
+    "status": "COMPLETED"
+  },
+  "horizon": "freeze from native GPU calibration before submission; template 100 steps is not a measurement",
+  "initial_templates": "configs/optimizer-sweep/*.json",
+  "matched_tokens": true,
+  "per_sbatch_limit": {
+    "cpus": 8,
+    "gpus": 8,
+    "h200_hours": 16,
+    "seconds": 7200
+  },
+  "preparation_id": "dolma-raw-baseline-20261008",
+  "stages_minutes": {
+    "initial": 5,
+    "medium": 20,
+    "short": 15
+  },
+  "status": "automatic_controller_ready",
+  "sweep_id": "optimizer-scheduler-raw-20261008",
+  "training_environment": "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9"
+}

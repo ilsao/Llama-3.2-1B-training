@@ -67,6 +67,8 @@
   "job_id": "518719",
   "source_commit": "58879dba8c54a8261c7acaf05a4996c8079d8e6f",
   "launch_record": "/work/asciibase64/Llama-3.2-1B-training/runs/baselines/baseline-muon-wsd-raw-20261009/launch.json",
-  "submission_state": "submitted; consult Slurm for live state",
-  "accounting": "Metadata-only cron reconciles allocation after termination; no automatic continuation"
+  "submission_state": "completed; one-time continuation also completed",
+  "accounting": "Metadata-only cron reconciles allocation after termination; no automatic continuation",
+  "continuation_result": "experiments/baselines/best-raw-one-hour-20261009.json",
+  "best_publication": "experiments/baselines/hf-best-13717-20261009.json"
 }

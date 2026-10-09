@@ -2,7 +2,7 @@
 # Sourced only by allocated jobs. The user authorized one H200 for CPU stages
 # because ACD115198 has no verified CPU-only partition access.
 set -euo pipefail
-REPO=/home/asciibase64/Llama-3.2-1B-training
+REPO=${TRAIN_SOURCE_ROOT:-/home/asciibase64/Llama-3.2-1B-training}
 DATA_ROOT=${DATA_ROOT:-/work/asciibase64/Llama-3.2-1B-training}
 ENV_PREFIX="$DATA_ROOT/environments/data-py311"
 [[ -n ${SLURM_JOB_ID:-} && -n ${SLURMD_NODENAME:-} ]] || { echo 'Use sbatch, not bash job.sbatch' >&2; exit 1; }

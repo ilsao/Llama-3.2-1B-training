@@ -70,9 +70,42 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps'}
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs', 'lr_scheduler', 'wsd_decay_ratio', 'fixed_horizon', 'checkpoint_policy', 'export_on_completion', 'retain_all_checkpoints', 'sweep_calibration_digest', 'sweep_environment_digest'}
     if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
+    if cfg.get('lr_scheduler', 'cosine') not in {'linear', 'cosine', 'wsd'}:
+        raise ValueError('Unsupported LR scheduler')
+    decay_ratio = cfg.get('wsd_decay_ratio', 0.2)
+    if type(decay_ratio) not in (int, float) or not math.isfinite(decay_ratio) or not 0 < decay_ratio < 1:
+        raise ValueError('WSD decay ratio must be finite and in (0, 1)')
+    for key in ('fixed_horizon', 'export_on_completion', 'retain_all_checkpoints'):
+        if key in cfg and type(cfg[key]) is not bool:
+            raise ValueError(f'{key} must be boolean')
+    if cfg.get('checkpoint_policy', 'best_and_interval') not in {'best_and_interval', 'final_only'}:
+        raise ValueError('Unknown checkpoint policy')
+    for key in ('sweep_calibration_digest', 'sweep_environment_digest'):
+        if key in cfg and not re.fullmatch(r'[0-9a-f]{64}', cfg[key]):
+            raise ValueError('Pin sweep calibration/environment to a SHA256 digest')
+    optimizer = cfg.get('optimizer', 'adamw')
+    if optimizer not in {'adamw', 'muon'}:
+        raise ValueError('optimizer must be adamw or muon')
+    if optimizer == 'muon':
+        muon = cfg.get('muon', {})
+        if set(muon) != {'learning_rate', 'momentum', 'nesterov', 'ns_steps', 'weight_decay', 'adjust_lr_fn', 'epsilon', 'ns_coefficients'}:
+            raise ValueError('Muon requires an explicit complete configuration')
+        for key in ('learning_rate', 'momentum', 'weight_decay', 'epsilon'):
+            if type(muon[key]) not in (int, float) or not math.isfinite(muon[key]):
+                raise ValueError(f'Invalid Muon {key}')
+        if muon['learning_rate'] <= 0 or not 0 <= muon['momentum'] < 1 or muon['weight_decay'] < 0 or muon['epsilon'] <= 0:
+            raise ValueError('Invalid Muon learning rate, momentum or decay')
+        if type(muon['ns_steps']) is not int or not 1 <= muon['ns_steps'] <= 10:
+            raise ValueError('Muon ns_steps must be an integer in [1, 10]')
+        if type(muon['nesterov']) is not bool or muon['adjust_lr_fn'] not in {'original', 'match_rms_adamw'}:
+            raise ValueError('Unsupported native Muon Nesterov/LR adjustment')
+        if len(muon['ns_coefficients']) != 3 or any(type(x) not in (int, float) or not math.isfinite(x) for x in muon['ns_coefficients']):
+            raise ValueError('Muon requires three finite Newton-Schulz coefficients')
+    elif 'muon' in cfg:
+        raise ValueError('Muon options are only valid with optimizer=muon')
     if cfg.get('attention_backend', 'sdpa') not in {'sdpa', 'flash_attention_3'}:
         raise ValueError('Unsupported attention backend')
     for key in ('checkpoint_interval_seconds', 'final_evaluation_reserve_seconds'):
@@ -113,14 +146,36 @@ def load_config(path):
         raise ValueError('Use lab5-training-llama; offline is allowed only for validation')
     if cfg['wandb_mode'] != 'online' and cfg['category'] != 'validation':
         raise ValueError('Training pilots require online W&B logging')
+    horizon = cfg.get('scheduler_steps', cfg['max_steps'])
+    if cfg.get('fixed_horizon', False) and horizon != cfg['max_steps']:
+        raise ValueError('Fixed-horizon schedules must finish on the final planned update')
+    if cfg.get('lr_scheduler') == 'wsd':
+        decay_steps = round(horizon * decay_ratio)
+        if not 2 <= decay_steps <= horizon - cfg['warmup_steps']:
+            raise ValueError('WSD needs a nonoverlapping stable/decay horizon with at least two decay updates')
     return cfg
 
 
-def lr_multiplier(update_index, max_steps, warmup_steps, min_ratio):
+def schedule_multiplier(update_index, cfg):
+    return lr_multiplier(update_index, cfg.get('scheduler_steps', cfg['max_steps']),
+                         cfg['warmup_steps'], cfg['min_lr_ratio'],
+                         cfg.get('lr_scheduler', 'cosine'), cfg.get('wsd_decay_ratio', 0.2))
+
+
+def lr_multiplier(update_index, max_steps, warmup_steps, min_ratio, scheduler='cosine', decay_ratio=0.2):
     """LR for zero-based *next* successful optimizer update; first update is nonzero."""
     if update_index < warmup_steps:
         return (update_index + 1) / warmup_steps
     progress = min(1.0, (update_index - warmup_steps) / max(1, max_steps - warmup_steps - 1))
+    if scheduler == 'linear':
+        return min_ratio + (1 - min_ratio) * (1 - progress)
+    if scheduler == 'wsd':
+        decay_steps = round(max_steps * decay_ratio)
+        decay_start = max_steps - decay_steps
+        progress = min(1.0, max(0.0, (update_index - decay_start) / max(1, decay_steps - 1)))
+        return min_ratio + (1 - min_ratio) * (1 - progress)
+    if scheduler != 'cosine':
+        raise ValueError('Unsupported LR scheduler')
     return min_ratio + (1 - min_ratio) * (1 + math.cos(math.pi * progress)) / 2
 
 
@@ -249,6 +304,8 @@ class ExperimentLedger:
     def reserve(self, reservation, run_id, config, seconds, gpus, resume):
         identifier(run_id)
         hours = gpus * seconds / 3600
+        if seconds > 7200 or hours > 16 or not 1 <= gpus <= 8:
+            raise ValueError('Maximum 7200 seconds and 16 H200-hours per sbatch')
         if gpus != config['world_size'] or seconds <= config['stop_margin_seconds']:
             raise ValueError('Allocation does not match configured world size or stopping margin')
         with self.transaction() as data:

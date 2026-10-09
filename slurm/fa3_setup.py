@@ -20,8 +20,12 @@ def main():
     require_compute()
     root = Path(os.environ['DATA_ROOT'])
     prefix = Path(os.environ['TRAIN_ENV_PREFIX'])
+    expected_prefix = root / 'environments/training-muon-torch291-fa3-94e22c9'
+    if prefix.resolve() != expected_prefix.resolve():
+        raise ValueError('Native Muon setup must use its separate pinned environment')
     if (prefix / 'fa3-build.json').exists():
-        if json.loads((prefix / 'fa3-build.json').read_text())['source_commit'] != SHA:
+        if (json.loads((prefix / 'fa3-build.json').read_text())['source_commit'] != SHA or
+                json.loads((prefix / 'fa3-build.json').read_text())['versions']['torch'].split('+')[0] != '2.9.1'):
             raise ValueError('Existing FA3 environment has another identity')
         return
     if not (prefix / 'bin/python').exists():
@@ -29,8 +33,12 @@ def main():
              '--clone', root / 'environments/training-py311', '--prefix', prefix])
     python = prefix / 'bin/python'
     run([python, '-m', 'pip', 'install', '--cache-dir', root / 'caches/pip',
+         'torch==2.9.1', '--index-url', 'https://download.pytorch.org/whl/cu126'])
+    run([python, '-m', 'pip', 'install', '--cache-dir', root / 'caches/pip',
+         '-r', Path(__file__).resolve().parents[1] / 'requirements-training.txt'])
+    run([python, '-m', 'pip', 'install', '--cache-dir', root / 'caches/pip',
          '-r', Path(__file__).resolve().parents[1] / 'requirements-fa3-build.txt'])
-    source = root / 'caches/fa3-source' / SHA
+    source = root / 'caches/fa3-source/torch291' / SHA
     source.parent.mkdir(parents=True, exist_ok=True)
     if not (source / '.git').exists():
         source.mkdir(exist_ok=True)
@@ -39,7 +47,7 @@ def main():
     run(['git', '-C', source, 'fetch', '--depth=1', 'origin', SHA])
     run(['git', '-C', source, 'checkout', '--detach', SHA])
     run(['git', '-C', source, 'submodule', 'update', '--init', 'csrc/cutlass'])
-    wheels = root / 'caches/fa3-wheels' / SHA
+    wheels = root / 'caches/fa3-wheels/torch291-cu126' / SHA
     wheels.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, MAX_JOBS='8', NVCC_THREADS='1', FLASH_ATTENTION_FORCE_BUILD='TRUE')
     env['PATH'] = str(prefix / 'bin') + os.pathsep + env['PATH']
@@ -60,9 +68,11 @@ def main():
     freeze = subprocess.check_output([python, '-m', 'pip', 'freeze', '--all'], text=True, env=env)
     (prefix / 'requirements-resolved.txt').write_text(freeze)
     metadata = json.loads(subprocess.check_output([python, '-c',
-        'import importlib.metadata,json,torch; print(json.dumps({"versions":{d.metadata["Name"]:d.version for d in importlib.metadata.distributions()},"torch_cuda":torch.version.cuda,"torch_abi":torch._C._GLIBCXX_USE_CXX11_ABI}))'], text=True, env=env))
-    if metadata['versions']['torch'].split('+')[0] != '2.6.0' or metadata['versions']['transformers'] != '4.51.3':
+        'import importlib.metadata,json,torch; print(json.dumps({"versions":{d.metadata["Name"]:d.version for d in importlib.metadata.distributions()},"torch_cuda":torch.version.cuda,"torch_abi":torch._C._GLIBCXX_USE_CXX11_ABI,"native_muon":hasattr(torch.optim,"Muon")}))'], text=True, env=env))
+    if metadata['versions']['torch'].split('+')[0] != '2.9.1' or metadata['versions']['transformers'] != '4.51.3':
         raise ValueError('Pinned training framework changed during installation')
+    if not metadata['native_muon']:
+        raise ValueError('Installed PyTorch does not expose native Muon')
     metadata.update(source_commit=SHA, wheel=str(built[0]), wheel_sha256=file_digest(built[0]),
                     submodules=subprocess.check_output(['git', '-C', source, 'submodule', 'status'], text=True),
                     driver=subprocess.check_output(['nvidia-smi', '--query-gpu=driver_version', '--format=csv,noheader'], text=True),
