@@ -2,7 +2,8 @@
 # Sourced only inside Slurm. Keep the established data environment untouched.
 set -euo pipefail
 SKIP_DATA_ENV=1
-source "${TRAIN_SOURCE_ROOT:?Submit from the intended training worktree}/slurm/common.sh"
+export TRAIN_SOURCE_ROOT=${TRAIN_SOURCE_ROOT:-/home/asciibase64/Llama-3.2-1B-training}
+source "$TRAIN_SOURCE_ROOT/slurm/common.sh"
 export TRAIN_ENV_PREFIX=${TRAIN_ENV_PREFIX:-"$DATA_ROOT/environments/training-muon-torch291-fa3-94e22c9"}
 RUN_ID=${1:?Supply a run ID through slurm/submit_training.py}
 [[ "$RUN_ID" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$ ]] || exit 1

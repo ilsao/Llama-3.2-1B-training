@@ -23,7 +23,8 @@ import uuid
 
 from training_state import (DEFAULT_ROOT, PROJECT, ExperimentLedger, TokenJournal,
                             atomic_json, digest, file_digest, identifier, load_config,
-                            locked, schedule_multiplier, read_json, storage_root, window_indices)
+                            locked, schedule_multiplier, read_json, storage_root, window_indices,
+                            training_target_reached)
 
 STOP = False
 
@@ -611,6 +612,9 @@ def run(args, cfg):
     last_evaluation_time = time.monotonic()
     last_checkpoint_time = time.monotonic()
     while state['global_step'] < cfg['max_steps']:
+        if training_target_reached(cfg, journal_data):
+            stop_reason = 'training_token_target'
+            break
         window_started = time.monotonic()
         reserve_seconds = (max(cfg['stop_margin_seconds'], state['evaluation_seconds'] +
                                state['checkpoint_seconds'] + 30)
@@ -756,6 +760,8 @@ def run(args, cfg):
         if args.stop_after_step and state['global_step'] >= args.stop_after_step:
             stop_reason = 'validation_pause'
             break
+    if stop_reason == 'max_steps' and training_target_reached(cfg, journal_data):
+        stop_reason = 'training_token_target'
     if state['interval_predictions']:
         log({**state['last_step_metrics'], 'train/loss': state['interval_nll'] / state['interval_predictions']})
         state['interval_nll'], state['interval_predictions'] = 0.0, 0
@@ -770,6 +776,8 @@ def run(args, cfg):
                'unused_training_sequences': len(train) - state['cursor'], 'checkpoint': latest,
                'h200_hours_so_far_estimate': compute_used(), 'slurm_job_id': job_id,
                'h200_hours_final': 'pending Slurm accounting reconciliation'}
+    if 'target_training_tokens' in cfg:
+        summary['training_token_target_reached'] = training_target_reached(cfg, journal_data)
     if stop_reason != 'validation_pause' and cfg.get('export_on_completion', True):
         export_metadata = summary
         if cfg['category'] != 'validation' and (run_path / 'best.json').exists():
@@ -789,7 +797,10 @@ def run(args, cfg):
     if lock_context is not None:
         lock_context.__exit__(None, None, None)
     accelerator.end_training()
-    if stop_reason == 'nonfinite_or_skipped_update':
+    if stop_reason == 'nonfinite_or_skipped_update' or (
+            'target_training_tokens' in cfg and stop_reason != 'validation_pause' and
+            not training_target_reached(cfg, journal_data) and
+            stop_reason not in ('wall_time_or_signal', 'data_unavailable')):
         return 2
     return 75 if stop_reason in ('wall_time_or_signal', 'data_unavailable') else 0
 

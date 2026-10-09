@@ -1,5 +1,18 @@
 # AGENTS.md
 
+## Filtered 2B-token run authorization (2026-10-09)
+
+The user authorized merging the winning Muon/WSD worktree into main and pushing
+main to GitHub, then starting `muon-wsd-filtered-2b-20261009` from random weights
+on verified `dolma-dclm10-005`. Use the best step13717 recipe, eight H200/eight
+CPUs, extend WSD to15259 updates with170 warmup updates and20% decay, and stop
+after the complete batch crossing2B non-padding training input tokens (normally
+2,000,027,648). The allocation may last8 hours/64 H200-hours including all
+initialization, evaluation and export. This overrides the earlier120-minute
+submission limit for this run only. Do not load any checkpoint for training or
+automatically resume. Record it as the third formal run in the shared ledger.
+Use a new W&B identity; preserve historical budgets and preparation artifacts.
+
 ## One-time checkpoint continuation authorization (2026-10-09)
 
 The user explicitly authorized exactly one continuation from the current best

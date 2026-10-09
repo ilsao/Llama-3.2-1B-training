@@ -280,3 +280,19 @@ First allocation520031 could not initialize CUDA on25a-hgpn001 and stopped
 before upload; retained source/authorization/accounting and excluded the node.
 Both validation/publication allocations reconciled: 0.09194444444444444 H200-hours.
 Parent training accounting remains21.802222222 H200-hours; no new training.
+
+### 2026-10-09 filtered 2B-token training implementation
+
+Merged sweep/muon into main (merge18c4b56), preserving completed filtering
+and the latest one-time checkpoint authorization. The new request starts
+muon-wsd-filtered-2b-20261009 from random weights, seed42, on verified
+dolma-dclm10-005. Best step13717 optimizer/model/batch/evaluation recipe
+is preserved; WSD horizon extends to15259 updates with170 warmup and20%
+decay. Target2B confirmed input tokens; final whole-batch cap2,000,027,648.
+8 H200/eight CPU threads, allocation limit28800 seconds/64 H200-hours,
+1800-second full-evaluation reserve and300-second stopping margin.
+74 lightweight tests passed, including token accounting, scheduler endpoints,
+old allocation caps, no-resume submission, and uncertain submission retention.
+Fresh-run source/config/preparation/environment seals precede Slurm training.
+Status/accounting owner never resubmits; prematurely stopped runs stay incomplete.
+Full50000 evaluation and reload verification occur in the same allocation.

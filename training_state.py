@@ -70,7 +70,7 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs', 'lr_scheduler', 'wsd_decay_ratio', 'fixed_horizon', 'checkpoint_policy', 'export_on_completion', 'retain_all_checkpoints', 'sweep_calibration_digest', 'sweep_environment_digest'}
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs', 'lr_scheduler', 'wsd_decay_ratio', 'fixed_horizon', 'checkpoint_policy', 'export_on_completion', 'retain_all_checkpoints', 'sweep_calibration_digest', 'sweep_environment_digest', 'target_training_tokens'}
     if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
     if cfg.get('lr_scheduler', 'cosine') not in {'linear', 'cosine', 'wsd'}:
@@ -123,6 +123,9 @@ def load_config(path):
         raise ValueError('Seed and warmup_steps must be integers')
     if cfg['world_size'] > 8 or cfg['max_training_tokens'] > 6_000_000_000:
         raise ValueError('Maximum 8 H200s and 6B processed input tokens per logical run')
+    target = cfg.get('target_training_tokens')
+    if target is not None and (type(target) is not int or not 0 < target <= cfg['max_training_tokens']):
+        raise ValueError('Training token target must be a positive integer within the hard token cap')
     if not 0 < cfg['max_h200_hours'] <= 64 or not 0 < cfg['eval_documents'] <= 10_000:
         raise ValueError('Maximum 64 H200-hours and 10,000 held-out documents')
     if cfg['eval_steps'] > max(1, cfg['max_steps'] // 10):
@@ -154,6 +157,12 @@ def load_config(path):
         if not 2 <= decay_steps <= horizon - cfg['warmup_steps']:
             raise ValueError('WSD needs a nonoverlapping stable/decay horizon with at least two decay updates')
     return cfg
+
+
+def training_target_reached(cfg, journal_data):
+    """Only confirmed processed inputs can satisfy a requested training target."""
+    target = cfg.get('target_training_tokens')
+    return target is not None and journal_data['confirmed_tokens'] >= target
 
 
 def schedule_multiplier(update_index, cfg):
@@ -304,8 +313,14 @@ class ExperimentLedger:
     def reserve(self, reservation, run_id, config, seconds, gpus, resume):
         identifier(run_id)
         hours = gpus * seconds / 3600
-        if seconds > 7200 or hours > 16 or not 1 <= gpus <= 8:
-            raise ValueError('Maximum 7200 seconds and 16 H200-hours per sbatch')
+        filtered_authorization = (run_id == 'muon-wsd-filtered-2b-20261009' and not resume and
+            config.get('category') == 'full' and config.get('sweep_id') == run_id and
+            config.get('target_training_tokens') == 2_000_000_000 and
+            config.get('max_training_tokens') == 2_000_027_648 and
+            config.get('max_h200_hours') == 64 and config.get('world_size') == 8)
+        seconds_limit, hours_limit = (28800, 64) if filtered_authorization else (7200, 16)
+        if seconds > seconds_limit or hours > hours_limit or not 1 <= gpus <= 8:
+            raise ValueError(f'Maximum {seconds_limit} seconds and {hours_limit} H200-hours per sbatch')
         if gpus != config['world_size'] or seconds <= config['stop_margin_seconds']:
             raise ValueError('Allocation does not match configured world size or stopping margin')
         with self.transaction() as data:
