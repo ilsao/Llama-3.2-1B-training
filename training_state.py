@@ -310,10 +310,10 @@ class ExperimentLedger:
                 j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values())
             atomic_json(self.path, data)
 
-    def reserve(self, reservation, run_id, config, seconds, gpus, resume):
+    def reserve(self, reservation, run_id, config, seconds, gpus, resume, *, uninitialized_retry=False):
         identifier(run_id)
         hours = gpus * seconds / 3600
-        filtered_authorization = (run_id == 'muon-wsd-filtered-2b-20261009' and not resume and
+        filtered_authorization = (run_id == 'muon-wsd-filtered-2b-20261009' and (not resume or uninitialized_retry) and
             config.get('category') == 'full' and config.get('sweep_id') == run_id and
             config.get('target_training_tokens') == 2_000_000_000 and
             config.get('max_training_tokens') == 2_000_027_648 and
@@ -325,6 +325,12 @@ class ExperimentLedger:
             raise ValueError('Allocation does not match configured world size or stopping margin')
         with self.transaction() as data:
             runs, jobs = data['runs'], data['jobs']
+            if uninitialized_retry:
+                previous = [j for j in jobs.values() if j['run_id'] == run_id]
+                if (not filtered_authorization or not resume or not previous or
+                    any(j.get('state') != 'FAILED' or 'h200_hours' not in j for j in previous) or
+                    (self.path.parent / 'runs/experiments' / run_id).exists()):
+                    raise ValueError('Retry requires reconciled failed allocations and no model/run initialization')
             if reservation in jobs:
                 raise ValueError('Reservation ID already exists')
             if run_id in runs:

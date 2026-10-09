@@ -1,6 +1,7 @@
 """Token stopping, recipe compatibility and durable submission tests; no torch or workers."""
 import copy
 import contextlib
+import io
 from pathlib import Path
 import subprocess
 import tempfile
@@ -10,6 +11,7 @@ from unittest.mock import patch
 from training_state import (PROJECT, ExperimentLedger, TokenJournal, atomic_json,
                             load_config, read_json, schedule_multiplier, training_target_reached)
 from slurm import submit_filtered_training as owner
+import train
 
 
 class FilteredTrainingTests(unittest.TestCase):
@@ -125,6 +127,41 @@ class FilteredTrainingTests(unittest.TestCase):
             ledger.reserve('resume', owner.RUN_ID, self.cfg, 28800, 8, True)
         with self.assertRaises(ValueError):
             ledger.reserve('overshoot', owner.RUN_ID, self.cfg, 28801, 8, False)
+
+    def test_full_training_export_validation_does_not_enable_checkpoint_resume(self):
+        args = ['train.py', '--config', str(PROJECT / 'configs/train-muon-wsd-filtered-2b.json'),
+                '--prep-id', owner.PREP_ID, '--run-id', owner.RUN_ID, '--validate-export']
+        with patch('sys.argv', args), patch.object(train, 'run', return_value=0) as run:
+            with self.assertRaises(SystemExit) as stopped: train.main()
+        self.assertEqual(stopped.exception.code, 0)
+        self.assertTrue(run.call_args.args[0].validate_export)
+        self.assertFalse(run.call_args.args[0].resume)
+        with patch('sys.argv', args + ['--resume']), patch.object(train, 'run') as run, contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as stopped: train.main()
+        self.assertEqual(stopped.exception.code, 2)
+        run.assert_not_called()
+
+    def test_uninitialized_retry_keeps_cost_and_reduces_walltime(self):
+        directory = self.prepare_submission()
+        def run(command, **kwargs):
+            job = '124\n' if '--time=479' in command else '123\n'
+            return subprocess.CompletedProcess(command, 0, stdout=job if command[0] == 'sbatch' else '', stderr='')
+        with patch.object(owner.subprocess, 'run', side_effect=run): owner.submit()
+        ledger = ExperimentLedger(self.root)
+        with patch('training_state.slurm_record', return_value=dict(job_id='123', gpu_count=8,
+                   h200_hours=8 * 12 / 3600, state='FAILED', elapsed_seconds=12)):
+            ledger.reconcile('123')
+        old = read_json(directory / 'launch.json'); old.update(status='reconciled', slurm_state='FAILED')
+        atomic_json(directory / 'launch.json', old)
+        owner.EXPERIMENT.mkdir(parents=True)
+        with self.assertRaisesRegex(ValueError, 'Existing submission'): owner.submit(retry_uninitialized=True)
+        owner.EXPERIMENT.rmdir()
+        with patch.object(owner.subprocess, 'run', side_effect=run): owner.submit(retry_uninitialized=True)
+        allocation = ledger.allocation('124', owner.RUN_ID)
+        self.assertAlmostEqual(allocation['previous_h200_hours'], 8 * 12 / 3600)
+        self.assertEqual(allocation['requested_seconds'], 479 * 60)
+        self.assertLessEqual(allocation['previous_h200_hours'] + allocation['reserved_h200_hours'], 64)
+        self.assertTrue((directory / 'attempts/123/launch.json').exists())
 
 
 if __name__ == '__main__': unittest.main()

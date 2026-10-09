@@ -72,11 +72,17 @@ def cron(install):
     subprocess.run(['crontab', '-'], input='\n'.join(lines) + '\n', text=True, check=True)
 
 
-def submit(test_only=False):
+def submit(test_only=False, retry_uninitialized=False):
     DIRECTORY.mkdir(parents=True, exist_ok=True)
     with locked(DIRECTORY / '.submission.lock', blocking=False):
+        old = None
         if (DIRECTORY / 'launch.json').exists():
-            raise ValueError('Existing submission; use status/recovery, never another training initialization')
+            old = read_json(DIRECTORY / 'launch.json')
+            if (not retry_uninitialized or old['status'] != 'reconciled' or
+                    old['slurm_state'] != 'FAILED' or EXPERIMENT.exists()):
+                raise ValueError('Existing submission; use status/recovery, never another training initialization')
+        elif retry_uninitialized:
+            raise ValueError('No failed submission to recover')
         cfg = load_config(CONFIG)
         best_path = DEFAULT_ROOT / 'runs/experiments/baseline-muon-wsd-raw-20261009/summary.json'
         best = read_json(best_path)
@@ -110,6 +116,16 @@ def submit(test_only=False):
         tag = 'filtered-2b-' + uuid.uuid4().hex
         frozen = CONFIG if test_only else DIRECTORY / 'config.json'
         command = ['sbatch', '--parsable', '--comment=' + tag]
+        seconds, used = 28800, 0.0
+        if old:
+            previous = [j for j in read_json(DEFAULT_ROOT / 'experiment-ledger.json')['jobs'].values() if j['run_id'] == RUN_ID]
+            if any(j.get('state') != 'FAILED' or 'h200_hours' not in j for j in previous):
+                raise ValueError('Uninitialized retry needs reconciled failed allocations')
+            used = sum(j['h200_hours'] for j in previous)
+            seconds = int((64 - used) * 3600 / 8) // 60 * 60
+            if seconds <= cfg['final_evaluation_reserve_seconds'] + cfg['stop_margin_seconds']:
+                raise ValueError('No remaining logical-run budget for retry')
+            command.append('--time=' + str(seconds // 60))
         if test_only:
             command.append('--test-only')
         command += [str(PROJECT / 'slurm/filtered-train.sbatch'), RUN_ID, PREP_ID, str(frozen)]
@@ -121,7 +137,9 @@ def submit(test_only=False):
         if EXPERIMENT.exists():
             raise ValueError('Fresh training output directory already exists')
         ledger = ExperimentLedger(DEFAULT_ROOT)
-        ledger.reserve(tag, RUN_ID, cfg, 28800, 8, False)
+        ledger.reserve(tag, RUN_ID, cfg, seconds, 8, bool(old), uninitialized_retry=bool(old))
+        if old:
+            atomic_json(DIRECTORY / 'attempts' / old['job_id'] / 'launch.json', old)
         atomic_json(frozen, cfg)
         sealed = {str(PROJECT / name): file_digest(PROJECT / name) for name in SOURCES}
         sealed.update({str(prep / name / 'manifest.json'): file_digest(prep / name / 'manifest.json') for name in ('select', 'pack', 'verify')})
@@ -129,7 +147,9 @@ def submit(test_only=False):
                       configuration=str(frozen), reservation=tag, source_commit=head,
                       source_hashes=sealed, environment=environment, config_digest=digest(cfg),
                       best_recipe_sha256=file_digest(best_path), shared_upper_before_reservation=upper,
-                      requested_seconds=28800, gpus=8, cpus=8, random_initialization=True,
+                      requested_seconds=seconds, previous_h200_hours=used, uninitialized_retry=bool(old),
+                      previous_allocation_job_ids=[j['job_id'] for j in previous] if old else [],
+                      gpus=8, cpus=8, random_initialization=True,
                       checkpoint_initialization=False, submission_command=command,
                       started_utc=dt.datetime.now(dt.timezone.utc).isoformat())
         atomic_json(DIRECTORY / 'launch.json', launch)
@@ -166,7 +186,8 @@ def worker_check():
         if file_digest(Path(name)) != sha:
             raise ValueError('Sealed training input changed: ' + name)
     allocation = ExperimentLedger(DEFAULT_ROOT).allocation(os.environ['SLURM_JOB_ID'], RUN_ID)
-    if allocation['config_digest'] != launch['config_digest'] or allocation['previous_h200_hours'] != 0:
+    if (allocation['config_digest'] != launch['config_digest'] or
+            abs(allocation['previous_h200_hours'] - launch['previous_h200_hours']) > 1e-12):
         raise ValueError('Fresh logical-run reservation changed')
     if digest(read_json(launch['configuration'])) != launch['config_digest']:
         raise ValueError('Frozen training configuration changed')
@@ -212,10 +233,11 @@ def status():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('submit', 'status', 'worker-check', 'training-check'))
+    parser.add_argument('action', choices=('submit', 'retry-uninitialized', 'status', 'worker-check', 'training-check'))
     parser.add_argument('--test-only', action='store_true')
     args = parser.parse_args()
     if args.action == 'submit': submit(args.test_only)
+    elif args.action == 'retry-uninitialized': submit(args.test_only, retry_uninitialized=True)
     elif args.action == 'status': status()
     elif args.action == 'worker-check': worker_check()
     else: training_check()

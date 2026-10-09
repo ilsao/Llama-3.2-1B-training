@@ -814,10 +814,12 @@ def main():
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--stop-after-step', type=int, help='Validation-only deliberate checkpoint pause')
     parser.add_argument('--pause-after-step', type=int, help='Save a faithful checkpoint and pause this logical run')
-    parser.add_argument('--validate-export', action='store_true', help='Validation-only HF reload and weight equality')
+    parser.add_argument('--validate-export', action='store_true', help='Verify HF reload and weight equality after training')
     args = parser.parse_args()
     cfg = load_config(args.config)
-    if (args.stop_after_step or args.validate_export) and cfg['category'] != 'validation':
+    if args.resume and args.run_id == 'muon-wsd-filtered-2b-20261009':
+        parser.error('This filtered training request requires random initialization; checkpoint resume is unauthorized')
+    if args.stop_after_step and cfg['category'] != 'validation':
         parser.error('Validation controls are restricted to validation configurations')
     if args.stop_after_step is not None and not 0 < args.stop_after_step < cfg['max_steps']:
         parser.error('stop-after-step must be within the planned run')

@@ -296,3 +296,19 @@ old allocation caps, no-resume submission, and uncertain submission retention.
 Fresh-run source/config/preparation/environment seals precede Slurm training.
 Status/accounting owner never resubmits; prematurely stopped runs stay incomplete.
 Full50000 evaluation and reload verification occur in the same allocation.
+
+### 2026-10-09 pre-initialization filtered launcher recovery
+
+Main7094ce2 pushed to GitHub. First allocation520098 failed at CLI argument
+validation before run directory, model, tokenizer, journal or W&B creation: the
+existing validate-export flag was limited to validation configurations. All
+eight rank exits2, no training tokens processed. Reconciled12 allocation
+seconds/0.026666667 H200-hours; retained source/launch/config evidence.
+Allow post-training export verification for formal runs while keeping deliberate
+validation pauses restricted. Explicit retry-uninitialized checks terminal
+failed accounting and absence of any training initialization; retains the same
+logical run, configuration and measured costs. No checkpoint load, no new formal
+run, no automatic retry. Remaining allocation rounded down to479 minutes so
+cumulative reservation plus measured cost remains below64 H200-hours.
+Regression tests cover full-run CLI dispatch, denied checkpoint resume, rejected
+retry after initialization, preserved prior cost and reduced wall-time.
