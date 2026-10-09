@@ -143,3 +143,278 @@ perplexity <=20 is still an unachieved target; production preprocessing and full
 model training have not begun. Advance only after completion, artifact checks,
 and accounting. No cleanup is authorized before the independent full eval archive
 and production verification seal exist.
+
+## Data takeover (2026-10-08)
+
+Split514101 completed and reconciled.005 has full canonical104020922rows,
+103970922training documents and independent50000eval originals.
+Clean514774 is RUNNING on1H200/8CPUs; unchanged fingerprint, no startup error
+in single observation. Shared reconciled9.6938888889H200-hours; clean reserved24.
+Heartbeat restored to current visible thread for data through verify only.
+Stage results/accounting gate promotion; full production verification pending.
+
+## Explicit resume after pause (2026-10-08)
+
+Cancelled514774 final89s charged0.0247222222H200-hours; no clean output yet.
+Clean continuation514780 submitted once and PENDING in single snapshot;005
+source/config/split identity unchanged. Heartbeat restored every20min/current
+thread. Shared reconciled9.7186111111, with reservation33.7186111111H200-hours.
+
+## Heartbeat (2026-10-08 12:51 Asia/Taipei)
+
+Clean514780 now RUNNING on25a-hgpn003 with verified1H200/8CPUs and
+unchanged005 startup fingerprint/spawn. stderr empty; clean artifacts absent
+in early snapshot. Score not yet ready.22 completed/cancelled/failed
+allocations agree with ledgers; shared9.7186111111H200-hours reconciled.
+Current-thread heartbeat delivery and completed cycle confirmed.
+
+## Heartbeat (2026-10-08 13:41 Asia/Taipei)
+
+Clean514780 committed scan cursor16141312/104020922 (~15.5%); live
+database mtime confirms ongoing work. Cursor is input scan coverage, not final
+retained count. Diagnostic periodic Timeout stacks at SQLite transaction do
+not show Slurm failure. Score gated on clean completion/accounting. Shared
+reconciled9.7186111111H200-hours, active0.8519444444provisional, reservation24.
+
+## Heartbeat (2026-10-08 13:42 Asia/Taipei)
+
+Clean514780 scan advanced from16141312 to17491968/104020922
+(16.82%); fresh database, manifest absent. No stall observed.
+Score awaits clean success/accounting. Shared actual9.7186111111H200-hours.
+
+## Heartbeat (2026-10-08 13:43 Asia/Taipei)
+
+Clean514780 committed scan18150912/104020922 (17.45%),
+advanced from17491968; database fresh, manifest absent. Score remains
+completion/accounting gated. Shared actual9.7186111111H200-hours.
+
+## Heartbeat (2026-10-08 13:44 Asia/Taipei)
+
+Clean514780 scan advanced from18150912 to18831872/104020922
+(18.10%); database and journal fresh, complete manifest absent.
+Score still gated on clean completion/accounting. Shared actual9.7186111111.
+
+## Heartbeat (2026-10-08 14:21 Asia/Taipei)
+
+Clean514780 database575021056bytes and fresh journal show ongoing updates.
+Indexed progress query temporarily locked after1sec; not retried. Last18.10%
+is from13:44 and is not current. Manifest absent; score remains gated.
+Shared measured9.7186111111H200-hours; active1.5213888889provisional.
+
+## Heartbeat (2026-10-08 14:23 Asia/Taipei)
+
+Clean514780 live database grew to582205440bytes with fresh journal; still
+RUNNING, no manifest. Readonly indexed progress query unavailable; no live
+DB writes or recovery attempted. Previous18.10% remains stale. Score gated
+on clean completion/accounting. Shared measured9.7186111111H200-hours.
+
+## Heartbeat (2026-10-08 14:25 Asia/Taipei)
+
+Clean514780 database grew to587530240bytes; fresh journal, no manifest.
+Readonly cursor unavailable during live journal; root cause unconfirmed.
+Skip repeated cross-node DB queries while journal is present; metadata
+shows continuing work. Last18.10% remains stale; score awaits completion.
+
+## Heartbeat (2026-10-08 14:26 Asia/Taipei)
+
+Clean514780 database grew to596209664bytes with fresh journal.
+Skipped live-journal cursor query; no current percentage or completion claim.
+Score gated on clean success/accounting; shared actual9.7186111111H200-hours.
+
+## Heartbeat (2026-10-08 14:30 Asia/Taipei)
+
+Clean514780 database grew to625307648bytes with fresh journal; RUNNING.
+Cursor query skipped; exact percentage unavailable, clean manifest absent.
+Score gated on successful completion/artifact checks/accounting.22 allocations
+match Slurm; shared measured9.7186111111H200-hours, active1.6733333333provisional.
+
+## Heartbeat (2026-10-08 15:21 Asia/Taipei)
+
+Clean514780 database grew from625307648 to973721600bytes with fresh journal;
+RUNNING. No completion manifest; exact cursor lookup skipped. File growth is
+activity evidence, not completion percentage. Score awaits success and accounting.
+22 allocations match Slurm; shared measured9.7186111111H200-hours,
+active2.5266666667provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 15:23 Asia/Taipei)
+
+Clean514780 database grew from973721600 to988164096bytes; fresh journal,
+still RUNNING. Exact cursor query skipped; no completion manifest. Score gated
+on clean success/artifact checks/accounting.22 allocations match Slurm; shared
+measured9.7186111111H200-hours, active2.5541666667provisional.
+
+## Heartbeat (2026-10-08 15:24 Asia/Taipei)
+
+Clean514780 database grew from988164096 to1001144320bytes; fresh journal,
+still RUNNING. Cursor query skipped; no completion manifest. Score awaits
+clean success/artifact checks/accounting.22 allocations match Slurm; shared
+measured9.7186111111H200-hours, active2.5791666667provisional.
+
+## Heartbeat (2026-10-08 15:26 Asia/Taipei)
+
+Clean514780 database grew from1001144320 to1015570432bytes; fresh journal,
+still RUNNING. Cursor skipped; no completion manifest. Score awaits success
+and accounting.22 allocations match Slurm; shared actual9.7186111111,
+active2.6063888889H200-hours provisional.
+
+## Heartbeat (2026-10-08 15:30 Asia/Taipei)
+
+Clean514780 database grew to1037889536bytes; fresh journal, RUNNING.
+Slurm query delayed; one fallback returned live allocation, no further queries.
+22 historical ledger records unchanged; full sacct refresh not completed here.
+No manifest; score gated. Shared actual9.7186111111, active2.6600000000
+H200-hours provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 15:32 Asia/Taipei)
+
+Clean514780 database grew from1037889536 to1064046592bytes; fresh journal,
+RUNNING. Slurm responded normally;22 allocations again match ledgers. Exact
+cursor skipped, manifest absent, score gated. Shared actual9.7186111111,
+active2.7047222222H200-hours provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 15:33 Asia/Taipei)
+
+Clean514780 database grew from1064046592 to1074606080bytes; fresh journal,
+RUNNING.22 allocations match Slurm/ledgers; cursor skipped, no manifest.
+Score gated; shared actual9.7186111111, active2.7300000000H200-hours
+provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 16:21 Asia/Taipei)
+
+Clean514780 database grew from1074606080 to1370673152bytes; fresh journal,
+RUNNING.22 allocations match Slurm/ledgers; cursor skipped, no manifest.
+Score gated; shared actual9.7186111111, active3.5280555556H200-hours
+provisional within existing24h reservation. File size gives no exact percentage/ETA.
+
+## Heartbeat (2026-10-08 16:23 Asia/Taipei)
+
+Clean514780 database grew from1370673152 to1377107968bytes; fresh journal,
+RUNNING.22 allocations match Slurm/ledgers; cursor skipped, no manifest.
+Score gated; shared actual9.7186111111, active3.5547222222H200-hours
+provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 16:24 Asia/Taipei)
+
+Clean514780 database grew from1377107968 to1382973440bytes; fresh journal,
+RUNNING.22 allocations match Slurm/ledgers; cursor skipped, no manifest.
+Score gated; shared actual9.7186111111, active3.5825000000H200-hours
+provisional within existing24h reservation.
+
+## Heartbeat (2026-10-08 16:26 Asia/Taipei)
+
+Clean514780 database grew from1382973440 to1390231552bytes; RUNNING.
+Journal briefly absent then reappeared before optional progress query; SQL
+lookup skipped. No manifest; score gated.22 allocations match Slurm/ledgers;
+shared actual9.7186111111, active3.6077777778H200-hours provisional.
+
+## Heartbeat (2026-10-08 16:29 Asia/Taipei)
+
+Clean514780 current committed input scan57708800/104020922(55.48%)
+read once with journal absent; advanced from old18831872. Scan includes
+skipped eval rows, not final retained count. Database1420492800bytes;
+no manifest, score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.6502777778H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:30 Asia/Taipei)
+
+Clean514780 database grew from1420492800 to1437315072bytes; fresh journal,
+RUNNING. Cursor skipped; prior55.48% is16:28 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.6838888889H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:33 Asia/Taipei)
+
+Clean514780 input scan advanced from57708800 to61106688/104020922
+(58.74%), one indexed readonly query with journal absent. Scan
+includes skipped eval rows, not final retained count. Database1459765248bytes;
+no manifest, score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.7169444444H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:34 Asia/Taipei)
+
+Clean514780 database grew from1459765248 to1475809280bytes; fresh journal,
+RUNNING. Cursor skipped; prior58.74% is16:32 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.7494444444H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:37 Asia/Taipei)
+
+Clean514780 database grew from1475809280 to1494171648bytes; fresh journal,
+RUNNING. Cursor skipped; prior58.74% is16:32 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.7825000000H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:39 Asia/Taipei)
+
+Clean514780 database grew from1494171648 to1513033728bytes; fresh journal,
+RUNNING. Cursor skipped; prior58.74% is16:32 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.8175000000H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 16:41 Asia/Taipei)
+
+Clean514780 database grew from1513033728 to1535148032bytes; fresh journal,
+RUNNING. Cursor skipped; prior58.74% is16:32 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active3.8638888889H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 17:23 Asia/Taipei)
+
+Clean514780 database grew from1535148032 to1874927616bytes; fresh journal,
+RUNNING. Cursor skipped; prior58.74% is16:32 input scan, not current.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active4.5375000000H200-hours provisional within24h reservation.
+
+## Heartbeat (2026-10-08 17:42 Asia/Taipei)
+
+Clean514780 database grew from1874927616 to1951641600bytes (mtime17:37);
+fresh17:41 journal, RUNNING. Cursor skipped; prior58.74% is16:32 scan.
+No manifest; score gated.22 allocations match Slurm/ledgers; shared actual
+9.7186111111, active4.8672222222H200-hours provisional within24h reservation.
+
+## Concurrent filtering resumed — 2026-10-08T17:13:07.754131+00:00
+
+Clean514780 completed2026-10-08 18:56:42 Asia/Taipei; actual6.125H200-hours already reconciled. Immutable005 clean manifest:103970922 train documents scanned,68250278 exact duplicates and40124 empty removed,35680520 retained, including28586141 Common Crawl documents. Score/select/pack/verify manifests absent. User explicitly authorized filtering in parallel with raw-data sweep. Score517587 submitted for120min,1H200/8CPUs (seven CPU fastText workers plus coordinator). Metadata checks match original source/config/environment/fingerprint, parent and clean artifact size; heavy validation remains on compute. Original split and all50000 reserved originals preserved. Raw sweep controller/preparation unchanged.
+
+2026-10-08T17:20:42.730108+00:00 — User requested stop/restart filtering with16-hour sbatch limit. SentUSR1 then cancelled score517587 while still loading canonical Arrow cache (no scores DB); terminal351sec=0.0975H200-hours reconciled. Submitted continuation517611, same005 fingerprint/source/config/data environment,960minutes,1H200/8CPUs, durable afterany517587 dependency prevents overlap. Filtering helper defaults and score/prepare batch headers now16hours; optimizer-sweep caps/controller unchanged.12 metadata submission tests and shell syntax passed.
+
+2026-10-08T18:08:27.581958+00:00 — Progress inspection: score517611 FAILED at01:45:21 Asia/Taipei,1507sec,exit139/SIGSEGV,actual0.418611H200-hours reconciled. Scores SQLite51802112bytes, no journal; one bounded readonly primary-key query gives committed last_row5574559 (source cursor, not scored-doc count). Periodic traces show Dataset random selection/Arrow table and numpy cumsum; root cause unconfirmed. No blind retry or artifact changes. Optimizer native calibrations all passed; initial15/18 completed,16th active; best completed Muon0.04/WSD subsetPPL621.48 vsAdamW0.0012/WSD1131.06 at matched13107200tokens, early pilot evidence only.
+
+2026-10-08T18:26:23.473469+00:00 — Filtering repair c43345b:16-hour score517834 RUNNING. Canonical index3004shards/104020922rows complete. Runtime checks passed for12 independent originals across6sources, native cross-shard order/duplicates/text projection, exact1/7-worker official classifier outputs and16 saved scores. Same original005 core/config/environment fingerprint; overlay hash receipts agree. Resumed after committed last_row5574559; new scores141568, total2438912/28586141. Initial score throughput2334documents/sec; ETA excludes ranking and later stages. No split/clean/raw-sweep changes or cleanup.
+
+2026-10-09T03:22:15.143118+00:00 — Score517834 complete at03:45:55 Asia/Taipei,28586141documents,5300sec=1.472222H200-hours reconciled; scored ranking index/manifest identities match immutable005 and validated bounded reader. Continued authorized filtering via select/tokenization job518703,16h,1H200/8CPU, unchanged6B whole-document budget and all50000 reserved originals. Raw optimizer campaign complete:18initial+18short allcomplete,31.374444H200-hours inclcalibration, no medium(clear ranking). Best short Muon0.02/WSD subsetPPL55.4453 vsAdamW0.0003/WSD140.8943 at104857600trainingtokens. Formal final training/full reserved-set result remain unrun.
+
+## Filtering tokenization reader repair (2026-10-09)
+
+The slow path repeatedly reopened approximately511MB raw IPC shards in canonical
+shuffle order, with9/10diagnostic main-thread samples in native Dataset.from_file
+and Arrow read_all. Increasing GPU count would not accelerate this CPU reader.
+Graceful select pause preserved81733docs/126905498tokens/117shards; actual cost
+3.9813888889H200-hours was reconciled before continuation519327.
+
+The replacement uses IPC record-batch offsets, lazy sealed sidecars and at most two
+mappings. Immutable core, config, tokenizer, manifests and selected prefix remain
+unchanged.34stdlib tests passed; compute-native fixtures verified batch boundaries,
+corrupt-index rejection, order/duplicates, native shuffle equivalence, exact original
+select interruption/resume and packing masks. Real archived six-source equivalence,
+1/7official scores, latest16saved scores and latest16saved tokenized documents passed.
+
+Matched1024candidate documents generated exactly1765290tokens in both pipelines.
+New complete pipeline43.1747s versus legacy96.6425s is2.2384x faster, including new
+lazy indexing. Conservative process+worker RSS upper26.24GiB is separate from Slurm's
+approximately200GiB MaxRSS statistic; their disagreement has not been independently
+resolved, so do not report the Slurm peak as eliminated. Production throughput and ETA are logged independently, with a
+15-minute snapshot; preprocessing/full verification are still ongoing.
+
+## Seven-worker reader/prefetch (2026-10-09)
+
+User-requested worker-local reading+tokenization with one prefetched batch each
+passed native correctness/budget/resume/mask/overlap checks. All seven workers use
+<=2 outstanding batches, one pinned CPU each; coordinator owns the eighth CPU.
+4096matched documents/6094282tokens:20.5996s old coordinator reader vs7.1494s
+worker prefetch (2.8813x). Production519502 interval524CPU-seconds/106wall-seconds
+uses4.9434cores out of8 (61.79%), compared with13.73% measured for519327.
+Initial219.64s production average981447tokens/s is a short observation, not the
+15-minute result; remaining training-tokenization estimate1.50h excludes eval,
+pack, verify, queue and continuation overhead. Existing prefix and all original
+core/config/split identities preserved; no training or upload was dispatched.

@@ -95,6 +95,57 @@ class SubmissionTests(unittest.TestCase):
 
 
 class PreprocessingSubmissionTests(unittest.TestCase):
+    def test_evaluation_only_override_records_twelve_cpus(self):
+        with patch.object(self.helper.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'123','')) as dispatch:
+            self.helper.submit('select','dolma-dclm10-005',['--evaluation-workers','11'],self.root,self.state_path,cpus=12)
+        self.assertIn('--cpus-per-task=12',dispatch.call_args.args[0])
+        self.assertEqual(read_json(self.state_path)['jobs'][0]['allocated_cpus'],12)
+        with patch.object(self.helper.subprocess,'run') as dispatch:
+            with self.assertRaisesRegex(ValueError,'override'):
+                self.helper.submit('select','dolma-dclm10-005',['--evaluation-workers','11'],self.root,self.state_path,cpus=8)
+            dispatch.assert_not_called()
+
+    def test_rejected_geometry_recovery_retains_reservation_and_blocks_exact_retry(self):
+        from training_state import atomic_json
+        old=dict(tag='rejected16',prep_id='dolma-dclm10-005',stage='select',status='submission_uncertain',
+                 allocated_cpus=16,reserved_h200_hours=16,recovery_preflight_rejected={'reason':'12CPUs/GPU'},ledger='preprocessing')
+        atomic_json(self.state_path,dict(jobs=[],submission_intents=[old],accounting={'shared_measured_plus_outstanding_reservations_upper_bound':16}))
+        with patch.object(self.helper.subprocess,'run') as dispatch:
+            with self.assertRaisesRegex(ValueError,'recovered/reconciled'):
+                self.helper.submit('select','dolma-dclm10-005',['--training-workers','15'],self.root,self.state_path,cpus=16)
+            dispatch.assert_not_called()
+        with patch.object(self.helper.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'123','')):
+            self.helper.submit('select','dolma-dclm10-005',['--training-workers','11'],self.root,self.state_path,minutes=960,cpus=12)
+        state=read_json(self.state_path)
+        self.assertEqual(state['accounting']['shared_measured_plus_outstanding_reservations_upper_bound'],32)
+        self.assertEqual(state['submission_intents'][0]['status'],'submission_uncertain')
+        self.assertEqual(state['jobs'][0]['allocated_cpus'],12)
+        with patch.object(self.helper.subprocess,'run') as dispatch:
+            with self.assertRaisesRegex(ValueError,'recovered/reconciled'):
+                self.helper.submit('select','dolma-dclm10-005',['--training-workers','11'],self.root,self.state_path,cpus=12)
+            dispatch.assert_not_called()
+
+    def test_train_only_override_records_actual_cpus(self):
+        response=subprocess.CompletedProcess([],0,'123','')
+        with patch.object(self.helper.subprocess,'run',return_value=response) as dispatch:
+            self.helper.submit('select','dolma-dclm10-005',['--training-workers','15'],
+                               self.root,self.state_path,minutes=960,cpus=16)
+        self.assertIn('--cpus-per-task=16',dispatch.call_args.args[0])
+        state=read_json(self.state_path)
+        self.assertEqual(state['jobs'][0]['allocated_cpus'],16)
+        self.assertEqual(state['submission_intents'][0]['allocated_cpus'],16)
+        self.assertEqual(state['submission_intents'][0]['reserved_h200_hours'],16)
+
+    def test_cpu_override_cannot_expand_other_stages_or_preparations(self):
+        for stage,prep,extra,cpus in (('pack','dolma-dclm10-005',[],16),
+                ('select','other',['--training-workers','15'],16),
+                ('select','dolma-dclm10-005',[],16),
+                ('select','dolma-dclm10-005',['--training-workers','15'],8)):
+            with self.subTest(stage=stage,prep=prep,cpus=cpus),patch.object(self.helper.subprocess,'run') as dispatch:
+                with self.assertRaisesRegex(ValueError,'override'):
+                    self.helper.submit(stage,prep,extra,self.root,self.state_path,cpus=cpus)
+                dispatch.assert_not_called()
+
     def setUp(self):
         from training_state import atomic_json
         from slurm import submit_preprocessing

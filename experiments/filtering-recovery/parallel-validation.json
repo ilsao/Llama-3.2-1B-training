@@ -1,0 +1,1487 @@
+{
+  "cpu_utilization": {
+    "allocated_cpus": 8,
+    "cpu_seconds": 524,
+    "equivalent_cores": 4.943396226415095,
+    "interval_seconds": 106,
+    "source": "Slurm step519502.1 AveCPU cumulative difference",
+    "timestamp": "2026-10-09T08:16:57.299056+00:00",
+    "utilization_percent": 61.79245283018868
+  },
+  "job_id": "519502",
+  "lightweight_tests_passed": 38,
+  "performance": {
+    "identity": {
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "487d73176d0e47d2f07c676cd9719c80f321a13f41a0b59ba4f6a37d21606ab7",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_batch_checks.py": "6e0cad48d54fff1329a507d3d1d40031e86083a7fe901e9e6d8421cb81beb14e",
+        "slurm/filtering_batch_fixture.py": "ca5ff9cc3cf5a97a40293264433a960524ea9bc524d2ab7d5621a6d0c26eca09",
+        "slurm/filtering_entry.py": "eb01378bf3aff8da24a4124479ce5e6234e2e620439a8e772aa409e284ac53a0",
+        "slurm/filtering_parallel_checks.py": "0413632ddb16f27bb40aa7b123d435e616c3c87dcddeb9e4608048d4f6fd5d63"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "input_sha256": "8dcdaa8179d1599ad5da67855ecbd0a3d5948d6f70c7783532be2d63ba9516aa",
+    "measurements": {
+      "coordinator_reader": {
+        "seconds": 20.59957443922758,
+        "tokens": 6094282,
+        "tokens_per_second": 295845.0436915199
+      },
+      "worker_reader_prefetch": {
+        "seconds": 7.149442134425044,
+        "tokens": 6094282,
+        "tokens_per_second": 852413.6408707503
+      }
+    },
+    "memory_upper_bytes": 29786308608,
+    "passed": true,
+    "slurm_job_id": "519502",
+    "speedup": 2.881284169017782,
+    "stats": {
+      "documents_per_batch": 32,
+      "max_active_mapping_per_prefetch_worker": 1,
+      "max_batches_per_worker": 2,
+      "outstanding_batches": 0,
+      "per_worker_max_batches": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prefetch_slots_per_worker": 1,
+      "retained_raw_shard_cache": 0,
+      "worker_metrics": [
+        {
+          "cpu": 13,
+          "pid": 1215805,
+          "read_end": 6662506.761274976,
+          "read_seconds": 0.02314369473606348,
+          "read_start": 6662506.738129545,
+          "reader_stats": {
+            "batch_reads": 608,
+            "fetch_documents": 608,
+            "fetch_seconds": 0.8230232121422887,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 595
+          },
+          "sequence": 126,
+          "tokenize_end": 6662506.822790108,
+          "tokenize_seconds": 0.06144023593515158,
+          "tokenize_start": 6662506.761349975,
+          "worker": 0
+        },
+        {
+          "cpu": 16,
+          "pid": 1215806,
+          "read_end": 6662506.764736573,
+          "read_seconds": 0.02551816962659359,
+          "read_start": 6662506.739216892,
+          "reader_stats": {
+            "batch_reads": 608,
+            "fetch_documents": 608,
+            "fetch_seconds": 0.7914852695539594,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 592
+          },
+          "sequence": 127,
+          "tokenize_end": 6662506.901317123,
+          "tokenize_seconds": 0.13650665152817965,
+          "tokenize_start": 6662506.764810588,
+          "worker": 1
+        },
+        {
+          "cpu": 17,
+          "pid": 1215808,
+          "read_end": 6662506.470726329,
+          "read_seconds": 0.025434136390686035,
+          "read_start": 6662506.44529096,
+          "reader_stats": {
+            "batch_reads": 575,
+            "fetch_documents": 576,
+            "fetch_seconds": 0.8065754184499383,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 561
+          },
+          "sequence": 121,
+          "tokenize_end": 6662506.631576216,
+          "tokenize_seconds": 0.11824771109968424,
+          "tokenize_start": 6662506.513328623,
+          "worker": 2
+        },
+        {
+          "cpu": 68,
+          "pid": 1215810,
+          "read_end": 6662506.472765041,
+          "read_seconds": 0.025614534504711628,
+          "read_start": 6662506.447148691,
+          "reader_stats": {
+            "batch_reads": 576,
+            "fetch_documents": 576,
+            "fetch_seconds": 0.778854176402092,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 569
+          },
+          "sequence": 122,
+          "tokenize_end": 6662506.691530929,
+          "tokenize_seconds": 0.08631443046033382,
+          "tokenize_start": 6662506.605216603,
+          "worker": 3
+        },
+        {
+          "cpu": 69,
+          "pid": 1215812,
+          "read_end": 6662506.573504655,
+          "read_seconds": 0.027272424660623074,
+          "read_start": 6662506.54622972,
+          "reader_stats": {
+            "batch_reads": 576,
+            "fetch_documents": 576,
+            "fetch_seconds": 0.7446408784016967,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 565
+          },
+          "sequence": 123,
+          "tokenize_end": 6662506.801134886,
+          "tokenize_seconds": 0.1452611032873392,
+          "tokenize_start": 6662506.655873868,
+          "worker": 4
+        },
+        {
+          "cpu": 70,
+          "pid": 1215814,
+          "read_end": 6662506.75689757,
+          "read_seconds": 0.022367386147379875,
+          "read_start": 6662506.734528635,
+          "reader_stats": {
+            "batch_reads": 576,
+            "fetch_documents": 576,
+            "fetch_seconds": 0.7283883383497596,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 564
+          },
+          "sequence": 124,
+          "tokenize_end": 6662506.887803091,
+          "tokenize_seconds": 0.05136117432266474,
+          "tokenize_start": 6662506.836441998,
+          "worker": 5
+        },
+        {
+          "cpu": 73,
+          "pid": 1215816,
+          "read_end": 6662506.758630778,
+          "read_seconds": 0.021847570315003395,
+          "read_start": 6662506.736781761,
+          "reader_stats": {
+            "batch_reads": 576,
+            "fetch_documents": 576,
+            "fetch_seconds": 0.7022323030978441,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 564
+          },
+          "sequence": 125,
+          "tokenize_end": 6662506.857803083,
+          "tokenize_seconds": 0.09909516107290983,
+          "tokenize_start": 6662506.758707988,
+          "worker": 6
+        }
+      ],
+      "worker_pids": [
+        1215805,
+        1215806,
+        1215808,
+        1215810,
+        1215812,
+        1215814,
+        1215816
+      ],
+      "workers": 7,
+      "workers_observed": 7
+    },
+    "timestamp": 1791533499.0681891
+  },
+  "prefix_descriptors_unchanged": true,
+  "preserved_prefix_documents": 305288,
+  "preserved_prefix_shards": 439,
+  "preserved_prefix_tokens": 472451933,
+  "production_progress": {
+    "checkpoint_sha256": "83f4bd5ff9d8f91f24a726eccc7b9db8c006d26880c52467b299ff17f59ca04b",
+    "committed_documents": 507070,
+    "committed_tokens": 785438704,
+    "evaluation_documents": 0,
+    "evaluation_tokens": 0,
+    "identity": {
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "487d73176d0e47d2f07c676cd9719c80f321a13f41a0b59ba4f6a37d21606ab7",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_batch_checks.py": "6e0cad48d54fff1329a507d3d1d40031e86083a7fe901e9e6d8421cb81beb14e",
+        "slurm/filtering_batch_fixture.py": "ca5ff9cc3cf5a97a40293264433a960524ea9bc524d2ab7d5621a6d0c26eca09",
+        "slurm/filtering_entry.py": "eb01378bf3aff8da24a4124479ce5e6234e2e620439a8e772aa409e284ac53a0",
+        "slurm/filtering_parallel_checks.py": "0413632ddb16f27bb40aa7b123d435e616c3c87dcddeb9e4608048d4f6fd5d63"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "last_commit_tokens_per_second": 1415719.192824514,
+    "process_memory_upper_bytes": 29786308608,
+    "reader_stats": {
+      "completed_phases": [],
+      "current": {
+        "documents_per_batch": 32,
+        "max_active_mapping_per_prefetch_worker": 1,
+        "max_batches_per_worker": 2,
+        "outstanding_batches": 14,
+        "per_worker_max_batches": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "prefetch_slots_per_worker": 1,
+        "retained_raw_shard_cache": 0,
+        "worker_metrics": [
+          {
+            "cpu": 13,
+            "pid": 1216132,
+            "read_end": 6662823.890423074,
+            "read_seconds": 0.11961403861641884,
+            "read_start": 6662823.770806804,
+            "reader_stats": {
+              "batch_reads": 28821,
+              "fetch_documents": 28832,
+              "fetch_seconds": 201.1796558983624,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28293
+            },
+            "sequence": 6300,
+            "tokenize_end": 6662824.051362276,
+            "tokenize_seconds": 0.16078418400138617,
+            "tokenize_start": 6662823.890578185,
+            "worker": 0
+          },
+          {
+            "cpu": 16,
+            "pid": 1216133,
+            "read_end": 6662824.024426706,
+            "read_seconds": 0.24705381784588099,
+            "read_start": 6662823.777370843,
+            "reader_stats": {
+              "batch_reads": 28818,
+              "fetch_documents": 28832,
+              "fetch_seconds": 196.30008407123387,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28251
+            },
+            "sequence": 6301,
+            "tokenize_end": 6662824.114633484,
+            "tokenize_seconds": 0.09010892920196056,
+            "tokenize_start": 6662824.024524794,
+            "worker": 1
+          },
+          {
+            "cpu": 17,
+            "pid": 1216135,
+            "read_end": 6662824.023304138,
+            "read_seconds": 0.23997487220913172,
+            "read_start": 6662823.783327478,
+            "reader_stats": {
+              "batch_reads": 28824,
+              "fetch_documents": 28832,
+              "fetch_seconds": 202.42478494532406,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28313
+            },
+            "sequence": 6302,
+            "tokenize_end": 6662824.236267532,
+            "tokenize_seconds": 0.21284821163862944,
+            "tokenize_start": 6662824.023419462,
+            "worker": 2
+          },
+          {
+            "cpu": 68,
+            "pid": 1216137,
+            "read_end": 6662823.920450571,
+            "read_seconds": 0.1295751417055726,
+            "read_start": 6662823.79087375,
+            "reader_stats": {
+              "batch_reads": 28823,
+              "fetch_documents": 28832,
+              "fetch_seconds": 200.56248077750206,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28334
+            },
+            "sequence": 6303,
+            "tokenize_end": 6662824.112922049,
+            "tokenize_seconds": 0.19235375337302685,
+            "tokenize_start": 6662823.920568484,
+            "worker": 3
+          },
+          {
+            "cpu": 69,
+            "pid": 1216140,
+            "read_end": 6662823.96025717,
+            "read_seconds": 0.15907602664083242,
+            "read_start": 6662823.801178781,
+            "reader_stats": {
+              "batch_reads": 28820,
+              "fetch_documents": 28832,
+              "fetch_seconds": 199.43664326146245,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28280
+            },
+            "sequence": 6304,
+            "tokenize_end": 6662824.3058713,
+            "tokenize_seconds": 0.34550108946859837,
+            "tokenize_start": 6662823.960370285,
+            "worker": 4
+          },
+          {
+            "cpu": 70,
+            "pid": 1216142,
+            "read_end": 6662824.020088342,
+            "read_seconds": 0.20830586180090904,
+            "read_start": 6662823.811780708,
+            "reader_stats": {
+              "batch_reads": 28828,
+              "fetch_documents": 28832,
+              "fetch_seconds": 202.4614210827276,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28312
+            },
+            "sequence": 6305,
+            "tokenize_end": 6662824.141665616,
+            "tokenize_seconds": 0.12145596742630005,
+            "tokenize_start": 6662824.020209716,
+            "worker": 5
+          },
+          {
+            "cpu": 73,
+            "pid": 1216144,
+            "read_end": 6662823.697263553,
+            "read_seconds": 0.11873297393321991,
+            "read_start": 6662823.578528261,
+            "reader_stats": {
+              "batch_reads": 28792,
+              "fetch_documents": 28800,
+              "fetch_seconds": 199.98266862425953,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 28240
+            },
+            "sequence": 6299,
+            "tokenize_end": 6662823.762179964,
+            "tokenize_seconds": 0.06479820143431425,
+            "tokenize_start": 6662823.697381863,
+            "worker": 6
+          }
+        ],
+        "worker_pids": [
+          1216132,
+          1216133,
+          1216135,
+          1216137,
+          1216140,
+          1216142,
+          1216144
+        ],
+        "workers": 7,
+        "workers_observed": 7
+      }
+    },
+    "remaining_training_seconds": 5279.7013073477665,
+    "session_seconds": 316.8965844353661,
+    "session_tokens": 312986771,
+    "slurm_job_id": "519502",
+    "timestamp": 1791533816.055711,
+    "timing_scope": "production pipeline elapsed, including reader, tokenization, writing and checkpoints",
+    "tokens_per_second": 987662.1786809964
+  },
+  "progress": {
+    "checkpoint_sha256": "c47011cd4651a2fe79262650efe07f425d34f5b7f2d6ce7938ba3aa2126dc19d",
+    "committed_documents": 425616,
+    "committed_tokens": 656412611,
+    "evaluation_documents": 0,
+    "evaluation_tokens": 0,
+    "identity": {
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "487d73176d0e47d2f07c676cd9719c80f321a13f41a0b59ba4f6a37d21606ab7",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_batch_checks.py": "6e0cad48d54fff1329a507d3d1d40031e86083a7fe901e9e6d8421cb81beb14e",
+        "slurm/filtering_batch_fixture.py": "ca5ff9cc3cf5a97a40293264433a960524ea9bc524d2ab7d5621a6d0c26eca09",
+        "slurm/filtering_entry.py": "eb01378bf3aff8da24a4124479ce5e6234e2e620439a8e772aa409e284ac53a0",
+        "slurm/filtering_parallel_checks.py": "0413632ddb16f27bb40aa7b123d435e616c3c87dcddeb9e4608048d4f6fd5d63"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "last_commit_tokens_per_second": 1241273.3920540793,
+    "process_memory_upper_bytes": 29786308608,
+    "reader_stats": {
+      "completed_phases": [],
+      "current": {
+        "documents_per_batch": 32,
+        "max_active_mapping_per_prefetch_worker": 1,
+        "max_batches_per_worker": 2,
+        "outstanding_batches": 14,
+        "per_worker_max_batches": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "prefetch_slots_per_worker": 1,
+        "retained_raw_shard_cache": 0,
+        "worker_metrics": [
+          {
+            "cpu": 13,
+            "pid": 1216132,
+            "read_end": 6662694.22806659,
+            "read_seconds": 0.3479778403416276,
+            "read_start": 6662693.880086405,
+            "reader_stats": {
+              "batch_reads": 17210,
+              "fetch_documents": 17216,
+              "fetch_seconds": 114.53064741380513,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16900
+            },
+            "sequence": 3759,
+            "tokenize_end": 6662694.384322562,
+            "tokenize_seconds": 0.15614169370383024,
+            "tokenize_start": 6662694.228180936,
+            "worker": 0
+          },
+          {
+            "cpu": 16,
+            "pid": 1216133,
+            "read_end": 6662694.118821132,
+            "read_seconds": 0.31172313168644905,
+            "read_start": 6662693.807095555,
+            "reader_stats": {
+              "batch_reads": 17208,
+              "fetch_documents": 17216,
+              "fetch_seconds": 113.47597987391055,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16857
+            },
+            "sequence": 3760,
+            "tokenize_end": 6662694.379350775,
+            "tokenize_seconds": 0.260404072701931,
+            "tokenize_start": 6662694.118946802,
+            "worker": 1
+          },
+          {
+            "cpu": 17,
+            "pid": 1216135,
+            "read_end": 6662694.024667413,
+            "read_seconds": 0.2745115039870143,
+            "read_start": 6662693.75015445,
+            "reader_stats": {
+              "batch_reads": 17178,
+              "fetch_documents": 17184,
+              "fetch_seconds": 116.3481048149988,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16866
+            },
+            "sequence": 3754,
+            "tokenize_end": 6662694.215574091,
+            "tokenize_seconds": 0.19079048559069633,
+            "tokenize_start": 6662694.024783683,
+            "worker": 2
+          },
+          {
+            "cpu": 68,
+            "pid": 1216137,
+            "read_end": 6662694.006330738,
+            "read_seconds": 0.2450408022850752,
+            "read_start": 6662693.761287346,
+            "reader_stats": {
+              "batch_reads": 17180,
+              "fetch_documents": 17184,
+              "fetch_seconds": 115.2333150729537,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16894
+            },
+            "sequence": 3755,
+            "tokenize_end": 6662694.124498264,
+            "tokenize_seconds": 0.11804618965834379,
+            "tokenize_start": 6662694.006452174,
+            "worker": 3
+          },
+          {
+            "cpu": 69,
+            "pid": 1216140,
+            "read_end": 6662693.950709312,
+            "read_seconds": 0.18117220420390368,
+            "read_start": 6662693.769534827,
+            "reader_stats": {
+              "batch_reads": 17175,
+              "fetch_documents": 17184,
+              "fetch_seconds": 115.47706597484648,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16854
+            },
+            "sequence": 3756,
+            "tokenize_end": 6662694.242611362,
+            "tokenize_seconds": 0.2917877910658717,
+            "tokenize_start": 6662693.950823664,
+            "worker": 4
+          },
+          {
+            "cpu": 70,
+            "pid": 1216142,
+            "read_end": 6662693.902306836,
+            "read_seconds": 0.12386601231992245,
+            "read_start": 6662693.778438755,
+            "reader_stats": {
+              "batch_reads": 17181,
+              "fetch_documents": 17184,
+              "fetch_seconds": 114.78605255112052,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16887
+            },
+            "sequence": 3757,
+            "tokenize_end": 6662694.030833755,
+            "tokenize_seconds": 0.1284078238531947,
+            "tokenize_start": 6662693.902426013,
+            "worker": 5
+          },
+          {
+            "cpu": 73,
+            "pid": 1216144,
+            "read_end": 6662693.912418521,
+            "read_seconds": 0.12478435784578323,
+            "read_start": 6662693.787632381,
+            "reader_stats": {
+              "batch_reads": 17181,
+              "fetch_documents": 17184,
+              "fetch_seconds": 114.66315841209143,
+              "index_seconds": 0.0,
+              "indexes_built": 0,
+              "maximum_cached_shards": 1,
+              "shard_opens": 16860
+            },
+            "sequence": 3758,
+            "tokenize_end": 6662694.12874468,
+            "tokenize_seconds": 0.21622058935463428,
+            "tokenize_start": 6662693.912524201,
+            "worker": 6
+          }
+        ],
+        "worker_pids": [
+          1216132,
+          1216133,
+          1216135,
+          1216137,
+          1216140,
+          1216142,
+          1216144
+        ],
+        "workers": 7,
+        "workers_observed": 7
+      }
+    },
+    "remaining_training_seconds": 5431.150668005866,
+    "session_seconds": 186.97516976390034,
+    "session_tokens": 183960678,
+    "slurm_job_id": "519502",
+    "timestamp": 1791533686.1342971,
+    "timing_scope": "production pipeline elapsed, including reader, tokenization, writing and checkpoints",
+    "tokens_per_second": 983877.5824206667
+  },
+  "runtime_fixture": {
+    "credits": {
+      "documents_per_batch": 32,
+      "max_active_mapping_per_prefetch_worker": 1,
+      "max_batches_per_worker": 2,
+      "outstanding_batches": 0,
+      "per_worker_max_batches": [
+        2,
+        2,
+        2
+      ],
+      "prefetch_slots_per_worker": 1,
+      "retained_raw_shard_cache": 0,
+      "worker_metrics": [
+        {
+          "cpu": 13,
+          "pid": 1215724,
+          "read_end": 6662478.346532777,
+          "read_seconds": 0.0220244862139225,
+          "read_start": 6662478.32450744,
+          "reader_stats": {
+            "batch_reads": 7,
+            "fetch_documents": 96,
+            "fetch_seconds": 0.2904304852709174,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 3
+          },
+          "sequence": 6,
+          "tokenize_end": 6662478.52013535,
+          "tokenize_seconds": 0.0980210704728961,
+          "tokenize_start": 6662478.422114373,
+          "worker": 0
+        },
+        {
+          "cpu": 16,
+          "pid": 1215725,
+          "read_end": 6662478.346740444,
+          "read_seconds": 0.02220426592975855,
+          "read_start": 6662478.32453524,
+          "reader_stats": {
+            "batch_reads": 9,
+            "fetch_documents": 96,
+            "fetch_seconds": 0.29062073212116957,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 3
+          },
+          "sequence": 7,
+          "tokenize_end": 6662478.5202184,
+          "tokenize_seconds": 0.09802012611180544,
+          "tokenize_start": 6662478.42219837,
+          "worker": 1
+        },
+        {
+          "cpu": 17,
+          "pid": 1215726,
+          "read_end": 6662478.346701366,
+          "read_seconds": 0.022140875458717346,
+          "read_start": 6662478.324559725,
+          "reader_stats": {
+            "batch_reads": 7,
+            "fetch_documents": 96,
+            "fetch_seconds": 0.29135751258581877,
+            "index_seconds": 0.0,
+            "indexes_built": 0,
+            "maximum_cached_shards": 1,
+            "shard_opens": 3
+          },
+          "sequence": 8,
+          "tokenize_end": 6662478.520219366,
+          "tokenize_seconds": 0.09802332147955894,
+          "tokenize_start": 6662478.422196149,
+          "worker": 2
+        }
+      ],
+      "worker_pids": [
+        1215724,
+        1215725,
+        1215726
+      ],
+      "workers": 3,
+      "workers_observed": 3
+    },
+    "interrupted_resume_equal": true,
+    "observed_sessions": [
+      {
+        "completed_phases": [
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 2,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              2,
+              2,
+              2
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215612,
+                "read_end": 6662469.83236982,
+                "read_seconds": 0.02093824651092291,
+                "read_start": 6662469.811430705,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.28709540236741304,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 6,
+                "tokenize_end": 6662469.962329015,
+                "tokenize_seconds": 0.09801112208515406,
+                "tokenize_start": 6662469.864317994,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215613,
+                "read_end": 6662469.880667011,
+                "read_seconds": 0.020983977243304253,
+                "read_start": 6662469.859682177,
+                "reader_stats": {
+                  "batch_reads": 9,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.28737312089651823,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 7,
+                "tokenize_end": 6662469.978734617,
+                "tokenize_seconds": 0.09801934193819761,
+                "tokenize_start": 6662469.880715361,
+                "worker": 1
+              },
+              {
+                "cpu": 17,
+                "pid": 1215614,
+                "read_end": 6662469.92083358,
+                "read_seconds": 0.020571845583617687,
+                "read_start": 6662469.900260926,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.28892173152416945,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 8,
+                "tokenize_end": 6662470.018881086,
+                "tokenize_seconds": 0.09801009576767683,
+                "tokenize_start": 6662469.920871076,
+                "worker": 2
+              }
+            ],
+            "worker_pids": [
+              1215612,
+              1215613,
+              1215614
+            ],
+            "workers": 3,
+            "workers_observed": 3
+          },
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 1,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              1,
+              1,
+              0
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215633,
+                "read_end": 6662471.026761821,
+                "read_seconds": 0.31532426457852125,
+                "read_start": 6662470.711436542,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.2952049858868122,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 0,
+                "tokenize_end": 6662471.124866621,
+                "tokenize_seconds": 0.09803065843880177,
+                "tokenize_start": 6662471.026836088,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215634,
+                "read_end": 6662471.026682713,
+                "read_seconds": 0.3152872556820512,
+                "read_start": 6662470.711394079,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.29516822192817926,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 1,
+                "tokenize_end": 6662471.124800486,
+                "tokenize_seconds": 0.09804429765790701,
+                "tokenize_start": 6662471.026756319,
+                "worker": 1
+              }
+            ],
+            "worker_pids": [
+              1215633,
+              1215634,
+              1215635
+            ],
+            "workers": 3,
+            "workers_observed": 2
+          }
+        ],
+        "current": null
+      },
+      {
+        "completed_phases": [
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 2,
+            "outstanding_batches": 6,
+            "per_worker_max_batches": [
+              2,
+              2,
+              2
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215647,
+                "read_end": 6662471.968283843,
+                "read_seconds": 0.31025048065930605,
+                "read_start": 6662471.658032016,
+                "reader_stats": {
+                  "batch_reads": 2,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.2900895783677697,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 0,
+                "tokenize_end": 6662472.066430094,
+                "tokenize_seconds": 0.09805465769022703,
+                "tokenize_start": 6662471.96837555,
+                "worker": 0
+              }
+            ],
+            "worker_pids": [
+              1215647,
+              1215648,
+              1215649
+            ],
+            "workers": 3,
+            "workers_observed": 1
+          }
+        ],
+        "current": {
+          "documents_per_batch": 32,
+          "max_active_mapping_per_prefetch_worker": 1,
+          "max_batches_per_worker": 2,
+          "outstanding_batches": 6,
+          "per_worker_max_batches": [
+            2,
+            2,
+            2
+          ],
+          "prefetch_slots_per_worker": 1,
+          "retained_raw_shard_cache": 0,
+          "worker_metrics": [
+            {
+              "cpu": 13,
+              "pid": 1215647,
+              "read_end": 6662471.968283843,
+              "read_seconds": 0.31025048065930605,
+              "read_start": 6662471.658032016,
+              "reader_stats": {
+                "batch_reads": 2,
+                "fetch_documents": 32,
+                "fetch_seconds": 0.2900895783677697,
+                "index_seconds": 0.0,
+                "indexes_built": 0,
+                "maximum_cached_shards": 1,
+                "shard_opens": 1
+              },
+              "sequence": 0,
+              "tokenize_end": 6662472.066430094,
+              "tokenize_seconds": 0.09805465769022703,
+              "tokenize_start": 6662471.96837555,
+              "worker": 0
+            }
+          ],
+          "worker_pids": [
+            1215647,
+            1215648,
+            1215649
+          ],
+          "workers": 3,
+          "workers_observed": 1
+        }
+      },
+      {
+        "completed_phases": [
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 2,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              2,
+              2,
+              2
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215661,
+                "read_end": 6662472.858591319,
+                "read_seconds": 0.022019091993570328,
+                "read_start": 6662472.83657126,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.2704996196553111,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 6,
+                "tokenize_end": 6662472.996795667,
+                "tokenize_seconds": 0.0980164771899581,
+                "tokenize_start": 6662472.898779295,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215662,
+                "read_end": 6662472.890690768,
+                "read_seconds": 0.020666489377617836,
+                "read_start": 6662472.870023315,
+                "reader_stats": {
+                  "batch_reads": 9,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.2693712878972292,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 4
+                },
+                "sequence": 7,
+                "tokenize_end": 6662472.997109979,
+                "tokenize_seconds": 0.09801686555147171,
+                "tokenize_start": 6662472.899093182,
+                "worker": 1
+              },
+              {
+                "cpu": 17,
+                "pid": 1215663,
+                "read_end": 6662472.920151915,
+                "read_seconds": 0.02063857950270176,
+                "read_start": 6662472.899512482,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 91,
+                  "fetch_seconds": 0.26972956489771605,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 8,
+                "tokenize_end": 6662473.002903096,
+                "tokenize_seconds": 0.08271157741546631,
+                "tokenize_start": 6662472.920191597,
+                "worker": 2
+              }
+            ],
+            "worker_pids": [
+              1215661,
+              1215662,
+              1215663
+            ],
+            "workers": 3,
+            "workers_observed": 3
+          },
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 1,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              1,
+              1,
+              0
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215677,
+                "read_end": 6662473.839721337,
+                "read_seconds": 0.30906442552804947,
+                "read_start": 6662473.530655672,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.2889422932639718,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 0,
+                "tokenize_end": 6662473.937938181,
+                "tokenize_seconds": 0.09812840912491083,
+                "tokenize_start": 6662473.839809888,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215678,
+                "read_end": 6662473.840658248,
+                "read_seconds": 0.3098848173394799,
+                "read_start": 6662473.530772296,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.2897643996402621,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 1,
+                "tokenize_end": 6662473.938882716,
+                "tokenize_seconds": 0.09814316499978304,
+                "tokenize_start": 6662473.84073974,
+                "worker": 1
+              }
+            ],
+            "worker_pids": [
+              1215677,
+              1215678,
+              1215679
+            ],
+            "workers": 3,
+            "workers_observed": 2
+          }
+        ],
+        "current": null
+      },
+      {
+        "completed_phases": [
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 2,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              2,
+              2,
+              2
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215694,
+                "read_end": 6662476.084929697,
+                "read_seconds": 0.02093308325856924,
+                "read_start": 6662476.063995798,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.2926340587437153,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 6,
+                "tokenize_end": 6662476.247521098,
+                "tokenize_seconds": 0.09801933355629444,
+                "tokenize_start": 6662476.149501834,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215695,
+                "read_end": 6662476.085144917,
+                "read_seconds": 0.021116099320352077,
+                "read_start": 6662476.064027985,
+                "reader_stats": {
+                  "batch_reads": 9,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.2928558476269245,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 7,
+                "tokenize_end": 6662476.247525606,
+                "tokenize_seconds": 0.0980093963444233,
+                "tokenize_start": 6662476.149516306,
+                "worker": 1
+              },
+              {
+                "cpu": 17,
+                "pid": 1215696,
+                "read_end": 6662476.08509732,
+                "read_seconds": 0.02104659378528595,
+                "read_start": 6662476.064050043,
+                "reader_stats": {
+                  "batch_reads": 7,
+                  "fetch_documents": 96,
+                  "fetch_seconds": 0.29295665957033634,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 3
+                },
+                "sequence": 8,
+                "tokenize_end": 6662476.247056005,
+                "tokenize_seconds": 0.09801915660500526,
+                "tokenize_start": 6662476.149036945,
+                "worker": 2
+              }
+            ],
+            "worker_pids": [
+              1215694,
+              1215695,
+              1215696
+            ],
+            "workers": 3,
+            "workers_observed": 3
+          },
+          {
+            "documents_per_batch": 32,
+            "max_active_mapping_per_prefetch_worker": 1,
+            "max_batches_per_worker": 1,
+            "outstanding_batches": 1,
+            "per_worker_max_batches": [
+              1,
+              1,
+              0
+            ],
+            "prefetch_slots_per_worker": 1,
+            "retained_raw_shard_cache": 0,
+            "worker_metrics": [
+              {
+                "cpu": 13,
+                "pid": 1215710,
+                "read_end": 6662477.091344675,
+                "read_seconds": 0.3113773101940751,
+                "read_start": 6662476.77996627,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.2912755096331239,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 0,
+                "tokenize_end": 6662477.189470428,
+                "tokenize_seconds": 0.09805596899241209,
+                "tokenize_start": 6662477.091414581,
+                "worker": 0
+              },
+              {
+                "cpu": 16,
+                "pid": 1215711,
+                "read_end": 6662477.09132433,
+                "read_seconds": 0.31194622721523046,
+                "read_start": 6662476.779376999,
+                "reader_stats": {
+                  "batch_reads": 3,
+                  "fetch_documents": 32,
+                  "fetch_seconds": 0.29182759299874306,
+                  "index_seconds": 0.0,
+                  "indexes_built": 0,
+                  "maximum_cached_shards": 1,
+                  "shard_opens": 1
+                },
+                "sequence": 1,
+                "tokenize_end": 6662477.189445736,
+                "tokenize_seconds": 0.09805097430944443,
+                "tokenize_start": 6662477.091394974,
+                "worker": 1
+              }
+            ],
+            "worker_pids": [
+              1215710,
+              1215711,
+              1215712
+            ],
+            "workers": 3,
+            "workers_observed": 2
+          }
+        ],
+        "current": null
+      }
+    ],
+    "ordered_tokens_equal": true,
+    "packing_masks_equal": true,
+    "passed": true,
+    "read_compute_overlap": true,
+    "slurm_job_id": "519502",
+    "timeline": [
+      {
+        "cpu": 13,
+        "pid": 1215724,
+        "read_end": 6662478.225814689,
+        "read_seconds": 0.3080985303968191,
+        "read_start": 6662477.917715141,
+        "reader_stats": {
+          "batch_reads": 2,
+          "fetch_documents": 32,
+          "fetch_seconds": 0.2879779729992151,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 1
+        },
+        "sequence": 0,
+        "tokenize_end": 6662478.323910469,
+        "tokenize_seconds": 0.09801837708801031,
+        "tokenize_start": 6662478.225892218,
+        "worker": 0
+      },
+      {
+        "cpu": 16,
+        "pid": 1215725,
+        "read_end": 6662478.225874708,
+        "read_seconds": 0.30792680382728577,
+        "read_start": 6662477.917946702,
+        "reader_stats": {
+          "batch_reads": 3,
+          "fetch_documents": 32,
+          "fetch_seconds": 0.28780536726117134,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 1
+        },
+        "sequence": 1,
+        "tokenize_end": 6662478.324007,
+        "tokenize_seconds": 0.09805136919021606,
+        "tokenize_start": 6662478.225955808,
+        "worker": 1
+      },
+      {
+        "cpu": 17,
+        "pid": 1215726,
+        "read_end": 6662478.225878476,
+        "read_seconds": 0.3082691412419081,
+        "read_start": 6662477.917608147,
+        "reader_stats": {
+          "batch_reads": 3,
+          "fetch_documents": 32,
+          "fetch_seconds": 0.28814892191439867,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 1
+        },
+        "sequence": 2,
+        "tokenize_end": 6662478.323997119,
+        "tokenize_seconds": 0.09803665149956942,
+        "tokenize_start": 6662478.22596057,
+        "worker": 2
+      },
+      {
+        "cpu": 13,
+        "pid": 1215724,
+        "read_end": 6662478.246562022,
+        "read_seconds": 0.02061833068728447,
+        "read_start": 6662478.225942919,
+        "reader_stats": {
+          "batch_reads": 4,
+          "fetch_documents": 64,
+          "fetch_seconds": 0.2884990945458412,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 2
+        },
+        "sequence": 3,
+        "tokenize_end": 6662478.422097736,
+        "tokenize_seconds": 0.09801659174263477,
+        "tokenize_start": 6662478.324081228,
+        "worker": 0
+      },
+      {
+        "cpu": 16,
+        "pid": 1215725,
+        "read_end": 6662478.2468088,
+        "read_seconds": 0.020799871534109116,
+        "read_start": 6662478.22600814,
+        "reader_stats": {
+          "batch_reads": 6,
+          "fetch_documents": 64,
+          "fetch_seconds": 0.2885102666914463,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 2
+        },
+        "sequence": 4,
+        "tokenize_end": 6662478.422181412,
+        "tokenize_seconds": 0.09801800455898046,
+        "tokenize_start": 6662478.324163527,
+        "worker": 1
+      },
+      {
+        "cpu": 17,
+        "pid": 1215726,
+        "read_end": 6662478.24726296,
+        "read_seconds": 0.021252096630632877,
+        "read_start": 6662478.226009988,
+        "reader_stats": {
+          "batch_reads": 5,
+          "fetch_documents": 64,
+          "fetch_seconds": 0.2893079314380884,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 2
+        },
+        "sequence": 5,
+        "tokenize_end": 6662478.422180332,
+        "tokenize_seconds": 0.09801764693111181,
+        "tokenize_start": 6662478.324162784,
+        "worker": 2
+      },
+      {
+        "cpu": 13,
+        "pid": 1215724,
+        "read_end": 6662478.346532777,
+        "read_seconds": 0.0220244862139225,
+        "read_start": 6662478.32450744,
+        "reader_stats": {
+          "batch_reads": 7,
+          "fetch_documents": 96,
+          "fetch_seconds": 0.2904304852709174,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 3
+        },
+        "sequence": 6,
+        "tokenize_end": 6662478.52013535,
+        "tokenize_seconds": 0.0980210704728961,
+        "tokenize_start": 6662478.422114373,
+        "worker": 0
+      },
+      {
+        "cpu": 16,
+        "pid": 1215725,
+        "read_end": 6662478.346740444,
+        "read_seconds": 0.02220426592975855,
+        "read_start": 6662478.32453524,
+        "reader_stats": {
+          "batch_reads": 9,
+          "fetch_documents": 96,
+          "fetch_seconds": 0.29062073212116957,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 3
+        },
+        "sequence": 7,
+        "tokenize_end": 6662478.5202184,
+        "tokenize_seconds": 0.09802012611180544,
+        "tokenize_start": 6662478.42219837,
+        "worker": 1
+      },
+      {
+        "cpu": 17,
+        "pid": 1215726,
+        "read_end": 6662478.346701366,
+        "read_seconds": 0.022140875458717346,
+        "read_start": 6662478.324559725,
+        "reader_stats": {
+          "batch_reads": 7,
+          "fetch_documents": 96,
+          "fetch_seconds": 0.29135751258581877,
+          "index_seconds": 0.0,
+          "indexes_built": 0,
+          "maximum_cached_shards": 1,
+          "shard_opens": 3
+        },
+        "sequence": 8,
+        "tokenize_end": 6662478.520219366,
+        "tokenize_seconds": 0.09802332147955894,
+        "tokenize_start": 6662478.422196149,
+        "worker": 2
+      }
+    ],
+    "whole_document_budget_and_skips_equal": true,
+    "worker_count": 3
+  },
+  "status": "production resumed; worker-prefetch gate passed",
+  "updated_utc": "2026-10-09T08:14:47.559970+00:00"
+}

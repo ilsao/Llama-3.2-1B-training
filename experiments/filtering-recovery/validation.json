@@ -1,0 +1,66 @@
+{
+  "code_commit": "c43345b",
+  "job_id": "517834",
+  "lightweight_tests_passed": 38,
+  "progress_at_check": {
+    "completed_documents": 2438912,
+    "expected_documents": 28586141,
+    "identity": {
+      "overlay_hashes": {
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_entry.py": "c7932b2e219134b61c69b6eef676940946cd615ca48a49a0dad886baea615b09"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "job_id": "517834",
+    "last_row": 5755601,
+    "maximum_cached_shards": 2,
+    "remaining_seconds_estimate": 11200.667018731689,
+    "session_documents": 141568,
+    "session_documents_per_second": 2334.4349900119423,
+    "session_seconds": 60.643367926590145,
+    "status": "running",
+    "updated_utc": "2026-10-08T18:26:00.479369+00:00"
+  },
+  "recorded_utc": "2026-10-08T18:26:23.473469+00:00",
+  "remaining_time_note": "Initial score-only estimate; excludes ranking-index construction and later select/pack/verify",
+  "runtime_validation": {
+    "archived_documents": 12,
+    "completed_utc": "2026-10-08T18:24:59.715717+00:00",
+    "duplicate_and_order_preservation": true,
+    "existing_scores_verified": 16,
+    "identity": {
+      "overlay_hashes": {
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_entry.py": "c7932b2e219134b61c69b6eef676940946cd615ca48a49a0dad886baea615b09"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "maximum_cached_shards": 2,
+    "native_selection": true,
+    "official_worker_equivalence": [
+      1,
+      7
+    ],
+    "passed": true,
+    "slurm_job_id": "517834",
+    "sources": {
+      "common_crawl": 2,
+      "dolma1_7": 2,
+      "finemath": 2,
+      "olmocr_science_pdfs": 2,
+      "rpj": 2,
+      "stack_edu": 2
+    }
+  },
+  "source_identity": {
+    "overlay_hashes": {
+      "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+      "slurm/filtering_entry.py": "c7932b2e219134b61c69b6eef676940946cd615ca48a49a0dad886baea615b09"
+    },
+    "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+    "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+  }
+}

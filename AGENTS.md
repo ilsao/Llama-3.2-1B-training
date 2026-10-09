@@ -1,5 +1,17 @@
 # AGENTS.md
 
+## One-time checkpoint continuation authorization (2026-10-09)
+
+The user explicitly authorized exactly one continuation from the current best
+Muon + WSD checkpoint on unfiltered raw data for a one-hour training phase while
+filtering verification runs. This exception applies only to
+`best-raw-one-hour-20261009`, retaining the original logical run, eight-GPU
+geometry, optimizer/scheduler/RNG/data cursor/W&B identity and cumulative token
+and compute accounting. Initialization and final checkpoint/evaluation overhead
+may use the separate stopping margin. Do not reset the 6B-token or 64-H200-hour
+logical-run caps. Subsequent training requests must start from random weights;
+this authorization does not permit another checkpoint load for training.
+
 ## Scope and objective
 
 These instructions apply to the entire repository. Follow the user's explicit

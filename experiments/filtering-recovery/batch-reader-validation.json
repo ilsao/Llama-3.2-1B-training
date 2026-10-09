@@ -1,0 +1,118 @@
+{
+  "controller_path": "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/filtering-access/batch-reader-v1/controller.json",
+  "cpu_utilization": {
+    "allocated_cpus": 8,
+    "allocation_utilization_percent": 13.729508196721312,
+    "cpu_seconds": 67,
+    "equivalent_cores": 1.098360655737705,
+    "sample_interval_seconds": 61,
+    "sampled_utc": "2026-10-09T07:48:10.922543+00:00",
+    "source": "Slurm step519327.1 AveCPU cumulative difference"
+  },
+  "implementation": "record-batch seek reader; original selection/packing core unchanged",
+  "job_id": "519327",
+  "lightweight_tests_passed": 34,
+  "performance": {
+    "checkpoint_sha256": "4caaa41bbc608d9e7d6db156d763ce454cf719587b1c2ead82cf045581ad8ce5",
+    "identity": {
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_batch_checks.py": "6ab339cbf3d151b6838841ff60e339d46de9c27c18d68cd19cb483710fd6e64b",
+        "slurm/filtering_batch_fixture.py": "ca5ff9cc3cf5a97a40293264433a960524ea9bc524d2ab7d5621a6d0c26eca09",
+        "slurm/filtering_entry.py": "e0da6289684bc19604181b7999b764a6cdc44c292a631b229e9e0e14be4aee47"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "input_sha256": "02abc0520650ef190a5c513d54038fa3e80c84cbe577d8c60231989ce11cb7f6",
+    "lazy_index_cost_included": true,
+    "measurements": {
+      "batch": {
+        "documents": 1024,
+        "reader_seconds": 35.96447291225195,
+        "seconds": 43.17470289487392,
+        "tokens": 1765290,
+        "tokens_per_second": 40887.137180730686
+      },
+      "legacy": {
+        "documents": 1024,
+        "reader_seconds": 89.31696850247681,
+        "seconds": 96.64251656178385,
+        "tokens": 1765290,
+        "tokens_per_second": 18266.184106158336
+      }
+    },
+    "memory_limit_bytes": 171798691840,
+    "memory_upper_bytes": 28173815808,
+    "passed": true,
+    "reader_stats": {
+      "batch_reads": 1091,
+      "fetch_documents": 1111,
+      "fetch_seconds": 37.55375716742128,
+      "index_seconds": 36.3369768448174,
+      "indexes_built": 666,
+      "maximum_cached_shards": 2,
+      "shard_opens": 1050
+    },
+    "slurm_job_id": "519327",
+    "speedup": 2.238406059147615,
+    "timestamp": 1791531114.1675003
+  },
+  "production_rate_vs_prior_overall": 20.53047916455375,
+  "progress_path": "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/filtering-access/batch-reader-v1/progress.json",
+  "runtime_fixture": {
+    "corrupt_index_rejected": true,
+    "interrupted_select_equal": true,
+    "maximum_cached_shards": 2,
+    "packing_masks_equal": true,
+    "passed": true,
+    "real_ipc_boundaries": true,
+    "slurm_job_id": "519327"
+  },
+  "saved_token_checks": {
+    "committed_documents": 81733,
+    "committed_tokens": 126905498,
+    "documents": 16,
+    "state_sha256": "4caaa41bbc608d9e7d6db156d763ce454cf719587b1c2ead82cf045581ad8ce5"
+  },
+  "status": "preflight passed; production resumed",
+  "sustained_15minute": {
+    "checkpoint_sha256": "55f1b6a972aedc39b0cd8549519685c291255574c4b0bc0f97e8314a7890ec87",
+    "committed_documents": 187443,
+    "committed_tokens": 291555321,
+    "evaluation_documents": 0,
+    "evaluation_tokens": 0,
+    "identity": {
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "slurm/filtering_batch_checks.py": "6ab339cbf3d151b6838841ff60e339d46de9c27c18d68cd19cb483710fd6e64b",
+        "slurm/filtering_batch_fixture.py": "ca5ff9cc3cf5a97a40293264433a960524ea9bc524d2ab7d5621a6d0c26eca09",
+        "slurm/filtering_entry.py": "e0da6289684bc19604181b7999b764a6cdc44c292a631b229e9e0e14be4aee47"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "last_commit_tokens_per_second": 190153.83751640088,
+    "process_memory_upper_bytes": 28176998400,
+    "reader_stats": {
+      "batch_reads": 106767,
+      "fetch_documents": 106839,
+      "fetch_seconds": 680.2221162011847,
+      "index_seconds": 269.23454319592565,
+      "indexes_built": 2971,
+      "maximum_cached_shards": 2,
+      "shard_opens": 104817
+    },
+    "remaining_training_seconds": 31361.712067848537,
+    "session_seconds": 904.5721963364631,
+    "session_tokens": 164649823,
+    "slurm_job_id": "519327",
+    "timestamp": 1791532018.7940016,
+    "timing_scope": "production pipeline elapsed, including reader, tokenization, writing and checkpoints",
+    "tokens_per_second": 182019.54876220532
+  },
+  "sustained_15minute_status": "complete",
+  "updated_utc": "2026-10-09T07:48:10.925977+00:00"
+}

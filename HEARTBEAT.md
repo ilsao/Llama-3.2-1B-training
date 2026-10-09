@@ -1,3 +1,19 @@
+# Automatic baseline takeover — 2026-10-08
+
+The user explicitly authorized automatic data -> FA3 -> sweep -> baseline -> full evaluation.
+During implementation the maintenance lease suppresses cron deliveries. Once installed,
+slurm/auto_baseline.py is the sole submission owner. Legacy queued Codex heartbeats
+must only report status, never mutate state, submit jobs, or restore the old cron.
+The campaign cap is 16 H200-hours and 7200 allocation-seconds including validation,
+scaling, LR candidates, baseline and full evaluation. Data/setup costs are separate
+but charged to the shared ledgers. Deadline: 2026-10-09 23:59 Asia/Taipei.
+
+# USER RESUME — 2026-10-08
+
+The user explicitly resumed the data pipeline. The prior pause is revoked.
+Use research-state.yaml for live job IDs; data-only scope through verify remains.
+If a future user pause occurs, disable heartbeat, preserve artifacts and stop.
+
 # Autoresearch heartbeat
 
 Every 20 minutes, read AGENTS.md, research-state.yaml, findings.md and research-log.md.
@@ -103,3 +119,22 @@ delivery receipts live in runs/heartbeat/target.json and last-run.json. Install
 defaults to CODEX_THREAD_ID; use --thread UUID only to intentionally bind another
 user-selected task. Do not launch hidden codex exec research cycles. The manual
 --check-only option remains a standalone read-only CLI-access check.
+
+## Current takeover scope (2026-10-08)
+
+The user authorized this visible thread to resume the stopped DATA pipeline.
+This section narrows older next-step instructions: process dolma-dclm10-005
+through clean -> score -> select -> pack -> verify only. Do not automatically
+submit training, scaling, model validation, upload, or artifact cleanup.
+Split514101 completed exit0 at12:21 Asia/Taipei and is reconciled
+(16775s, one H200, 4.6597222222 H200-hours). Complete seed42 split manifest
+and all50000 evaluation originals are present; config/source identity unchanged.
+Read current state for the live clean job. On each tick inspect once, reconcile
+terminal allocations, validate stage artifacts, and advance exactly eligible work
+using durable wrappers. Exit75 continues the same stage/ID after accounting.
+After successful production verify, report prepared-data paths and disable this
+heartbeat. Never duplicate a live/uncertain submission or resume the old thread.
+
+This takeover controller is bound to thread01a119cd-05e8-7ae2-9f40-09fffcd641c1.
+If CODEX_THREAD_ID differs, do not mutate research state or submit jobs; report
+stale routing and stop that cycle. Old queued prompts must not take over.

@@ -1,0 +1,308 @@
+{
+  "allocated_cpus": 8,
+  "allocated_h200_count": 1,
+  "checks": {
+    "fixture": {
+      "byte_identical_shards": true,
+      "canonical_masks_spans_order": true,
+      "full_original_verification_equal": true,
+      "job_id": "519745",
+      "original_resume": true,
+      "parallel_resume": true,
+      "passed": true,
+      "quality_membership_corruption_rejected": true,
+      "updated_checksum_mask_corruption_rejected": true,
+      "workers": 3
+    },
+    "identity": {
+      "execution_resources": {
+        "cpus": 8,
+        "library_threads_per_worker": 1,
+        "maximum_outstanding_tasks": 14,
+        "raw_shard_cache_per_worker": 0,
+        "workers": 7
+      },
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
+        "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+        "slurm/filtering_batch_checks.py": "8fad154cb7a34094dd3f5f3050f7102c0a06282b03c4879d128765e7f52ad1cb",
+        "slurm/filtering_entry.py": "ad43997920c9fe035ce983b6747fe9a287ecbb23d91973d2635d1cd67bc15053",
+        "slurm/filtering_parallel_checks.py": "340af0e3b47aed8f7c796f86c0e8a862251f2476270f8683e3774078a8c5757a",
+        "slurm/packing_checks.py": "ce4cc33fd5c92b0633c2a8277d2022b78c83bd562521311d734485923f6e44b4",
+        "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
+        "verification_parallel.py": "f1c0193bb8e09df9296c56568921d6fe4596f97bd36fc5effbb7cfb00e4682cb"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "select_sha256": "17fb97492fc0d186e4207c80ce403962554e211a2b3da07d9e448038191ce7bf",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "job_id": "519745",
+    "passed": true,
+    "performance": {
+      "byte_identical": true,
+      "measurements": {
+        "parallel": {
+          "seconds": 4.158889967016876,
+          "tokens": 34242560,
+          "tokens_per_second": 8233581.621915762
+        },
+        "serial": {
+          "seconds": 19.573788528330624,
+          "tokens": 34242560,
+          "tokens_per_second": 1749408.9072454295
+        }
+      },
+      "memory_upper_bytes": 24766447616,
+      "passed": true,
+      "speedup": 4.706493483493308,
+      "stats": {
+        "maximum_outstanding_tasks": 14,
+        "worker_pids": [
+          1316804,
+          1316807,
+          1316808,
+          1316809,
+          1316810,
+          1316811,
+          1316812
+        ],
+        "workers": 7
+      },
+      "timing_scope": "matched preplanned shards; includes read/pack/write/hash and worker startup"
+    },
+    "saved_prefix": {
+      "passed": true,
+      "reconstructed_recent_shards": 2,
+      "saved_cursor": [
+        1828,
+        78
+      ],
+      "shards": 1832
+    }
+  },
+  "immutable_core_and_manifests_verified": true,
+  "job_id": "519745",
+  "lightweight_tests_passed": 62,
+  "max_outstanding_tasks": 14,
+  "packing_result": {
+    "allocation_h200_hours": 0.195,
+    "carry": {
+      "labels": [],
+      "spans": [],
+      "tokens": []
+    },
+    "completed_utc": "2026-10-09T10:33:18Z",
+    "eval_cursor": [
+      1563,
+      0
+    ],
+    "evaluation_input_tokens": 76982723,
+    "evaluation_prediction_tokens": 76930208,
+    "evaluation_sequence_count": 52515,
+    "evaluation_shards": 410,
+    "subset_prediction_tokens": 15146114,
+    "train_cursor": [
+      5568,
+      0
+    ],
+    "training_sequence_count": 732422,
+    "training_shards": 5584,
+    "training_tokens": 6000000000
+  },
+  "prefix_descriptors_unchanged": true,
+  "preserved_prefix_shards": 1832,
+  "preserved_prefix_tokens": 1962541056,
+  "production_progress": {
+    "committed_eval_shards": 410,
+    "committed_train_shards": 5584,
+    "evaluation_input_tokens": 76982723,
+    "identity": {
+      "execution_resources": {
+        "cpus": 8,
+        "library_threads_per_worker": 1,
+        "maximum_outstanding_tasks": 14,
+        "raw_shard_cache_per_worker": 0,
+        "workers": 7
+      },
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
+        "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+        "slurm/filtering_batch_checks.py": "8fad154cb7a34094dd3f5f3050f7102c0a06282b03c4879d128765e7f52ad1cb",
+        "slurm/filtering_entry.py": "ad43997920c9fe035ce983b6747fe9a287ecbb23d91973d2635d1cd67bc15053",
+        "slurm/filtering_parallel_checks.py": "340af0e3b47aed8f7c796f86c0e8a862251f2476270f8683e3774078a8c5757a",
+        "slurm/packing_checks.py": "ce4cc33fd5c92b0633c2a8277d2022b78c83bd562521311d734485923f6e44b4",
+        "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
+        "verification_parallel.py": "f1c0193bb8e09df9296c56568921d6fe4596f97bd36fc5effbb7cfb00e4682cb"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "select_sha256": "17fb97492fc0d186e4207c80ce403962554e211a2b3da07d9e448038191ce7bf",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "job_id": "519745",
+    "maximum_outstanding_tasks": 14,
+    "phase": "complete",
+    "remaining_training_seconds": 0.0,
+    "session_seconds": 637.2326885489747,
+    "timestamp": 1791541998.8113978,
+    "training_tokens": 6000000000,
+    "training_tokens_per_second": 6335925.661932988,
+    "worker_pids": [
+      1316833,
+      1316836,
+      1316837,
+      1316838,
+      1316839,
+      1316840,
+      1316841
+    ],
+    "workers": 7
+  },
+  "shared_h200_hours_upper_bound": 117.80333333333334,
+  "status": "production packing and full real-data parallel verification complete",
+  "timestamp": "2026-10-09T12:06:51.914577+00:00",
+  "verification_accounting": {
+    "allocated_cpus": 8,
+    "exit_code": 0,
+    "h200_hours": 1.0830555555555557,
+    "job_id": "519786",
+    "stage": "verify",
+    "state": "COMPLETED",
+    "status": "reconciled"
+  },
+  "verification_job_id": "519786",
+  "verification_progress": {
+    "completed_tasks": null,
+    "elapsed_seconds": 3795.4699601223692,
+    "identity": {
+      "execution_resources": {
+        "cpus": 8,
+        "library_threads_per_worker": 1,
+        "maximum_outstanding_tasks": 14,
+        "raw_shard_cache_per_worker": 0,
+        "workers": 7
+      },
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
+        "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+        "slurm/filtering_batch_checks.py": "8fad154cb7a34094dd3f5f3050f7102c0a06282b03c4879d128765e7f52ad1cb",
+        "slurm/filtering_entry.py": "ad43997920c9fe035ce983b6747fe9a287ecbb23d91973d2635d1cd67bc15053",
+        "slurm/filtering_parallel_checks.py": "340af0e3b47aed8f7c796f86c0e8a862251f2476270f8683e3774078a8c5757a",
+        "slurm/packing_checks.py": "8ca5d1eab29867d68f943b2bcccb60e228197ea516c41282ad39265a8e5f779a",
+        "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
+        "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "select_sha256": "17fb97492fc0d186e4207c80ce403962554e211a2b3da07d9e448038191ce7bf",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "job_id": "519786",
+    "maximum_outstanding_tasks": 14,
+    "phase": "complete",
+    "timestamp": 1791546776.438153,
+    "total_tasks": null,
+    "worker_pids": [
+      1357487,
+      1357490,
+      1357492,
+      1357494,
+      1357496,
+      1357499,
+      1357501
+    ],
+    "workers": 7
+  },
+  "verification_recoveries": [
+    {
+      "allocation_h200_hours": 0.10083333333333333,
+      "cause": "Archive schema has no flattened id; erroneous unconditional doc[id] access in parallel verifier",
+      "continuation_job_id": "519786",
+      "exit_code": 1,
+      "failed_job_id": "519754",
+      "fix": "Archive IDs validated by full JSON equality; native fixture matches immutable archive schema"
+    }
+  ],
+  "verification_recovery_checks": {
+    "fixture": {
+      "byte_identical_shards": true,
+      "canonical_masks_spans_order": true,
+      "full_original_verification_equal": true,
+      "job_id": "519786",
+      "original_resume": true,
+      "parallel_resume": true,
+      "passed": true,
+      "quality_membership_corruption_rejected": true,
+      "updated_checksum_mask_corruption_rejected": true,
+      "workers": 3
+    },
+    "identity": {
+      "execution_resources": {
+        "cpus": 8,
+        "library_threads_per_worker": 1,
+        "maximum_outstanding_tasks": 14,
+        "raw_shard_cache_per_worker": 0,
+        "workers": 7
+      },
+      "overlay_hashes": {
+        "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+        "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+        "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+        "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
+        "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+        "slurm/filtering_batch_checks.py": "8fad154cb7a34094dd3f5f3050f7102c0a06282b03c4879d128765e7f52ad1cb",
+        "slurm/filtering_entry.py": "ad43997920c9fe035ce983b6747fe9a287ecbb23d91973d2635d1cd67bc15053",
+        "slurm/filtering_parallel_checks.py": "340af0e3b47aed8f7c796f86c0e8a862251f2476270f8683e3774078a8c5757a",
+        "slurm/packing_checks.py": "8ca5d1eab29867d68f943b2bcccb60e228197ea516c41282ad39265a8e5f779a",
+        "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
+        "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
+      },
+      "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+      "select_sha256": "17fb97492fc0d186e4207c80ce403962554e211a2b3da07d9e448038191ce7bf",
+      "split_sha256": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+    },
+    "job_id": "519786",
+    "passed": true,
+    "performance": {
+      "passed": true,
+      "skipped": "Verification only"
+    },
+    "saved_prefix": {
+      "passed": true,
+      "reconstructed_recent_shards": 2,
+      "saved_cursor": [
+        5568,
+        0
+      ],
+      "shards": 5584
+    }
+  },
+  "verification_result": {
+    "completed_utc": "2026-10-09T11:52:57Z",
+    "evaluation": {
+      "input_tokens": 76982723,
+      "prediction_tokens": 76930208,
+      "sequences": 52515
+    },
+    "evaluation_documents": 50000,
+    "evaluation_raw_documents": 50000,
+    "fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a",
+    "pack_manifest_sha256": "e409b629eb61061a6004591622a10a95eda6e58d4a3e055805ff65a4d7a43ed2",
+    "scope": "artifact checksums, split bijection, provenance, global quality ranking, budget, full sequence reconstruction and loss masks",
+    "subset_documents": 10000,
+    "training": {
+      "input_tokens": 6000000000,
+      "prediction_tokens": 5995636176,
+      "sequences": 732422
+    },
+    "training_limit": 6000000000
+  },
+  "workers": 7
+}

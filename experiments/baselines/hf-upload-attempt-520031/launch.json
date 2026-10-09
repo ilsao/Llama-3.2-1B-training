@@ -1,0 +1,34 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+    "elapsed_seconds": 16,
+    "end": "2026-10-09T20:35:11",
+    "gpu_count": 1,
+    "gpu_type_evidence": {
+      "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.0044444444444444444,
+    "job_id": "520031",
+    "nodes": "25a-hgpn001",
+    "start": "2026-10-09T20:34:55",
+    "state": "FAILED"
+  },
+  "job_id": "520031",
+  "reservation": "hf-upload-f62daf61c6df44b18098ca1ee379c7c0",
+  "slurm_state": "FAILED",
+  "started_utc": "2026-10-09T12:34:53.750458+00:00",
+  "status": "reconciled",
+  "submission_command": [
+    "sbatch",
+    "--parsable",
+    "--comment=hf-upload-f62daf61c6df44b18098ca1ee379c7c0",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/hf-best-upload.sbatch",
+    "hf-best-13717-20261009"
+  ],
+  "submission_result": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "520031\n"
+  }
+}

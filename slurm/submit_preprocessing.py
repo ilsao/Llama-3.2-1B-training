@@ -42,16 +42,25 @@ def bind(state_path, root, state, item, job_id):
     if not matching:
         jobs.append({'job_id': job_id, 'tag': item['tag'], 'prep_id': item['prep_id'],
                      'stage': item['stage'], 'ledger': 'preprocessing', 'status': 'SUBMITTED',
-                     'allocated_cpus': 8, 'allocated_gpu_count': 1,
+                     'allocated_cpus': item.get('allocated_cpus',8), 'allocated_gpu_count': 1,
                      'allocation_h200_hours_upper_bound': item.get('reserved_h200_hours', 24),
                      'accounting_status': 'reserved; reconcile after termination'})
     save_intent(state_path, root, state, item)
     return job_id
 
 
-def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None):
+def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None, cpus=8):
     if stage not in STAGES:
         raise ValueError('Invalid preprocessing stage')
+    valid_expanded_args=(cpus in (12,16) and extra==['--training-workers',str(cpus-1)]) or (
+        cpus==12 and extra in (['--evaluation-workers','11'],['--training-workers','11','--evaluation-workers','11']))
+    expanded=stage=='select' and prep_id=='dolma-dclm10-005' and valid_expanded_args
+    if type(cpus) is not int or cpus not in (8,12,16) or (cpus>8)!=expanded:
+        raise ValueError('Expanded CPUs require the explicit training-tokenization override')
+    if '--training-workers' in extra and not expanded and extra!=['--training-workers','7']:
+        raise ValueError('Training-worker override does not match allocated CPUs')
+    if '--evaluation-workers' in extra and not expanded and extra!=['--evaluation-workers','7']:
+        raise ValueError('Evaluation-worker override does not match allocated CPUs')
     if after_job is not None and not re.fullmatch(r'\d+', str(after_job)):
         raise ValueError('Continuation dependency requires a numeric job ID')
     if stage != 'setup':
@@ -64,7 +73,10 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None
         # within the same preparation, including uncertain or pending jobs.
         for old in state.get('submission_intents', []):
             if (old.get('prep_id') == prep_id and old.get('status') != 'not_dispatched'
-                    and old.get('job_id') not in accounted):
+                    and old.get('job_id') not in accounted
+                    and not (old.get('recovery_preflight_rejected') and cpus<=12
+                             and old.get('allocated_cpus')==16 and stage in {'select','pack','verify'}
+                             and old.get('prep_id')=='dolma-dclm10-005')):
                 raise ValueError('Existing preprocessing intent must be recovered/reconciled before submission')
         tag = 'preprocessing-' + uuid.uuid4().hex
         short_job = (stage in {'parallel-check', 'cache-audit', 'cache-repair'}
@@ -78,7 +90,7 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None
             wall_time = str(minutes)
             reserved_hours = minutes/60
         script = 'setup.sbatch' if stage == 'setup' else 'score.sbatch' if stage == 'score' else 'prepare.sbatch'
-        command = ['sbatch', '--parsable', '--no-requeue', '--cpus-per-task=8', '--gpus-per-node=1',
+        command = ['sbatch', '--parsable', '--no-requeue', f'--cpus-per-task={cpus}', '--gpus-per-node=1',
                    f'--time={wall_time}', f'--comment={tag}',
                    f'--output={root}/logs/%x-%j.out', f'--error={root}/logs/%x-%j.err',
                    str(PROJECT / 'slurm' / script)]
@@ -91,7 +103,7 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None
         item = {'tag': tag, 'submission_tag': tag, 'prep_id': prep_id, 'stage': stage,
                 'ledger': 'preprocessing', 'status': 'submission_uncertain', 'timestamp': now,
                 'submission_started_utc': now, 'submission_command': command,
-                'reserved_h200_hours': reserved_hours, 'gpu_count': 1, 'allocated_cpus': 8}
+                'reserved_h200_hours': reserved_hours, 'gpu_count': 1, 'allocated_cpus': cpus}
         accounting = state.setdefault('accounting', {})
         key = 'shared_measured_plus_outstanding_reservations_upper_bound'
         accounting[key] = accounting.get(key, 0) + reserved_hours
@@ -109,7 +121,9 @@ def submit(stage, prep_id, extra, root, state_path, minutes=None, after_job=None
             save_intent(state_path, root, state, item)
             raise
         job_id = result.stdout.strip().split(';')[0]
+        item['sbatch_response']={'returncode':result.returncode,'stdout':result.stdout,'stderr':result.stderr}
         if result.returncode or not re.fullmatch(r'\d+', job_id):
+            save_intent(state_path,root,state,item)
             raise RuntimeError(f'Sbatch outcome uncertain; retain {reserved_hours} H200-hour reservation. '
                                f'Do not resubmit; use: bash slurm/submit.sh recover {tag}')
         item['returned_job_id'] = job_id

@@ -50,8 +50,18 @@ scontrol show job -o "$SLURM_JOB_ID" > "$JOB_RECORD/allocation.txt"
 scontrol show node "$SLURMD_NODENAME" > "$JOB_RECORD/node.txt"
 ALLOCATED_CPUS=$(sed -n 's/.* NumCPUs=\([0-9]*\).*/\1/p' "$JOB_RECORD/allocation.txt")
 [[ ${SLURM_JOB_NUM_NODES:-1} == 1 && ${SLURM_NTASKS:-1} == 1 ]] || { echo 'Use one node and one Slurm task' >&2; exit 1; }
-[[ "$ALLOCATED_CPUS" =~ ^[0-9]+$ && "$ALLOCATED_CPUS" -ge 1 && "$ALLOCATED_CPUS" -le 8 ]] || { echo 'Allocate at most 8 CPUs per job' >&2; exit 1; }
-[[ ${SLURM_CPUS_PER_TASK:-0} -ge 1 && ${SLURM_CPUS_PER_TASK:-0} -le 8 ]] || exit 1
+CPU_LIMIT=8
+# Explicit user override: training tokenization only, unchanged evaluation workers.
+if [[ ${STAGE:-} == select && ${PREPARATION_ID:-} == dolma-dclm10-005 && ${FILTERING_TRAIN_WORKERS:-7} =~ ^(11|15)$ ]]; then
+    CPU_LIMIT=$((FILTERING_TRAIN_WORKERS+1))
+    [[ "$ALLOCATED_CPUS" == "$CPU_LIMIT" && ${SLURM_CPUS_PER_TASK:-0} == "$CPU_LIMIT" ]] || exit 1
+fi
+if [[ ${STAGE:-} == select && ${PREPARATION_ID:-} == dolma-dclm10-005 && ${FILTERING_EVAL_WORKERS:-7} == 11 ]]; then
+    CPU_LIMIT=12
+    [[ "$ALLOCATED_CPUS" == 12 && ${SLURM_CPUS_PER_TASK:-0} == 12 ]] || exit 1
+fi
+[[ "$ALLOCATED_CPUS" =~ ^[0-9]+$ && "$ALLOCATED_CPUS" -ge 1 && "$ALLOCATED_CPUS" -le "$CPU_LIMIT" ]] || { echo "Allocate at most $CPU_LIMIT CPUs for this job" >&2; exit 1; }
+[[ ${SLURM_CPUS_PER_TASK:-0} -ge 1 && ${SLURM_CPUS_PER_TASK:-0} -le "$CPU_LIMIT" ]] || exit 1
 printf '%s\n' "$ALLOCATED_CPUS" > "$JOB_RECORD/cpus.txt"
 export MAX_JOBS="$ALLOCATED_CPUS"
 export CMAKE_BUILD_PARALLEL_LEVEL="$ALLOCATED_CPUS"

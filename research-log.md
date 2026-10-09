@@ -114,3 +114,169 @@ Split 513322 FAILED exit 1 (28s): nested metadata vs declared string in pinned d
 - 2026-10-08T09:21:42.632833+08:00 bounded visible heartbeat: split514101 RUNNING on1H200/8CPUs,5934s observed; source lineage524/6081 shards, up from251, covers28344326 rows. Native rowcount remains104020922; cursor/order/contiguity match canonical manifest, stdout fresh. Complete native shuffle/split/eval archive pending; no downstream job.20 terminated allocations match Slurm/ledgers; shared5.0341666667 H200-hours reconciled,active1.6483333333 provisional,24-hour reservation retained,upper29.0341666667. Identity/config/source/repaired manifest unchanged; no polling/source changes/repeated tests/cleanup/training. Savedto_human/heartbeat-20261008-0921.md.
 
 - 2026-10-08T09:41:36.618985+08:00 bounded visible heartbeat: split514101 RUNNING on1H200/8CPUs,7135s observed; source lineage805/6081 shards, up from524, covers42214136 rows. Native rowcount remains104020922; cursor/order/contiguity match canonical manifest, stdout fresh. Complete native shuffle/split/eval archive pending; no downstream job.20 terminated allocations match Slurm/ledgers; shared5.0341666667 H200-hours reconciled,active1.9819444444 provisional,24-hour reservation retained,upper29.0341666667. Identity/config/source/repaired manifest unchanged; no polling/source changes/repeated tests/cleanup/training. Savedto_human/heartbeat-20261008-0941.md.
+
+- 2026-10-08T04:44:07.077519+00:00 user-authorized data takeover: queue empty, old heartbeat has no cron entry and old thread is not loaded. Split514101 COMPLETED exit0; accounted16775s/1H200=4.6597222222hours. Canonical6081 ranges cover104020922rows; eval archive196files/50000rows complete; identity/parent manifest/small eval indices/archive integrity checked. Shared reconciled9.6938888889H200-hours. Proceed clean005; restore visible-thread heartbeat scoped to DATA through verify, no training/cleanup.
+
+- 2026-10-08T04:45:24.710968+00:00 takeover submitted clean514774 once, observed RUNNING on25a-hgpn001/1H200/8CPUs/200G, fingerprint unchanged, startup stderr empty. Restored20min heartbeat to current thread; old thread remains notLoaded. Shared reconciled9.6938888889, with24h clean reservation33.6938888889. Data through verify only; reportto_human/heartbeat-20261008-1245.md.
+
+- 2026-10-08T04:46:17.596297+00:00 user requested pause. Disabled heartbeat cron and created stop flag. scancel514774 accepted; Slurm CANCELLED, allocation initially COMPLETING,89s observed. No clean directory yet; complete split preserved. No automatic stage/resubmission allowed until explicit resume.
+
+- 2026-10-08T04:48:35.452682+00:00 explicit user resume: queue empty; cancelled clean514774 final89s/1H200=0.0247222222hours accounted; no clean directory had been produced. Shared reconciled9.7186111111H200-hours.005 split/config/source identity and eval archive50000rows unchanged. Resume clean005 and restore visible-thread20min continuity, data-only through verify.
+
+- 2026-10-08T04:49:33.864750+00:00 resume submitted clean514780 once, single snapshot PENDING;1GPU/8CPUs/200G/24h requested, runtime H200 verification pending. Heartbeat restored20min/current thread. Shared actual9.7186111111, with reservation33.7186111111H200-hours. Reportto_human/heartbeat-20261008-1249.md; data-only through verify.
+
+- 2026-10-08T04:51:21.411478+00:00 bounded heartbeat: clean514780 RUNNING on25a-hgpn003/1H200/8CPUs;59s observed, startup fingerprint/spawn match005, stderr0bytes, clean directory/manifest absent. No downstream submission.22 terminated jobs agree with Slurm/ledgers; shared reconciled9.7186111111, active0.0163888889provisional,24h reservation/shared upper33.7186111111. Correct-thread cron delivery and execution verified; no polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1251.md.
+
+- 2026-10-08T05:41:42.453075+00:00 bounded heartbeat: clean514780 RUNNING,3067s observed, committed scan16141312/104020922 (~15.5%), fresh378576896-byte database, complete manifest absent. Periodic faulthandler Timeout stacks at database transaction are diagnostic; source/config/split unchanged.22 accounted allocations match Slurm/ledgers; shared9.7186111111 reconciled, active0.8519444444provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1341.md.
+
+- 2026-10-08T05:42:48.635676+00:00 bounded heartbeat: clean514780 RUNNING; scan17491968/104020922(16.82%) advanced from16141312; fresh database, no manifest.22 reconciled allocations match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active0.8830555556provisional, reservation24/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1342.md.
+
+- 2026-10-08T05:43:52.460564+00:00 bounded heartbeat: clean514780 RUNNING; committed scan18150912/104020922(17.45%) from17491968, database fresh, complete manifest absent.22 accounted jobs match Slurm/ledgers; identity unchanged. Shared9.7186111111reconciled, active0.9011111111provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1343.md.
+
+- 2026-10-08T05:44:54.478792+00:00 bounded heartbeat: clean514780 RUNNING; scan18831872/104020922(18.10%) from18150912; fresh database/live journal, no manifest.22 accounted jobs match Slurm/ledgers, identity unchanged. Shared9.7186111111reconciled, active0.9188888889provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1344.md.
+
+- 2026-10-08T06:21:56.173085+00:00 bounded heartbeat: clean514780 RUNNING,5477s; database575021056bytes vs previous407818240, fresh mtime/journal, manifest absent. Indexed cursor query locked after1sec, not retried; previous18831872/18.10% retained as stale observation.22 accounted allocations match Slurm/ledgers, identity unchanged. Shared9.7186111111reconciled, active1.5213888889provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1421.md.
+
+- 2026-10-08T06:23:32.460755+00:00 bounded heartbeat: clean514780 RUNNING,5602s; database582205440bytes vs575021056, fresh journal; manifest absent. Single readonly indexed query returned attempt to write a readonly database; not retried or repaired, exact cursor unavailable; previous18.10% retained as stale13:44 observation.22 accounted jobs match Slurm/ledgers; identity unchanged. Shared9.7186111111reconciled, active1.5561111111provisional, reservation24/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1423.md.
+
+- 2026-10-08T06:25:12.480851+00:00 bounded heartbeat: clean514780 RUNNING,5697s; database587530240bytes vs582205440, fresh journal, no manifest. One readonly indexed query unavailable; no retry/write/recovery. Future ticks skip cross-node SQLite lookup while active journal exists; last18.10% explicitly stale.22 accounted allocations match Slurm/ledgers; identity unchanged. Shared9.7186111111reconciled, active1.5825000000provisional, reservation24/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1425.md.
+
+- 2026-10-08T06:26:32.956041+00:00 bounded heartbeat: clean514780 RUNNING,5797s; database596209664bytes from587530240, fresh journal; cursor query skipped, manifest absent.22 accounted jobs match Slurm/ledgers; identity unchanged. Shared9.7186111111reconciled, active1.6102777778provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1426.md.
+
+- 2026-10-08T06:30:23.925501+00:00 bounded heartbeat: clean514780 RUNNING,6024s; database625307648bytes from596209664, fresh journal; cursor query skipped, no manifest.22 accounted jobs match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active1.6733333333provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1430.md.
+
+- 2026-10-08T07:21:30.041145+00:00 bounded heartbeat: clean514780 RUNNING,9096s; database973721600bytes from625307648, fresh journal; cursor skipped, manifest absent.22 accounted jobs match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active2.5266666667provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Corrected stale next_expected_local_tick to next nominal20min boundary (not a delivery guarantee). Reportto_human/heartbeat-20261008-1521.md.
+
+- 2026-10-08T07:23:03.225299+00:00 bounded heartbeat: clean514780 RUNNING,9195s; database988164096bytes from973721600, fresh journal; cursor skipped, no manifest.22 accounted jobs match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active2.5541666667provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1523.md.
+
+- 2026-10-08T07:24:29.069085+00:00 bounded heartbeat: clean514780 RUNNING,9285s; database1001144320bytes from988164096, fresh journal; cursor skipped, no manifest.22 accounted jobs match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active2.5791666667provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1524.md.
+
+- 2026-10-08T07:26:10.197295+00:00 bounded heartbeat: clean514780 RUNNING,9383s; database1015570432bytes from1001144320, fresh journal; cursor skipped, no manifest.22 accounted jobs match Slurm/ledgers; source/config/split unchanged. Shared9.7186111111reconciled, active2.6063888889provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1526.md.
+
+- 2026-10-08T07:30:17.956635+00:00 bounded heartbeat: initial Slurm snapshot unavailable; one fallback eventually returned clean514780 RUNNING,9576s,1H200/8CPUs. Database1037889536bytes from1015570432, fresh journal; no cursor/manifest. Historical22-job ledger unchanged, full sacct refresh not completed this cycle. Source/config/split unchanged. Shared9.7186111111reconciled, active2.6600000000provisional,24h reservation/shared upper33.7186111111. No downstream/duplicate submissions, training or cleanup. Reportto_human/heartbeat-20261008-1530.md.
+
+- 2026-10-08T07:32:08.102913+00:00 bounded heartbeat: clean514780 RUNNING,9737s; database1064046592bytes from1037889536, fresh journal; cursor skipped, no manifest. Short-timeout Slurm snapshot returned normally;22 accounted allocations match ledgers. Source/config/split unchanged. Shared9.7186111111reconciled, active2.7047222222provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1532.md.
+
+- 2026-10-08T07:33:39.191001+00:00 bounded heartbeat: clean514780 RUNNING,9828s; database1074606080bytes from1064046592, fresh journal; cursor skipped, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active2.7300000000provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1533.md.
+
+- 2026-10-08T08:21:35.324772+00:00 bounded heartbeat: clean514780 RUNNING,12701s; database1370673152bytes from1074606080, fresh journal; cursor skipped, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.5280555556provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1621.md.
+
+- 2026-10-08T08:23:10.198061+00:00 bounded heartbeat: clean514780 RUNNING,12797s; database1377107968bytes from1370673152, fresh journal; cursor skipped, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.5547222222provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1623.md.
+
+- 2026-10-08T08:24:48.109319+00:00 bounded heartbeat: clean514780 RUNNING,12897s; database1382973440bytes from1377107968, fresh journal; cursor skipped, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.5825000000provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1624.md.
+
+- 2026-10-08T08:26:59.887279+00:00 bounded heartbeat: clean514780 RUNNING,12988s; database1390231552bytes from1382973440, freshmtime. Journal reappeared before optional readonly cursor query, skipped without SQL; no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.6077777778provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1626.md.
+
+- 2026-10-08T08:29:13.112542+00:00 bounded heartbeat: clean514780 RUNNING,13141s; single readonly indexed query during absent journal gives input scan57708800/104020922(55.48%) from old18831872; database1420492800bytes, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.6502777778provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1629.md.
+
+- 2026-10-08T08:30:58.377934+00:00 bounded heartbeat: clean514780 RUNNING,13262s; database1437315072bytes from1420492800, fresh journal; cursor skipped, no manifest. Prior55.48% retains16:28 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.6838888889provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1630.md.
+
+- 2026-10-08T08:33:01.152174+00:00 bounded heartbeat: clean514780 RUNNING,13381s; single readonly indexed query during absent journal gives input scan61106688/104020922(58.74%) from57708800; database1459765248bytes, no manifest.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.7169444444provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1633.md.
+
+- 2026-10-08T08:34:54.640118+00:00 bounded heartbeat: clean514780 RUNNING,13498s; database1475809280bytes from1459765248, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.7494444444provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1634.md.
+
+- 2026-10-08T08:37:03.538498+00:00 bounded heartbeat: clean514780 RUNNING,13617s; database1494171648bytes from1475809280, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp; current diagnostic trace at input iterator.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.7825000000provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1637.md.
+
+- 2026-10-08T08:39:01.037493+00:00 bounded heartbeat: clean514780 RUNNING,13743s; database1513033728bytes from1494171648, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.8175000000provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1639.md.
+
+- 2026-10-08T08:41:49.118437+00:00 bounded heartbeat: clean514780 RUNNING,13910s; database1535148032bytes from1513033728, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active3.8638888889provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1641.md.
+
+- 2026-10-08T09:23:20.896134+00:00 bounded heartbeat: clean514780 RUNNING,16335s; database1874927616bytes from1535148032, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active4.5375000000provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1723.md.
+
+- 2026-10-08T09:42:07.727954+00:00 bounded heartbeat: clean514780 RUNNING,17522s; database1951641600bytes from1874927616,mtime2026-10-08T09:37:58.287595+00:00, fresh journal; cursor skipped, no manifest. Prior58.74% retains16:32 timestamp.22 accounted allocations match one Slurm snapshot; source/config/split unchanged. Shared9.7186111111reconciled, active4.8672222222provisional,24h reservation/shared upper33.7186111111. No new jobs/polling/repeated tests/cleanup/training. Reportto_human/heartbeat-20261008-1742.md.
+
+2026-10-08T17:13:07.754131+00:00 — User authorized concurrent filtering continuation. Updated stale514780 state from live Slurm/accounting and completed clean manifest; submitted durable score005 intent/job517587 with120min limit,1H200 and8CPUs. Next: reconcile terminal scoring; exit75 continues original score, success gates select/pack/verify. No cleanup/upload.
+
+2026-10-08T17:20:42.730108+00:00 — User requested stop/restart filtering with16-hour sbatch limit. SentUSR1 then cancelled score517587 while still loading canonical Arrow cache (no scores DB); terminal351sec=0.0975H200-hours reconciled. Submitted continuation517611, same005 fingerprint/source/config/data environment,960minutes,1H200/8CPUs, durable afterany517587 dependency prevents overlap. Filtering helper defaults and score/prepare batch headers now16hours; optimizer-sweep caps/controller unchanged.12 metadata submission tests and shell syntax passed.
+
+2026-10-08T18:08:27.581958+00:00 — Progress inspection: score517611 FAILED at01:45:21 Asia/Taipei,1507sec,exit139/SIGSEGV,actual0.418611H200-hours reconciled. Scores SQLite51802112bytes, no journal; one bounded readonly primary-key query gives committed last_row5574559 (source cursor, not scored-doc count). Periodic traces show Dataset random selection/Arrow table and numpy cumsum; root cause unconfirmed. No blind retry or artifact changes. Optimizer native calibrations all passed; initial15/18 completed,16th active; best completed Muon0.04/WSD subsetPPL621.48 vsAdamW0.0012/WSD1131.06 at matched13107200tokens, early pilot evidence only.
+
+2026-10-08T18:26:23.473469+00:00 — Filtering repair c43345b:16-hour score517834 RUNNING. Canonical index3004shards/104020922rows complete. Runtime checks passed for12 independent originals across6sources, native cross-shard order/duplicates/text projection, exact1/7-worker official classifier outputs and16 saved scores. Same original005 core/config/environment fingerprint; overlay hash receipts agree. Resumed after committed last_row5574559; new scores141568, total2438912/28586141. Initial score throughput2334documents/sec; ETA excludes ranking and later stages. No split/clean/raw-sweep changes or cleanup.
+
+2026-10-09T03:22:15.143118+00:00 — Score517834 complete at03:45:55 Asia/Taipei,28586141documents,5300sec=1.472222H200-hours reconciled; scored ranking index/manifest identities match immutable005 and validated bounded reader. Continued authorized filtering via select/tokenization job518703,16h,1H200/8CPU, unchanged6B whole-document budget and all50000 reserved originals. Raw optimizer campaign complete:18initial+18short allcomplete,31.374444H200-hours inclcalibration, no medium(clear ranking). Best short Muon0.02/WSD subsetPPL55.4453 vsAdamW0.0003/WSD140.8943 at104857600trainingtokens. Formal final training/full reserved-set result remain unrun.
+
+2026-10-09T07:30:39.526230+00:00 — Implemented seekable record-batch filtering recovery. Gracefully stopped/reconciled518703:14333s,3.9813888889H200-hours,81733docs/126905498tokens/117shards preserved.34lightweight tests and shell syntax passed; immutable core/config/environment hashes unchanged. Installed metadata-only bounded filtering controller; continuation519327 running16h/1H200/8CPU/200GB, preflight and2x/160GiB gate before production writes. Original validation/manifests kept; pack/full verify will follow via durable submission and shared-budget checks.
+
+2026-10-09T07:33:16.163049+00:00 — Recovery519327 passed all runtime gates; production selection resumed.1024matched candidates/1765290tokens: batch43.1747s (including35.9645s reader/lazy index), legacy96.6425s,2.2384x complete-pipeline speedup, byte-identical outputs. Conservative process+worker RSS upper28.1738GB (distinct from Slurm cgroup memory/pagecache statistic). Real IPC/corruption/ordered duplicates/interrupted select/packing checks passed;16saved documents regenerated exactly, prefix hashes verified.15-minute production measurement pending.
+
+2026-10-09T07:48:10.947330+00:00 — Recovery519327 sustained15-minute observation completed: 904.57s, 164649823new committed tokens, 182019.55tokens/s, 20.53x versus old observed overall rate. Remaining training-tokenization ETA 8.71h excludes evaluation tokenization, pack, verify, queue and future resume overhead. Recent Slurm CPU difference67CPU-sec/61wall-sec=1.098cores/8=13.73%; reader remains coordinator-limited. Prefix unchanged, controller active.
+
+2026-10-09T08:14:47.559970+00:00 — User-requested worker-local read+tokenize+prefetch implemented. Seven pinned workers plus coordinator;32docs/batch,<=2unconsumed credits/worker,oneprefetch slot,zero retained raw shard cache. Original stage_select/code/config/split/439-shard prefix unchanged.519327 graceful stop1849s=.513611H200-hours reconciled;519502 resumed16h/1H200/8CPU/200GB after38stdlib and real worker/order/resume/budget/mask/overlap checks.4096matched docs6094282tokens:20.5996s serial-reader vs7.1494s worker-prefetch,2.8813x. Production metrics separate; controller remains sole filtering submission owner.
+
+2026-10-09T08:16:57.299056+00:00 —519502 production sample:106wall-sec/524CPU-sec=4.9434of8CPUs,61.79% utilization. Seven workers observed; every per-worker maximum2batches. First219.64production seconds averaged981447tokens/s;~1.5h remaining training tokenization excludes downstream. Versioned progress continues; no extra GPU or CPU allocation.
+
+### 2026-10-09 train-tokenization CPU override
+
+User authorized16CPUs fortraining tokenization only. Cluster enforces12CPUs/H200
+and this account lacks CPU-only partition access. Paused519502 with exit75,
+reconciled0.4791666667H200-hours, and preserved2.053802665Btokens/1913shards.
+Submitted corrected12CPU/oneH200 continuation519577 (11workers+coordinator),
+with automatic8CPU evaluation continuation; immutable config/core unchanged.
+37lightweight tests and shell/Python syntax checks passed. Real worker/output
+equivalence and7/11-worker scaling run inside the new Slurm job. Retain the
+failed16CPU intent reservation conservatively; see cpu-scaling-validation.json.
+
+### 2026-10-09 evaluation tokenization CPU override
+
+User corrected the evaluation allocation to12CPUs too. Updated controller and
+execution overlay to11evaluation workers plus coordinator without interrupting
+active519577. Immutable preparation identity/split/order unchanged; the upcoming
+evaluation continuation retains12CPUs and will validate actual workers on Slurm.
+40lightweight checks passed; runtime evaluation gate remains upcoming.
+
+### 2026-10-09 parallel packing and verification
+
+Implemented explicit overlays for both stages, with seven pinned workers plus
+coordinator on eight CPUs. Paused/reconciled 519687 and resumed as 519745, retaining
+1.962541056B packed tokens and all 1,832 prefix shards. 62 lightweight checks and
+all Slurm equivalence/resume/corruption gates passed. Original and parallel full
+fixture verification reports match; matched real-data packing is byte-identical
+and 4.7065x faster. Initial production throughput is about 7.6M tokens/s. Full
+real-data verification is configured after packing and has not started yet.
+See experiments/filtering-recovery/packing-parallel-validation.json for evidence.
+
+### 2026-10-09 explicitly authorized one-hour best-checkpoint continuation
+
+User authorized exactly one best-checkpoint resume on unfiltered data while
+verification runs, and prohibited checkpoint initialization for future training
+requests. Recorded in both repository guidance files and immutable one-time
+authorization. Training519858 uses eight H200/eight CPUs and the same logical
+run baseline-muon-wsd-raw-20261009, checkpoint008500-b746a2a7d6b4, optimizer,
+WSD8500 horizon (terminal LR floor), RNG, data cursor136000 and W&B44c3ab1a26b94760afba44992342140d.
+Preserved parent1,114,112,000 charged/confirmed tokens and13.62 H200-hours;
+the continuation raises the bounded logical compute ceiling to23 H200-hours
+without resetting the6B-token/64-H200-hour hard caps or committing another full run.
+The training phase started19:19:42 Taipei and is bounded by a3600-second timer;
+70-minute allocation includes initialization and finalization. Training already
+progressed beyond step8726 at about209k input tokens/s, concurrently with519786.
+Original resolved configuration/execution/checkpoint/result metadata are archived
+under runs/experiments/<run>/continuations/best-raw-one-hour-20261009.
+
+Raw buffer supplementation retains the original preparation, published prefix,
+8192-token packing, carry and whole-document flush boundaries. Seven workers
+read/tokenize32-document batches with at most two batches each; coordinator
+appends unique shards until at least3B raw input tokens are available. Initial
+producer519857 failed before publication because OrderedBatches lacks a context
+manager; cancelled/reconciled121 seconds (.0336111111 H200-hours). Explicit v2
+lifecycle overlay closes workers on early return/errors, preserving original
+sealed code; producer519863 resumes the unchanged prefix. Producer allocations
+are separately labelled preprocessing in the shared experiment ledger; costs
+are counted once. Only metadata accounting cron is installed; no automatic
+training resubmission, cleanup or upload. Runtime raw-tokenizer equality gate
+precedes any append; final one-hour training result remains pending.
+
+### 2026-10-09 best checkpoint published to Hugging Face
+
+User explicitly authorized publication to asciibase64/Llama-3.2-1B-dolma3_mix.
+Published best step13717, 1,797,914,624 cumulative non-padding training tokens,
+at revision 0b54c9d826c765cb0e3d75494b00e898d04f882e. All146 exported tensors are exactly
+equal to the original best checkpoint. Standard Transformers BF16/SDPA loading,
+tied output weights, tokenizer parity and finite8192-token inference passed
+in Slurm520037. All15 uploaded files have matching remote Git/LFS checksums;
+unauthenticated remote config/tokenizer loading passed. Model card explicitly
+labels PPL20.939945 as the fixed1000-document subset, with current full50000
+PPL unmeasured. Included license/notice and full training provenance.
+First allocation520031 could not initialize CUDA on25a-hgpn001 and stopped
+before upload; retained source/authorization/accounting and excluded the node.
+Both validation/publication allocations reconciled: 0.09194444444444444 H200-hours.
+Parent training accounting remains21.802222222 H200-hours; no new training.

@@ -1,0 +1,161 @@
+{
+  "authorization_path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/continuations/best-raw-one-hour-20261009/authorization.json",
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/checkpoints/checkpoint-008500-b746a2a7d6b4",
+  "continuation_id": "best-raw-one-hour-20261009",
+  "final_accounting": {
+    "producer": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 3579,
+      "end": "2026-10-09T20:21:30",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "b70d28882971d528ce2f50b6b3063701ba6ee92fffb71d023a9579502ad4619c",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.9941666666666666,
+      "job_id": "519863",
+      "nodes": "25a-hgpn005",
+      "start": "2026-10-09T19:21:51",
+      "state": "FAILED"
+    },
+    "training": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 3682,
+      "end": "2026-10-09T20:20:11",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "0d3249d6bcdd9f06fac900e77006e177a5cf426b7fc1d7dc097001651a63894f",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 8.182222222222222,
+      "job_id": "519858",
+      "nodes": "25a-hgpn118",
+      "start": "2026-10-09T19:18:49",
+      "state": "COMPLETED"
+    }
+  },
+  "final_training_result": {
+    "additional_tokens": 683802624,
+    "budget_tokens_charged": 1797914624,
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/checkpoints/checkpoint-013717-aeec221b8192",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/export-step-13717-3407ee78",
+    "full_reserved_set_evaluation": "Not measured for this continuation; prior step8500 full PPL24.4493 remains historical",
+    "global_step": 13717,
+    "h200_hours_final": 21.80222222222222,
+    "last_evaluation": {
+      "eval/documents": 1000,
+      "eval/nll": 4499531.603969574,
+      "eval/perplexity": 20.939944786326542,
+      "eval/prediction_tokens": 1479302,
+      "eval/sequences": 1044
+    },
+    "stop_reason": "wall_time_or_signal",
+    "total_tokens_seen": 1797914624
+  },
+  "future_training": "Random initialization; this one-time checkpoint permission is consumed",
+  "latest_training_metrics": {
+    "job_id": "519858",
+    "timestamp": 1791545078.1301713,
+    "train/budget_tokens_charged": 1169293312,
+    "train/decay_factor_adamw_decay": 0.999997,
+    "train/decay_factor_adamw_no_decay": 1.0,
+    "train/decay_factor_muon": 0.9998,
+    "train/global_step": 8921,
+    "train/grad_norm": 0.35301002860069275,
+    "train/h200_hours_so_far_estimate": 14.395842748747931,
+    "train/learning_rate": 2.9999999999999997e-05,
+    "train/loss": 2.9520263755754828,
+    "train/lr_adamw_decay": 2.9999999999999997e-05,
+    "train/lr_adamw_no_decay": 2.9999999999999997e-05,
+    "train/lr_muon": 0.002,
+    "train/step_input_tokens": 131072,
+    "train/step_prediction_tokens": 130977,
+    "train/step_seconds": 0.6379923224449158,
+    "train/tokens_per_second": 205444.47854435857,
+    "train/total_tokens_seen": 1169293312
+  },
+  "lightweight_tests_passed": 23,
+  "logical_h200_hour_ceiling": 23,
+  "logical_run": "baseline-muon-wsd-raw-20261009",
+  "optimizer_scheduler_rng_cursor_restored": true,
+  "original_checkpoint_files_unchanged": true,
+  "original_h200_hours": 13.62,
+  "original_training_tokens": 1114112000,
+  "preparation_id": "dolma-raw-baseline-20261008",
+  "producer_job_id": "519863",
+  "producer_recovery": {
+    "failed_accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 121,
+      "end": "2026-10-09T19:20:50",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.03361111111111111,
+      "job_id": "519857",
+      "nodes": "25a-hgpn001",
+      "start": "2026-10-09T19:18:49",
+      "state": "CANCELLED by 44781"
+    },
+    "failed_job_id": "519857",
+    "job_id": "519863",
+    "overlay_hashes": {
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw-continue-once-v2.sbatch": "28bdd8e98200e70b6d8a75b4dadac3200d75c3d9fa44834a4ffcec56d5c171cb",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw_continue_once.py": "ef0b494ba7f8f6bfa5a5d2841e0a7dc2131237adf81d4e2624d0c305b2d81130",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw_continue_once_v2.py": "4ceeb14dede6ffbb2a5ef0ed007d078dbf2c7cda8770a725c70fb6095b854f11"
+    },
+    "reason": "OrderedBatches requires explicit close; ManagedBatches adds enter/exit and always closes workers; no raw prefix writes occurred",
+    "reservation": "best-raw-one-hour-20261009-producer-v2",
+    "status": "submitted",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=best-raw-one-hour-20261009-producer-v2",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw-continue-once-v2.sbatch",
+      "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/continuations/best-raw-one-hour-20261009/authorization.json"
+    ],
+    "submission_result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "519863\n"
+    }
+  },
+  "raw_progress": {
+    "job_id": "519863",
+    "next_position": 1866533,
+    "status": "paused",
+    "training_tokens": 2821221119,
+    "updated_at": 1791548477.573111
+  },
+  "raw_tokenization_gate": {
+    "documents": 32,
+    "original_tokenization_equal": true,
+    "passed": true,
+    "raw_metadata_hashes": {
+      "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97",
+      "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7",
+      "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/raw/ready.json": "2ff73402ce41bec675e6fffcf7924c3e5d6d4999913c37ac213537df1c4eebfe"
+    },
+    "workers": 7
+  },
+  "scheduler_horizon": 8500,
+  "status": "One-hour training complete; full filtered preparation verified; supporting raw producer stopped after faithful checkpoint",
+  "terminal_auxiliary_lr": 3e-05,
+  "terminal_muon_lr": 0.002,
+  "timestamp": "2026-10-09T12:22:07.202869+00:00",
+  "token_cap": 6000000000,
+  "training_allocation_seconds": 4200,
+  "training_cpus": 8,
+  "training_gpus": 8,
+  "training_job_id": "519858",
+  "training_phase": {
+    "job_id": "519858",
+    "seconds": 3600,
+    "started_utc": "2026-10-09T11:19:42.110650+00:00",
+    "stop_epoch": 1791548382.1106622
+  },
+  "verification_job_id": "519786",
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44c3ab1a26b94760afba44992342140d"
+}

@@ -16,14 +16,17 @@ import contextlib
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import dataset as pipeline
 from filtering_reader import IndexedRaw, build_index
-from preparation_parallel import configure_processes, configure_threads, ordered_executor, worker_count
+from preparation_parallel import configure_processes, configure_threads, ordered_executor
+from filtering_resources import worker_count, training_worker_count, evaluation_worker_count
 
 
 def identity(prep):
     return dict(preparation_fingerprint=prep.key,
+        execution_resources=dict(allocated_cpus=int(os.environ.get('SLURM_CPUS_PER_TASK','1')),
+            training_workers=training_worker_count(prep.config),evaluation_workers=evaluation_worker_count(prep.config)),
         split_sha256=pipeline.sha256(prep.path / 'split/manifest.json'),
         overlay_hashes={name:pipeline.sha256(pipeline.PROJECT/name) for name in
-                        ['filtering_reader.py','slurm/filtering_entry.py']})
+                        ['filtering_reader.py','filtering_batch_reader.py','slurm/filtering_entry.py','slurm/filtering_batch_checks.py','slurm/filtering_batch_fixture.py','filtering_parallel.py','filtering_resources.py','slurm/filtering_parallel_checks.py']})
 
 
 def validate(prep, raw, model_path, receipt):
@@ -54,20 +57,28 @@ def validate(prep, raw, model_path, receipt):
             raise ValueError('Indexed reader changed original document/global row mapping')
     # Cross-file bounds/order/duplicates/column projection versus native Dataset.select.
     sample_files=sorted({raw.locate(int(row['row_index']))[0] for row in samples})[:3]
-    pieces=[datasets.Dataset.from_file(raw.files[s]['path']) for s in sample_files]
-    native=datasets.concatenate_datasets(pieces)
-    local_indices=[]; global_indices=[]; count=0
-    for s,piece in zip(sample_files,pieces):
-        global_start=raw.ends[s-1] if s else 0
-        for offset in [0,len(piece)-1,len(piece)//2]:
-            local_indices.append(count+offset);global_indices.append(global_start+offset)
-        count+=len(piece)
-    local_indices=local_indices[::-1]+local_indices[:2]; global_indices=global_indices[::-1]+global_indices[:2]
-    if list(native.select(local_indices))!=list(raw.select(global_indices)):
-        raise ValueError('Bounded selection differs from native cross-file select')
-    if native.select(local_indices)['text']!=raw.select(global_indices)['text']:
-        raise ValueError('Column projection differs from native select')
-    del native,pieces
+    local_indices=[]; global_indices=[]; expected=[]
+    # Compare one native mapping at a time, with one optimized mapping beside it.
+    # Reassemble reversed cross-shard/duplicate requests after obtaining references.
+    raw.close(); original_bound=raw.max_open; raw.max_open=1
+    try:
+        for shard in sample_files:
+            piece=datasets.Dataset.from_file(raw.files[shard]['path'])
+            start=raw.ends[shard-1] if shard else 0
+            offsets=[0,len(piece)-1,len(piece)//2]
+            references=list(piece.select(offsets))
+            actual=list(raw.select([start+i for i in offsets]))
+            if actual!=references: raise ValueError('Native shard selection differs')
+            expected.extend(references);global_indices.extend(start+i for i in offsets)
+            raw.close();del piece,references,actual
+        indices=global_indices[::-1]+global_indices[:2]
+        reference=expected[::-1]+expected[:2]
+        if list(raw.select(indices))!=reference:
+            raise ValueError('Bounded selection differs from native cross-file select')
+        if raw.select(indices)['text']!=[row['text'] for row in reference]:
+            raise ValueError('Column projection differs from native select')
+    finally:
+        raw.close();raw.max_open=original_bound
     # Compare 1/7 CPU-worker official classification outputs, then saved score receipt.
     texts=raw.select([int(s['row_index']) for s in samples])['text']
     pipeline.initialize_scorer(model_path)
@@ -143,16 +154,23 @@ def score(prep, raw, model_path):
     prep.finish('score',[path,model_path],dict(scored_documents=count,workers=workers,
         input='full text; official strip and splitlines join',classifier_sha256=pipeline.sha256(Path(model_path)),device='CPU',
         score='official DCLM high-quality probability; no rounding or clamping',
-        raw_access='bounded canonical shard index; two cached shards',reader_validation_sha256=pipeline.sha256(prep.path/'filtering-access/validation.json')))
+        raw_access='bounded canonical shard index; two cached shards',reader_validation_sha256=pipeline.sha256(getattr(prep,'reader_validation_path',prep.path/'filtering-access/validation.json'))))
     publish('complete')
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('stage',choices=['score','select']);parser.add_argument('--prep-id',required=True)
+    parser.add_argument('stage',choices=['score','select','verify']);parser.add_argument('--prep-id',required=True)
     parser.add_argument('--root',type=Path,default=pipeline.DEFAULT_ROOT)
     parser.add_argument('--config',type=Path,default=pipeline.PROJECT/'configs/dataset.json')
+    parser.add_argument('--training-workers',type=int,choices=(7,11,15),default=7)
+    parser.add_argument('--evaluation-workers',type=int,choices=(7,11),default=7)
     args=parser.parse_args();pipeline.require_compute();configure_threads();configure_processes()
+    if (args.training_workers>7 or args.evaluation_workers>7) and (args.stage!='select' or args.prep_id!='dolma-dclm10-005'):
+        raise ValueError('16-CPU override is only authorized for this preparation training tokenization')
+    os.environ['FILTERING_TRAIN_WORKERS']=str(args.training_workers)
+    os.environ['FILTERING_EVAL_WORKERS']=str(args.evaluation_workers)
+    pipeline.worker_count=worker_count
     faulthandler.enable();faulthandler.dump_traceback_later(300,repeat=True)
     def stop(signum,frame):pipeline.STOP=True
     signal.signal(signal.SIGUSR1,stop);signal.signal(signal.SIGTERM,stop)
@@ -163,19 +181,57 @@ def main():
     with (root/'.retention.lock').open('a') as retention,(prep.path/'.lock').open('a') as lock:
         fcntl.flock(retention,fcntl.LOCK_SH|fcntl.LOCK_NB);fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         if prep.done(args.stage):return 0
-        prep.manifest('clean' if args.stage=='score' else 'score');prep.event(args.stage,'started')
+        prep.manifest('clean' if args.stage=='score' else 'pack' if args.stage=='verify' else 'score');prep.event(args.stage,'started')
         provenance=prep.directory('filtering-access')/('job-'+os.environ['SLURM_JOB_ID']+'.json')
         pipeline.atomic_json(provenance,dict(identity=identity(prep),stage=args.stage,
             config=cfg,slurm_job_id=os.environ['SLURM_JOB_ID'],started_utc=dt.datetime.now(dt.timezone.utc).isoformat()))
+        print('execution resources:',json.dumps(identity(prep)['execution_resources']),flush=True)
         try:
-            raw=IndexedRaw(build_index(prep))
+            index=build_index(prep)
+            evidence_identity=identity(prep)
+            if args.stage in ('select','verify'):
+                from filtering_batch_reader import BatchRaw
+                sidecars=prep.path/'filtering-access/batch-reader-v1/indexes'
+                raw=BatchRaw(index,sidecars,dict(preparation_fingerprint=prep.key,
+                    split_sha256=evidence_identity['split_sha256']))
+            else:
+                raw=IndexedRaw(index)
             from huggingface_hub import hf_hub_download
             model=hf_hub_download(cfg['classifier_id'],cfg['classifier_filename'],revision=cfg['classifier_revision'])
-            validate(prep,raw,model,prep.path/'filtering-access/validation.json')
+            receipt_dir=prep.path/'filtering-access'/('batch-reader-v1/'+pipeline.fingerprint(evidence_identity) if args.stage in ('select','verify') else 'score-'+pipeline.fingerprint(evidence_identity))
+            receipt_dir.mkdir(parents=True,exist_ok=True)
+            validate(prep,raw,model,receipt_dir/'validation.json')
+            prep.reader_validation_path=receipt_dir/'validation.json'
             if args.stage=='score':score(prep,raw,model)
-            else:
+            elif args.stage=='verify':
+                from slurm.filtering_batch_checks import saved_tokens
+                saved_tokens(prep,raw)
                 pipeline.load_raw=lambda _:raw
-                pipeline.stage_select(prep)
+                pipeline.stage_verify(prep)
+            else:
+                from slurm.filtering_batch_checks import saved_tokens,progress_writer
+                from slurm.filtering_parallel_checks import prepare_indexes,fixture as parallel_fixture,benchmark as parallel_benchmark
+                from filtering_parallel import ParallelRaw,prepared_documents
+                from slurm.filtering_batch_fixture import run as fixture
+                fixture(receipt_dir/('fixture-'+os.environ['SLURM_JOB_ID']))
+                saved=saved_tokens(prep,raw)
+                pipeline.atomic_json(receipt_dir/('saved-tokens-'+os.environ['SLURM_JOB_ID']+'.json'),saved)
+                index_receipt=prepare_indexes(raw)
+                pipeline.atomic_json(receipt_dir/('indexes-'+os.environ['SLURM_JOB_ID']+'.json'),index_receipt)
+                parallel_fixture(receipt_dir/('parallel-fixture-'+os.environ['SLURM_JOB_ID']))
+                parallel_benchmark(prep,raw,receipt_dir,evidence_identity)
+                adapter=ParallelRaw(prep,raw)
+                original,writer=progress_writer(prep,adapter,evidence_identity)
+                original_tokenize=pipeline.tokenize_documents
+                pipeline.load_raw=lambda _:adapter
+                pipeline.tokenize_documents=prepared_documents
+                pipeline.atomic_json=writer
+                try:
+                    pipeline.stage_select(prep)
+                finally:
+                    pipeline.atomic_json=original
+                    pipeline.tokenize_documents=original_tokenize
+                    adapter.close()
             raw.close();prep.event(args.stage,'completed');return 0
         except pipeline.StopRequested as error:
             prep.event(args.stage,'checkpointed');print(str(error),file=sys.stderr);return 75

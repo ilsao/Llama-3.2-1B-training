@@ -1,0 +1,137 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/checkpoints/checkpoint-013717-aeec221b8192",
+  "commit_url": "https://huggingface.co/asciibase64/Llama-3.2-1B-dolma3_mix/commit/0b54c9d826c765cb0e3d75494b00e898d04f882e",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/export-step-13717-3407ee78",
+  "finished_utc": "2026-10-09T12:42:24.135986+00:00",
+  "global_step": 13717,
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "public_unauthenticated_access": true,
+  "remote_config_tokenizer_load_verified": true,
+  "remote_file_checksums_verified": true,
+  "revision": "0b54c9d826c765cb0e3d75494b00e898d04f882e",
+  "slurm_job_id": "520037",
+  "status": "complete",
+  "upload_checksums": {
+    "LICENSE.txt": {
+      "git_sha1": "085b47c1575cb889b7024030e60b78f54f0b8c9e",
+      "sha256": "0b4284c1f87029e67654c7953afa16279961632cf73dcfe33374c4c2f298fa35",
+      "size": 7712
+    },
+    "NOTICE": {
+      "git_sha1": "be377ceb486e76ce39475663ef8323d7403bb4a5",
+      "sha256": "3bc2d1a6b360a03d172058198631b931c9aadf01650892fb0d25b93c6b8f0025",
+      "size": 116
+    },
+    "README.md": {
+      "git_sha1": "8ce133a06a6bfc62d1b7ef192556d797ddc1891e",
+      "sha256": "abd4e6a289dd431df603d6bb613a55ac841ecf7922a0e7e4694175c0a7c36a45",
+      "size": 3366
+    },
+    "config.json": {
+      "git_sha1": "dbe98aff8354a0c7b0d1672e0a19e632119b149a",
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+      "size": 838
+    },
+    "generation_config.json": {
+      "git_sha1": "e381c682311b55a600b6c588d39957bbed3dd069",
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+      "size": 143
+    },
+    "model-00001-of-00003.safetensors": {
+      "git_sha1": "c1846e26774ac529295fa01426df9ca4a659cacd",
+      "sha256": "2bafad32734c52ad92eaab81844a143392421bc97332fc96c8dbbea1219c9dec",
+      "size": 1956695880
+    },
+    "model-00002-of-00003.safetensors": {
+      "git_sha1": "81d549a40950ec3a38a18faa9318fbbe5afc7123",
+      "sha256": "c5f261aab6c0297f4971536167315b4808a9a60b83a399b45770ca81820d0f96",
+      "size": 1946296312
+    },
+    "model-00003-of-00003.safetensors": {
+      "git_sha1": "c9a26f059207af56796f3c76419619b560a3aca0",
+      "sha256": "2902702af68aade7dfaa67a63e1ac243ed23f6c394bb52e921b2fd97e9147b18",
+      "size": 1040282032
+    },
+    "model.safetensors.index.json": {
+      "git_sha1": "d56ab3a5f0708d688f6b5df5455008ce120f555a",
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+      "size": 12003
+    },
+    "resolved-training-config.json": {
+      "git_sha1": "78ee8e3ad76e86899b41d299fa14b89c8ef24a3e",
+      "sha256": "133091d6f737d6d7c348f0988e72ed55f29a73be9a904f7b40cd89f0edcfccf9",
+      "size": 1747
+    },
+    "special_tokens_map.json": {
+      "git_sha1": "cfabacc2620186cd3dd4b1dde9a37e057208636e",
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+      "size": 301
+    },
+    "tokenizer.json": {
+      "git_sha1": "475b31150454dc05e90b9c4c1adbd699f4e2774b",
+      "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b",
+      "size": 17209920
+    },
+    "tokenizer_config.json": {
+      "git_sha1": "795f75993a20250b35fee4a0685d080b1a01ab2b",
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+      "size": 50526
+    },
+    "training-details.json": {
+      "git_sha1": "f7ff70b17c74cae75bb647869cdbe35559c1503d",
+      "sha256": "550a521793bc6114adc6233d6700b48e05e67be89124f59a228527384298e5d7",
+      "size": 36728
+    },
+    "training-metadata.json": {
+      "git_sha1": "16fef26f6b55b4478de56dcf8ce6d18d3018c46e",
+      "sha256": "db64c559f96e7ef94f68453865aca4c741fca62a6b38399fb77fa4809502d12a",
+      "size": 26393
+    }
+  },
+  "validation": {
+    "checked_utc": "2026-10-09T12:37:26.088078+00:00",
+    "compared_tensors": 146,
+    "context_tokens": 8192,
+    "evaluation_scope": "Synthetic 8192-token finite-loss/load check; held-out PPL is the existing fixed-subset result",
+    "exact_tensor_equality": true,
+    "job_id": "520037",
+    "smoke_loss": 0.03676008805632591,
+    "standard_transformers_load": true,
+    "tied_output_weights": true,
+    "tokenizer_equivalence": true
+  },
+  "publication_allocations": [
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 16,
+      "end": "2026-10-09T20:35:11",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "b8e914b6965758657a88bcf825571510a5787046aa08c18b940e4152cf6a44d3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.0044444444444444444,
+      "job_id": "520031",
+      "nodes": "25a-hgpn001",
+      "start": "2026-10-09T20:34:55",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "elapsed_seconds": 315,
+      "end": "2026-10-09T20:42:24",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "c19e4d566bcfd091f42eba2aaffe3153befc876726c1f439acff8d65e57c3661",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.0875,
+      "job_id": "520037",
+      "nodes": "25a-hgpn014",
+      "start": "2026-10-09T20:37:09",
+      "state": "COMPLETED"
+    }
+  ],
+  "publication_h200_hours": 0.09194444444444444,
+  "publication_receipt": "/work/asciibase64/Llama-3.2-1B-training/runs/publications/hf-best-13717-20261009-recovery-1/upload.json"
+}

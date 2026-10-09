@@ -1,0 +1,49 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/checkpoints/checkpoint-013717-aeec221b8192",
+  "config": {
+    "activation_checkpointing": true,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "validation",
+    "epsilon": 1e-08,
+    "eval_documents": 1,
+    "eval_steps": 1,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 0.0003,
+    "logging_steps": 1,
+    "max_grad_norm": 1.0,
+    "max_h200_hours": 0.5,
+    "max_steps": 2,
+    "max_training_tokens": 1000000,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0.1,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "seed": 42,
+    "sequence_length": 8192,
+    "stop_margin_seconds": 180,
+    "wandb_mode": "offline",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 0,
+    "weight_decay": 0.1,
+    "world_size": 1
+  },
+  "cpus": 8,
+  "expected_parent_commit": "3a73100208da73716a3d9f2bef12139db81fcd18",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/export-step-13717-3407ee78",
+  "gpus": 1,
+  "kind": "export verification and publication; no training",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_run": "baseline-muon-wsd-raw-20261009",
+  "requested_seconds": 1800,
+  "sealed_files": {
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/hf-best-upload.sbatch": "c745a45c0b026906a306a4bca537e6fa14aa4a0cc54ea9d1c7decf9bb35e2318",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/hf_best_upload.py": "7108df46488f3e56df882dd98f4a27b0997780be51713ec063770f136a51952f",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/best.json": "aea97987065843cb6cf25b754960db4ce7f36053af2256327e82d8a5b632c0bc",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/export.json": "da11e22c41c195d1e651274d546da2008132658d18cffb84f3e87105fae5fe8a",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/summary.json": "dbf2155319e4f06334f8e3bcd6657dced4cba5e5375174cb1cf295ffe508e48c"
+  },
+  "user_authorization": "Push this best checkpoint to asciibase64/Llama-3.2-1B-dolma3_mix"
+}
