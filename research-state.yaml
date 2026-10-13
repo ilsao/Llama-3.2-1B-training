@@ -16,13 +16,18 @@
   "campaigns": {
     "horizon-wsd-20261014": {
       "allocation_cap_h200_hours": 205.33333333333334,
-      "continuity": "not_installed; auto-review rejected persistent schedule; explicit approval pending",
+      "authorization": "experiments/horizon-wsd-20261014/authorization.json",
+      "continuity": "20-minute controller installed; source-v2 recovery explicitly approved",
       "controller": "slurm/horizon_campaign.py",
       "final_tokens": 2000027648,
       "plan": "experiments/horizon-wsd-20261014/plan.json",
-      "state": "protocol_prepared",
+      "recovery_protocol": "experiments/horizon-wsd-20261014/recovery-protocol.md",
+      "state": "validation_failed_recovery_approved",
       "sweep_tokens": 700055552,
-      "total_sbatches": 18
+      "total_sbatches": 18,
+      "validation_actual_h200_hours": 1.3888888888888888,
+      "validation_job": "537355",
+      "validation_tokens": 0
     }
   },
   "cancellation_intents": [

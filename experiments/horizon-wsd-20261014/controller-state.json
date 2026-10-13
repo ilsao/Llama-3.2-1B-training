@@ -1,0 +1,58 @@
+{
+  "campaign": "horizon-wsd-20261014",
+  "created_utc": "2026-10-13T16:32:26.723208+00:00",
+  "jobs": {
+    "validation": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 625,
+        "end": "2026-10-14T00:42:53",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "a6c55cd63e1428d880161a433e49adc0527ab4ae97859f2bd926c2d88dc64857",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 1.3888888888888888,
+        "job_id": "537355",
+        "nodes": "25a-hgpn123",
+        "start": "2026-10-14T00:32:28",
+        "state": "TIMEOUT"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=10",
+        "--comment=horizon-4c412a9e7bf641b0a689bb9098d2272d",
+        "--job-name=hw-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd.sbatch",
+        "horizon-wsd-20261014-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation.json",
+      "configuration_sha256": "68cf8a438d84e952527adb9f32d9e888fd24ab8a72c4738df64030af82d9ea4c",
+      "full_eval": false,
+      "job_id": "537355",
+      "minutes": 10,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537355\n"
+      },
+      "reservation": "horizon-4c412a9e7bf641b0a689bb9098d2272d",
+      "run_id": "horizon-wsd-20261014-validation",
+      "slurm_state": "TIMEOUT",
+      "started_utc": "2026-10-13T16:32:26.774881+00:00",
+      "status": "reconciled"
+    }
+  },
+  "selections": {},
+  "stage": "validation",
+  "updated_utc": "2026-10-13T16:32:27.261138+00:00"
+}

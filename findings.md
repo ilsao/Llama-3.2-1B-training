@@ -422,3 +422,7 @@ core/config/split identities preserved; no training or upload was dispatched.
 ## Horizon-scaled WSD research — 2026-10-14
 
 Current evidence: completed BE60P20 at399,900,672 inputs has fixed1,000-document PPL27.4331322294; previous LR-scaled2B endpoint subset PPL17.7475548804. These are historical subset measurements, not new results or full-set claims. The new0.7B/2B campaign tests LR multipliers, clipping, and shared-prefix decay before two final continuations. beta0.32 is a cosine/AdamW transfer heuristic for WSD/Muon, not an established law here. Pure contracts pass; GPU validation and all tuning outcomes remain unrun at protocol creation. Persistent continuity was rejected by automatic review and remains uninstalled; never bypass that rejection. Historical allocation costs and failed/uncertain jobs remain preserved.
+
+### Runtime gate result
+
+537355 failed before model training: NCCL bootstrap self-connection remained SYN-SENT on25a-hgpn123. This is infrastructure evidence, not evidence about LR/clipping/WSD quality. Actual1.388888889H200-hours is charged, including25s Slurm termination overhead and recorded validation-budget overrun. No new PPL results exist. Preserve original artifacts; single-node bootstraploopback recovery is explicitly approved but GPU correctness remains unverified until that bounded recovery passes.

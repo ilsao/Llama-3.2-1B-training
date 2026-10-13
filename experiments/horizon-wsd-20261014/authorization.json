@@ -1,0 +1,18 @@
+{
+  "campaign": "horizon-wsd-20261014",
+  "approved_utc": "2026-10-13T16:37:14.741207+00:00",
+  "user_reply": "批准，照此協定自動完成",
+  "protocol_commit": "b5a0b84",
+  "protocol": "/home/asciibase64/Llama-3.2-1B-training/experiments/horizon-wsd-20261014/protocol.md",
+  "approval_scope": "Persistent20-minute controller; all18 independent sbatches; sweep0.7B/final2B; additional allocation cap205.333333H200-hours; formal runs5/6 each two allocations and32H200-hours; retain all prior budgets/costs. Only prescribed checkpoint forks/continuations.",
+  "allocation_cap_h200_hours": 205.33333333333334,
+  "total_sbatches": 18,
+  "formal_run_numbers": [
+    5,
+    6
+  ],
+  "max_h200_hours_per_final_run": 32,
+  "retry_allowed": false,
+  "cleanup_allowed": false,
+  "hf_upload_allowed": false
+}
