@@ -1,0 +1,5 @@
+{
+  "user_reply": "批准單次修復後繼續整輪",
+  "approved_utc": "2026-10-13T16:48:38.592992+00:00",
+  "scope": "One additional10min8H200/8CPU fresh validation with exactloopback bootstrap; original625s cost retained, LR0.5 cap79min and fixed0.7B endpoint;19allocations total under205.333333H200-hour cap; continueoriginaltwo2B finals. No further retry/cleanup/upload."
+}
