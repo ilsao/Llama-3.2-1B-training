@@ -312,3 +312,7 @@ run, no automatic retry. Remaining allocation rounded down to479 minutes so
 cumulative reservation plus measured cost remains below64 H200-hours.
 Regression tests cover full-run CLI dispatch, denied checkpoint resume, rejected
 retry after initialization, preserved prior cost and reduced wall-time.
+
+## 2026-10-14 — horizon-wsd campaign protocol
+
+User requested sequential LR/clipping/decay tuning with independent sbatches, a shared stable checkpoint, and two final two-sbatch comparisons; clarified0.7B sweep and2B final. Scoped preparation is immutable raw baseline, BE60P20 WSD hold/zero, matched token endpoints. Prepared18 allocations,205.333333H200-hour upper bound, and preserved197.968611 historical training hours plus4 outstanding reserved hours. Six pure contracts, Python/sbatch syntax and sbatch --test-only passed. Protocol/source/config seals created before compute. Persistent20-minute schedule installation was auto-review rejected; no cron installed. See experiments/horizon-wsd-20261014/protocol.md.

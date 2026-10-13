@@ -418,3 +418,7 @@ Initial219.64s production average981447tokens/s is a short observation, not the
 15-minute result; remaining training-tokenization estimate1.50h excludes eval,
 pack, verify, queue and continuation overhead. Existing prefix and all original
 core/config/split identities preserved; no training or upload was dispatched.
+
+## Horizon-scaled WSD research — 2026-10-14
+
+Current evidence: completed BE60P20 at399,900,672 inputs has fixed1,000-document PPL27.4331322294; previous LR-scaled2B endpoint subset PPL17.7475548804. These are historical subset measurements, not new results or full-set claims. The new0.7B/2B campaign tests LR multipliers, clipping, and shared-prefix decay before two final continuations. beta0.32 is a cosine/AdamW transfer heuristic for WSD/Muon, not an established law here. Pure contracts pass; GPU validation and all tuning outcomes remain unrun at protocol creation. Persistent continuity was rejected by automatic review and remains uninstalled; never bypass that rejection. Historical allocation costs and failed/uncertain jobs remain preserved.

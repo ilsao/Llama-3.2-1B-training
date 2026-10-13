@@ -13,6 +13,18 @@
     "training_h200_hours_reserved_or_measured": 61.85611111111112,
     "training_tokens_processed": 0
   },
+  "campaigns": {
+    "horizon-wsd-20261014": {
+      "allocation_cap_h200_hours": 205.33333333333334,
+      "continuity": "not_installed; auto-review rejected persistent schedule; explicit approval pending",
+      "controller": "slurm/horizon_campaign.py",
+      "final_tokens": 2000027648,
+      "plan": "experiments/horizon-wsd-20261014/plan.json",
+      "state": "protocol_prepared",
+      "sweep_tokens": 700055552,
+      "total_sbatches": 18
+    }
+  },
   "cancellation_intents": [
     {
       "end": "2026-10-08T03:25:39",
