@@ -254,7 +254,7 @@ def run_once():
                 export_on_completion=False,retain_all_checkpoints=True,
                 hold_schedule=tail_settings(.6),wsd_decay_ratio=.6,
                 stop_margin_seconds=180,final_evaluation_reserve_seconds=30,sweep_id=CAMPAIGN,sweep_stage='runtime')
-            path=CONFIGS/'validation.json';atomic_json(path,cfg)
+            path=CONFIGS/'validation-recovery1.json';atomic_json(path,cfg)
             submit(s,'validation','validation-recovery1',path,load_config(path),10)
             if completed(s,['validation']):s['stage']='lr'
         if s['stage']=='lr':
