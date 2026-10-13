@@ -111,6 +111,11 @@ def submit(s, key, run_name, path, cfg, minutes, mode='fresh', pause=0, parent='
         return
     ledger=ExperimentLedger(DEFAULT_ROOT)
     DEFAULT_ROOT.joinpath('logs').mkdir(parents=True,exist_ok=True)
+    with ledger.transaction() as data:
+        consumed_or_held = sum(j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values()
+            if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind') == 'horizon_wsd_campaign')
+    if consumed_or_held + minutes*8/60 > plan()['allocation_cap_h200_hours'] + 1e-12:
+        raise ValueError('Campaign actual cost plus held reservations exceeds approved205.333333H200-hours; preserve costs and stop')
     ledger.reserve(tag,run_id,cfg,minutes*60,8,mode=='resume')
     if parent!='-':
         with ledger.transaction() as data:
@@ -224,7 +229,9 @@ def choose(s, keys, field, values):
     # Strict endpoint argmin; deterministic listed order for exact numeric ties.
     best=min(observations,key=lambda x:x['nll'])
     s['selections'][field]=best['value']
-    s.setdefault('trajectory',[]).extend(observations)
+    s['trajectory']=[r for r in s.get('trajectory',[]) if r['candidate'] not in keys]+observations
+    with (REPO/'research-log.md').open('a') as stream:
+        stream.write(f'\n{stamp()} — {CAMPAIGN} completed {field} ranking: selected {best["value"]}; endpoint NLL {best["nll"]:.9f}, PPL {best["perplexity"]:.6f}. All compared candidates completed/reconciled at matched tokens. Single-seed exploratory transfer interpretation; no significance claim.\n')
     atomic_json(DIRECTORY/'results'/('ranking-'+field+'.json'),dict(best=best,observations=observations))
     report(s)
 
@@ -237,6 +244,46 @@ def report(s):
         lines.append(f'| {row["candidate"]} | {row["perplexity"]:.6f} | {row["training_tokens"]} | {row["physical_h200_hours"]:.6f} |')
     lines+=['','Matched endpoint held-out NLL determines winners. Shared prefix is physically charged once; branches retain inherited tokens and compute.','No significance claim from a single seed. Final 50,000-document evaluation is separate from tuning.']
     (REPO/'to_human'/('horizon-wsd-20261014.md')).write_text('\n'.join(lines)+'\n')
+    import html
+    physical=sum(r.get('accounting',{}).get('h200_hours',0) for r in s['jobs'].values())
+    reserved=sum(r['minutes']*8/60 for r in s['jobs'].values() if r['status']!='reconciled')
+    summary={'state':s['stage'],'controller':'slurm/horizon_campaign_v2.py',
+        'sweep_tokens':SWEEP_STEPS*BATCH_TOKENS,'final_tokens':FINAL_STEPS*BATCH_TOKENS,
+        'allocation_cap_h200_hours':plan()['allocation_cap_h200_hours'],
+        'physical_h200_hours_reconciled':physical,'outstanding_h200_hours_reserved':reserved,
+        'selections':s['selections'],'jobs':{k:r.get('job_id') for k,r in s['jobs'].items()},
+        'updated_utc':stamp(),'continuity':'enabled20-minute sole-owner controller' if not DISABLED.exists() else 'new submissions disabled'}
+    research=REPO/'research-state.yaml'
+    if research.exists():
+        value=read_json(research);value.setdefault('campaigns',{}).setdefault(CAMPAIGN,{}).update(summary)
+        atomic_json(research,value)
+    narrative=(f'Current stage: {s["stage"]}. Selected settings: {s["selections"]}. '
+        f'Measured physical cost {physical:.6f} H200-hours, outstanding reservations {reserved:.6f}. '
+        'Endpoint NLL determines stage winners; beta0.32 remains a tested transfer heuristic, not a fitted WSD exponent. '
+        'The original NCCL failure and all historical costs remain charged. No automatic retries.')
+    memory=REPO/'findings.md'
+    if memory.exists():
+        start='<!-- horizon-wsd-20261014-live-start -->';end='<!-- horizon-wsd-20261014-live-end -->'
+        old=memory.read_text();block=start+'\n## Horizon WSD live synthesis\n\n'+narrative+'\n'+end
+        if start in old and end in old:
+            a=old.index(start);b=old.index(end,a)+len(end);old=old[:a]+block+old[b:]
+        else:old+='\n'+block+'\n'
+        memory.write_text(old)
+    atomic_json(DIRECTORY/'results/trajectory.json',rows)
+    body='<h1>WSD horizon autoresearch</h1><p>'+html.escape(narrative)+'</p>'
+    body+='<p>0.7B sweep →2B finals. Same seed42, canonical split,8192 context, global batch16. Tuning:1,000 fixed reserved docs; finals:50,000 reserved docs.</p>'
+    body+='<table><tr><th>Allocation</th><th>Job</th><th>Status</th></tr>'
+    for key,r in s['jobs'].items():
+        body+='<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in (key,r.get('job_id','uncertain'),r.get('slurm_state',r['status'])))+'</tr>'
+    body+='</table><h2>Completed matched-token endpoints</h2><table><tr><th>Candidate</th><th>PPL</th><th>NLL</th><th>Inputs</th></tr>'
+    for row in rows:
+        body+='<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in (row['candidate'],round(row['perplexity'],6),round(row['nll'],9),row['training_tokens']))+'</tr>'
+    body+='</table>'
+    if s.get('final_full_results'):
+        body+='<h2>Final full reserved-set results</h2><pre>'+html.escape(json.dumps(s['final_full_results'],indent=2))+'</pre>'
+    style='body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:24px;background:#f8f9fb;color:#17202f}table{border-collapse:collapse;width:100%;background:white;margin:24px 0}td,th{padding:10px;text-align:left;border-bottom:1px solid #ddd}'
+    (REPO/'to_human/horizon-wsd-20261014.html').write_text('<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>WSD research</title><style>'+style+'</style>'+body+'</html>')
+
 
 
 def run_once():

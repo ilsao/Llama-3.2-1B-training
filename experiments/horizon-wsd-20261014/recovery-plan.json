@@ -36,7 +36,7 @@
     "experiments/horizon-wsd-20261014/source-v2/slurm/full_evaluation.py": "bc9fe8071f34a50d694dff520cd5860889558e9ed430ea07906ee100a3a94965",
     "experiments/horizon-wsd-20261014/source-v2/slurm/training_entry.py": "34e5234232f2663dd2ae34f49d65bc9b247a6bd2cbcc0588ac189b66dafa6484",
     "experiments/horizon-wsd-20261014/source-v2/slurm/common.sh": "c9c474c296c32f266560d3bef068c89853a268e47fa8eb0f78be3e24ffcd8cca",
-    "slurm/horizon_campaign_v2.py": "78cfcfd651ad56629bbe4df70160f0f24796ff0d827f54841d6346458cb95b14",
+    "slurm/horizon_campaign_v2.py": "74796ee40ae18d841fe717863f1ddc13a526c5b039d453237053eb6267b1fdb6",
     "slurm/horizon-wsd-v2.sbatch": "e4c53182b66e1b7bc219be059391b7c72d7968365084eae873cf6cb1b570cf23"
   },
   "original_actual_h200_hours": 1.3888888888888888,
