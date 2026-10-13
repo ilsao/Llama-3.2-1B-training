@@ -426,3 +426,9 @@ Current evidence: completed BE60P20 at399,900,672 inputs has fixed1,000-document
 ### Runtime gate result
 
 537355 failed before model training: NCCL bootstrap self-connection remained SYN-SENT on25a-hgpn123. This is infrastructure evidence, not evidence about LR/clipping/WSD quality. Actual1.388888889H200-hours is charged, including25s Slurm termination overhead and recorded validation-budget overrun. No new PPL results exist. Preserve original artifacts; single-node bootstraploopback recovery is explicitly approved but GPU correctness remains unverified until that bounded recovery passes.
+
+<!-- horizon-wsd-20261014-live-start -->
+## Horizon WSD live synthesis
+
+Current stage: lr. Selected settings: {}. Measured physical cost 1.740000 H200-hours, outstanding reservations 34.533333. Endpoint NLL determines stage winners; beta0.32 remains a tested transfer heuristic, not a fitted WSD exponent. The original NCCL failure and all historical costs remain charged. No automatic retries.
+<!-- horizon-wsd-20261014-live-end -->

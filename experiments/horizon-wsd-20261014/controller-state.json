@@ -2,7 +2,155 @@
   "campaign": "horizon-wsd-20261014",
   "created_utc": "2026-10-13T16:32:26.723208+00:00",
   "jobs": {
+    "lr05": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=79",
+        "--comment=horizon-97bed9159177437c88708d2de4dd9134",
+        "--job-name=hw-lr05",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr05",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr05.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr05.json",
+      "configuration_sha256": "373c86b8fe09fec06a92cf75563ce69beabc0f6139f08307888e84a4cbe5eae2",
+      "full_eval": false,
+      "job_id": "537499",
+      "minutes": 79,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537499\n"
+      },
+      "reservation": "horizon-97bed9159177437c88708d2de4dd9134",
+      "run_id": "horizon-wsd-20261014-lr05",
+      "started_utc": "2026-10-13T16:53:10.650298+00:00",
+      "status": "submitted"
+    },
+    "lr10": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-3241d2b6c5d842feba26423719740a0d",
+        "--job-name=hw-lr10",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr10",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr10.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr10.json",
+      "configuration_sha256": "a167470a66e4c613436041f7dee49288b8c4b4b2d19db32618dcf9b75f08a919",
+      "full_eval": false,
+      "job_id": "537500",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537500\n"
+      },
+      "reservation": "horizon-3241d2b6c5d842feba26423719740a0d",
+      "run_id": "horizon-wsd-20261014-lr10",
+      "started_utc": "2026-10-13T16:53:11.158863+00:00",
+      "status": "submitted"
+    },
+    "lr20": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-ed00dd6696da4f7abb31d1f7bc1659f6",
+        "--job-name=hw-lr20",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr20",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr20.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr20.json",
+      "configuration_sha256": "455a86049eb05f5c33b8bc49c333d71a19828ca942efcbda9bf071de37966706",
+      "full_eval": false,
+      "job_id": "537501",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537501\n"
+      },
+      "reservation": "horizon-ed00dd6696da4f7abb31d1f7bc1659f6",
+      "run_id": "horizon-wsd-20261014-lr20",
+      "started_utc": "2026-10-13T16:53:11.654011+00:00",
+      "status": "submitted"
+    },
     "validation": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 158,
+        "end": "2026-10-14T00:51:59",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "88a1618586fc557ca9ae67936d5fb4c9324665032e50ebbeac12f0ace02b7d82",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.3511111111111111,
+        "job_id": "537466",
+        "nodes": "25a-hgpn176",
+        "start": "2026-10-14T00:49:21",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=10",
+        "--comment=horizon-16a51c6c5ce24881a0bb56115580a522",
+        "--job-name=hw-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-validation-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation-recovery1.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation-recovery1.json",
+      "configuration_sha256": "dd13be7b3b0b0e2f0983207afa1bb766a2a53544a05421dc442b857eb1397c3d",
+      "full_eval": false,
+      "job_id": "537466",
+      "minutes": 10,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537466\n"
+      },
+      "reservation": "horizon-16a51c6c5ce24881a0bb56115580a522",
+      "run_id": "horizon-wsd-20261014-validation-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T16:49:19.886075+00:00",
+      "status": "reconciled"
+    },
+    "validation-original": {
       "accounting": {
         "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
         "elapsed_seconds": 625,
@@ -53,6 +201,6 @@
     }
   },
   "selections": {},
-  "stage": "validation",
-  "updated_utc": "2026-10-13T16:32:27.261138+00:00"
+  "stage": "lr",
+  "updated_utc": "2026-10-13T16:53:13.127970+00:00"
 }
