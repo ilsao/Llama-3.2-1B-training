@@ -1,0 +1,6 @@
+{
+  "user_reply": "重新從 ckp 訓練，sweep lr scale = [1.0, 0.7, 0.5, 0.3]",
+  "approved_utc": "2026-10-14T06:35:48.706878+00:00",
+  "owner_hostname": "25a-lgn01",
+  "scope": "Stop superseded reheated resplit phase2; four exact frozen12715 checkpoint LR forks at1.0/0.7/0.5/0.3 of first phase peak, same333447168 new inputs, same optimizer momentum/RNG/cursor/warmup/cooldown,55min8H200/8CPU each; complete standard independently; preserve every prior cost and original205.333333 campaign cap. No auto retry, cleanup or HF upload."
+}

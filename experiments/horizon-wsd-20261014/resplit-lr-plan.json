@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-10-14T06:35:48.706878+00:00",
+  "scales": [
+    1.0,
+    0.7,
+    0.5,
+    0.3
+  ],
+  "reference": "first phase peak",
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+  "checkpoint_state_sha256": "35a46e700d4d113cd252d0201c4a47e44b6c0fab9aed4639bcc7c180efa878b8",
+  "checkpoint_complete_sha256": "8601ca06b107233d1ba7b7328bd399c7349c8b6a83cd5df2f7c25fda74985a5d",
+  "overlay_hashes": {
+    "slurm/resplit_lr_runtime.py": "3daaffd0fbfade560700583ec77393a583bad19cd65ca37d8cee57e3aaff2a00",
+    "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509"
+  },
+  "source_hashes": {
+    "slurm/resplit_lr_runtime.py": "3daaffd0fbfade560700583ec77393a583bad19cd65ca37d8cee57e3aaff2a00",
+    "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509",
+    "slurm/resplit-lr.sbatch": "b1966fe0c7dcffec8426260dc98e6a0c77e35736b2c7a013d0e27b406205c772",
+    "slurm/horizon_campaign_v5.py": "035498e2cece84848159dfebd68304da1e80279066b834337979a44f8aa2c030",
+    "tests/test_resplit_lr_sweep.py": "9c5b027c28d4c9fc9e76ed70c4722586a428ecd0346f5ddbb8f88830852ea455",
+    "experiments/horizon-wsd-20261014/resplit-lr-protocol.md": "c6d362dcfe0190d9cfeb4c464fc4189d127c25e350052cef5b1250ad5f5f15d4",
+    "experiments/horizon-wsd-20261014/resplit-lr-authorization.json": "6ba0ac81081e8bf9ff8934eac679a53de79c41234beda0a65918680445814047",
+    "configs/horizon-wsd-20261014/tail-lr100.json": "49e5b98f5a9ba3917e1e23be960fc2b0f6ae03f8e36006471e3c4bd15bafbc17",
+    "configs/horizon-wsd-20261014/tail-lr070.json": "fb6e23047b0023f8ea7526884c84a909aeffd226b625f9045ad10a23da646539",
+    "configs/horizon-wsd-20261014/tail-lr050.json": "819946b010288d4edf3333ecafe5024f2149cdf5471dd0d7599b19bc363e7a6a",
+    "configs/horizon-wsd-20261014/tail-lr030.json": "28c6616c3620d2563f88b146496ca9170c5c5a11569b8ecca20acb8f0526dbf8"
+  },
+  "new_tokens_per_branch": 333447168,
+  "additional_h200_hour_reservation": 29.333333333333332,
+  "owner_hostname": "25a-lgn01",
+  "original_parent_prior_cost_h200_hours": 23.535555555555554,
+  "original_campaign_cap_h200_hours": 205.33333333333334,
+  "resplit_tree_processed_inputs_if_complete": 3333816320
+}
