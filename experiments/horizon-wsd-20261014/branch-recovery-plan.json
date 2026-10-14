@@ -20,10 +20,23 @@
   "remaining_allocation_maximum_h200_hours": 114,
   "combined_upper_bound_h200_hours": 176.48,
   "source_hashes": {
-    "slurm/horizon_campaign_v3.py": "f0df498caa0d2b7fbd903b99e4b1959b6eea1041a50c8eb3deb92b6768f21fef",
-    "tests/test_horizon_branch_recovery.py": "899984d8d7b49f6be2e7a142892638685b1c02f93ae747632f19323e90993eb0",
+    "slurm/horizon_campaign_v3.py": "eeb758c65b08e1463d87a7d451da6655ea676511cf7f5ee9e204d5598c1e110b",
+    "tests/test_horizon_branch_recovery.py": "cac0edb9f303896a5288f1d9c856504878c5e083b0380ac62e0f98f1d797b822",
     "experiments/horizon-wsd-20261014/branch-recovery-protocol.md": "2917138c789275c762d55025050e84ded3c417cd963b8b100628a88ee98531f1",
-    "experiments/horizon-wsd-20261014/branch-recovery-authorization.json": "637a8b3ab2c4b21bcd9ef8cc35992351f970fad4ba368eac312ad70bdd9a9735"
+    "experiments/horizon-wsd-20261014/branch-recovery-authorization.json": "637a8b3ab2c4b21bcd9ef8cc35992351f970fad4ba368eac312ad70bdd9a9735",
+    "experiments/horizon-wsd-20261014/controller-before-device-recovery.py": "f0df498caa0d2b7fbd903b99e4b1959b6eea1041a50c8eb3deb92b6768f21fef",
+    "experiments/horizon-wsd-20261014/device-recovery-protocol.md": "ef3fc2242cf56f957d4e94222c4abdf35da77f44617010cb7e384ff13823db25"
   },
-  "sealed_training_source": "source-v2; unchanged"
+  "sealed_training_source": "source-v2; unchanged",
+  "device_recovery": {
+    "failed_job": "539630",
+    "user_reply": "\u4fee\u5fa9\u4e26\u7e7c\u7e8c",
+    "diagnosed_utc": "2026-10-14T02:24:02.865903+00:00",
+    "replacement_run_id": "horizon-wsd-20261014-decay-60-recovery2",
+    "excluded_node": "25a-hgpn027",
+    "failed_h200_hours": 0.03777777777777778,
+    "combined_upper_bound_h200_hours": 176.51777777777778,
+    "total_planned_allocations": 25,
+    "automatic_retry": false
+  }
 }

@@ -30,10 +30,12 @@ MARKER = '# horizon-wsd-20261014-controller'
 BRANCH_KEYS = ('decay60', 'decay50', 'decay40', 'decay20', 'decay10')
 
 
-def decay_run_name(key):
+def decay_run_name(key, device_recovery=False):
     if key not in BRANCH_KEYS:
         raise ValueError('Unknown authorized decay branch')
-    return 'decay-' + key.removeprefix('decay') + '-recovery1'
+    if device_recovery and key != 'decay60':
+        raise ValueError('Device recovery restricted to decay60')
+    return 'decay-' + key.removeprefix('decay') + ('-recovery2' if device_recovery else '-recovery1')
 
 
 def stamp():
@@ -115,6 +117,7 @@ def submit(s, key, run_name, path, cfg, minutes, mode='fresh', pause=0, parent='
         raise ValueError('Run already initialized; no automatic retry')
     tag='horizon-'+uuid.uuid4().hex
     command=['sbatch','--parsable',f'--time={minutes}', '--comment='+tag,
+             '--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn151',
              '--job-name=hw-'+key, str(REPO/'slurm/horizon-wsd-v2.sbatch'),run_id,str(path),mode,str(pause),parent,'1' if full_eval else '0']
     env={**os.environ,'DATA_ROOT':str(DEFAULT_ROOT),'TRAIN_SOURCE_ROOT':str(SOURCE),
          'HORIZON_CONTROLLER':str(Path(__file__).resolve())}
@@ -139,6 +142,8 @@ def submit(s, key, run_name, path, cfg, minutes, mode='fresh', pause=0, parent='
             if key in BRANCH_KEYS:
                 failed = s['jobs'][key+'-failed-original']
                 inherited += failed['accounting']['h200_hours']
+                if key == 'decay60' and s.get('device_recovery_applied'):
+                    inherited += s['jobs']['decay60-failed-recovery1']['accounting']['h200_hours']
             if inherited+minutes*8/60>cfg['max_h200_hours']:
                 raise ValueError('Logical branch resource cap exceeded')
             data['runs'][run_id].update(inherited_h200_hours=inherited,parent_run=parent,
@@ -345,7 +350,8 @@ def run_once():
                 path,cfg=config_for(key,lr_ratio=s['selections']['lr_ratio'],clipping=s['selections']['clipping'],tail=value)
                 if not s.get('branch_recovery_applied'):
                     raise ValueError('Apply the explicitly authorized branch recovery before submission')
-                submit(s,key,decay_run_name(key),path,load_config(path),75,parent=CAMPAIGN+'-stable-prefix')
+                submit(s,key,decay_run_name(key, device_recovery=key=='decay60' and bool(s.get('device_recovery_applied'))),
+                       path,load_config(path),75,parent=CAMPAIGN+'-stable-prefix')
             if completed(s,keys):
                 choose(s,keys,'decay_tail',values);s['stage']='final'
         if s['stage']=='final':
@@ -411,6 +417,45 @@ def recover_decay():
         print('Archived all five failed allocations; enabled exactly five named recovery branches.')
 
 
+def recover_device():
+    """Diagnosed manual replacement of one pre-training device failure."""
+    with locked(DIRECTORY/'.controller.lock', blocking=False):
+        check()
+        read_json(DIRECTORY/'device-recovery-protocol-commit.json')
+        s = state()
+        if s.get('device_recovery_applied'):
+            print('Device recovery already applied; no automatic retry.')
+            return
+        if s['stage'] != 'decay' or not s.get('branch_recovery_applied'):
+            raise ValueError('Device recovery restricted to current decay recovery')
+        reconcile(s)
+        failed = s['jobs']['decay60']
+        if (failed['job_id'] != '539630' or failed['status'] != 'reconciled' or
+                failed['slurm_state'] != 'FAILED' or failed['accounting']['elapsed_seconds'] != 17):
+            raise ValueError('Device failure identity/accounting mismatch')
+        run = DEFAULT_ROOT/'runs/experiments'/failed['run_id']
+        if (run/'token-journal.json').exists() or (run/'latest.json').exists():
+            raise ValueError('Device recovery cannot reset processed tokens/checkpoints')
+        log = DEFAULT_ROOT/'logs/hw-decay60-539630.err'
+        if 'device=7, num_gpus=7' not in log.read_text():
+            raise ValueError('Expected diagnosed CUDA device failure missing')
+        with ExperimentLedger(DEFAULT_ROOT).transaction() as data:
+            held = sum(j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values()
+                if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind') == 'horizon_wsd_campaign')
+        if held + 10 + 64 > plan()['allocation_cap_h200_hours']:
+            raise ValueError('Device replacement and final reservations exceed campaign cap')
+        atomic_json(DIRECTORY/'device-recovery-original-state.json', s)
+        s['jobs']['decay60-failed-recovery1'] = s['jobs'].pop('decay60')
+        s['device_recovery_applied'] = dict(failed_job='539630', applied_utc=stamp(),
+            excluded_node='25a-hgpn027', replacement_run_id=CAMPAIGN+'-decay-60-recovery2',
+            authorization='User repair-and-continue request; device-recovery-protocol.md',
+            total_planned_allocations=25, failed_costs_retained=True)
+        s['updated_utc'] = stamp()
+        atomic_json(STATE, s)
+        report(s)
+        print('Archived diagnosed CUDA startup failure; enabled one manual decay60 replacement.')
+
+
 def install():
     import shlex
     old=subprocess.run(['crontab','-l'],capture_output=True,text=True)
@@ -428,14 +473,15 @@ def install():
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action',choices=['check','run-once','status','install','disable','verify-job','test-only','recover-decay'])
+    parser.add_argument('action',choices=['check','run-once','status','install','disable','verify-job','test-only','recover-decay','recover-device'])
     parser.add_argument('run_id',nargs='?');parser.add_argument('--pause',type=int,default=0)
     args=parser.parse_args()
     if args.action in ('install', 'run-once') and not (DIRECTORY/'recovery-authorization.json').exists():
         raise ValueError('One additional recovery allocation requires explicit approval recorded in recovery-authorization.json')
     if args.action in ('install', 'run-once', 'recover-decay') and not (DIRECTORY/'branch-recovery-authorization.json').exists():
         raise ValueError('Branch repair requires explicit recorded user approval')
-    if args.action=='recover-decay':recover_decay()
+    if args.action=='recover-device':recover_device()
+    elif args.action=='recover-decay':recover_decay()
     elif args.action=='check':check()
     elif args.action=='run-once':run_once()
     elif args.action=='verify-job':verify_job(args.run_id,args.pause)

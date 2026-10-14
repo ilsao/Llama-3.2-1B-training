@@ -1,0 +1,5 @@
+{
+  "commit": "9b7443e3dbf2b237ca9c841d47e7f04e30b37ed6",
+  "parent_recovery_protocol": "ba501f4d156b2a45b49afc87934a14a6f2ad5e5f",
+  "validation": "13 pure tests passed; bash -n launcher; all sealed source/metadata checks passed"
+}

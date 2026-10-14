@@ -87,6 +87,33 @@ class RecoveryTests(unittest.TestCase):
                 self.assertEqual(state['jobs'][key+'-failed-original'], original['jobs'][key])
             self.assertEqual(json.loads((d/'branch-recovery-original-state.json').read_text()), original)
 
+    def test_device_recovery_is_one_time_and_preserves_failed_charge(self):
+        original = json.loads((ROOT/'experiments/horizon-wsd-20261014/controller-state.json').read_text())
+        if 'decay60-failed-recovery1' in original['jobs']:
+            original['jobs']['decay60'] = original['jobs'].pop('decay60-failed-recovery1')
+        original.pop('device_recovery_applied', None)
+        original['stage'] = 'decay'
+        ledger = MagicMock()
+        ledger.transaction.return_value.__enter__.return_value = {'jobs': {}}
+        with tempfile.TemporaryDirectory() as directory:
+            d = Path(directory); (d/'logs').mkdir()
+            (d/'logs/hw-decay60-539630.err').write_text('device=7, num_gpus=7')
+            atomic_json(d/'state.json', original)
+            atomic_json(d/'device-recovery-protocol-commit.json', {'commit':'test'})
+            with patch.object(c, 'DIRECTORY', d), patch.object(c, 'STATE', d/'state.json'), \
+                 patch.object(c, 'DEFAULT_ROOT', d), patch.object(c, 'check'), patch.object(c, 'reconcile'), \
+                 patch.object(c, 'report'), patch.object(c, 'ExperimentLedger', return_value=ledger), \
+                 patch.object(c, 'plan', return_value={'allocation_cap_h200_hours':205.33333333333334}):
+                c.recover_device()
+                first = (d/'state.json').read_text()
+                c.recover_device()
+                self.assertEqual((d/'state.json').read_text(), first)
+            state = json.loads(first)
+            self.assertNotIn('decay60', state['jobs'])
+            self.assertEqual(state['jobs']['decay60-failed-recovery1'], original['jobs']['decay60'])
+            self.assertEqual(c.decay_run_name('decay60', True), 'decay-60-recovery2')
+            with self.assertRaises(ValueError): c.decay_run_name('decay50', True)
+
     def test_failed_recovery_does_not_promote_or_retry(self):
         state = {'stage':'decay', 'jobs':{key:{'status':'reconciled','slurm_state':'FAILED'} for key in c.BRANCH_KEYS}}
         with self.assertRaisesRegex(ValueError, 'Stage failed'):
