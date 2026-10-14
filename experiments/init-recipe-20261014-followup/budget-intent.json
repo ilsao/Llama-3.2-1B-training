@@ -1,7 +1,8 @@
 {
-  "actual_or_held_now": 133.29777777777775,
+  "actual_or_held_now": 158.5622222222222,
   "campaign_cap": 256,
   "followup_intent_h200_hours": 32,
-  "parent_final_not_yet_reserved": 32,
-  "worst_committed_total": 197.29777777777775
+  "parent_final_not_yet_reserved": 0,
+  "worst_committed_total": 190.5622222222222,
+  "parallel_training": true
 }

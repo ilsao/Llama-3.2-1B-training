@@ -7,7 +7,7 @@
     "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
     "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
     "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
-    "followup_contracts.py": "1966b367d045bca7dc18932aab882a6da2b5185133fd1e72bec13432afb09a8a",
+    "followup_contracts.py": "52d3614d0da59bf81e52b2fdf43d3641e1736c0688c48d5ab64438f8497ad0a4",
     "horizon_contracts.py": "f2e9c77b2b63bff0749f2b06023f82889a335a7577f098ebefcaa99b64a592ed",
     "horizon_gpu_checks.py": "4308368b553235330dc0208af8fa2a5dc879f2cceac9d38d66ea5420e5974c37",
     "horizon_runtime.py": "c50493767fae227b04e30efae71ee34180e872be6ad1183c83560084359eca8a",
@@ -72,8 +72,9 @@
     "slurm/training-common.sh": "bf2aa81d5ae211126807918e6397d1780cf2c5f134bbbbe317b504bc010bc104",
     "slurm/training_entry.py": "34e5234232f2663dd2ae34f49d65bc9b247a6bd2cbcc0588ac189b66dafa6484",
     "train.py": "763a872bdf5f3c0143ea7f0ddde3333aee50b27eb670cdd59dbc3c0fbefeaca4",
-    "training_state.py": "cb995f0c710f0758299bc5f72d0586403b9c703a308e67707fb58850054232ab",
-    "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
+    "training_state.py": "c6c926823ea5e518fa5be49e778169d767eff15c3ec81f2c2739d83f938a05c5",
+    "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297",
+    "slurm/followup_controller_v2.py": "04c225d0f7f8cdd0dbd9acf5e6da5721ca9bf5e1fe5b60a201b1fd8d5300e2fc"
   },
-  "source_commit": "a80fc82727dfcea9dda5b0f066de007944608305"
+  "source_commit": "fca26825bedaf32cc8c288df9b6e208d2efabb19"
 }

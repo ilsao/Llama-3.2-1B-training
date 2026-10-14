@@ -21,7 +21,7 @@
   "formal_run_number": 8,
   "fresh_random_weights": true,
   "hf_upload": false,
-  "instruction": "現輪最終結果出來後，不加入EMA，加入residual-half與resplit再測一次",
+  "instruction": "兩個訓練有依賴關係嗎? 沒有的話並行啟動。",
   "max_allocation_seconds": 14400,
   "max_h200_hours": 32,
   "parent_numerical_payload": {
@@ -37,6 +37,8 @@
   },
   "parent_run": "init-recipe-20261014-final-2b",
   "run_id": "init-recipe-20261014-followup-rh-resplit-2b",
-  "trigger": "Previous final2B completes full50000-document evaluation and all allocation accounting",
-  "world_size": 8
+  "trigger": "Verified immutable formal7 configuration; independent random initialization; submit in parallel without waiting for evaluation",
+  "world_size": 8,
+  "parallel_training": true,
+  "previous_instruction": "現輪最終結果出來後，不加入EMA，加入residual-half與resplit再測一次"
 }

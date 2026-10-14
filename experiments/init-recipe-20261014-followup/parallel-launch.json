@@ -1,0 +1,16 @@
+{
+  "instruction": "兩個訓練有依賴關係嗎? 沒有的話並行啟動。",
+  "recorded_utc": "2026-10-14T16:28:57.514553+00:00",
+  "parent_job": "544399",
+  "followup_job": "544451",
+  "followup_slurm_state": "PENDING",
+  "dependency": null,
+  "fresh_random_weights": true,
+  "checkpoint_resume": false,
+  "ema": [],
+  "shared_budget_h200_hours": 256,
+  "actual_or_held_h200_hours": 190.5622222222222,
+  "static_contract_tests_passed": 9,
+  "batch_shell_syntax_passed": true,
+  "source_commit": "fca26825bedaf32cc8c288df9b6e208d2efabb19"
+}
