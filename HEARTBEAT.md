@@ -138,3 +138,7 @@ heartbeat. Never duplicate a live/uncertain submission or resume the old thread.
 This takeover controller is bound to thread01a119cd-05e8-7ae2-9f40-09fffcd641c1.
 If CODEX_THREAD_ID differs, do not mutate research state or submit jobs; report
 stale routing and stop that cycle. Old queued prompts must not take over.
+
+## Horizon campaign shared owner — 2026-10-14
+
+For horizon-wsd-20261014, submission-owner.json is authoritative across all login hosts. Only slurm/horizon_campaign_v4.py on25a-lgn04 may mutate state, install cron or submit. Never reinstall/invoke old v1/v2/v3 owners, or infer all cron is missing from another login host. Legacy heartbeat deliveries are status-only; read the durable state and report without mutations or submissions. Existing obsolete cron commands are inert via shared ownership gates.

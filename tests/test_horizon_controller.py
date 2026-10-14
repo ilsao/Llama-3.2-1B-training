@@ -29,7 +29,7 @@ class ControllerTests(unittest.TestCase):
             def summary(run_id,pause=0):
                 return dict(data_provenance={'locked':'same'},last_evaluation={'eval/perplexity':20.,'eval/nll':3e6,'eval/prediction_tokens':1000000},
                     total_tokens_seen=700055552,wandb_url='test')
-            with patch.object(c,'DIRECTORY',tmp),patch.object(c,'STATE',tmp/'state.json'),patch.object(c,'DISABLED',tmp/'disabled'), \
+            with patch.object(c,'require_owner',return_value=True),patch.object(c,'DIRECTORY',tmp),patch.object(c,'STATE',tmp/'state.json'),patch.object(c,'DISABLED',tmp/'disabled'), \
                  patch.object(c,'CONFIGS',tmp/'configs'),patch.object(c,'REPO',tmp),patch.object(c,'DEFAULT_ROOT',tmp), \
                  patch.object(c,'plan',return_value=json.loads((ROOT/'experiments/horizon-wsd-20261014/plan.json').read_text())), \
                  patch.object(c,'check'),patch.object(c,'reconcile'),patch.object(c,'submit',side_effect=fake_submit), \
@@ -50,7 +50,7 @@ class ControllerTests(unittest.TestCase):
         c=controller
         with tempfile.TemporaryDirectory() as d:
             tmp=Path(d);stop=tmp/'disabled';stop.touch()
-            with patch.object(c,'DIRECTORY',tmp),patch.object(c,'STATE',tmp/'state.json'),patch.object(c,'DISABLED',stop), \
+            with patch.object(c,'require_owner',return_value=True),patch.object(c,'DIRECTORY',tmp),patch.object(c,'STATE',tmp/'state.json'),patch.object(c,'DISABLED',stop), \
                  patch.object(c,'reconcile') as reconcile,patch.object(c,'submit') as submit,patch.object(c,'report'):
                 c.run_once()
                 reconcile.assert_called_once();submit.assert_not_called()

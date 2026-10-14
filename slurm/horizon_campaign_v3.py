@@ -13,6 +13,8 @@ import sys
 import uuid
 
 REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO/'slurm'))
+from horizon_owner import require_owner
 CAMPAIGN = 'horizon-wsd-20261014'
 DIRECTORY = REPO / 'experiments' / CAMPAIGN
 SOURCE = DIRECTORY / 'source-v2'
@@ -105,6 +107,8 @@ def config_for(name, lr_ratio=1, clipping=1, tail=.6, final=False, resplit=False
 
 
 def submit(s, key, run_name, path, cfg, minutes, mode='fresh', pause=0, parent='-', full_eval=False, test_only=False):
+    if not require_owner(__file__, 'submit'):
+        raise ValueError('Controller superseded; no submission')
     run_id=CAMPAIGN+'-'+run_name
     if key in s['jobs']:
         return
@@ -309,6 +313,8 @@ def report(s):
 
 
 def run_once():
+    if not require_owner(__file__, 'run-once'):
+        return
     with locked(DIRECTORY/'.controller.lock',blocking=False):
         s=state()
         reconcile(s)
@@ -457,6 +463,8 @@ def recover_device():
 
 
 def install():
+    if not require_owner(__file__, 'install'):
+        return
     import shlex
     old=subprocess.run(['crontab','-l'],capture_output=True,text=True)
     if old.returncode not in (0,1):raise ValueError('Cannot inspect crontab')
@@ -476,6 +484,8 @@ def main():
     parser.add_argument('action',choices=['check','run-once','status','install','disable','verify-job','test-only','recover-decay','recover-device'])
     parser.add_argument('run_id',nargs='?');parser.add_argument('--pause',type=int,default=0)
     args=parser.parse_args()
+    if not require_owner(__file__, args.action):
+        return
     if args.action in ('install', 'run-once') and not (DIRECTORY/'recovery-authorization.json').exists():
         raise ValueError('One additional recovery allocation requires explicit approval recorded in recovery-authorization.json')
     if args.action in ('install', 'run-once', 'recover-decay') and not (DIRECTORY/'branch-recovery-authorization.json').exists():

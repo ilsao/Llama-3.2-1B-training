@@ -1,0 +1,6 @@
+{
+  "user_reply": "修正",
+  "approved_utc": "2026-10-14T04:18:24.454552+00:00",
+  "owner_hostname": "25a-lgn04",
+  "scope": "Fix host-local cron split and prevent obsolete controllers from mutating/submitting; preserve running resplit; one fresh uninitialized replacement of final standard under existing formal5/32H200-hour and campaign205.333333 cap. No cleanup/upload or general automatic retry."
+}

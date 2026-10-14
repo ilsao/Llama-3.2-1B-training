@@ -1,0 +1,5 @@
+{
+  "slurm/horizon_campaign.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign.py",
+  "slurm/horizon_campaign_v2.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v2.py",
+  "slurm/horizon_campaign_v3.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v3.py"
+}

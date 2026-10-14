@@ -1,0 +1,33 @@
+{
+  "created_utc": "2026-10-14T04:18:24.454552+00:00",
+  "owner_hostname": "25a-lgn04",
+  "historical_sources": {
+    "slurm/horizon_campaign.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign.py",
+    "slurm/horizon_campaign_v2.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v2.py",
+    "slurm/horizon_campaign_v3.py": "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v3.py"
+  },
+  "source_hashes": {
+    "slurm/horizon_owner.py": "f5994483373e00ac69328197e1b280c82a65c342e4f755c541edfbc1aed8b244",
+    "slurm/horizon_campaign.py": "5083087e38f054dd6fcf0a16c5ec290bd9f6b2b4a2fb110a25a5eff7ab43a754",
+    "slurm/horizon_campaign_v2.py": "ea2dcb75ee48b8e10d72ef53ad7a01d1fd2e789e5ac34a65a389dcc83e507b05",
+    "slurm/horizon_campaign_v3.py": "1377fa35e19f3335936e9e1136e9cce5b957b885a565f4ff9e29f443430f5e02",
+    "slurm/horizon_campaign_v4.py": "29654ec2efa3b90c8b9c0aa78109859aaab0057e1e983dd87e4d6a4493d0945d",
+    "tests/test_horizon_owner_recovery.py": "b9e45059a076dbe90c982730ac475ca1f105597dc0e438840d03ee673b0e0d60",
+    "tests/test_horizon_controller.py": "c24c8856ef6a86085f715d8eeb750c83dc77af58647c8f216c8bb0d20192b346",
+    "experiments/horizon-wsd-20261014/owner-recovery-protocol.md": "0bdf4c7695bab8182241288c7e0ff6253813438ceea800d7b5fac715c75d9185",
+    "experiments/horizon-wsd-20261014/owner-recovery-authorization.json": "71a1ad35eb3179ba7b401bb32435162df49d164526b10d0c1279492aaf3e9164",
+    "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign.py": "f4149574000694e6ec7af731e6881e27ee461844db856f94e34ec5ec35a86d5e",
+    "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v2.py": "74796ee40ae18d841fe717863f1ddc13a526c5b039d453237053eb6267b1fdb6",
+    "experiments/horizon-wsd-20261014/owner-recovery-originals/horizon_campaign_v3.py": "eeb758c65b08e1463d87a7d451da6655ea676511cf7f5ee9e204d5598c1e110b"
+  },
+  "failed_standard_job": "539819",
+  "formal_run_number": 5,
+  "standard_allocation_minutes": [
+    179,
+    60
+  ],
+  "standard_h200_hour_upper_bound": 31.9,
+  "campaign_h200_hour_upper_bound": 151.11111111111111,
+  "total_planned_allocations": 26,
+  "training_source_unchanged": true
+}
