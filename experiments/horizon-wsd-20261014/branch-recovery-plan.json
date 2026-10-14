@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-10-14T02:19:33.569921+00:00",
+  "failed_jobs": {
+    "decay60": "538423",
+    "decay50": "538424",
+    "decay40": "538425",
+    "decay20": "538426",
+    "decay10": "538427"
+  },
+  "replacement_run_ids": {
+    "decay60": "horizon-wsd-20261014-decay-60-recovery1",
+    "decay50": "horizon-wsd-20261014-decay-50-recovery1",
+    "decay40": "horizon-wsd-20261014-decay-40-recovery1",
+    "decay20": "horizon-wsd-20261014-decay-20-recovery1",
+    "decay10": "horizon-wsd-20261014-decay-10-recovery1"
+  },
+  "additional_allocations": 5,
+  "total_planned_allocations": 24,
+  "physical_h200_hours_reconciled": 62.48,
+  "remaining_allocation_maximum_h200_hours": 114,
+  "combined_upper_bound_h200_hours": 176.48,
+  "source_hashes": {
+    "slurm/horizon_campaign_v3.py": "f0df498caa0d2b7fbd903b99e4b1959b6eea1041a50c8eb3deb92b6768f21fef",
+    "tests/test_horizon_branch_recovery.py": "899984d8d7b49f6be2e7a142892638685b1c02f93ae747632f19323e90993eb0",
+    "experiments/horizon-wsd-20261014/branch-recovery-protocol.md": "2917138c789275c762d55025050e84ded3c417cd963b8b100628a88ee98531f1",
+    "experiments/horizon-wsd-20261014/branch-recovery-authorization.json": "637a8b3ab2c4b21bcd9ef8cc35992351f970fad4ba368eac312ad70bdd9a9735"
+  },
+  "sealed_training_source": "source-v2; unchanged"
+}
