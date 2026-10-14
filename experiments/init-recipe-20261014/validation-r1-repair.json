@@ -1,0 +1,14 @@
+{
+  "cause": "Calibration test lacked barrier after distributed save_state; peer ranks attempted load before main finished model.safetensors",
+  "costs_and_token_journal_preserved": true,
+  "failed_job": "542027",
+  "failed_run": "init-recipe-20261014-validation",
+  "fix": "wait_for_everyone after save_state",
+  "fresh_model_initialization": true,
+  "maximum_additional_h200_hours": 2.6666666666666665,
+  "measured_h200_hours": 0.8222222222222222,
+  "replacement": "init-recipe-20261014-validation-r1",
+  "replacement_seconds": 1200,
+  "trigger": "Implement the approved plan; manual diagnosed correctness repair, no controller retry mechanism",
+  "utc": "2026-10-14T09:10:34.065704+00:00"
+}
