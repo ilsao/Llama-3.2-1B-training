@@ -1,7 +1,7 @@
 {
-  "activated_utc": "2026-10-14T04:18:48.370933+00:00",
-  "hostname": "25a-lgn04",
-  "protocol_commit": "960f315bef51d4b40362fb3aeec4193e32cb0493",
-  "script": "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon_campaign_v4.py",
-  "sha256": "29654ec2efa3b90c8b9c0aa78109859aaab0057e1e983dd87e4d6a4493d0945d"
+  "activated_utc": "2026-10-14T06:36:42.151180+00:00",
+  "hostname": "25a-lgn01",
+  "protocol_commit": "ec06055edf0b2ecb29849d8e7845593f32199105",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon_campaign_v5.py",
+  "sha256": "035498e2cece84848159dfebd68304da1e80279066b834337979a44f8aa2c030"
 }

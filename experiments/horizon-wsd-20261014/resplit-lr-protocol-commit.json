@@ -1,0 +1,5 @@
+{
+  "commit": "ec06055edf0b2ecb29849d8e7845593f32199105",
+  "validation": "5 new frozen-checkpoint/LR tests +21 existing pure campaign tests passed; source seals and bash -n passed",
+  "user_request": "重新從 ckp 訓練，sweep lr scale = [1.0, 0.7, 0.5, 0.3]"
+}

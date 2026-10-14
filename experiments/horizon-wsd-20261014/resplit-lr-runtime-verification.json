@@ -1,0 +1,110 @@
+{
+  "verified_utc": "2026-10-14T06:38:49.019730+00:00",
+  "all_four_processing_tail_inputs": true,
+  "checkpoint_step": 12715,
+  "checks": [
+    {
+      "key": "tail-lr100",
+      "job_id": "540742",
+      "lineage": {
+        "inherited_tokens": 1666580480,
+        "lr_reference": "first phase peak",
+        "lr_scale": 1.0,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+        "parent_run": "horizon-wsd-20261014-final-resplit",
+        "parent_wandb_id": "d6c9a9fd75164594895e3042a0ad8fe6",
+        "scheduler_rebased": true
+      },
+      "wandb": {
+        "id": "a32fe208444f4ffd9a8ab5652989ac8b",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/a32fe208444f4ffd9a8ab5652989ac8b"
+      },
+      "last_metrics": {
+        "train/global_step": 12775,
+        "train/total_tokens_seen": 1674444800,
+        "train/learning_rate": 3.3530023504045396e-05,
+        "train/lr_muon": 0.0022353349002696933,
+        "train/tokens_per_second": 210017.97650363974
+      }
+    },
+    {
+      "key": "tail-lr070",
+      "job_id": "540743",
+      "lineage": {
+        "inherited_tokens": 1666580480,
+        "lr_reference": "first phase peak",
+        "lr_scale": 0.7,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+        "parent_run": "horizon-wsd-20261014-final-resplit",
+        "parent_wandb_id": "d6c9a9fd75164594895e3042a0ad8fe6",
+        "scheduler_rebased": true
+      },
+      "wandb": {
+        "id": "1ca9908422404b8089d05517470ec52b",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1ca9908422404b8089d05517470ec52b"
+      },
+      "last_metrics": {
+        "train/global_step": 12768,
+        "train/total_tokens_seen": 1673527296,
+        "train/learning_rate": 2.07327312000014e-05,
+        "train/lr_muon": 0.0013821820800000936,
+        "train/tokens_per_second": 210206.28728596156
+      }
+    },
+    {
+      "key": "tail-lr050",
+      "job_id": "540744",
+      "lineage": {
+        "inherited_tokens": 1666580480,
+        "lr_reference": "first phase peak",
+        "lr_scale": 0.5,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+        "parent_run": "horizon-wsd-20261014-final-resplit",
+        "parent_wandb_id": "d6c9a9fd75164594895e3042a0ad8fe6",
+        "scheduler_rebased": true
+      },
+      "wandb": {
+        "id": "5871de47793b47bf89de13c988cc005e",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/5871de47793b47bf89de13c988cc005e"
+      },
+      "last_metrics": {
+        "train/global_step": 12770,
+        "train/total_tokens_seen": 1673789440,
+        "train/learning_rate": 1.536792743935414e-05,
+        "train/lr_muon": 0.0010245284959569426,
+        "train/tokens_per_second": 211364.570765965
+      }
+    },
+    {
+      "key": "tail-lr030",
+      "job_id": "540745",
+      "lineage": {
+        "inherited_tokens": 1666580480,
+        "lr_reference": "first phase peak",
+        "lr_scale": 0.3,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+        "parent_run": "horizon-wsd-20261014-final-resplit",
+        "parent_wandb_id": "d6c9a9fd75164594895e3042a0ad8fe6",
+        "scheduler_rebased": true
+      },
+      "wandb": {
+        "id": "02c96475697742c38b9d7a21a1d67e64",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/02c96475697742c38b9d7a21a1d67e64"
+      },
+      "last_metrics": {
+        "train/global_step": 12769,
+        "train/total_tokens_seen": 1673658368,
+        "train/learning_rate": 9.053106346092256e-06,
+        "train/lr_muon": 0.0006035404230728171,
+        "train/tokens_per_second": 205545.25659114227
+      }
+    }
+  ],
+  "reference": "first phase peak",
+  "standard_unchanged": true,
+  "prior_costs_retained": true
+}

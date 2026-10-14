@@ -1,0 +1,1366 @@
+{
+  "branch_recovery_applied": {
+    "additional_allocations": 5,
+    "applied_utc": "2026-10-14T02:20:09.084164+00:00",
+    "authorization": "branch-recovery-authorization.json",
+    "failed_costs_retained": true,
+    "sealed_training_source_unchanged": true,
+    "total_planned_allocations": 24
+  },
+  "campaign": "horizon-wsd-20261014",
+  "created_utc": "2026-10-13T16:32:26.723208+00:00",
+  "device_recovery_applied": {
+    "applied_utc": "2026-10-14T02:24:19.755426+00:00",
+    "authorization": "User repair-and-continue request; device-recovery-protocol.md",
+    "excluded_node": "25a-hgpn027",
+    "failed_costs_retained": true,
+    "failed_job": "539630",
+    "replacement_run_id": "horizon-wsd-20261014-decay-60-recovery2",
+    "total_planned_allocations": 25
+  },
+  "jobs": {
+    "clip05": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3666,
+        "end": "2026-10-14T03:01:13",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "716741a0a334fc61d873b896bb8eb05c214455760de4b6c738b87ea5253c16c1",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.146666666666667,
+        "job_id": "538027",
+        "nodes": "25a-hgpn160",
+        "start": "2026-10-14T02:00:07",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-f75121669c414beaa233c358a56e9b68",
+        "--job-name=hw-clip05",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-clip05",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip05.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip05.json",
+      "configuration_sha256": "80a5f1f624462a8f2ea3e87af4785cac7c84c599fcb08f6e7dae9fd73425d354",
+      "full_eval": false,
+      "job_id": "538027",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538027\n"
+      },
+      "reservation": "horizon-f75121669c414beaa233c358a56e9b68",
+      "run_id": "horizon-wsd-20261014-clip05",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T18:00:02.865452+00:00",
+      "status": "reconciled"
+    },
+    "clip10": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3657,
+        "end": "2026-10-14T03:01:04",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "e1e1183548ba739e8abd20c76cd4aae32692fc4e40e399f58cc8e8bab3feb3d0",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.126666666666667,
+        "job_id": "538028",
+        "nodes": "25a-hgpn162",
+        "start": "2026-10-14T02:00:07",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-cabfaf9328e249b6886f85183c636f4d",
+        "--job-name=hw-clip10",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-clip10",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip10.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip10.json",
+      "configuration_sha256": "1e1b5e1edb8ec65105d6f0de6f6c66907357523ac0841e574009c9adae862fc3",
+      "full_eval": false,
+      "job_id": "538028",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538028\n"
+      },
+      "reservation": "horizon-cabfaf9328e249b6886f85183c636f4d",
+      "run_id": "horizon-wsd-20261014-clip10",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T18:00:03.563810+00:00",
+      "status": "reconciled"
+    },
+    "clip20": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3631,
+        "end": "2026-10-14T03:00:38",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "85f0e0543db22474621fdca89b0c3d0d650ddfb241e2512382b8124bef52cdf9",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.068888888888889,
+        "job_id": "538029",
+        "nodes": "25a-hgpn174",
+        "start": "2026-10-14T02:00:07",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-8fe3a21a6f5e4323b560a7e6b400626b",
+        "--job-name=hw-clip20",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-clip20",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip20.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clip20.json",
+      "configuration_sha256": "6c262f40eeb1c136fe7a4a63be13ee32f1d33a0b018f57fe8741d8d196d88cfc",
+      "full_eval": false,
+      "job_id": "538029",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538029\n"
+      },
+      "reservation": "horizon-8fe3a21a6f5e4323b560a7e6b400626b",
+      "run_id": "horizon-wsd-20261014-clip20",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T18:00:04.094696+00:00",
+      "status": "reconciled"
+    },
+    "clipoff": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3694,
+        "end": "2026-10-14T03:01:41",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "7b2ad251c1659c2a4c3ed99f4114e641657c07ff8cc574d5f96fe9de6607b454",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.20888888888889,
+        "job_id": "538030",
+        "nodes": "25a-hgpn080",
+        "start": "2026-10-14T02:00:07",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-9bc17da773a04f7b942debca27fa33c5",
+        "--job-name=hw-clipoff",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-clipoff",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clipoff.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/clipoff.json",
+      "configuration_sha256": "13fbafd524d82fd4c6b071d8b635bb89559a9cb780506647149f3e32292863c0",
+      "full_eval": false,
+      "job_id": "538030",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538030\n"
+      },
+      "reservation": "horizon-9bc17da773a04f7b942debca27fa33c5",
+      "run_id": "horizon-wsd-20261014-clipoff",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T18:00:04.730715+00:00",
+      "status": "reconciled"
+    },
+    "decay10": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2241,
+        "end": "2026-10-14T10:58:00",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "183560348a889bad602c46e7b392d6fd7c190d456db64298548508436eb23941",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.98,
+        "job_id": "539634",
+        "nodes": "25a-hgpn044",
+        "start": "2026-10-14T10:20:39",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-b13141bce5834bcfb9ad8c4cc820ecbb",
+        "--job-name=hw-decay10",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-10-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay10.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay10.json",
+      "configuration_sha256": "b253090718339aabb6b3456944a23c8173ce26b2b89a3cf36f3ad4d45afaf887",
+      "full_eval": false,
+      "job_id": "539634",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539634\n"
+      },
+      "reservation": "horizon-b13141bce5834bcfb9ad8c4cc820ecbb",
+      "run_id": "horizon-wsd-20261014-decay-10-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T02:20:37.540262+00:00",
+      "status": "reconciled"
+    },
+    "decay10-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 44,
+        "end": "2026-10-14T04:00:52",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "915245f88a501a7cfad182f2d830658e1c994d5cfc6d8cc36111238d65b12799",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.09777777777777778,
+        "job_id": "538427",
+        "nodes": "25a-hgpn087",
+        "start": "2026-10-14T04:00:08",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-cd037a759d5a44c886db0c271d284e0c",
+        "--job-name=hw-decay10",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay10",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay10.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay10.json",
+      "configuration_sha256": "b253090718339aabb6b3456944a23c8173ce26b2b89a3cf36f3ad4d45afaf887",
+      "full_eval": false,
+      "job_id": "538427",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538427\n"
+      },
+      "reservation": "horizon-cd037a759d5a44c886db0c271d284e0c",
+      "run_id": "horizon-wsd-20261014-decay10",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-13T20:00:05.145695+00:00",
+      "status": "reconciled"
+    },
+    "decay20": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2231,
+        "end": "2026-10-14T10:57:50",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "b1872b6deff802d936215cb5a62140b4d703222acb0cf8821252d3beb42ab455",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.957777777777777,
+        "job_id": "539633",
+        "nodes": "25a-hgpn043",
+        "start": "2026-10-14T10:20:39",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-1db2b13c73c44d70ae01ec9077313533",
+        "--job-name=hw-decay20",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-20-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay20.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay20.json",
+      "configuration_sha256": "3ea57e1bbd1dc557bf9922642a2c3f15857d3c8950cec1910fbc0ebbc7aff6bb",
+      "full_eval": false,
+      "job_id": "539633",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539633\n"
+      },
+      "reservation": "horizon-1db2b13c73c44d70ae01ec9077313533",
+      "run_id": "horizon-wsd-20261014-decay-20-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T02:20:36.894560+00:00",
+      "status": "reconciled"
+    },
+    "decay20-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 41,
+        "end": "2026-10-14T04:00:49",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "4fa96161a58ed234f9865135f44458f8779c1ebeb291c4055747ca037e4c50e4",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.09111111111111111,
+        "job_id": "538426",
+        "nodes": "25a-hgpn082",
+        "start": "2026-10-14T04:00:08",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-cb0990ce3742413c9f4763baf009397a",
+        "--job-name=hw-decay20",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay20",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay20.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay20.json",
+      "configuration_sha256": "3ea57e1bbd1dc557bf9922642a2c3f15857d3c8950cec1910fbc0ebbc7aff6bb",
+      "full_eval": false,
+      "job_id": "538426",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538426\n"
+      },
+      "reservation": "horizon-cb0990ce3742413c9f4763baf009397a",
+      "run_id": "horizon-wsd-20261014-decay20",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-13T20:00:04.406258+00:00",
+      "status": "reconciled"
+    },
+    "decay40": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2216,
+        "end": "2026-10-14T10:57:35",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "7b2ad251c1659c2a4c3ed99f4114e641657c07ff8cc574d5f96fe9de6607b454",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.924444444444444,
+        "job_id": "539632",
+        "nodes": "25a-hgpn080",
+        "start": "2026-10-14T10:20:39",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-444623b627374582a8c2b64db24df40f",
+        "--job-name=hw-decay40",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-40-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay40.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay40.json",
+      "configuration_sha256": "ed798443bc4547721f02cb0da7c423e82d87cf51f210663c2e91734445a442fb",
+      "full_eval": false,
+      "job_id": "539632",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539632\n"
+      },
+      "reservation": "horizon-444623b627374582a8c2b64db24df40f",
+      "run_id": "horizon-wsd-20261014-decay-40-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T02:20:35.565508+00:00",
+      "status": "reconciled"
+    },
+    "decay40-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 44,
+        "end": "2026-10-14T04:00:49",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "7b2ad251c1659c2a4c3ed99f4114e641657c07ff8cc574d5f96fe9de6607b454",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.09777777777777778,
+        "job_id": "538425",
+        "nodes": "25a-hgpn080",
+        "start": "2026-10-14T04:00:05",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-65149ba33fdf40cc988da30a5ea24d8d",
+        "--job-name=hw-decay40",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay40",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay40.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay40.json",
+      "configuration_sha256": "ed798443bc4547721f02cb0da7c423e82d87cf51f210663c2e91734445a442fb",
+      "full_eval": false,
+      "job_id": "538425",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538425\n"
+      },
+      "reservation": "horizon-65149ba33fdf40cc988da30a5ea24d8d",
+      "run_id": "horizon-wsd-20261014-decay40",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-13T20:00:03.757424+00:00",
+      "status": "reconciled"
+    },
+    "decay50": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2202,
+        "end": "2026-10-14T10:57:21",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "239fb84b241f8932f8a0238548773e5d25008260a0779eeabf9c1e374b076e16",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.8933333333333335,
+        "job_id": "539631",
+        "nodes": "25a-hgpn079",
+        "start": "2026-10-14T10:20:39",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-81e3aa29b9574ca7a1242a95ca3ff366",
+        "--job-name=hw-decay50",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-50-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay50.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay50.json",
+      "configuration_sha256": "c62d81c00cebc883df74f8908cc50f287247a335da77bbced918e1067c537ab3",
+      "full_eval": false,
+      "job_id": "539631",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539631\n"
+      },
+      "reservation": "horizon-81e3aa29b9574ca7a1242a95ca3ff366",
+      "run_id": "horizon-wsd-20261014-decay-50-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T02:20:34.656012+00:00",
+      "status": "reconciled"
+    },
+    "decay50-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 45,
+        "end": "2026-10-14T04:00:50",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "219554e12228cdc90190110bf67cf813b5188faa9173222cfb62a494271717f0",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.1,
+        "job_id": "538424",
+        "nodes": "25a-hgpn045",
+        "start": "2026-10-14T04:00:05",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-c085304f9f1b441db21df57b814be878",
+        "--job-name=hw-decay50",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay50",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay50.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay50.json",
+      "configuration_sha256": "c62d81c00cebc883df74f8908cc50f287247a335da77bbced918e1067c537ab3",
+      "full_eval": false,
+      "job_id": "538424",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538424\n"
+      },
+      "reservation": "horizon-c085304f9f1b441db21df57b814be878",
+      "run_id": "horizon-wsd-20261014-decay50",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-13T20:00:03.043361+00:00",
+      "status": "reconciled"
+    },
+    "decay60": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2222,
+        "end": "2026-10-14T11:01:31",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "cbe9685f975b0c504b4b768afc50b6d791b9e6a7d963c1814dbb3030acb7691a",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.937777777777778,
+        "job_id": "539636",
+        "nodes": "25a-hgpn006",
+        "start": "2026-10-14T10:24:29",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-0b0ec7549d4c4ced9e957fc5d1a79ece",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn151",
+        "--job-name=hw-decay60",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-60-recovery2",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+      "configuration_sha256": "08fea58e56de749f200441ca5e994c181adcddba25ef35f0cbe090c60f5256a3",
+      "full_eval": false,
+      "job_id": "539636",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539636\n"
+      },
+      "reservation": "horizon-0b0ec7549d4c4ced9e957fc5d1a79ece",
+      "run_id": "horizon-wsd-20261014-decay-60-recovery2",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T02:24:27.997254+00:00",
+      "status": "reconciled"
+    },
+    "decay60-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 44,
+        "end": "2026-10-14T04:00:47",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "f4e60ef72a413a8a225340b4a7ba349518d1877cb1db72e839226398117ee456",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.09777777777777778,
+        "job_id": "538423",
+        "nodes": "25a-hgpn038",
+        "start": "2026-10-14T04:00:03",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-a3b66a080a53462697672304d5217712",
+        "--job-name=hw-decay60",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay60",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+      "configuration_sha256": "08fea58e56de749f200441ca5e994c181adcddba25ef35f0cbe090c60f5256a3",
+      "full_eval": false,
+      "job_id": "538423",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538423\n"
+      },
+      "reservation": "horizon-a3b66a080a53462697672304d5217712",
+      "run_id": "horizon-wsd-20261014-decay60",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-13T20:00:02.423140+00:00",
+      "status": "reconciled"
+    },
+    "decay60-failed-recovery1": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 17,
+        "end": "2026-10-14T10:20:52",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "75805dff926c0d62ef5765aefcb341161750c7b486c4c1f693c4d0d8fde3d21d",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.03777777777777778,
+        "job_id": "539630",
+        "nodes": "25a-hgpn027",
+        "start": "2026-10-14T10:20:35",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=75",
+        "--comment=horizon-eb63851012e040a2b36759f4f5bf9e69",
+        "--job-name=hw-decay60",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-decay-60-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+        "fresh",
+        "0",
+        "horizon-wsd-20261014-stable-prefix",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/decay60.json",
+      "configuration_sha256": "08fea58e56de749f200441ca5e994c181adcddba25ef35f0cbe090c60f5256a3",
+      "full_eval": false,
+      "job_id": "539630",
+      "minutes": 75,
+      "mode": "fresh",
+      "parent": "horizon-wsd-20261014-stable-prefix",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539630\n"
+      },
+      "reservation": "horizon-eb63851012e040a2b36759f4f5bf9e69",
+      "run_id": "horizon-wsd-20261014-decay-60-recovery1",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-14T02:20:33.499023+00:00",
+      "status": "reconciled"
+    },
+    "final-resplit-a": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 8672,
+        "end": "2026-10-14T13:44:36",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "e4231271b3fe1ddcbf2b75e3e123ffafd70ee87975fe1e9c3956c47132e9ee0c",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 19.27111111111111,
+        "job_id": "539820",
+        "nodes": "25a-hgpn099",
+        "start": "2026-10-14T11:20:04",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=180",
+        "--comment=horizon-3f9a15126b1f4535a81f29552faac621",
+        "--job-name=hw-final-resplit-a",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-final-resplit",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-resplit.json",
+        "fresh",
+        "12715",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-resplit.json",
+      "configuration_sha256": "08af20de4bae3fb700081b87d58dc86e8fd4f94af1025a90587f8b04139bd269",
+      "full_eval": false,
+      "job_id": "539820",
+      "minutes": 180,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 12715,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539820\n"
+      },
+      "reservation": "horizon-3f9a15126b1f4535a81f29552faac621",
+      "run_id": "horizon-wsd-20261014-final-resplit",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-14T03:20:03.550777+00:00",
+      "status": "reconciled"
+    },
+    "final-resplit-b": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1919,
+        "end": "2026-10-14T14:25:50",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "915245f88a501a7cfad182f2d830658e1c994d5cfc6d8cc36111238d65b12799",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 4.264444444444444,
+        "job_id": "540582",
+        "nodes": "25a-hgpn087",
+        "start": "2026-10-14T13:53:51",
+        "state": "CANCELLED by 44781"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--comment=horizon-588116fb8a8841c8948d38bb56e821a2",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn151",
+        "--job-name=hw-final-resplit-b",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-final-resplit",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-resplit.json",
+        "resume",
+        "0",
+        "-",
+        "1"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-resplit.json",
+      "configuration_sha256": "08af20de4bae3fb700081b87d58dc86e8fd4f94af1025a90587f8b04139bd269",
+      "full_eval": true,
+      "job_id": "540582",
+      "minutes": 60,
+      "mode": "resume",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "540582\n"
+      },
+      "reservation": "horizon-588116fb8a8841c8948d38bb56e821a2",
+      "run_id": "horizon-wsd-20261014-final-resplit",
+      "slurm_state": "CANCELLED",
+      "started_utc": "2026-10-14T05:53:49.750379+00:00",
+      "status": "reconciled"
+    },
+    "final-standard-a": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=179",
+        "--comment=horizon-ec216a9b2b434e06904c8db98a1ba6f1",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn151",
+        "--job-name=hw-final-standard-a",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-final-standard",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-standard.json",
+        "fresh",
+        "12715",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-standard.json",
+      "configuration_sha256": "d772a93444b6bbb9d2895a05b2aca7e0f19bbb20cca0ec1e687173a5177804d9",
+      "full_eval": false,
+      "job_id": "540265",
+      "minutes": 179,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 12715,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "540265\n"
+      },
+      "reservation": "horizon-ec216a9b2b434e06904c8db98a1ba6f1",
+      "run_id": "horizon-wsd-20261014-final-standard",
+      "slurm_state": "RUNNING",
+      "started_utc": "2026-10-14T04:18:57.243650+00:00",
+      "status": "submitted"
+    },
+    "final-standard-a-failed-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 15,
+        "end": "2026-10-14T11:20:19",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "75805dff926c0d62ef5765aefcb341161750c7b486c4c1f693c4d0d8fde3d21d",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.03333333333333333,
+        "job_id": "539819",
+        "nodes": "25a-hgpn027",
+        "start": "2026-10-14T11:20:04",
+        "state": "FAILED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=180",
+        "--comment=horizon-9d77b243737c4cdd931574cecb2b5ae6",
+        "--job-name=hw-final-standard-a",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-final-standard",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-standard.json",
+        "fresh",
+        "12715",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/final-standard.json",
+      "configuration_sha256": "d772a93444b6bbb9d2895a05b2aca7e0f19bbb20cca0ec1e687173a5177804d9",
+      "full_eval": false,
+      "job_id": "539819",
+      "minutes": 180,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 12715,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "539819\n"
+      },
+      "reservation": "horizon-9d77b243737c4cdd931574cecb2b5ae6",
+      "run_id": "horizon-wsd-20261014-final-standard",
+      "slurm_state": "FAILED",
+      "started_utc": "2026-10-14T03:20:02.454763+00:00",
+      "status": "reconciled"
+    },
+    "lr05": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3659,
+        "end": "2026-10-14T01:54:12",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "716741a0a334fc61d873b896bb8eb05c214455760de4b6c738b87ea5253c16c1",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.13111111111111,
+        "job_id": "537499",
+        "nodes": "25a-hgpn160",
+        "start": "2026-10-14T00:53:13",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=79",
+        "--comment=horizon-97bed9159177437c88708d2de4dd9134",
+        "--job-name=hw-lr05",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr05",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr05.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr05.json",
+      "configuration_sha256": "373c86b8fe09fec06a92cf75563ce69beabc0f6139f08307888e84a4cbe5eae2",
+      "full_eval": false,
+      "job_id": "537499",
+      "minutes": 79,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537499\n"
+      },
+      "reservation": "horizon-97bed9159177437c88708d2de4dd9134",
+      "run_id": "horizon-wsd-20261014-lr05",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T16:53:10.650298+00:00",
+      "status": "reconciled"
+    },
+    "lr10": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3654,
+        "end": "2026-10-14T01:54:07",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "1173ca7a1cb2a65b69de5a4957203b8c1d58afb74acfa6c8e494f7091e39efdd",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.12,
+        "job_id": "537500",
+        "nodes": "25a-hgpn161",
+        "start": "2026-10-14T00:53:13",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-3241d2b6c5d842feba26423719740a0d",
+        "--job-name=hw-lr10",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr10",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr10.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr10.json",
+      "configuration_sha256": "a167470a66e4c613436041f7dee49288b8c4b4b2d19db32618dcf9b75f08a919",
+      "full_eval": false,
+      "job_id": "537500",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537500\n"
+      },
+      "reservation": "horizon-3241d2b6c5d842feba26423719740a0d",
+      "run_id": "horizon-wsd-20261014-lr10",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T16:53:11.158863+00:00",
+      "status": "reconciled"
+    },
+    "lr20": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3662,
+        "end": "2026-10-14T01:54:15",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "e1e1183548ba739e8abd20c76cd4aae32692fc4e40e399f58cc8e8bab3feb3d0",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 8.137777777777778,
+        "job_id": "537501",
+        "nodes": "25a-hgpn162",
+        "start": "2026-10-14T00:53:13",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=90",
+        "--comment=horizon-ed00dd6696da4f7abb31d1f7bc1659f6",
+        "--job-name=hw-lr20",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-lr20",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr20.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/lr20.json",
+      "configuration_sha256": "455a86049eb05f5c33b8bc49c333d71a19828ca942efcbda9bf071de37966706",
+      "full_eval": false,
+      "job_id": "537501",
+      "minutes": 90,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537501\n"
+      },
+      "reservation": "horizon-ed00dd6696da4f7abb31d1f7bc1659f6",
+      "run_id": "horizon-wsd-20261014-lr20",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T16:53:11.654011+00:00",
+      "status": "reconciled"
+    },
+    "prefix": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1492,
+        "end": "2026-10-14T03:45:01",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "aa967317bb3e4ad3bfdb594c7f4cae8a3b940b8b20e8b96cdd75dc7d7a1fd37b",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 3.3155555555555556,
+        "job_id": "538297",
+        "nodes": "25a-hgpn010",
+        "start": "2026-10-14T03:20:09",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=45",
+        "--comment=horizon-cf221f3c7c4e426f91533716f9486813",
+        "--job-name=hw-prefix",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-stable-prefix",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/stable-prefix.json",
+        "fresh",
+        "2136",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/stable-prefix.json",
+      "configuration_sha256": "80a5f1f624462a8f2ea3e87af4785cac7c84c599fcb08f6e7dae9fd73425d354",
+      "full_eval": false,
+      "job_id": "538297",
+      "minutes": 45,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 2136,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "538297\n"
+      },
+      "reservation": "horizon-cf221f3c7c4e426f91533716f9486813",
+      "run_id": "horizon-wsd-20261014-stable-prefix",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T19:20:02.620365+00:00",
+      "status": "reconciled"
+    },
+    "validation": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 158,
+        "end": "2026-10-14T00:51:59",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "88a1618586fc557ca9ae67936d5fb4c9324665032e50ebbeac12f0ace02b7d82",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.3511111111111111,
+        "job_id": "537466",
+        "nodes": "25a-hgpn176",
+        "start": "2026-10-14T00:49:21",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=10",
+        "--comment=horizon-16a51c6c5ce24881a0bb56115580a522",
+        "--job-name=hw-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd-v2.sbatch",
+        "horizon-wsd-20261014-validation-recovery1",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation-recovery1.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation-recovery1.json",
+      "configuration_sha256": "dd13be7b3b0b0e2f0983207afa1bb766a2a53544a05421dc442b857eb1397c3d",
+      "full_eval": false,
+      "job_id": "537466",
+      "minutes": 10,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537466\n"
+      },
+      "reservation": "horizon-16a51c6c5ce24881a0bb56115580a522",
+      "run_id": "horizon-wsd-20261014-validation-recovery1",
+      "slurm_state": "COMPLETED",
+      "started_utc": "2026-10-13T16:49:19.886075+00:00",
+      "status": "reconciled"
+    },
+    "validation-original": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 625,
+        "end": "2026-10-14T00:42:53",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "a6c55cd63e1428d880161a433e49adc0527ab4ae97859f2bd926c2d88dc64857",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 1.3888888888888888,
+        "job_id": "537355",
+        "nodes": "25a-hgpn123",
+        "start": "2026-10-14T00:32:28",
+        "state": "TIMEOUT"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=10",
+        "--comment=horizon-4c412a9e7bf641b0a689bb9098d2272d",
+        "--job-name=hw-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon-wsd.sbatch",
+        "horizon-wsd-20261014-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation.json",
+        "fresh",
+        "0",
+        "-",
+        "0"
+      ],
+      "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/horizon-wsd-20261014/validation.json",
+      "configuration_sha256": "68cf8a438d84e952527adb9f32d9e888fd24ab8a72c4738df64030af82d9ea4c",
+      "full_eval": false,
+      "job_id": "537355",
+      "minutes": 10,
+      "mode": "fresh",
+      "parent": "-",
+      "pause": 0,
+      "receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "537355\n"
+      },
+      "reservation": "horizon-4c412a9e7bf641b0a689bb9098d2272d",
+      "run_id": "horizon-wsd-20261014-validation",
+      "slurm_state": "TIMEOUT",
+      "started_utc": "2026-10-13T16:32:26.774881+00:00",
+      "status": "reconciled"
+    }
+  },
+  "selections": {
+    "clipping": 0.5,
+    "decay_tail": 0.6,
+    "lr_ratio": 0.5
+  },
+  "stage": "final",
+  "standard_recovery_applied": {
+    "applied_utc": "2026-10-14T04:18:48.501338+00:00",
+    "authorization": "owner-recovery-authorization.json",
+    "failed_job": "539819",
+    "first_allocation_minutes": 179,
+    "formal_h200_hour_upper_bound": 31.900000000000002,
+    "fresh_weights": true,
+    "original_failed_cost_retained": true,
+    "resplit_unchanged": true,
+    "run_id": "horizon-wsd-20261014-final-standard",
+    "same_formal_run": 5,
+    "second_allocation_minutes": 60
+  },
+  "trajectory": [
+    {
+      "candidate": "lr05",
+      "nll": 3.126626289271634,
+      "perplexity": 22.796939380939833,
+      "physical_h200_hours": 8.13111111111111,
+      "training_tokens": 700055552,
+      "value": 0.5,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7f52f2e748ef44b0a98b5429d5414f15"
+    },
+    {
+      "candidate": "lr10",
+      "nll": 3.1309817571254794,
+      "perplexity": 22.896447261961917,
+      "physical_h200_hours": 8.12,
+      "training_tokens": 700055552,
+      "value": 1.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/068e4aaf70ca470caab2ddd89c8831f4"
+    },
+    {
+      "candidate": "lr20",
+      "nll": 3.2508135333898958,
+      "perplexity": 25.811329756662435,
+      "physical_h200_hours": 8.137777777777778,
+      "training_tokens": 700055552,
+      "value": 2.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7245c67aceff4d46873b26d8e397952e"
+    },
+    {
+      "candidate": "clip05",
+      "nll": 3.118394911847265,
+      "perplexity": 22.610059363930443,
+      "physical_h200_hours": 8.146666666666667,
+      "training_tokens": 700055552,
+      "value": 0.5,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/e407efc49c9f4db19b71fa4cef55bff4"
+    },
+    {
+      "candidate": "clip10",
+      "nll": 3.1264148018850224,
+      "perplexity": 22.792118625589858,
+      "physical_h200_hours": 8.126666666666667,
+      "training_tokens": 700055552,
+      "value": 1.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d3d35ea772634100b5583c37aaa13759"
+    },
+    {
+      "candidate": "clip20",
+      "nll": 3.1296373649206886,
+      "perplexity": 22.865686138885682,
+      "physical_h200_hours": 8.068888888888889,
+      "training_tokens": 700055552,
+      "value": 2.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/803b49b248a84898bfbf5aafd2693f90"
+    },
+    {
+      "candidate": "clipoff",
+      "nll": 3.1342061384899806,
+      "perplexity": 22.97039329085964,
+      "physical_h200_hours": 8.20888888888889,
+      "training_tokens": 700055552,
+      "value": 0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/211f5298441e4069a56a0eb020350189"
+    },
+    {
+      "candidate": "decay60",
+      "nll": 3.1196607596227777,
+      "perplexity": 22.638698379773537,
+      "physical_h200_hours": 4.937777777777778,
+      "training_tokens": 700055552,
+      "value": 0.6,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d5f8148cb57146a3902f30df3db635fe"
+    },
+    {
+      "candidate": "decay50",
+      "nll": 3.1219575595143083,
+      "perplexity": 22.69075469834568,
+      "physical_h200_hours": 4.8933333333333335,
+      "training_tokens": 700055552,
+      "value": 0.5,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/868399dd687141a0bf886649ebb5f563"
+    },
+    {
+      "candidate": "decay40",
+      "nll": 3.129557132296104,
+      "perplexity": 22.86385163846821,
+      "physical_h200_hours": 4.924444444444444,
+      "training_tokens": 700055552,
+      "value": 0.4,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/be178e8c2eec495b80d8f3fcc3b2feb0"
+    },
+    {
+      "candidate": "decay20",
+      "nll": 3.169062461983459,
+      "perplexity": 23.785174394619144,
+      "physical_h200_hours": 4.957777777777777,
+      "training_tokens": 700055552,
+      "value": 0.2,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/182b8abc572547cb937836edeb12d610"
+    },
+    {
+      "candidate": "decay10",
+      "nll": 3.2192287523074468,
+      "perplexity": 25.00882474313655,
+      "physical_h200_hours": 4.98,
+      "training_tokens": 700055552,
+      "value": 0.1,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1d85ec1d2d53433bb5d2206afea2c2df"
+    }
+  ],
+  "updated_utc": "2026-10-14T06:20:02.742021+00:00"
+}
