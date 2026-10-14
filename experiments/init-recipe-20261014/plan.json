@@ -89,7 +89,8 @@
     "25a-hgpn027",
     "25a-hgpn062",
     "25a-hgpn071",
-    "25a-hgpn151"
+    "25a-hgpn151",
+    "25a-hgpn083"
   ],
   "final_reserve_h200_hours": 32,
   "historical_resplit_tree_h200_hours": 41.26222222222222,
@@ -136,8 +137,10 @@
     "batch8": "batch8-hardware-r1",
     "clip-groups": "clip-groups-hardware-r1",
     "clip-late": "clip-late-hardware-r1",
+    "combo-baseline": "combo-baseline-slow-r1",
     "filtered": "filtered-hardware-r1",
     "muon13": "muon13-hardware-r1",
+    "promote-muon13": "promote-muon13-slow-r1",
     "short-baseline": "short-baseline-hardware-r1",
     "tail-lr005": "tail-lr005-hardware-r1",
     "tail-lr010": "tail-lr010-hardware-r1",
@@ -145,7 +148,7 @@
     "wd003": "wd003-hardware-r1",
     "wd005": "wd005-hardware-r1"
   },
-  "source_commit": "b8edf46193170da8b902c98fcfc5d970afb7a310",
+  "source_commit": "74c50782090e8930286444183b0d34e58360622f",
   "source_hashes": {
     "RECIPE_PROTOCOL.md": "d784dbe6d5357f061c1212ad9fd38ffc7002ab0711f5e368cb958eeb4f90c535",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
@@ -204,6 +207,7 @@
     "slurm/recipe_campaign_v5.py": "80f59282bc68eb198bc5a1becee4fa8f48e2b3c8d953e178203b733e06134249",
     "slurm/recipe_campaign_v6.py": "c25eaf728fb383d9c6e2e2b378725f897f7153d6aa9ba1a6c5d994c095049ae6",
     "slurm/recipe_campaign_v7.py": "342086364312b6913c973d4592c0c9e44dd8c41fe10005972ad0d4ff41444eca",
+    "slurm/recipe_campaign_v8.py": "cad358492307ad505f1fbadf87db36a2e615bb8d2c6ef4351f60d1f0f1223a64",
     "slurm/recipe_tail_entry.py": "ab942e70ecc032a3481f2f54d9544da031c15a0231d6947159cd95c2fc61543c",
     "slurm/recipe_tail_runtime.py": "232b858fd6224881b836817c3c16f60204d01516461f68e400507dea76dc1d1d",
     "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509",
