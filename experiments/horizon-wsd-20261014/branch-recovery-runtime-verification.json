@@ -1,0 +1,87 @@
+{
+  "checked_utc": "2026-10-14T02:25:23.710726+00:00",
+  "all_five_confirmed_training_from_parent": true,
+  "checks": [
+    {
+      "candidate": "decay60",
+      "job_id": "539636",
+      "run_id": "horizon-wsd-20261014-decay-60-recovery2",
+      "parent": {
+        "inherited_tokens": 279969792,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/checkpoints/checkpoint-002136-3cb20d10f182",
+        "parent_run": "horizon-wsd-20261014-stable-prefix",
+        "parent_wandb_id": "96cf78deac0149c1a4ad4e11d8726a9e",
+        "scheduler_rebased": true
+      },
+      "global_step": 2141,
+      "total_tokens_seen": 280625152,
+      "tokens_per_second": 205781.5926664296
+    },
+    {
+      "candidate": "decay50",
+      "job_id": "539631",
+      "run_id": "horizon-wsd-20261014-decay-50-recovery1",
+      "parent": {
+        "inherited_tokens": 279969792,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/checkpoints/checkpoint-002136-3cb20d10f182",
+        "parent_run": "horizon-wsd-20261014-stable-prefix",
+        "parent_wandb_id": "96cf78deac0149c1a4ad4e11d8726a9e",
+        "scheduler_rebased": true
+      },
+      "global_step": 2488,
+      "total_tokens_seen": 326107136,
+      "tokens_per_second": 209197.97877809315
+    },
+    {
+      "candidate": "decay40",
+      "job_id": "539632",
+      "run_id": "horizon-wsd-20261014-decay-40-recovery1",
+      "parent": {
+        "inherited_tokens": 279969792,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/checkpoints/checkpoint-002136-3cb20d10f182",
+        "parent_run": "horizon-wsd-20261014-stable-prefix",
+        "parent_wandb_id": "96cf78deac0149c1a4ad4e11d8726a9e",
+        "scheduler_rebased": true
+      },
+      "global_step": 2486,
+      "total_tokens_seen": 325844992,
+      "tokens_per_second": 209814.32683249743
+    },
+    {
+      "candidate": "decay20",
+      "job_id": "539633",
+      "run_id": "horizon-wsd-20261014-decay-20-recovery1",
+      "parent": {
+        "inherited_tokens": 279969792,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/checkpoints/checkpoint-002136-3cb20d10f182",
+        "parent_run": "horizon-wsd-20261014-stable-prefix",
+        "parent_wandb_id": "96cf78deac0149c1a4ad4e11d8726a9e",
+        "scheduler_rebased": true
+      },
+      "global_step": 2480,
+      "total_tokens_seen": 325058560,
+      "tokens_per_second": 209721.74020395725
+    },
+    {
+      "candidate": "decay10",
+      "job_id": "539634",
+      "run_id": "horizon-wsd-20261014-decay-10-recovery1",
+      "parent": {
+        "inherited_tokens": 279969792,
+        "parent_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/checkpoints/checkpoint-002136-3cb20d10f182",
+        "parent_run": "horizon-wsd-20261014-stable-prefix",
+        "parent_wandb_id": "96cf78deac0149c1a4ad4e11d8726a9e",
+        "scheduler_rebased": true
+      },
+      "global_step": 2480,
+      "total_tokens_seen": 325058560,
+      "tokens_per_second": 210793.77881687754
+    }
+  ],
+  "source": "bounded startup logs and fork-lineage metadata",
+  "code_commits": [
+    "9b7443e",
+    "78009dc"
+  ],
+  "failed_costs_retained": true
+}
