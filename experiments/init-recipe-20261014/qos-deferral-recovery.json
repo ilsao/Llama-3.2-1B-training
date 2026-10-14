@@ -1,0 +1,15 @@
+{
+  "max_submit_jobs_per_user": 20,
+  "no_job_id_returned": true,
+  "no_matching_queued_job": true,
+  "no_run_directory": true,
+  "rejected_candidate": "tail-lr020",
+  "rejected_receipt": {
+    "returncode": 1,
+    "stderr": "sbatch: error: QOSMaxSubmitJobPerUserLimit\nsbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)\n",
+    "stdout": ""
+  },
+  "reservation_released": "init-recipe-20261014-d9d061bb77c64f95b834a4a7518c9a2f",
+  "training_retry": false,
+  "verified_partition_qos": "p_8gpus"
+}
