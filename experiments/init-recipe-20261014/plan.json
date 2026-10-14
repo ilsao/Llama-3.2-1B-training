@@ -124,7 +124,7 @@
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/resource-accounting.json": "5fa405cdf2047371c426a7e4464accc0ff314bfba4fba0031fe3c7ccc99b3c3a",
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/token-journal.json": "8c94249aa8a673a000a793e3f5b63392d399c65c1e88c9ad616350072554a6fd"
   },
-  "source_commit": "8536e2c14ff7b0055ceb3478f39bdb3edf4a4954",
+  "source_commit": "ad189f9867cbe7b10ded388aef8f8d3bd4ea8a45",
   "source_hashes": {
     "RECIPE_PROTOCOL.md": "d784dbe6d5357f061c1212ad9fd38ffc7002ab0711f5e368cb958eeb4f90c535",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
@@ -180,6 +180,7 @@
     "slurm/recipe_campaign_v2.py": "9b40e64948829a036cc667c188dd3613fd96188d5669fd7ebd0a71f763c086fd",
     "slurm/recipe_campaign_v3.py": "14b5bee3990de5ffd4535f966362503e2dfae0d2ed0c6e0a1b5218e9a6d8bb95",
     "slurm/recipe_campaign_v4.py": "b1085b482bea7f7bc1abc9ae815c29d47524f5f1fe9ff392ec997fc6470e1cfc",
+    "slurm/recipe_campaign_v5.py": "80f59282bc68eb198bc5a1becee4fa8f48e2b3c8d953e178203b733e06134249",
     "slurm/recipe_tail_entry.py": "ab942e70ecc032a3481f2f54d9544da031c15a0231d6947159cd95c2fc61543c",
     "slurm/recipe_tail_runtime.py": "477301838f297811ed1ee90fb7217a6d0b106a1afd1cf7205a1d06bad373ee03",
     "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509",
