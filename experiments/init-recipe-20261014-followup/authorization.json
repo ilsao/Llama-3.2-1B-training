@@ -1,0 +1,42 @@
+{
+  "automatic_retries": false,
+  "budget_h200_hours": 256,
+  "budget_pool": "init-recipe-20261014",
+  "changes": {
+    "ema": [],
+    "initialization": "residual_half",
+    "resplit_tail_scale": 0.1
+  },
+  "checkpoint_resume": false,
+  "cpu_count": 8,
+  "created_utc": "2026-10-14T16:08:07.633524+00:00",
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn151",
+    "25a-hgpn083"
+  ],
+  "formal_run_number": 8,
+  "fresh_random_weights": true,
+  "hf_upload": false,
+  "instruction": "現輪最終結果出來後，不加入EMA，加入residual-half與resplit再測一次",
+  "max_allocation_seconds": 14400,
+  "max_h200_hours": 32,
+  "parent_numerical_payload": {
+    "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
+    "dataset.py": "5a14f3f63951fd7aef16048f8b40c2016bc518f29e0de1bfb77445bbf41f9e55",
+    "horizon_contracts.py": "f2e9c77b2b63bff0749f2b06023f82889a335a7577f098ebefcaa99b64a592ed",
+    "horizon_runtime.py": "c50493767fae227b04e30efae71ee34180e872be6ad1183c83560084359eca8a",
+    "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
+    "performance.py": "0fd60630051d9aa8a2f0d3e172cf199d04383cfde882797d0e83ed08d3251254",
+    "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
+    "recipe_runtime.py": "9277161d74cc87a32bff41b24a8afd52ba37f902c54366b2e7ef4d6adda6f9c1",
+    "train.py": "763a872bdf5f3c0143ea7f0ddde3333aee50b27eb670cdd59dbc3c0fbefeaca4"
+  },
+  "parent_run": "init-recipe-20261014-final-2b",
+  "run_id": "init-recipe-20261014-followup-rh-resplit-2b",
+  "trigger": "Previous final2B completes full50000-document evaluation and all allocation accounting",
+  "world_size": 8
+}
