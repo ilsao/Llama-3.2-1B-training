@@ -1,0 +1,677 @@
+{
+  "automatic_retry": false,
+  "each_failed_before_run_directory_or_model_initialization": true,
+  "error": "GPU7 device handle Unknown Error; seven usable GPUs instead of eight",
+  "failed_allocations": {
+    "batch32": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:25:49",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "a9f0be37b61c96bf9da7865f340accbb60cf115c5304a0eec526779611691320",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542123",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:25:49",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "gradient_accumulation_steps": 4
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-9559635090e648f0977273c551cd0f84",
+          "--job-name=ir-batch32",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-batch32",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/batch32.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "3a2c6262cff78bcefbd984b9927c50f9da02f8a9c458d8b47494c8ad2f38457c",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/batch32.json",
+        "job_id": "542123",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-9559635090e648f0977273c551cd0f84",
+        "run_id": "init-recipe-20261014-batch32",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:13.701123+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542123\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542123.json'"
+      }
+    ],
+    "batch8": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:25:21",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "e337230c95d99cf7cc0a3d1a0348aef07298fee8c79d1fb58c6dabb1aea0da5f",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542121",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:25:20",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "gradient_accumulation_steps": 1
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-62812e25bb374d2798e05873c5ce12d1",
+          "--job-name=ir-batch8",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-batch8",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/batch8.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "d211259026ddef3cc061deeef9b6d290f39b489080eebfa7348425f1316255ca",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/batch8.json",
+        "job_id": "542121",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-62812e25bb374d2798e05873c5ce12d1",
+        "run_id": "init-recipe-20261014-batch8",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:13.173071+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542121\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542121.json'"
+      }
+    ],
+    "clip-groups": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:24:21",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "cd41825b974aa008ce62e7de24753facea48c6e981ba8dfeb6f0855b3ad4fb6f",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542117",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:24:20",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/optimizer",
+        "changes": {
+          "clipping": "per_optimizer"
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-fbe70da3d4cb49f0a7e2b0d086b7b3b8",
+          "--job-name=ir-clip-groups",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-clip-groups",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/clip-groups.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "5df627af1f9995dcdbe8095a15d64dc4b215a3e43d9efbf77d83703befb6c07f",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/clip-groups.json",
+        "job_id": "542117",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-fbe70da3d4cb49f0a7e2b0d086b7b3b8",
+        "run_id": "init-recipe-20261014-clip-groups",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/optimizer",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:09.398746+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542117\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542117.json'"
+      }
+    ],
+    "clip-late": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:23:51",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "c7e74ac6d90e00e330bb01040fa5acc3a77436c08be5d83c949b6ebd902b40f0",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542115",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:23:50",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/optimizer",
+        "changes": {
+          "clipping": "late_one"
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-8b91db4e5acb4491926a2045c45b00c0",
+          "--job-name=ir-clip-late",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-clip-late",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/clip-late.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "f4f735dc4d0ea558d5d0fdce8507bf6a767a445f595f067ade1f2028e66f83bf",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/clip-late.json",
+        "job_id": "542115",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-8b91db4e5acb4491926a2045c45b00c0",
+        "run_id": "init-recipe-20261014-clip-late",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/optimizer",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:08.818734+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542115\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542115.json'"
+      }
+    ],
+    "filtered": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:25:58",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "a96e6216f7c9bbae664f397745c7229f0d5d935fe2e26b87e73c63d9be443b94",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542124",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:25:58",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/data",
+        "changes": {
+          "preparation_id": "dolma-dclm10-005"
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-68044550fce740fc9154fb75a6e497be",
+          "--job-name=ir-filtered",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-filtered",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/filtered.json",
+          "dolma-dclm10-005",
+          "train",
+          "0"
+        ],
+        "config_sha256": "0fc8b11ade315c1d2faab7aa8d298f607957ecdda3caa27489ce3451e468bc02",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/filtered.json",
+        "job_id": "542124",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-68044550fce740fc9154fb75a6e497be",
+        "run_id": "init-recipe-20261014-filtered",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/data",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:14.594012+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542124\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542124.json'"
+      }
+    ],
+    "muon13": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:23:20",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "0586b4499396795a58dd940e301f3332efc572a020f49e91143103316655ba79",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542113",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:23:20",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/optimizer",
+        "changes": {
+          "muon.learning_rate": 0.007766699734578367
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=20",
+          "--comment=init-recipe-20261014-b027075934004d519c95f12806dc9b91",
+          "--job-name=ir-muon13",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-muon13",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/muon13.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "7bf1527b979353d269984c0cef012b25b196d912e8a20a05efdf9f2e2caa6aba",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/muon13.json",
+        "job_id": "542113",
+        "minutes": 20,
+        "reservation": "init-recipe-20261014-b027075934004d519c95f12806dc9b91",
+        "run_id": "init-recipe-20261014-muon13",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/optimizer",
+        "stage": "initial",
+        "started_utc": "2026-10-14T09:18:07.731788+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542113\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542113.json'"
+      }
+    ],
+    "short-baseline": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:23:49",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "c317068f941ae39ecb1433831bc82d72fe8a5cf9afdfff223a069298dfd28e18",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542114",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:23:49",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "ema": [
+            0.99,
+            0.999,
+            0.9995
+          ]
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-f7a92e1c443248a3a8ebb3d5b6f5e610",
+          "--job-name=ir-short-baseline",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-short-baseline",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/short-baseline.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "bc01d411f78c2353181115c5190440a49ab81de8ef459c052675852224dc766f",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/short-baseline.json",
+        "job_id": "542114",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-f7a92e1c443248a3a8ebb3d5b6f5e610",
+        "run_id": "init-recipe-20261014-short-baseline",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:08.269933+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542114\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542114.json'"
+      }
+    ],
+    "tail-lr005": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:26:28",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "4dd7c9aa57d283b33bde544b0d5ed8eb3c6a9f2f56c299da6d480a3df924b808",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542125",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:26:28",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "scale": 0.05
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=55",
+          "--comment=init-recipe-20261014-c4c0885e0f744af586bbacdacc927bf0",
+          "--job-name=ir-tail-lr005",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-tail-lr005",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr005.json",
+          "dolma-raw-baseline-20261008",
+          "tail",
+          "1"
+        ],
+        "config_sha256": "86e287d47b25f98e2c99e6706e9424ef1eced69d724402e2c038eb92ae27b5ae",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr005.json",
+        "job_id": "542125",
+        "minutes": 55,
+        "reservation": "init-recipe-20261014-c4c0885e0f744af586bbacdacc927bf0",
+        "run_id": "init-recipe-20261014-tail-lr005",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:15.218563+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542125\n"
+        },
+        "tail": true,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542125.json'"
+      }
+    ],
+    "tail-lr010": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 0,
+          "end": "2026-10-14T17:26:49",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "a043513598bb61702b9639d3ef793cba5c9879a7a0ee2c7d2ac58c2992a2c04b",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0,
+          "job_id": "542126",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:26:49",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "scale": 0.1
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=55",
+          "--comment=init-recipe-20261014-07e4cb0eacd740eabde6c4bd23cb41c5",
+          "--job-name=ir-tail-lr010",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-tail-lr010",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr010.json",
+          "dolma-raw-baseline-20261008",
+          "tail",
+          "1"
+        ],
+        "config_sha256": "6753a65fc59db0c49271cc92f5ca17951ef28c8c1c73f5a3f94c5c3813fcf0ad",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr010.json",
+        "job_id": "542126",
+        "minutes": 55,
+        "reservation": "init-recipe-20261014-07e4cb0eacd740eabde6c4bd23cb41c5",
+        "run_id": "init-recipe-20261014-tail-lr010",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:18.053992+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542126\n"
+        },
+        "tail": true,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542126.json'"
+      }
+    ],
+    "tail-lr020": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:26:59",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "9c162a34e563aa32b7e6d9e10d61c8d2df1897d635485b508ee97572a7e974e2",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542225",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:26:58",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/tail",
+        "changes": {
+          "scale": 0.2
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=55",
+          "--comment=init-recipe-20261014-3651d5fb416e4dae8e22e1d868be5b34",
+          "--job-name=ir-tail-lr020",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-tail-lr020",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr020.json",
+          "dolma-raw-baseline-20261008",
+          "tail",
+          "1"
+        ],
+        "config_sha256": "941e05ba137d0e33e35e519b3093c06296122444ba2351e04944696698baf9dd",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/tail-lr020.json",
+        "job_id": "542225",
+        "minutes": 55,
+        "reservation": "init-recipe-20261014-3651d5fb416e4dae8e22e1d868be5b34",
+        "run_id": "init-recipe-20261014-tail-lr020",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/tail",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:24:02.575797+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542225\n"
+        },
+        "tail": true,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542225.json'"
+      }
+    ],
+    "wd003": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:24:50",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "689724e3479ead194661435965e1084a6ee33ec1121b6846c531a5c5fe7e038b",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542118",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:24:49",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/optimizer",
+        "changes": {
+          "muon.weight_decay": 0.03
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-9f12274effb147eba94c442893e5e390",
+          "--job-name=ir-wd003",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-wd003",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/wd003.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "b42ed964bc34f2ce65cb84bd72863f1b59cfb0b66cfb00f72638e74bb5cd3c18",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/wd003.json",
+        "job_id": "542118",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-9f12274effb147eba94c442893e5e390",
+        "run_id": "init-recipe-20261014-wd003",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/optimizer",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:10.473018+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542118\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542118.json'"
+      }
+    ],
+    "wd005": [
+      {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 1,
+          "end": "2026-10-14T17:24:51",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "ec494034afbc5c3c09fe7f4ecb6ac13a7649ba6a071c44a82cce04c5b3ad10c2",
+            "source": "startup scontrol node with exclusively H200 GPUs"
+          },
+          "h200_hours": 0.0022222222222222222,
+          "job_id": "542120",
+          "nodes": "25a-hgpn071",
+          "start": "2026-10-14T17:24:50",
+          "state": "FAILED"
+        },
+        "branch": "campaign/init-recipe-20261014/optimizer",
+        "changes": {
+          "muon.weight_decay": 0.05
+        },
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=60",
+          "--comment=init-recipe-20261014-3fca7147d0f44daaaadc8a0fa0057b7d",
+          "--job-name=ir-wd005",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe.sbatch",
+          "init-recipe-20261014-wd005",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/wd005.json",
+          "dolma-raw-baseline-20261008",
+          "train",
+          "0"
+        ],
+        "config_sha256": "3e24672411e23c84ccd0eb2f1337f13e98c222d9e58f3f4916163b86a91f0139",
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/configs/wd005.json",
+        "job_id": "542120",
+        "minutes": 60,
+        "reservation": "init-recipe-20261014-3fca7147d0f44daaaadc8a0fa0057b7d",
+        "run_id": "init-recipe-20261014-wd005",
+        "seed": 42,
+        "slurm_state": "FAILED",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/worktrees/optimizer",
+        "stage": "short",
+        "started_utc": "2026-10-14T09:18:12.098184+00:00",
+        "status": "reconciled",
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "542120\n"
+        },
+        "tail": false,
+        "verification_error": "[Errno 2] No such file or directory: '/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/receipts/542120.json'"
+      }
+    ]
+  },
+  "no_checkpoint_resume_for_fresh_candidates": true,
+  "node": "25a-hgpn071",
+  "one_manual_replacement_per_affected_candidate": true,
+  "original_running_jobs_unchanged": true,
+  "replacement_suffix": "-hardware-r1",
+  "retained_h200_hours": 0.013333333333333332
+}

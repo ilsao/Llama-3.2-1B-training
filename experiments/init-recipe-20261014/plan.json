@@ -84,6 +84,13 @@
     "partition": "8gpus",
     "partition_qos": "p_8gpus"
   },
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn151"
+  ],
   "final_reserve_h200_hours": 32,
   "historical_resplit_tree_h200_hours": 41.26222222222222,
   "metadata_hashes": {
@@ -124,7 +131,21 @@
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/resource-accounting.json": "5fa405cdf2047371c426a7e4464accc0ff314bfba4fba0031fe3c7ccc99b3c3a",
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/token-journal.json": "8c94249aa8a673a000a793e3f5b63392d399c65c1e88c9ad616350072554a6fd"
   },
-  "source_commit": "ad189f9867cbe7b10ded388aef8f8d3bd4ea8a45",
+  "run_name_overrides": {
+    "batch32": "batch32-hardware-r1",
+    "batch8": "batch8-hardware-r1",
+    "clip-groups": "clip-groups-hardware-r1",
+    "clip-late": "clip-late-hardware-r1",
+    "filtered": "filtered-hardware-r1",
+    "muon13": "muon13-hardware-r1",
+    "short-baseline": "short-baseline-hardware-r1",
+    "tail-lr005": "tail-lr005-hardware-r1",
+    "tail-lr010": "tail-lr010-hardware-r1",
+    "tail-lr020": "tail-lr020-hardware-r1",
+    "wd003": "wd003-hardware-r1",
+    "wd005": "wd005-hardware-r1"
+  },
+  "source_commit": "85ec11511c11caf6ef419cda6abb86b8ee6da246",
   "source_hashes": {
     "RECIPE_PROTOCOL.md": "d784dbe6d5357f061c1212ad9fd38ffc7002ab0711f5e368cb958eeb4f90c535",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
@@ -181,8 +202,9 @@
     "slurm/recipe_campaign_v3.py": "14b5bee3990de5ffd4535f966362503e2dfae0d2ed0c6e0a1b5218e9a6d8bb95",
     "slurm/recipe_campaign_v4.py": "b1085b482bea7f7bc1abc9ae815c29d47524f5f1fe9ff392ec997fc6470e1cfc",
     "slurm/recipe_campaign_v5.py": "80f59282bc68eb198bc5a1becee4fa8f48e2b3c8d953e178203b733e06134249",
+    "slurm/recipe_campaign_v6.py": "c25eaf728fb383d9c6e2e2b378725f897f7153d6aa9ba1a6c5d994c095049ae6",
     "slurm/recipe_tail_entry.py": "ab942e70ecc032a3481f2f54d9544da031c15a0231d6947159cd95c2fc61543c",
-    "slurm/recipe_tail_runtime.py": "477301838f297811ed1ee90fb7217a6d0b106a1afd1cf7205a1d06bad373ee03",
+    "slurm/recipe_tail_runtime.py": "232b858fd6224881b836817c3c16f60204d01516461f68e400507dea76dc1d1d",
     "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509",
     "slurm/resplit_lr_runtime.py": "3daaffd0fbfade560700583ec77393a583bad19cd65ca37d8cee57e3aaff2a00",
     "slurm/submission.py": "0064fde8f506d01eb1604f16d843ab5197c0aa5ac983950aaa0bfafa03df7794",
