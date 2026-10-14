@@ -118,7 +118,7 @@
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/resource-accounting.json": "5fa405cdf2047371c426a7e4464accc0ff314bfba4fba0031fe3c7ccc99b3c3a",
     "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/token-journal.json": "8c94249aa8a673a000a793e3f5b63392d399c65c1e88c9ad616350072554a6fd"
   },
-  "source_commit": "7a0c08a893f18509bc16db53c8742cb20edfa366",
+  "source_commit": "9aea7e611cf4367eabfa01c475ede7739a04d75d",
   "source_hashes": {
     "RECIPE_PROTOCOL.md": "d784dbe6d5357f061c1212ad9fd38ffc7002ab0711f5e368cb958eeb4f90c535",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
@@ -171,8 +171,9 @@
     "slurm/recipe.sbatch": "de49443d7752c3095e891c8abb21b21992e818231d4fc81cdfed58dff7ef9cb0",
     "slurm/recipe_calibration.py": "b61043e5e7e556a002c77dea3cff4b19265f476b488ff22c5bda31a0a70c49a1",
     "slurm/recipe_campaign.py": "fadd5ea7d1c8e8e96ad0d3d3be5951b8d141d2bae8a556e9e54cc6f5b992480a",
+    "slurm/recipe_campaign_v2.py": "9b40e64948829a036cc667c188dd3613fd96188d5669fd7ebd0a71f763c086fd",
     "slurm/recipe_tail_entry.py": "ab942e70ecc032a3481f2f54d9544da031c15a0231d6947159cd95c2fc61543c",
-    "slurm/recipe_tail_runtime.py": "02012cf4f8ed77bc660b718a564eb7b847a7621ae0f72348023a3f428afd844c",
+    "slurm/recipe_tail_runtime.py": "477301838f297811ed1ee90fb7217a6d0b106a1afd1cf7205a1d06bad373ee03",
     "slurm/resplit_lr_entry.py": "6592bf4492a1aead1f465c735c019ff18775a0c1d6d749581c1cc4c7e8dbf509",
     "slurm/resplit_lr_runtime.py": "3daaffd0fbfade560700583ec77393a583bad19cd65ca37d8cee57e3aaff2a00",
     "slurm/submission.py": "0064fde8f506d01eb1604f16d843ab5197c0aa5ac983950aaa0bfafa03df7794",
@@ -187,5 +188,6 @@
     "training_state.py": "238e59b1c4c12b5c5da391ce1fa1c896506fd69873a287513378d27468b543d8",
     "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
   },
-  "tail_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca"
+  "tail_checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+  "validation_source_commit": "7a0c08a893f18509bc16db53c8742cb20edfa366"
 }
