@@ -1,0 +1,18 @@
+{
+  "automatic_retries": false,
+  "budget_h200_hours": 256,
+  "created_utc": "2026-10-14T09:01:17.734752+00:00",
+  "final_from_random_weights": true,
+  "formal7_max_h200_hours": 32,
+  "formal7_max_seconds": 14400,
+  "formal7_run_id": "init-recipe-20261014-final-2b",
+  "hf_upload": false,
+  "historical_costs_preserved": true,
+  "source_commit": "7a0c08a893f18509bc16db53c8742cb20edfa366",
+  "tail_scales": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "user_instruction": "Implement the plan."
+}
