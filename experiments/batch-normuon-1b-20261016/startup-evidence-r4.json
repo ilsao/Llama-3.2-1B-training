@@ -1,0 +1,83 @@
+{
+  "observed_utc": "2026-10-15T19:52:06.722577+00:00",
+  "jobs": {
+    "control": {
+      "job_id": "555139",
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "pretrained_weights_loaded": false,
+      "journal": {
+        "charged_tokens": 10354688,
+        "confirmed_tokens": 10223616,
+        "limit": 1000079360,
+        "next_transaction": 79,
+        "pending": {
+          "78": 131072
+        }
+      },
+      "wandb": {
+        "id": "75e1539a4611483a9d229f8dab9b811d",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/75e1539a4611483a9d229f8dab9b811d"
+      },
+      "last_update": {
+        "step": 78,
+        "job_id": "555139",
+        "update_seconds": 0.6503427569987252,
+        "compute_seconds": 0.6244470477104187,
+        "optimizer_seconds": 0.1105370864868164
+      }
+    },
+    "lr001": {
+      "job_id": "555140",
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "pretrained_weights_loaded": false,
+      "journal": {
+        "charged_tokens": 10223616,
+        "confirmed_tokens": 10092544,
+        "limit": 1000079360,
+        "next_transaction": 78,
+        "pending": {
+          "77": 131072
+        }
+      },
+      "wandb": {
+        "id": "56a6fe3640ea4fd58fc41b3b09903843",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/56a6fe3640ea4fd58fc41b3b09903843"
+      },
+      "last_update": {
+        "step": 77,
+        "job_id": "555140",
+        "update_seconds": 0.6615508222021163,
+        "compute_seconds": 0.6305148601531982,
+        "optimizer_seconds": 0.11233961486816406
+      }
+    },
+    "normuon": {
+      "job_id": "555141",
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "pretrained_weights_loaded": false,
+      "journal": {
+        "charged_tokens": 5767168,
+        "confirmed_tokens": 5636096,
+        "limit": 1000079360,
+        "next_transaction": 44,
+        "pending": {
+          "43": 131072
+        }
+      },
+      "wandb": {
+        "id": "de8ba60a219049729c5ca81540b7be80",
+        "mode": "online",
+        "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/de8ba60a219049729c5ca81540b7be80"
+      },
+      "last_update": {
+        "step": 43,
+        "job_id": "555141",
+        "update_seconds": 0.6664770570350811,
+        "compute_seconds": 0.6400832533836365,
+        "optimizer_seconds": 0.1239163818359375
+      }
+    }
+  }
+}

@@ -1,6 +1,90 @@
 {
   "blocked_lanes": {},
   "jobs": {
+    "control": {
+      "completed_endpoint": false,
+      "job_id": "555139",
+      "kind": "train",
+      "reservation": "batch-normuon-1b-20261016-control-88079389132f439a976d5e385d5292f2",
+      "returned_job_id": "555139",
+      "slurm_state": "RUNNING",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-control",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-control-88079389132f439a976d5e385d5292f2",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-control",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/control.json",
+        "train"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555139\n"
+      },
+      "submission_started_utc": "2026-10-15T19:50:02.225403+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-control-88079389132f439a976d5e385d5292f2"
+    },
+    "lr001": {
+      "completed_endpoint": false,
+      "job_id": "555140",
+      "kind": "train",
+      "reservation": "batch-normuon-1b-20261016-lr001-967f84b3f0fa463fa837c40c83be90ab",
+      "returned_job_id": "555140",
+      "slurm_state": "RUNNING",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-lr001",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-lr001-967f84b3f0fa463fa837c40c83be90ab",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-lr001",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/lr001.json",
+        "train"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555140\n"
+      },
+      "submission_started_utc": "2026-10-15T19:50:02.824265+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-lr001-967f84b3f0fa463fa837c40c83be90ab"
+    },
+    "normuon": {
+      "completed_endpoint": false,
+      "job_id": "555141",
+      "kind": "normuon",
+      "reservation": "batch-normuon-1b-20261016-normuon-bf556c0ba2e14a40a5134ff654a43b80",
+      "returned_job_id": "555141",
+      "slurm_state": "RUNNING",
+      "status": "submitted",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-normuon",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-normuon-bf556c0ba2e14a40a5134ff654a43b80",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-normuon",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/normuon.json",
+        "normuon"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555141\n"
+      },
+      "submission_started_utc": "2026-10-15T19:50:03.523187+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-normuon-bf556c0ba2e14a40a5134ff654a43b80"
+    },
     "normuon-check-r2": {
       "accounting": {
         "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=100G,node=1",
@@ -84,6 +168,48 @@
       },
       "submission_started_utc": "2026-10-15T19:46:30.901807+00:00",
       "submission_tag": "batch-normuon-1b-20261016-normuon-check-r3-a9c7ac5592964efb91f093c55e4374c9"
+    },
+    "normuon-check-r4": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=100G,node=1",
+        "elapsed_seconds": 88,
+        "end": "2026-10-16T03:49:52",
+        "gpu_count": 1,
+        "gpu_type_evidence": {
+          "sha256": "98a80d430d3adb56f2c3c841bfb9e8bb9ff79c1c6b635ea609eda958172e5e39",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.024444444444444446,
+        "job_id": "555117",
+        "nodes": "25a-hgpn028",
+        "start": "2026-10-16T03:48:24",
+        "state": "COMPLETED"
+      },
+      "job_id": "555117",
+      "kind": "validation",
+      "reservation": "batch-normuon-1b-20261016-normuon-check-r4-ce4e4fd941f743e89ea16ae0fac11161",
+      "returned_job_id": "555117",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-normuon-check-r4",
+        "--time=15",
+        "--comment=batch-normuon-1b-20261016-normuon-check-r4-ce4e4fd941f743e89ea16ae0fac11161",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/normuon-check.sbatch",
+        "batch-normuon-1b-20261016-normuon-check-r4",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/normuon-check-r4.json",
+        "validation"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555117\n"
+      },
+      "submission_started_utc": "2026-10-15T19:48:23.103432+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-normuon-check-r4-ce4e4fd941f743e89ea16ae0fac11161"
     },
     "setup": {
       "accounting": {
@@ -212,5 +338,5 @@
       "submission_tag": "batch-normuon-1b-20261016-validation-r1-f72b5ccff38f4d46882662e535dd5e1b"
     }
   },
-  "stage": "recovery_prepared"
+  "stage": "training_and_snapshot_forks"
 }
