@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-10-15T06:57:27.973229+00:00",
+  "stage": "screen",
+  "jobs_submitted": 3,
+  "scheduler_deferred": "Command '['squeue', '-u', 'asciibase64', '-p', '8gpus', '-h', '-o', '%i']' timed out after 30 seconds",
+  "tests_passed": 6,
+  "source_commit": "c98136d201f157b3f4f64a167a1549f3d2d37116"
+}

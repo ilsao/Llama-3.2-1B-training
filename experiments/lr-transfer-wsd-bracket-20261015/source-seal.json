@@ -78,12 +78,12 @@
     "slurm/submit_training.py": "f6cd9b63928a8bd54f3e78ed3383e2ea4e8dd3113cca4a44d610531de6dcc448",
     "slurm/training-common.sh": "bf2aa81d5ae211126807918e6397d1780cf2c5f134bbbbe317b504bc010bc104",
     "slurm/training_entry.py": "34e5234232f2663dd2ae34f49d65bc9b247a6bd2cbcc0588ac189b66dafa6484",
+    "slurm/wsd_bracket_controller.py": "0f5c05bd61a9c46fa205c10746fa8893640770eb388214bda99369dc0ad6f577",
     "tests/test_lr_transfer.py": "186c6bd3f27b482b73cb25311e1051608da74092ebda21a8f879d0c0b7f7c4db",
+    "tests/test_wsd_bracket.py": "ecf21224fcfd8a5ea573485dd61f3c181af7c100f65166d8a3790deaf8de7309",
     "train.py": "5a6c7af4516a914a2aa61faea7a02bd024827116cb82c217c7c82417a2bb5ec6",
     "training_state.py": "348271ab102155b9c2899016f0226fee06f0d92aedd41d3502766a53769357ea",
-    "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297",
-    "slurm/wsd_bracket_controller.py": "3aa0a13ec9f11018a5504760794056dea2db0e797a53de204b13397cdd399086",
-    "tests/test_wsd_bracket.py": "37b45d52c5d0f05126ab21aa569097a1c4c5ae2476734b170234dc5a58932177"
+    "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
   },
-  "source_commit": "684d06a0871012c845da3bc0e10f6e7dac18e23b"
+  "source_commit": "c98136d201f157b3f4f64a167a1549f3d2d37116"
 }
