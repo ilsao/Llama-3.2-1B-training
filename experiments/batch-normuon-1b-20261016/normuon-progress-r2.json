@@ -1,0 +1,9 @@
+{
+  "checks": [],
+  "execution": "eager",
+  "job_id": "555093",
+  "normuon_pass": false,
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2",
+  "stage": "random_model",
+  "timestamp": 1792093276.8906777
+}

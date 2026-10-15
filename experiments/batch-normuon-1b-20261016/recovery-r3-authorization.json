@@ -1,0 +1,13 @@
+{
+  "approval_evidence": "User twice explicitly requested \u4fee\u6b63\u4e26\u7e7c\u7e8c after554476 failed",
+  "approved": true,
+  "complete_gate_required": true,
+  "correctness_cpus": 8,
+  "correctness_gpus": 1,
+  "correctness_seconds": 900,
+  "no_cleanup_upload": true,
+  "no_training_retry": true,
+  "original_approval": "Implement the plan:exactly nine1B endpoints and146.5H cap",
+  "training_gpus": 8,
+  "training_seconds": 7140
+}

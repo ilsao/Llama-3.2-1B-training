@@ -1,0 +1,11 @@
+{
+  "checks": [],
+  "error": "AttributeError: 'NoneType' object has no attribute 'index'",
+  "execution": "eager",
+  "job_id": "555093",
+  "normuon_pass": false,
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2",
+  "stage": "random_model",
+  "timestamp": 1792093276.8906777,
+  "traceback": "Traceback (most recent call last):\n  File \"/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2/normuon_check.py\", line 68, in main\n    model,initialization=build_model(cfg,run,provenance,accelerator)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2/train.py\", line 256, in build_model\n    recipe_initialization = initialize(model, cfg, accelerator.device)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2/recipe_runtime.py\", line 33, in initialize\n    with torch.no_grad(), torch.random.fork_rng(devices=[device.index]):\n  File \"/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/lib/python3.11/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/lib/python3.11/site-packages/torch/random.py\", line 196, in fork_rng\n    device_rng_states = [device_mod.get_rng_state(device) for device in devices]\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/lib/python3.11/site-packages/torch/random.py\", line 196, in <listcomp>\n    device_rng_states = [device_mod.get_rng_state(device) for device in devices]\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/lib/python3.11/site-packages/torch/cuda/random.py\", line 39, in get_rng_state\n    idx = device.index\n          ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'index'\n"
+}
