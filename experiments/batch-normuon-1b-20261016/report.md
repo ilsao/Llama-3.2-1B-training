@@ -5,4 +5,5 @@ Stage: validation_failed_no_retry
 | Candidate | Job | State |
 |---|---|---|
 | setup | 554390 | COMPLETED |
-| validation | 554398 | FAILED |
+| validation-original | 554398 | FAILED |
+| validation-r1 | 554476 | TIMEOUT |

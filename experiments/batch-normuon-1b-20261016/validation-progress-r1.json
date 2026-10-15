@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "fixed-beta native equivalence",
+    "historical-product variable-beta recurrence",
+    "variable-beta optimizer state roundtrip",
+    "token-weighted unequal-mask DDP accumulation equivalence",
+    "random residual-half initialization",
+    "canonical split and immutable raw prefix",
+    "parameter-group unique coverage",
+    "full model/two-optimizer/scheduler checkpoint roundtrip",
+    "all-rank RNG restoration",
+    "bit-exact full weights and optimizer state restoration",
+    "bit-exact BS64 update replay with identical gradients",
+    "optimizer moments/step/beta2 product retained",
+    "fixed1000-document evaluation tokens and finite NLL"
+  ],
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "job_id": "554476",
+  "native_pass": true,
+  "normuon_pass": false,
+  "processed_training_inputs": 786432,
+  "provenance_digest": "5f7b0ab3662949f0c16e8afdaa481896f4c9d886b2f8f0f7396a6080106ef97b"
+}

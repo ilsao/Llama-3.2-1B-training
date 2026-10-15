@@ -1,0 +1,113 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 798,
+    "end": "2026-10-16T02:20:52",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "2a7da2ad3461a3195b4af71d03053c3cf5e3134cad714ec608248b392ab64e06",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 1.7733333333333334,
+    "job_id": "554476",
+    "nodes": "25a-hgpn057",
+    "start": "2026-10-16T02:07:34",
+    "state": "TIMEOUT"
+  },
+  "actual_allocation_seconds": 798,
+  "combined_validation_h200_hours": 1.98,
+  "combined_validation_seconds": 891,
+  "combined_validation_within_original_allowance": true,
+  "individual_resource_accounting": {
+    "all_jobs_reconciled": true,
+    "budget_exceeded": true,
+    "category": "validation",
+    "config_digest": "621f15c305170b470add205c6b65e1d983cb2a6fd4e9b86c49edc93885beba46",
+    "created": 1792087652.4915502,
+    "h200_hours_measured": 1.7733333333333334,
+    "inherited_h200_hours": 0,
+    "inherited_tokens": 0,
+    "jobs": [
+      {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "authorization": "User approved complete nine-endpoint1B plan; bounded independent pilots and planned full-state forks only",
+        "elapsed_seconds": 798,
+        "end": "2026-10-16T02:20:52",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "2a7da2ad3461a3195b4af71d03053c3cf5e3134cad714ec608248b392ab64e06",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 1.7733333333333334,
+        "job_id": "554476",
+        "nodes": "25a-hgpn057",
+        "requested_seconds": 780,
+        "reserved_h200_hours": 1.7333333333333334,
+        "returned_job_id": "554476",
+        "run_id": "batch-normuon-1b-20261016-validation-r1",
+        "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r1",
+        "start": "2026-10-16T02:07:34",
+        "state": "TIMEOUT",
+        "status": "reconciled",
+        "study": "batch-normuon-1b-20261016",
+        "submission_command": [
+          "sbatch",
+          "--parsable",
+          "--job-name=b1b-validation-r1",
+          "--time=13",
+          "--comment=batch-normuon-1b-20261016-validation-r1-f72b5ccff38f4d46882662e535dd5e1b",
+          "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r1/slurm/batch1b.sbatch",
+          "batch-normuon-1b-20261016-validation-r1",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/validation-r1.json",
+          "validation"
+        ],
+        "submission_started_utc": "2026-10-15T18:07:32.501314+00:00",
+        "submission_tag": "batch-normuon-1b-20261016-validation-r1-f72b5ccff38f4d46882662e535dd5e1b"
+      }
+    ],
+    "logical_h200_hours_measured": 1.7733333333333334,
+    "max_h200_hours": 1.7333333333333334,
+    "run_id": "batch-normuon-1b-20261016-validation-r1",
+    "study": "batch-normuon-1b-20261016"
+  },
+  "job_id": "554476",
+  "native_validation": {
+    "checks": [
+      "fixed-beta native equivalence",
+      "historical-product variable-beta recurrence",
+      "variable-beta optimizer state roundtrip",
+      "token-weighted unequal-mask DDP accumulation equivalence",
+      "random residual-half initialization",
+      "canonical split and immutable raw prefix",
+      "parameter-group unique coverage",
+      "full model/two-optimizer/scheduler checkpoint roundtrip",
+      "all-rank RNG restoration",
+      "bit-exact full weights and optimizer state restoration",
+      "bit-exact BS64 update replay with identical gradients",
+      "optimizer moments/step/beta2 product retained",
+      "fixed1000-document evaluation tokens and finite NLL"
+    ],
+    "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+    "job_id": "554476",
+    "native_pass": true,
+    "normuon_pass": false,
+    "processed_training_inputs": 786432,
+    "provenance_digest": "5f7b0ab3662949f0c16e8afdaa481896f4c9d886b2f8f0f7396a6080106ef97b"
+  },
+  "nine_training_endpoints_launched": false,
+  "normuon_validation_complete": false,
+  "reason": "NCCL collective timeout during NorMuon stage; root cause unconfirmed; no further retry authorized",
+  "requested_seconds": 780,
+  "state": "TIMEOUT",
+  "termination_overhead_seconds": 18,
+  "token_journal": {
+    "charged_tokens": 917504,
+    "confirmed_tokens": 786432,
+    "limit": 1000079360,
+    "next_transaction": 4,
+    "pending": {
+      "3": 131072
+    }
+  }
+}
