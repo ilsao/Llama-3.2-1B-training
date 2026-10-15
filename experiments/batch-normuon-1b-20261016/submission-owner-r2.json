@@ -1,0 +1,5 @@
+{
+  "hostname": "25a-lgn05",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r2/slurm/batch1b_controller.py",
+  "sha256": "e98cebd593d7469d6e94637597307cfd5ceec213458d6f939d23803638d82494"
+}

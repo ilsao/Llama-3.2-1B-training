@@ -1,0 +1,44 @@
+{
+  "checks": [
+    "fixed-beta native equivalence",
+    "historical-product variable-beta recurrence",
+    "variable-beta optimizer state roundtrip",
+    "token-weighted unequal-mask DDP accumulation equivalence",
+    "random residual-half initialization",
+    "canonical split and immutable raw prefix",
+    "parameter-group unique coverage",
+    "full model/two-optimizer/scheduler checkpoint roundtrip",
+    "all-rank RNG restoration",
+    "bit-exact full weights and optimizer state restoration",
+    "bit-exact BS64 update replay with identical gradients",
+    "optimizer moments/step/beta2 product retained",
+    "fixed1000-document evaluation tokens and finite NLL"
+  ],
+  "equivalent_runtime_definitions": [
+    "TokenScheduler",
+    "adamw_class",
+    "configure_update",
+    "verify_checkpoint_files",
+    "publish_snapshot",
+    "fork_checkpoint",
+    "build_optimizers"
+  ],
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "job_id": "554476",
+  "native_files": {
+    "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
+    "batch1b_contracts.py": "ff38a25f038f60fd19cec799ff4703a732901b88d10fd475d2d49933e90ce70d",
+    "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
+    "performance.py": "0fd60630051d9aa8a2f0d3e172cf199d04383cfde882797d0e83ed08d3251254",
+    "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
+    "recipe_runtime.py": "5d322e54e2737d3f9f419054765b123d3a0e744b3ec4eae4049f92099fec45b4",
+    "train.py": "4cb8b9508bb247e30b89f0743e0d9793b0b14ce32468b66458158c111a2d561a",
+    "training_state.py": "321511e20f1075520cde99914c2eec8db04d0aa1c5998a8df419fa897ff1ac64"
+  },
+  "native_pass": true,
+  "normuon_pass": false,
+  "original_failed_allocation_remains_failed": true,
+  "processed_training_inputs": 786432,
+  "provenance_digest": "5f7b0ab3662949f0c16e8afdaa481896f4c9d886b2f8f0f7396a6080106ef97b",
+  "unchanged_native_payload": true
+}
