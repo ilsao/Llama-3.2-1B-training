@@ -1,0 +1,66 @@
+{
+  "study": "raw-filtered-3b-20261015",
+  "user_instruction": "\u7528\u5916\u63a8\u7684 lr\uff0c\u8a13\u7df43B token:1.\u539f\u59cbraw2.\u820afiltered\u6062\u5fa9token\u914d\u6bd4",
+  "run_ids": [
+    "raw-filtered-3b-20261015-raw",
+    "raw-filtered-3b-20261015-filtered"
+  ],
+  "formal_run_numbers": [
+    9,
+    10
+  ],
+  "training_tokens": 3000107008,
+  "max_steps": 22889,
+  "allocation_minutes_each": 360,
+  "allocated_h200_hours_each": 48,
+  "muon_lr": 0.005593716406714465,
+  "adamw_lr": 0.00016781149220143396,
+  "initialization": "residual_half",
+  "ema": false,
+  "scheduler": "single_original_hold_zero_wsd",
+  "raw_preparation": "dolma-raw-baseline-20261008",
+  "filtered_parent": "dolma-dclm10-005",
+  "filtered_new_preparation": "dolma-dclm10-005-rawmix3b-20261015",
+  "source_token_mixture_reference": "Actual first3000107008 raw non-padding training input tokens, including structural BOS/EOS",
+  "absolute_source_share_tolerance": 0.0001,
+  "repeat_policy": "User forbids repeats; filtered arm cancelled before submission.",
+  "automatic_retry": false,
+  "automatic_resume": false,
+  "full_evaluation_documents": 50000,
+  "previous_formal_runs": [
+    "baseline-fa3-20261009-baseline",
+    "baseline-muon-wsd-raw-20261009",
+    "be60p20-lrscaled-2b-20261010",
+    "horizon-wsd-20261014-final-resplit",
+    "horizon-wsd-20261014-final-standard",
+    "init-recipe-20261014-final-2b",
+    "init-recipe-20261014-followup-rh-resplit-2b",
+    "muon-wsd-filtered-2b-20261009"
+  ],
+  "control_summary": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/summary.json",
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn031",
+    "25a-hgpn039",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn083",
+    "25a-hgpn151"
+  ],
+  "immutable_inputs": {
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/raw/ready.json": "2ff73402ce41bec675e6fffcf7924c3e5d6d4999913c37ac213537df1c4eebfe",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/configuration.json": "eeb7479eb86929bb09f3e9f245116e28364fba8b03fcff4692435f9cfb5acd84",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/select/manifest.json": "17fb97492fc0d186e4207c80ce403962554e211a2b3da07d9e448038191ce7bf",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/verify/manifest.json": "2b190afafee0cd774b3c54d9ebaaebbe6c80c2f988ff5d74f9e8a2a56188906a",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/calibration-result.json": "61bee230efaa6e02154b6554efaad7f27db25174b390a66a3c36cf6b9769cd20",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension.json": "441bfdb7be071a8e7207a63d3a66d10657a9a640b123c3f8f4ed2338418ef6d9",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/producer-recovery.json": "ad1824c921397460e321ecf8f66b965b1654ec3430eb7157f2731b47399902a0",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/raw.json": "09da85c3e72984679da3d6642946347cc05bc0fc684547809101df78ada68d99",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/filtered.json": "09da85c3e72984679da3d6642946347cc05bc0fc684547809101df78ada68d99"
+  },
+  "filtered_enabled": false,
+  "filtered_cancelled_by_user": true
+}

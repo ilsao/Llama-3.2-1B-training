@@ -1,0 +1,11 @@
+{
+  "overlay_hashes": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/raw_continue_once.py": "ef0b494ba7f8f6bfa5a5d2841e0a7dc2131237adf81d4e2624d0c305b2d81130",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/raw_continue_once_v2.py": "4ceeb14dede6ffbb2a5ef0ed007d078dbf2c7cda8770a725c70fb6095b854f11",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/dataset.py": "5a14f3f63951fd7aef16048f8b40c2016bc518f29e0de1bfb77445bbf41f9e55"
+  }
+}
