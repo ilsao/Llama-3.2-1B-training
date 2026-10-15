@@ -1,3 +1,12 @@
+# Latest instruction: continue raw data extension
+
+The user clarified「喔如果資料延伸是為了 raw，那不用取消」. Job552535
+had already been cancelled after346seconds/0.0961111111H, with durable raw
+progress2,939,309,475 tokenized inputs and2,939,305,984 published packed
+inputs. Preserve its accounting and append-only files; a new4h-bounded1H200
+allocation continues from that exact cursor using raw-extension-r2.json. Raw
+formal9 then starts automatically. Filtered remains cancelled.
+
 # Latest correction: filtered cancelled
 
 User explicitly cancelled the filtered sbatch before any filtered or mixprep

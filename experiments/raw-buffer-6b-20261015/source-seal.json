@@ -1,0 +1,21 @@
+{
+  "files": {
+    "AGENTS.md": "ba22d637babb9ceecf4821b754d6f209ea4038a7b8b6ff805875884b28138597",
+    "dataset.py": "5a14f3f63951fd7aef16048f8b40c2016bc518f29e0de1bfb77445bbf41f9e55",
+    "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
+    "filtering_parallel.py": "6cc867066717f804ed8901ed206b59cfb973bced304df9f18a2fa5bf41cb096b",
+    "filtering_batch_reader.py": "74b89cb5e8b3ccd02f8fca38d6b6b32e8016c5aaa3f62f9b8ec67b1bb2eafdbc",
+    "filtering_reader.py": "ebaf43aeb72026d6486992c56a9773039f57c07fb957e4fcbc7589c809ac37dc",
+    "filtering_resources.py": "56d7ab94bbf5b2bd1c3eef2aa811cf27b8fc61116615c63fc416febd712e83d1",
+    "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
+    "preparation_parallel.py": "dbf65aab4f5b389df60304ed4db2a93a6c9d705c80aa5e7e3601027325f88c16",
+    "requirements-data.txt": "41df24057de7e16ee0d31d335843a6a69c482cf1b49b2baa5876f110aca6c92e",
+    "third_party/dclm_fasttext.py": "9fdf98ee83480a84fe695d9ed8ebcc436b607a3945c1d369b2ee0bb03e7681d9",
+    "slurm/common.sh": "c9c474c296c32f266560d3bef068c89853a268e47fa8eb0f78be3e24ffcd8cca",
+    "slurm/raw_extend_six.py": "b328957e77fadd16776ec8e0df105c92d6c77d6976bb1125464ba29265ee6459",
+    "slurm/raw_six_controller.py": "86bea6d2ac1c4a6355e13921e4308f89dcaa75b588700991ac93288eecfc41e7",
+    "slurm/raw-six.sbatch": "1e58cea0c7ab64a67dad2dcb4789a2664c57da92562b3e4ead6d04ea6e4b98f4",
+    "tests/test_raw_six.py": "db599489e2a3ce386a046185bec5cf6a91449d3425d92b2c19786bb841773ff3"
+  },
+  "source_commit": "a850dd06093519b08e741e2293a920425d4ac293"
+}

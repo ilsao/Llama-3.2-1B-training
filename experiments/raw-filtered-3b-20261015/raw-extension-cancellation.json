@@ -1,0 +1,9 @@
+{
+  "user_instruction": "\u53d6\u6d88\u8cc7\u6599\u5ef6\u4f38\u5de5\u4f5c\uff0c\u4e26\u8aaa\u660e raw \u7d44\u8a13\u7df4\u914d\u7f6e",
+  "job_id": "552535",
+  "timestamp": "2026-10-15T09:26:35.577409+00:00",
+  "dependent_new_training_submission_disabled": true,
+  "existing_jobs": {
+    "rawprep": "552535"
+  }
+}

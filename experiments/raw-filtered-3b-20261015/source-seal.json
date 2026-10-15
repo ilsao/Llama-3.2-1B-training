@@ -1,6 +1,6 @@
 {
   "files": {
-    "AGENTS.md": "8f0cf93a016a6a8bc91dfe2eadf3a3e71e7ff31bb17dc51f8233a939c208e701",
+    "AGENTS.md": "38320c706ade6f79a3072484987a26bf269e5c8e8906ac8942151702e3db0a8d",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
     "configs/lr-transfer-base.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
     "configs/train-pilot.json": "5049ac74e62c74852a62ebeb79150d2318dccdcf04b5b7bdb8b52ebbe4ee080d",
@@ -18,7 +18,7 @@
     "optimizer_sweep.py": "5423a1bd03ceaac6893ca94bdcddbfb3d9f474b02f2abada107967262abf5dd5",
     "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
     "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
-    "pair3b_contracts.py": "f23b09087dbe549a05b689d842ac326bb4fd7bd4170aff779a54f4590923e433",
+    "pair3b_contracts.py": "b96ee65cf2b69c5e345057c8967b0fa65fbd7d38d9d238ab24090418840aee33",
     "performance.py": "0fd60630051d9aa8a2f0d3e172cf199d04383cfde882797d0e83ed08d3251254",
     "preparation_parallel.py": "dbf65aab4f5b389df60304ed4db2a93a6c9d705c80aa5e7e3601027325f88c16",
     "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
@@ -60,7 +60,7 @@
     "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
     "slurm/pair3b-data.sbatch": "bffc14575960df0b54990f885b5b6039d11ec7e6ac5dd26efcb4d9e239de53d1",
     "slurm/pair3b-train.sbatch": "f4e67adf8b49ae70e8a5c12e36bb6949d799924d2735348f53539237f2447da4",
-    "slurm/pair3b_controller.py": "5db086a2f914213715a35311ebd67be95dd3f0762366d18da13e4c24133c8da3",
+    "slurm/pair3b_controller.py": "6e846bf043c828034ece9fb56f7eac24607ba04eb8cd8e4cad2e4d3506f1f4d7",
     "slurm/raw_continue_once.py": "ef0b494ba7f8f6bfa5a5d2841e0a7dc2131237adf81d4e2624d0c305b2d81130",
     "slurm/raw_continue_once_v2.py": "4ceeb14dede6ffbb2a5ef0ed007d078dbf2c7cda8770a725c70fb6095b854f11",
     "slurm/recipe_calibration.py": "3dc7ae306d8f2802073db3298d90028520233877caed2f490ed486a1e2981692",
@@ -87,11 +87,11 @@
     "slurm/wsd_bracket_controller.py": "0f5c05bd61a9c46fa205c10746fa8893640770eb388214bda99369dc0ad6f577",
     "tests/test_horizon_transfer.py": "3c32eee4b6ed49b277aabe653647c48b34306d6823a0692c771e1b73dcc4501a",
     "tests/test_lr_transfer.py": "186c6bd3f27b482b73cb25311e1051608da74092ebda21a8f879d0c0b7f7c4db",
-    "tests/test_pair3b.py": "1df7258b179b25805b524b2a86e3f81d052bc6c8082dbcaa387c135654af19bb",
+    "tests/test_pair3b.py": "bb71f400c6275cf07fb7eecf11f647e6214fe304b2d3e8ab80b2b7e07ade5742",
     "tests/test_wsd_bracket.py": "ecf21224fcfd8a5ea573485dd61f3c181af7c100f65166d8a3790deaf8de7309",
     "train.py": "27c4d68f618637cdd67732b776b1ba99957a0b48f4c072332db9a423257e7fd8",
     "training_state.py": "5147fd97b8aaba1ea79203caf24debca75b418f6e15a2c3ea25bfb4313d65346",
     "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
   },
-  "source_commit": "7284278f0b773fa6d9f504d65b0c927932045845"
+  "source_commit": "1415fa8050b17b1293a221056377ab7f26e207d1"
 }

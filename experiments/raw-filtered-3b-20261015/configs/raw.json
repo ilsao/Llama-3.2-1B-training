@@ -30,7 +30,7 @@
   "lr_transfer": {
     "ema_stride_steps": 32,
     "kind": "decay",
-    "multiplier": 1.9612808677333258,
+    "multiplier": 0.936283309158156,
     "study": "lr-transfer-20261015"
   },
   "max_grad_norm": 0.5,
@@ -65,7 +65,7 @@
   "sweep_calibration_digest": "96983b309d28901187e4b6578d3ea577b602c50c333b37321eccd7beecefcc57",
   "sweep_environment_digest": "97e1880efc870ad6d498c0527aafd63032de995d6c79fa89fc4946b6299b3163",
   "sweep_id": "raw-filtered-3b-20261015",
-  "sweep_purpose": "Matched fresh3B raw versus old filtered pool restored to raw processed-token source mixture",
+  "sweep_purpose": "Fresh raw3B using frozen true-WSD LR extrapolation; filtered arm cancelled by user",
   "sweep_stage": "formal-3b",
   "target_training_tokens": 3000107008,
   "wandb_mode": "online",

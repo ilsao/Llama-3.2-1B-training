@@ -58,9 +58,12 @@
     "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/calibration-result.json": "61bee230efaa6e02154b6554efaad7f27db25174b390a66a3c36cf6b9769cd20",
     "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension.json": "441bfdb7be071a8e7207a63d3a66d10657a9a640b123c3f8f4ed2338418ef6d9",
     "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/producer-recovery.json": "ad1824c921397460e321ecf8f66b965b1654ec3430eb7157f2731b47399902a0",
-    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/raw.json": "09da85c3e72984679da3d6642946347cc05bc0fc684547809101df78ada68d99",
-    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/filtered.json": "09da85c3e72984679da3d6642946347cc05bc0fc684547809101df78ada68d99"
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/raw.json": "472c91406af88e1c5b1dae23d1ddef68bb4ea0b83841221fb1cd5866092086ce",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/filtered.json": "09da85c3e72984679da3d6642946347cc05bc0fc684547809101df78ada68d99",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension-r2.json": "dbb53360d1215e2c7bd720934218b6887e026b88338d0342ce647404d6a4efdc"
   },
   "filtered_enabled": false,
-  "filtered_cancelled_by_user": true
+  "filtered_cancelled_by_user": true,
+  "raw_extension_authorization": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension-r2.json",
+  "raw_extension_latest_user_instruction": "\u5594\u5982\u679c\u8cc7\u6599\u5ef6\u4f38\u662f\u70ba\u4e86 raw\uff0c\u90a3\u4e0d\u7528\u53d6\u6d88"
 }
