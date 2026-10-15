@@ -65,5 +65,8 @@
   "filtered_enabled": false,
   "filtered_cancelled_by_user": true,
   "raw_extension_authorization": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension-r2.json",
-  "raw_extension_latest_user_instruction": "\u5594\u5982\u679c\u8cc7\u6599\u5ef6\u4f38\u662f\u70ba\u4e86 raw\uff0c\u90a3\u4e0d\u7528\u53d6\u6d88"
+  "raw_extension_latest_user_instruction": "\u5594\u5982\u679c\u8cc7\u6599\u5ef6\u4f38\u662f\u70ba\u4e86 raw\uff0c\u90a3\u4e0d\u7528\u53d6\u6d88",
+  "approved_followon_formal_runs": {
+    "raw3b-sota-20261015": "bbe8b4c62678fbe64bbda66452752f41cac9e89b2860fc7166ee7e1b1e7285b7"
+  }
 }

@@ -60,7 +60,7 @@
     "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
     "slurm/pair3b-data.sbatch": "bffc14575960df0b54990f885b5b6039d11ec7e6ac5dd26efcb4d9e239de53d1",
     "slurm/pair3b-train.sbatch": "f4e67adf8b49ae70e8a5c12e36bb6949d799924d2735348f53539237f2447da4",
-    "slurm/pair3b_controller.py": "6e846bf043c828034ece9fb56f7eac24607ba04eb8cd8e4cad2e4d3506f1f4d7",
+    "slurm/pair3b_controller.py": "52c01abe8b634743d00f203b4c6a96513bb913ac06527e77b0ef1ba4429ff047",
     "slurm/raw_continue_once.py": "ef0b494ba7f8f6bfa5a5d2841e0a7dc2131237adf81d4e2624d0c305b2d81130",
     "slurm/raw_continue_once_v2.py": "4ceeb14dede6ffbb2a5ef0ed007d078dbf2c7cda8770a725c70fb6095b854f11",
     "slurm/recipe_calibration.py": "3dc7ae306d8f2802073db3298d90028520233877caed2f490ed486a1e2981692",
@@ -93,5 +93,5 @@
     "training_state.py": "5147fd97b8aaba1ea79203caf24debca75b418f6e15a2c3ea25bfb4313d65346",
     "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
   },
-  "source_commit": "1415fa8050b17b1293a221056377ab7f26e207d1"
+  "source_commit": "c35034f66a719451481e031a672625f9f39c306f"
 }

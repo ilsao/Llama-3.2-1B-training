@@ -1,0 +1,19 @@
+{
+  "checked_utc": "2026-10-15T09:47:39.470567+00:00",
+  "job_id": "552679",
+  "verified_slurm_state": "RUNNING",
+  "source_commit": "f39355531d56a2db35c438128d24355f0eab0e0e",
+  "control_job_id": "552612",
+  "data_job_id": "552620",
+  "shared_preparation": "dolma-raw-baseline-20261008",
+  "two_consumer_append_test_passed": true,
+  "pure_tests_passed": 4,
+  "training_tokens_each": 3000107008,
+  "matched_initialization": true,
+  "matched_data_provenance": true,
+  "wandb": {
+    "id": "f905ff728cec44f4b2bce516804b3ab0",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/f905ff728cec44f4b2bce516804b3ab0"
+  }
+}
