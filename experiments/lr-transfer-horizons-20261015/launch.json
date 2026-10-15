@@ -1,0 +1,28 @@
+{
+  "checked_utc": "2026-10-15T08:09:33.318768+00:00",
+  "source_commit": "8b36e33287367887e63a7e604057a61a1a173f85",
+  "owner": "25a-lgn04",
+  "jobs": {
+    "screen-high": "552016",
+    "t200-lr0": "552017",
+    "t200-lr1": "552018",
+    "t200-lr2": "552019",
+    "t200-lr3": "552020",
+    "t600-lr0": "552021",
+    "t600-lr1": "552022",
+    "t600-lr2": "552023",
+    "t600-lr3": "552024",
+    "t600-lr4": "552025"
+  },
+  "status": "Ten initial allocations verified RUNNING; highest-LR200M target pending its own screen.",
+  "numerical_payload_unchanged": true,
+  "pure_tests_passed": 11,
+  "gpu_validation": "Reused passed original runtime; no new tensor code",
+  "ledger_recovered": {
+    "jobs": 188,
+    "runs": 170,
+    "actual_h200_hours": 614.2808333333338,
+    "formal_runs": 8
+  },
+  "later_heldout_jobs_submitted": false
+}

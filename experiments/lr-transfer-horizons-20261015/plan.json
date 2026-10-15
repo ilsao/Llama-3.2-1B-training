@@ -1,0 +1,176 @@
+{
+  "study": "lr-transfer-horizons-20261015",
+  "user_instruction": "\u7e7c\u7e8c (after actual WSD optimum bracket and ledger anomaly)",
+  "aggregate_time_budget_enforced": false,
+  "stage_h200_hours_limit": 62,
+  "cases": [
+    {
+      "key": "screen-high",
+      "kind": "screen",
+      "tokens": 120000000,
+      "minutes": 15,
+      "muon_lr": 0.0331419416528187
+    },
+    {
+      "key": "t200-lr0",
+      "kind": "decay",
+      "tokens": 200000000,
+      "minutes": 30,
+      "muon_lr": 0.008285485413204676
+    },
+    {
+      "key": "t200-lr1",
+      "kind": "decay",
+      "tokens": 200000000,
+      "minutes": 30,
+      "muon_lr": 0.0117174458421985
+    },
+    {
+      "key": "t200-lr2",
+      "kind": "decay",
+      "tokens": 200000000,
+      "minutes": 30,
+      "muon_lr": 0.01657097082640935
+    },
+    {
+      "key": "t200-lr3",
+      "kind": "decay",
+      "tokens": 200000000,
+      "minutes": 30,
+      "muon_lr": 0.023434891684397
+    },
+    {
+      "key": "t200-lr4",
+      "kind": "decay",
+      "tokens": 200000000,
+      "minutes": 30,
+      "muon_lr": 0.0331419416528187,
+      "requires": "screen-high"
+    },
+    {
+      "key": "t600-lr0",
+      "kind": "decay",
+      "tokens": 600000000,
+      "minutes": 60,
+      "muon_lr": 0.00585872292109925
+    },
+    {
+      "key": "t600-lr1",
+      "kind": "decay",
+      "tokens": 600000000,
+      "minutes": 60,
+      "muon_lr": 0.008285485413204676
+    },
+    {
+      "key": "t600-lr2",
+      "kind": "decay",
+      "tokens": 600000000,
+      "minutes": 60,
+      "muon_lr": 0.0117174458421985
+    },
+    {
+      "key": "t600-lr3",
+      "kind": "decay",
+      "tokens": 600000000,
+      "minutes": 60,
+      "muon_lr": 0.01657097082640935
+    },
+    {
+      "key": "t600-lr4",
+      "kind": "decay",
+      "tokens": 600000000,
+      "minutes": 60,
+      "muon_lr": 0.023434891684397
+    }
+  ],
+  "previous_wsd_points": [
+    {
+      "adamw_lr": 0.00012428228119807012,
+      "job_id": "550805",
+      "mean_nll": 3.3642053595809625,
+      "muon_lr": 0.004142742706602337,
+      "perplexity": 28.91051470529056,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ad3594be016d4f90a45aa492cdc53998"
+    },
+    {
+      "adamw_lr": 0.00017576168763297747,
+      "job_id": "550806",
+      "mean_nll": 3.310593631340522,
+      "muon_lr": 0.00585872292109925,
+      "perplexity": 27.40138696683644,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/4f2e3ee24f334e3fa8f325615c3719c6"
+    },
+    {
+      "adamw_lr": 0.00024856456239614024,
+      "job_id": "550807",
+      "mean_nll": 3.2693934722253526,
+      "muon_lr": 0.008285485413204676,
+      "perplexity": 26.29538562384208,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ed135ecedf4247a1bca00f292130226c"
+    },
+    {
+      "adamw_lr": 0.000351523375265955,
+      "job_id": "551793",
+      "mean_nll": 3.2494163204098894,
+      "muon_lr": 0.0117174458421985,
+      "perplexity": 25.775291014457313,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44f07395e86547ebaa7205263dd50197"
+    },
+    {
+      "adamw_lr": 0.0004971291247922805,
+      "job_id": "551794",
+      "mean_nll": 3.2563026486336564,
+      "muon_lr": 0.01657097082640935,
+      "perplexity": 25.95340068542102,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7edf083847724a3a99bdc38e5fc720ef"
+    },
+    {
+      "adamw_lr": 0.00070304675053191,
+      "job_id": "551795",
+      "mean_nll": 3.286675215053371,
+      "muon_lr": 0.023434891684397,
+      "perplexity": 26.753765105726252,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1a7762a2b7224abea04ddcbd5d67cc95"
+    }
+  ],
+  "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+  "control_summary": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/summary.json",
+  "immutable_inputs": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-wsd-bracket-20261015/bracket-result.json": "bf08dd927b24677a3259c425b4360ae28f81e9ee8ff60198408d70f3dda5756e",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-wsd-bracket-20261015/ledger-recovery/candidate.json": "430744f0b6b8c8d5b2b3ccb915446db230a17bc8679f91334927a81bb963ffb1",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-wsd-bracket-20261015/ledger-recovery/audit.json": "9cbd7f031e7ade12241ed532c7db70260ec601bf923b906eedece5585bd75208",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-wsd-bracket-20261015/plan.json": "92ab93b96ea2baabc292e645a07f27d0926ed6e4d2e090b2d8efd1e453d56714",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/receipts/550805.json": "5459b59a353e27988cedc8dd49d81b3b9cab23c98f33c8d0a5dcfc5ebe2714c1",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/receipts/550806.json": "9002b9411fb7fd2f9ed6628239d6a759a5a5cbd0633c8376298a4339ca31a7e7",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/receipts/550807.json": "478270cb26c79d0e8805210e2f277a1cf437f76a70bafa3f94750b195b75323e",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014-followup/resolved-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/base-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
+    "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/fa3-build.json": "660dc4dbd0538bd33607cab92d974814739c3dd0ccadcdf686a1697f538b9f4b",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/source-seal.json": "5924ec6f4aa215a36786c6740ccf4c563cef2b2599af21927ddff026703c23fa"
+  },
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn031",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn083",
+    "25a-hgpn151",
+    "25a-hgpn039"
+  ],
+  "fresh_random_weights": true,
+  "automatic_retry": false,
+  "heldout_horizons_automatic": false,
+  "calibration_horizons": [
+    200000000,
+    400000000,
+    600000000
+  ],
+  "heldout_horizons": [
+    800000000,
+    1000000000
+  ],
+  "created_utc": "2026-10-15T08:05:48.787740+00:00"
+}
