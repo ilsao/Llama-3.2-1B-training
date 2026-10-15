@@ -1,0 +1,30 @@
+{
+  "activation_checkpointing": true,
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "category": "validation",
+  "epsilon": 1e-08,
+  "eval_documents": 1,
+  "eval_steps": 1,
+  "gradient_accumulation_steps": 1,
+  "learning_rate": 0.0003,
+  "logging_steps": 1,
+  "max_grad_norm": 1.0,
+  "max_h200_hours": 0.5,
+  "max_steps": 2,
+  "max_training_tokens": 1000000,
+  "microbatch_size": 1,
+  "min_lr_ratio": 0.1,
+  "model_id": "meta-llama/Llama-3.2-1B",
+  "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+  "seed": 42,
+  "sequence_length": 8192,
+  "stop_margin_seconds": 180,
+  "wandb_mode": "offline",
+  "wandb_project": "lab5-training-llama",
+  "warmup_steps": 0,
+  "weight_decay": 0.1,
+  "world_size": 1
+}

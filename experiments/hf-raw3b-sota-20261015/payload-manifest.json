@@ -1,0 +1,67 @@
+{
+  "files": {
+    "README.md": {
+      "sha256": "3e18186691fb52fd4fa78417a4ba52a50291bbf646200d485fa49a76ee51f3b1",
+      "size": 3403,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-preview/README.md"
+    },
+    "config.json": {
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+      "size": 838,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/config.json"
+    },
+    "generation_config.json": {
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+      "size": 143,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/generation_config.json"
+    },
+    "model-00001-of-00003.safetensors": {
+      "size": 1956695880,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/model-00001-of-00003.safetensors"
+    },
+    "model-00002-of-00003.safetensors": {
+      "size": 1946296312,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/model-00002-of-00003.safetensors"
+    },
+    "model-00003-of-00003.safetensors": {
+      "size": 1040282032,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/model-00003-of-00003.safetensors"
+    },
+    "model.safetensors.index.json": {
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+      "size": 12003,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/model.safetensors.index.json"
+    },
+    "resolved-training-config.json": {
+      "sha256": "12bfcbdaccf91e2f7a7c9eee2515a47aea729959359a80e6131fb0da2552ec87",
+      "size": 2772,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-preview/resolved-training-config.json"
+    },
+    "special_tokens_map.json": {
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+      "size": 301,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/special_tokens_map.json"
+    },
+    "tokenizer.json": {
+      "size": 17209920,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/tokenizer.json"
+    },
+    "tokenizer_config.json": {
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+      "size": 50526,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4/tokenizer_config.json"
+    },
+    "training-details.json": {
+      "sha256": "1b95a35bff20425d41742213481fb67c6ef83f92da60d061ebed170fcb997f22",
+      "size": 13221,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-preview/training-details.json"
+    },
+    "training-metadata.json": {
+      "sha256": "c898035704f606ea60529a3a7631ed5768f80b93cc53ab17849f2152d08deff7",
+      "size": 4298,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-preview/training-metadata.json"
+    }
+  },
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "status": "prepared; public confirmation pending"
+}

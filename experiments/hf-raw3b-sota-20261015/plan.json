@@ -1,0 +1,71 @@
+{
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "run_id": "hf-raw3b-sota-20261015",
+  "parent_run": "raw3b-sota-20261015",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4",
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/checkpoints/checkpoint-022889-2f68824938d4",
+  "expected_parent_commit": "38fa239d83ee53409cec8d7b78179915fe4e1bae",
+  "user_authorization": "\u5e6b\u6211\u4e0a\u50b3\u5230 HF; latest best full3B resplit model,PPL15.277734596019409, existing public repository from previous authorized publication",
+  "status": "prepared_for_confirmation",
+  "preserve_public_visibility": true,
+  "preserve_history": true,
+  "global_step": 22889,
+  "training_tokens": 3000107008,
+  "full_perplexity": 15.277734596019409,
+  "allocation_seconds": 1800,
+  "gpu_count": 1,
+  "cpus": 8,
+  "immutable_inputs": {
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/summary.json": "290c1e20cadbd7c82950b17c5fc861a4d01abd260f00a79d324119c076e4e923",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/resource-accounting.json": "f5cc8131b2d8ab5fa7f0da4a6f40317bdf169ce024d75928a629717c2f5dbee0",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export.json": "f9685c5f7913fc789d8fbff5c9d5d8d3e9fe838070b7f14e282270200fd45c19",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/full-evaluation.json": "08ef8a56a0a71da59755b1134eab100705851c3d1c2c512901c95fe88697a8a1",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/initialization.json": "deb2f9199c739faa6d5fc13480c254bc0f11b0a839e8f7873cb1f9fd3a319b8a",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/data-provenance.json": "e8450e86a77dd2d9aeb8833e0ee072aa1802744f92ed5975709cac84e33fadd3",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/optimizer-groups.json": "529f2eb901421956bd0aad2bb983cb3d221045328f04088bcb41b840c1f0487c",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/execution-identity.json": "efaa36a851b3a9edc81f66c93606aca355e43c96b339ba3e4ccdc777e1eff695"
+  },
+  "export_file_stats": {
+    "model.safetensors.index.json": {
+      "size": 12003,
+      "mtime_ns": 1792073010731139583
+    },
+    "tokenizer.json": {
+      "size": 17209920,
+      "mtime_ns": 1792073011350127550
+    },
+    "model-00001-of-00003.safetensors": {
+      "size": 1956695880,
+      "mtime_ns": 1792073007910194418
+    },
+    "model-00003-of-00003.safetensors": {
+      "size": 1040282032,
+      "mtime_ns": 1792073010722139775
+    },
+    "config.json": {
+      "size": 838,
+      "mtime_ns": 1792073006166228319
+    },
+    "model-00002-of-00003.safetensors": {
+      "size": 1946296312,
+      "mtime_ns": 1792073009788157913
+    },
+    "training-metadata.json": {
+      "size": 34965,
+      "mtime_ns": 1792073011353127560
+    },
+    "generation_config.json": {
+      "size": 143,
+      "mtime_ns": 1792073006167228300
+    },
+    "tokenizer_config.json": {
+      "size": 50526,
+      "mtime_ns": 1792073011223130019
+    },
+    "special_tokens_map.json": {
+      "size": 301,
+      "mtime_ns": 1792073011225129980
+    }
+  },
+  "automatic_review": "Submission rejected because user has not explicitly confirmed exact public destination and payload; no sbatch submitted."
+}
