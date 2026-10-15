@@ -1,0 +1,24 @@
+{
+  "job_id": "554390",
+  "source_hashes": {
+    "muonium/__init__.py": "ddfbac36079ba4e68b3ee0a64d817fb80550c16739139802ab46e5bd7d38246a",
+    "muonium/kernels/__init__.py": "602dd0471bfa6413705f4f754dc3a30adda3639c0f1d5b18b2aa445e9ef6fee2",
+    "muonium/kernels/gram.py": "c2b7d69e015c3f401638ca746f30f619e683c39c041de45579b8aa22f58c5f65",
+    "muonium/optim/__init__.py": "ffef24cf5555d435b1997229e586422ed04622d10a33341dab0fe0cf6cf6471d",
+    "muonium/optim/algorithms/__init__.py": "04f4cd15a611cc6cd4f97a9d3fba5459e4b5df09044f8dc8e4d59b6f6d0d6792",
+    "muonium/optim/algorithms/base.py": "03faceac9d8543f61a75b34d233fed332d42c3ba4dfe6357647443d453878139",
+    "muonium/optim/algorithms/muon.py": "199910b07e7e4ec1b61b6738d3867fc61b4a166cc290315e027d3a98f509956e",
+    "muonium/optim/algorithms/normuon.py": "5cf8541326fd06cc34af170223d50d88959a643bf0f1ed26533e3f5351c5c7c4",
+    "muonium/optim/optim.py": "46b8ce8cab6ce30a79151a5e9fe5ae6217555478d3e08a58bf8fbb718fd26132",
+    "muonium/optim/optim_lp.py": "603209118ff8a326859d7ff8d893b5417ab967c45afaee3a226d561fe3fca589",
+    "muonium/orthogonalize/__init__.py": "26862d044b990dce81859383c7b131ac1f5feb61c0c443267923165cca22f551",
+    "muonium/orthogonalize/newton_schulz.py": "6ac472c775bceef4dde543819c8320bd305c22b0ffdf56ed6b85d56012024f41",
+    "muonium/orthogonalize/orthogonalize.py": "18d11523ef503db5fbcb14438ae34b3da98eff6ba51c1ed74913066c32447ba5",
+    "muonium/orthogonalize/polar_express.py": "b3501a59d6a1a80f3d19c1d9a039a51d48b65dc50af4a70552bccda9728fef3d",
+    "muonium/utils/__init__.py": "a03742546d5b7a22be863b87904fd22665b58d67c1701054d418adaa8f1df73c",
+    "muonium/utils/dtensor.py": "d4036982ab0135e2fbe11c646753826b1966b0eae011f63ae8f49f29e496cec3",
+    "muonium/utils/foreach.py": "21196fb9ee97daa318da606c287db40c0169557f9cd209fa802f9f033d288be8"
+  },
+  "target": "/work/asciibase64/Llama-3.2-1B-training/environments/batch-normuon-1b-20261016/muonium-0.2.0",
+  "version": "0.2.0"
+}

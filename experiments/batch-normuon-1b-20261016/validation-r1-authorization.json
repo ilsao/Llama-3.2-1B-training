@@ -1,0 +1,12 @@
+{
+  "approved": false,
+  "automatic_retry": false,
+  "campaign_cap_h200_hours": 146.5,
+  "combined_validation_seconds": 873,
+  "cpu_count": 8,
+  "fresh_correctness_validation": true,
+  "gpu_count": 8,
+  "max_seconds": 780,
+  "original_validation_seconds": 93,
+  "run_id": "batch-normuon-1b-20261016-validation-r1"
+}
