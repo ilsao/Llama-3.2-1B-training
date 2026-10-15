@@ -17,13 +17,13 @@
 
 | 階段 | candidates | 每run allocation上限 | token endpoint | H200-hours上限 |
 |---|---:|---:|---:|---:|
-| full-model GPU正確性驗證 | 1 | 10min | 8updates | 1.333333 |
+| full-model GPU正確性驗證修正版 | 1 | 15min | 32updates、固定16篇eval | 2 |
 | LR數值穩定性screen | 4 | 15min | 約120M，完整batch | 8 |
-| stable/EMA horizon measurement | 4 | 90min | 1,000,079,360 | 48 |
+| stable/EMA horizon measurement | 4 | 94min | 1,000,079,360 | 50.133333 |
 | EMA對單段WSD的短程驗證 | 3 | 45min | 400,031,744 | 18 |
 
-合計最多75.333333 H200-hours，納入原init-recipe-20261014的256H pool。
-開始前已結算176.186667H，最壞合計251.52H；不重設歷史成本。所有新run是有界的transfer pilots，沒有額外formal run。
+加上舊驗證job549160的601秒/1.335556H失敗成本，合計最多79.468889 H200-hours，納入原init-recipe-20261014的256H pool。
+開始前已結算176.186667H，最壞合計255.655556H；不重設歷史成本。所有新run是有界的transfer pilots，沒有額外formal run。
 同階段平行；下一階段必須完成Slurm結算與endpoint驗證。任何失敗/未完成候選停止自動晉級；不自動retry/resume。
 不自動啟動1–6B正式訓練，不清理artifact、不上傳HF。大檔及checkpoint均在/work/asciibase64/。
 
@@ -58,3 +58,10 @@ controller-state.json及results.json提供進度、每個job/W&B與實際/保留
 proxy-fit.json保存每個horizon的四個LR/NLL、曲率、vertex、R²、held-out預測誤差。
 predictions.json及lr-table.md列出1/2/3/4/5/6B的Muon與AdamW peak LR、fit-window範圍與驗證狀態。
 report.md整合所有結果。GPU階段由sealed slurm/lr_transfer_controller.py的唯一owner每分鐘執行；cron保留其他排程。
+
+## 使用者要求修正後的單次recovery
+
+保留原source、配置、state與所有失敗費用於recovery-r1/及Git歷史。原驗證於3/8updates被timeout；不把partial當成功。新validation-r1從隨機權重開始，32updates、同一fixed subset的前16篇；screen/proxy/WSD仍是原1000篇。
+移除preflight中的提前Accelerator初始化，只讓training建立distributed runtime。加入各初始化階段timestamp、GPU clocks/topology及CPU affinity紀錄。
+驗證必須完成且穩態update median<=1秒。後續每個候選於step32預測剩餘耗時，不足以完成既定token endpoint就停止，保留checkpoint及成本，不自動retry。
+Proxy allocation由90調到94分鐘，仍在單次120分鐘門檻與原共享256H內；正式數值實驗設定不變。

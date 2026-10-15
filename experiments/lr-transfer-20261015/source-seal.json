@@ -1,7 +1,6 @@
 {
-  "source_commit": "283fafa5b3220aedabe33b0775692a2c8c845177",
   "files": {
-    "AGENTS.md": "54dfb45eb84c48470f67a83419d66d38c404a0c9b26f7cd0d72a777f9f720846",
+    "AGENTS.md": "f65c32b44b8a886a4cd9c944956ea52f7c00bc6ad47eb7036a5a616351c6543c",
     "attention_backend.py": "fc3bb56650632bac993c207693f8f7ccf56cc4db8640e79a98706745e9e32bbc",
     "configs/lr-transfer-base.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
     "configs/train-pilot.json": "5049ac74e62c74852a62ebeb79150d2318dccdcf04b5b7bdb8b52ebbe4ee080d",
@@ -14,7 +13,7 @@
     "horizon_contracts.py": "f2e9c77b2b63bff0749f2b06023f82889a335a7577f098ebefcaa99b64a592ed",
     "horizon_gpu_checks.py": "4308368b553235330dc0208af8fa2a5dc879f2cceac9d38d66ea5420e5974c37",
     "horizon_runtime.py": "c50493767fae227b04e30efae71ee34180e872be6ad1183c83560084359eca8a",
-    "lr_transfer.py": "159f37045d73b6684a5067dd5c8be1c3cd2dc90fa030db9037105e5a51a18594",
+    "lr_transfer.py": "a89f56baa1f0dfa558619f20deecb393afcb9dab5326c0ea9f5e7c9b5ff290ce",
     "optimizer_sweep.py": "5423a1bd03ceaac6893ca94bdcddbfb3d9f474b02f2abada107967262abf5dd5",
     "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
     "packing_parallel.py": "030037f9efc2ad423ff8cf4ce92f118221987e1f79365e3fd99b0ab8cd66f579",
@@ -50,9 +49,9 @@
     "slurm/horizon_campaign_v4.py": "29654ec2efa3b90c8b9c0aa78109859aaab0057e1e983dd87e4d6a4493d0945d",
     "slurm/horizon_campaign_v5.py": "035498e2cece84848159dfebd68304da1e80279066b834337979a44f8aa2c030",
     "slurm/horizon_owner.py": "f5994483373e00ac69328197e1b280c82a65c342e4f755c541edfbc1aed8b244",
-    "slurm/lr_transfer.sbatch": "a447f7e3198023fb74e76029fb9c363950e1da0bf5eebdd856dafdce4d1aefa3",
-    "slurm/lr_transfer_controller.py": "e6f8052918fd1d55d62a2cf5638df9cc023ad1a02365d2e0fb1eb89978e5c63b",
-    "slurm/lr_transfer_entry.py": "23623c572efb8f10772fea5ddf8385a0e4ce98b611363887857bb23933b79be4",
+    "slurm/lr_transfer.sbatch": "cc4ed3c427c0b038c19f1d21c7ca209df5a8353a59fbb6de501b601b7a02ab09",
+    "slurm/lr_transfer_controller.py": "22424494e9742401cb0dbd55559a4964fc1b532e392dabf64f6dcf54397b0333",
+    "slurm/lr_transfer_entry.py": "b715141f69596b3f661f48205b5b5f9c6bf742b9d88d892963aa57d1f3f19e84",
     "slurm/optimizer_sweep.py": "9e572adbd4c54c93660ba4fc51c49c908dae60d72fb3aad09b7785740c6cfeb0",
     "slurm/packing_checks.py": "8ca5d1eab29867d68f943b2bcccb60e228197ea516c41282ad39265a8e5f779a",
     "slurm/packing_entry.py": "fa08ab6c5d9d00b98831e4721af53dd5a4f6bfeedbe165c2800f7407c1ed4d11",
@@ -79,9 +78,10 @@
     "slurm/submit_training.py": "f6cd9b63928a8bd54f3e78ed3383e2ea4e8dd3113cca4a44d610531de6dcc448",
     "slurm/training-common.sh": "bf2aa81d5ae211126807918e6397d1780cf2c5f134bbbbe317b504bc010bc104",
     "slurm/training_entry.py": "34e5234232f2663dd2ae34f49d65bc9b247a6bd2cbcc0588ac189b66dafa6484",
-    "tests/test_lr_transfer.py": "46027c75aef4a646e5de991301620cf938f7f67c1d2737b7c80288f597cbf3ce",
-    "train.py": "b4e761f943b84f6e87da56724333e24fc86ee5f72a7af11c01b49656e09f2f03",
+    "tests/test_lr_transfer.py": "186c6bd3f27b482b73cb25311e1051608da74092ebda21a8f879d0c0b7f7c4db",
+    "train.py": "5a6c7af4516a914a2aa61faea7a02bd024827116cb82c217c7c82417a2bb5ec6",
     "training_state.py": "348271ab102155b9c2899016f0226fee06f0d92aedd41d3502766a53769357ea",
     "verification_parallel.py": "9cd666cb4a10badab27b2e301682b96efe5b5843f20bfcd534318fcfcffd2297"
-  }
+  },
+  "source_commit": "f8b2cca3953085a09a7f004607c00e202da9d7d6"
 }

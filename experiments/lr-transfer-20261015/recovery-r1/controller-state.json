@@ -1,0 +1,48 @@
+{
+  "blocked": true,
+  "error": "Incomplete/failed stage; no automatic retry: validation",
+  "jobs": {
+    "validation": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 601,
+        "end": "2026-10-15T11:32:14",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "3ab3913eb589914c8ba31a4eb97618d5b84e45655536417bf5efb9f97b26d519",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 1.3355555555555556,
+        "job_id": "549160",
+        "nodes": "25a-hgpn039",
+        "start": "2026-10-15T11:22:13",
+        "state": "TIMEOUT"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=10",
+        "--job-name=lt-validation",
+        "--comment=lr-transfer-20261015-d36a3a872092497c9cd0f08dffae7c64",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-validation",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/configs/validation.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/configs/validation.json",
+      "job_id": "549160",
+      "kind": "validation",
+      "multiplier": 1.0,
+      "reservation": "lr-transfer-20261015-d36a3a872092497c9cd0f08dffae7c64",
+      "run_id": "init-recipe-20261014-transfer-validation",
+      "slurm_state": "TIMEOUT",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "549160\n"
+      }
+    }
+  },
+  "stage": "validation"
+}

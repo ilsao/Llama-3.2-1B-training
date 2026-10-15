@@ -1,0 +1,6 @@
+{
+  "hostname": "25a-lgn05",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/source/slurm/lr_transfer_controller.py",
+  "sha256": "e6f8052918fd1d55d62a2cf5638df9cc023ad1a02365d2e0fb1eb89978e5c63b",
+  "source_commit": "283fafa5b3220aedabe33b0775692a2c8c845177"
+}

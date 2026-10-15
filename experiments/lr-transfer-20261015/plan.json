@@ -1,49 +1,76 @@
 {
-  "study": "lr-transfer-20261015",
-  "instruction": "利用文中的方法，設計實驗，並推導出在 token = 1, 2, 3, 4, 5, 6 B 時的最佳 lr。",
-  "scheduler_choice": "單段 WSD，依論文驗證 LR transfer（建議）",
-  "scheduler_target": "single_wsd",
-  "scheduler_shape": "existing single-phase wsd_hold_zero: 40% decay,10% hold at20% LR,10% decay to zero; warmup170",
-  "pool": "init-recipe-20261014",
-  "pool_cap_h200_hours": 256,
-  "study_max_h200_hours": 75.33333333333333,
-  "pool_preexisting_actual_h200_hours": 176.18666666666667,
-  "worst_committed_pool_h200_hours": 251.51999999999998,
-  "minutes": {
-    "validation": 10,
-    "screen": 15,
-    "proxy": 90,
-    "decay": 45
+  "anchor_adamw": 0.00017923153233642382,
+  "anchor_muon": 0.005974384411214128,
+  "automatic_retry": false,
+  "checkpoint_load": false,
+  "control_summary": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/summary.json",
+  "created_utc": "2026-10-15T03:20:20.092754+00:00",
+  "decay_check_tokens": 400031744,
+  "ema": {
+    "beta": 0.6,
+    "purpose": "proxy measurement only",
+    "stride_steps": 32,
+    "stride_tokens": 4194304
   },
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn031",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn083",
+    "25a-hgpn151",
+    "25a-hgpn039"
+  ],
+  "exclusion_note": "Prior hardware/throughput exclusions;031 had slower completed allocation, avoid risking90min1B endpoint;039 incomplete validation with slow compute/eval, excluded pending diagnosis",
+  "failed_validation_hours": 1.3355555555555556,
+  "formal_training": false,
   "grid_multipliers": [
     0.35,
     0.7,
     1.4,
     2.8
   ],
-  "anchor_muon": 0.005974384411214128,
-  "anchor_adamw": 0.00017923153233642382,
+  "hf_upload": false,
+  "immutable_inputs": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014-followup/resolved-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/base-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
+    "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/fa3-build.json": "660dc4dbd0538bd33607cab92d974814739c3dd0ccadcdf686a1697f538b9f4b",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97",
+    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7"
+  },
+  "instruction": "\u5229\u7528\u6587\u4e2d\u7684\u65b9\u6cd5\uff0c\u8a2d\u8a08\u5be6\u9a57\uff0c\u4e26\u63a8\u5c0e\u51fa\u5728 token = 1, 2, 3, 4, 5, 6 B \u6642\u7684\u6700\u4f73 lr\u3002",
   "lr_ratio_adamw_to_muon": 0.029999999999999995,
-  "proxy_target_tokens": 1000079360,
+  "minutes": {
+    "decay": 45,
+    "proxy": 94,
+    "screen": 15,
+    "validation": 15
+  },
+  "pool": "init-recipe-20261014",
+  "pool_cap_h200_hours": 256,
+  "pool_preexisting_actual_h200_hours": 176.18666666666667,
   "proxy_fit_token_range": [
     200000000,
     650000000
   ],
   "proxy_held_out_min_tokens": 750000000,
-  "decay_check_tokens": 400031744,
-  "ema": {
-    "beta": 0.6,
-    "stride_steps": 32,
-    "stride_tokens": 4194304,
-    "purpose": "proxy measurement only"
-  },
+  "proxy_target_tokens": 1000079360,
   "quality_gates": {
-    "quadratic_r_squared_min": 0.9,
-    "power_r_squared_min": 0.8,
-    "held_out_median_relative_lr_error_max": 0.15,
+    "decay_optimum_relative_error_max": 0.25,
     "held_out_max_relative_lr_error_max": 0.25,
-    "decay_optimum_relative_error_max": 0.25
+    "held_out_median_relative_lr_error_max": 0.15,
+    "power_r_squared_min": 0.8,
+    "quadratic_r_squared_min": 0.9
   },
+  "recovery": "One explicit fresh validation-r1; preserve original failed job549160, costs/tokens/source; no checkpoint load; no further automatic retry",
+  "recovery_instruction": "\u4fee\u6b63\u5440",
+  "reference": "https://arxiv.org/html/2608.20061v1",
+  "scheduler_choice": "\u55ae\u6bb5 WSD\uff0c\u4f9d\u8ad6\u6587\u9a57\u8b49 LR transfer\uff08\u5efa\u8b70\uff09",
+  "scheduler_shape": "existing single-phase wsd_hold_zero: 40% decay,10% hold at20% LR,10% decay to zero; warmup170",
+  "scheduler_target": "single_wsd",
+  "study": "lr-transfer-20261015",
+  "study_max_h200_hours": 79.4688888888889,
   "target_tokens": [
     1000000000,
     2000000000,
@@ -52,28 +79,7 @@
     5000000000,
     6000000000
   ],
-  "formal_training": false,
-  "checkpoint_load": false,
-  "automatic_retry": false,
-  "hf_upload": false,
-  "control_summary": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/summary.json",
-  "excluded_nodes": [
-    "25a-hgpn001",
-    "25a-hgpn027",
-    "25a-hgpn031",
-    "25a-hgpn062",
-    "25a-hgpn071",
-    "25a-hgpn083",
-    "25a-hgpn151"
-  ],
-  "exclusion_note": "Prior hardware/throughput exclusions;031 had slower completed allocation, avoid risking90min1B endpoint",
-  "immutable_inputs": {
-    "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/base-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
-    "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014-followup/resolved-config.json": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
-    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7",
-    "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97",
-    "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/fa3-build.json": "660dc4dbd0538bd33607cab92d974814739c3dd0ccadcdf686a1697f538b9f4b"
-  },
-  "reference": "https://arxiv.org/html/2608.20061v1",
-  "created_utc": "2026-10-15T03:20:20.092754+00:00"
+  "validation_eval_documents": 16,
+  "validation_tokens": 4194304,
+  "worst_committed_pool_h200_hours": 255.65555555555557
 }
