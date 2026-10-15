@@ -1,5 +1,6 @@
 {
-  "approved": false,
+  "approved": true,
+  "approval_evidence": "User explicitly replied 可以 to exactly one corrected validation:8H200/8CPU/13minutes,combined validation873seconds within original budget;then original approved endpoints",
   "automatic_retry": false,
   "campaign_cap_h200_hours": 146.5,
   "combined_validation_seconds": 873,
