@@ -1,0 +1,11 @@
+{
+  "instruction": "你不用管時間預算，繼續設計實驗",
+  "scope": "subsequent LR transfer experimental design and bounded pilots; no aggregate256H time gate",
+  "preserve_historical_accounting": true,
+  "per_run_token_limit": 6000000000,
+  "per_run_h200_hours_limit": 64,
+  "per_job_gpus": 8,
+  "per_job_cpus": 8,
+  "formal_count_exception": false,
+  "created_utc": "2026-10-15T06:53:01.115054+00:00"
+}
