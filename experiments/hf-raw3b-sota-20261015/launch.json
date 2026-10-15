@@ -1,0 +1,35 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+    "elapsed_seconds": 316,
+    "end": "2026-10-15T22:24:36",
+    "gpu_count": 1,
+    "gpu_type_evidence": {
+      "sha256": "45a78cb63742ed6d6c11e0b30de8ad484968335399a1a5bdda71f8ddcbf9d92a",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.08777777777777777,
+    "job_id": "553299",
+    "nodes": "25a-hgpn009",
+    "start": "2026-10-15T22:19:20",
+    "state": "COMPLETED"
+  },
+  "job_id": "553299",
+  "reservation": "hf-raw3b-sota-20261015-294bf3a84a1148bfbf5ad8620b744d50",
+  "slurm_state": "COMPLETED",
+  "status": "reconciled",
+  "submission_command": [
+    "sbatch",
+    "--parsable",
+    "--comment=hf-raw3b-sota-20261015-294bf3a84a1148bfbf5ad8620b744d50",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/source/slurm/hf-raw3b-sota.sbatch",
+    "hf-raw3b-sota-20261015"
+  ],
+  "submission_result": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "553299\n"
+  },
+  "submission_started_utc": "2026-10-15T14:19:18.553436+00:00",
+  "submission_tag": "hf-raw3b-sota-20261015-294bf3a84a1148bfbf5ad8620b744d50"
+}

@@ -19,7 +19,7 @@
   },
   "external_files": {
     "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/README.md": "3e18186691fb52fd4fa78417a4ba52a50291bbf646200d485fa49a76ee51f3b1",
-    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/plan.json": "985c3dfd82127e08a77a3d583b6e2cb89db8de83ccd3f509c57978318a153906",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/plan.json": "a849b2177718cd4e4eead21400bdcb39a7d5c78b0e608f33d5f041b26e5e6fb4",
     "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/validation-config.json": "0a9ebbe9ac6ab105c35e76cda34b1999ecd700356574f562aaa233ccc1ff85bf",
     "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-manifest.json": "6bcf969bf00bd996ee5d1943a9479450a4dfad60ffdeed27cd60107006ebe1ea",
     "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw3b-sota-20261015/payload-preview/training-details.json": "1b95a35bff20425d41742213481fb67c6ef83f92da60d061ebed170fcb997f22",

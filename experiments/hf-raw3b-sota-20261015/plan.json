@@ -6,7 +6,7 @@
   "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/checkpoints/checkpoint-022889-2f68824938d4",
   "expected_parent_commit": "38fa239d83ee53409cec8d7b78179915fe4e1bae",
   "user_authorization": "\u5e6b\u6211\u4e0a\u50b3\u5230 HF; latest best full3B resplit model,PPL15.277734596019409, existing public repository from previous authorized publication",
-  "status": "prepared_for_confirmation",
+  "status": "approved_for_submission",
   "preserve_public_visibility": true,
   "preserve_history": true,
   "global_step": 22889,
@@ -67,5 +67,7 @@
       "mtime_ns": 1792073011225129980
     }
   },
-  "automatic_review": "Submission rejected because user has not explicitly confirmed exact public destination and payload; no sbatch submitted."
+  "automatic_review": "Submission rejected because user has not explicitly confirmed exact public destination and payload; no sbatch submitted.",
+  "explicit_public_confirmation": "User replied \u5c0d to the exact public repository and13-file4.96GB payload confirmation.",
+  "confirmed_utc": "2026-10-15T14:19:18.409439+00:00"
 }

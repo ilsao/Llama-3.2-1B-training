@@ -1,0 +1,67 @@
+{
+  "README.md": {
+    "git_sha1": "e9472cb122a81e33ee873f574aff13a42538c0be",
+    "sha256": "3e18186691fb52fd4fa78417a4ba52a50291bbf646200d485fa49a76ee51f3b1",
+    "size": 3403
+  },
+  "config.json": {
+    "git_sha1": "dbe98aff8354a0c7b0d1672e0a19e632119b149a",
+    "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+    "size": 838
+  },
+  "generation_config.json": {
+    "git_sha1": "e381c682311b55a600b6c588d39957bbed3dd069",
+    "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+    "size": 143
+  },
+  "model-00001-of-00003.safetensors": {
+    "git_sha1": "c1617d00ef6689e76d555b762621f8d9555c17c3",
+    "sha256": "07136033b441351e68ef2937ce7d5eb06c388db0adb07ed1bb6885487bfc0ef9",
+    "size": 1956695880
+  },
+  "model-00002-of-00003.safetensors": {
+    "git_sha1": "1fefe20acad7ca146fe22e5397c9dc0cd20fb579",
+    "sha256": "76780dcbf6955ca988ef1bf9be5506746520c6256c3a4556c3316cf58dc11809",
+    "size": 1946296312
+  },
+  "model-00003-of-00003.safetensors": {
+    "git_sha1": "b03ef4d3880d9061d36981f240c76ab235613e2e",
+    "sha256": "5c9efe96afd23b3a333f6075da0f28040ed7b39d7f82288039afaed5e4801781",
+    "size": 1040282032
+  },
+  "model.safetensors.index.json": {
+    "git_sha1": "d56ab3a5f0708d688f6b5df5455008ce120f555a",
+    "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+    "size": 12003
+  },
+  "resolved-training-config.json": {
+    "git_sha1": "52be1ac90ec83987987af39dccffea24c1dfb6ef",
+    "sha256": "12bfcbdaccf91e2f7a7c9eee2515a47aea729959359a80e6131fb0da2552ec87",
+    "size": 2772
+  },
+  "special_tokens_map.json": {
+    "git_sha1": "cfabacc2620186cd3dd4b1dde9a37e057208636e",
+    "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+    "size": 301
+  },
+  "tokenizer.json": {
+    "git_sha1": "475b31150454dc05e90b9c4c1adbd699f4e2774b",
+    "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b",
+    "size": 17209920
+  },
+  "tokenizer_config.json": {
+    "git_sha1": "795f75993a20250b35fee4a0685d080b1a01ab2b",
+    "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+    "size": 50526
+  },
+  "training-details.json": {
+    "git_sha1": "653864550e50b190b36f6a08e5666f92820b0952",
+    "sha256": "1b95a35bff20425d41742213481fb67c6ef83f92da60d061ebed170fcb997f22",
+    "size": 13221
+  },
+  "training-metadata.json": {
+    "git_sha1": "c9a9c471a9856b63cbb42f5817ecbe994a841706",
+    "sha256": "c898035704f606ea60529a3a7631ed5768f80b93cc53ab17849f2152d08deff7",
+    "size": 4298
+  }
+}
