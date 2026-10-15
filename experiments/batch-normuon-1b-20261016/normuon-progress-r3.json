@@ -1,0 +1,11 @@
+{
+  "checks": [],
+  "execution": "eager",
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "job_id": "555108",
+  "normuon_pass": false,
+  "provenance_digest": "0bf66349b27cff417b6058205533adbe611ef3469dc3513dcf6915f6240350dc",
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r3",
+  "stage": "optimizer_update_1",
+  "timestamp": 1792093620.8621995
+}
