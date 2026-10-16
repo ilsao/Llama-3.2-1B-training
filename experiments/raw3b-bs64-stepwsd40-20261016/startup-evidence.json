@@ -1,0 +1,51 @@
+{
+  "observed_utc": "2026-10-16T08:31:49.676937+00:00",
+  "job_id": "558510",
+  "source_commit": "5f7e44d",
+  "configuration_digest": "a6084bbce35936772098e364b2c1bab5affcfe5ae3b979a77af2be32c81daf90",
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "pretrained_weights_loaded": false,
+  "wandb": {
+    "id": "cba7b737a27141ba84ab7ec861b6fe73",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/cba7b737a27141ba84ab7ec861b6fe73"
+  },
+  "token_journal": {
+    "charged_tokens": 9699328,
+    "confirmed_tokens": 9568256,
+    "limit": 3000107008,
+    "next_transaction": 74,
+    "pending": {
+      "73": 131072
+    }
+  },
+  "logged_updates_audited": 7,
+  "partial_lr_audit_passed": true,
+  "last_logged_metrics": {
+    "train/grad_norm_adamw_no_decay": 0.5541161894798279,
+    "train/grad_norm_muon": 1.3540520668029785,
+    "train/clip_limit": 0.5,
+    "train/grad_norm": 1.463045358657837,
+    "train/learning_rate": 6.909884973000222e-05,
+    "train/lr_adamw_decay": 6.909884973000222e-05,
+    "train/lr_adamw_no_decay": 6.909884973000222e-05,
+    "train/lr_muon": 0.0023032949910000737,
+    "train/decay_factor_adamw_decay": 0.999993090115027,
+    "train/decay_factor_adamw_no_decay": 1.0,
+    "train/decay_factor_muon": 0.9997696705009,
+    "train/tokens_per_second": 209141.03627593277,
+    "train/step_seconds": 0.6267158389091492,
+    "train/total_tokens_seen": 9175040,
+    "train/budget_tokens_charged": 9175040,
+    "train/step_input_tokens": 131072,
+    "train/step_prediction_tokens": 130952,
+    "train/global_batch_sequences": 16,
+    "train/gradient_accumulation_steps": 2,
+    "train/adamw_beta2": 0.95,
+    "train/reference_update": 70,
+    "train/scheduler_completed_updates": 69,
+    "train/h200_hours_so_far_estimate": 0.21887398136986627,
+    "train/loss": 7.819949829150588,
+    "train/global_step": 70
+  }
+}
