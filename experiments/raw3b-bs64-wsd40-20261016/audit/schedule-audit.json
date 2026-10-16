@@ -1,0 +1,102 @@
+{
+  "audited_utc": "2026-10-16T08:13:12.039271+00:00",
+  "log": "/work/asciibase64/Llama-3.2-1B-training/logs/raw3b-bs64-wsd40-556710.out",
+  "log_sha256": "a1641e44947eb5cd63a765b34abdeb66d443ad51b0f494660c110b8ca8b1b0b6",
+  "configuration_sha256": "6d3fdb1e72f077f3bcb71c98b7d247cc626f2732b36053105162c65906823c23",
+  "logged_updates_checked": 1432,
+  "mismatches": [],
+  "boundaries": [
+    {
+      "event": "first_tail_start_and_BS64",
+      "unit": 11444,
+      "tokens": 1499987968,
+      "token_percent": 49.99781554458473,
+      "next_optimizer_update": 11445,
+      "optimizer_update_percent": 79.96087199552822
+    },
+    {
+      "event": "first_plateau_start",
+      "unit": 16530,
+      "tokens": 2166620160,
+      "token_percent": 72.21809602866006,
+      "next_optimizer_update": 12718,
+      "optimizer_update_percent": 88.85550586920067
+    },
+    {
+      "event": "first_final_ramp_start",
+      "unit": 17802,
+      "tokens": 2333343744,
+      "token_percent": 77.77535060509415,
+      "next_optimizer_update": 13036,
+      "optimizer_update_percent": 91.07741755170487
+    },
+    {
+      "event": "second_phase_start",
+      "unit": 19074,
+      "tokens": 2500067328,
+      "token_percent": 83.33260518152825,
+      "next_optimizer_update": 13356,
+      "optimizer_update_percent": 93.3133035215204
+    },
+    {
+      "event": "second_tail_start",
+      "unit": 21364,
+      "tokens": 2800222208,
+      "token_percent": 93.33741098344183,
+      "next_optimizer_update": 13929,
+      "optimizer_update_percent": 97.31693683622136
+    },
+    {
+      "event": "second_plateau_start",
+      "unit": 22381,
+      "tokens": 2933522432,
+      "token_percent": 97.78059329809079,
+      "next_optimizer_update": 14184,
+      "optimizer_update_percent": 99.09865846841811
+    },
+    {
+      "event": "second_final_ramp_start",
+      "unit": 22635,
+      "tokens": 2966814720,
+      "token_percent": 98.8902966490454,
+      "next_optimizer_update": 14248,
+      "optimizer_update_percent": 99.54583566238122
+    },
+    {
+      "event": "last_zero_lr_update",
+      "unit": 22888,
+      "tokens": 2999975936,
+      "token_percent": 99.99563108916946,
+      "next_optimizer_update": 14312,
+      "optimizer_update_percent": 99.99301285634432
+    }
+  ],
+  "meaning": "40 percent of each phase in nonpadding-input-token units,including plateau;not40 percent of optimizer updates",
+  "actual_optimizer_updates": 14312,
+  "actual_training_inputs": 3000107008,
+  "result": {
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/checkpoints/checkpoint-014312-7b82ab670332",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/export-step-14312-7c58e390",
+    "full_perplexity": 15.21170256746107,
+    "global_step": 14312,
+    "job_id": "556710",
+    "run_id": "raw3b-bs64-wsd40-20261016",
+    "subset_perplexity": 15.213240094314846,
+    "tokens": 3000107008,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/6ae9e9ddd2ad4dffb3c8fc3a5688143d"
+  },
+  "comparison": {
+    "raw3b-sota-20261015": {
+      "candidate_full_perplexity": 15.21170256746107,
+      "control_full_perplexity": 15.277734596019409,
+      "delta_perplexity": -0.06603202855833779,
+      "improved": true
+    },
+    "raw3b-sota-wsd20-20261015": {
+      "candidate_full_perplexity": 15.21170256746107,
+      "control_full_perplexity": 15.912297665809827,
+      "delta_perplexity": -0.7005950983487566,
+      "improved": true
+    }
+  }
+}
