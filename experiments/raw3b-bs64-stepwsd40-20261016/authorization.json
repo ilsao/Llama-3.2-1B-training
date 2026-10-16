@@ -1,0 +1,18 @@
+{
+  "approval_evidence": "User requested \u5e6b\u6211\u7528 steps \u5f8c40% \u8dd1\u4e00\u6b213B and selected Warmup\u4e5f\u6309steps\uff1a\u6bcf\u6bb5170\u6b21\u5be6\u969boptimizer updates",
+  "approved": true,
+  "automatic_retry": false,
+  "cleanup": false,
+  "configuration_digest": "a6084bbce35936772098e364b2c1bab5affcfe5ae3b979a77af2be32c81daf90",
+  "cpus": 8,
+  "formal_run_number": 13,
+  "gpus": 8,
+  "hf_upload": false,
+  "maximum_h200_hours": 48,
+  "maximum_seconds": 21600,
+  "random_weights_only": true,
+  "requested_seconds": 21540,
+  "resume": false,
+  "run_id": "raw3b-bs64-stepwsd40-20261016",
+  "single_allocation": true
+}
