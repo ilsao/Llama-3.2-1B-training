@@ -1,0 +1,18 @@
+{
+  "approval_evidence": "User selected \u6bcf\u6bb5\u5f8c40% then explicitly requested Implement the plan",
+  "approved": true,
+  "automatic_retry": false,
+  "cleanup": false,
+  "configuration_digest": "a1f147bde17a4d3ff050873568d40b2482263675e91338a68f8a550979e07da7",
+  "cpus": 8,
+  "formal_run_number": 12,
+  "gpus": 8,
+  "hf_upload": false,
+  "maximum_h200_hours": 48,
+  "maximum_seconds": 21600,
+  "random_weights_only": true,
+  "requested_seconds": 21540,
+  "resume": false,
+  "run_id": "raw3b-bs64-wsd40-20261016",
+  "single_allocation": true
+}
