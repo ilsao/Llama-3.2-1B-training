@@ -1,0 +1,27 @@
+{
+  "observed_utc": "2026-10-16T04:06:33.999081+00:00",
+  "job_id": "556710",
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "pretrained_weights_loaded": false,
+  "token_journal": {
+    "charged_tokens": 11403264,
+    "confirmed_tokens": 11272192,
+    "limit": 3000107008,
+    "next_transaction": 87,
+    "pending": {
+      "86": 131072
+    }
+  },
+  "wandb": {
+    "id": "6ae9e9ddd2ad4dffb3c8fc3a5688143d",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/6ae9e9ddd2ad4dffb3c8fc3a5688143d"
+  },
+  "last_update": {
+    "step": 86,
+    "job_id": "556710",
+    "update_seconds": 0.6506424387916923,
+    "compute_seconds": 0.6253865957260132,
+    "optimizer_seconds": 0.10876367950439453
+  }
+}
