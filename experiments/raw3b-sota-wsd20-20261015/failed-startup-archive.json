@@ -1,0 +1,9 @@
+{
+  "archive": "/work/asciibase64/Llama-3.2-1B-training/runs/failed-startups/raw3b-sota-wsd20-20261015/job-553561",
+  "failed_job": "553561",
+  "files": {
+    ".run.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "resolved-config.json": "33c5b58b4b6d64e902347ea7ec4c90db04a2c62245e7e48df94450b2eaaf4a9e",
+    "resource-accounting.json": "19095cc0132de190c84fed371e18dcf954c5f966b5b96f47e8d2774313442601"
+  }
+}

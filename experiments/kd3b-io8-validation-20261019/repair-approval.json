@@ -1,0 +1,17 @@
+{
+  "status": "approved",
+  "user_approval_text": "允許，兩組各補交一次",
+  "failed_jobs": [
+    "575177",
+    "575178"
+  ],
+  "recorded_at": "2026-10-19T11:26:55.782903+00:00",
+  "seconds_per_replacement": 1080,
+  "gpu_count_per_replacement": 8,
+  "cpu_count_per_replacement": 8,
+  "replacements_per_role": 1,
+  "same_logical_run_ids": true,
+  "preserve_failed_allocation_costs": true,
+  "training_checkpoint_load": false,
+  "further_automatic_retry": false
+}

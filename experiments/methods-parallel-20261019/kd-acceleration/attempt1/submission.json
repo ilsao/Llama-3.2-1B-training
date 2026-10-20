@@ -1,0 +1,10 @@
+{
+  "gpu_count": 8,
+  "job_id": "573035",
+  "max_h200_hours": 1.3333333333333333,
+  "requested_seconds": 600,
+  "reservation": "kd-speed-validation-20261019",
+  "run_id": "kd-acceleration-validation-20261019",
+  "source_seal": "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/kd-acceleration/seal.json",
+  "state": "submitted"
+}

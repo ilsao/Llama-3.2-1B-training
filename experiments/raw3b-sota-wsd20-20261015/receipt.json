@@ -1,0 +1,10 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/checkpoints/checkpoint-022889-c5d757907173",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/export-step-22889-d671ecb0",
+  "full_perplexity": 15.912297665809827,
+  "job_id": "553634",
+  "run_id": "raw3b-sota-wsd20-20261015",
+  "subset_perplexity": 15.834676811355047,
+  "tokens": 3000107008,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9d2b5f1a1ffc477f9be6b0862d36a15d"
+}

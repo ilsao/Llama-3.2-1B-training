@@ -1,0 +1,17 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/checkpoints/checkpoint-012715-7b7f9aa120ca",
+  "complete_sha256": "8601ca06b107233d1ba7b7328bd399c7349c8b6a83cd5df2f7c25fda74985a5d",
+  "cursor": 203440,
+  "evaluation": {
+    "eval/documents": 1000,
+    "eval/nll": 4273417.786762238,
+    "eval/perplexity": 17.971854123480476,
+    "eval/prediction_tokens": 1479302,
+    "eval/sequences": 1044
+  },
+  "job_id": "539820",
+  "recovered_from_immutable_checkpoint": true,
+  "run_id": "horizon-wsd-20261014-final-resplit",
+  "step": 12715,
+  "tokens": 1666580480
+}

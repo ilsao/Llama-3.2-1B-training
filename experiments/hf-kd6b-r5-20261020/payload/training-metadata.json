@@ -1,0 +1,17 @@
+{
+  "run_id": "kd6b-r5-20261020-seed42",
+  "global_step": 28619,
+  "training_tokens": 6000082944,
+  "combined_10k_perplexity": 12.3989218778246,
+  "configuration_digest": "3080c174a87a531814a8e26b5caf122b66806046c51c57cf9b58329278ecc24c",
+  "dataset": "allenai/dolma3_mix-150B-1025",
+  "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+  "split": "Complete original train documents shuffled with seed42; final50000 held out before tokenization; fixed10000 evaluated",
+  "context_length": 8192,
+  "attention": "intradoc document-span causal",
+  "student_pretrained_weights_loaded": false,
+  "teacher_pretrained_weights_loaded": true,
+  "checkpoint_reload_verified": true,
+  "export_reload_verified": true,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/58970e70c88c"
+}

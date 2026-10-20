@@ -1,0 +1,15 @@
+{
+  "all_original_sources_preserved": true,
+  "campaign_maximum_cumulative_h200_hours": 63.782222222222224,
+  "checkpoint_load": false,
+  "initial_failed_h200_hours": 0.31555555555555553,
+  "preserve_jobs": [
+    "559836",
+    "559837",
+    "559859",
+    "559860"
+  ],
+  "reason": "Missing isolated third_party package; no full model initialization or training",
+  "source": "source-r2",
+  "stage1_new_allocation_seconds": 7080
+}

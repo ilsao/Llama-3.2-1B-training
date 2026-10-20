@@ -1,5 +1,241 @@
 # AGENTS.md
 
+## Approved 6B C2 token-bound early-decay run (2026-10-20)
+
+The user approved “好，注意到 decay 綁定的是 tokens 喔” after reviewing
+`kd6b-c2-earlydecay-20261020-seed42`. Exactly one8H200/8CPU/32400second allocation,72H
+inclusive, formal20; preserve all19 prior formal identities and every cost.
+Digest `6aec35618cbc60da734f7d9de459e8b831a09a80638328baf0c28ec53f6856c3`. Fresh residual-half seed42,
+no training checkpoint load. Use6B table LRs with AdamWx2, R5 KD, C2 adaptive
+batch16/32/64/128. First decay is bound to2399928320 cumulative nonpadding
+input tokens (old R5 W&B_step1841/local18310), never update/logging steps.
+Keep5B phase split and second-phase schedule. Hard rounded endpoint6000082944
+inputs per role; teacher accounting separate. This exact approval supersedes
+nominal6B,64H,three-full-run/120min gates only for this allocation. New methods
+cap350.65416666666664H; shared cap1545.525H,
+including all existing costs. Rank-private cache and compiled/DDP/data-reader
+gates inside this allocation; save complete states and verify export. No
+automatic retry/resume/requeue, cleanup, HF upload or further allocation.
+See experiments/kd6b-c2-earlydecay-20261020/authorization.json and protocol.md.
+
+## Approved second critical-batch startup replacements (2026-10-20)
+
+The user explicitly replied “允許，兩組再各補交一次” after reviewing the
+JOB_RECORD export failure and recovery2 entrypoint regression tests. Authorize
+exactly one further8H200/8CPU/7080second allocation for each existing logical
+C0-shadow/C1-cbs-half run, same numerical config digests, sealed recovery2 source.
+Preserve C0 jobs587009(99s) and587032(9s), C1 jobs587010(107s) and587033(12s),
+all costs and original131072 pending charged inputs per role. The latest failed
+attempts processed no new training inputs. New attempt endpoints1,000,079,360;
+logical per-role input cap1,000,210,432 unchanged. Fresh seed42, no checkpoint load.
+Use unique startup-replacement2 paths, exported JOB_RECORD plus worker fallback,
+rank-private caches and compiled/DDP gates inside each replacement allocation.
+Maximum campaign48.0288888888889H remains within49.3333333333333H, including
+all prior failures/gate and C2's full reserved cost; each logical arm stays<=16H.
+This exception applies only to these two additional allocations. No further
+automatic retry/resume/requeue, promotion, cleanup or upload. Preserve all19
+formal identities and the running C2 source/config. See recovery2 authorization.
+
+## Approved critical-batch startup replacements (2026-10-20)
+
+The user explicitly replied "yes" to the reviewed C0/C1 replacement proposal.
+Authorize exactly one further8H200/8CPU/7080second allocation per logical run
+critical-batch-20261020-c0-shadow and critical-batch-20261020-c1-cbs-half,
+using the original numerical config digests and the sealed recovery1 source.
+Preserve failed jobs587009(99s,.22H) and587010(107s,.2377777777778H), and
+all131072 charged but unconfirmed inputs per role in each failed attempt.
+Fresh random seed42 student, no training checkpoint load. New attempt endpoint
+1,000,079,360 inputs; cumulative logical input cap per role1,000,210,432.
+Use unique startup-replacement1 artifact paths and rank-private compiler caches;
+run compiled CUDA and DDP checks inside each allocation before training.
+Including gate, failures, both replacements and C2's full reserved allocation,
+maximum47.9822222222222H remains within49.3333333333333H. Each logical arm's
+allocated cost remains within16H; keep all19 existing formal identities.
+This supersedes the single-allocation restriction only for these two expressly
+approved attempts. No further automatic retry/resume/requeue, promotion,
+cleanup or HF upload. See experiments/critical-batch-20261020-recovery1/
+authorization.json and plan.json. Do not modify the running C2 source/config.
+
+## Approved critical-batch 1B screen (2026-10-20)
+
+The user explicitly requested “初篩 1B tokens 吧，開始。” after reviewing C0/C1/C2.
+Authorize exactly one8H200/8CPU/600second correctness gate and one8H200/8CPU/
+7200second allocation per C0 shadow, C1 CBS-half, C2 CBS-one, all fresh seed42.
+Runs use the critical-batch-20261020 prefix and exact configuration digests in
+experiments/critical-batch-20261020/authorization.json. Hard student endpoint
+1,000,079,360 nonpadding inputs; teacher accounting remains separate. Preserve
+R5 KD/math/token-clock LR schedule; only the batch policy differs by arm.
+Gate must pass before the three independent pilots may run concurrently
+(up to24H200 total,8H200/8CPU per job). No new formal/full run is authorized;
+preserve all19 formal identities and every prior allocation/cost.
+The new scoped campaign cap is49.3333333333333H200-hours inclusive. This approval
+supersedes the prior methods-study ceiling only for these four allocations;
+new methods-study cap290.2230555555556H and shared-ledger cap
+1485.0938888888888H including all existing1435.7605555555556H. No automatic
+retry/resume/requeue, training checkpoint load, promotion to3B/6B, cleanup,
+or HF upload. Save complete branch/final checkpoints and verify export.
+
+## Approved R5 online KD 6B run (2026-10-20)
+
+The user replied "好，開始訓練" after reviewing the detailed R5 6B proposal,
+including the 9h/72H resource proposal, rounded token endpoint and study cap.
+Authorize exactly one allocation for `kd6b-r5-20261020-seed42`:8 H200/8 CPUs,
+32400 seconds,72 H200-hours inclusive. Record formal19 and preserve all18 prior
+formal identities and all costs. For this exact run, this approval supersedes
+the64H,120-minute/three-full-run and nominal6B gates; the scoped study cap is
+248.1786111111111H including176.1786111111111H already spent.
+Configuration digest `3080c174a87a531814a8e26b5caf122b66806046c51c57cf9b58329278ecc24c`.
+Fresh residual-half seed42 random1B student, official pretrained3B teacher;
+same8GPUs for both roles. Full-vocabulary KD,T1,teacher weight.25,intradoc mask,
+micro2,globalBS16->64,original event-aligned6B schedule and table LRs/AdamWx2.
+R5 fused CE/KL,local compile,checkpointing disabled,whole-matrix NorMuon owners.
+Hard endpoint6,000,082,944 inputs/28,619updates; separate teacher accounting.
+Read-only reuse of verified canonical6B tail overlay is authorized; perform
+actual8rank TailDataset preflight before model initialization. Save all owned
+optimizer states and verify export inside allocation. No trained checkpoint
+load,automatic retry/resume/requeue,old-artifact cleanup,HF upload or extra run.
+See experiments/kd6b-r5-20261020/authorization.json and protocol.md.
+
+## Approved 8-teacher + 8-student hidden-state 3B run (2026-10-19)
+
+The user replied "好，開始訓練" after the reviewed8+8 validation and6h-per-role,
+96H200-hour proposal. Authorize exactly one producer and one consumer allocation
+for `kd3b-hidden8-20261019-seed42`, each8H200/8CPU/21600seconds, one combined
+logical full run, formal18. Preserve all17 prior formal identities and all costs.
+This scoped approval supersedes the64H logical ceiling, three-full-run/120minute
+gates, and128H methods-study cap; the new study cap is191.419H including the
+historical95.4186111111H. Both roles together may use16H200 concurrently.
+Fresh random residual-half seed42 student, no checkpoint load; pretrained official
+Llama3.2-3B teacher, BF16 hidden-state transport, original3B-token KD recipe.
+Hard student endpoint3,000,107,008 inputs/14,312 updates, separate teacher journal.
+Keep cache below1TB; only consumed newly generated payloads/READY may be deleted.
+No automatic retry/resume/requeue, old-artifact cleanup or HF upload.
+See experiments/kd3b-hidden8-20261019/authorization.json and protocol.md.
+
+## Approved second 6B startup replacement (2026-10-18)
+
+The user explicitly replied "可" after reviewing the second startup failure and
+rank0-only provenance fix. Authorize exactly one further allocation for
+raw6b-normuon-adam2x-20261018, same digest and formal17:8H200/8CPU,9h58m,
+35880seconds. Preserve jobs566121(5s) and567063(97s), cumulative0.22666666666666666
+H200-hours; all allocations remain within80H200-hours. Use source-v3 and execute
+the real TailDataset8rank preflight before model initialization. Existing
+metadata-only run directory may be reused only with the approved exact file
+hashes and no initialization/token journal/weights. Existing validated data-tail
+overlay may be reused. Start fresh random weights; no training checkpoint load.
+This supersedes the single-replacement restriction only for this expressly
+approved attempt; no further automatic retries. See recovery2-authorization.json.
+
+## Approved one-time 6B startup replacement (2026-10-18)
+
+The user explicitly replied "好" to the reviewed replacement request after job
+566121 failed in5seconds before training. Authorize exactly one replacement
+allocation for raw6b-normuon-adam2x-20261018, same configuration digest and
+formal17 identity:8H200/8CPU,9h59m,35940seconds. Preserve failed job566121 and
+its0.011111111111111112 H200-hour cost; cumulative cap remains80H200-hours.
+Use source-v2 with original pinned data environment for tail preparation,
+original requirements-data.txt and canonical Preparation fingerprint checks.
+Fresh random initialization; no checkpoint load or further automatic retry.
+This explicit replacement supersedes the original single-allocation restriction
+only for this one startup repair. See recovery-authorization.json.
+
+## Approved 6B SOTA AdamW LR x2 run (2026-10-18)
+
+The user approved "可以，開始訓練" after reviewing the complete configuration.
+Run `raw6b-normuon-adam2x-20261018`, digest `92b99288eb9afdfba6749bdd03058a42d27279f0b83765ec9424cb67da8c5f9b`.
+One allocation only: 8 H200 / 8 CPUs, 10 hours / 80 H200-hours inclusive.
+Category full, formal17; preserve all16 prior formal identities and all costs.
+For this exact run, approval supersedes the three-formal-run/120-minute gates,
+64 H200-hour cap and nominal6B token cap. Rounded-up hard endpoint is
+6,000,082,944 nonpadding inputs /28,619 updates. Fresh residual-half seed42;
+intradoc document-span causal mask,NS5 NorMuon, ordinary WD;6B lookup matrix
+LR .00425961126463665 and AdamW lookup x2 .000255576675878199.
+BS16->64 at3,000,107,008 inputs;phase split5,000,003,584 inputs;second peak .1x;
+170 BS16-equivalent token warmup units per phase;token-clock40% tail with
+4:1:1 ramp/hold/final and .2 plateau. Fixed1k + additional9k evaluation.
+Complete the canonical tail in an isolated overlay within this allocation;
+retain every original shard and all existing nonpadding tokens/document spans.
+Bound W&B completion waits, preserve local logging. No training checkpoint
+load, automatic retry/resume/requeue, cleanup, HF upload or additional run.
+See experiments/raw6b-normuon-adam2x-20261018/authorization.json and config.json.
+
+## Approved 4B last30-percent step-decay run (2026-10-18)
+
+The user requested a fresh 4B-token training run using the current recipe except
+last30% step decay, and explicitly reiterated the correct attention mask.
+Run `raw4b-normuon-adam2x-step30-20261018`, configuration digest
+`10dbaeef65171439aa652dad1ded13c5cd6deeac0f041e31f6af0e499747e2ad`.
+Category full, formal16; preserve all15 prior formal identities and all costs.
+One8H200/8CPU allocation,7h/56H inclusive, as in the immediately preceding run.
+For this exact run the new request supersedes the three-formal-run/120-minute
+gates. Fresh residual-half seed42; no checkpoint load or automatic retry/resume.
+Preserve intradoc document-span causal mask, NS5 NorMuon, AdamW LRx2, ordinary
+WD, canonical raw data, all19080 batch windows,4,000,055,296input endpoint,
+BS16-to-64 at2,000,027,648inputs, phase split3,333,292,032inputs, token warmup
+170 BS16-equivalent units per phase, second peak0.1x, fixed1k+additional9k eval.
+Only the tail changes to last30% of actual optimizer updates per phase, with
+20% initial ramp/5% hold/5% final ramp and original0.2 plateau ratio. Decay
+starts after completed updates12463 and18697 in phases of17804 and1276updates.
+No cleanup, HF upload or additional run. See this run's authorization.json,
+config.json and schedule-plan.json under experiments/.
+
+
+## Approved 4B AdamW LR x2 run (2026-10-17)
+
+The user explicitly approved "允許，開始訓練" and then "重新嘗試" the reviewed
+`raw4b-normuon-adam2x-20261017` configuration, digest
+`3f12b71e61585347c61a17ca4e369e2a1abdc8eb41c3402685102ae4b4d9db2f`.
+One allocation only, 8 H200 / 8 CPUs, at most 7 hours / 56 H200-hours inclusive.
+Category full, formal run 15; preserve all 14 prior formal identities and costs.
+For this exact configuration only, this approval supersedes the three-formal-run
+and 120-minute gates. Start random residual-half seed42 weights, no checkpoint
+load, using the prior raw4B intradoc NorMuon recipe and 4B table matrix LR;
+double only the auxiliary AdamW peak LR to 0.00029973682960834946. Ordinary WD.
+Stop at 4,000,055,296 non-padding inputs / 19,080 updates; original token-clock
+phases and BS16-to-64 at 2,000,027,648 inputs. Evaluate fixed 1k documents every
+1900 updates and at endpoint, then canonical additional 9k in this allocation.
+No automatic retry/resume/requeue, cleanup, upload, or further formal run.
+See experiments/raw4b-normuon-adam2x-20261017/authorization.json and config.json.
+
+
+## Approved intradoc NorMuon 4B run (2026-10-17)
+
+The user explicitly approved ("允許，提交") the reviewed 4B configuration:
+`raw4b-intradoc-normuon-20261017`, configuration digest
+`ed7d3b6317bd308ce76d1bcecc5db4c3332d8db2568ad56cdee1118bb0ab19bf`.
+Use one allocation of eight H200s/eight CPUs up to seven hours/56 H200-hours,
+including preflight, initialization, evaluation, checkpointing, export and idle
+time. Record category `full`, formal run fourteen; preserve all thirteen prior
+formal identities and every historical/failed allocation cost. For this exact
+run only, this approval supersedes the three-formal-run and120-minute gates.
+Start from random residual-half weights, seed42, on `dolma-raw-baseline-20261008`.
+Use the 1B-winning document-span causal mask and NorMuon normalization after NS5,
+with the 3B recipe otherwise preserved and the4B table LRs .004995613826805825
+and .00014986841480417473. Stop at4,000,055,296 non-padding inputs/19,080 updates;
+BS16→64 at2,000,027,648 inputs; phase split3,333,292,032 inputs, second peak .1×,
+170 BS16-equivalent warmup units and40% tail per phase. No training checkpoint
+load, automatic retry/resume, other formal-run exception, cleanup or HF upload.
+See `experiments/raw4b-intradoc-normuon-20261017/protocol.md`.
+
+## Approved BE60P20 LR-scaled 2B run exception (2026-10-10)
+
+After reviewing the concrete configuration and the automatic review rejection,
+the user explicitly approved ("可以") this fourth formal run, with eight H200s,
+eight CPUs, and a single allocation up to four hours /32 H200-hours.
+This exception applies only to `be60p20-lrscaled-2b-20261010` and the configuration
+in `configs/be60p20-lrscaled-2b-20261010.json`, digest
+`c2ec561c2bae73988d292fa9fe1bc7093265a3c1a6f401930dceedea40da46bf`.
+Record it as category `full`, formal run four, preserving all three prior runs
+and every historical/failed allocation cost. For this exact run only, this
+approval supersedes the three-formal-run and120-minute submission gates.
+Start from random weights on parent raw preparation `dolma-raw-baseline-20261008`.
+Scale both BE60P20 peak LRs by `(2000027648/399900672)**(-0.32)` using the requested
+arXiv:2409.19913v3 method. Keep phase ratios,20% plateau,170 warmup updates,
+8192 context, batch geometry and WD=0.1. Stop at15259 updates /2,000,027,648
+non-padding inputs, the complete batch crossing2B tokens. No training checkpoint
+load, automatic retry/resume, other formal-run exception, cleanup or HF upload
+is authorized. See `experiments/be60p20-lrscaled-2b-20261010/protocol.md`.
+
 ## Filtered 2B-token run authorization (2026-10-09)
 
 The user authorized merging the winning Muon/WSD worktree into main and pushing

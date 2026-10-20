@@ -1,0 +1,24 @@
+{
+  "Llama-3.1-8B": {
+    "gated": "manual",
+    "repo_id": "meta-llama/Llama-3.1-8B",
+    "revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "source": "https://huggingface.co/api/models/meta-llama/Llama-3.1-8B",
+    "config_retrieved": false,
+    "http_status": 403
+  },
+  "Llama-3.2-3B": {
+    "gated": "manual",
+    "repo_id": "meta-llama/Llama-3.2-3B",
+    "revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+    "source": "https://huggingface.co/api/models/meta-llama/Llama-3.2-3B",
+    "config_sha256": "35f063e9f381e8678eea34bc56c3ecef3c6d10149f6b2cbdf27b8ee1bad3073d",
+    "config_retrieved": true,
+    "first_weight_shard_head_status": 200,
+    "weight_files": [
+      "model-00001-of-00002.safetensors",
+      "model-00002-of-00002.safetensors"
+    ],
+    "declared_total_weight_bytes": 6425499648
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "activation_checkpointing": true,
+  "attention_backend": "flash_attention_3",
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "category": "full",
+  "checkpoint_interval_seconds": 1200,
+  "checkpoint_policy": "final_only",
+  "epsilon": 1e-08,
+  "eval_documents": 1000,
+  "eval_steps": 1525,
+  "export_on_completion": true,
+  "final_evaluation_reserve_seconds": 300,
+  "fixed_horizon": true,
+  "gradient_accumulation_steps": 2,
+  "hold_schedule": {
+    "final_decay_ratio": 0.1,
+    "first_decay_ratio": 0.4,
+    "hold_ratio": 0.1,
+    "plateau_lr_ratio": 0.2
+  },
+  "learning_rate": 0.00017923153233642382,
+  "logging_steps": 1,
+  "lr_scheduler": "wsd_hold_zero",
+  "max_grad_norm": 1.0,
+  "max_h200_hours": 32,
+  "max_steps": 15259,
+  "max_training_tokens": 2000027648,
+  "microbatch_size": 1,
+  "min_lr_ratio": 0,
+  "model_id": "meta-llama/Llama-3.2-1B",
+  "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+  "muon": {
+    "adjust_lr_fn": "original",
+    "epsilon": 1e-07,
+    "learning_rate": 0.011948768822428256,
+    "momentum": 0.95,
+    "nesterov": true,
+    "ns_coefficients": [
+      3.4445,
+      -4.775,
+      2.0315
+    ],
+    "ns_steps": 5,
+    "weight_decay": 0.1
+  },
+  "optimizer": "muon",
+  "parent_runs": [
+    "cg-20261010-be60p20-s42"
+  ],
+  "retain_all_checkpoints": false,
+  "scheduler_steps": 15259,
+  "seed": 42,
+  "sequence_length": 8192,
+  "stop_margin_seconds": 300,
+  "sweep_calibration_digest": "eb373ce909847e577d58cec95966d5ae551fa9a861d611577d31fa34f317ce5a",
+  "sweep_environment_digest": "97e1880efc870ad6d498c0527aafd63032de995d6c79fa89fc4946b6299b3163",
+  "sweep_id": "be60p20-lrscaled-2b-20261010",
+  "sweep_purpose": "User-selected BE60P20 at 2B tokens with arXiv:2409.19913v3 beta=0.32 horizon LR transfer",
+  "sweep_stage": "final",
+  "target_training_tokens": 2000000000,
+  "wandb_mode": "online",
+  "wandb_project": "lab5-training-llama",
+  "warmup_steps": 170,
+  "weight_decay": 0.1,
+  "world_size": 8,
+  "wsd_decay_ratio": 0.6
+}

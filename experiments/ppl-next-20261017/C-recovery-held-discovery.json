@@ -1,0 +1,36 @@
+{
+  "accounting": {
+    "command": [
+      "sacct",
+      "-X",
+      "-n",
+      "-P",
+      "--user",
+      "asciibase64",
+      "-S",
+      "2026-10-17T14:52:19",
+      "--format=JobIDRaw,JobName%100,State,Submit,Start,ElapsedRaw"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "561623|pf17-A-seed42|COMPLETED|2026-10-17T13:32:47|2026-10-17T13:32:48|4815\n561624|pf17-B-seed42|COMPLETED|2026-10-17T13:32:47|2026-10-17T13:32:48|4827\n561891|pf17-D-seed42|RUNNING|2026-10-17T14:55:32|2026-10-17T14:55:33|333\n"
+  },
+  "ambiguous": [],
+  "checked_utc": "2026-10-17T07:01:07.020597+00:00",
+  "matches": [
+    "561910"
+  ],
+  "queue": {
+    "command": [
+      "squeue",
+      "--noheader",
+      "--user",
+      "asciibase64",
+      "--format=%i|%j|%T|%k"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "561910|pf17-C-seed42|PENDING|ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1\n561891|pf17-D-seed42|RUNNING|ppl-next-20261017-D-seed42-575c8b170da547a3a8a47e6c1680f07e\n"
+  },
+  "startup_receipts": []
+}

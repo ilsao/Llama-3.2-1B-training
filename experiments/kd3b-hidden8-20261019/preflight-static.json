@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-10-19T11:54:40.424866+00:00",
+  "stdlib_tests_passed": 11,
+  "ast_parsed_files": 110,
+  "sbatch_syntax_passed": true,
+  "heavy_checks": "Will run inside authorized producer/consumer allocations",
+  "preexisting_gpu_evidence": "experiments/kd3b-io8-validation-20261019/results.json",
+  "preserved_full_runs": 17,
+  "study_cost_before": 95.4186111111111,
+  "approved_combined_new_cap": 96
+}

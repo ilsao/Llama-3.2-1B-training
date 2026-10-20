@@ -1,0 +1,28 @@
+{
+  "status": "approved for one second replacement per arm",
+  "reason": "First replacement failed before torch/model initialization because JOB_RECORD was not exported; fixed batch export plus worker fallback and real worker-entrypoint regression tests",
+  "failed_jobs": {
+    "critical-batch-20261020-c0-shadow": [
+      "587009",
+      "587032"
+    ],
+    "critical-batch-20261020-c1-cbs-half": [
+      "587010",
+      "587033"
+    ]
+  },
+  "all_failed_h200_hours": 0.5044444444444445,
+  "latest_failed_h200_hours": 0.04666666666666667,
+  "original_source_seal_sha256": "a76abcef8f0b16c10cc48c8cd541a347d38ced09b82d2717ac8527af466f6491",
+  "configuration_digests": {
+    "critical-batch-20261020-c0-shadow": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "critical-batch-20261020-c1-cbs-half": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25"
+  },
+  "replacement_seconds": 7080,
+  "replacement_count": 2,
+  "max_campaign_h200_hours_including_all_prior_and_c2": 48.028888888888886,
+  "original_campaign_cap_h200_hours": 49.333333333333336,
+  "logical_input_cap_per_role": 1000210432,
+  "prior_charged_inputs_per_role": 131072,
+  "fresh_attempt_target_inputs": 1000079360
+}

@@ -1,0 +1,10 @@
+{
+  "all_241_costs_verified_against_sacct": true,
+  "applied": true,
+  "cause": "unknown; original empty ledger preserved",
+  "formal_runs": 14,
+  "h200_hours": 1042.5144444444447,
+  "historical_digests_preserved": true,
+  "jobs": 241,
+  "runs": 216
+}

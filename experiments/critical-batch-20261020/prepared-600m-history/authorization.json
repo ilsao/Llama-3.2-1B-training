@@ -1,0 +1,8 @@
+{
+  "approved": false,
+  "reason": "User requested experiment design and implementation; no new allocation approved. Previous formal19 authorization does not transfer.",
+  "configs": {},
+  "source_seal_sha256": null,
+  "campaign_cap_h200_hours": 0,
+  "shared_ledger_cap_h200_hours": null
+}

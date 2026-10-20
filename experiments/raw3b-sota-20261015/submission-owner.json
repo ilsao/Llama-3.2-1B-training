@@ -1,0 +1,6 @@
+{
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-20261015/source/slurm/sota3b_controller.py",
+  "sha256": "4207b2ed0159ec0c6ba1b6c83cb8e480d58bf14b34ee620d7e9147768477a2c7",
+  "source_commit": "f39355531d56a2db35c438128d24355f0eab0e0e",
+  "hostname": "25a-lgn01"
+}

@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "decay_clock": "nonpadding_tokens",
+  "decay_ratio": 0.4,
+  "last_logged_step": 28619,
+  "last_logged_tokens": 6000082944,
+  "logged_updates": 2862,
+  "passed": true
+}

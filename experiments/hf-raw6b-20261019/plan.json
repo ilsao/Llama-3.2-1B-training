@@ -1,0 +1,71 @@
+{
+  "status": "approved_for_submission",
+  "run_id": "hf-raw6b-20261019",
+  "parent_run": "raw6b-normuon-adam2x-20261018",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "expected_parent_commit": "1b62848efb2a8881483d880778208d17699d3b9b",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+  "global_step": 28619,
+  "training_tokens": 6000082944,
+  "allocation_seconds": 1800,
+  "gpu_count": 1,
+  "cpus": 8,
+  "preserve_history": true,
+  "preserve_public_visibility": true,
+  "user_authorization": "\u5e6b\u6211\u4e0a\u50b3\u9019\u500b checkpoint \u5230 huggingface; use established public repository, update main and retain previous commits",
+  "export_file_stats": {
+    "generation_config.json": {
+      "size": 143,
+      "mtime_ns": 1792362076408202539
+    },
+    "special_tokens_map.json": {
+      "size": 301,
+      "mtime_ns": 1792362082745052851
+    },
+    "config.json": {
+      "size": 838,
+      "mtime_ns": 1792362076407202563
+    },
+    "model-00001-of-00003.safetensors": {
+      "size": 1956695880,
+      "mtime_ns": 1792362078697148470
+    },
+    "training-metadata.json": {
+      "size": 35246,
+      "mtime_ns": 1792362082873049861
+    },
+    "tokenizer_config.json": {
+      "size": 50526,
+      "mtime_ns": 1792362082741052945
+    },
+    "model-00003-of-00003.safetensors": {
+      "size": 1040282032,
+      "mtime_ns": 1792362082251064536
+    },
+    "model-00002-of-00003.safetensors": {
+      "size": 1946296312,
+      "mtime_ns": 1792362080964094920
+    },
+    "model.safetensors.index.json": {
+      "size": 12003,
+      "mtime_ns": 1792362082257064378
+    },
+    "tokenizer.json": {
+      "size": 17209920,
+      "mtime_ns": 1792362082869049922
+    }
+  },
+  "immutable_inputs": {
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/summary.json": "8c6483a22cc6c5cf667b294ad5487acc38cfffd43152243ef80d4d8882db216b",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export.json": "79e175165deaf4dd300d068eff5d22f65b6c8ad7afdbacd49893b75fa4ae3035",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/initialization.json": "deb2f9199c739faa6d5fc13480c254bc0f11b0a839e8f7873cb1f9fd3a319b8a",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/optimizer-groups.json": "c796f8f8d0489c77b929123a9d90c953456a4ba7c389b286100a87005109cb35",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/data-provenance.json": "e8450e86a77dd2d9aeb8833e0ee072aa1802744f92ed5975709cac84e33fadd3",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/confirmation-evaluation.json": "2aecdb7e7f92f9a31c7e38ebe9b96aa9490dd928f088688153ff177e804761bb",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/results.json": "660fa5b3a94aee4a571e7930b993323ea3aeda5630ca72974365db8ce46f2002",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/schedule-audit.json": "59fec36a2df739fe844815805315f4559b8bc2d4843e1ab749d7a33f0f660f63",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/completion-status.json": "8347f165cba2a07309fde8bc02724e58653cb314636431afa253587dd8306a66"
+  },
+  "public_destination_confirmation": "User explicitly replied \u662f to publishing weights, tokenizer, configuration, model card and training/evaluation metadata to public asciibase64/Llama-3.2-1B-dolma3_mix, updating main and preserving history",
+  "confirmation_utc": "2026-10-19T02:35:00.979947+00:00"
+}

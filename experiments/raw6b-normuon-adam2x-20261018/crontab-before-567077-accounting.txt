@@ -1,0 +1,5 @@
+
+* * * * * /usr/bin/python3 /home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe_campaign_v8.py run-once >> /work/asciibase64/Llama-3.2-1B-training/runs/init-recipe-20261014/controller.log 2>&1 # init-recipe-20261014-controller
+* * * * * /usr/bin/python3 /home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-20261015/source-v2/slurm/lr_transfer_controller.py run-once >> /work/asciibase64/Llama-3.2-1B-training/runs/lr-transfer-20261015/controller.log 2>&1 # lr-transfer-20261015-controller
+* * * * * /usr/bin/python3 /home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/controller_recovery.py run-once >> /work/asciibase64/Llama-3.2-1B-training/runs/ppl-next-20261017/controller-recovery.log 2>&1 # ppl-next-20261017-recovery-controller
+* * * * * /usr/bin/python3 /home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/accounting_only.py >> /work/asciibase64/Llama-3.2-1B-training/logs/raw6b-567063-accounting.log 2>&1 # raw6b-567063-accounting-only

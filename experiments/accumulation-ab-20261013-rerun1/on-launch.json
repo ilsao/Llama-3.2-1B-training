@@ -1,0 +1,44 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 472,
+    "end": "2026-10-13T23:36:14",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "f6498290b8e1980be42eb9083343376afc262fdab97fc67fde36066ccb972af4",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 1.048888888888889,
+    "job_id": "537003",
+    "nodes": "25a-hgpn018",
+    "start": "2026-10-13T23:28:22",
+    "state": "COMPLETED"
+  },
+  "arm": "on",
+  "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/accumulation-ab-20261013-rerun1/on.json",
+  "configuration_sha256": "9861f32f01872a6ff7d2b42cb506cfc42889d5a92b4e8d9c21d412daba6fbbd2",
+  "execution_mode": "independent_parallel",
+  "execution_seal_sha256": "e0608680db525dc962d5ece2afda3e8848dcaa402e253e8cb94bbee16b0c45b9",
+  "historical_campaign": "accumulation-ab-20261013",
+  "job_id": "537003",
+  "reservation": "accumulation-3c086afbf1bb4e559ac7107085fda7f3",
+  "run_id": "accumulation-ab-20261013-rerun1-on",
+  "slurm_state": "COMPLETED",
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/source-b",
+  "started_utc": "2026-10-13T15:28:21.025402+00:00",
+  "status": "reconciled",
+  "submission_command": [
+    "sbatch",
+    "--parsable",
+    "--comment=accumulation-3c086afbf1bb4e559ac7107085fda7f3",
+    "--job-name=accum-r1-on",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/accumulation-parallel.sbatch",
+    "accumulation-ab-20261013-rerun1-on",
+    "/home/asciibase64/Llama-3.2-1B-training/configs/accumulation-ab-20261013-rerun1/on.json"
+  ],
+  "submission_result": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "537003\n"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "accumulation": 2,
+  "context": 8192,
+  "cpu_count": 8,
+  "full_gradient_gates": {
+    "cosine_min": 0.999999,
+    "loss_absolute_error_max": 1e-05,
+    "relative_l2_max": 0.0001
+  },
+  "global_batch": 16,
+  "h200_hours_cap": 1.6,
+  "loss": ".75 CE + .25 KL(teacher||student), T1, full vocabulary",
+  "max_student_inputs": 20000000,
+  "microbatch": 1,
+  "requeue": false,
+  "scope": "implementation and bounded performance/numerical validation; no formal training",
+  "seconds": 720,
+  "student_initialization": "fresh residual_half seed42",
+  "teacher": "meta-llama/Llama-3.2-3B",
+  "teacher_prefetch_counted": true,
+  "teacher_revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+  "timing": "two reversed-order blocks, each 6 updates, includes fill/drain, initialization excluded but charged",
+  "user_instruction": "\u5229\u7528 pipeline \u52a0\u901f\uff0c\u5b78\u751f\u5b78\u7fd2\u524d\u4e00\u500b batch \u6642\u6559\u5e2b\u751f\u6210\u4e0b\u4e00\u500b batch logits",
+  "variants": [
+    "inline",
+    "serial_buffer",
+    "pipeline"
+  ],
+  "weights_updated": false,
+  "world_size": 8
+}

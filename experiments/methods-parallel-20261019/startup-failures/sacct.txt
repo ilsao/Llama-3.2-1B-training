@@ -1,0 +1,6 @@
+572065|FAILED|2|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:28|2026-10-19T13:54:30|25a-hgpn001|0:53
+572067|FAILED|3|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:42|2026-10-19T13:54:45|25a-hgpn001|0:53
+572070|FAILED|3|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:45|2026-10-19T13:54:48|25a-hgpn001|0:53
+572071|FAILED|6|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:49|2026-10-19T13:54:55|25a-hgpn001|0:53
+572072|FAILED|1|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:55|2026-10-19T13:54:56|25a-hgpn001|0:53
+572073|FAILED|1|billing=8,cpu=8,gres/gpu=8,mem=200G,node=1|2026-10-19T13:54:56|2026-10-19T13:54:57|25a-hgpn001|0:53

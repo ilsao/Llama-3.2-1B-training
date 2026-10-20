@@ -1,0 +1,53 @@
+{
+  "analysis_scope": "Read-only analysis of saved metrics, metadata, and source code. No new GPU evaluation or training.",
+  "runs": [
+    {
+      "run_id": "baseline-muon-wsd-raw-20261009",
+      "source_directory": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009",
+      "training_tokens": 1797914624,
+      "updates": 13717,
+      "full_eval_step": 8500,
+      "full_eval_ppl": 24.449283537468563,
+      "subset_eval_ppl": 20.939944786326542,
+      "allocation_h200_hours": 21.80222222222222,
+      "last_500_train_mean_nll": 3.0361838793918654,
+      "prediction_input_ratio": 0.999215210788563,
+      "clipped_step_fraction": 0.03739884814463804,
+      "decay_only_retention_factor": 7.857941700414676e-08,
+      "random_initialization_signature": "2f16e166efabc6cf88c801c2411545ced320b444a657b53842a18bc37e738b5c",
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44c3ab1a26b94760afba44992342140d"
+    },
+    {
+      "run_id": "muon-wsd-filtered-2b-20261009",
+      "source_directory": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009",
+      "training_tokens": 2000027648,
+      "updates": 15259,
+      "full_eval_step": 15259,
+      "full_eval_ppl": 26.143339436780774,
+      "subset_eval_ppl": 26.221399463284897,
+      "allocation_h200_hours": 24.115555555555556,
+      "last_500_train_mean_nll": 2.616581577868468,
+      "prediction_input_ratio": 0.9992390660191514,
+      "clipped_step_fraction": 0.07208860344714595,
+      "decay_only_retention_factor": 1.002342243798929e-12,
+      "random_initialization_signature": "2f16e166efabc6cf88c801c2411545ced320b444a657b53842a18bc37e738b5c",
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/52f993c6c5954fba933ee7bfeaa9baff"
+    },
+    {
+      "run_id": "muon-wsd-raw-2b-20261010",
+      "source_directory": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-raw-2b-20261010",
+      "training_tokens": 2000027648,
+      "updates": 15259,
+      "full_eval_step": 15259,
+      "full_eval_ppl": 22.40346126037556,
+      "subset_eval_ppl": 22.389385824468263,
+      "allocation_h200_hours": 24.866666666666667,
+      "last_500_train_mean_nll": 3.1719943427904704,
+      "prediction_input_ratio": 0.9992149378526991,
+      "clipped_step_fraction": 0.041418179435087486,
+      "decay_only_retention_factor": 1.002342243798929e-12,
+      "random_initialization_signature": "2f16e166efabc6cf88c801c2411545ced320b444a657b53842a18bc37e738b5c",
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/a087e38227234c1c85fabc5e6ccff2a9"
+    }
+  ]
+}

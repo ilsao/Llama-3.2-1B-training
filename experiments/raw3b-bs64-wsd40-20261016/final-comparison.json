@@ -1,0 +1,14 @@
+{
+  "raw3b-sota-20261015": {
+    "candidate_full_perplexity": 15.21170256746107,
+    "control_full_perplexity": 15.277734596019409,
+    "delta_perplexity": -0.06603202855833779,
+    "improved": true
+  },
+  "raw3b-sota-wsd20-20261015": {
+    "candidate_full_perplexity": 15.21170256746107,
+    "control_full_perplexity": 15.912297665809827,
+    "delta_perplexity": -0.7005950983487566,
+    "improved": true
+  }
+}

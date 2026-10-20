@@ -1,0 +1,15 @@
+# True WSD horizon calibration
+
+Stage: calibration_complete; measured/reserved 49.158/62.0 H200-hours.
+
+- screen-high: 552016, COMPLETED
+- t200-lr0: 552017, COMPLETED
+- t200-lr1: 552018, COMPLETED
+- t200-lr2: 552019, COMPLETED
+- t200-lr3: 552020, COMPLETED
+- t200-lr4: 552073, COMPLETED
+- t600-lr0: 552021, COMPLETED
+- t600-lr1: 552022, COMPLETED
+- t600-lr2: 552023, COMPLETED
+- t600-lr3: 552024, COMPLETED
+- t600-lr4: 552025, COMPLETED

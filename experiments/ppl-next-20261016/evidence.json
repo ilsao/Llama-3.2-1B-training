@@ -1,0 +1,1200 @@
+{
+  "observed_utc": "2026-10-16T13:58:37.414734+00:00",
+  "ledger": {
+    "path": "/work/asciibase64/Llama-3.2-1B-training/experiment-ledger.json",
+    "bytes": 497258,
+    "sha256": "2002435deaf4b2d49fb8aa000bdf6557b83eae06371e01633c110f1cef092eaf"
+  },
+  "measured_h200_hours": 891.867777777778,
+  "reserved_or_measured_h200_hours": 891.867777777778,
+  "formal_run_count": 13,
+  "runs": [
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "job_id": "552612",
+      "tokens": 3000107008,
+      "updates": 22889,
+      "allocation_h200_hours": 34.91777777777778,
+      "full_ppl": 15.579936997983262,
+      "full_mean_nll": 2.7459839966592825,
+      "full_documents": 50000,
+      "full_prediction_tokens": 76930208,
+      "subset_ppl": 15.536772715200494,
+      "tail_ratio": 0.6,
+      "phase_schedule": null,
+      "schedule_clock": "optimizer_updates",
+      "warmup_clock": "optimizer_updates",
+      "muon_lr": 0.005593716406714465,
+      "adamw_lr": 0.00016781149220143396,
+      "checkpoint_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+      "stop_reason": "training_token_target",
+      "wandb": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ecf909bb7e7f48a6aa24c8f0a8f2e149",
+      "full_length_buckets": {
+        "eval/length_0_256_nll": 3978698.187535286,
+        "eval/length_0_256_perplexity": 20.54697276324819,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 72860417.8571167,
+        "eval/length_1024_4096_perplexity": 15.99414392132061,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 38971191.31770325,
+        "eval/length_256_1024_perplexity": 16.365394684952964,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 95438812.66531467,
+        "eval/length_4096_inf_perplexity": 14.832599233645768,
+        "eval/length_4096_inf_prediction_tokens": 35389292
+      },
+      "sampled_training_windows": [
+        {
+          "start_b": 0,
+          "end_b": 1,
+          "logged_samples": 762,
+          "median_preclip_norm": 0.5413846969604492,
+          "fraction_samples_over_clip": 0.7322834645669292,
+          "median_tokens_per_second": 206534.07698082016
+        },
+        {
+          "start_b": 1,
+          "end_b": 1.5,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.5333716571331024,
+          "fraction_samples_over_clip": 0.7670157068062827,
+          "median_tokens_per_second": 206442.48223800783
+        },
+        {
+          "start_b": 1.5,
+          "end_b": 2.5,
+          "logged_samples": 763,
+          "median_preclip_norm": 0.6201870441436768,
+          "fraction_samples_over_clip": 0.9764089121887287,
+          "median_tokens_per_second": 206637.44162737246
+        },
+        {
+          "start_b": 2.5,
+          "end_b": 3.1,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.7555169761180878,
+          "fraction_samples_over_clip": 0.9973821989528796,
+          "median_tokens_per_second": 206322.52769456728
+        }
+      ],
+      "sources": [
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/summary.json",
+          "bytes": 35164,
+          "sha256": "d45ce9e550dd40300a8c86cb4e9f3664fdb896d553e6f05ad31e7d742d2ce2f9"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/metrics.jsonl",
+          "bytes": 8662005,
+          "sha256": "2079a40dac55e5bf3db45e1dbc8319678819bb5a17b570a7ca8e6b237a163e54"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/full-evaluation.json",
+          "bytes": 2530,
+          "sha256": "83f32cd6151f4e1c5e07130672be1f6871b2ed23f4f628f571dde2f9e7ccdb30"
+        }
+      ]
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "job_id": "552679",
+      "tokens": 3000107008,
+      "updates": 22889,
+      "allocation_h200_hours": 34.71333333333333,
+      "full_ppl": 15.277734596019409,
+      "full_mean_nll": 2.726396513324046,
+      "full_documents": 50000,
+      "full_prediction_tokens": 76930208,
+      "subset_ppl": 15.223860644913243,
+      "tail_ratio": 0.6,
+      "phase_schedule": [
+        {
+          "end": 19074,
+          "hold_schedule": {
+            "final_decay_ratio": 0.09999999999999999,
+            "first_decay_ratio": 0.39999999999999997,
+            "hold_ratio": 0.09999999999999999,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 1.0,
+          "start": 0,
+          "warmup_steps": 170
+        },
+        {
+          "end": 22889,
+          "hold_schedule": {
+            "final_decay_ratio": 0.09999999999999999,
+            "first_decay_ratio": 0.39999999999999997,
+            "hold_ratio": 0.09999999999999999,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 0.1,
+          "start": 19074,
+          "warmup_steps": 170
+        }
+      ],
+      "schedule_clock": "optimizer_updates",
+      "warmup_clock": "optimizer_updates",
+      "muon_lr": 0.005593716406714465,
+      "adamw_lr": 0.00016781149220143396,
+      "checkpoint_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+      "stop_reason": "training_token_target",
+      "wandb": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/f905ff728cec44f4b2bce516804b3ab0",
+      "full_length_buckets": {
+        "eval/length_0_256_nll": 3934780.308717251,
+        "eval/length_0_256_perplexity": 19.87272404249381,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 72362094.1907959,
+        "eval/length_1024_4096_perplexity": 15.693745071796751,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 38670513.20687103,
+        "eval/length_256_1024_perplexity": 16.01623978215413,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 94774863.15410948,
+        "eval/length_4096_inf_perplexity": 14.556914418032731,
+        "eval/length_4096_inf_prediction_tokens": 35389292
+      },
+      "sampled_training_windows": [
+        {
+          "start_b": 0,
+          "end_b": 1,
+          "logged_samples": 762,
+          "median_preclip_norm": 0.53549724817276,
+          "fraction_samples_over_clip": 0.7467191601049868,
+          "median_tokens_per_second": 207204.39476892014
+        },
+        {
+          "start_b": 1,
+          "end_b": 1.5,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.5356782674789429,
+          "fraction_samples_over_clip": 0.806282722513089,
+          "median_tokens_per_second": 206943.02580314234
+        },
+        {
+          "start_b": 1.5,
+          "end_b": 2.5,
+          "logged_samples": 763,
+          "median_preclip_norm": 0.6795763969421387,
+          "fraction_samples_over_clip": 0.9986893840104849,
+          "median_tokens_per_second": 206904.38517417325
+        },
+        {
+          "start_b": 2.5,
+          "end_b": 3.1,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.8232862949371338,
+          "fraction_samples_over_clip": 0.9973821989528796,
+          "median_tokens_per_second": 206938.43949929162
+        }
+      ],
+      "sources": [
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/summary.json",
+          "bytes": 35283,
+          "sha256": "290c1e20cadbd7c82950b17c5fc861a4d01abd260f00a79d324119c076e4e923"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/metrics.jsonl",
+          "bytes": 8665641,
+          "sha256": "7b3e632335f84013001c066fe8e92231515adbee42afca16aaecba8a2fda41b3"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/full-evaluation.json",
+          "bytes": 2514,
+          "sha256": "08ef8a56a0a71da59755b1134eab100705851c3d1c2c512901c95fe88697a8a1"
+        }
+      ]
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "job_id": "553634",
+      "tokens": 3000107008,
+      "updates": 22889,
+      "allocation_h200_hours": 34.58444444444444,
+      "full_ppl": 15.912297665809827,
+      "full_mean_nll": 2.7670922483783205,
+      "full_documents": 50000,
+      "full_prediction_tokens": 76930208,
+      "subset_ppl": 15.834676811355047,
+      "tail_ratio": 0.2,
+      "phase_schedule": [
+        {
+          "end": 19074,
+          "hold_schedule": {
+            "final_decay_ratio": 0.03333333333333333,
+            "first_decay_ratio": 0.13333333333333333,
+            "hold_ratio": 0.03333333333333333,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 1.0,
+          "start": 0,
+          "warmup_steps": 170
+        },
+        {
+          "end": 22889,
+          "hold_schedule": {
+            "final_decay_ratio": 0.03333333333333333,
+            "first_decay_ratio": 0.13333333333333333,
+            "hold_ratio": 0.03333333333333333,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 0.1,
+          "start": 19074,
+          "warmup_steps": 170
+        }
+      ],
+      "schedule_clock": "optimizer_updates",
+      "warmup_clock": "optimizer_updates",
+      "muon_lr": 0.005593716406714465,
+      "adamw_lr": 0.00016781149220143396,
+      "checkpoint_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+      "stop_reason": "training_token_target",
+      "wandb": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9d2b5f1a1ffc477f9be6b0862d36a15d",
+      "full_length_buckets": {
+        "eval/length_0_256_nll": 4024678.2812871933,
+        "eval/length_0_256_perplexity": 21.27740715776433,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 73433926.93286133,
+        "eval/length_1024_4096_perplexity": 16.34698956003713,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 39340903.0520401,
+        "eval/length_256_1024_perplexity": 16.80516404947743,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 96073473.95674324,
+        "eval/length_4096_inf_perplexity": 15.101002301116186,
+        "eval/length_4096_inf_prediction_tokens": 35389292
+      },
+      "sampled_training_windows": [
+        {
+          "start_b": 0,
+          "end_b": 1,
+          "logged_samples": 762,
+          "median_preclip_norm": 0.5380271673202515,
+          "fraction_samples_over_clip": 0.7349081364829396,
+          "median_tokens_per_second": 208747.73388528562
+        },
+        {
+          "start_b": 1,
+          "end_b": 1.5,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.5467936098575592,
+          "fraction_samples_over_clip": 0.8167539267015707,
+          "median_tokens_per_second": 208785.03646951585
+        },
+        {
+          "start_b": 1.5,
+          "end_b": 2.5,
+          "logged_samples": 763,
+          "median_preclip_norm": 0.5554252862930298,
+          "fraction_samples_over_clip": 0.872870249017038,
+          "median_tokens_per_second": 208736.52854909335
+        },
+        {
+          "start_b": 2.5,
+          "end_b": 3.1,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.6245412230491638,
+          "fraction_samples_over_clip": 0.9947643979057592,
+          "median_tokens_per_second": 208575.71524627646
+        }
+      ],
+      "sources": [
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/summary.json",
+          "bytes": 35365,
+          "sha256": "77a76fe1e500cc83683922b9cf7a40f64e8aa8f03d768114e6f606b571e5e72d"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/metrics.jsonl",
+          "bytes": 8662944,
+          "sha256": "66bdacf4d9f22dc2c77e835fe5aa333d6e0e562be075dd43bb114263d6b92a42"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/full-evaluation.json",
+          "bytes": 2526,
+          "sha256": "c138d6916285a87db113e086aa0439140750508d7e5e0e2f47c045fc2982755f"
+        }
+      ]
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "job_id": "556710",
+      "tokens": 3000107008,
+      "updates": 14312,
+      "allocation_h200_hours": 31.946666666666665,
+      "full_ppl": 15.21170256746107,
+      "full_mean_nll": 2.7220650373808475,
+      "full_documents": 50000,
+      "full_prediction_tokens": 76930208,
+      "subset_ppl": 15.213240094314846,
+      "tail_ratio": 0.4,
+      "phase_schedule": [
+        {
+          "end": 19074,
+          "hold_schedule": {
+            "final_decay_ratio": 0.06666666666666667,
+            "first_decay_ratio": 0.26666666666666666,
+            "hold_ratio": 0.06666666666666667,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 1.0,
+          "start": 0,
+          "warmup_steps": 170
+        },
+        {
+          "end": 22889,
+          "hold_schedule": {
+            "final_decay_ratio": 0.06666666666666667,
+            "first_decay_ratio": 0.26666666666666666,
+            "hold_ratio": 0.06666666666666667,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 0.1,
+          "start": 19074,
+          "warmup_steps": 170
+        }
+      ],
+      "schedule_clock": "nonpadding_tokens",
+      "warmup_clock": "nonpadding_tokens",
+      "muon_lr": 0.005593716406714465,
+      "adamw_lr": 0.00016781149220143396,
+      "checkpoint_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+      "stop_reason": "training_token_target",
+      "wandb": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/6ae9e9ddd2ad4dffb3c8fc3a5688143d",
+      "full_length_buckets": {
+        "eval/length_0_256_nll": 3922086.5607151985,
+        "eval/length_0_256_perplexity": 19.681997625344717,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 72347354.31402588,
+        "eval/length_1024_4096_perplexity": 15.684946035288888,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 38648349.53965759,
+        "eval/length_256_1024_perplexity": 15.990799528934414,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 94491239.10083771,
+        "eval/length_4096_inf_perplexity": 14.440715690951945,
+        "eval/length_4096_inf_prediction_tokens": 35389292
+      },
+      "sampled_training_windows": [
+        {
+          "start_b": 0,
+          "end_b": 1,
+          "logged_samples": 762,
+          "median_preclip_norm": 0.5376320779323578,
+          "fraction_samples_over_clip": 0.7401574803149606,
+          "median_tokens_per_second": 207712.07765229582
+        },
+        {
+          "start_b": 1,
+          "end_b": 1.5,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.5449347794055939,
+          "fraction_samples_over_clip": 0.8010471204188482,
+          "median_tokens_per_second": 207747.14414278508
+        },
+        {
+          "start_b": 1.5,
+          "end_b": 2.5,
+          "logged_samples": 191,
+          "median_preclip_norm": 0.29417064785957336,
+          "fraction_samples_over_clip": 0.03664921465968586,
+          "median_tokens_per_second": 245454.45322691058
+        },
+        {
+          "start_b": 2.5,
+          "end_b": 3.1,
+          "logged_samples": 97,
+          "median_preclip_norm": 0.2972341775894165,
+          "fraction_samples_over_clip": 0.041237113402061855,
+          "median_tokens_per_second": 245411.25486654634
+        }
+      ],
+      "sources": [
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/summary.json",
+          "bytes": 35527,
+          "sha256": "7bc39222479dfe870d6f21169a62b8ec92e737c432e1ddbecf94b22a4c1638ce"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/metrics.jsonl",
+          "bytes": 5629829,
+          "sha256": "4f363ea506c6cd479e44b93a37793384eade6eba367ae4d213195493ecebec02"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/full-evaluation.json",
+          "bytes": 2532,
+          "sha256": "4c9559e8d3104fb40450420da9554b80f8d4e760afa03e6a38ed209e0303cb22"
+        }
+      ]
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "job_id": "558510",
+      "tokens": 3000107008,
+      "updates": 14312,
+      "allocation_h200_hours": 31.753333333333334,
+      "full_ppl": 15.371304229874601,
+      "full_mean_nll": 2.7325024095051016,
+      "full_documents": 50000,
+      "full_prediction_tokens": 76930208,
+      "subset_ppl": 15.410731893855608,
+      "tail_ratio": 0.4,
+      "phase_schedule": [
+        {
+          "end": 13355,
+          "hold_schedule": {
+            "final_decay_ratio": 0.06666666666666667,
+            "first_decay_ratio": 0.26666666666666666,
+            "hold_ratio": 0.06666666666666667,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 1.0,
+          "start": 0,
+          "warmup_steps": 170
+        },
+        {
+          "end": 14312,
+          "hold_schedule": {
+            "final_decay_ratio": 0.06666666666666667,
+            "first_decay_ratio": 0.26666666666666666,
+            "hold_ratio": 0.06666666666666667,
+            "plateau_lr_ratio": 0.2
+          },
+          "peak_ratio": 0.1,
+          "start": 13355,
+          "warmup_steps": 170
+        }
+      ],
+      "schedule_clock": "optimizer_updates",
+      "warmup_clock": "optimizer_updates",
+      "muon_lr": 0.005593716406714465,
+      "adamw_lr": 0.00016781149220143396,
+      "checkpoint_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+      "stop_reason": "training_token_target",
+      "wandb": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/cba7b737a27141ba84ab7ec861b6fe73",
+      "full_length_buckets": {
+        "eval/length_0_256_nll": 3934189.0068888664,
+        "eval/length_0_256_perplexity": 19.86379869598214,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 72612827.0894165,
+        "eval/length_1024_4096_perplexity": 15.844179622667465,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 38784198.92208099,
+        "eval/length_256_1024_perplexity": 16.147369967014175,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 94880763.7053423,
+        "eval/length_4096_inf_perplexity": 14.600540442510482,
+        "eval/length_4096_inf_prediction_tokens": 35389292
+      },
+      "sampled_training_windows": [
+        {
+          "start_b": 0,
+          "end_b": 1,
+          "logged_samples": 762,
+          "median_preclip_norm": 0.5370422601699829,
+          "fraction_samples_over_clip": 0.7624671916010499,
+          "median_tokens_per_second": 208907.16543499735
+        },
+        {
+          "start_b": 1,
+          "end_b": 1.5,
+          "logged_samples": 382,
+          "median_preclip_norm": 0.5281951725482941,
+          "fraction_samples_over_clip": 0.7303664921465969,
+          "median_tokens_per_second": 208702.6328683801
+        },
+        {
+          "start_b": 1.5,
+          "end_b": 2.5,
+          "logged_samples": 191,
+          "median_preclip_norm": 0.33530187606811523,
+          "fraction_samples_over_clip": 0.041884816753926704,
+          "median_tokens_per_second": 246606.28433998246
+        },
+        {
+          "start_b": 2.5,
+          "end_b": 3.1,
+          "logged_samples": 97,
+          "median_preclip_norm": 0.3686125874519348,
+          "fraction_samples_over_clip": 0.07216494845360824,
+          "median_tokens_per_second": 246737.8277911599
+        }
+      ],
+      "sources": [
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/summary.json",
+          "bytes": 35564,
+          "sha256": "c66b7c64d5e0ea3c61217f18acf357c5356c003644c52be1e9d8aa0b598985f2"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/metrics.jsonl",
+          "bytes": 5692832,
+          "sha256": "14a0d697565e4d552558443358f7464b0d3fa083474ba9299fb929b8a2d1db97"
+        },
+        {
+          "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/full-evaluation.json",
+          "bytes": 2536,
+          "sha256": "5d6d90903f1e2d369e30ef204d08d47523760c146ac4320a91e83ea414e99a57"
+        }
+      ]
+    }
+  ],
+  "curves": [
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 2288,
+      "tokens": 299892736,
+      "ppl": 37.01490245231041,
+      "mean_nll": 3.6113206005359335
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 4576,
+      "tokens": 599785472,
+      "ppl": 30.689854463643663,
+      "mean_nll": 3.4239321264778027
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 6864,
+      "tokens": 899678208,
+      "ppl": 28.15355147351851,
+      "mean_nll": 3.3376735090974585
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 9152,
+      "tokens": 1199570944,
+      "ppl": 27.074480604142877,
+      "mean_nll": 3.298591609107216
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 11440,
+      "tokens": 1499463680,
+      "ppl": 24.338583025850383,
+      "mean_nll": 3.192062869999956
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 13728,
+      "tokens": 1799356416,
+      "ppl": 22.37153409204076,
+      "mean_nll": 3.107789351248154
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 16016,
+      "tokens": 2099249152,
+      "ppl": 20.129828574846062,
+      "mean_nll": 3.002202723711121
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 18304,
+      "tokens": 2399141888,
+      "ppl": 17.818652608676857,
+      "mean_nll": 2.880245807998632
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 20592,
+      "tokens": 2699034624,
+      "ppl": 17.415608073426682,
+      "mean_nll": 2.8573668198564937
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 22880,
+      "tokens": 2998927360,
+      "ppl": 15.53690047481415,
+      "mean_nll": 2.7432178704006143
+    },
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "step": 22889,
+      "tokens": 3000107008,
+      "ppl": 15.536772715200494,
+      "mean_nll": 2.7432096473873337
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 2288,
+      "tokens": 299892736,
+      "ppl": 37.11467725324557,
+      "mean_nll": 3.6140125046741116
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 4576,
+      "tokens": 599785472,
+      "ppl": 30.69720555000671,
+      "mean_nll": 3.424171626020428
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 6864,
+      "tokens": 899678208,
+      "ppl": 27.977836528304056,
+      "mean_nll": 3.331412644171491
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 9152,
+      "tokens": 1199570944,
+      "ppl": 25.681647259091914,
+      "mean_nll": 3.245776622367787
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 11440,
+      "tokens": 1499463680,
+      "ppl": 22.753627910116446,
+      "mean_nll": 3.1247246012597447
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 13728,
+      "tokens": 1799356416,
+      "ppl": 20.34364656203335,
+      "mean_nll": 3.012768654887571
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 16016,
+      "tokens": 2099249152,
+      "ppl": 18.019065456587136,
+      "mean_nll": 2.891430389380686
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 18304,
+      "tokens": 2399141888,
+      "ppl": 16.51208061379523,
+      "mean_nll": 2.804092271421151
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 20592,
+      "tokens": 2699034624,
+      "ppl": 16.16674030951842,
+      "mean_nll": 2.7829560644928963
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 22880,
+      "tokens": 2998927360,
+      "ppl": 15.224253425596427,
+      "mean_nll": 2.722889776308032
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "step": 22889,
+      "tokens": 3000107008,
+      "ppl": 15.223860644913243,
+      "mean_nll": 2.7228639763072637
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 2288,
+      "tokens": 299892736,
+      "ppl": 37.022027801793605,
+      "mean_nll": 3.611513081490526
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 4576,
+      "tokens": 599785472,
+      "ppl": 30.6916738423979,
+      "mean_nll": 3.4239914074636295
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 6864,
+      "tokens": 899678208,
+      "ppl": 27.95865225157349,
+      "mean_nll": 3.3307267134703973
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 9152,
+      "tokens": 1199570944,
+      "ppl": 26.959441501747857,
+      "mean_nll": 3.2943335700189915
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 11440,
+      "tokens": 1499463680,
+      "ppl": 25.783619270268737,
+      "mean_nll": 3.2497393782805024
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 13728,
+      "tokens": 1799356416,
+      "ppl": 25.37527787523905,
+      "mean_nll": 3.2337753880503293
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 16016,
+      "tokens": 2099249152,
+      "ppl": 23.028937016154014,
+      "mean_nll": 3.1367515562825052
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 18304,
+      "tokens": 2399141888,
+      "ppl": 17.988229459496836,
+      "mean_nll": 2.889717625081094
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 20592,
+      "tokens": 2699034624,
+      "ppl": 16.630131706819668,
+      "mean_nll": 2.8112162130062868
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 22880,
+      "tokens": 2998927360,
+      "ppl": 15.835060680318364,
+      "mean_nll": 2.7622265120210483
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "step": 22889,
+      "tokens": 3000107008,
+      "ppl": 15.834676811355047,
+      "mean_nll": 2.7622022700162994
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 1431,
+      "tokens": 187564032,
+      "ppl": 45.389049421476834,
+      "mean_nll": 3.8152708737832666
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 2288,
+      "tokens": 299892736,
+      "ppl": 37.027860247713015,
+      "mean_nll": 3.611670608965181
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 3719,
+      "tokens": 487456768,
+      "ppl": 32.268819152023084,
+      "mean_nll": 3.474101412646372
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 4577,
+      "tokens": 599916544,
+      "ppl": 30.56989984157747,
+      "mean_nll": 3.420015859534192
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 6008,
+      "tokens": 787480576,
+      "ppl": 28.886973018535368,
+      "mean_nll": 3.363390732890973
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 6866,
+      "tokens": 899940352,
+      "ppl": 28.087149065988974,
+      "mean_nll": 3.335312143120584
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 8297,
+      "tokens": 1087504384,
+      "ppl": 27.342265070674898,
+      "mean_nll": 3.308433676096518
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 9155,
+      "tokens": 1199964160,
+      "ppl": 26.9718289384531,
+      "mean_nll": 3.2947929486622898
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 10586,
+      "tokens": 1387528192,
+      "ppl": 26.39397042572543,
+      "mean_nll": 3.2731355911016795
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 11444,
+      "tokens": 1499987968,
+      "ppl": 25.829499328877382,
+      "mean_nll": 3.251517223601167
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 12017,
+      "tokens": 1800011776,
+      "ppl": 19.06720833079597,
+      "mean_nll": 2.9479700182719464
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 12590,
+      "tokens": 2100035584,
+      "ppl": 17.040224485764245,
+      "mean_nll": 2.83557669536159
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 13163,
+      "tokens": 2400059392,
+      "ppl": 15.93017528772119,
+      "mean_nll": 2.7682151274848446
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 13737,
+      "tokens": 2700083200,
+      "ppl": 15.520512970839823,
+      "mean_nll": 2.7421625664536933
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "step": 14312,
+      "tokens": 3000107008,
+      "ppl": 15.213240094314846,
+      "mean_nll": 2.722166107537145
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 1431,
+      "tokens": 187564032,
+      "ppl": 45.26071794729445,
+      "mean_nll": 3.8124395028125546
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 2288,
+      "tokens": 299892736,
+      "ppl": 37.144580605249935,
+      "mean_nll": 3.6148178817943006
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 3719,
+      "tokens": 487456768,
+      "ppl": 32.326069885654064,
+      "mean_nll": 3.4758740218875896
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 4577,
+      "tokens": 599916544,
+      "ppl": 30.491204065482055,
+      "mean_nll": 3.417438250724929
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 6008,
+      "tokens": 787480576,
+      "ppl": 28.747652872402277,
+      "mean_nll": 3.3585561246899065
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 6866,
+      "tokens": 899940352,
+      "ppl": 27.993481712261076,
+      "mean_nll": 3.3319716870833354
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 8297,
+      "tokens": 1087504384,
+      "ppl": 26.884342125226436,
+      "mean_nll": 3.291544040006005
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 9155,
+      "tokens": 1199964160,
+      "ppl": 25.009713645748903,
+      "mean_nll": 3.219264295233773
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 10586,
+      "tokens": 1387528192,
+      "ppl": 21.68374677243785,
+      "mean_nll": 3.076562983246424
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 11444,
+      "tokens": 1499987968,
+      "ppl": 19.714866195549373,
+      "mean_nll": 2.9813729803701845
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 12017,
+      "tokens": 1800011776,
+      "ppl": 17.531413177426614,
+      "mean_nll": 2.863994310482953
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 12590,
+      "tokens": 2100035584,
+      "ppl": 16.737786365279472,
+      "mean_nll": 2.817668820073587
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 13163,
+      "tokens": 2400059392,
+      "ppl": 15.876900152307359,
+      "mean_nll": 2.7648652322494587
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 13737,
+      "tokens": 2700083200,
+      "ppl": 15.764976573419965,
+      "mean_nll": 2.7577908070092385
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "step": 14312,
+      "tokens": 3000107008,
+      "ppl": 15.410731893855608,
+      "mean_nll": 2.735064142938488
+    }
+  ],
+  "historical_recipe": [
+    {
+      "candidate": "short-baseline",
+      "tokens": 388759552,
+      "ppl": 30.152951114365838,
+      "mean_nll": 3.4062827994566485
+    },
+    {
+      "candidate": "promote-adam20",
+      "tokens": 388759552,
+      "ppl": 28.108842407109453,
+      "mean_nll": 3.336084203249052
+    },
+    {
+      "candidate": "promote-muon13",
+      "tokens": 388759552,
+      "ppl": 29.28551813852278,
+      "mean_nll": 3.377093132351687
+    },
+    {
+      "candidate": "combo-merged-reranked",
+      "tokens": 388759552,
+      "ppl": 28.318536867834656,
+      "mean_nll": 3.3435166032194994
+    },
+    {
+      "candidate": "seed43-baseline",
+      "tokens": 388759552,
+      "ppl": 29.913735300478745,
+      "mean_nll": 3.3983177495143835
+    },
+    {
+      "candidate": "seed43-candidate",
+      "tokens": 388759552,
+      "ppl": 28.123098847284506,
+      "mean_nll": 3.33659126169884
+    },
+    {
+      "candidate": "filtered",
+      "tokens": 388759552,
+      "ppl": 34.67433895674335,
+      "mean_nll": 3.545999902046381
+    },
+    {
+      "candidate": "batch8",
+      "tokens": 388759552,
+      "ppl": 28.30283636840938,
+      "mean_nll": 3.3429620246591325
+    },
+    {
+      "candidate": "batch32",
+      "tokens": 388759552,
+      "ppl": 36.346594026596556,
+      "mean_nll": 3.593100500183593
+    },
+    {
+      "candidate": "wd003",
+      "tokens": 388759552,
+      "ppl": 32.25724110877911,
+      "mean_nll": 3.473742548543359
+    },
+    {
+      "candidate": "wd005",
+      "tokens": 388759552,
+      "ppl": 31.41099691250688,
+      "mean_nll": 3.4471580517449794
+    },
+    {
+      "candidate": "clip-late",
+      "tokens": 388759552,
+      "ppl": 30.188104800546405,
+      "mean_nll": 3.4074479660128065
+    },
+    {
+      "candidate": "clip-groups",
+      "tokens": 388759552,
+      "ppl": 30.222513801473237,
+      "mean_nll": 3.4085871367561023
+    }
+  ],
+  "batch1b": [
+    {
+      "candidate": "bs-50-fixed",
+      "job_id": "555278",
+      "tokens": 1000079360,
+      "global_step": 4776,
+      "mean_nll": 2.9946669425016883,
+      "perplexity": 19.978704724227274,
+      "delta_mean_nll_vs_control": -0.023082132065012306,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/8abd6431c25048e1aa3e19d44648fcbd"
+    },
+    {
+      "candidate": "bs-50-scaled",
+      "job_id": "555279",
+      "tokens": 1000079360,
+      "global_step": 4776,
+      "mean_nll": 3.001783706307691,
+      "perplexity": 20.121395593251556,
+      "delta_mean_nll_vs_control": -0.015965368259009516,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/196b3b523fde4ffd9872f5ec7dd2445c"
+    },
+    {
+      "candidate": "bs-70-fixed",
+      "job_id": "555489",
+      "tokens": 1000079360,
+      "global_step": 5920,
+      "mean_nll": 3.052049966029177,
+      "perplexity": 21.158674558780785,
+      "delta_mean_nll_vs_control": 0.03430089146247628,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/5ce1f8f2a8ab44788e96573a4ee312c6"
+    },
+    {
+      "candidate": "bs-70-scaled",
+      "job_id": "555490",
+      "tokens": 1000079360,
+      "global_step": 5920,
+      "mean_nll": 3.055684041339406,
+      "perplexity": 21.235706661045448,
+      "delta_mean_nll_vs_control": 0.03793496677270536,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/8e027fbcdce14cfa88e5cd5653221dc7"
+    },
+    {
+      "candidate": "bs-predecay-fixed",
+      "job_id": "555440",
+      "tokens": 1000079360,
+      "global_step": 5729,
+      "mean_nll": 3.040350458578595,
+      "perplexity": 20.91257094087579,
+      "delta_mean_nll_vs_control": 0.0226013840118946,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/e628c609477f4ff3a65b6ef83474d66c"
+    },
+    {
+      "candidate": "bs-predecay-scaled",
+      "job_id": "555441",
+      "tokens": 1000079360,
+      "global_step": 5729,
+      "mean_nll": 3.044257543620448,
+      "perplexity": 20.994437960545778,
+      "delta_mean_nll_vs_control": 0.026508469053747596,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/3739f0614b894fd58ca8322684b58485"
+    },
+    {
+      "candidate": "control",
+      "job_id": "555139",
+      "tokens": 1000079360,
+      "global_step": 7630,
+      "mean_nll": 3.0177490745667006,
+      "perplexity": 20.445219186910613,
+      "delta_mean_nll_vs_control": 0.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/75e1539a4611483a9d229f8dab9b811d"
+    },
+    {
+      "candidate": "lr001",
+      "job_id": "555140",
+      "tokens": 1000079360,
+      "global_step": 7630,
+      "mean_nll": 3.0211231929603013,
+      "perplexity": 20.514320289122576,
+      "delta_mean_nll_vs_control": 0.003374118393600689,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/56a6fe3640ea4fd58fc41b3b09903843"
+    },
+    {
+      "candidate": "normuon",
+      "job_id": "555141",
+      "tokens": 1000079360,
+      "global_step": 7630,
+      "mean_nll": 3.028190251860639,
+      "perplexity": 20.659809684451144,
+      "delta_mean_nll_vs_control": 0.010441177293938342,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/de8ba60a219049729c5ca81540b7be80"
+    }
+  ],
+  "comparisons_vs_best": [
+    {
+      "run_id": "raw-filtered-3b-20261015-raw",
+      "delta_nll": 0.023918959278435015,
+      "relative_ppl_percent": 2.420731202764048
+    },
+    {
+      "run_id": "raw3b-sota-20261015",
+      "delta_nll": 0.004331475943198715,
+      "relative_ppl_percent": 0.43408703440983576
+    },
+    {
+      "run_id": "raw3b-sota-wsd20-20261015",
+      "delta_nll": 0.04502721099747298,
+      "relative_ppl_percent": 4.605632375743274
+    },
+    {
+      "run_id": "raw3b-bs64-wsd40-20261016",
+      "delta_nll": 0.0,
+      "relative_ppl_percent": 0.0
+    },
+    {
+      "run_id": "raw3b-bs64-stepwsd40-20261016",
+      "delta_nll": 0.010437372124254107,
+      "relative_ppl_percent": 1.0492031493892773
+    }
+  ],
+  "best_vs_sota": {
+    "relative_ppl_reduction_percent": 0.4322108630918531,
+    "relative_cost_reduction_percent": 7.970040330324557,
+    "long_document_share_of_nll_gain": 0.851158118495651
+  }
+}

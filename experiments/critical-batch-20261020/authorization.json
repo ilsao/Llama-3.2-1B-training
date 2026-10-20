@@ -1,0 +1,82 @@
+{
+  "approved": true,
+  "user_quote": "初篩 1B tokens 吧，開始。",
+  "approved_at_utc": "2026-10-20T05:36:46.327055+00:00",
+  "scope": "Exactly one correctness gate and C0/C1/C2 pilot allocation, fresh seed42; no retry/resume/requeue, formal promotion, cleanup or upload",
+  "configs": {
+    "critical-batch-20261020-c0-shadow": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "critical-batch-20261020-c1-cbs-half": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25",
+    "critical-batch-20261020-c2-cbs-one": "86a31b0551446bfba6ef5a27f2c1142821f9a69d2c2adea91abb6b7e38829830",
+    "critical-batch-20261020-gpu-gate": "7bf82cc111bba474a5eb58ac57bde845c0a8d5561470f728834c13b73d4c08e4"
+  },
+  "allocations": [
+    {
+      "run_id": "critical-batch-20261020-c0-shadow",
+      "config_digest": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+      "seconds": 7200,
+      "gpu_count": 8,
+      "cpu_count": 8,
+      "max_h200_hours": 16,
+      "target_tokens": 1000079360
+    },
+    {
+      "run_id": "critical-batch-20261020-c1-cbs-half",
+      "config_digest": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25",
+      "seconds": 7200,
+      "gpu_count": 8,
+      "cpu_count": 8,
+      "max_h200_hours": 16,
+      "target_tokens": 1000079360
+    },
+    {
+      "run_id": "critical-batch-20261020-c2-cbs-one",
+      "config_digest": "86a31b0551446bfba6ef5a27f2c1142821f9a69d2c2adea91abb6b7e38829830",
+      "seconds": 7200,
+      "gpu_count": 8,
+      "cpu_count": 8,
+      "max_h200_hours": 16,
+      "target_tokens": 1000079360
+    },
+    {
+      "run_id": "critical-batch-20261020-gpu-gate",
+      "config_digest": "7bf82cc111bba474a5eb58ac57bde845c0a8d5561470f728834c13b73d4c08e4",
+      "seconds": 600,
+      "gpu_count": 8,
+      "cpu_count": 8,
+      "max_h200_hours": 1.3333333333333333,
+      "target_tokens": 599916544
+    }
+  ],
+  "source_seal_sha256": "a76abcef8f0b16c10cc48c8cd541a347d38ced09b82d2717ac8527af466f6491",
+  "campaign_cap_h200_hours": 49.333333333333336,
+  "shared_ledger_before_h200_hours": 1435.7605555555556,
+  "shared_ledger_cap_h200_hours": 1485.0938888888888,
+  "methods_study_before_h200_hours": 240.88972222222222,
+  "methods_study_cap_h200_hours": 290.22305555555556,
+  "preserved_formal_count": 19,
+  "preserved_formal_run_ids": [
+    "baseline-fa3-20261009-baseline",
+    "baseline-muon-wsd-raw-20261009",
+    "be60p20-lrscaled-2b-20261010",
+    "horizon-wsd-20261014-final-resplit",
+    "horizon-wsd-20261014-final-standard",
+    "init-recipe-20261014-final-2b",
+    "init-recipe-20261014-followup-rh-resplit-2b",
+    "kd3b-hidden8-20261019-seed42",
+    "kd6b-r5-20261020-seed42",
+    "muon-wsd-filtered-2b-20261009",
+    "raw-filtered-3b-20261015-raw",
+    "raw3b-bs64-stepwsd40-20261016",
+    "raw3b-bs64-wsd40-20261016",
+    "raw3b-sota-20261015",
+    "raw3b-sota-wsd20-20261015",
+    "raw4b-intradoc-normuon-20261017",
+    "raw4b-normuon-adam2x-20261017",
+    "raw4b-normuon-adam2x-step30-20261018",
+    "raw6b-normuon-adam2x-20261018"
+  ],
+  "preserved_allocation_count": 284,
+  "concurrent_pilot_gpus_max": 24,
+  "automatic_retry": false,
+  "training_checkpoint_load": false
+}

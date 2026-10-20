@@ -1,0 +1,48 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-adam20/checkpoints/checkpoint-001145-9d3b54671287",
+  "checkpoint_complete_sha256": "37fe061e9b3a36a9b5b87a3c5578517920e789cca42b981ac49380fd96691303",
+  "config_sha256": "7a0e56b00d20f05b0ed76cd23c55c05c6816107f08d78dd0e6f8a3c44ed31754",
+  "cursor": 18320,
+  "ema_evaluations": {},
+  "evaluation": {
+    "eval/documents": 1000,
+    "eval/length_0_256_nll": 132629.53107833862,
+    "eval/length_0_256_perplexity": 101.71800535212661,
+    "eval/length_0_256_prediction_tokens": 28694,
+    "eval/length_1024_4096_nll": 2258786.319091797,
+    "eval/length_1024_4096_perplexity": 60.4889689889587,
+    "eval/length_1024_4096_prediction_tokens": 550593,
+    "eval/length_256_1024_nll": 1110885.6758422852,
+    "eval/length_256_1024_perplexity": 66.3535651600348,
+    "eval/length_256_1024_prediction_tokens": 264812,
+    "eval/length_4096_inf_nll": 2413893.7524414062,
+    "eval/length_4096_inf_perplexity": 44.7097956394021,
+    "eval/length_4096_inf_prediction_tokens": 635203,
+    "eval/nll": 5916195.278453827,
+    "eval/perplexity": 54.56078524846893,
+    "eval/prediction_tokens": 1479302,
+    "eval/sequences": 1044
+  },
+  "evaluation_identity": {
+    "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+    "evaluation_indices_sha256": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3",
+    "evaluation_loss": "independent documents, stride 8191; each within-document target once",
+    "pad_token_id": 128001
+  },
+  "full_evaluation": null,
+  "job_id": "542111",
+  "run_id": "init-recipe-20261014-adam20",
+  "step": 1145,
+  "tokens": 150077440,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/0b5f98439c9a414cb11a82fede5edfeb",
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

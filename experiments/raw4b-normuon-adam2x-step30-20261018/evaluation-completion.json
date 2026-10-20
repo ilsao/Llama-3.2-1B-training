@@ -1,0 +1,15 @@
+{
+  "additional_9k_ppl": 14.004185024537982,
+  "allocation_h200_hours": 45.32666666666667,
+  "checked_at": "2026-10-18T10:10:19.797008+00:00",
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/export-step-19080-0bda0231",
+  "combined_10k_ppl": 13.98182063803591,
+  "combined_method": "exp(sum NLL / sum prediction tokens), disjoint fixed slots 0:1000 and 1000:10000",
+  "combined_nll": 39951782.76574087,
+  "combined_prediction_tokens": 15146114,
+  "end_taipei": "2026-10-18T18:09:41",
+  "fixed_1k_ppl": 13.776884825494228,
+  "job_id": "565259",
+  "resolution": "Original W&B finish returned; original evaluation completed and W&B synced; batch exited normally. No recovery evaluation or cancellation needed. No additional allocation submitted.",
+  "slurm_state": "COMPLETED"
+}

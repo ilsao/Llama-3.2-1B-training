@@ -1,0 +1,12 @@
+{
+  "alloc_tres": "",
+  "elapsed_seconds": 0,
+  "end": "2026-10-17T15:04:19",
+  "gpu_count": 0,
+  "gpu_type_evidence": "typed AllocTRES",
+  "h200_hours": 0.0,
+  "job_id": "561910",
+  "nodes": "None assigned",
+  "start": "None",
+  "state": "CANCELLED by 44781"
+}

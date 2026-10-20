@@ -1,0 +1,40 @@
+{
+  "global_batch": 16,
+  "inputs_per_update": 131072,
+  "records": [
+    {
+      "compute_seconds": 1.1830098032951355,
+      "optimizer_seconds": 0.1352518768310547,
+      "run": "methods-parallel-20261019-k1-seed42",
+      "samples": 100,
+      "steps": [
+        3015,
+        3114
+      ],
+      "update_seconds": 1.2142357520060614
+    },
+    {
+      "compute_seconds": 0.6386338174343109,
+      "optimizer_seconds": 0.12626529693603517,
+      "run": "ppl-next-20261017-B-seed42",
+      "samples": 100,
+      "steps": [
+        3015,
+        3114
+      ],
+      "update_seconds": 0.6707354299724102
+    },
+    {
+      "compute_seconds": 0.7704640328884125,
+      "optimizer_seconds": 0.12753206634521486,
+      "run": "methods-parallel-20261019-c1-seed42",
+      "samples": 100,
+      "steps": [
+        3015,
+        3114
+      ],
+      "update_seconds": 0.799397433467675
+    }
+  ],
+  "source": "Existing run logs, historical N0 timing not contemporaneous"
+}

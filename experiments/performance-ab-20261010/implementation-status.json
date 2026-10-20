@@ -1,0 +1,47 @@
+{
+  "actual_validation_h200_hours": 2.6666666666666665,
+  "automatic_retry": false,
+  "benchmark_job_ids": {
+    "A": "524312",
+    "B": "524313"
+  },
+  "benchmark_states": {
+    "A": "COMPLETED/reconciled",
+    "B": "COMPLETED/reconciled"
+  },
+  "benchmarks_completed": true,
+  "benchmarks_submitted": true,
+  "controller_observation": "Slurm controller recovered; runtime COMPLETED and reconciled",
+  "end_to_end_speedup": 1.331280318988045,
+  "gpu_correctness": "passed",
+  "gpu_measurements_available": true,
+  "historical_uncertain_reservation_preserved": true,
+  "implemented": true,
+  "observer_sha256": "cee1955c3e830f68d5adea3aae7b7ea0c2209e5a51145f11ef059e6dfa588dcf",
+  "recommended": true,
+  "relative_perplexity_difference": 0.0007131606799648527,
+  "results": "results.json",
+  "runtime_accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 474,
+    "end": "2026-10-10T22:00:12",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "be4649a9e653f0e259c3943599158da13c9aa62764c6f63964c73b917681d00e",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 1.0533333333333332,
+    "job_id": "524270",
+    "nodes": "25a-hgpn064",
+    "start": "2026-10-10T21:52:18",
+    "state": "COMPLETED"
+  },
+  "runtime_job_id": "524270",
+  "runtime_recovery_reservation": "performance-4c259e3776334b72989d21dd181a0e9f",
+  "runtime_reservation": "performance-1ddc24fb79124b6a924beb2c3e179861",
+  "runtime_run_id": "performance-ab-20261010-runtime-recovery-1",
+  "slurm_submission_error": "sbatch: error: Batch job submission failed: Socket timed out on send/recv operation\n",
+  "source_b_seal_sha256": "02df98672c5aff65ff92d608638aadbd32c33dd74f50b38c05dddf0637540f55",
+  "static_tests_passed": 38,
+  "syntax_checks_passed": true
+}

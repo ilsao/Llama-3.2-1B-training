@@ -1,0 +1,75 @@
+{
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 42,
+  "delta_nll": -0.026496596713433792,
+  "job_id": "562178",
+  "note": "Reused canonical validation subset; document uncertainty does not measure seed variance",
+  "paired_document_ci95": [
+    -0.027393472860530992,
+    -0.02544222659170841
+  ],
+  "prefix128": {
+    "A": {
+      "nll": 3686199.045463562,
+      "prediction_tokens": 1116891
+    },
+    "B": {
+      "nll": 3644598.079164505,
+      "prediction_tokens": 1116891
+    }
+  },
+  "records": {
+    "A": {
+      "eval/documents": 9000,
+      "eval/length_0_256_nll": 729263.4453573227,
+      "eval/length_0_256_perplexity": 23.80078045398402,
+      "eval/length_0_256_prediction_tokens": 230072,
+      "eval/length_1024_4096_nll": 14410697.576538086,
+      "eval/length_1024_4096_perplexity": 19.368844328530113,
+      "eval/length_1024_4096_prediction_tokens": 4862457,
+      "eval/length_256_1024_nll": 7455155.915313721,
+      "eval/length_256_1024_perplexity": 19.60951883978559,
+      "eval/length_256_1024_prediction_tokens": 2505080,
+      "eval/length_4096_inf_nll": 17964253.73057556,
+      "eval/length_4096_inf_perplexity": 19.296104913193723,
+      "eval/length_4096_inf_prediction_tokens": 6069203,
+      "eval/nll": 40559370.66778469,
+      "eval/perplexity": 19.447670030337214,
+      "eval/prediction_tokens": 13666812,
+      "eval/sequences": 9405,
+      "evaluation_slots": [
+        1000,
+        10000
+      ],
+      "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261017-A-seed42/export-step-4775-08c5ce6f",
+      "original_subset_identity": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3"
+    },
+    "B": {
+      "eval/documents": 9000,
+      "eval/length_0_256_nll": 720429.4803285599,
+      "eval/length_0_256_perplexity": 22.904235470505657,
+      "eval/length_0_256_prediction_tokens": 230072,
+      "eval/length_1024_4096_nll": 14275339.729980469,
+      "eval/length_1024_4096_perplexity": 18.8371027833379,
+      "eval/length_1024_4096_prediction_tokens": 4862457,
+      "eval/length_256_1024_nll": 7375564.403503418,
+      "eval/length_256_1024_perplexity": 18.996277891051328,
+      "eval/length_256_1024_prediction_tokens": 2505080,
+      "eval/length_4096_inf_nll": 17825913.048049927,
+      "eval/length_4096_inf_perplexity": 18.861246701458555,
+      "eval/length_4096_inf_prediction_tokens": 6069203,
+      "eval/nll": 40197246.66186237,
+      "eval/perplexity": 18.939139871413474,
+      "eval/prediction_tokens": 13666812,
+      "eval/sequences": 9405,
+      "evaluation_slots": [
+        1000,
+        10000
+      ],
+      "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261017-B-seed42/export-step-4775-909710e7",
+      "original_subset_identity": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3"
+    }
+  },
+  "status": "complete",
+  "winner": "B"
+}

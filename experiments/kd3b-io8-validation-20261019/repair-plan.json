@@ -1,0 +1,23 @@
+{
+  "original_jobs": {
+    "producer": "575177",
+    "consumer": "575178"
+  },
+  "original_cost_h200_hours": 0.26666666666666666,
+  "failure": "Missing own-role READY publication wait on nonzero ranks before reading own ready.json",
+  "fix": "Each rank waits for both producer and consumer READY files before reading either; retain atomic publication",
+  "new_allocations": 2,
+  "seconds_per_allocation": 1080,
+  "gpus_per_allocation": 8,
+  "cpus_per_allocation": 8,
+  "replacement_max_h200_hours": 4.8,
+  "logical_pair_max_h200_hours_including_failure": 5.066666666666666,
+  "original_logical_pair_cap_h200_hours": 5.333333333333333,
+  "same_validation_configs": true,
+  "fresh_random_benchmark_weights": true,
+  "weight_updates": false,
+  "training_checkpoint_load": false,
+  "old_artifacts_preserved": true,
+  "submission_status": "not_submitted",
+  "requires_explicit_retry_approval": true
+}

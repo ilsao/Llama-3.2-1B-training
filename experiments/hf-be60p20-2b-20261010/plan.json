@@ -1,0 +1,32 @@
+{
+  "allocation_seconds": 1800,
+  "approved_utc": "2026-10-10T12:24:02.987733+00:00",
+  "automatic_retry": false,
+  "automatic_review": {
+    "action": "Submit publication job that uploads weights and metadata to public HF repository",
+    "decision": "rejected",
+    "reason": "Trusted user message has not explicitly specified this public repository and full payload",
+    "recorded_utc": "2026-10-10T12:20:54.385308+00:00"
+  },
+  "batch_script": "slurm/hf-be60p20-upload.sbatch",
+  "configuration": "configs/hf-be60p20-upload-20261010.json",
+  "cpus": 8,
+  "expected_parent_commit": "0b54c9d826c765cb0e3d75494b00e898d04f882e",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/export-step-15259-036f2ed7",
+  "gpus": 1,
+  "hf_repository_visibility": "Preserve existing public ungated repository; require expected parent HEAD; preserve Git history.",
+  "job_id": null,
+  "lightweight_validation": "Syntax and complete-endpoint rejection checks passed",
+  "model_card_sha256": "012a1170e2d5bc1ed7c7f8cc22620c3716df2934074ba89b8d60fa9d32dc3f62",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "model_validation": "Reuse completed compute-node HF reload verification; verify export index, checksums, anonymous remote model-file metadata and public config/tokenizer access in publication job.",
+  "parent_run": "be60p20-lrscaled-2b-20261010",
+  "payload_manifest": "experiments/hf-be60p20-2b-20261010/payload-manifest.json",
+  "publication_id": "hf-be60p20-2b-20261010",
+  "publication_worker": "slurm/hf_be60p20_upload.py",
+  "reservation": null,
+  "reserved_h200_hours": 0.5,
+  "status": "approved_for_submission",
+  "training": false,
+  "user_authorization": "使用者在確認公開 asciibase64/Llama-3.2-1B-dolma3_mix 與清單中完整 15 個檔案後明確回覆「傳」。"
+}

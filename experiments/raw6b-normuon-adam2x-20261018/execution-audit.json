@@ -1,0 +1,15 @@
+{
+  "data_tail": "verified7900 valid tokens+292 padding in final old row; next canonical document cursor3972824; run-local repack keeps original files and all historical nonpadding contents",
+  "gpu_checks": "scheduled within same approved allocation; not yet run",
+  "source_template": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-20261017/source",
+  "static_tests_passed": 6,
+  "training_from_checkpoint": false,
+  "unchanged_core_files": {
+    "attention_backend.py": "9bf9cc4ac7909c129fa9cff1473ff193ac762040a8aa0a10d299f0f5308dc87d",
+    "batch3b_runtime.py": "d8f8c37f74f4ec82bcaa79ec9c8b31e995302e02b5e3340a86a06acc0a21c577",
+    "dataset.py": "5a14f3f63951fd7aef16048f8b40c2016bc518f29e0de1bfb77445bbf41f9e55",
+    "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
+    "ppl_optimizer.py": "89f9f1cb57213a812b3cf8e033c1d8a6abe7dcf01270dda3bfb5fdb2e159f287",
+    "recipe_runtime.py": "5d322e54e2737d3f9f419054765b123d3a0e744b3ec4eae4049f92099fec45b4"
+  }
+}

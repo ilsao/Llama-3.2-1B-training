@@ -1,0 +1,10 @@
+{
+  "unit_tests_passed": 13,
+  "worker_entrypoint_missing_job_record": "passed",
+  "worker_entrypoint_explicit_job_record": "passed",
+  "python_ast_passed": true,
+  "sbatch_syntax_passed": true,
+  "source_seal_passed": true,
+  "compiled_cuda_smoke": "not yet run",
+  "new_allocations_submitted": []
+}

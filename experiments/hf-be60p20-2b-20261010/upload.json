@@ -1,0 +1,94 @@
+{
+  "commit_url": "https://huggingface.co/asciibase64/Llama-3.2-1B-dolma3_mix/commit/38fa239d83ee53409cec8d7b78179915fe4e1bae",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/export-step-15259-036f2ed7",
+  "finished_utc": "2026-10-10T12:30:33.608087+00:00",
+  "global_step": 15259,
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_run": "be60p20-lrscaled-2b-20261010",
+  "perplexity": 17.74755488037505,
+  "public_unauthenticated_access": true,
+  "public_weight_shard_access_verified": true,
+  "remote_config_tokenizer_load_verified": true,
+  "remote_file_checksums_verified": true,
+  "revision": "38fa239d83ee53409cec8d7b78179915fe4e1bae",
+  "slurm_job_id": "523972",
+  "status": "complete",
+  "training_tokens": 2000027648,
+  "upload_checksums": {
+    "LICENSE.txt": {
+      "git_sha1": "085b47c1575cb889b7024030e60b78f54f0b8c9e",
+      "sha256": "0b4284c1f87029e67654c7953afa16279961632cf73dcfe33374c4c2f298fa35",
+      "size": 7712
+    },
+    "NOTICE": {
+      "git_sha1": "be377ceb486e76ce39475663ef8323d7403bb4a5",
+      "sha256": "3bc2d1a6b360a03d172058198631b931c9aadf01650892fb0d25b93c6b8f0025",
+      "size": 116
+    },
+    "README.md": {
+      "git_sha1": "232bb08e2d1134e4f6c2c2df9ea930d0ad653311",
+      "sha256": "012a1170e2d5bc1ed7c7f8cc22620c3716df2934074ba89b8d60fa9d32dc3f62",
+      "size": 4279
+    },
+    "config.json": {
+      "git_sha1": "dbe98aff8354a0c7b0d1672e0a19e632119b149a",
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+      "size": 838
+    },
+    "generation_config.json": {
+      "git_sha1": "e381c682311b55a600b6c588d39957bbed3dd069",
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+      "size": 143
+    },
+    "model-00001-of-00003.safetensors": {
+      "git_sha1": "51fd5f2c1db3bf7cdf11a7b83dd36eba8978ba3d",
+      "sha256": "71017a1bf67e35600c4b950e46d9367e1bb8e95b51341e4513a04a75c3efe4b4",
+      "size": 1956695880
+    },
+    "model-00002-of-00003.safetensors": {
+      "git_sha1": "34a575fac1ca83104473f8fdba62b4499d812a17",
+      "sha256": "38a3113b9c0c2cb51e185136bf2ebe262e07157e75e28f62c6c9d2ce1fbcb383",
+      "size": 1946296312
+    },
+    "model-00003-of-00003.safetensors": {
+      "git_sha1": "08421ba43b1ec4f902ef14b6d6d705d8ae819f16",
+      "sha256": "e63a1206327735dcfbc1fd085080af6fcc2c4d2d899cf69508dc73bd64d493ef",
+      "size": 1040282032
+    },
+    "model.safetensors.index.json": {
+      "git_sha1": "d56ab3a5f0708d688f6b5df5455008ce120f555a",
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+      "size": 12003
+    },
+    "resolved-training-config.json": {
+      "git_sha1": "9aaef617c61c75e60c8f60ef2e422f48383906aa",
+      "sha256": "e407e5d272c785d63e45edf8bbee5f2cc2287ee566ff3d2ae50c9bbe0397dd17",
+      "size": 1978
+    },
+    "special_tokens_map.json": {
+      "git_sha1": "cfabacc2620186cd3dd4b1dde9a37e057208636e",
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+      "size": 301
+    },
+    "tokenizer.json": {
+      "git_sha1": "475b31150454dc05e90b9c4c1adbd699f4e2774b",
+      "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b",
+      "size": 17209920
+    },
+    "tokenizer_config.json": {
+      "git_sha1": "795f75993a20250b35fee4a0685d080b1a01ab2b",
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+      "size": 50526
+    },
+    "training-details.json": {
+      "git_sha1": "515a39f707f3bfb1aaa237d32a223775ae48f56d",
+      "sha256": "88b8596fe0c1bcd1888e248169d86baa15658f827a1e5c2638c7c2820caed2ba",
+      "size": 35910
+    },
+    "training-metadata.json": {
+      "git_sha1": "167b022d120f7dbacbc92d933a41a5374bfafaa9",
+      "sha256": "a33b0a8ec4b27d60745e62f68c01eb31c0429b987c31d860ad0474a99d15184b",
+      "size": 26482
+    }
+  }
+}

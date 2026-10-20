@@ -1,0 +1,1636 @@
+{
+  "accounting_sha256": "8965f27202ca9b4b9ee51575cbabdf2ebb1812f9c6fd39245cf4a00eca409ed6",
+  "candidate_sha256": "073e4c36d42d85a7b655bbcc383c0aeae2f72cb2888f3a93cd6880f98f5e0ec5",
+  "cause": "Unverified; no deletion cause inferred",
+  "created_utc": "2026-10-17T05:25:48.316297+00:00",
+  "empty_ledger_sha256": "db8923962b2cf3d11351646523e2d045d3bdd0d69be23a3979d5e106a58daeb1",
+  "jobs": 232,
+  "runs": 208,
+  "sources": [
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/accumulation-ab-20261013-on/resource-accounting.json",
+      "sha256": "72e9d941f228c8fd0a2fca097c00cc6b20bfd0f0e696cd9b9199891848d8c6e6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/accumulation-ab-20261013-rerun1-off/resource-accounting.json",
+      "sha256": "00296ce512c47c8d4e6cfdfef5cf78299a703bfdfd4a1224a938b8b7f1d58f6c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/accumulation-ab-20261013-rerun1-on/resource-accounting.json",
+      "sha256": "31e4d3af3b5b44f461acda152944919a582ae689077f006a2a8a4b77ed3a8c06"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/resource-accounting.json",
+      "sha256": "178a12e7c3affce2e00b41c663637d40c9728fc379bc3b513b95ef22000a9a0b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-probe4/resource-accounting.json",
+      "sha256": "ac1b4c6b22f4ea3fc13f4194a071d651ada01eca55ff09afaad136a4ef3b5ad3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-probe8/resource-accounting.json",
+      "sha256": "8e73d9fc9138798ed37010dc0a3fa72d0bcc318eff25b0968750080a60791dfa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/resource-accounting.json",
+      "sha256": "246fd2ee83f4249090a0ba8357288b5af4a634514ff6667435b6c80e553f6156"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-50-fixed/resource-accounting.json",
+      "sha256": "2fd5fe9dce3251ff2deb35d6f47090b5fc3d700493f4583c1a148f5db302aed2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-50-scaled/resource-accounting.json",
+      "sha256": "94798bd515a8a63dedda17ca878c7c5ea9d43f7f94e3360ae8dd8e8f4d226e4c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-70-fixed/resource-accounting.json",
+      "sha256": "a5bd653af0b03d0610928aa6cba78b1780198a40d137ca3b5cd2bb39be3146d1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-70-scaled/resource-accounting.json",
+      "sha256": "0fe5acede25b6c5b8a242729faf8bc003f71365a63ba3ce9dc5da5429c3ea296"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-predecay-fixed/resource-accounting.json",
+      "sha256": "640dedccad9f8a18931a475ef9a13b29b7113728b1e76128684134d3fdb9cf70"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-bs-predecay-scaled/resource-accounting.json",
+      "sha256": "ac5f8fab07ee7c7b4ecb5a8dd15574601cf74378aa990f61117b75e9794d867b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-control/resource-accounting.json",
+      "sha256": "e095f58d02f6b0c385fb463d734766187c18c1e0190318a82743dccb264ef626"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-lr001/resource-accounting.json",
+      "sha256": "2a77f76f41ceae18a4416afc77c9ec58b391ecbdec3bb96af28dfd62344d0385"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-normuon/resource-accounting.json",
+      "sha256": "b665a5f843dd39bc81c7bbef4032311b700356505fa8a26094cf45572940313b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-normuon-check-r2/resource-accounting.json",
+      "sha256": "b49fe2e60d837e92fbc56f4b506f1d10783330179839c649f68e2268700e3152"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-normuon-check-r3/resource-accounting.json",
+      "sha256": "977632df9fe5629ce5ba8475cef4907624174817039bf773c615cdaaa88fd216"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-normuon-check-r4/resource-accounting.json",
+      "sha256": "4bd105ae1a6ba5193e46d0ccf3e65f2e1efac2be6f8da8f160e35d10f110024c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-validation/resource-accounting.json",
+      "sha256": "9eef17251aa1533fc82e09a85305005c7cf8615b89f4024e48e473ed1bcb985e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/batch-normuon-1b-20261016-validation-r1/resource-accounting.json",
+      "sha256": "af0b6e3e52fb97f0662ffe7d968ff3ff93f539b15e8a8ef766e17843390ce6d8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/resource-accounting.json",
+      "sha256": "d62939a06aafa358d5f1a95809f260a3b49b6a485fdf06729d3b25c3162ffd68"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/cg-20261010-be50p05-s42/resource-accounting.json",
+      "sha256": "b634b4657a37d717815068b19fce95971940bbaaae65fbd98e0f1ffa0d6aae5c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/cg-20261010-be50p10-s42/resource-accounting.json",
+      "sha256": "2197c070d4a07448b6888c80fcb4488167c2da8c89c912991c95fe099c21aecf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/cg-20261010-be60p10-s42/resource-accounting.json",
+      "sha256": "cbc7ad3580e0d211ebff4bb3ad6f93b0f82050e92fb25968b9217b3d351365ab"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/cg-20261010-be60p20-s42/resource-accounting.json",
+      "sha256": "bd34f3d6cc72d12096a8ae34036367a6bc4391518a02423189d8d619938e21ab"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-clip05/resource-accounting.json",
+      "sha256": "85dd939cd1a924a5066dd9c840ad26709beea68e602040ced21afd644b4223f4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-clip10/resource-accounting.json",
+      "sha256": "746f4c33cf55f4c608c60b3c3da72f58f3f7060ae8ad5c3b5f3d2a57d566397e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-clip20/resource-accounting.json",
+      "sha256": "bc14be7c23d0bfc0d616a328d57c22e8e28509e0f0b1322d00407b08f9bf9969"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-clipoff/resource-accounting.json",
+      "sha256": "bd61c17ea2035936192b3a213fb2f83cc5b5858d4feec054f90b94a27ab0c0ce"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay-10-recovery1/resource-accounting.json",
+      "sha256": "91a23d8bbea289e319525ad95dfe8186e904424850bf310e4970ed8dd8e651d5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay-20-recovery1/resource-accounting.json",
+      "sha256": "36a59ea6f74520b50702101ffec96b007b1c10897823a3bdee95bfe7c19809f9"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay-40-recovery1/resource-accounting.json",
+      "sha256": "c24d30ce09189fd2afc021b850108aba24c8969bd279408dfa41a282fc3e13f2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay-50-recovery1/resource-accounting.json",
+      "sha256": "08eb737b3c3e1227426025b1eb324af7b60c4ab41cd31e424bbb95405e0f0c54"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay-60-recovery2/resource-accounting.json",
+      "sha256": "a8221b1beda13c85c616432bc6b0ce1ce19f31de0c006810d68219beade87e59"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay10/resource-accounting.json",
+      "sha256": "bb12a2e479b20767897fd7f4ed06c76edf4145257243c537f5c84a6ac19bb2bf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay20/resource-accounting.json",
+      "sha256": "f546b4901b78240d63db5a6468aaaa6916ebc4bb4d818fe114f011874ce9cb66"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay40/resource-accounting.json",
+      "sha256": "85d8b748c6631522854834c3f9be8258fcc88f06e9f1805083743f170c51594c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay50/resource-accounting.json",
+      "sha256": "1f94d25ba7c278be7c8ba6bd31430580e0f6a30586cef0185c70b8ed01b89b5e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-decay60/resource-accounting.json",
+      "sha256": "d0a591f317131f0e26b33187f2ed12c3bb4b5983f3294904e33a82faba124ba0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/resource-accounting.json",
+      "sha256": "5fa405cdf2047371c426a7e4464accc0ff314bfba4fba0031fe3c7ccc99b3c3a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/resource-accounting.json",
+      "sha256": "03ba1b84d6972ed7f72dc19b5f49dfedd50868185fabc716d2d95e0d9404e6e2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-lr05/resource-accounting.json",
+      "sha256": "466c12c0336a82fdaf43529a635a43cff6e97049547cb0a4e48d47802b744137"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-lr10/resource-accounting.json",
+      "sha256": "5a9adede530209c4ed40fd7c427bb3ce1f5b91aa6888ac99554af4be7ed87531"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-lr20/resource-accounting.json",
+      "sha256": "d8aa4c31a7c985190d6442b668a30ff455131769cb4041c23ef33fa84b9dbd1b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-stable-prefix/resource-accounting.json",
+      "sha256": "c544a6ef6646b607a7b7dbf6d467d9c5f9dc0dfc6fb55a5e1d3622ea61f5b65f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-tail-lr030/resource-accounting.json",
+      "sha256": "4729c76ae7a736e92ef4f9955711e081c43e4dcfeeb56413ee3f6f708bc73c7d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-tail-lr050/resource-accounting.json",
+      "sha256": "ef7b97a3d8aa386e9d0df60e2d5e4ebb2c55c60aec2d42127fefac80c11d478b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-tail-lr070/resource-accounting.json",
+      "sha256": "bc02bd8d529910879954ad08bc029eb76099175a1a68487ce21c36637ac0c1f8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-tail-lr100/resource-accounting.json",
+      "sha256": "d8ce1b37c6c431d3289b199951ca5e7d1ed8ef54cb280be6ff140b2456e2ed7c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-validation-recovery1/resource-accounting.json",
+      "sha256": "554b61f15731f5f794db34f4d87081b68b20610c6c4d31319c7a5f3468ccbba3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-adam05/resource-accounting.json",
+      "sha256": "86d97cb4db7082e9b5ae225a9378db8aea8907fdfe8b9f4aab52e30ace3b08fe"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-adam20/resource-accounting.json",
+      "sha256": "f673cd518400c741741944f341c9693011da47036e2dfc9a0b215c4ea76258e0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-batch32-hardware-r1/resource-accounting.json",
+      "sha256": "cd9feea88b1ea9c1cac09db392d75c0315051d3bfb4ef84ea3fd4525dd85ac30"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-batch8-hardware-r1/resource-accounting.json",
+      "sha256": "7195f1829d0986d625a1a7c3ddfa409587b817b12f336827c8993d3b236b1963"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-clip-groups-hardware-r1/resource-accounting.json",
+      "sha256": "1517284f5220f4d95901882e80ef9089fc133f1a50f0ad7c3fa1504794b5b418"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-clip-late-hardware-r1/resource-accounting.json",
+      "sha256": "3af6c203be4ee8af5755deef8504f3bff5bb34e1d2f8f1345ff4d3f40d1587d6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-combo-baseline/resource-accounting.json",
+      "sha256": "7ae12aa35885b3526d89fad660e5475c3460c8dc54fbcfa2701ed19abd1740c7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-combo-baseline-slow-r1/resource-accounting.json",
+      "sha256": "1a1d2f5e75a63d4e8da6a24febbda2739ac9cee177aa0deac6f1c4a7c7a5696f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-combo-merged/resource-accounting.json",
+      "sha256": "0e9a0be40afa31823844c909a9d0bfb120b0db1ed64a102fbd27e35af93237c1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-combo-merged-reranked/resource-accounting.json",
+      "sha256": "d81edcff409699e2130b51c45c91309bc5ec2aca45366bdec036f1df4d3ee567"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-embedding_half/resource-accounting.json",
+      "sha256": "530706a3ef4e1842481bacfbe5bdf20939eebbf898e454128c5f3337df8df972"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-fan_in/resource-accounting.json",
+      "sha256": "13f75247b0b1c8a1eb79d7820341eac6962bd8303bc6467c98805c350847c024"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-filtered-hardware-r1/resource-accounting.json",
+      "sha256": "0176059ba836aba50150eec355650cb2e57f854a8bc5965bc7cc4a7e858fd853"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/resource-accounting.json",
+      "sha256": "25a7d1579569acbe93ffa1d6d69c295b93982660d9d60b1b08822725111adba5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/resource-accounting.json",
+      "sha256": "8c8b27442781d209c9a55543df011dbb3bd6309118397587eebaffde726ef3f2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-gaussian/resource-accounting.json",
+      "sha256": "a80f22990a7e3ae429b2c3255aec7e98b4084171d9e8190680e0550664d90f04"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-muon07/resource-accounting.json",
+      "sha256": "fb01a48215fe4a86089d2ab1c3c0af0cc359d78244ea3e6fc8b05942a289cf19"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-muon13-hardware-r1/resource-accounting.json",
+      "sha256": "c177c95770cdfe17acaf05158a52e03a3234fdfe41351e9fd8d7ebcb25a89efc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-orthogonal/resource-accounting.json",
+      "sha256": "1844d45511b3c2f0126a9cdfa8752db238ef4690d69bee65c3b3b867ba64139f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-promote-adam20/resource-accounting.json",
+      "sha256": "21876565765203083bc2f9b2b04d9aec7464cfc3cd0143bf13483026fbec9264"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-promote-muon13/resource-accounting.json",
+      "sha256": "6454c4e2331ec5fa234bcc30c328eda3a7406401ece1c449024a501971e88997"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-promote-muon13-slow-r1/resource-accounting.json",
+      "sha256": "184a6f7535072ed84d71f0a6c1fce8d3b81b86d661bfd5e9f2e7a3b93c80773d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-promote-residual_depth/resource-accounting.json",
+      "sha256": "004d551f8646a0fa1e6223a1fec9e81de486eed5c02243c94cab323b97e8afab"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-promote-residual_half/resource-accounting.json",
+      "sha256": "3bfcb831079224a80aecb525321f3da8b3ddb5a874c3b230f32cf0def4860e94"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-residual_depth/resource-accounting.json",
+      "sha256": "177738a49f7e8bd1f76adef273064feff6c535d9ab587ff89ecdedf8993dbc6f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-residual_half/resource-accounting.json",
+      "sha256": "6c57298147a5412b644fd830714bc97a95a196d7890f3fbb9d4b7fe575ba4ab1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-seed43-baseline/resource-accounting.json",
+      "sha256": "c6aed1002a9630d5cbc09037f712630da1e9d0038a1a004f659a6717835ad75f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-seed43-candidate/resource-accounting.json",
+      "sha256": "debcf982723da903bed9b5c7a54c9368dc2078f1eebe4f235abb5dd607a2e552"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-short-baseline-hardware-r1/resource-accounting.json",
+      "sha256": "04ac66f6a0fa13ca62b27732cd9ba17b4bcac7e5063f919d88e7634fc9e49259"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr005-hardware-r1/resource-accounting.json",
+      "sha256": "d0f2f6b9554f70e4d0795a323ee9fa1405cbec4240814e709e520db974e49954"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr010-hardware-r1/resource-accounting.json",
+      "sha256": "451e374dd9cd895c17522f8674a9d95e9fe640ded69d1e2b596a21a198fccc2d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr020-hardware-r1/resource-accounting.json",
+      "sha256": "f92b7ef8375dbc39402ff8754431139c82b1e453125dc81098a4b719bef2c5b8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-decay0/resource-accounting.json",
+      "sha256": "2679f3d2c5634c0afb933d7630a5b7fd7c6351f650b5cb0e09d9813507564a70"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-decay1/resource-accounting.json",
+      "sha256": "c3a32416b822f49dc79d9c77f5944bbfd78aa57b5a34f762b54f83619db07ba1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-decay2/resource-accounting.json",
+      "sha256": "001212850b9cd361209f60b3da7e5dd5284cac600f3a9537e0b3d82a46803323"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-screen-high/resource-accounting.json",
+      "sha256": "0b7387d0922321fdc3ca6598a39a3a223ce48aeefcabe51ac604af8ed49b462e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr0/resource-accounting.json",
+      "sha256": "decb582008a326700fbd66f91398f867b6189600556fb65b162e4103d345ab73"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr1/resource-accounting.json",
+      "sha256": "704c51c3221c1b62761e58be6d727d5aae8585ff5479e7f9b69fac893f911e4e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr2/resource-accounting.json",
+      "sha256": "c3127e35951ad5d33cfdd0bb1587cfc551c141ee7cf87ec7ed08d65d306c3c80"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr3/resource-accounting.json",
+      "sha256": "0e7e0de247c5c24338a2f2f9480cfe240f19bc284e50e694d12eac0fb4ed6a17"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr4/resource-accounting.json",
+      "sha256": "335d0c51d9a33cb57f82110e9f625c916dbf889a004dba796b819a09f65ffc0b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr0/resource-accounting.json",
+      "sha256": "b5edae5caa705052a8db9f7aadddabfebfc090e10840dd27fd3d190a3f0eb504"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr1/resource-accounting.json",
+      "sha256": "e4093dafd3dc450c1acfee4fda7a99c06b5eb4b7862f574abb5c828df0d831ca"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr2/resource-accounting.json",
+      "sha256": "dddb89c56eefea9bce8573d4ad86ba9ef4a323b4233059d6d7b22b8ef676b46f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr3/resource-accounting.json",
+      "sha256": "1a92e4d06953921c5807625a11ec5c928546a72d68c1d50e99c5e0acc626ce10"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr4/resource-accounting.json",
+      "sha256": "17c7ea95b66fac702fef2e6c0253b58e53fd6263337b5d75cf09b9751b76471c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-proxy0/resource-accounting.json",
+      "sha256": "bab9372999e65ec650a50541d7bb642669d9ddf01893047343d7756939a79578"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-proxy1/resource-accounting.json",
+      "sha256": "ec3a773d7d1030b6d56a359161905ac5475e93aaf41aca8596f82e2db3c39b34"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-proxy2/resource-accounting.json",
+      "sha256": "a3d4f65c9d627471e3eaa0e7a915d6c706712018851fd5b2a28f2f56c3839995"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-proxy3/resource-accounting.json",
+      "sha256": "30f554f3d31ccbfb18ebe793056218f6cd49b93cc25c43067047b06ea37a9f82"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-screen0/resource-accounting.json",
+      "sha256": "23009150b29e732ef808a219720299835aec15cb3759da68112bbd602b591316"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-screen1/resource-accounting.json",
+      "sha256": "f6934d44b231861408947daddc67685168e36d223cd7e4d852f889e7ab134fe6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-screen2/resource-accounting.json",
+      "sha256": "b023cd852fdd6229060fec8c8d90427862b7a17088c88538832cb175d3d13df5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-screen3/resource-accounting.json",
+      "sha256": "a1b8faeb0e049732e1d359290ecb68bcfafe9183dee9a272f950c07f5ee22f43"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-validation/resource-accounting.json",
+      "sha256": "d2fbaa2d8f4a2ec91dbaaadf64e66bb05c769f386e1f29937250885a70e66391"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-validation-r1/resource-accounting.json",
+      "sha256": "4dad4e27ce3268b0b50687f9fa45ee8a3db56a93ace4b73ef7918d5564dfb9ab"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-decay0/resource-accounting.json",
+      "sha256": "545037d0facd617453649fd069a2e861135493af7ea3aafb7fc84d896bd0991e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-decay1/resource-accounting.json",
+      "sha256": "02855511635b56e53216db81208a83bc280d4e30a7dae368d210dc379248da5a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-decay2/resource-accounting.json",
+      "sha256": "1602bb5fad295a1a63097e3a7c2fe96a368513e98c569597d0b0b17a18035f1b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-screen0/resource-accounting.json",
+      "sha256": "6cd029442e9eaf5790f7de4533c69221e03334397eeefbe4626cf1c1b401f176"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-screen1/resource-accounting.json",
+      "sha256": "11056e810902ea5984fe288246b6e14a7257d53c9490e990a7d4f72a901f367b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-wsdbracket-screen2/resource-accounting.json",
+      "sha256": "9585f610bcbe6245d5a2af7451a4fa69cdce1f3ee36d1e191af48dc84e28f93e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-validation/resource-accounting.json",
+      "sha256": "59564254215839ba2e82323f642d5a3734b2e7c1bac067926df01a67971c8853"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-validation-r1/resource-accounting.json",
+      "sha256": "d8571c7ceed95b007e62bf1bda02abcf9c6f14f821dde340862915b65fcdd898"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-wd003-hardware-r1/resource-accounting.json",
+      "sha256": "663fedeeb0dd1c6e4d6623111d5544b2b30a6e106013155dd8e723e23f1a52ba"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-wd005-hardware-r1/resource-accounting.json",
+      "sha256": "06312877a595c9eeba17d70d90223a2f673d1a515656b6a83e7221f179ab3c8d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/resource-accounting.json",
+      "sha256": "ec02fd85e3ede12a2ab74acdb9e6c2591488c33025f3a3a54cea216678672eed"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-raw-2b-20261010/resource-accounting.json",
+      "sha256": "3fe89682da44c7eeb7e55334d24e146cfc3c9697cc53093d9eddebea21ba111d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr1.2e-3-cosine/resource-accounting.json",
+      "sha256": "be092abdf04df62aa84cb0156c3e31a36f13cf8534241f27abace1b85ce3ec9d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr1.2e-3-linear/resource-accounting.json",
+      "sha256": "a4bbb566bde1eeb3bf0deb9efce7430d890e2fe7145f9835c49c1c8a9d5c11a6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr1.2e-3-wsd/resource-accounting.json",
+      "sha256": "10ef126b575d8d9a6dc7ff890c668763e7a633f1bace7d91e281c930ef142640"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr3e-4-cosine/resource-accounting.json",
+      "sha256": "dba4839ba1420ee084d3b85cc0bf83a126ea8f067f350f9b0fff207b6b31dfaa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr3e-4-linear/resource-accounting.json",
+      "sha256": "09735dc6cc58bf5f128c8248d727ebff5e49405863c0e0229a653ddf02d0d5bc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr3e-4-wsd/resource-accounting.json",
+      "sha256": "012f7b1719fa5b86e9850f79da379eeb1833648643403d9e7ad0854c06301838"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr6e-4-cosine/resource-accounting.json",
+      "sha256": "7fa6f291e725ea7c658822cb438e89cb3093e681845d4ffcf5d7ed79c7349172"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr6e-4-linear/resource-accounting.json",
+      "sha256": "08c04faf15dda12442c8a4aff4932f430aa30624c757ab074a017a7477b32335"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-adamw-lr6e-4-wsd/resource-accounting.json",
+      "sha256": "1795f5d751838ca4e34f3921202ac3ba27b6344e45f401cba2e3ebdc9202d009"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.02-cosine/resource-accounting.json",
+      "sha256": "d968e86eae3c68227903a5a1cc3710c902c7f5694e4d033588880c193854917d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.02-linear/resource-accounting.json",
+      "sha256": "a23e1e032fd87c09bbd5cd0f4ce756ab5c30bf368f7d5a77723bcc810d02f122"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.02-wsd/resource-accounting.json",
+      "sha256": "62adc8633826e8d627b9377c2bd4ec0eb7d8fc233c134a50006cebb95c6b8b7c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.04-cosine/resource-accounting.json",
+      "sha256": "bbbf86b0b414456c3a14570c6fee8c1e9a2ee144fb95826f0b1f962850a1eeac"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.04-linear/resource-accounting.json",
+      "sha256": "1fe4cdc3cdbdce0a44d913f5f16ffcccd513fb2651d271fd3b5117e5aa71cbdc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.04-wsd/resource-accounting.json",
+      "sha256": "4a17a7a46f0752aae44640c81737964e61bb447185c475caaa41a36af47addb1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.08-cosine/resource-accounting.json",
+      "sha256": "85af1d6d48c1635be2196732c16c613b26b197312125820a878683b78e529be5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.08-linear/resource-accounting.json",
+      "sha256": "003be36c2ad57a33fb58dad0b373666d602bef57da426e0ee04c4402b6f382e7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-initial-muon-lr0.08-wsd/resource-accounting.json",
+      "sha256": "ea3a8997e1634f459144d2142ccda10efa907f987869546de550d8a50dd1cabb"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr1.2e-3-cosine/resource-accounting.json",
+      "sha256": "23370aa102f80378838d7144a8637c84787cdaa99c8bc6e938828f6741b14bec"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr1.2e-3-linear/resource-accounting.json",
+      "sha256": "804cc90fbc736a547f95a49b9d3a21b0030ab76ad656ca241ff458c8cbdae25c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr1.2e-3-wsd/resource-accounting.json",
+      "sha256": "cd3c5ebf1b746b734385fc518b988006a0dbb50a94b82e33378e348355bf0904"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr3e-4-cosine/resource-accounting.json",
+      "sha256": "1ef84ec62d7d88f9f53fb51dd740dfb719ea4ae52e4d5e2fee3cf961bbe24539"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr3e-4-linear/resource-accounting.json",
+      "sha256": "52ad3d32a331737a55423ae4cc2bb88e5c466ce057ceefc80d50864a35e69388"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr3e-4-wsd/resource-accounting.json",
+      "sha256": "614d3311e56637005870aef0bf8950ed756baeac92b2b49a803660bcda4958c6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr6e-4-cosine/resource-accounting.json",
+      "sha256": "8064d3d2619a434975457bb68583717bc52646746457f807be94d2518e398e15"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr6e-4-linear/resource-accounting.json",
+      "sha256": "06f99d881da19b453b99c10f3198a1ce85f40393d64f46b51f59791833b12dcf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-adamw-lr6e-4-wsd/resource-accounting.json",
+      "sha256": "7a96378021083242489baaf4152fa5824871fd36ae24ff16279c52390fda4187"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.02-cosine/resource-accounting.json",
+      "sha256": "818868e5e3b200ad75c436e787ae9df02a4dc40239e1b57cafcfde74204843cf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.02-linear/resource-accounting.json",
+      "sha256": "7c47b0d6a81325aef2006dec57b3eda1b55733c3b612a0ba48b7483f39034704"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.02-wsd/resource-accounting.json",
+      "sha256": "70d3261902ab43d705077c2d771c742b9dd83471d2e28bec7b3a10efc7fd3d73"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.04-cosine/resource-accounting.json",
+      "sha256": "58ffb8d931f75cf781342f1ba2c8e71804495562c4aaf09949f47511e81f076d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.04-linear/resource-accounting.json",
+      "sha256": "5749dcb79dcfb4b112b315a9357acd91c81e435d4a83658115e9397ecdf1ef7a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.04-wsd/resource-accounting.json",
+      "sha256": "08fc52913d5f51b0bdd70638bfe6dc15450bae3e82d4ece7c85f1679c244be0c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.08-cosine/resource-accounting.json",
+      "sha256": "37b6b3369853e520b66dd45427248ce30be909a41c2953b9908b7bfce651ea30"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.08-linear/resource-accounting.json",
+      "sha256": "079821b978fa84280108b9e4d3d6b23225a7aaa31a365f376980047632dd6c2c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/os-20261008-short-muon-lr0.08-wsd/resource-accounting.json",
+      "sha256": "fd84694c527c07ff3adfbe4efe5b1c45183c9cc625a2444f93b8c820dcfa3cf0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/performance-ab-20261010-a/resource-accounting.json",
+      "sha256": "2b38f5c3f3c05e813f720653585e7a92274631a1bf9c71d065e65458f8be206b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/performance-ab-20261010-b/resource-accounting.json",
+      "sha256": "240cab66aa0d55c2369f6fedd369fec6403ae2583d86401fa1efac07a999cc21"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261016-s1-dense/resource-accounting.json",
+      "sha256": "5f69ae27cda7f18111f38160cb7eb91f7384cac4849aa819a17aa3a6e84d9826"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261016-s1-intradoc/resource-accounting.json",
+      "sha256": "6a4161bda2cc227b37c9cf6d37c4e3f5cbe6c4b477fd4de50f39f05373938513"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261016-s2-nor/resource-accounting.json",
+      "sha256": "b0882da3310dce7442d9fea85d4c4a6f722f88ee876b798fc24b1dad92c9c99e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/ppl-next-20261016-s2-pe/resource-accounting.json",
+      "sha256": "2a44ca59d3ec449d238d36787af9f319c96db6fbb9a0e86948855243e02bce46"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/resource-accounting.json",
+      "sha256": "50de322aafa6bb8dc5fb624cde42392f156019532d44c6c8484eb2fff89791ec"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/resource-accounting.json",
+      "sha256": "585061611fa66d9c9a048ecf9f43ac470d5dd35cac0d37e9a720eb8ec5a7ae14"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/resource-accounting.json",
+      "sha256": "3d5d6bafabfa13af6e04e485e14b8d133552ca2c08ba67c24a028273212a17c4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/resource-accounting.json",
+      "sha256": "f5cc8131b2d8ab5fa7f0da4a6f40317bdf169ce024d75928a629717c2f5dbee0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/resource-accounting.json",
+      "sha256": "e51caa4e7737273a27da2d967408348f89c1ef013143e339815e3cf71ff54aaf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/sweep-calibration-adamw-4-20261008/resource-accounting.json",
+      "sha256": "ca3e8905a9d5ba3a1cf2181540082b629e66c9a69c60aa9c6fae8fa9a5d9405d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/sweep-calibration-adamw-8-20261008/resource-accounting.json",
+      "sha256": "a9f41c7372baf084847dcb8c5b54d92239cb78d3244d658943ee0efd3c4dad03"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/sweep-calibration-muon-4-20261008/resource-accounting.json",
+      "sha256": "4cddd7ed1372b0b166199bb1f56211307e8314c3f2ed98aad4dee81e3cc87f32"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/sweep-calibration-muon-8-20261008/resource-accounting.json",
+      "sha256": "c1df54fd4282eada3531b389d19a3f45a09bd23ef847d8c6077a81f5ffa1fea8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-a-combined-s42/resource-accounting.json",
+      "sha256": "07f9f300bb9614277d9b75799284c3c786651ecd63552f7071748e6d8eaee53f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-a-control-s42/resource-accounting.json",
+      "sha256": "db2e6be885dafb91b69dd194b1186143ad2b446f823f73dcb120bb6c75f1bf4e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-b-earlier-decay-s42/resource-accounting.json",
+      "sha256": "c8dc995df6abb15af59d5232a3607051f5ec2695cce9a0865624b64920e94301"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-c-weaker-decay-s42/resource-accounting.json",
+      "sha256": "03aea4c3292371d0f644b094b9a5077b8de954f54a25319be694abafe10759a4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-e-hold-zero-s42/resource-accounting.json",
+      "sha256": "39e906fb3f5adebe0873862b3fc43b81e25c346386380bbfd7aa751500a14bcf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511510/training-reservation.json",
+      "sha256": "95915bcd59f6e2e387ef17b309f9f6e7e47884013f652ac7acbd4f1777330845"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511940/training-reservation.json",
+      "sha256": "b088fcea7695011704c68f34ac7d742d1c2a7af9b964391e27d1297bbf315edf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511971/training-reservation.json",
+      "sha256": "2dc3c6461b906a3b25b2d2110520ff56bf9bbf11f9565283c00d34319476eb0f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-511980/training-reservation.json",
+      "sha256": "6f7d4a61199b2b2afb18029155b6d850510780d60131ea45b8a9d0107a35022a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-515998/training-reservation.json",
+      "sha256": "d19a23f8c0752cd5a269c3cbd516689273be172e060c907b6825e22065426cd5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516028/training-reservation.json",
+      "sha256": "7377b427f82679c4c6ee820de306de69e1cbdac45ad5b893fbc0674bb7bcc8f6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516201/training-reservation.json",
+      "sha256": "1b3b5b0f69db7044930e798692173f66b083ab086633d5888cb18343a8ed9c8e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516228/training-reservation.json",
+      "sha256": "6509679f4d69c5ca96a64d27da332bd645383f41b815119a966a594ec8545c7e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516380/training-reservation.json",
+      "sha256": "1fb1bacc32e4bc3875949bb5e59a426cf12113fcac0af8e4027386cbfbe38cfb"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516381/training-reservation.json",
+      "sha256": "48a38c14536f29e495d294db95e448c24e06a51b0be8dffb1edebd97b6f43b09"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516385/training-reservation.json",
+      "sha256": "c2f43cd571166fea6d0f33e25e2894a8eacfb40479d1bce3547d6fe4cd97a8f9"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516433/training-reservation.json",
+      "sha256": "8b09266cc36c2f57246caabf3bd3e825cb48f18a12b7aa446e96ffa26fb4e121"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516472/training-reservation.json",
+      "sha256": "07a3f24defcf5f20c555921b7fd18f563da490bf5cd87dbe885bda161996df39"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516510/training-reservation.json",
+      "sha256": "5847fa7acb8a6e97aa87eaac60cdcc4645040b34e653ab542073ef89f7c1420d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516573/training-reservation.json",
+      "sha256": "6e8cabe461d4a0726fce39bade97a3f3eba72a581e12b700841e4c92e03c26a2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516676/training-reservation.json",
+      "sha256": "da4f91599423964dfd950c152fd6ec93102a9c50b239ebecbf6f34e9653688e1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-516772/training-reservation.json",
+      "sha256": "f671f7c005640f2389c9bf8d58853336a9e5a2b79827fb62f04b01304c1d6976"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517555/training-reservation.json",
+      "sha256": "f3b52fe3e7a692264323800d383102873f3c154f2dbbb04f5e37f11dca1b639b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517566/training-reservation.json",
+      "sha256": "cacd05fe77c175271c1788b2312e79b0d683b520b7357f74e2f2eefea956a028"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517582/training-reservation.json",
+      "sha256": "65a0e8f537f5cb13165eb12d12c43f7f752f0b608ab8933356e1c7b9ecb2cca4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517594/training-reservation.json",
+      "sha256": "5d2b49dc0ece7cfff2acaea6755f8d85c6f558b48836f71c0c5215778a58c8f6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517606/training-reservation.json",
+      "sha256": "e645d10d7c42ed9687d620955f202aec31d68367d0cba18fd6cecd3ab31ac1b4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517612/training-reservation.json",
+      "sha256": "8119c8685bf455d2388985de7248c65466ea0c1c4bdc82b2196209a670932125"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517620/training-reservation.json",
+      "sha256": "17dffbdcba6588dac07fe274a111680b192a6c98eb90fc83610f6d195d98afc7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517640/training-reservation.json",
+      "sha256": "7af44d1ad080e9121a1b7987cd0375fe1b4c1e6faa1b5b344adc1c326d93411b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517656/training-reservation.json",
+      "sha256": "ae19137db7f057356cfb984d1b0afa814eb0d0242d4aebc7c520db1bf75c7578"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517664/training-reservation.json",
+      "sha256": "cdc13cd094b9a8ebb7fc842e533cef15f2221d0d79f41d89b4243b4ef789d397"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517673/training-reservation.json",
+      "sha256": "a7b0b92b8584581bd404ee4613a960b9f6ca1dcfea6b6bb4d798aa5054366b3a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517676/training-reservation.json",
+      "sha256": "70e071e2f074d7d62b6f4673d90a7cd74c23030b8efde795075a2892ef5cf84a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517697/training-reservation.json",
+      "sha256": "9e7aa53a4c357d404b2f989b38a6a016bf5c6673e3247971bf65d7730434961b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517707/training-reservation.json",
+      "sha256": "4d77983ab42690b92fd81c3512d1f7f83bb5fd4c2966d9e882a868e46d61f348"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517716/training-reservation.json",
+      "sha256": "66e91ce67fd6c7c97973b2268aa7b916b0c0b17d776093d8de158817fbdfe3bf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517721/training-reservation.json",
+      "sha256": "6838cb07e2f8163b3c8deb6c559e1463a7fb4aa477136764ab3cbda4193fd33c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517724/training-reservation.json",
+      "sha256": "066b5dd02c451a89afcac73a611e63798f234ebc692e561c01e3b97063f42b5f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517729/training-reservation.json",
+      "sha256": "fef30244609714a39f3140f7a76ddab451dbd7b796ff32fdc21e004f09e693f3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517751/training-reservation.json",
+      "sha256": "2278ac19af27773ddb5845be56e3394b729cefdcff2158f3c63a35913d091543"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517784/training-reservation.json",
+      "sha256": "aec477f40f111c29570f60168a38cd779e8690cd276028dfd3058e55b8d7975a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517793/training-reservation.json",
+      "sha256": "a62fc53dc824091997db1108c098dfb87fa62073dec88d65f4ec0ccb5e8cc2a2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517800/training-reservation.json",
+      "sha256": "e614e97af86a5584d42ad1633a2355149147d1cae673ec747858da244bcbc2b5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517811/training-reservation.json",
+      "sha256": "3b8b915dad4d8753be5832ed6d6eadd13dfc934abf8d49eab8b66d00754bc19b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517858/training-reservation.json",
+      "sha256": "a213d0a504bb075d4dd6b2b5ebd53953e96e052c0443b9435ac95e0520625f99"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517890/training-reservation.json",
+      "sha256": "ecd811d35baff591e0810768cc0813bd2d560984352a39bb1d42aa80581018f0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517916/training-reservation.json",
+      "sha256": "fe527c7a714b56ce332a88692b486368a474e18ebb0284a5fae72409fe3a0156"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517940/training-reservation.json",
+      "sha256": "563b29c436d33765be6b977bf15f3d729f3e8da275c01fa3c264be08fe525925"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517971/training-reservation.json",
+      "sha256": "3aec846c3998788c186bfa4c99e8853733be2ef3c10346206aab7171345ebbb7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-517996/training-reservation.json",
+      "sha256": "5d287d25feb0372330cd81c981b3861c7a68fb7cf42fe2181b022119bcfbb694"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518013/training-reservation.json",
+      "sha256": "d9800f8e8d6ab656fe4040322659a69fdcd8a11264165c99a73abc15944e986b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518039/training-reservation.json",
+      "sha256": "8d0f0d76f736ba202f720d6adcbc6c0b4aa1ad4f12263a905b79cbe98c3c589b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518051/training-reservation.json",
+      "sha256": "c798fd13c6e545953c16f086cad9048f34eb9c88f05835128029dfed292b8ab9"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518073/training-reservation.json",
+      "sha256": "33d484eb88deeefa55abac23acf09d6f2a573581d0585e7ef9249d0b61297989"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518105/training-reservation.json",
+      "sha256": "1433153c40f684930f17083ca40314e14d95ea50883aa50b4f5de5b14493585c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518133/training-reservation.json",
+      "sha256": "5b9cb849b942077cdb267a0f12e08090888d756907a29ea3f23ca9dd8799e7f3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518162/training-reservation.json",
+      "sha256": "f2ebb3735463f8e55a1c634da91e0872d5e7b8c82884ceab19a72c8480ad2848"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518182/training-reservation.json",
+      "sha256": "71e5f55468e89c9d35d2ca5003b4bb4e8809928dec7457bfd720bcac3a2b6aee"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518193/training-reservation.json",
+      "sha256": "68e67a6eebf58c161e8a2ed35b88db7d534eb749f090104d33ee12315514918d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518211/training-reservation.json",
+      "sha256": "01ebc96b825e8ff28ef8008fa20a2d5dd6878152ff15809682552e5e82699790"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518228/training-reservation.json",
+      "sha256": "886e5cdb684f9fd37757d0f3faa2e8c74a4c59ab38e521e5230bc1c3c535893d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-518719/training-reservation.json",
+      "sha256": "7b86f9dcdbea64726ca5db3860cc0149f786c6c0c2cc7dab531a472813c31d05"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-519858/training-reservation.json",
+      "sha256": "a98b7f2c03a859a262cc416fb38882bf9b994c0d60bc9c52e0534e588e8dc41e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-520031/training-reservation.json",
+      "sha256": "7c0fe915fffda3621c2363d2ac4f602865b7a67f76757aa2d594154493d18ad8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-520037/training-reservation.json",
+      "sha256": "bbfe722240a58ea3b5fd0964e18930a0b094cf4e2af3be4d004b7a633f2905cb"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-520098/training-reservation.json",
+      "sha256": "c28d54bb61207b304ec47f3d36537f422e559ea16b58839f9ad61c22dac8ff55"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-520119/training-reservation.json",
+      "sha256": "03ffe04cbb31acaf9beb4500147ec0fbe9efeac1c6067a45178af8460cf9939e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-520754/training-reservation.json",
+      "sha256": "226a2fead2d54bbb97f8f92ba17d71f69cc08793f8392cd3ae48f4cd20cafad7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522525/training-reservation.json",
+      "sha256": "ac452785eed292ad6a1fd99b49b8453b7a4658ac0eb2dd4bb07dd72d7e6a9e4a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522526/training-reservation.json",
+      "sha256": "988b40ce4707539ccfc4d44ff2f0971319fc81d2a7c9b893f95b39e60bbfed40"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522527/training-reservation.json",
+      "sha256": "61f63d3a401122a9d162fa006bd5e8414440c0284c3895007602bff8c40d2f92"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522528/training-reservation.json",
+      "sha256": "7d8ba3e54e4ebcc593ece712a222c1cb320822898306a2fbb955e46d8b65001e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522529/training-reservation.json",
+      "sha256": "e7ca2deb4421cc80a85ff142c282792eea28e8c2d10afbeae008f8f2de13f0c9"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522539/training-reservation.json",
+      "sha256": "25c7618d382c3706b22644e51e15d2b6351c6fe7a12b51ff865ab2ffc7241680"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522540/training-reservation.json",
+      "sha256": "a050807101e6aba0654f6ef4006839e0a5300fcf5c48a18f9df6fa58152ca372"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522541/training-reservation.json",
+      "sha256": "f4f1d42e121a0c7d7c28d0e48a4d41a2cb8e7681272d93f14832f3cef007b941"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522542/training-reservation.json",
+      "sha256": "4f9f94cc0a4283424d14a4fef0728f9c9be5fb52d5ea8fa62bbb9a4c3f12e675"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522543/training-reservation.json",
+      "sha256": "6b700e700987c821f0f19d985a8991b12563e7bd156eeea61ada59968f90351e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522553/training-reservation.json",
+      "sha256": "9b2f3b14fb0fb2f08fcaf7fca1965f98beb84d5e60a934b47af5bacda59a46b1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522849/training-reservation.json",
+      "sha256": "c75f4e1b96eb4acf351c522b08919141f9198a780680c782d717c3a99714a360"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522850/training-reservation.json",
+      "sha256": "31212942e3868c74164f663dfaaa1d0bdc3af0850ca883863811e8807a031f17"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522851/training-reservation.json",
+      "sha256": "f3285556e526f5b885bc60e21536823bf853928668bcee4cdd71b0a02d0681eb"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522852/training-reservation.json",
+      "sha256": "ec5b9e543839e2c6a42d1cc6cc09ded67b89519108512aabd396962dfedddf9c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522853/training-reservation.json",
+      "sha256": "f48a419d585e3d2c8d150b03322893e0ef3144fa2229d6257a19927c330c1ad1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522854/training-reservation.json",
+      "sha256": "7a2a7faedbc7c1b94c563a454544e16be72c32ab2b081c65315485aa27b2952f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522855/training-reservation.json",
+      "sha256": "037abcaca5711df13c80960c1d9e5a2a557131155727aa1e5a7671973eb5f5dd"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-522856/training-reservation.json",
+      "sha256": "79da9cf2b27d114b0e11d8adea3d09b060e49201464073eb4481536918d747e6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-523243/training-reservation.json",
+      "sha256": "c203d8c8d4dbf28bdf2bb7f554ea48c0616f811d0c5ef60b9c6ff21ad7fc589d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-523972/training-reservation.json",
+      "sha256": "2fdf21ea67bbdbf67ba1e9a93c986923798132110e5b56336df9c89c3223426d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-524270/training-reservation.json",
+      "sha256": "4c75d096379eed825d5052153084498230d1081a360ba3baa17bced13cca1162"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-524312/training-reservation.json",
+      "sha256": "70bdf667cf7accf45612ab4aac75cd0ec2dc2611211ebe49ba9bdd9759bd011a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-524313/training-reservation.json",
+      "sha256": "58f78814456b0e5a221be79f7d2eaff95281c8464b9d9cef7abb3de3b7d6c11b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-536902/training-reservation.json",
+      "sha256": "71364ef3deab5fdadd7ca5044a6827bf03bc40eeba8d8a18454baaf496bb97fe"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537003/training-reservation.json",
+      "sha256": "95d1fd15873144b0d84ce3f6da655b93a576f1763e7aa8c3398ce25a50e2ee6f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537004/training-reservation.json",
+      "sha256": "0c68f9e3b9b57a10f7d56afee9b9a37c454f9b0cd8dcdd66f49208fd666fa016"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537355/training-reservation.json",
+      "sha256": "ac8947135e443788b85f6d798bd95e426c9f9fc4aa16b0b1a22e87d249c0648e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537466/training-reservation.json",
+      "sha256": "6a19569334676edc1e060a1b5efc59a96513d424acb5cb6263c72efa2484381c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537499/training-reservation.json",
+      "sha256": "7efd0472f9ca845ce42f8aae155809fa2bf945b57d24ee1e5938963d5904b8f8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537500/training-reservation.json",
+      "sha256": "aecbfe80099287523b5974c25e39c18b0f808a76b73dfa49b4c12cb15353f06b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-537501/training-reservation.json",
+      "sha256": "78d517c66e72e54887d0f7afeeb7025ff896d469ae3d456ff4223ddc852336f3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538027/training-reservation.json",
+      "sha256": "fbe76c35479496a1228f38f29234c26ff2497df64b27ecab1136275f9d58a9de"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538028/training-reservation.json",
+      "sha256": "86f99c4cc9020a9fdd0938a3e6cb7be2c6da70344d33650a8085cb492c3f9638"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538029/training-reservation.json",
+      "sha256": "6faedea8c3a81799867d445e622766d975609c4c55bbbbcd3df40272b53bacaa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538030/training-reservation.json",
+      "sha256": "7248668f34ecb0bbe263dfa437e63b5a22256228dae76bad836eaf1ed7c671ed"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538297/training-reservation.json",
+      "sha256": "fc729b42341d62e088f5e930e0eb10ff15cdc1f88c074dffa6a3cee27a580df7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538423/training-reservation.json",
+      "sha256": "03c9045a1271c178b1a1b252fc6859a8ed4a7255ce496909e9c96c0241c2c46a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538424/training-reservation.json",
+      "sha256": "e56362d15c2f7f5e3ccd24e7af121c28f3356402cf8ea4b5fff6f1573fdbf904"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538425/training-reservation.json",
+      "sha256": "b05aea8ff274d2912e608ec8912f1a9a3eb00ede9f8f545c8dc74e1e6fd73cb4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538426/training-reservation.json",
+      "sha256": "11738faf35c8834cbf2d91b22ce8dcfff3b3318e7eabaa01445a5902c1015944"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-538427/training-reservation.json",
+      "sha256": "5239c70147ef9625c30a232cd5b55c5794a8aab5611cc350e11dcd611c48589c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539630/training-reservation.json",
+      "sha256": "4cd21eb7999dda34e25794d081454431d7db797405d7cc68c97a3a259c36e868"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539631/training-reservation.json",
+      "sha256": "2ae21c71f6149a823de49646238b4ba5f7fcb1af2145a1f4c80b95c66c95f4f6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539632/training-reservation.json",
+      "sha256": "ac47bfaa498a6e13cad834ab47d7e7f0b848049a8fd0eda03ae491baadb7ce85"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539633/training-reservation.json",
+      "sha256": "f2a75455edcd801254d4d2e157127eb70852dd4851b2da18bf0f9d37a247f7aa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539634/training-reservation.json",
+      "sha256": "b9aeb40b0625d3302d3d9b1c6707eb66e89e26ca71911b5d82aa9191c6f77ea0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539636/training-reservation.json",
+      "sha256": "03e4f007ba14a2abff953bb4bb8fa29e959e492864751bb6f0aecad1880ac8c8"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539819/training-reservation.json",
+      "sha256": "92b3668bb3b496a2055ae61761e7e5b62d76647bc1a9f5cae76b651dfbeb8325"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-539820/training-reservation.json",
+      "sha256": "225a41aff9e1bca83b17ee6e1677437a8786744e2d76afc00428078aaded7962"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540265/training-reservation.json",
+      "sha256": "21d407b47bdaab1abe45b2c6e8b3ac6ce27dd60d8d982a92d31c192c193f5dc5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540582/training-reservation.json",
+      "sha256": "3203f68c741e44b2809f6981110789845c470d294025852f71b43e09e37d3562"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540742/training-reservation.json",
+      "sha256": "7296e1692c40d683c833f944f02b33877197458a05ca9979d30b2b500fc9d23e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540743/training-reservation.json",
+      "sha256": "a95221e4e9da9033b42602c867ab5e792de048d5716c5fbdc39ffb7ce8ca3ab2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540744/training-reservation.json",
+      "sha256": "1e7b81bd029677ab98f2c822e7ad27ff160ac36c57e2ee624fa67749ebe1169f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540745/training-reservation.json",
+      "sha256": "833a7f3303d3a08679bece442f2b513fc998b6986c04a8b6fdf9ac9e7cb70929"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-540815/training-reservation.json",
+      "sha256": "ce8e0a9849298dfa7721b18d05b554a8d233fbe7f3b9ebfccbf70b1cfd654abc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542027/training-reservation.json",
+      "sha256": "14a5fec8c28262e1619729be306b86d3237cccfecfb623450d9d8a2b88c5b242"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542044/training-reservation.json",
+      "sha256": "6f52f186d9c59eacfc4bf74b72b4c3ff56dc961f37cf85c5cbc31b1b34505f4f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542104/training-reservation.json",
+      "sha256": "9af61ede05d9c4a105340629fdb6ae24d86f89b38d89b5f319144d5a75701655"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542105/training-reservation.json",
+      "sha256": "aff0aeb5951a45cd9a4eec2c81a61ee838ce06c07d49a3df7364882411df7900"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542106/training-reservation.json",
+      "sha256": "6dbcfbe997afada1143664494023be2127dc35e697565805d53b8e8c039e6442"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542107/training-reservation.json",
+      "sha256": "22b37d219408f650bfc0dd063304a96f6a4e1039a59de6a04bf0f762df7ad1cb"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542108/training-reservation.json",
+      "sha256": "a59cea31c80c261441b9048bd1edd9199c7222725d198a1702d7a45e244ec5f3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542109/training-reservation.json",
+      "sha256": "2b0a31d00a4b5fe1f6ca876ce04405a544d9621d86ad368983d51cd397fd988d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542110/training-reservation.json",
+      "sha256": "843a893f013eebfdafa44ad0e8da09c078388fa93c6b9fabadcf77aa187a2e21"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542111/training-reservation.json",
+      "sha256": "797bd17386e339db133f0d7174f9abfe77e8c84a67961f99d6e82a9eb43865da"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542112/training-reservation.json",
+      "sha256": "3a1c5fadaaabe0427815bb2e3557a822f870c041866537ef52c39503989c7611"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542113/training-reservation.json",
+      "sha256": "3c5be17666bf5dde1c7ea0c68f0d9b82850ebe5a07f002e81cbbbefe18a31dbf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542114/training-reservation.json",
+      "sha256": "85282ba023cc168b5d048c281b4adc37858d51f8eaad9539ebcccd9b94509db0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542115/training-reservation.json",
+      "sha256": "de7eff3aa037e0ab13dfbf9e28d7b2a8be42cfe5c06e2750a3afa45248567075"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542117/training-reservation.json",
+      "sha256": "2ad623375072b7e1c17661b8633a32db08dd6011706ff58ac951da910e42fdc4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542118/training-reservation.json",
+      "sha256": "78e7148525f9c8524b0b59c288a8cce569c70c52faea85c3d7a679670ef7efc6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542120/training-reservation.json",
+      "sha256": "b4937886990e7a0079f9746ed22107793ca0c08c1dc4f8bb74819fd65344ff4a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542121/training-reservation.json",
+      "sha256": "806dfcb95e002992a57bd9009e9ed4632fa61996ef3c7d2886e7393bfd46d83b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542123/training-reservation.json",
+      "sha256": "d9570c705130be8cfd21d2c7dc1bd147f6d034c125a05e9d62ad4ccf43ce1f3e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542124/training-reservation.json",
+      "sha256": "9f7f7753815e08f8807eba5206da14d3ee7789d449885389b296eaec2ddb8b50"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542125/training-reservation.json",
+      "sha256": "08f2a82d63b50b3e9bbfcb61b16ccba2f89329eb651174bf9bf2ef1f9e2731c6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542126/training-reservation.json",
+      "sha256": "03054439b483b5a98afdc36345521be946ccb6d77df672dc2b41a862c7620ecd"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542225/training-reservation.json",
+      "sha256": "1e209683dc9e2525c22155cd120c36350bc2309c83cf5280c884682dadd2e361"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542328/training-reservation.json",
+      "sha256": "ce17638c0a8c7e73ddd720e87f1a447f9dc43183c0db2cde54eb977aad00e2d2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542329/training-reservation.json",
+      "sha256": "52cc53dd1e99461fcd4864e618c29d39a1331d76d2d1202f2835c823681674dc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542330/training-reservation.json",
+      "sha256": "a14c1cfc570790fc53e728185a37c6de882693d8a961fc6efbb91d2fa176564f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542331/training-reservation.json",
+      "sha256": "2da2366a6c2629c8a8a1e4a74b311d50b7d49a3413e829c26126da8158f93e53"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542332/training-reservation.json",
+      "sha256": "4304e33fa5f571cbc0bf87aa19f75296170caa5ff6ba6eed454a84086130d197"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542333/training-reservation.json",
+      "sha256": "61fd312c24771a64bdc5260197d1ce91bc93286f93d1598a8cce014c717bc036"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542334/training-reservation.json",
+      "sha256": "a2f2737bf53222d7db5bd0403650cd6cd229e06a05290b92abc0d3f4e01019fe"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542335/training-reservation.json",
+      "sha256": "5a78b1cc6751b1e10e4ea789e83c319f966eed8a3892f5d351e6f2a5ebc58e45"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542336/training-reservation.json",
+      "sha256": "0642bd00e8b52463751094c95876f7515c5247f4012c6004218de818bb3e56a6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542338/training-reservation.json",
+      "sha256": "f85185f527cd6395c3749916762635752064153c4eed41e6dc8b01245b51941b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542339/training-reservation.json",
+      "sha256": "6c14693ef8909cbb7a0a904471bd2e3eb5fe2475775d5b1164a9eba840b8ef65"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542393/training-reservation.json",
+      "sha256": "878295e301072dcfb401adf23228f39840bd19c19991632437f918686a756fe2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542394/training-reservation.json",
+      "sha256": "f468f1018e3a84592d032c793909bbf669ac687f8f88548cd3342506054f583a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542395/training-reservation.json",
+      "sha256": "f3ef3b743c7cba1805527b9066d6496a627a4b14a748e7902a75cf952c7c7884"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542421/training-reservation.json",
+      "sha256": "cbeb3970d92d7a713cb8a15e5a44b1adf29012a93db5e7a8b5c64d036f88fb08"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542604/training-reservation.json",
+      "sha256": "c357bc70d1c0bf6527829f15bba4514fe0cf4a83ae9d95aa3be45c60c8848797"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542982/training-reservation.json",
+      "sha256": "b60ae54277e13a21889fbd38146a05d17d14aee2d4419226652187b88b348c81"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-542983/training-reservation.json",
+      "sha256": "e8cdb1596dae4b1eebdeaed614f1c2eb05331c49996f61900e795543b37cc3d7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-543956/training-reservation.json",
+      "sha256": "7364b688bb6f2b73025a56a2643da4a6f9487d842273a061ae8f8b226b88f266"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-543961/training-reservation.json",
+      "sha256": "cf8c8ca7d8c47a81f3a1dfcf41eaf148330e28cb35b037c77662603f448308b4"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-544165/training-reservation.json",
+      "sha256": "6511c7c9c0e917c51fd2b29458ac2838b5c26e76cb720f60f82d3350e991f738"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-544286/training-reservation.json",
+      "sha256": "0e59c14cbe914473123c3b750ae0112df469349a6cfd9e237122fab720d8f286"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-544287/training-reservation.json",
+      "sha256": "0befee61a7d31a73c5c3f5b2b692398d3a1e94515d5e072e67aa930ac5da9ed2"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-544399/training-reservation.json",
+      "sha256": "f4889db933e56a7707f2eed96119463cfb488cae34fb6d0a2bcd8709cdd3d0fa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-544451/training-reservation.json",
+      "sha256": "cbf8dee2fc59b986e42f4b335a40c3f024081103f596d5d0ab8b7f362e4aae8e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549160/training-reservation.json",
+      "sha256": "5bd2c9195ab8d4314515d2d64e12d0c5288c5cbe12f20a3ec7735e39be60b8c0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549507/training-reservation.json",
+      "sha256": "8bb8d609fad2deb04bb989cff851aacb58a4ca1f3924d08ffaf7a2effc82d7e1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549594/training-reservation.json",
+      "sha256": "fce3d5a492f621a3948b4a807efc67fed3da31f7267c5db04ee33d6b71daaae0"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549595/training-reservation.json",
+      "sha256": "0860f4455a628d786e6d85b88eb77a5e433c23bc62c04e0da789a255a7c1e7cc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549596/training-reservation.json",
+      "sha256": "bee21cbd87eacb05d67bd0ec7bc882c9ad30c3edf6a40966a6ff3f9c3b7d2701"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549597/training-reservation.json",
+      "sha256": "5f688c3d7ef457768cce64ed0978e71266a3d9242ed518ab261bb46307769bcd"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549715/training-reservation.json",
+      "sha256": "98139ce6f90febdc1a848527983baa4ef2e5cb8b59094b1467a144bc47a5bf02"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549716/training-reservation.json",
+      "sha256": "98e1704f4440aff55ff1cbcec49a6db03b41cc32caa40dfc3564e7b84168b4de"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549717/training-reservation.json",
+      "sha256": "ad7c84f7c8213664cd5fe8e26bc2f7fb9febc9356e7ea4266d5a31eaf388fbc5"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-549718/training-reservation.json",
+      "sha256": "5edd553604f1001087c2e28679e00f0089497b43cf2ea871128c463bda7ec68f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-550805/training-reservation.json",
+      "sha256": "69f943811fea84638148c1cff6bd2eb438030836206d01489593d314498ac519"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-550806/training-reservation.json",
+      "sha256": "2edaeffc87ee569225da3d271f8b51abf7353f2301fddf33fa9c137131580604"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-550807/training-reservation.json",
+      "sha256": "26ac1732c0b0d8c586f39a5baf5c298a5859be46471b5ce1bfcacfedf935eb38"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551523/training-reservation.json",
+      "sha256": "7a18bde88ef20c78df438756980171481749c949f74606fbd99c275c65da2616"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551524/training-reservation.json",
+      "sha256": "de9a39c079ba2a70244a8d9cbf7717c8ba6604feb6bfbce15be150349dbfca92"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551525/training-reservation.json",
+      "sha256": "085744f206b5cf3bfae2723b88e943a084b28eaf289c4ed857e9143f093b31a7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551793/training-reservation.json",
+      "sha256": "dbf3546d30d93e81503e3e054810c18da6e0f88c891ca47bd6804458d31a7a07"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551794/training-reservation.json",
+      "sha256": "468533efe0d3ffdae5a2ae9c2cad290feb60e016e523601036dffc8749a3e0f1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-551795/training-reservation.json",
+      "sha256": "a8a76190842888f74e0f335f2c443fe8870a15c76083770703b9d4c3792c6b6c"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552016/training-reservation.json",
+      "sha256": "56480fc2e1a6cca35189c7682e5b3102daa73ee2d8bf4a82f4be42f5f49dec26"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552017/training-reservation.json",
+      "sha256": "0029194f95c9742e803f6bcd482148a2096e403307e9a6c8c2e7d15efd200c78"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552018/training-reservation.json",
+      "sha256": "3c3922b73de3025da5a7f70baaac510617c8ed5e51803099ee3ccf8666a6ac21"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552019/training-reservation.json",
+      "sha256": "2341dfbc1291ee4f9fa5b6eb2460c07ebe219db0345b512c6197320a97db9c54"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552020/training-reservation.json",
+      "sha256": "7070d0ee85355fe43d76f68c0f7592f6e9e85823720edce8c2c2cbbe38b0df12"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552021/training-reservation.json",
+      "sha256": "8fa403283830704019d3497d7acd166df957f8034456fe150b4d2af8975d9b58"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552022/training-reservation.json",
+      "sha256": "075dedcf1a830c5a48cfad6ddebc7afc4b13dac3d0e243317813b72ca8a6393d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552023/training-reservation.json",
+      "sha256": "20abd50f96b4d3b5b6dc7dec79c19e164d5b0c35ed43c50dc47d023a86784093"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552024/training-reservation.json",
+      "sha256": "46de33f010f4fcfe9521178138cd1c199337c7edb295dc8b58c6cde482964cf3"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552025/training-reservation.json",
+      "sha256": "e60e3990035e6107ec55bb438c4696e3411afd9b6a83dd9e69da49ed1e28ca36"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552073/training-reservation.json",
+      "sha256": "965d9fe4c19454a719a4159ea0cc8c251c1c0507ecf33421dece380ea9076b5e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552612/training-reservation.json",
+      "sha256": "aabac9f453b443b9ab2264856273ce53282695e1c0625a893ee0c4187e3ff240"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-552679/training-reservation.json",
+      "sha256": "e12fcfb949216f7a51b5502e9610ebe2a49d6eec183b7a8fede19b5d9e3090ed"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-553299/training-reservation.json",
+      "sha256": "852076c57ab1f4820d444692cd0035113eb3c710f17991b6d3901c983704b4c9"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-553561/training-reservation.json",
+      "sha256": "478d736252e2f9dfd97d7238170f8e85d5a530c5372d377e126c4ae3c1300a61"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-553634/training-reservation.json",
+      "sha256": "40e74cf616681794b7081ec005eb865844c20e90a28b156023b10237f973a11d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-554390/training-reservation.json",
+      "sha256": "425bd94e3b4119c643a72e0488a7e7f78fb48173e21ea26e983f091bb284e55a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-554398/training-reservation.json",
+      "sha256": "7dfbc257df59b90c1a3cea876f133126227c1abde50e206a5670e496d7f13256"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-554476/training-reservation.json",
+      "sha256": "b1e4cc814c5362a2f2e0439382ea9f528730e6dbeabe7ea2c884fdc02b6df819"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555093/training-reservation.json",
+      "sha256": "0c7c20a4c95df901c78404b5859578b7c6064a23613b4bbe1403f8afa36aad9b"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555108/training-reservation.json",
+      "sha256": "e5ed1acebc3d5f7be091235108d360d909750c33b698bacce84fefbab4153603"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555117/training-reservation.json",
+      "sha256": "0f85bd9737a95ab4ca20625496a253f0cc78751c06a2acfb68c2253f3cdb4dc6"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555139/training-reservation.json",
+      "sha256": "7d7d1981a664c14d2b4b3ea21e0e6f106391cf2da87bce40a60704cd9c32b46f"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555140/training-reservation.json",
+      "sha256": "153c1e11984fe6adedf235f09429a2587b535f3f09c5dbab903fdabc3e0f8457"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555141/training-reservation.json",
+      "sha256": "fb27b833207d3719ae94c8e4905c52bbe1591e769c2d5d3db7653a4a237a142d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555278/training-reservation.json",
+      "sha256": "6137ffcea38f6d60ab3d878e50c63b6d0e59f925554c6bdd6da056f2fcab0c5e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555279/training-reservation.json",
+      "sha256": "74ed547ac4f05e6f644e09bcc112cd4119ef53a5cca918edf2cfd5309001f617"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555440/training-reservation.json",
+      "sha256": "fcaed052b5768b298dc8dc69bbb831f04ad35fdb38b03b4b64f7255361ef9ea1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555441/training-reservation.json",
+      "sha256": "fd5f21f78aa62a16ec4c15621f2f5d0f28fbb9f038131660ba29707d787abdfa"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555489/training-reservation.json",
+      "sha256": "25f146164d98f12991e7861696f6fa0be2590c6ffc9b3b49d4e074477820dc92"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-555490/training-reservation.json",
+      "sha256": "3080c6d44e8920daac5af871ca747591970ce75ebc26340324ddbf8263fe9c13"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-556710/training-reservation.json",
+      "sha256": "b9b6e7e1d1298cfef9dbe6326b1c5318db88a7b7032d74c47b8486d03cd80caf"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-558510/training-reservation.json",
+      "sha256": "78294bb82a67f44f048c81caa02eb9d2ed8ad45ca4d3607583fdca73edcae8c1"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559836/training-reservation.json",
+      "sha256": "0c03dffa9bb589a25058993d87f74d0c32a3a9cb217d90a8c44292ca75c94407"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559837/training-reservation.json",
+      "sha256": "d52bed0033573e5f923b2ee1760bde8fe7d8bbaf8a6b358d0af4b29d6980003a"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559859/training-reservation.json",
+      "sha256": "5415e12b77c1702e69945dd8a7eacb86badd7babe684ce436952fd9e1ae9b99e"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559860/training-reservation.json",
+      "sha256": "131c0a22fc315f3aea6745e7ea104c2834549934fbe7d0d5362e09e951559d36"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559883/training-reservation.json",
+      "sha256": "d5d21d76bf7f8833272f5be6688d585a4e6a8940c4e79a460a9f164ff25a3ab7"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-559884/training-reservation.json",
+      "sha256": "28c3b1f463ed2e12c2feb9329a1b82933e698fe37a9d2dd088c43aa6d2993866"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-560141/training-reservation.json",
+      "sha256": "2b9578d8056b459544414f7aa6fa008fe5962ec78b7f1e51c6af8ed97a0108ca"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-560143/training-reservation.json",
+      "sha256": "9554b242688353adb882c32eaaff235ed6ac88b305262ccaaf086fef7fbbc9bc"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-560415/training-reservation.json",
+      "sha256": "42080376c656068dd20a893ec33afe4ceca1612ba4da5d0d241d9ed89e5d813d"
+    },
+    {
+      "path": "/work/asciibase64/Llama-3.2-1B-training/logs/job-561525/training-reservation.json",
+      "sha256": "d09c207c20ccdf75de2f2a9797980ee6325d39699125879e378a2b324f649ddb"
+    }
+  ],
+  "total_h200_hours_measured": 977.5855555555561
+}

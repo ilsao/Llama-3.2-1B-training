@@ -1,0 +1,87 @@
+{
+  "candidate": {
+    "fill_drain_included": true,
+    "loss": 11.728001594543457,
+    "mode": "pipeline",
+    "peak_allocated": 39116900864,
+    "peak_reserved": 42584768512,
+    "rank0_timeline": {
+      "student": [
+        {
+          "end_ms": 590.8931884765625,
+          "start_ms": 210.71043395996094
+        },
+        {
+          "end_ms": 907.6289672851562,
+          "start_ms": 590.8963012695312
+        }
+      ],
+      "teacher": [
+        {
+          "end_ms": 171.3086395263672,
+          "key": 0,
+          "start_ms": 0.1404159963130951
+        },
+        {
+          "end_ms": 429.5031433105469,
+          "key": 1,
+          "start_ms": 171.31234741210938
+        }
+      ]
+    },
+    "seconds": 0.9076383219799027,
+    "seconds_per_step": 0.9076383219799027,
+    "steps": 1
+  },
+  "cosine": 1.0,
+  "deterministic_fa3_backward": true,
+  "reference": {
+    "fill_drain_included": true,
+    "loss": 11.728001594543457,
+    "mode": "inline",
+    "peak_allocated": 29991129600,
+    "peak_reserved": 31652315136,
+    "rank0_timeline": {
+      "student": [
+        {
+          "end_ms": 487.33465576171875,
+          "start_ms": 0.6920959949493408
+        },
+        {
+          "end_ms": 1024.2379150390625,
+          "start_ms": 487.3385009765625
+        }
+      ],
+      "teacher": []
+    },
+    "seconds": 1.032937263022177,
+    "seconds_per_step": 1.032937263022177,
+    "steps": 1
+  },
+  "relative_l2": 0.0,
+  "repeat_relative_l2": 0.0,
+  "repeated_inline": {
+    "fill_drain_included": true,
+    "loss": 11.728001594543457,
+    "mode": "inline",
+    "peak_allocated": 39878685184,
+    "peak_reserved": 41383100416,
+    "rank0_timeline": {
+      "student": [
+        {
+          "end_ms": 433.333984375,
+          "start_ms": 0.35369598865509033
+        },
+        {
+          "end_ms": 895.4317626953125,
+          "start_ms": 433.33770751953125
+        }
+      ],
+      "teacher": []
+    },
+    "seconds": 0.895624396041967,
+    "seconds_per_step": 0.895624396041967,
+    "steps": 1
+  },
+  "threshold_relative_l2": 0.0001
+}

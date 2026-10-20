@@ -1,0 +1,23 @@
+{
+  "python_ast_files": 102,
+  "shell_syntax_files": 3,
+  "configs": 9,
+  "new_training_jobs": 8,
+  "reference_only_configs": 1,
+  "seeds": [
+    42
+  ],
+  "contract_tests_passed": 11,
+  "vendor_checksums": "all_match",
+  "torch_imported_on_login": false,
+  "gpu_runtime_checks": "not_run; includes old/native vs wrapper parity inside each sbatch",
+  "submissions": 0,
+  "ledger_reservations": 0,
+  "source_isolated": true,
+  "training_inputs_per_job": 1000079360,
+  "optimizer_windows_per_job": 4775,
+  "planned_max_h200_hours": 128,
+  "historical_control": "ppl-next-20261017-B-seed42",
+  "historical_control_ppl_10k": 18.915596244218058,
+  "status": "single_seed_and_historical_control_static_validation_complete"
+}

@@ -1,0 +1,8 @@
+{
+  "files": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/kd-acceleration/pipeline/assets-config.json": "8cfac4f7f2a810e9ac05968e75f6457c98b1e61b854321ed7ac2793830cdbdbc",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/kd-acceleration/pipeline/prepare_teacher.py": "1eacb646ba00c0657b38402b1955ccd52c672ebb47979de54532a2faa97fb10c",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/kd-acceleration/pretrained-teacher-proposal.json": "73a6a672cecf088c582aac899646a0aadbdafe42cceec478d9209531caef20fa",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/kd-pipeline-assets-20261019.sbatch": "985b129266e00cd97e7241cb5b97628f1b520706e0f329bf16bb6131963d1983"
+  }
+}

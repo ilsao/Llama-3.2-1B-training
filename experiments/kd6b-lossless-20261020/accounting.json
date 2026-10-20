@@ -1,0 +1,15 @@
+{
+  "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+  "elapsed_seconds": 360,
+  "end": "2026-10-20T01:06:39",
+  "gpu_count": 8,
+  "gpu_type_evidence": {
+    "sha256": "1057ab930ad238cc80da8babc8408b37cef3c2740c28f5e1bf732f1e13200033",
+    "source": "startup nvidia-smi for allocated devices"
+  },
+  "h200_hours": 0.8,
+  "job_id": "577467",
+  "nodes": "25a-hgpn069",
+  "start": "2026-10-20T01:00:39",
+  "state": "COMPLETED"
+}

@@ -1,0 +1,16 @@
+{
+  "before_measured_allocations": 230,
+  "before_measured_h200_hours": 935.2500000000002,
+  "before_run_identities": 206,
+  "cause": "Unknown; shared ledger is empty. Do not overwrite unrelated shared state from incomplete snapshots.",
+  "ledger_path": "/work/asciibase64/Llama-3.2-1B-training/experiment-ledger.json",
+  "observed_ledger": {
+    "jobs": {},
+    "runs": {},
+    "total_h200_hours_measured": 0,
+    "total_h200_hours_reserved_or_measured": 0
+  },
+  "observed_sha256": "e260192b089de5ee44a09d4b34a2d98b7b5186c5761e4f7abf2f3981ff98c268",
+  "observed_utc": "2026-10-17T04:50:15.723159+00:00",
+  "shared_ledger_modified": false
+}

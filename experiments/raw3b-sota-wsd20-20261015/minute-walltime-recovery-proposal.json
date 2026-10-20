@@ -1,0 +1,23 @@
+{
+  "checkpoint_training_load": false,
+  "combined_allocation_seconds": 21560,
+  "combined_h200_hours": 47.91111111111111,
+  "configuration_changes": false,
+  "failed_jobs": {
+    "553561": {
+      "elapsed_seconds": 20,
+      "h200_hours": 0.044444444444444446
+    },
+    "553577": {
+      "elapsed_seconds": 0,
+      "h200_hours": 0.0
+    }
+  },
+  "failure_cause": "Slurm rounded requested05:59:40 upward to06:00:00; existing allocation-duration guard rejected it before model/training startup",
+  "proposed_allocation_seconds": 21540,
+  "proposed_wall_time_minutes": 359,
+  "requires_new_user_approval": true,
+  "retry_submitted": false,
+  "test_only_submission": "passed; no resources allocated",
+  "timestamp_utc": "2026-10-15T15:34:32.146964+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "sha256": "caf3aac99a18a7b0ac816c2ba0921b5136081913c3a50322fbd49ef6a25063e8",
+  "authorization": "User: \u4fee\u5fa9",
+  "training_source_unchanged": true,
+  "scope": "C one-time held submission under original reservation; independent accounting recovery; 180s future submission RPC timeout; no automatic retries",
+  "state": "controller-state-recovery.json",
+  "legacy_stop_marker": "disabled",
+  "stop_marker": "recovery-disabled"
+}

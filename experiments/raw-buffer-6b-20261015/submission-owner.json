@@ -1,0 +1,6 @@
+{
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-buffer-6b-20261015/source/slurm/raw_six_controller.py",
+  "sha256": "86bea6d2ac1c4a6355e13921e4308f89dcaa75b588700991ac93288eecfc41e7",
+  "hostname": "25a-lgn01",
+  "source_commit": "a850dd06093519b08e741e2293a920425d4ac293"
+}

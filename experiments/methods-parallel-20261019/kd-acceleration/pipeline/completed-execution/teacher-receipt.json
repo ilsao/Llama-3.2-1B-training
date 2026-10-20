@@ -1,0 +1,7 @@
+{
+  "manifest_path": "/work/asciibase64/Llama-3.2-1B-training/caches/kd-teachers/llama32-3b-13afe512-pipeline-20261019/teacher-manifest.json",
+  "manifest_sha256": "bf1dec0109c97ad0d00d5714127aca10a6046edbd0b35e0d4c1a55fb2f192507",
+  "model_id": "meta-llama/Llama-3.2-3B",
+  "revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+  "tokenizer_equivalence_verified": true
+}

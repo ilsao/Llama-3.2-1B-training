@@ -1,0 +1,117 @@
+{
+  "complete": true,
+  "jobs": {
+    "consumer": {
+      "alloc_tres": "billing=4,cpu=4,gres/gpu=4,mem=200G,node=1",
+      "elapsed_seconds": 224,
+      "end": "2026-10-19T19:00:27",
+      "gpu_count": 4,
+      "gpu_type_evidence": {
+        "sha256": "80c8c091a1ce037748b1f3d3059a412f0ab0443dbb42fbce5fb13802454f44ff",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.24888888888888888,
+      "job_id": "575057",
+      "nodes": "25a-hgpn012",
+      "start": "2026-10-19T18:56:43",
+      "state": "COMPLETED"
+    },
+    "producer": {
+      "alloc_tres": "billing=4,cpu=4,gres/gpu=4,mem=200G,node=1",
+      "elapsed_seconds": 239,
+      "end": "2026-10-19T19:00:26",
+      "gpu_count": 4,
+      "gpu_type_evidence": {
+        "sha256": "1fa93126e7d2d3a8d9041b3356ba3c3f72ab45403b859422b6207c108447a531",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.26555555555555554,
+      "job_id": "575056",
+      "nodes": "25a-hgpn006",
+      "start": "2026-10-19T18:56:27",
+      "state": "COMPLETED"
+    }
+  },
+  "validation_h200_hours": 0.5144444444444445,
+  "rows": [
+    {
+      "mode": "hidden",
+      "global_batch": 16,
+      "producer_tokens_per_second": 141992.48957793062,
+      "student_resident_tokens_per_second": 104309.48723613935,
+      "student_disk_tokens_per_second": 102453.8389673574,
+      "disk_slowdown": 1.0181120423352137,
+      "producer_over_student_demand": 1.3612615049720571,
+      "write_GB_per_second": 1.825079237295752,
+      "teacher_compute_and_d2h_seconds_slowest_rank": 0.9844614969333634,
+      "write_seconds_slowest_rank": 0.8823814851930365
+    },
+    {
+      "mode": "hidden",
+      "global_batch": 64,
+      "producer_tokens_per_second": 151030.28878113691,
+      "student_resident_tokens_per_second": 113656.22696870145,
+      "student_disk_tokens_per_second": 108643.4253807581,
+      "disk_slowdown": 1.0461399442292545,
+      "producer_over_student_demand": 1.3288342645997522,
+      "write_GB_per_second": 2.178252830032923,
+      "teacher_compute_and_d2h_seconds_slowest_rank": 4.018675382016227,
+      "write_seconds_slowest_rank": 2.957262087846175
+    },
+    {
+      "mode": "logits",
+      "global_batch": 16,
+      "producer_tokens_per_second": 16150.328108466692,
+      "student_resident_tokens_per_second": 103260.20018617029,
+      "student_disk_tokens_per_second": 16320.732120860608,
+      "disk_slowdown": 6.326934320194288,
+      "producer_over_student_demand": 0.15640419134718778,
+      "write_GB_per_second": 4.525914582096265,
+      "teacher_compute_and_d2h_seconds_slowest_rank": 1.4058255760464817,
+      "write_seconds_slowest_rank": 14.85553298110608
+    },
+    {
+      "mode": "logits",
+      "global_batch": 64,
+      "producer_tokens_per_second": 15468.606490249433,
+      "student_resident_tokens_per_second": 114614.82469375762,
+      "student_disk_tokens_per_second": 15462.400212391118,
+      "disk_slowdown": 7.412485973678823,
+      "producer_over_student_demand": 0.13496165554133518,
+      "write_GB_per_second": 4.335555020818887,
+      "teacher_compute_and_d2h_seconds_slowest_rank": 5.756203388562426,
+      "write_seconds_slowest_rank": 62.03115681488998
+    }
+  ],
+  "historical_online8gpu": {
+    "16": {
+      "count": 381,
+      "median": 131270.36224458364,
+      "p10": 125940.96813228942
+    },
+    "64": {
+      "count": 54,
+      "median": 151595.646877888,
+      "p10": 146817.41111578318
+    }
+  },
+  "estimates_3b_online": {
+    "median": {
+      "compute_hours": 5.922843188621924,
+      "compute_plus_data_journal_logging_hours": 6.072989973284087
+    },
+    "p10": {
+      "compute_hours": 6.146619207229879,
+      "compute_plus_data_journal_logging_hours": 6.296765991892043
+    }
+  },
+  "projected_data_journal_logging_seconds": 540.5284247837876,
+  "conservative_hours_with_20_percent_slowdown_plus_20min_exit_and_3min_start_eval": 7.9394525236037845,
+  "proposed_allocation_hours": 8,
+  "proposed_gpu_hours": 64,
+  "previous_study_gpu_hours": 92.92194444444445,
+  "study_gpu_hours_after_validation": 93.4363888888889,
+  "maximum_study_gpu_hours_with_full_run": 157.4363888888889,
+  "recommendation": "8GPU online pipeline; full logits disk cache cannot sustain demand; hidden spool works but4+4 is slower than8 online",
+  "limitation": "2 timed windows per geometry; producer service excludes backpressure, student disk includes exposed waits; reference online is a prior sustained run, not simultaneous matched-node A/B"
+}

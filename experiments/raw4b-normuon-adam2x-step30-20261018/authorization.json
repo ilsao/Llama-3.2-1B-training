@@ -1,0 +1,18 @@
+{
+  "approval_scope": "Fresh 4B with current recipe/resources; only decay ratio/clock changed; preserve token warmup and batch/phase token boundaries",
+  "approved": true,
+  "attention_mask": "intradoc document-span causal",
+  "automatic_resume": false,
+  "automatic_retry": false,
+  "configuration_digest": "10dbaeef65171439aa652dad1ded13c5cd6deeac0f041e31f6af0e499747e2ad",
+  "cpus": 8,
+  "formal_run_number": 16,
+  "fresh_random_initialization": true,
+  "gpus": 8,
+  "hf_upload": false,
+  "maximum_allocations": 1,
+  "maximum_h200_hours": 56,
+  "requested_seconds": 25200,
+  "run_id": "raw4b-normuon-adam2x-step30-20261018",
+  "user_instruction": "\u9664\u53bb\u4f7f\u7528\u5f8c 30% step decay \u5916\uff0c\u5176\u9918\u4f7f\u7528\u7576\u524d\u914d\u7f6e\uff0c\u91cd\u65b0\u8a13\u7df4\u4e00\u500b 4B token\u3002\u8a18\u5f97\u4f7f\u7528\u6b63\u78ba\u7684 attn mask"
+}

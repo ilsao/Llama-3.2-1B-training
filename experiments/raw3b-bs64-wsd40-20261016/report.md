@@ -5,8 +5,8 @@
     "job_id": "556710",
     "reservation": "raw3b-bs64-wsd40-20261016-0d28a8d979924e93a138f58a345d047a",
     "returned_job_id": "556710",
-    "slurm_state": "RUNNING",
-    "status": "submitted",
+    "slurm_state": "COMPLETED",
+    "status": "reconciled",
     "submission_command": [
       "sbatch",
       "--parsable",
@@ -24,7 +24,33 @@
       "stdout": "556710\n"
     },
     "submission_started_utc": "2026-10-16T04:04:44.297885+00:00",
-    "submission_tag": "raw3b-bs64-wsd40-20261016-0d28a8d979924e93a138f58a345d047a"
+    "submission_tag": "raw3b-bs64-wsd40-20261016-0d28a8d979924e93a138f58a345d047a",
+    "accounting": {
+      "job_id": "556710",
+      "state": "COMPLETED",
+      "elapsed_seconds": 14376,
+      "gpu_count": 8,
+      "h200_hours": 31.946666666666665,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "295369f0ccb67a22bbd511790f46d958fd07a74ed2afe67a06f9b6d15dd62fe6"
+      },
+      "start": "2026-10-16T12:04:45",
+      "end": "2026-10-16T16:04:21",
+      "nodes": "25a-hgpn058"
+    }
   },
-  "stage": "submitted_or_uncertain"
+  "stage": "complete",
+  "result": {
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/checkpoints/checkpoint-014312-7b82ab670332",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/export-step-14312-7c58e390",
+    "full_perplexity": 15.21170256746107,
+    "global_step": 14312,
+    "job_id": "556710",
+    "run_id": "raw3b-bs64-wsd40-20261016",
+    "subset_perplexity": 15.213240094314846,
+    "tokens": 3000107008,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/6ae9e9ddd2ad4dffb3c8fc3a5688143d"
+  }
 }

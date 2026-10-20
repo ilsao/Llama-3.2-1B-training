@@ -1,0 +1,85 @@
+{
+  "jobs": [
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 3131,
+      "end": "2026-10-19T15:06:33",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "ff7aea01375e64d206a00bc44454cc0deab37e6ed19ba2129f10b9a264feb8af",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 6.957777777777777,
+      "job_id": "572265",
+      "key": "D025-seed42",
+      "nodes": "25a-hgpn049",
+      "start": "2026-10-19T14:14:22",
+      "state": "CANCELLED by 44781"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 4310,
+      "end": "2026-10-19T15:06:33",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "a3901b5fb71a2b56eef43877292f13448869112ea3d31128affbe70db1a96377",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 9.577777777777778,
+      "job_id": "572069",
+      "key": "S1-seed42",
+      "nodes": "25a-hgpn121",
+      "start": "2026-10-19T13:54:43",
+      "state": "CANCELLED by 44781"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 3948,
+      "end": "2026-10-19T15:06:33",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "31a714d7f4d894edeae93a5f724e8a0425b96fc33c9b91caccc61d9578013cb4",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 8.773333333333333,
+      "job_id": "572115",
+      "key": "F1-seed42",
+      "nodes": "25a-hgpn024",
+      "start": "2026-10-19T14:00:45",
+      "state": "CANCELLED by 44781"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 3948,
+      "end": "2026-10-19T15:06:33",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "5885742c8737ecf86cac448197dceb4e61a2248b1469c2c779b96d0490d874db",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 8.773333333333333,
+      "job_id": "572116",
+      "key": "F2-seed42",
+      "nodes": "25a-hgpn037",
+      "start": "2026-10-19T14:00:45",
+      "state": "CANCELLED by 44781"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 3950,
+      "end": "2026-10-19T15:06:33",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "80e69f421ada2ec6546b52574d1d9a66d2ae3a528c9c98daec70388f375e9a0d",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 8.777777777777779,
+      "job_id": "572114",
+      "key": "K1-seed42",
+      "nodes": "25a-hgpn036",
+      "start": "2026-10-19T14:00:43",
+      "state": "CANCELLED by 44781"
+    }
+  ],
+  "total_cancelled_allocation_h200_hours": 42.86
+}

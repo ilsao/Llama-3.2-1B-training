@@ -1,0 +1,13 @@
+{
+  "auxiliary_lr_multiplier": 2,
+  "basis": "Nominal 4B lookup: matrix LR unchanged, AdamW LR times 2 from replicated 1B B winner",
+  "lookup_row": {
+    "adamw_lr": 0.00014986841480417473,
+    "muon_lr": 0.004995613826805825,
+    "status": "unvalidated_extrapolation",
+    "tokens": 4000000000
+  },
+  "path": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/calibration-result.json",
+  "resolved_adamw_lr": 0.00029973682960834946,
+  "sha256": "61bee230efaa6e02154b6554efaad7f27db25174b390a66a3c36cf6b9769cd20"
+}

@@ -1,0 +1,36 @@
+{
+  "current_candidate_gpu_validation": "completed: official 3B online pipeline, exact full-gradient match under deterministic FA3 backward",
+  "current_teacher_proposal": "official pretrained Llama3.2-3B prepared and tokenizer verified",
+  "files": {
+    "benchmark.py": "f009c5101163acdf7b6782dc4f78c435d4d78b15afbb7fa0365eabd9538a435b",
+    "fast_kd.py": "36d21e699b34532c1fc05c992a1a672670e81f5313bb10af6a445dca5afba04a",
+    "pretrained-teacher-proposal.json": "07194bfab59d77eb4a718e21dcab320e608f5e69286933149c4ed1035dc54c63",
+    "pretrained_teacher.py": "d8e1b75ba8782a9ad866b097c6564e9f117c1d585f534ef116c7c3f4ebc04273",
+    "pipeline/online_pipeline.py": "6e9e357e3fa75a90552ed9c4947d67f919c6120f1dd54f381af275e24b3ac5cb",
+    "pipeline/teacher_attention.py": "f49ae0bf4632f34b3fa406afdbc75289128a74572dbc0bbe445bb72aea9917c6",
+    "pipeline/benchmark_pipeline.py": "1a7c90a8e4e5356cc67b2148f0a821aec387517656aec01419f3b018ae00bba3"
+  },
+  "new_training_submitted": false,
+  "old_teacher_benchmark": "failed; archived in attempt1; not automatically resubmitted",
+  "recorded_utc": "2026-10-19T07:26:17.183481+00:00",
+  "retained_jobs": {
+    "A1": {
+      "job": "572068",
+      "state": "COMPLETED"
+    },
+    "C1": {
+      "job": "572119",
+      "state": "COMPLETED"
+    },
+    "D1": {
+      "job": "572264",
+      "state": "COMPLETED"
+    }
+  },
+  "small_gpu_checks": "passed on attempt1 same-hidden implementation",
+  "teacher_execution": "online; no persistent logits cache or offline logit generation",
+  "configuration_updated_utc": "2026-10-19T08:03:48.512350+00:00",
+  "pipeline_validation_results": "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/kd-acceleration/pipeline/results.json",
+  "pipeline_gpu_job": "573794",
+  "pipeline_cost_including_preprocessing_and_failed_attempts": 0.5841666666666666
+}

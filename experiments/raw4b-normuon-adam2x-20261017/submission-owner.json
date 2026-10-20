@@ -1,0 +1,8 @@
+{
+  "host": "25a-lgn01",
+  "controller": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-20261017/source/slurm/fourb_controller.py",
+  "cron_marker": "# raw4b-normuon-adam2x-20261017-controller",
+  "created_utc": "2026-10-17T15:10:13.775454+00:00",
+  "single_submission": true,
+  "other_cron_entries_preserved": true
+}

@@ -1,0 +1,66 @@
+{
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "files": {
+    "generation_config.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/generation_config.json",
+      "size": 143,
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed"
+    },
+    "special_tokens_map.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/special_tokens_map.json",
+      "size": 301,
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535"
+    },
+    "config.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/config.json",
+      "size": 838,
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5"
+    },
+    "model-00001-of-00003.safetensors": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/model-00001-of-00003.safetensors",
+      "size": 1956695880
+    },
+    "training-metadata.json": {
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw6b-20261019/payload-preview/training-metadata.json",
+      "size": 4452,
+      "sha256": "d090e584a4b169e647d5d232affeac200fba7dc81d5a1055965af393eb44dbc5"
+    },
+    "tokenizer_config.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/tokenizer_config.json",
+      "size": 50526,
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793"
+    },
+    "model-00003-of-00003.safetensors": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/model-00003-of-00003.safetensors",
+      "size": 1040282032
+    },
+    "model-00002-of-00003.safetensors": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/model-00002-of-00003.safetensors",
+      "size": 1946296312
+    },
+    "model.safetensors.index.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/model.safetensors.index.json",
+      "size": 12003,
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821"
+    },
+    "tokenizer.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317/tokenizer.json",
+      "size": 17209920
+    },
+    "resolved-training-config.json": {
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw6b-20261019/payload-preview/resolved-training-config.json",
+      "size": 2855,
+      "sha256": "8a64ce7325074ff1b9e613e77f18a72f1bec8602e8b40690473de24bc65dc56b"
+    },
+    "training-details.json": {
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw6b-20261019/payload-preview/training-details.json",
+      "size": 31108,
+      "sha256": "5dab75864d148d40876618ac8bd0368e0053cbd96a6319a4ff072f50623e7442"
+    },
+    "README.md": {
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw6b-20261019/payload-preview/README.md",
+      "size": 3422,
+      "sha256": "6c6ca2c5a8ad79049fd68644199ff53a40e24184ba76d7acf60663bea50eb526"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "approved": true,
+  "reason": "Explicit approval after reviewed two one-time startup replacements; preserve all failed costs and pending token charges",
+  "source_seal_sha256": "808bbdd564426cc733deba3e5c2ef1f6d7f4ba256a0193a12282275965546b41",
+  "configs": {
+    "critical-batch-20261020-c0-shadow": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "critical-batch-20261020-c1-cbs-half": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25"
+  },
+  "logical_input_cap_per_role": 1000210432,
+  "user_quote": "yes",
+  "approved_at_utc": "2026-10-20T05:48:17.389786+00:00",
+  "failed_jobs": {
+    "critical-batch-20261020-c0-shadow": "587009",
+    "critical-batch-20261020-c1-cbs-half": "587010"
+  },
+  "replacement_seconds": 7080,
+  "replacement_count": 2,
+  "gpu_count_per_job": 8,
+  "cpu_count_per_job": 8,
+  "max_campaign_h200_hours": 47.98222222222222,
+  "no_automatic_retry": true,
+  "no_training_checkpoint_load": true
+}

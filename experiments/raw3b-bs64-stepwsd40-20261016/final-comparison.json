@@ -1,0 +1,20 @@
+{
+  "raw3b-bs64-wsd40-20261016": {
+    "candidate_full_perplexity": 15.371304229874601,
+    "control_full_perplexity": 15.21170256746107,
+    "delta_perplexity": 0.15960166241353058,
+    "improved": false
+  },
+  "raw3b-sota-20261015": {
+    "candidate_full_perplexity": 15.371304229874601,
+    "control_full_perplexity": 15.277734596019409,
+    "delta_perplexity": 0.09356963385519279,
+    "improved": false
+  },
+  "raw3b-sota-wsd20-20261015": {
+    "candidate_full_perplexity": 15.371304229874601,
+    "control_full_perplexity": 15.912297665809827,
+    "delta_perplexity": -0.540993435935226,
+    "improved": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "hostname": "retired-completed-campaign",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-wsd-bracket-20261015/source/slurm/wsd_bracket_controller.py",
+  "sha256": "0f5c05bd61a9c46fa205c10746fa8893640770eb388214bda99369dc0ad6f577",
+  "source_commit": "c98136d201f157b3f4f64a167a1549f3d2d37116",
+  "recovery_utc": "2026-10-15T08:02:14.259914+00:00",
+  "previous_hostname": "25a-lgn04",
+  "retired_utc": "2026-10-15T09:20:26.887366+00:00",
+  "reason": "Completed; replaced by explicitly requested matched3B comparison"
+}

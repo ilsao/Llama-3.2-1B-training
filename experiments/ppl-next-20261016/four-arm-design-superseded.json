@@ -1,0 +1,340 @@
+{
+  "automatic_promotion": false,
+  "constraints": {
+    "architecture": "meta-llama/Llama-3.2-1B unchanged",
+    "automatic_retry_or_resume": false,
+    "canonical_split_seed": 42,
+    "cleanup": false,
+    "context": 8192,
+    "heavy_work": "Slurm only",
+    "hf_upload": false,
+    "large_artifacts_root": "/work/asciibase64/Llama-3.2-1B-training",
+    "new_formal_run_authorization": "Required for selected final experiments; historical named exceptions do not extend to this proposal",
+    "preparation": "dolma-raw-baseline-20261008",
+    "reserved_documents": 50000,
+    "training_checkpoint_load": false,
+    "wandb_project": "lab5-training-llama"
+  },
+  "evaluation": {
+    "additional_evaluation": [
+      "common 10 percent token knots",
+      "phase boundaries",
+      "batch boundary",
+      "endpoint"
+    ],
+    "confirmation_allocation": {
+      "cpus": 8,
+      "gpus": 8,
+      "h200_hours_cap": 2,
+      "minutes": 15
+    },
+    "confirmation_documents": "remaining 9000 within the existing fixed 10000 subset; disclose historical reuse",
+    "confirmation_selection": "Lock at most one complete candidate on 1k, then compare with dense NS raw control on 9k; do not reselect using 9k",
+    "development_documents": 1000,
+    "eval_steps_proposed": 400,
+    "final_documents": 50000,
+    "paired_bootstrap_unit": "document",
+    "primary_metric": "sum NLL / sum valid prediction tokens at matched final input tokens",
+    "screen_delta_nll_threshold": -0.005,
+    "seed_confirmation": [
+      42,
+      43
+    ],
+    "sequence_length": 8192,
+    "use_best_checkpoint_for_ranking": false,
+    "validate_interval_against_resolved_updates": true
+  },
+  "optional_modules": [
+    {
+      "additional_fresh_1b_arms": 1,
+      "condition": "Consider after standalone PE and NorMuon results; no automatic launch; old 20 percent tail combination is not a matched cell",
+      "id": "normuon_pe_interaction_1b",
+      "interaction": "NLL(NorMuon_PE)-NLL(Muon_PE)-NLL(NorMuon_NS)+NLL(Muon_NS)",
+      "reservation_h200_hours": 16
+    },
+    {
+      "additional_fresh_1b_arms": 1,
+      "condition": "Assess after the two main-effect contrasts; no automatic launch",
+      "id": "intradoc_pe_interaction_1b",
+      "interaction": "NLL(intradoc_PE)-NLL(intradoc_NS)-NLL(dense_PE)+NLL(dense_NS)",
+      "reservation_h200_hours": 16
+    },
+    {
+      "additional_fresh_1b_arms": 2,
+      "formula": "d=product over virtual BS16 substeps of (1-lr_j*wd); apply d directly",
+      "id": "token_normalized_weight_decay",
+      "reservation_h200_hours": 32,
+      "shared_control": "first-stage dense control"
+    },
+    {
+      "fresh_runs": 2,
+      "historical_cells": [
+        "raw3b-sota-20261015",
+        "raw3b-bs64-wsd40-20261016"
+      ],
+      "id": "batch_tail_factorial_3b",
+      "minutes_each": 360,
+      "new_cells": [
+        "BS16 tail40",
+        "BS16to64 tail60"
+      ],
+      "reservation_h200_hours": 96,
+      "target_input_tokens": 3000107008
+    },
+    {
+      "adamw_lr_multipliers": [
+        0.5,
+        1,
+        2
+      ],
+      "fresh_1b_arms": 3,
+      "id": "auxiliary_lr_transfer",
+      "muon_lr_fixed": true,
+      "reservation_h200_hours": 48
+    },
+    {
+      "freeze_batch_windows": true,
+      "fresh_runs": 2,
+      "id": "clock_factorial_3b",
+      "minutes_each": 360,
+      "new_cells": [
+        "token_decay_update_warmup",
+        "update_decay_token_warmup"
+      ],
+      "reservation_h200_hours": 96
+    },
+    {
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "comparison": "same-horizon current Muon control; author results versus AdamW are not evidence versus Muon",
+      "epsilon": 1e-08,
+      "id": "soap",
+      "matrix_lrs": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "max_1b_candidates": 2,
+      "max_precond_dim": 2048,
+      "merge_dims": false,
+      "normalize_grads": false,
+      "precondition_1d": false,
+      "precondition_frequency": 100,
+      "reservation_h200_hours": 42,
+      "runtime_gate_h200_hours": 2,
+      "screen_minutes_each": 20,
+      "shampoo_beta": 0.95,
+      "source_commit": null,
+      "source_pin_required": true
+    },
+    {
+      "condition": "lock winner and control after first-stage result",
+      "fresh_1b_runs": 2,
+      "id": "seed_confirmation",
+      "reservation_h200_hours": 32,
+      "seed": 43
+    },
+    {
+      "condition": "replicated 1B signal and applicable formal-run authorization",
+      "fresh_runs": 2,
+      "id": "method_transfer_3b",
+      "minutes_each": 360,
+      "reservation_h200_hours": 96,
+      "target_input_tokens": 3000107008
+    },
+    {
+      "condition": "locked recipe and applicable formal-run authorization",
+      "fresh_runs": 1,
+      "id": "fresh_4b",
+      "minutes_each": 420,
+      "reservation_h200_hours": 56,
+      "target_input_tokens": 4000055296
+    }
+  ],
+  "recommended_first_stage": {
+    "accumulation_before_after": [
+      2,
+      8
+    ],
+    "adamw_betas": [
+      0.9,
+      0.95
+    ],
+    "adamw_peak_lr": 0.00025844674626140116,
+    "arm_definitions": {
+      "dense_control": {
+        "attention": "cross_document_causal",
+        "orthogonalizer": "native_ns5"
+      },
+      "intra_document": {
+        "attention": "document_span_causal",
+        "orthogonalizer": "native_ns5"
+      },
+      "normuon_only": {
+        "attention": "cross_document_causal",
+        "orthogonalizer": "native_ns5",
+        "post_orthogonalization": "neuron_wise_second_moment_normalization"
+      },
+      "polar_express_only": {
+        "attention": "cross_document_causal",
+        "orthogonalizer": "pe5"
+      }
+    },
+    "averaging": {
+      "cross_phase_averaging": false,
+      "ema_beta_formula": "2**(-delta_input_tokens/half_life_tokens)",
+      "ema_half_life_fraction": 0.01,
+      "ema_start_fraction": 0.95,
+      "estimated_extra_fp32_shadow_bytes_per_rank": 9886515200,
+      "feedback_into_training": false,
+      "finite_window_fractions": [
+        0.98,
+        0.985,
+        0.99,
+        0.995,
+        1.0
+      ],
+      "rounding": "nearest completed batch in presealed common batch plan"
+    },
+    "batch_switch_tokens": 500039680,
+    "confirmation_eval_reservation_h200_hours": 2,
+    "cpus_total_per_arm": 8,
+    "final_evaluation_export_stop_reserve_minutes": 20,
+    "first_decision_reservation_h200_hours": 70,
+    "fresh_initialization": true,
+    "global_clip": 0.5,
+    "global_sequences_before_after": [
+      16,
+      64
+    ],
+    "gpus_per_arm": 8,
+    "h200_hours_cap_per_arm": 16,
+    "initialization": "residual_half",
+    "methods": [
+      "intra_document_attention",
+      "phase_local_weight_averaging",
+      "polar_express_only",
+      "normuon_only"
+    ],
+    "microbatch_per_rank": 1,
+    "minutes_cap_per_arm": 120,
+    "muon_momentum": 0.95,
+    "muon_peak_lr": 0.008614891542046706,
+    "normuon": {
+      "cautious_weight_decay": false,
+      "interpretation": "NorMuon neuron-normalization ablation with native Muon outer semantics, not a verbatim full-package reproduction",
+      "lr_search_in_first_round": false,
+      "no_optimizer_state_reset_at_phase_or_batch_boundary": true,
+      "normalization_after_transpose_restored": true,
+      "normalized_update": "V = U/(sqrt(v)+1e-8); U_new = V*(norm_F(U)/max(norm_F(V),1e-8))",
+      "orthogonalizer": "native_ns5",
+      "polar_express": false,
+      "preserve_original_update_frobenius_norm": true,
+      "reference": "muonium 0.2.0 algorithms/normuon.py _normuon_normalize; transplant only normalization into native-Muon-compatible adapter",
+      "variance_beta2": 0.95,
+      "variance_beta2_policy": "fixed_per_optimizer_update_even_after_batch_switch",
+      "variance_bias_correction": false,
+      "variance_dtype": "float32",
+      "variance_initialization": "zeros",
+      "variance_shape": "one scalar per original weight-matrix output row",
+      "variance_update": "v = 0.95*v + 0.05*mean(U**2, input_dimension)"
+    },
+    "normuon_validation": {
+      "cpus": 8,
+      "gpus": 8,
+      "h200_hours_cap": 2,
+      "minutes": 15
+    },
+    "phase_end_units": [
+      6358,
+      7630
+    ],
+    "phase_peak_ratios": [
+      1.0,
+      0.1
+    ],
+    "phase_warmup_units": [
+      170,
+      170
+    ],
+    "planned_actual_updates": null,
+    "planned_updates_status": "Must be generated and sealed with exact batch-event windows before execution",
+    "plateau_lr_ratio": 0.2,
+    "polar_express": {
+      "additional_rms_renormalization": false,
+      "cautious_weight_decay": false,
+      "coefficient_reference": "Existing sealed muonium 0.2.0 PE table; see first-round.md",
+      "interpretation": "A fixed-recipe drop-in comparison, not a comparison of independently optimized best recipes",
+      "iterations": 5,
+      "lr_adjust_fn": "original",
+      "lr_search_in_first_round": false,
+      "momentum": 0.95,
+      "must_pass_native_ns_parity": true,
+      "nesterov": true,
+      "normalization": "X / (1.02 * FrobeniusNorm(X) + 1e-6)",
+      "normuon_second_moment": false,
+      "row_equilibration": false,
+      "scope_of_change": "Orthogonalizer only, including its prescribed normalization; preserve native torch 2.9.1 outer Muon update semantics"
+    },
+    "polar_express_validation": {
+      "cpus": 8,
+      "gpus": 8,
+      "h200_hours_cap": 2,
+      "minutes": 15
+    },
+    "readout_variants_per_arm": [
+      "raw",
+      "token_ema",
+      "finite_window_mean"
+    ],
+    "reference_batch_tokens": 131072,
+    "schedule_clock": "nonpadding_input_tokens",
+    "screen_and_confirmation_reservation_h200_hours": 72,
+    "seed": 42,
+    "stage": "medium",
+    "tail_ramp_hold_final_proportions": [
+      4,
+      1,
+      1
+    ],
+    "tail_ratio_each_phase": 0.4,
+    "target_input_tokens": 1000079360,
+    "training_arms": [
+      "dense_control",
+      "intra_document",
+      "polar_express_only",
+      "normuon_only"
+    ],
+    "validation": {
+      "cpus": 8,
+      "gpus": 8,
+      "h200_hours_cap": 2,
+      "minutes": 15
+    },
+    "weight_decay_embedding_head_norm": 0,
+    "weight_decay_muon": 0.1
+  },
+  "runtime_gates": [
+    "NorMuon disabled reproduces native NS Muon; enabled normalization matches FP32 reference and preserves update Frobenius norm for nondegenerate inputs",
+    "NorMuon variance rows correspond to original output-neuron dimension after NS transpose restoration; zero/tiny inputs remain finite",
+    "NorMuon variance persists across phase/batch boundaries and state roundtrip; no PE calls in NorMuon-only arm; eight-rank parity",
+    "PE adapter in NS mode reproduces native torch 2.9.1 Muon parameter and momentum updates",
+    "PE5 forward matches a fixed reference on square, tall, wide, zero and rank-deficient matrices; compiled/eager parity",
+    "PE preserves original LR shape scaling and decoupled decay; no NorMuon second moment",
+    "FA3 document spans versus explicit block-causal SDPA forward and backward",
+    "Input and prediction token counts identical to dense control",
+    "Earlier-document perturbation leaves later-document outputs unchanged",
+    "Unique tied-parameter routing and averaging",
+    "Raw trajectory unchanged by averaging observers",
+    "Complete optimizer/scheduler/RNG/cursor and observer state save/load",
+    "GPU memory, allocation throughput and export reload inside cap",
+    "Per-step global token accounting and actual LR audit"
+  ],
+  "scope": "Historical analysis, literature survey and falsifiable experimental design",
+  "status": "design_only",
+  "study": "ppl-next-20261016",
+  "submission_enabled": false,
+  "training_implementation_complete": false
+}

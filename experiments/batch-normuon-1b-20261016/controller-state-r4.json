@@ -1,14 +1,287 @@
 {
   "blocked_lanes": {},
   "jobs": {
+    "bs-50-fixed": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2270,
+        "end": "2026-10-16T05:12:53",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "355dc92cd8e2742e7b248e60703fa76997dea0a9435f7bc8435a942d93b43ee3",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 5.044444444444444,
+        "job_id": "555278",
+        "nodes": "25a-hgpn013",
+        "start": "2026-10-16T04:35:03",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555278",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-50-fixed-b4e19fc63c0b42fe8e69f533bb4691a2",
+      "returned_job_id": "555278",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-50-fixed",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-50-fixed-b4e19fc63c0b42fe8e69f533bb4691a2",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-50-fixed",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-50-fixed.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555278\n"
+      },
+      "submission_started_utc": "2026-10-15T20:35:02.407775+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-50-fixed-b4e19fc63c0b42fe8e69f533bb4691a2"
+    },
+    "bs-50-scaled": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 2255,
+        "end": "2026-10-16T05:12:40",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "1057ab930ad238cc80da8babc8408b37cef3c2740c28f5e1bf732f1e13200033",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 5.011111111111111,
+        "job_id": "555279",
+        "nodes": "25a-hgpn069",
+        "start": "2026-10-16T04:35:05",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555279",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-50-scaled-1cb2e265bb324f7583f447e215f9d752",
+      "returned_job_id": "555279",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-50-scaled",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-50-scaled-1cb2e265bb324f7583f447e215f9d752",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-50-scaled",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-50-scaled.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555279\n"
+      },
+      "submission_started_utc": "2026-10-15T20:35:02.969606+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-50-scaled-1cb2e265bb324f7583f447e215f9d752"
+    },
+    "bs-70-fixed": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1418,
+        "end": "2026-10-16T05:16:02",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "e3ed324b3753c97be5d762bbd89dba11ec2e284ec6d000a59f3291659372c0ba",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 3.151111111111111,
+        "job_id": "555489",
+        "nodes": "25a-hgpn167",
+        "start": "2026-10-16T04:52:24",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555489",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-70-fixed-fe7e3f83845746d6babc1973bc3c0034",
+      "returned_job_id": "555489",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-70-fixed",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-70-fixed-fe7e3f83845746d6babc1973bc3c0034",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-70-fixed",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-70-fixed.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555489\n"
+      },
+      "submission_started_utc": "2026-10-15T20:52:02.590142+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-70-fixed-fe7e3f83845746d6babc1973bc3c0034"
+    },
+    "bs-70-scaled": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1441,
+        "end": "2026-10-16T05:16:25",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "82a09ab97b9b84957bda28a219b4095d0b22f918d82299eb83fae3ad4d16448d",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 3.2022222222222223,
+        "job_id": "555490",
+        "nodes": "25a-hgpn086",
+        "start": "2026-10-16T04:52:24",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555490",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-70-scaled-b651c4b5f6964d5cbf8d3453f9493130",
+      "returned_job_id": "555490",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-70-scaled",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-70-scaled-b651c4b5f6964d5cbf8d3453f9493130",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-70-scaled",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-70-scaled.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555490\n"
+      },
+      "submission_started_utc": "2026-10-15T20:52:03.152547+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-70-scaled-b651c4b5f6964d5cbf8d3453f9493130"
+    },
+    "bs-predecay-fixed": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1564,
+        "end": "2026-10-16T05:15:27",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "e0a64f3f257f57faff6c6ebbb3b9336f64e554d2204e10091b5eaadacc3fb62e",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 3.4755555555555557,
+        "job_id": "555440",
+        "nodes": "25a-hgpn143",
+        "start": "2026-10-16T04:49:23",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555440",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-predecay-fixed-7cdd4c8c1fdc40aeafc72ec1d0109be9",
+      "returned_job_id": "555440",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-predecay-fixed",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-predecay-fixed-7cdd4c8c1fdc40aeafc72ec1d0109be9",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-predecay-fixed",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-predecay-fixed.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555440\n"
+      },
+      "submission_started_utc": "2026-10-15T20:49:02.443206+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-predecay-fixed-7cdd4c8c1fdc40aeafc72ec1d0109be9"
+    },
+    "bs-predecay-scaled": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1553,
+        "end": "2026-10-16T05:15:16",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "194192f3b8c13fc9a24e7c119b03935990ed30095c9f5a1ab434adae13b33f73",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 3.451111111111111,
+        "job_id": "555441",
+        "nodes": "25a-hgpn150",
+        "start": "2026-10-16T04:49:23",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
+      "job_id": "555441",
+      "kind": "fork",
+      "reservation": "batch-normuon-1b-20261016-bs-predecay-scaled-707ba749177f47f6996766a8cd6dc580",
+      "returned_job_id": "555441",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=b1b-bs-predecay-scaled",
+        "--time=119",
+        "--comment=batch-normuon-1b-20261016-bs-predecay-scaled-707ba749177f47f6996766a8cd6dc580",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/source-r4/slurm/batch1b.sbatch",
+        "batch-normuon-1b-20261016-bs-predecay-scaled",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/configs/bs-predecay-scaled.json",
+        "fork"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "555441\n"
+      },
+      "submission_started_utc": "2026-10-15T20:49:03.009527+00:00",
+      "submission_tag": "batch-normuon-1b-20261016-bs-predecay-scaled-707ba749177f47f6996766a8cd6dc580"
+    },
     "control": {
-      "completed_endpoint": false,
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 5254,
+        "end": "2026-10-16T05:17:59",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "42569e58b7892b67011ea3b4f49f39a8e7b077a1f7fee82fba466fd3ebcf046c",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 11.675555555555556,
+        "job_id": "555139",
+        "nodes": "25a-hgpn041",
+        "start": "2026-10-16T03:50:25",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
       "job_id": "555139",
       "kind": "train",
       "reservation": "batch-normuon-1b-20261016-control-88079389132f439a976d5e385d5292f2",
       "returned_job_id": "555139",
-      "slurm_state": "RUNNING",
-      "status": "submitted",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -30,13 +303,28 @@
       "submission_tag": "batch-normuon-1b-20261016-control-88079389132f439a976d5e385d5292f2"
     },
     "lr001": {
-      "completed_endpoint": false,
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 5208,
+        "end": "2026-10-16T05:17:13",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "295369f0ccb67a22bbd511790f46d958fd07a74ed2afe67a06f9b6d15dd62fe6",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 11.573333333333334,
+        "job_id": "555140",
+        "nodes": "25a-hgpn058",
+        "start": "2026-10-16T03:50:25",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
       "job_id": "555140",
       "kind": "train",
       "reservation": "batch-normuon-1b-20261016-lr001-967f84b3f0fa463fa837c40c83be90ab",
       "returned_job_id": "555140",
-      "slurm_state": "RUNNING",
-      "status": "submitted",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -58,13 +346,28 @@
       "submission_tag": "batch-normuon-1b-20261016-lr001-967f84b3f0fa463fa837c40c83be90ab"
     },
     "normuon": {
-      "completed_endpoint": false,
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 5319,
+        "end": "2026-10-16T05:19:04",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "066168cc29853bb2a9505c31af36fe999df99174aec1488fc77f9bce55d831ff",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 11.82,
+        "job_id": "555141",
+        "nodes": "25a-hgpn124",
+        "start": "2026-10-16T03:50:25",
+        "state": "COMPLETED"
+      },
+      "completed_endpoint": true,
       "job_id": "555141",
       "kind": "normuon",
       "reservation": "batch-normuon-1b-20261016-normuon-bf556c0ba2e14a40a5134ff654a43b80",
       "returned_job_id": "555141",
-      "slurm_state": "RUNNING",
-      "status": "submitted",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
       "submission_command": [
         "sbatch",
         "--parsable",
@@ -338,5 +641,5 @@
       "submission_tag": "batch-normuon-1b-20261016-validation-r1-f72b5ccff38f4d46882662e535dd5e1b"
     }
   },
-  "stage": "training_and_snapshot_forks"
+  "stage": "complete"
 }

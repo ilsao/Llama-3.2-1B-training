@@ -1,0 +1,110 @@
+[
+  {
+    "candidate": "lr05",
+    "nll": 3.126626289271634,
+    "perplexity": 22.796939380939833,
+    "physical_h200_hours": 8.13111111111111,
+    "training_tokens": 700055552,
+    "value": 0.5,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7f52f2e748ef44b0a98b5429d5414f15"
+  },
+  {
+    "candidate": "lr10",
+    "nll": 3.1309817571254794,
+    "perplexity": 22.896447261961917,
+    "physical_h200_hours": 8.12,
+    "training_tokens": 700055552,
+    "value": 1.0,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/068e4aaf70ca470caab2ddd89c8831f4"
+  },
+  {
+    "candidate": "lr20",
+    "nll": 3.2508135333898958,
+    "perplexity": 25.811329756662435,
+    "physical_h200_hours": 8.137777777777778,
+    "training_tokens": 700055552,
+    "value": 2.0,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7245c67aceff4d46873b26d8e397952e"
+  },
+  {
+    "candidate": "clip05",
+    "nll": 3.118394911847265,
+    "perplexity": 22.610059363930443,
+    "physical_h200_hours": 8.146666666666667,
+    "training_tokens": 700055552,
+    "value": 0.5,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/e407efc49c9f4db19b71fa4cef55bff4"
+  },
+  {
+    "candidate": "clip10",
+    "nll": 3.1264148018850224,
+    "perplexity": 22.792118625589858,
+    "physical_h200_hours": 8.126666666666667,
+    "training_tokens": 700055552,
+    "value": 1.0,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d3d35ea772634100b5583c37aaa13759"
+  },
+  {
+    "candidate": "clip20",
+    "nll": 3.1296373649206886,
+    "perplexity": 22.865686138885682,
+    "physical_h200_hours": 8.068888888888889,
+    "training_tokens": 700055552,
+    "value": 2.0,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/803b49b248a84898bfbf5aafd2693f90"
+  },
+  {
+    "candidate": "clipoff",
+    "nll": 3.1342061384899806,
+    "perplexity": 22.97039329085964,
+    "physical_h200_hours": 8.20888888888889,
+    "training_tokens": 700055552,
+    "value": 0,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/211f5298441e4069a56a0eb020350189"
+  },
+  {
+    "candidate": "decay60",
+    "nll": 3.1196607596227777,
+    "perplexity": 22.638698379773537,
+    "physical_h200_hours": 4.937777777777778,
+    "training_tokens": 700055552,
+    "value": 0.6,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d5f8148cb57146a3902f30df3db635fe"
+  },
+  {
+    "candidate": "decay50",
+    "nll": 3.1219575595143083,
+    "perplexity": 22.69075469834568,
+    "physical_h200_hours": 4.8933333333333335,
+    "training_tokens": 700055552,
+    "value": 0.5,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/868399dd687141a0bf886649ebb5f563"
+  },
+  {
+    "candidate": "decay40",
+    "nll": 3.129557132296104,
+    "perplexity": 22.86385163846821,
+    "physical_h200_hours": 4.924444444444444,
+    "training_tokens": 700055552,
+    "value": 0.4,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/be178e8c2eec495b80d8f3fcc3b2feb0"
+  },
+  {
+    "candidate": "decay20",
+    "nll": 3.169062461983459,
+    "perplexity": 23.785174394619144,
+    "physical_h200_hours": 4.957777777777777,
+    "training_tokens": 700055552,
+    "value": 0.2,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/182b8abc572547cb937836edeb12d610"
+  },
+  {
+    "candidate": "decay10",
+    "nll": 3.2192287523074468,
+    "perplexity": 25.00882474313655,
+    "physical_h200_hours": 4.98,
+    "training_tokens": 700055552,
+    "value": 0.1,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1d85ec1d2d53433bb5d2206afea2c2df"
+  }
+]

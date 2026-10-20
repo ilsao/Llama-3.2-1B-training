@@ -1,0 +1,41 @@
+{
+  "job": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 18951,
+      "end": "2026-10-18T04:25:47",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "b845a9fc95e5afcec732a377067f4ae760ad245fc5368b53676cd1f837289bcb",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 42.11333333333334,
+      "job_id": "563624",
+      "nodes": "25a-hgpn021",
+      "start": "2026-10-17T23:09:56",
+      "state": "COMPLETED"
+    },
+    "job_id": "563624",
+    "reservation": "raw4b-normuon-adam2x-20261017-527864462d7149c4ad671adda685df90",
+    "returned_job_id": "563624",
+    "slurm_state": "COMPLETED",
+    "status": "complete",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=raw4b-normuon-adam2x-20261017-527864462d7149c4ad671adda685df90",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw4b-normuon-adam2x.sbatch",
+      "raw4b-normuon-adam2x-20261017",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-20261017/config.json"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "563624\n"
+    },
+    "submission_started_utc": "2026-10-17T15:09:53.741553+00:00",
+    "submission_tag": "raw4b-normuon-adam2x-20261017-527864462d7149c4ad671adda685df90"
+  },
+  "status": "complete"
+}

@@ -1,0 +1,25 @@
+{
+  "approved": false,
+  "approved_utc": "2026-10-15T15:32:52.131854+00:00",
+  "automatic_further_retry": false,
+  "checkpoint_training_load": false,
+  "configuration_digest": "efd9b2a00aa2d225d9bc6b84e433384093288ed8ed266417591b46f8f432b5a7",
+  "failed_allocation_seconds": 20,
+  "failed_h200_hours": 0.044444444444444446,
+  "failed_job_id": "553561",
+  "failed_jobs": [
+    "553561",
+    "553577"
+  ],
+  "failed_metadata_files": {},
+  "formal_run_number": 11,
+  "fresh_random_initialization": true,
+  "maximum_cumulative_allocation_seconds": 21600,
+  "maximum_cumulative_h200_hours": 48,
+  "maximum_restart_seconds": 21540,
+  "one_time_only": true,
+  "reason": "Whole-minute wall-time359minutes avoids observed Slurm round-up; no training inputs processed by either failed startup",
+  "run_id": "raw3b-sota-wsd20-20261015",
+  "training_tokens_previously_processed": 0,
+  "user_reply": null
+}

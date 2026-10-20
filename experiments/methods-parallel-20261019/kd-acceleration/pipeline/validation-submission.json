@@ -1,0 +1,9 @@
+{
+  "gpu_count": 8,
+  "job_id": "573687",
+  "max_h200_hours": 1.6,
+  "requested_seconds": 720,
+  "reservation": "kd-pipeline-validation-20261019-allocation1",
+  "run_id": "kd-pipeline-validation-20261019",
+  "state": "submitted"
+}

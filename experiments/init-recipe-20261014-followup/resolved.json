@@ -1,0 +1,10 @@
+{
+  "configuration_digest": "987bca585d32759f3deaa7b31fc6916efc9c92c6dff5a19f1a2763b2a4a08d57",
+  "parallel_training": true,
+  "parent_completed_full_evaluation": false,
+  "parent_configuration": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/resolved-config.json",
+  "parent_configuration_sha256": "b026005dfa221a1b2c84b99b352d1b7f5352c10e5d142cc717a843d6f83ecbd3",
+  "parent_configuration_verified": true,
+  "parent_full_perplexity": null,
+  "parent_job": "544399"
+}

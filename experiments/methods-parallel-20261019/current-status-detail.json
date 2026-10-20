@@ -1,0 +1,486 @@
+{
+  "timestamp_utc": "2026-10-19T06:59:45.635755+00:00",
+  "records": [
+    {
+      "key": "D1-seed42",
+      "job_id": "572264",
+      "slurm_state": "RUNNING",
+      "step": 3690,
+      "tokens": 483655680,
+      "latest_eval": {
+        "step": 3452,
+        "tokens": 452460544,
+        "ppl": 32.36631261716121,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 31.394858955261316
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 153.88859705647587,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 56.38698054783848,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 45.90685805419937,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 40.62510420588361,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 1.5490226745605469,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 184279.47627722926,
+      "seconds_until_training_stop_margin": 3156.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "D025-seed42",
+      "job_id": "572265",
+      "slurm_state": "RUNNING",
+      "step": 3970,
+      "tokens": 581304320,
+      "latest_eval": {
+        "step": 3815,
+        "tokens": 500039680,
+        "ppl": 37.09800050429706,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 30.48905816418166
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 185.4860036046917,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 69.79621700608956,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 57.12552671604863,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 50.05506390452074,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 1.4721896648406982,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 247446.87377974953,
+      "seconds_until_training_stop_margin": 3156.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "A1-seed42",
+      "job_id": "572068",
+      "slurm_state": "RUNNING",
+      "step": 4320,
+      "tokens": 764149760,
+      "latest_eval": {
+        "step": 4197,
+        "tokens": 700055552,
+        "ppl": 21.52789380043537,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 20.639773812398055
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 204.25198526939556,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 61.87863992940662,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 47.62694583549371,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 41.74411781429576,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 5.187397718429565,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 235715.1041112585,
+      "seconds_until_training_stop_margin": 2096.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "S1-seed42",
+      "job_id": "572069",
+      "slurm_state": "RUNNING",
+      "step": 1110,
+      "tokens": 145489920,
+      "latest_eval": {
+        "step": 763,
+        "tokens": 100007936,
+        "ppl": 118.94667300302314,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 53.457232608856295
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 261.08748460611145,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 118.94667300302314,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 13.65866494178772,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 38395.7383847655,
+      "seconds_until_training_stop_margin": 2097.3642449378967,
+      "linear_projection_tokens_at_stop": 226019768.8461967,
+      "recent_error_markers": []
+    },
+    {
+      "key": "K1-seed42",
+      "job_id": "572114",
+      "slurm_state": "RUNNING",
+      "step": 2780,
+      "tokens": 364380160,
+      "latest_eval": {
+        "step": 2689,
+        "tokens": 352452608,
+        "ppl": 29.559989006703372,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 32.65712711135478
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 116.90452712983337,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 48.46911532782144,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 39.786574527101756,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 35.58572158644662,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 6.885579347610474,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 105166.05584256887,
+      "seconds_until_training_stop_margin": 2397.3642449378967,
+      "linear_projection_tokens_at_stop": 616501502.0581168,
+      "recent_error_markers": []
+    },
+    {
+      "key": "F1-seed42",
+      "job_id": "572115",
+      "slurm_state": "RUNNING",
+      "step": 4140,
+      "tokens": 670302208,
+      "latest_eval": {
+        "step": 4006,
+        "tokens": 600047616,
+        "ppl": 24.5059773975826,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 23.080507197056633
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 254.9956143235338,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 111.25164146540686,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 57.298022737693685,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 43.153196338642545,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 9.288400411605835,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 236625.92290511972,
+      "seconds_until_training_stop_margin": 2399.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "F2-seed42",
+      "job_id": "572116",
+      "slurm_state": "RUNNING",
+      "step": 4160,
+      "tokens": 680787968,
+      "latest_eval": {
+        "step": 4006,
+        "tokens": 600047616,
+        "ppl": 35.93525197640231,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 23.080507197056633
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 198.7702872902801,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 88.98089540205014,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 56.88148353716831,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 47.61004021129231,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 13.951281547546387,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 237858.3790704464,
+      "seconds_until_training_stop_margin": 2399.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "C1-seed42",
+      "job_id": "572119",
+      "slurm_state": "RUNNING",
+      "step": 3920,
+      "tokens": 555089920,
+      "latest_eval": {
+        "step": 3815,
+        "tokens": 500039680,
+        "ppl": 30.471225299098297,
+        "prediction_tokens": 1479302,
+        "historical_n0_same_step_ppl": 30.48905816418166
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 131.9436467094754,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 53.48003422909679,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 43.85554338669933,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 39.12830165509799,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 8.212854385375977,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": false,
+      "confirmation_exists": false,
+      "recent_wall_clock_tokens_per_second": 193154.45857467822,
+      "seconds_until_training_stop_margin": 2405.3642449378967,
+      "linear_projection_tokens_at_stop": 1000079360,
+      "recent_error_markers": []
+    },
+    {
+      "key": "N0-seed42",
+      "job_id": null,
+      "slurm_state": null,
+      "step": 4775,
+      "tokens": 1000079360,
+      "latest_eval": {
+        "step": 4775,
+        "tokens": 1000079360,
+        "ppl": 18.699463505050684,
+        "prediction_tokens": 1479302
+      },
+      "early_evaluations": [
+        {
+          "step": 400,
+          "tokens": 52428800,
+          "ppl": 131.99954207467079,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 763,
+          "tokens": null,
+          "ppl": 53.457232608856295,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1163,
+          "tokens": null,
+          "ppl": 43.8698373157136,
+          "prediction_tokens": 1479302
+        },
+        {
+          "step": 1526,
+          "tokens": null,
+          "ppl": 39.151073767642075,
+          "prediction_tokens": 1479302
+        }
+      ],
+      "train_metrics_age_seconds": 173223.602714777,
+      "nonfinite_logged_losses": 0,
+      "summary_exists": true,
+      "confirmation_exists": false
+    }
+  ],
+  "matched_latest_evaluation_table": [
+    {
+      "method": "D1-seed42",
+      "progress_pct": 48.36173001310616,
+      "processed_million_tokens": 483.65568,
+      "eval_million_tokens": 452.460544,
+      "ppl": 32.36631261716121,
+      "matched_historical_n0_ppl": 31.394858955261316
+    },
+    {
+      "method": "D025-seed42",
+      "progress_pct": 58.12581913499345,
+      "processed_million_tokens": 581.30432,
+      "eval_million_tokens": 500.03968,
+      "ppl": 37.09800050429706,
+      "matched_historical_n0_ppl": 30.48905816418166
+    },
+    {
+      "method": "A1-seed42",
+      "progress_pct": 76.4089121887287,
+      "processed_million_tokens": 764.14976,
+      "eval_million_tokens": 700.055552,
+      "ppl": 21.52789380043537,
+      "matched_historical_n0_ppl": 20.639773812398055
+    },
+    {
+      "method": "S1-seed42",
+      "progress_pct": 14.5478374836173,
+      "processed_million_tokens": 145.48992,
+      "eval_million_tokens": 100.007936,
+      "ppl": 118.94667300302314,
+      "matched_historical_n0_ppl": 53.457232608856295
+    },
+    {
+      "method": "K1-seed42",
+      "progress_pct": 36.435124508519,
+      "processed_million_tokens": 364.38016,
+      "eval_million_tokens": 352.452608,
+      "ppl": 29.559989006703372,
+      "matched_historical_n0_ppl": 32.65712711135478
+    },
+    {
+      "method": "F1-seed42",
+      "progress_pct": 67.02490170380078,
+      "processed_million_tokens": 670.302208,
+      "eval_million_tokens": 600.047616,
+      "ppl": 24.5059773975826,
+      "matched_historical_n0_ppl": 23.080507197056633
+    },
+    {
+      "method": "F2-seed42",
+      "progress_pct": 68.07339449541284,
+      "processed_million_tokens": 680.787968,
+      "eval_million_tokens": 600.047616,
+      "ppl": 35.93525197640231,
+      "matched_historical_n0_ppl": 23.080507197056633
+    },
+    {
+      "method": "C1-seed42",
+      "progress_pct": 55.5045871559633,
+      "processed_million_tokens": 555.08992,
+      "eval_million_tokens": 500.03968,
+      "ppl": 30.471225299098297,
+      "matched_historical_n0_ppl": 30.48905816418166
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "activation_checkpointing": true,
+  "adamw_beta2_policy": "fixed",
+  "attention_backend": "flash_attention_3",
+  "batch_switch_tokens": 500039680,
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "category": "pilot",
+  "checkpoint_interval_seconds": 1200,
+  "checkpoint_policy": "final_only",
+  "clipping": "global",
+  "ema": [],
+  "epsilon": 1e-08,
+  "eval_documents": 1000,
+  "eval_steps": 400,
+  "export_on_completion": true,
+  "final_evaluation_reserve_seconds": 900,
+  "fixed_horizon": true,
+  "gradient_accumulation_steps": 2,
+  "hold_schedule": {
+    "final_decay_ratio": 0.06666666666666667,
+    "first_decay_ratio": 0.26666666666666666,
+    "hold_ratio": 0.06666666666666667,
+    "plateau_lr_ratio": 0.2
+  },
+  "initialization": "residual_half",
+  "learning_rate": 0.00025844674626140116,
+  "logging_steps": 10,
+  "lr_scheduler": "wsd_hold_zero",
+  "max_grad_norm": 0.5,
+  "max_h200_hours": 16,
+  "max_steps": 7630,
+  "max_training_tokens": 1000079360,
+  "microbatch_size": 1,
+  "min_lr_ratio": 0,
+  "model_id": "meta-llama/Llama-3.2-1B",
+  "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+  "muon": {
+    "adjust_lr_fn": "original",
+    "epsilon": 1e-07,
+    "learning_rate": 0.008614891542046706,
+    "momentum": 0.95,
+    "nesterov": true,
+    "ns_coefficients": [
+      3.4445,
+      -4.775,
+      2.0315
+    ],
+    "ns_steps": 5,
+    "weight_decay": 0.1
+  },
+  "optimizer": "muon",
+  "parent_runs": [
+    "ppl-next-20261016-s2-nor",
+    "raw4b-intradoc-normuon-20261017"
+  ],
+  "phase_schedule": [
+    {
+      "end": 6358,
+      "hold_schedule": {
+        "final_decay_ratio": 0.06666666666666667,
+        "first_decay_ratio": 0.26666666666666666,
+        "hold_ratio": 0.06666666666666667,
+        "plateau_lr_ratio": 0.2
+      },
+      "peak_ratio": 1.0,
+      "start": 0,
+      "warmup_steps": 170
+    },
+    {
+      "end": 7630,
+      "hold_schedule": {
+        "final_decay_ratio": 0.06666666666666667,
+        "first_decay_ratio": 0.26666666666666666,
+        "hold_ratio": 0.06666666666666667,
+        "plateau_lr_ratio": 0.2
+      },
+      "peak_ratio": 0.1,
+      "start": 6358,
+      "warmup_steps": 170
+    }
+  ],
+  "ppl": {
+    "stage": 1,
+    "arm": "A",
+    "mask": "intradoc",
+    "matrix": "nor",
+    "cautious_decay": false
+  },
+  "reference_batch_tokens": 131072,
+  "retain_all_checkpoints": true,
+  "schedule_clock": "nonpadding_tokens",
+  "scheduler_steps": 7630,
+  "seed": 42,
+  "sequence_length": 8192,
+  "snapshot_tokens": [],
+  "stop_margin_seconds": 300,
+  "sweep_id": "ppl-next-20261017",
+  "sweep_purpose": "Fixed 2x2 auxiliary AdamW LR x cautious decay; fresh intradoc NS5 NorMuon",
+  "sweep_stage": "medium",
+  "target_training_tokens": 1000079360,
+  "wandb_mode": "online",
+  "wandb_project": "lab5-training-llama",
+  "warmup_steps": 170,
+  "weight_decay": 0.1,
+  "world_size": 8,
+  "wsd_decay_ratio": 0.4
+}

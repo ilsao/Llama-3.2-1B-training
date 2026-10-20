@@ -1,0 +1,8 @@
+{
+  "submission_owner": "submit_replacement.py explicitly invoked once",
+  "accounting_host": "25a-lgn05",
+  "accounting_only_script": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/accounting_only.py",
+  "monitored_existing_job": "567063",
+  "automatic_submission": false,
+  "automatic_retry": false
+}

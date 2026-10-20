@@ -1,0 +1,41 @@
+{
+  "job": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 5,
+      "end": "2026-10-18T18:35:04",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "fc90c4fac69fabd51b9d01b27e6240fde88ef0bcbc7b525e5f7ac3ad1d4d6952",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.011111111111111112,
+      "job_id": "566121",
+      "nodes": "25a-hgpn070",
+      "start": "2026-10-18T18:34:59",
+      "state": "FAILED"
+    },
+    "job_id": "566121",
+    "reservation": "raw6b-normuon-adam2x-20261018-3068044ce7b942728e85aa1c81ab3f6b",
+    "returned_job_id": "566121",
+    "slurm_state": "FAILED",
+    "status": "failed",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=raw6b-normuon-adam2x-20261018-3068044ce7b942728e85aa1c81ab3f6b",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw6b-normuon-adam2x.sbatch",
+      "raw6b-normuon-adam2x-20261018",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/config.json"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "566121\n"
+    },
+    "submission_started_utc": "2026-10-18T10:34:58.257065+00:00",
+    "submission_tag": "raw6b-normuon-adam2x-20261018-3068044ce7b942728e85aa1c81ab3f6b"
+  },
+  "status": "failed"
+}

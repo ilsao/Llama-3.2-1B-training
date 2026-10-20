@@ -430,5 +430,5 @@ Current evidence: completed BE60P20 at399,900,672 inputs has fixed1,000-document
 <!-- horizon-wsd-20261014-live-start -->
 ## Horizon WSD live synthesis
 
-Current stage: lr. Selected settings: {}. Measured physical cost 1.740000 H200-hours, outstanding reservations 34.533333. Endpoint NLL determines stage winners; beta0.32 remains a tested transfer heuristic, not a fitted WSD exponent. The original NCCL failure and all historical costs remain charged. No automatic retries.
+Current stage: complete. Selected settings: {'clipping': 0.5, 'decay_tail': 0.6, 'lr_ratio': 0.5, 'resplit_lr_candidate': 'tail-lr030', 'resplit_lr_scale': 0.3}. Measured physical cost 152.048889 H200-hours, outstanding reservations 0.000000. Endpoint NLL determines stage winners; beta0.32 remains a tested transfer heuristic, not a fitted WSD exponent. The original NCCL failure and all historical costs remain charged. No automatic retries.
 <!-- horizon-wsd-20261014-live-end -->

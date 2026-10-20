@@ -1,0 +1,24 @@
+{
+  "recorded_utc": "2026-10-19T06:03:17.584271+00:00",
+  "unchanged_execution_seal_sha256": "e9e695ef06a2a48a0ae716c1c5b65cb4d3529c68bc27f530ff99fccf7deaf19b",
+  "job_count": 8,
+  "seed": 42,
+  "historical_control_reused": true,
+  "verified_training_jobs": {
+    "A1-seed42": "572068",
+    "S1-seed42": "572069",
+    "K1-seed42": "572114",
+    "F1-seed42": "572115",
+    "F2-seed42": "572116",
+    "C1-seed42": "572119"
+  },
+  "failed_gate_jobs": {
+    "D1-seed42": "572102",
+    "D025-seed42": "572113"
+  },
+  "completed_failed_allocation_h200_hours": 0.32,
+  "reserved_or_measured_study_h200_hours": 95.78666666666666,
+  "budget_cap_h200_hours": 128,
+  "source_not_modified_during_training": true,
+  "further_retries": false
+}

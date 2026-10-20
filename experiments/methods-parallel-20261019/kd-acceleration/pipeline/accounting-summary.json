@@ -1,0 +1,68 @@
+{
+  "all_terminal": true,
+  "jobs": [
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=64G,node=1",
+      "elapsed_seconds": 175,
+      "end": "2026-10-19T15:43:06",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "54b39290e558d4a797c8f5a6a2a0afba7a4d54a80f1cb00a2f213c5e5eb06e3f",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.04861111111111111,
+      "job_id": "573586",
+      "nodes": "25a-hgpn024",
+      "start": "2026-10-19T15:40:11",
+      "state": "COMPLETED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 54,
+      "end": "2026-10-19T15:49:38",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "73a4dd32a42db5f268551e29ce7c04730fcde0f25a67ed34d0c07ec0f3c7387c",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.12,
+      "job_id": "573687",
+      "nodes": "25a-hgpn029",
+      "start": "2026-10-19T15:48:44",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 56,
+      "end": "2026-10-19T15:54:34",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "990da96f33396a9cd321212d5177fdcdaa6ccbd16f08cf9c873ab97c96078aa3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.12444444444444444,
+      "job_id": "573750",
+      "nodes": "25a-hgpn008",
+      "start": "2026-10-19T15:53:38",
+      "state": "FAILED"
+    },
+    {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 131,
+      "end": "2026-10-19T16:00:43",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "990da96f33396a9cd321212d5177fdcdaa6ccbd16f08cf9c873ab97c96078aa3",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.2911111111111111,
+      "job_id": "573794",
+      "nodes": "25a-hgpn008",
+      "start": "2026-10-19T15:58:32",
+      "state": "COMPLETED"
+    }
+  ],
+  "total_h200_hours": 0.5841666666666666,
+  "validation_cap_h200_hours": 1.6,
+  "validation_h200_hours": 0.5355555555555556
+}

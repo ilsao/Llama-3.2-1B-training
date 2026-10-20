@@ -1,0 +1,55 @@
+# SOTA raw3B with20% WSD tails
+
+{
+  "job": {
+    "job_id": "553634",
+    "reservation": "raw3b-sota-wsd20-20261015-66b8223c126d4adb9844530388c5d0e9",
+    "returned_job_id": "553634",
+    "slurm_state": "COMPLETED",
+    "status": "reconciled",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--time=359",
+      "--comment=raw3b-sota-wsd20-20261015-66b8223c126d4adb9844530388c5d0e9",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/source-restart2/slurm/sota3b.sbatch",
+      "raw3b-sota-wsd20-20261015",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/config.json",
+      "dolma-raw-baseline-20261008"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "553634\n"
+    },
+    "submission_started_utc": "2026-10-15T15:48:08.212930+00:00",
+    "submission_tag": "raw3b-sota-wsd20-20261015-66b8223c126d4adb9844530388c5d0e9",
+    "accounting": {
+      "job_id": "553634",
+      "state": "COMPLETED",
+      "elapsed_seconds": 15543,
+      "gpu_count": 8,
+      "h200_hours": 34.54,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "1057ab930ad238cc80da8babc8408b37cef3c2740c28f5e1bf732f1e13200033"
+      },
+      "start": "2026-10-15T23:48:09",
+      "end": "2026-10-16T04:07:12",
+      "nodes": "25a-hgpn069"
+    }
+  },
+  "stage": "complete",
+  "result": {
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/checkpoints/checkpoint-022889-c5d757907173",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/export-step-22889-d671ecb0",
+    "full_perplexity": 15.912297665809827,
+    "job_id": "553634",
+    "run_id": "raw3b-sota-wsd20-20261015",
+    "subset_perplexity": 15.834676811355047,
+    "tokens": 3000107008,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9d2b5f1a1ffc477f9be6b0862d36a15d"
+  }
+}

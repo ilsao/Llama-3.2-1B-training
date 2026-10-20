@@ -1,0 +1,12 @@
+{
+  "applied": true,
+  "cause": "unknown",
+  "current_entries_preserved": true,
+  "formal_runs": 14,
+  "h200_hours": 977.5855555555557,
+  "historical_identity_and_cost_checks_passed": true,
+  "jobs": 232,
+  "previous_digest": "9050d86207374bd8f48bf33c33e283fe6cf604ff9ddaefb2cf57df0bfacaab61",
+  "restored_digest": "a4ec901c3ada476608532679669c8c2802704a96b607e41c61af2a94f3c1d0d9",
+  "runs": 208
+}

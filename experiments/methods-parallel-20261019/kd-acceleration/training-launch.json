@@ -1,0 +1,7 @@
+{
+  "job_id": "574250",
+  "run_id": "kd3b-online-pipeline-20261019-seed42",
+  "source_directory": "/home/asciibase64/Llama-3.2-1B-training/experiments/kd3b-online-pipeline-20261019",
+  "launch_status": "/home/asciibase64/Llama-3.2-1B-training/experiments/kd3b-online-pipeline-20261019/launch-status.json",
+  "state": "training_updates_confirmed"
+}

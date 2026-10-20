@@ -1,0 +1,117 @@
+{
+  "accelerated_loss": "online_pipeline.LogitsKD + two-slot OnlineTeacherPipeline; full-vocabulary T1; actual 3B/1B shape validated",
+  "alternative_teacher": {
+    "model_id": "meta-llama/Llama-3.1-8B",
+    "revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "status": "current authenticated config request HTTP403; not substituted with another source"
+  },
+  "data": "dolma-raw-baseline-20261008 canonical train, intradoc document-span causal mask, native model RoPE",
+  "evaluation": "existing fixed 1k, plus canonical additional 9k only at completed endpoint; teacher NLL first",
+  "geometry": {
+    "cpus_total": 8,
+    "gpus": 8,
+    "initial_global_batch": 16,
+    "initial_gradient_accumulation": 2,
+    "later_global_batch": 64,
+    "microbatch": 1,
+    "switch_inputs": 500039680
+  },
+  "new_training_submitted": false,
+  "objective": {
+    "formula": "0.75 CE(y,p_student) + 0.25 KL(p_teacher || p_student)",
+    "reduction": "sum over valid shifted labels, normalize over all ranks and accumulation microbatches",
+    "teacher_weight": 0.25,
+    "temperature": 1.0,
+    "vocabulary": "full, no top-k"
+  },
+  "optimizer": {
+    "auxiliary": "AdamW for tied embedding/head and normalization",
+    "auxiliary_peak_lr": 0.0005168934925228023,
+    "auxiliary_weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "epsilon": 1e-08,
+    "global_clip": 0.5,
+    "matrix": "NorMuon NS5, post-NS row normalization beta2=.95",
+    "matrix_peak_lr": 0.008614891542046706,
+    "matrix_weight_decay": 0.1,
+    "momentum": 0.95,
+    "nesterov": true
+  },
+  "schedule": "same K1 two-phase token-clock WSD; change only teacher identity first",
+  "scientific_scope": "External pretrained knowledge; not a pure optimizer comparison or proof of training solely from Dolma knowledge.",
+  "status": "official pretrained 3B teacher prepared; online pipeline passed full-model validation; no formal training submitted",
+  "student": {
+    "hidden_size": 2048,
+    "initialization": "fresh random residual_half",
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "seed": 42,
+    "sequence_length": 8192,
+    "teacher_weights_loaded_into_student": false
+  },
+  "supersedes_teacher": "local 1.24B student trained on 6B tokens",
+  "teacher": {
+    "frozen": true,
+    "head_chunk": 1024,
+    "hidden_size": 3072,
+    "initialization": "official pretrained weights",
+    "mode": "eval",
+    "model_id": "meta-llama/Llama-3.2-3B",
+    "num_hidden_layers": 28,
+    "precision": "bfloat16",
+    "prepared_manifest": "/work/asciibase64/Llama-3.2-1B-training/caches/kd-teachers/llama32-3b-13afe512-pipeline-20261019/teacher-manifest.json",
+    "preserve_native_rope": true,
+    "revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+    "use_cache": false,
+    "vocab_size": 128256,
+    "attention_backend": "torch2.9.1 pinned ATen flash varlen (head128); frozen teacher only"
+  },
+  "teacher_execution": {
+    "decision_source": "User selected online teacher computation; defer recording logits",
+    "forward": "frozen teacher under torch.no_grad on each student microbatch",
+    "inputs": "same input_ids, document-span attention mask and prediction positions as student",
+    "logit_materialization": "transient GPU position chunks across the full vocabulary",
+    "mode": "online",
+    "offline_logit_generation": false,
+    "persistent_logits_cache": false,
+    "pipeline": {
+      "buffer_dtype": "bfloat16",
+      "bytes_per_rank": 4202179584,
+      "cuda_streams": 2,
+      "lookahead_microbatches": 1,
+      "placement": "colocated teacher/student on each of 8 H200 ranks",
+      "promotion": "Correctness passed; short benchmark shows 1.37% throughput gain, provisional performance benefit",
+      "slots": 2,
+      "synchronization": "input-ready, teacher-ready and consumer-release CUDA events; record_stream for tensor lifetime",
+      "correctness": "Full 8-rank gradients identical with deterministic FA3 backward; default backward used for timing",
+      "validation_job_id": "573794",
+      "measured_speedup_vs_inline": 1.0137329838043805,
+      "measured_peak_allocated_bytes": 40268982272
+    },
+    "teacher_input_accounting": "count every processed non-padding input, including repeated validation windows",
+    "top_k_truncation": false
+  },
+  "training_target_inputs": 1000079360,
+  "validation_before_training": [
+    "pinned teacher weight and tokenizer manifests",
+    "exact vocabulary/tokenization/special-token alignment",
+    "teacher and student document boundaries and shifted labels",
+    "8-rank full-gradient comparison with recompute reference",
+    "paired throughput and peak memory on actual pretrained teacher",
+    "teacher held-out NLL"
+  ],
+  "validation_completed": [
+    "teacher weights pinned and hashed",
+    "full tokenizer equivalence",
+    "teacher head128 GQA/document-boundary/padding tests against FP32 SDPA",
+    "8-rank pipeline vs inline full-gradient comparison with deterministic FA3 backward",
+    "paired throughput and peak memory on actual pretrained 3B teacher"
+  ],
+  "validation_remaining_before_training": [
+    "teacher held-out NLL",
+    "longer throughput confirmation if performance promotion is required"
+  ]
+}

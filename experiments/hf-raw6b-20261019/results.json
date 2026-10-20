@@ -1,0 +1,34 @@
+{
+  "combined_10k_perplexity": 12.9078477387367,
+  "commit_url": "https://huggingface.co/asciibase64/Llama-3.2-1B-dolma3_mix/commit/13125ad091ca25c914e1528af6dce22d5f6efa3a",
+  "finished_utc": "2026-10-19T02:41:48.884437+00:00",
+  "global_step": 28619,
+  "local_export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_revision": "1b62848efb2a8881483d880778208d17699d3b9b",
+  "parent_run": "raw6b-normuon-adam2x-20261018",
+  "public_unauthenticated_access": true,
+  "public_weight_shard_access_verified": true,
+  "remote_config_tokenizer_load_verified": true,
+  "remote_file_checksums_verified": true,
+  "revision": "13125ad091ca25c914e1528af6dce22d5f6efa3a",
+  "slurm_job_id": "570539",
+  "status": "complete",
+  "training_tokens": 6000082944,
+  "allocation": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+    "elapsed_seconds": 406,
+    "end": "2026-10-19T10:41:49",
+    "gpu_count": 1,
+    "gpu_type_evidence": {
+      "sha256": "812d91d1565fec76ec32a774024873859cb3ce42192de11700b4f138bb45e0cf",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.11277777777777778,
+    "job_id": "570539",
+    "nodes": "25a-hgpn012",
+    "start": "2026-10-19T10:35:03",
+    "state": "COMPLETED"
+  },
+  "main_revision_verified": true
+}

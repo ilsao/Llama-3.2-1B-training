@@ -1,0 +1,822 @@
+{
+  "jobs": {
+    "screen-high": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 752,
+        "end": "2026-10-15T16:20:08",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "aa967317bb3e4ad3bfdb594c7f4cae8a3b940b8b20e8b96cdd75dc7d7a1fd37b",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 1.6711111111111112,
+        "job_id": "552016",
+        "nodes": "25a-hgpn010",
+        "start": "2026-10-15T16:07:36",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=15",
+        "--job-name=ht-screen-high",
+        "--comment=lr-transfer-horizons-20261015-5948e92c670d4900927c6855a0c75029",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-screen-high",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/screen-high.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/screen-high.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-screen-high/checkpoints/checkpoint-000916-668322808e90",
+        "config_digest": "1fa83a62f390c57b4a1c8027415d539f12f9446fe3df9ed362f12a12b90bb311",
+        "ema_evaluations": {
+          "0.6": {
+            "eval/documents": 1000,
+            "eval/length_0_256_nll": 135551.30310440063,
+            "eval/length_0_256_perplexity": 112.62114897516427,
+            "eval/length_0_256_prediction_tokens": 28694,
+            "eval/length_1024_4096_nll": 2316285.4642333984,
+            "eval/length_1024_4096_perplexity": 67.14754228824046,
+            "eval/length_1024_4096_prediction_tokens": 550593,
+            "eval/length_256_1024_nll": 1137176.7150878906,
+            "eval/length_256_1024_perplexity": 73.2793899028899,
+            "eval/length_256_1024_prediction_tokens": 264812,
+            "eval/length_4096_inf_nll": 2495927.332763672,
+            "eval/length_4096_inf_perplexity": 50.873292178570544,
+            "eval/length_4096_inf_prediction_tokens": 635203,
+            "eval/nll": 6084940.815189362,
+            "eval/perplexity": 61.15346098054357,
+            "eval/prediction_tokens": 1479302,
+            "eval/sequences": 1044
+          }
+        },
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/ema_0.6_nll": 6084940.815189362,
+          "eval/ema_0.6_perplexity": 61.15346098054357,
+          "eval/ema_0.6_prediction_tokens": 1479302,
+          "eval/ema_last_snapshot_tokens": 117440512,
+          "eval/ema_updates": 28,
+          "eval/length_0_256_nll": 144227.05059432983,
+          "eval/length_0_256_perplexity": 152.38094234766533,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 2430737.244873047,
+          "eval/length_1024_4096_perplexity": 82.66219364596303,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 1201351.383178711,
+          "eval/length_256_1024_perplexity": 93.37464841763038,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2631073.4150390625,
+          "eval/length_4096_inf_perplexity": 62.93475368375204,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 6407389.09368515,
+          "eval/perplexity": 76.04761962521212,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 916,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552016",
+        "run_id": "init-recipe-20261014-transfer-horizons-screen-high",
+        "tokens": 120061952,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/6c176648961244098e9c2c3c547acbe8"
+      },
+      "job_id": "552016",
+      "kind": "screen",
+      "multiplier": 5.547340005542684,
+      "reservation": "lr-transfer-horizons-20261015-5948e92c670d4900927c6855a0c75029",
+      "run_id": "init-recipe-20261014-transfer-horizons-screen-high",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552016\n"
+      }
+    },
+    "t200-lr0": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1120,
+        "end": "2026-10-15T16:26:18",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "1757d94a7b71b9aca35eef95967a07a12f446520ff8729220436399fe94e2147",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 2.488888888888889,
+        "job_id": "552017",
+        "nodes": "25a-hgpn012",
+        "start": "2026-10-15T16:07:38",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=30",
+        "--job-name=ht-t200-lr0",
+        "--comment=lr-transfer-horizons-20261015-1c17b0a461494ef9ac2ed841064aefac",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t200-lr0",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr0.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr0.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr0/checkpoints/checkpoint-001526-ab72ab2bb03f",
+        "config_digest": "e4b964018c4bad398c970969029960b5ec846cafcef2fd9cde0ed01a8a95ff1b",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 117624.30078125,
+          "eval/length_0_256_perplexity": 60.295934598013886,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 2038976.6623535156,
+          "eval/length_1024_4096_perplexity": 40.57846600010894,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 994489.7650756836,
+          "eval/length_256_1024_perplexity": 42.753703115742866,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2180615.8217773438,
+          "eval/length_4096_inf_perplexity": 30.967652861743943,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 5331706.549987793,
+          "eval/perplexity": 36.75242633934421,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 1526,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552017",
+        "run_id": "init-recipe-20261014-transfer-horizons-t200-lr0",
+        "tokens": 200015872,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9cddf7a089ef41bbb043815dadadb45f"
+      },
+      "job_id": "552017",
+      "kind": "decay",
+      "multiplier": 1.386835001385671,
+      "reservation": "lr-transfer-horizons-20261015-1c17b0a461494ef9ac2ed841064aefac",
+      "run_id": "init-recipe-20261014-transfer-horizons-t200-lr0",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552017\n"
+      }
+    },
+    "t200-lr1": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1123,
+        "end": "2026-10-15T16:26:23",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "5f88b351d6ac7a389b7bafd36f6a11ae4cfb6f7911ac8fc6c7ed0494f86c429a",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 2.4955555555555557,
+        "job_id": "552018",
+        "nodes": "25a-hgpn017",
+        "start": "2026-10-15T16:07:40",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=30",
+        "--job-name=ht-t200-lr1",
+        "--comment=lr-transfer-horizons-20261015-0c1f8214a31140f98992f621c1a9602b",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t200-lr1",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr1.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr1.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr1/checkpoints/checkpoint-001526-017a2e2519ba",
+        "config_digest": "63180e5775c497220c72cffcfdf9737ea3eec0868334fa3fe83ad2964f130cae",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 115414.07509231567,
+          "eval/length_0_256_perplexity": 55.8258615419225,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 2008376.4602050781,
+          "eval/length_1024_4096_perplexity": 38.38476831879753,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 978822.4185180664,
+          "eval/length_256_1024_perplexity": 40.297594557191424,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2149213.7905273438,
+          "eval/length_4096_inf_perplexity": 29.473954938514918,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 5251826.744342804,
+          "eval/perplexity": 34.820487607264916,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 1526,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552018",
+        "run_id": "init-recipe-20261014-transfer-horizons-t200-lr1",
+        "tokens": 200015872,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9a93d1c443ae45cf84022b713a0119c5"
+      },
+      "job_id": "552018",
+      "kind": "decay",
+      "multiplier": 1.9612808677333258,
+      "reservation": "lr-transfer-horizons-20261015-0c1f8214a31140f98992f621c1a9602b",
+      "run_id": "init-recipe-20261014-transfer-horizons-t200-lr1",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552018\n"
+      }
+    },
+    "t200-lr2": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1123,
+        "end": "2026-10-15T16:26:27",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "22ce08867fd5f0a318519498a182bd74d62e2f34ae4d20754344902458f8fdfe",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 2.4955555555555557,
+        "job_id": "552019",
+        "nodes": "25a-hgpn025",
+        "start": "2026-10-15T16:07:44",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=30",
+        "--job-name=ht-t200-lr2",
+        "--comment=lr-transfer-horizons-20261015-94465d6ea3de45ca8779d9fefdff380b",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t200-lr2",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr2.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr2.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr2/checkpoints/checkpoint-001526-0bb1ea1c6cab",
+        "config_digest": "4a13e40fb8b3b2119c47045e0259dd4b9af8924e77b29095f351fe6e5c10ebbd",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 114528.2346496582,
+          "eval/length_0_256_perplexity": 54.12873851406482,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1999890.7971191406,
+          "eval/length_1024_4096_perplexity": 37.79772293476932,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 973478.4330444336,
+          "eval/length_256_1024_perplexity": 39.492527597120954,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2143478.723876953,
+          "eval/length_4096_inf_perplexity": 29.209040725923668,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 5231376.188690186,
+          "eval/perplexity": 34.34242515937931,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 1526,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552019",
+        "run_id": "init-recipe-20261014-transfer-horizons-t200-lr2",
+        "tokens": 200015872,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1870da3ebc65408c8be65c0d4b837719"
+      },
+      "job_id": "552019",
+      "kind": "decay",
+      "multiplier": 2.773670002771342,
+      "reservation": "lr-transfer-horizons-20261015-94465d6ea3de45ca8779d9fefdff380b",
+      "run_id": "init-recipe-20261014-transfer-horizons-t200-lr2",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552019\n"
+      }
+    },
+    "t200-lr3": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1108,
+        "end": "2026-10-15T16:26:12",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "43dcb1f40076ea63c53864d87b590ff0e0967fbd319cb9bf6c24ed7fbabcc355",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 2.462222222222222,
+        "job_id": "552020",
+        "nodes": "25a-hgpn060",
+        "start": "2026-10-15T16:07:44",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=30",
+        "--job-name=ht-t200-lr3",
+        "--comment=lr-transfer-horizons-20261015-c72e553b55394434bd3d58f4a16cdc8c",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t200-lr3",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr3.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr3.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr3/checkpoints/checkpoint-001526-a684e00ba746",
+        "config_digest": "9557f311e093ce2f84856fdc700f02adc2222b3fe65c0276ddea5801a30a6cd6",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 115131.5025062561,
+          "eval/length_0_256_perplexity": 55.27879809179419,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 2009579.689819336,
+          "eval/length_1024_4096_perplexity": 38.46874358244755,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 978772.9575195312,
+          "eval/length_256_1024_perplexity": 40.290068564645715,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2158076.2646484375,
+          "eval/length_4096_inf_perplexity": 29.888063354863345,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 5261560.414493561,
+          "eval/perplexity": 35.05035862638394,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 1526,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552020",
+        "run_id": "init-recipe-20261014-transfer-horizons-t200-lr3",
+        "tokens": 200015872,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ccbf7a4b04c440bcbedd349ebdd96ca6"
+      },
+      "job_id": "552020",
+      "kind": "decay",
+      "multiplier": 3.9225617354666515,
+      "reservation": "lr-transfer-horizons-20261015-c72e553b55394434bd3d58f4a16cdc8c",
+      "run_id": "init-recipe-20261014-transfer-horizons-t200-lr3",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552020\n"
+      }
+    },
+    "t200-lr4": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 1128,
+        "end": "2026-10-15T16:39:51",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "4a283b6e7078442dfdc0e2738ff980cd1242a4cd22185d6926d99f2360c2def6",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 2.506666666666667,
+        "job_id": "552073",
+        "nodes": "25a-hgpn166",
+        "start": "2026-10-15T16:21:03",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=30",
+        "--job-name=ht-t200-lr4",
+        "--comment=lr-transfer-horizons-20261015-760c5c03601c48c293646b9df4169571",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t200-lr4",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr4.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t200-lr4.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t200-lr4/checkpoints/checkpoint-001526-8797309b9566",
+        "config_digest": "45f2b66d3fa1118222c8828f1557b8907a5f18b7b0f55fbeeab5390f5ef54fc2",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 117664.85648345947,
+          "eval/length_0_256_perplexity": 60.381216290705666,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 2047444.0378417969,
+          "eval/length_1024_4096_perplexity": 41.207331064940206,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 998032.3033752441,
+          "eval/length_256_1024_perplexity": 43.32948602345196,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 2195324.4294433594,
+          "eval/length_4096_inf_perplexity": 31.69309908681347,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 5358465.62714386,
+          "eval/perplexity": 37.42328989281049,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 1526,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552073",
+        "run_id": "init-recipe-20261014-transfer-horizons-t200-lr4",
+        "tokens": 200015872,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/2dfa9fce448541459e8667828ed50215"
+      },
+      "job_id": "552073",
+      "kind": "decay",
+      "multiplier": 5.547340005542684,
+      "reservation": "lr-transfer-horizons-20261015-760c5c03601c48c293646b9df4169571",
+      "run_id": "init-recipe-20261014-transfer-horizons-t200-lr4",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552073\n"
+      }
+    },
+    "t600-lr0": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3135,
+        "end": "2026-10-15T17:00:05",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "4218c81496968c3dc52f56b0aa50a8f39a849a47c15a11e64bcae441ddc98515",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 6.966666666666667,
+        "job_id": "552021",
+        "nodes": "25a-hgpn100",
+        "start": "2026-10-15T16:07:50",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--job-name=ht-t600-lr0",
+        "--comment=lr-transfer-horizons-20261015-b0c7a8a4b3ac40a9bc0b89fbc7762ef0",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t600-lr0",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr0.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr0.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr0/checkpoints/checkpoint-004578-abbe00b31fd5",
+        "config_digest": "0838193a8d7cb7156a065166c1cab334be767e799706e287ee4c22ccaf3a31b5",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 100958.10548019409,
+          "eval/length_0_256_perplexity": 33.73175187744613,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1785099.6584472656,
+          "eval/length_1024_4096_perplexity": 25.58842564731932,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 860670.3533935547,
+          "eval/length_256_1024_perplexity": 25.79339364039549,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 1918014.181274414,
+          "eval/length_4096_inf_perplexity": 20.48165229249192,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 4664742.2985954285,
+          "eval/perplexity": 23.414139401860098,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 4578,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552021",
+        "run_id": "init-recipe-20261014-transfer-horizons-t600-lr0",
+        "tokens": 600047616,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/e3b3116ab6a3427d91c374d9007f96c1"
+      },
+      "job_id": "552021",
+      "kind": "decay",
+      "multiplier": 0.9806404338666629,
+      "reservation": "lr-transfer-horizons-20261015-b0c7a8a4b3ac40a9bc0b89fbc7762ef0",
+      "run_id": "init-recipe-20261014-transfer-horizons-t600-lr0",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552021\n"
+      }
+    },
+    "t600-lr1": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3156,
+        "end": "2026-10-15T17:00:26",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "3003f464280a8421dbbd945a5e4f667fc01f92f0d8eeac2996752b3744806a81",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 7.013333333333334,
+        "job_id": "552022",
+        "nodes": "25a-hgpn111",
+        "start": "2026-10-15T16:07:50",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--job-name=ht-t600-lr1",
+        "--comment=lr-transfer-horizons-20261015-95fb45e5d6eb4795bdca68bf39c81a4b",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t600-lr1",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr1.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr1.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr1/checkpoints/checkpoint-004578-52a2f1d8931d",
+        "config_digest": "78c20ba30b1217070ed3af8d61364b97e25f46f93ed97a472979fef29e5ff518",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 100374.52175140381,
+          "eval/length_0_256_perplexity": 33.05263881630087,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1769117.8603515625,
+          "eval/length_1024_4096_perplexity": 24.85635880268071,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 852925.292388916,
+          "eval/length_256_1024_perplexity": 25.04992927799848,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 1901074.2875976562,
+          "eval/length_4096_inf_perplexity": 19.94265694916282,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 4623491.962089539,
+          "eval/perplexity": 22.770255198186177,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 4578,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552022",
+        "run_id": "init-recipe-20261014-transfer-horizons-t600-lr1",
+        "tokens": 600047616,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/172f4be5c6f34c398814c2d160feb8e3"
+      },
+      "job_id": "552022",
+      "kind": "decay",
+      "multiplier": 1.386835001385671,
+      "reservation": "lr-transfer-horizons-20261015-95fb45e5d6eb4795bdca68bf39c81a4b",
+      "run_id": "init-recipe-20261014-transfer-horizons-t600-lr1",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552022\n"
+      }
+    },
+    "t600-lr2": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3155,
+        "end": "2026-10-15T17:00:29",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "a3901b5fb71a2b56eef43877292f13448869112ea3d31128affbe70db1a96377",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 7.011111111111111,
+        "job_id": "552023",
+        "nodes": "25a-hgpn121",
+        "start": "2026-10-15T16:07:54",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--job-name=ht-t600-lr2",
+        "--comment=lr-transfer-horizons-20261015-d0d9973f774d4100b4ff2d856aefa972",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t600-lr2",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr2.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr2.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr2/checkpoints/checkpoint-004578-de20d8372560",
+        "config_digest": "f30f1d761c5b1429f39bd7021a1723ecc7b4ef725d931a652be4d6fd3e4e39c8",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 100436.93431854248,
+          "eval/length_0_256_perplexity": 33.12461014070984,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1767277.0085449219,
+          "eval/length_1024_4096_perplexity": 24.77339286149634,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 852504.8188476562,
+          "eval/length_256_1024_perplexity": 25.01018608365748,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 1899954.287475586,
+          "eval/length_4096_inf_perplexity": 19.907524718388583,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 4620173.049186707,
+          "eval/perplexity": 22.71922587410467,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 4578,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552023",
+        "run_id": "init-recipe-20261014-transfer-horizons-t600-lr2",
+        "tokens": 600047616,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/edd62590c79c4449aae2846dd5ae0d6c"
+      },
+      "job_id": "552023",
+      "kind": "decay",
+      "multiplier": 1.9612808677333258,
+      "reservation": "lr-transfer-horizons-20261015-d0d9973f774d4100b4ff2d856aefa972",
+      "run_id": "init-recipe-20261014-transfer-horizons-t600-lr2",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552023\n"
+      }
+    },
+    "t600-lr3": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3150,
+        "end": "2026-10-15T17:00:24",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "066168cc29853bb2a9505c31af36fe999df99174aec1488fc77f9bce55d831ff",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 7.0,
+        "job_id": "552024",
+        "nodes": "25a-hgpn124",
+        "start": "2026-10-15T16:07:54",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--job-name=ht-t600-lr3",
+        "--comment=lr-transfer-horizons-20261015-3790c720130248a7b17d2996c27a2014",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t600-lr3",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr3.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr3.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr3/checkpoints/checkpoint-004578-fbe9655e49d9",
+        "config_digest": "2fe4fe6d880c9e1f7a2d24cdb56427a290a1d99712e65e225ec04feda563f8f7",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 100864.95973205566,
+          "eval/length_0_256_perplexity": 33.62243023922396,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1774798.5489501953,
+          "eval/length_1024_4096_perplexity": 25.114139342025954,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 857222.9069213867,
+          "eval/length_256_1024_perplexity": 25.45977946251106,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 1908783.16015625,
+          "eval/length_4096_inf_perplexity": 20.186157150702055,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 4641669.575759888,
+          "eval/perplexity": 23.05178148554645,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 4578,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552024",
+        "run_id": "init-recipe-20261014-transfer-horizons-t600-lr3",
+        "tokens": 600047616,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1e981df55487433e88e21f26f0369619"
+      },
+      "job_id": "552024",
+      "kind": "decay",
+      "multiplier": 2.773670002771342,
+      "reservation": "lr-transfer-horizons-20261015-3790c720130248a7b17d2996c27a2014",
+      "run_id": "init-recipe-20261014-transfer-horizons-t600-lr3",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552024\n"
+      }
+    },
+    "t600-lr4": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 3171,
+        "end": "2026-10-15T17:00:45",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "8fd3f4a81eb9d1db22bc417ae939ecefa2c04abf042ecba95287b2507bda3e65",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 7.046666666666667,
+        "job_id": "552025",
+        "nodes": "25a-hgpn148",
+        "start": "2026-10-15T16:07:54",
+        "state": "COMPLETED"
+      },
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=60",
+        "--job-name=ht-t600-lr4",
+        "--comment=lr-transfer-horizons-20261015-2ab4424f2c014a2593ec65fe6a93659f",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151,25a-hgpn039",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/lr_transfer.sbatch",
+        "init-recipe-20261014-transfer-horizons-t600-lr4",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr4.json"
+      ],
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/configs/t600-lr4.json",
+      "endpoint": {
+        "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-horizons-t600-lr4/checkpoints/checkpoint-004578-6339c694fe58",
+        "config_digest": "07287859cc31be17f0fed5844ec4f2b36c0fe243de44bb323a5ab4f614e0c69a",
+        "ema_evaluations": {},
+        "evaluation": {
+          "eval/documents": 1000,
+          "eval/length_0_256_nll": 102314.15069961548,
+          "eval/length_0_256_perplexity": 35.36414409748502,
+          "eval/length_0_256_prediction_tokens": 28694,
+          "eval/length_1024_4096_nll": 1797149.9869384766,
+          "eval/length_1024_4096_perplexity": 26.154629654447998,
+          "eval/length_1024_4096_prediction_tokens": 550593,
+          "eval/length_256_1024_nll": 870051.5838623047,
+          "eval/length_256_1024_perplexity": 26.723528665697312,
+          "eval/length_256_1024_prediction_tokens": 264812,
+          "eval/length_4096_inf_nll": 1934068.236328125,
+          "eval/length_4096_inf_perplexity": 21.00590044936918,
+          "eval/length_4096_inf_prediction_tokens": 635203,
+          "eval/nll": 4703583.957828522,
+          "eval/perplexity": 24.03706070677378,
+          "eval/prediction_tokens": 1479302,
+          "eval/sequences": 1044
+        },
+        "evaluation_identity": "c737540f55741c4e4549d2a1a0fcce9cd11912bc4bcf592c6400ec7017a8016f",
+        "global_step": 4578,
+        "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+        "job_id": "552025",
+        "run_id": "init-recipe-20261014-transfer-horizons-t600-lr4",
+        "tokens": 600047616,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/a92ba2b2abd74e23a73e6979694e7027"
+      },
+      "job_id": "552025",
+      "kind": "decay",
+      "multiplier": 3.9225617354666515,
+      "reservation": "lr-transfer-horizons-20261015-2ab4424f2c014a2593ec65fe6a93659f",
+      "run_id": "init-recipe-20261014-transfer-horizons-t600-lr4",
+      "slurm_state": "COMPLETED",
+      "status": "reconciled",
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "552025\n"
+      }
+    }
+  },
+  "stage": "calibration_complete"
+}

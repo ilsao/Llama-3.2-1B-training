@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "full_gradient_cosine": 1.0,
+  "full_gradient_relative_l2": 0.0,
+  "global_batch": 16,
+  "gpu": "NVIDIA H200",
+  "job_id": "573794",
+  "limits": "Fixed repeated canonical windows and fresh random student; LR=0; no convergence/PPL claim; 2 blocks of 6 updates including pipeline fill/drain.",
+  "median_seconds_per_step": {
+    "inline": 1.042551214331373,
+    "pipeline": 1.0284278315763609,
+    "serial_buffer": 1.0448865025828127
+  },
+  "optimizer_updates_to_weights": 0,
+  "peak_allocated": {
+    "inline": 36116886016,
+    "pipeline": 40268982272,
+    "serial_buffer": 40268982272
+  },
+  "pipeline_speedup_vs_inline": 1.0137329838043805,
+  "pipeline_speedup_vs_serial_buffer": 1.0160037199510872,
+  "seed": 42,
+  "student_inputs": 6291456,
+  "teacher_id": "meta-llama/Llama-3.2-3B",
+  "teacher_inputs": 6291456,
+  "teacher_revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+  "world_size": 8
+}

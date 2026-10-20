@@ -1,0 +1,492 @@
+{
+  "allocation_h200_hours": 6,
+  "allocation_minutes": 45,
+  "candidate_priority": [
+    "BE50P10",
+    "E40P05",
+    "E40P20",
+    "BE60P10",
+    "BE50P05",
+    "BE50P20",
+    "BE60P05",
+    "BE60P20"
+  ],
+  "candidates": [
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "E40P05",
+      "config": "configs/cooldown-grid-20261010/e40p05-seed42.json",
+      "config_sha256": "129f1b1f602af3f8e72a1c33c66c74984f15987783b7ac7864948616c6624815",
+      "cooldown_start_index": 1831,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.6,
+      "nominal_tail_ratio": 0.4,
+      "phase_indices": [
+        1831,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-e40p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "E40P20",
+      "config": "configs/cooldown-grid-20261010/e40p20-seed42.json",
+      "config_sha256": "02f9bf89e8c482b5708ffdc237cd07bedb4d3d9aa3b606aad3aea653be7c69f6",
+      "cooldown_start_index": 1831,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.6,
+      "nominal_tail_ratio": 0.4,
+      "phase_indices": [
+        1831,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-e40p20-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P05",
+      "config": "configs/cooldown-grid-20261010/be50p05-seed42.json",
+      "config_sha256": "d28a711f8c17fb3aa3dbc11ea822440bc96d8a63be7869d054d963e5845ac08e",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P10",
+      "config": "configs/cooldown-grid-20261010/be50p10-seed42.json",
+      "config_sha256": "cd27488f3a0eb2dd16b730f698447375fe61e884be361fabd8951dd7ed3df4fe",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.1,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p10-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P20",
+      "config": "configs/cooldown-grid-20261010/be50p20-seed42.json",
+      "config_sha256": "d0b5a160e98b0f8711b5ec520a432ef0add6599084ad7696ccc0a44e80e6c687",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p20-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P05",
+      "config": "configs/cooldown-grid-20261010/be60p05-seed42.json",
+      "config_sha256": "e54e1ba513747a7cf3885571b9136d93526d8e642c7ac66ba2a63134d4f9b021",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P10",
+      "config": "configs/cooldown-grid-20261010/be60p10-seed42.json",
+      "config_sha256": "37dea2f10e70cb3486f9672f9ec148972e166ad7f376aefc9f6fd51024c6a3fc",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.1,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p10-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P20",
+      "config": "configs/cooldown-grid-20261010/be60p20-seed42.json",
+      "config_sha256": "b54a6357d4418235a2c91f2ac00e17b652acc0f4ad5a0de53a94fc54aedf57fe",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p20-s42",
+      "terminal_ratio": 0
+    }
+  ],
+  "checkpoint_training_load_allowed": false,
+  "comparison_rules": {
+    "endpoint": "All require 3051 successful updates and 399900672 charged=confirmed inputs, finite NLL, matching eval identity, cooldown completed, no skipped updates and all allocations reconciled. Compare NLL, not best checkpoint or incomplete endpoint.",
+    "hold_zero_timing": [
+      "E40P10 vs BE50P10 vs BE60P10"
+    ],
+    "interaction": "Only report descriptive NLL interaction once its relevant four cells are complete. No single-seed statistical or 2B transfer claim.",
+    "joint_grid": [
+      "Three cooldown-tail levels times three plateau levels; hold and final-zero lengths fixed"
+    ],
+    "near_ties": "Within 0.005 nats of the lowest endpoint use preregistered candidate_priority; prefer existing E40P10 if it is within that band.",
+    "plateau_height": [
+      "E40P05 vs E40P10 vs E40P20"
+    ],
+    "promotion": "Exploratory improvement >=0.03 nats/token relative to completed E40P10 merits a future paired seed test; this is not significance or authorization for automatic promotion."
+  },
+  "costs": {
+    "all_h200_hours_allocation_cap": 48,
+    "all_new_jobs": 8,
+    "extra_validation_or_diagnostics_jobs": 0,
+    "interaction_h200_hours_allocation_cap": 24,
+    "interaction_new_jobs": 4,
+    "main_h200_hours_allocation_cap": 24,
+    "main_new_jobs": 4,
+    "reference_new_jobs": 0,
+    "seed_confirmation": "Not planned or auto-submitted; requires separate paired design"
+  },
+  "cpus_per_job": 8,
+  "environment_build": "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9/fa3-build.json",
+  "environment_build_sha256": "660dc4dbd0538bd33607cab92d974814739c3dd0ccadcdf686a1697f538b9f4b",
+  "execution_policy": "User authorized submission of all eight independent jobs in parallel, with no job dependencies. Each gets the complete 45-minute allocation. No automatic retry, checkpoint continuation, seed confirmation, full training, cleanup or upload.",
+  "global_input_tokens_per_update": 131072,
+  "gpus_per_job": 8,
+  "launch_authorization": {
+    "allocation_h200_hours_cap": 48,
+    "allocation_minutes": 45,
+    "checkpoint_loading_allowed": false,
+    "dependencies": [],
+    "maximum_simultaneous_cpus": 64,
+    "maximum_simultaneous_gpus": 64,
+    "new_jobs": 8,
+    "per_job_cpus": 8,
+    "per_job_gpus": 8,
+    "recorded_utc": "2026-10-10T07:08:48.792418+00:00",
+    "user_request": "\u5e73\u884c\u7684\u5be6\u9a57\u9019\u516b\u7d44"
+  },
+  "launch_record": "experiments/cooldown-grid-20261010/launch.json",
+  "matrix": [
+    {
+      "candidate": "E40P10",
+      "cooldown_start_index": 1831,
+      "family": "hold_zero",
+      "nominal_start_progress": 0.6,
+      "nominal_tail_ratio": 0.4,
+      "plateau_ratio": 0.1,
+      "reference_reused": true,
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "E40P05",
+      "config": "configs/cooldown-grid-20261010/e40p05-seed42.json",
+      "config_sha256": "129f1b1f602af3f8e72a1c33c66c74984f15987783b7ac7864948616c6624815",
+      "cooldown_start_index": 1831,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.6,
+      "nominal_tail_ratio": 0.4,
+      "phase_indices": [
+        1831,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-e40p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "E40P20",
+      "config": "configs/cooldown-grid-20261010/e40p20-seed42.json",
+      "config_sha256": "02f9bf89e8c482b5708ffdc237cd07bedb4d3d9aa3b606aad3aea653be7c69f6",
+      "cooldown_start_index": 1831,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.6,
+      "nominal_tail_ratio": 0.4,
+      "phase_indices": [
+        1831,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-e40p20-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P05",
+      "config": "configs/cooldown-grid-20261010/be50p05-seed42.json",
+      "config_sha256": "d28a711f8c17fb3aa3dbc11ea822440bc96d8a63be7869d054d963e5845ac08e",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P10",
+      "config": "configs/cooldown-grid-20261010/be50p10-seed42.json",
+      "config_sha256": "cd27488f3a0eb2dd16b730f698447375fe61e884be361fabd8951dd7ed3df4fe",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.1,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p10-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE50P20",
+      "config": "configs/cooldown-grid-20261010/be50p20-seed42.json",
+      "config_sha256": "d0b5a160e98b0f8711b5ec520a432ef0add6599084ad7696ccc0a44e80e6c687",
+      "cooldown_start_index": 1526,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.5,
+      "nominal_tail_ratio": 0.5,
+      "phase_indices": [
+        1526,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be50p20-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P05",
+      "config": "configs/cooldown-grid-20261010/be60p05-seed42.json",
+      "config_sha256": "e54e1ba513747a7cf3885571b9136d93526d8e642c7ac66ba2a63134d4f9b021",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.05,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p05-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P10",
+      "config": "configs/cooldown-grid-20261010/be60p10-seed42.json",
+      "config_sha256": "37dea2f10e70cb3486f9672f9ec148972e166ad7f376aefc9f6fd51024c6a3fc",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "main",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.1,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p10-s42",
+      "terminal_ratio": 0
+    },
+    {
+      "allocation_h200_hours": 6,
+      "allocation_minutes": 45,
+      "candidate": "BE60P20",
+      "config": "configs/cooldown-grid-20261010/be60p20-seed42.json",
+      "config_sha256": "b54a6357d4418235a2c91f2ac00e17b652acc0f4ad5a0de53a94fc54aedf57fe",
+      "cooldown_start_index": 1221,
+      "family": "hold_zero",
+      "group": "interaction",
+      "nominal_start_progress": 0.4,
+      "nominal_tail_ratio": 0.6,
+      "phase_indices": [
+        1221,
+        2441,
+        2746,
+        3051
+      ],
+      "plateau_ratio": 0.2,
+      "reference_reused": false,
+      "run_id": "cg-20261010-be60p20-s42",
+      "terminal_ratio": 0
+    }
+  ],
+  "per_run_limits": {
+    "context": 8192,
+    "max_h200_hours": 6,
+    "max_training_tokens": 399900672
+  },
+  "phase_definition": "All nominal percentages use full 3051-update horizon including warmup. First ramp starts at 1-tail, hold about 80-90%, zero ramp about 90-100%.",
+  "planned_updates": 3051,
+  "preparation_id": "dolma-raw-baseline-20261008",
+  "purpose": "Compare earlier cooldown with hold/zero and independently vary plateau LR in an E/BE factorial grid",
+  "recorded_utc": "2026-10-10T06:43:00+00:00",
+  "reference": {
+    "candidate": "E40P10",
+    "config": "configs/training-diagnosis-20261010/e-hold-zero-seed42.json",
+    "config_sha256": "2e39a4393e4e06d32137af28ab223dcddd21dcb380b1a9d0d1c3b58d27428b05",
+    "directory": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/td-20261010-e-hold-zero-s42",
+    "environment_digest": "97e1880efc870ad6d498c0527aafd63032de995d6c79fa89fc4946b6299b3163",
+    "evaluation_indices_sha256": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3",
+    "evaluation_manifest_sha256": "2ff73402ce41bec675e6fffcf7924c3e5d6d4999913c37ac213537df1c4eebfe",
+    "execution_identity_sha256": "7fc980d49d0a4213ad0e70832c88bc981d826bcfd7072ffc5b38281b12e3253d",
+    "initialization_signature": "2f16e166efabc6cf88c801c2411545ced320b444a657b53842a18bc37e738b5c",
+    "mean_nll": 3.356305682267233,
+    "ppl": 28.68303067636484,
+    "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+    "run_id": "td-20261010-e-hold-zero-s42"
+  },
+  "results_record": "experiments/cooldown-grid-20261010/results.json",
+  "scope_update": {
+    "recorded_utc": "2026-10-10T06:53:22.266410+00:00",
+    "removed_candidates": [
+      "B40",
+      "B50",
+      "B60"
+    ],
+    "scope": "Remove only fresh standalone-B candidates. Preserve historical B results, artifacts and accounting; retain eight fresh E/BE candidates plus completed E40P10 reference.",
+    "user_request": "\u65e2\u7136\u5df2\u77e5 BE \u6bd4 B \u597d\uff0c\u522a\u53bb B \u81ea\u5df1\u7684\u5be6\u9a57\u3002"
+  },
+  "seed": 42,
+  "source_hashes": {
+    "attention_backend.py": "e382c5cd1490198a650a96f48973f3b333ede5e76295a2aa7f3ccfb53e631dba",
+    "dataset.py": "5a14f3f63951fd7aef16048f8b40c2016bc518f29e0de1bfb77445bbf41f9e55",
+    "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
+    "preparation_parallel.py": "dbf65aab4f5b389df60304ed4db2a93a6c9d705c80aa5e7e3601027325f88c16",
+    "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
+    "requirements-training.txt": "6ee6c72ed76e6c63e23efdf9d72019ef5b63451c88ec38946167c512d5dc34a8",
+    "slurm/common.sh": "c9c474c296c32f266560d3bef068c89853a268e47fa8eb0f78be3e24ffcd8cca",
+    "slurm/review_cooldown_grid.py": "fe3292fbf915dcea56356f65625568db989826adc090d3d773244cdefae9714b",
+    "slurm/submit_training.py": "18028af59e76f9274fb6e6834fdb121ce7f118fbb48c48faea2a1b27ba9cb76c",
+    "slurm/train.sbatch": "c8d9a534093e1295a61d6ebaa4fa582c0a13fe9f688c623df2eac86bcb09137c",
+    "slurm/training-common.sh": "bf2aa81d5ae211126807918e6397d1780cf2c5f134bbbbe317b504bc010bc104",
+    "third_party/DCLM-LICENSE.txt": "f6f22e7ddf73c6acc94c82555d60f33f26df2aea3be34d65c2f10c9d9c95e3ff",
+    "third_party/dclm_fasttext.py": "9fdf98ee83480a84fe695d9ed8ebcc436b607a3945c1d369b2ee0bb03e7681d9",
+    "train.py": "511ca4452b55faed69ddb11346b9261d4ed5abf79660486127be869ac204072d",
+    "training_state.py": "5708b8ae3e570e2edc8115f4d7143de4fcafda4e3e2795645cc96a51a9bf1007"
+  },
+  "stage": "short_exploratory_ranking",
+  "status": "four_complete_four_initialization_failures_no_jobs_running",
+  "storage_root": "/work/asciibase64/Llama-3.2-1B-training",
+  "submission_authorized": true,
+  "sweep_id": "cooldown-grid-20261010",
+  "training_input_tokens": 399900672,
+  "user_budget_override": {
+    "recorded_utc": "2026-10-10T06:43:00+00:00",
+    "scope": "Do not prune or block this follow-up design on remaining aggregate H200-hours; keep accounting and per-job/per-logical-run limits. Historical reservations and budgets unchanged.",
+    "user_request": "\u4f60\u4e0d\u9700\u8003\u616e\u5269\u9918 H200 Hours"
+  }
+}

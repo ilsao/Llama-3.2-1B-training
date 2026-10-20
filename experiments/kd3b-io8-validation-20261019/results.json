@@ -1,0 +1,198 @@
+{
+  "complete": true,
+  "geometry": {
+    "teacher_gpus": 8,
+    "student_gpus": 8,
+    "teacher_cpus": 8,
+    "student_cpus": 8,
+    "different_nodes": true
+  },
+  "rows": [
+    {
+      "mode": "hidden",
+      "global_batch": 16,
+      "teacher_produce_write_tokens_per_second": 264046.801181099,
+      "student_resident_tokens_per_second": 181620.32901959767,
+      "student_disk_tokens_per_second": 179693.46312113927,
+      "producer_over_resident_student": 1.4538394606289209,
+      "disk_slowdown": 1.0107230717522508,
+      "six_timed_global_window_seconds": [
+        0.7291163050103933,
+        0.7352809809381142,
+        0.7311572110047564,
+        0.7290788709651679,
+        0.7285117959836498,
+        0.7271259410772473
+      ],
+      "slowest_timed_student_tokens_per_second": 178261.10479937986,
+      "payload_bytes_per_update": 805208064,
+      "producer_write_GB_per_second": 3.2401121417881567,
+      "producer_compute_copy_seconds_slowest_rank": 1.5352042788872495,
+      "producer_write_seconds_slowest_rank": 1.491074435878545,
+      "teacher_scaling_vs_four_gpu": 1.8595828692487328,
+      "student_scaling_vs_four_gpu": 1.7538968274130853,
+      "student_speed_ratio_vs_historical_online8": 1.368880682955178
+    },
+    {
+      "mode": "hidden",
+      "global_batch": 64,
+      "teacher_produce_write_tokens_per_second": 288081.26911560964,
+      "student_resident_tokens_per_second": 217408.63731924727,
+      "student_disk_tokens_per_second": 209755.88148053747,
+      "producer_over_resident_student": 1.3250681880342465,
+      "disk_slowdown": 1.0364841061175196,
+      "six_timed_global_window_seconds": [
+        2.554477366968058,
+        2.6080175869865343,
+        2.425689092022367,
+        2.506826127995737,
+        2.470360919018276,
+        2.4429023399716243
+      ],
+      "slowest_timed_student_tokens_per_second": 201029.31921014955,
+      "payload_bytes_per_update": 3220832256,
+      "producer_write_GB_per_second": 3.9857687155591157,
+      "producer_compute_copy_seconds_slowest_rank": 6.127074276912026,
+      "producer_write_seconds_slowest_rank": 4.8484984742244706,
+      "teacher_scaling_vs_four_gpu": 1.907440364714378,
+      "student_scaling_vs_four_gpu": 1.9306817761444353,
+      "student_speed_ratio_vs_historical_online8": 1.383653724895532
+    },
+    {
+      "mode": "logits",
+      "global_batch": 16,
+      "teacher_produce_write_tokens_per_second": 20886.092569290704,
+      "student_resident_tokens_per_second": 180506.2598056562,
+      "student_disk_tokens_per_second": 21127.432877473177,
+      "producer_over_resident_student": 0.11570841139680095,
+      "disk_slowdown": 8.543691079388942,
+      "six_timed_global_window_seconds": [
+        6.051548590068705,
+        7.61452611500863,
+        5.082969920011237,
+        6.7239040760323405,
+        6.069513074005954,
+        5.687770510907285
+      ],
+      "slowest_timed_student_tokens_per_second": 17213.415256617245,
+      "payload_bytes_per_update": 33617436672,
+      "producer_write_GB_per_second": 5.693345219695789,
+      "producer_compute_copy_seconds_slowest_rank": 2.2252429630607367,
+      "producer_write_seconds_slowest_rank": 35.428137983661145,
+      "teacher_scaling_vs_four_gpu": 1.2932302321673157,
+      "student_scaling_vs_four_gpu": 1.2945150205895977
+    },
+    {
+      "mode": "logits",
+      "global_batch": 64,
+      "teacher_produce_write_tokens_per_second": 20456.141707846557,
+      "student_resident_tokens_per_second": 219035.77754539816,
+      "student_disk_tokens_per_second": 20324.002827720742,
+      "producer_over_resident_student": 0.0933917825529975,
+      "disk_slowdown": 10.777196765916912,
+      "six_timed_global_window_seconds": [
+        26.165619477978908,
+        24.582009471952915,
+        26.61378607491497,
+        24.83921967004426,
+        28.300579490023665,
+        24.3241174480645
+      ],
+      "slowest_timed_student_tokens_per_second": 18525.69839373143,
+      "payload_bytes_per_update": 134469746688,
+      "producer_write_GB_per_second": 5.556685905907949,
+      "producer_compute_copy_seconds_slowest_rank": 8.626105218660086,
+      "producer_write_seconds_slowest_rank": 145.19778403709643,
+      "teacher_scaling_vs_four_gpu": 1.3224295104242902,
+      "student_scaling_vs_four_gpu": 1.3144144860145113
+    }
+  ],
+  "projections_3b": {
+    "hidden": {
+      "training_loop_hours": 4.305716337753375,
+      "plus_historical_host_overhead_hours": 4.455863122415538,
+      "both_eight_gpu_roles_allocated_for_training_loop_h200_hours": 68.891461404054,
+      "caveat": "Short validation extrapolation; excludes startup/eval/export/safety margin. Historical host overhead may change with the cache implementation. Teacher time includes backpressure until its job can exit."
+    },
+    "logits": {
+      "training_loop_hours": 40.22338861588358,
+      "plus_historical_host_overhead_hours": 40.37353540054574,
+      "both_eight_gpu_roles_allocated_for_training_loop_h200_hours": 643.5742178541373,
+      "caveat": "Short validation extrapolation; excludes startup/eval/export/safety margin. Historical host overhead may change with the cache implementation. Teacher time includes backpressure until its job can exit."
+    }
+  },
+  "original_and_replacement_accounting": {
+    "original": {
+      "consumer": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 53,
+        "end": "2026-10-19T19:21:19",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "75805dff926c0d62ef5765aefcb341161750c7b486c4c1f693c4d0d8fde3d21d",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.11777777777777777,
+        "job_id": "575178",
+        "nodes": "25a-hgpn027",
+        "start": "2026-10-19T19:20:26",
+        "state": "FAILED"
+      },
+      "producer": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 67,
+        "end": "2026-10-19T19:21:19",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "5f88b351d6ac7a389b7bafd36f6a11ae4cfb6f7911ac8fc6c7ed0494f86c429a",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.14888888888888888,
+        "job_id": "575177",
+        "nodes": "25a-hgpn017",
+        "start": "2026-10-19T19:20:12",
+        "state": "FAILED"
+      }
+    },
+    "replacement": {
+      "consumer": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 382,
+        "end": "2026-10-19T19:33:29",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "5f88b351d6ac7a389b7bafd36f6a11ae4cfb6f7911ac8fc6c7ed0494f86c429a",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.8488888888888889,
+        "job_id": "575197",
+        "nodes": "25a-hgpn017",
+        "start": "2026-10-19T19:27:07",
+        "state": "COMPLETED"
+      },
+      "producer": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 390,
+        "end": "2026-10-19T19:33:28",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "990da96f33396a9cd321212d5177fdcdaa6ccbd16f08cf9c873ab97c96078aa3",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.8666666666666667,
+        "job_id": "575196",
+        "nodes": "25a-hgpn008",
+        "start": "2026-10-19T19:26:58",
+        "state": "COMPLETED"
+      }
+    }
+  },
+  "validation_pair_cumulative_h200_hours": 1.9822222222222223,
+  "study_reserved_or_measured_h200_hours": 95.4186111111111,
+  "input_reservations": {
+    "teacher": 11534336,
+    "student": 18350080
+  },
+  "full_training_submitted": false,
+  "uncertainty": "Six timed windows per format/batch; no long-duration storage guarantee. Historical online8 and four+four runs used different nodes/windows; ratios are planning evidence, not controlled scaling claims."
+}

@@ -1,0 +1,157 @@
+{
+  "generated_at_utc": "2026-10-19T04:17:30.911459+00:00",
+  "scope": "Existing metadata and scalar arithmetic only. New methods are untested proposals.",
+  "runs": [
+    {
+      "run_id": "raw4b-normuon-adam2x-20261017",
+      "training_input_tokens": 4000055296,
+      "updates": 19080,
+      "logical_h200_hours": 42.11333333333334,
+      "subset_1k_ppl": 13.651287217874438,
+      "additional_9k_ppl": 13.872206425392553,
+      "combined_10k_prediction_tokens": 15146114,
+      "combined_10k_nll_sum": 39808824.91508865,
+      "combined_10k_mean_nll": 2.6283193771741487,
+      "combined_10k_ppl": 13.850472909963697
+    },
+    {
+      "run_id": "raw4b-normuon-adam2x-step30-20261018",
+      "training_input_tokens": 4000055296,
+      "updates": 19080,
+      "logical_h200_hours": 45.32666666666667,
+      "subset_1k_ppl": 13.776884825494228,
+      "additional_9k_ppl": 14.004185024537982,
+      "combined_10k_prediction_tokens": 15146114,
+      "combined_10k_nll_sum": 39951782.76574087,
+      "combined_10k_mean_nll": 2.637757959945427,
+      "combined_10k_ppl": 13.98182063803591
+    },
+    {
+      "run_id": "raw6b-normuon-adam2x-20261018",
+      "training_input_tokens": 6000082944,
+      "updates": 28619,
+      "logical_h200_hours": 64.70666666666668,
+      "subset_1k_ppl": 12.773935950410152,
+      "additional_9k_ppl": 12.922426349966036,
+      "combined_10k_prediction_tokens": 15146114,
+      "combined_10k_nll_sum": 38741267.746617794,
+      "combined_10k_mean_nll": 2.5578354782367145,
+      "combined_10k_ppl": 12.9078477387367
+    }
+  ],
+  "architecture": {
+    "total_parameters": 1235814400,
+    "hidden_size": 2048,
+    "intermediate_size": 8192,
+    "vocab_size": 128256,
+    "layers": 16,
+    "tied_embeddings": true,
+    "embedding_parameters": 262668288,
+    "embedding_fraction": 0.2125467125160542,
+    "training_inputs_per_parameter": 4.855165099225256,
+    "optimizer_parameter_counts": {
+      "adamw_decay": 0,
+      "adamw_no_decay": 262735872,
+      "muon": 973078528
+    },
+    "initialization_method": "AutoModelForCausalLM.from_config",
+    "pretrained_weights_loaded": false
+  },
+  "performance": {
+    "async_transfer": false,
+    "enabled": false,
+    "model_compiled": false,
+    "muon_core_compiled": false,
+    "requested": {}
+  },
+  "timing_totals": {
+    "checkpoint_count": 1,
+    "checkpoint_seconds": 25.881397081539035,
+    "data_seconds": 1013.9411727339029,
+    "evaluation_seconds": 57.86497584544122,
+    "initialization_max_seconds": 40.51722220890224,
+    "initialization_seconds": 40.51722220890224,
+    "journal_seconds": 234.93135544471443,
+    "logging_seconds": 11.471730692312121,
+    "optimizer_seconds": 3659.0415378570597,
+    "training_seconds": 27076.35180141218
+  },
+  "derived_estimates_not_benchmarks": {
+    "optimizer_fraction_of_training_timer": 0.1351379079683187,
+    "training_speedup_if_entire_optimizer_6x_rest_unchanged": 1.1269064876846964,
+    "training_speedup_if_optimizer_free_rest_unchanged": 1.1562537070515613,
+    "one_sequence_8192_full_vocab_logits_gib_bf16": 1.95703125,
+    "one_sequence_8192_full_vocab_logits_gib_fp32": 3.9140625,
+    "extra_full_matrix_fp32_second_moment_gib_per_replicated_rank": 3.625,
+    "soap_two_gram_and_two_basis_matrices_gib_for_one_8192_by_2048_weight": 0.53125,
+    "full_6b_teacher_logits_fp32_decimal_petabytes": 3.078186552262656
+  },
+  "adam_factorial_seed42": {
+    "A": {
+      "run_id": "ppl-next-20261017-A-seed42",
+      "perplexity": 19.194009175501584,
+      "mean_nll": 2.9545982082354167
+    },
+    "B": {
+      "run_id": "ppl-next-20261017-B-seed42",
+      "perplexity": 18.699463505050684,
+      "mean_nll": 2.928494833879505
+    },
+    "C": {
+      "run_id": "ppl-next-20261017-C-seed42",
+      "perplexity": 19.58524822136701,
+      "mean_nll": 2.974776641092471
+    },
+    "D": {
+      "run_id": "ppl-next-20261017-D-seed42",
+      "perplexity": 19.055256669882766,
+      "mean_nll": 2.9473430041843445
+    }
+  },
+  "mask_and_normalization_pilots": {
+    "ppl-next-20261016-s1-dense": {
+      "perplexity": 20.20459415103959,
+      "observer_ppl": {
+        "finite_window_mean": 20.21728513557753,
+        "token_ema": 20.21980377448117
+      }
+    },
+    "ppl-next-20261016-s1-intradoc": {
+      "perplexity": 19.427365375709286,
+      "observer_ppl": {
+        "finite_window_mean": 19.43929390641159,
+        "token_ema": 19.4417333787763
+      }
+    },
+    "ppl-next-20261016-s2-nor": {
+      "perplexity": 19.149161573236906,
+      "observer_ppl": {
+        "finite_window_mean": 19.16071950789115,
+        "token_ema": 19.16341143356658
+      }
+    },
+    "ppl-next-20261016-s2-pe": {
+      "perplexity": 19.448750357708004,
+      "observer_ppl": {
+        "finite_window_mean": 19.459994823166664,
+        "token_ema": 19.462877949257358
+      }
+    }
+  },
+  "source_sha256": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-20261017/results.json": "9e42bc524c3e9873d62c35cd979c14523816ff02ce6600b50c3cbf7deb6bcfb0",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/summary.json": "7f269e8b8c33f5a390b0b096cca4e0c3b48d8e5e2aa47e2510a5f2544c1f4db4",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-step30-20261018/results.json": "a467e5627088c847b0cd25182c8c7dfdb5b12fbfc668d5c20783611a58ab81d8",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/summary.json": "89175aefa7618886478eca9bf6c8cd5f0f019564e3ff8fbc6c46a623511ae052",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/results.json": "660fa5b3a94aee4a571e7930b993323ea3aeda5630ca72974365db8ce46f2002",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/summary.json": "8c6483a22cc6c5cf667b294ad5487acc38cfffd43152243ef80d4d8882db216b",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/initialization.json": "deb2f9199c739faa6d5fc13480c254bc0f11b0a839e8f7873cb1f9fd3a319b8a",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/optimizer-groups.json": "c796f8f8d0489c77b929123a9d90c953456a4ba7c389b286100a87005109cb35",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/selection.json": "81840eb48b2613cd3c1cd3bd701a3df9e8abbc97e695558d67af10063a0c5f23",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/results.json": "a18b558c01857adc35071bc75acb0dd739ce5b873d468cb04b9d56f0b38af5cb",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v3/ppl_optimizer.py": "89f9f1cb57213a812b3cf8e033c1d8a6abe7dcf01270dda3bfb5fdb2e159f287",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v3/recipe_runtime.py": "5d322e54e2737d3f9f419054765b123d3a0e744b3ec4eae4049f92099fec45b4",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v3/train.py": "73971bfdfd9b46059889bf45678df140aff8cbbc22cb1047101f746ee91088bc",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v3/performance.py": "0fd60630051d9aa8a2f0d3e172cf199d04383cfde882797d0e83ed08d3251254"
+  }
+}

@@ -5,8 +5,8 @@
     "job_id": "558510",
     "reservation": "raw3b-bs64-stepwsd40-20261016-4d4b52fe067e409d9f5831eae1948a59",
     "returned_job_id": "558510",
-    "slurm_state": "RUNNING",
-    "status": "submitted",
+    "slurm_state": "COMPLETED",
+    "status": "reconciled",
     "submission_command": [
       "sbatch",
       "--parsable",
@@ -24,7 +24,59 @@
       "stdout": "558510\n"
     },
     "submission_started_utc": "2026-10-16T08:30:06.395746+00:00",
-    "submission_tag": "raw3b-bs64-stepwsd40-20261016-4d4b52fe067e409d9f5831eae1948a59"
+    "submission_tag": "raw3b-bs64-stepwsd40-20261016-4d4b52fe067e409d9f5831eae1948a59",
+    "accounting": {
+      "job_id": "558510",
+      "state": "COMPLETED",
+      "elapsed_seconds": 14289,
+      "gpu_count": 8,
+      "h200_hours": 31.753333333333334,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "1057ab930ad238cc80da8babc8408b37cef3c2740c28f5e1bf732f1e13200033"
+      },
+      "start": "2026-10-16T16:30:09",
+      "end": "2026-10-16T20:28:18",
+      "nodes": "25a-hgpn069"
+    }
   },
-  "stage": "submitted_or_uncertain"
+  "stage": "complete",
+  "result": {
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/checkpoints/checkpoint-014312-7a7a9e34bff7",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/export-step-14312-198d7e6d",
+    "full_perplexity": 15.371304229874601,
+    "global_step": 14312,
+    "job_id": "558510",
+    "run_id": "raw3b-bs64-stepwsd40-20261016",
+    "schedule_audit": {
+      "actual_updates": 14312,
+      "decay_clock": "optimizer_updates",
+      "decay_start_completed_updates": [
+        8014,
+        13929
+      ],
+      "distinct_steps": 1432,
+      "final_ramp_start_completed_updates": [
+        12465,
+        14248
+      ],
+      "job_id": "558510",
+      "log_path": "/work/asciibase64/Llama-3.2-1B-training/logs/raw3b-bs64-stepwsd40-558510.out",
+      "logged_updates": 1432,
+      "passed": true,
+      "phase_updates": [
+        13355,
+        957
+      ],
+      "plateau_start_completed_updates": [
+        11575,
+        14184
+      ],
+      "warmup_clock": "optimizer_updates"
+    },
+    "subset_perplexity": 15.410731893855608,
+    "tokens": 3000107008,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/cba7b737a27141ba84ab7ec861b6fe73"
+  }
 }

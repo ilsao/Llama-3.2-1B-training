@@ -1,0 +1,22 @@
+{
+  "run": "58970e70c88c",
+  "source": "local W&B protobuf history",
+  "records": [
+    {
+      "_step": 1840,
+      "train/global_step": 18310,
+      "train/total_tokens_seen": 2399928320
+    },
+    {
+      "_step": 1841,
+      "train/global_step": 18310,
+      "eval/training_tokens": 2399928320,
+      "eval/perplexity": 20.668532536877265
+    },
+    {
+      "_step": 1842,
+      "train/global_step": 18320,
+      "train/total_tokens_seen": 2401239040
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "actual_updates": 19080,
+  "decay_clock": "optimizer_updates",
+  "decay_start_completed_updates": [
+    12463,
+    18697
+  ],
+  "decay_start_tokens": [
+    1633550336,
+    3800432640
+  ],
+  "final_ramp_start_completed_updates": [
+    16914,
+    19016
+  ],
+  "hold_start_completed_updates": [
+    16024,
+    18952
+  ],
+  "phase_tokens": [
+    0,
+    3333292032,
+    4000055296
+  ],
+  "phase_updates": [
+    0,
+    17804,
+    19080
+  ],
+  "preserved_batch_events": [
+    0,
+    170,
+    3051,
+    6103,
+    9155,
+    12207,
+    15259,
+    18310,
+    21362,
+    22041,
+    23736,
+    24414,
+    25430,
+    25431,
+    25601,
+    27466,
+    28483,
+    29840,
+    30179,
+    30517,
+    30518
+  ],
+  "tail_ratios": [
+    0.2,
+    0.05,
+    0.05
+  ],
+  "warmup_actual_updates": [
+    170,
+    43
+  ],
+  "warmup_clock": "nonpadding_tokens",
+  "warmup_units_per_phase": 170
+}

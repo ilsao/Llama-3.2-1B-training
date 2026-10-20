@@ -1,0 +1,7 @@
+{
+  "activated_utc": "2026-10-14T14:32:24.525601+00:00",
+  "hostname": "25a-lgn05",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/source/slurm/recipe_campaign_v8.py",
+  "sha256": "cad358492307ad505f1fbadf87db36a2e615bb8d2c6ef4351f60d1f0f1223a64",
+  "source_commit": "74c50782090e8930286444183b0d34e58360622f"
+}

@@ -1,0 +1,79 @@
+{
+  "allocated_nodes": {
+    "off": "25a-hgpn089",
+    "on": "25a-hgpn018"
+  },
+  "first_step_relative_grad_norm_difference": 1.1799005386281536e-05,
+  "first_step_relative_loss_difference": 6.402143739592248e-07,
+  "limitations": "One short trial per arm, within 170-update LR warmup; scalar loss/gradient norm and held-out PPL checks, not full-gradient equivalence or final-quality evidence.",
+  "mean_relative_training_loss_difference": 7.468065000788097e-05,
+  "numerical_consistency_passed": true,
+  "off": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 502,
+      "end": "2026-10-13T23:36:54",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "4708ece85813748f2544b13d85cca15af44c7e66c338b04ed247d0a24084dc31",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 1.1155555555555556,
+      "job_id": "537004",
+      "nodes": "25a-hgpn089",
+      "start": "2026-10-13T23:28:32",
+      "state": "COMPLETED"
+    },
+    "cold_start_excess_seconds_estimate": 345.67562368512154,
+    "compute_tokens_per_second": 284477.06509023916,
+    "end_to_end_tokens_per_second": 266793.9924560269,
+    "gradient_accumulation_steps": 1,
+    "job_id": "537004",
+    "mean_optimizer_seconds": 0.09647339767456055,
+    "measured_updates": 100,
+    "median_update_seconds": 0.4893755030352622,
+    "microbatch_size": 2,
+    "nonpadding_tokens": 13107200,
+    "p95_update_seconds": 0.5100270919501781,
+    "peak_allocated_gib": 36.91773223876953,
+    "peak_reserved_gib": 44.72265625,
+    "perplexity": 912.9269940361218,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ddef5b6ea7a14520a0b623898d125329"
+  },
+  "off_vs_on_speedup": 1.0236088797450074,
+  "on": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 472,
+      "end": "2026-10-13T23:36:14",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "f6498290b8e1980be42eb9083343376afc262fdab97fc67fde36066ccb972af4",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 1.048888888888889,
+      "job_id": "537003",
+      "nodes": "25a-hgpn018",
+      "start": "2026-10-13T23:28:22",
+      "state": "COMPLETED"
+    },
+    "cold_start_excess_seconds_estimate": 311.1100242808461,
+    "compute_tokens_per_second": 277640.2381713931,
+    "end_to_end_tokens_per_second": 260640.5607994416,
+    "gradient_accumulation_steps": 2,
+    "job_id": "537003",
+    "mean_optimizer_seconds": 0.09813793937683106,
+    "measured_updates": 100,
+    "median_update_seconds": 0.5011975600064034,
+    "microbatch_size": 1,
+    "nonpadding_tokens": 13107200,
+    "p95_update_seconds": 0.5191209859913215,
+    "peak_allocated_gib": 30.705841541290283,
+    "peak_reserved_gib": 44.916015625,
+    "perplexity": 912.544943451875,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/829039f0a4324cb9b86995f6f31c6fdb"
+  },
+  "recommendation": "inconclusive",
+  "relative_perplexity_difference": 0.00041866495123144,
+  "total_h200_hours": 2.1644444444444444
+}

@@ -1,0 +1,9 @@
+{
+  "action": "submit1H200/30min upload and verification job",
+  "result": "rejected_before_execution",
+  "job_submitted": false,
+  "remote_modified": false,
+  "reason": "User requested Hugging Face upload, but automatic approval review requires explicit approval of the specific public repository and publication payload.",
+  "requested_destination": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "payload": "HF model weights, architecture config, tokenizer, model card, resolved training config, training metadata and optimizer/split/evaluation details; no optimizer checkpoint states or credentials"
+}

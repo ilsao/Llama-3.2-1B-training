@@ -1,0 +1,23 @@
+{
+  "measurement_note": "CUDA event stage intervals on rank0, not proof of simultaneously executing SM instructions; timings include waiting/resource contention",
+  "modes": {
+    "serial_buffer": {
+      "rank0_mean_teacher_ms": 154.33021681817868,
+      "rank0_mean_student_ms": 367.97957611083984,
+      "rank0_mean_next_teacher_stage_overlap_ms": 0,
+      "seconds_per_step_blocks": [
+        1.053640960987347,
+        1.0361320441782784
+      ]
+    },
+    "pipeline": {
+      "rank0_mean_teacher_ms": 207.67386892127493,
+      "rank0_mean_student_ms": 419.4711405436198,
+      "rank0_mean_next_teacher_stage_overlap_ms": 123.26772932572798,
+      "seconds_per_step_blocks": [
+        1.0282310894884479,
+        1.028624573664274
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+# Raw buffer to6B
+
+{
+  "job": {
+    "gpu_count": 1,
+    "job_id": "552620",
+    "requested_seconds": 57600,
+    "reserved_h200_hours": 16,
+    "returned_job_id": "552620",
+    "slurm_state": "COMPLETED",
+    "status": "reconciled",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:552564",
+      "--comment=raw-buffer-6b-20261015-a24343ef5ed14c7ca2ff798c3120af65",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-buffer-6b-20261015/source/slurm/raw-six.sbatch",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-buffer-6b-20261015/authorization.json"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "552620\n"
+    },
+    "submission_started_utc": "2026-10-15T09:34:52.250797+00:00",
+    "submission_tag": "raw-buffer-6b-20261015-a24343ef5ed14c7ca2ff798c3120af65",
+    "accounting": {
+      "job_id": "552620",
+      "state": "COMPLETED",
+      "elapsed_seconds": 8467,
+      "gpu_count": 1,
+      "h200_hours": 2.3519444444444444,
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "gpu_type_evidence": {
+        "source": "startup nvidia-smi for allocated devices",
+        "sha256": "d1e6b82a28e0cbba86a7de6b5cb711f91eb35368fe31b7bd5bd7c5ed655ac798"
+      },
+      "start": "2026-10-15T17:35:07",
+      "end": "2026-10-15T19:56:14",
+      "nodes": "25a-hgpn030"
+    }
+  },
+  "stage": "complete",
+  "result": {
+    "completed_utc": "2026-10-15T11:56:03.267137+00:00",
+    "published_rows": 732421,
+    "target_met": true,
+    "token_limit": 6000000000,
+    "training_tokens": 5999992540,
+    "unused_token_budget": 7460
+  }
+}

@@ -11,7 +11,8 @@ import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from slurm.submission import find_submission_job
-from training_state import (DEFAULT_ROOT, PROJECT, ExperimentLedger, identifier,
+from training_state import (BE60P20_2B_RUN_ID, DEFAULT_ROOT, PROJECT, ExperimentLedger,
+                            be60p20_2b_authorized, identifier,
                             load_config, storage_root)
 
 
@@ -43,8 +44,11 @@ def main():
                         help='Optimizer for the built-in runtime correctness check')
     parser.add_argument('--gpus', type=int, choices=(4, 8), help='Runtime correctness-check GPU count; configs govern training')
     parser.add_argument('--minutes', type=int, help='Override allocation duration; must fit remaining budget')
+    parser.add_argument('--exclude', help='Comma-separated verified Slurm node names to avoid')
     parser.add_argument('--test-only', action='store_true', help='Slurm validation only; no reservation or execution')
     args = parser.parse_args()
+    if args.exclude and not re.fullmatch(r'[A-Za-z0-9_-]+(?:,[A-Za-z0-9_-]+)*', args.exclude):
+        parser.error('Use comma-separated node names for --exclude')
     if args.dependency and not re.fullmatch(r'afterok:[0-9]+(?::[0-9]+)*', args.dependency):
         parser.error('Use afterok:JOB_ID[:JOB_ID]')
     root = storage_root(args.root)
@@ -62,7 +66,16 @@ def main():
         'train-scaling-4.json' if args.action == 'scaling' else 'train-pilot.json')).resolve()
     cfg = load_config(config_path)
     minutes = args.minutes if args.minutes is not None else {'setup': 60, 'runtime': 10, 'scaling': 10, 'sweep-calibration': 10}.get(args.action, 30)
-    if minutes > 120 and args.action != 'setup':
+    if args.id == BE60P20_2B_RUN_ID and args.action != 'pilot':
+        parser.error('The authorized BE60P20 2B run requires a fresh pilot launcher; resume is unauthorized')
+    be60p20_authorization = be60p20_2b_authorized(args.id, cfg)
+    if args.id == BE60P20_2B_RUN_ID and not be60p20_authorization:
+        parser.error('BE60P20 2B requires the exact approved configuration')
+    if be60p20_authorization and args.prep_id != 'dolma-raw-baseline-20261008':
+        parser.error('BE60P20 2B requires the parent raw preparation')
+    if be60p20_authorization and minutes > 240:
+        parser.error('BE60P20 2B allocation is limited to 240 minutes')
+    if minutes > 120 and args.action != 'setup' and not be60p20_authorization:
         parser.error('Training/validation allocations are limited to 120 minutes per sbatch')
     if cfg.get('sweep_stage') in ('initial', 'short', 'medium') and not cfg.get('sweep_calibration_digest'):
         parser.error('Sweep templates are uncalibrated; freeze the stage through optimizer_sweep.py')
@@ -103,11 +116,16 @@ def main():
             data['jobs'][reservation]['source_root'] = str(PROJECT)
     script = ('setup-training.sbatch' if args.action == 'setup' else
               'sweep-calibration.sbatch' if args.action == 'sweep-calibration' else 'train.sbatch')
+    if be60p20_authorization:
+        script = 'be60p20-2b.sbatch'
     command = ['sbatch', '--parsable', '--cpus-per-task=8', f'--time={minutes}', f'--gpus-per-node={cfg["world_size"]}',
                f'--job-name=llama-{args.action}', f'--signal=B:USR1@{cfg["stop_margin_seconds"]}', f'--output={root}/logs/%x-%j.out',
                f'--error={root}/logs/%x-%j.err']
+    excluded = set(args.exclude.split(',')) if args.exclude else set()
     if args.action == 'sweep-calibration':
-        command.append('--exclude=25a-hgpn062')
+        excluded.add('25a-hgpn062')
+    if excluded:
+        command.append('--exclude=' + ','.join(sorted(excluded)))
     if not args.test_only:
         command.append(f'--comment={reservation}')
     if args.dependency:
@@ -115,7 +133,9 @@ def main():
     if args.test_only:
         command.append('--test-only')
     command.extend([str(PROJECT / 'slurm' / script), args.id])
-    if args.action != 'setup':
+    if be60p20_authorization:
+        command.extend([args.prep_id, str(config_path)])
+    elif args.action != 'setup':
         command.extend([args.action, args.prep_id or '-', str(config_path)])
     if not args.test_only:
         with ledger.transaction() as data:

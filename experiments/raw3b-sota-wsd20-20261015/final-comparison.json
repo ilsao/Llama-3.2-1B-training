@@ -1,0 +1,8 @@
+{
+  "absolute_ppl_change": 0.6345630697904188,
+  "candidate_full_perplexity": 15.912297665809827,
+  "control_full_perplexity": 15.277734596019409,
+  "control_run": "raw3b-sota-20261015",
+  "improved": false,
+  "relative_ppl_change_percent": 4.153515469209368
+}

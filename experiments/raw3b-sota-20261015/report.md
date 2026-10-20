@@ -1,0 +1,56 @@
+# Scaled-LR plus SOTA raw3B
+
+{
+  "blocked": true,
+  "error": "Historical formal identities changed",
+  "job": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 15621,
+      "end": "2026-10-15T22:07:03",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "95b10814e5c38dab43955d7bff9462c155925381b7a713aa2a68bb2b33deb955",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 34.71333333333333,
+      "job_id": "552679",
+      "nodes": "25a-hgpn075",
+      "start": "2026-10-15T17:46:42",
+      "state": "COMPLETED"
+    },
+    "job_id": "552679",
+    "reservation": "raw3b-sota-20261015-a8663085b4dc49528ac9e0f2d2d93669",
+    "returned_job_id": "552679",
+    "slurm_state": "COMPLETED",
+    "status": "reconciled",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=raw3b-sota-20261015-a8663085b4dc49528ac9e0f2d2d93669",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-20261015/source/slurm/sota3b.sbatch",
+      "raw3b-sota-20261015",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-20261015/config.json",
+      "dolma-raw-baseline-20261008"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "552679\n"
+    },
+    "submission_started_utc": "2026-10-15T09:46:40.738236+00:00",
+    "submission_tag": "raw3b-sota-20261015-a8663085b4dc49528ac9e0f2d2d93669"
+  },
+  "result": {
+    "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/checkpoints/checkpoint-022889-2f68824938d4",
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export-step-22889-a8cf7ed4",
+    "full_perplexity": 15.277734596019409,
+    "job_id": "552679",
+    "run_id": "raw3b-sota-20261015",
+    "subset_perplexity": 15.223860644913243,
+    "tokens": 3000107008,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/f905ff728cec44f4b2bce516804b3ab0"
+  },
+  "stage": "complete"
+}

@@ -1,0 +1,26 @@
+{
+  "automatic_retry": false,
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn031",
+    "25a-hgpn039",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn083",
+    "25a-hgpn151"
+  ],
+  "first_decision_max_h200_hours": 68,
+  "maximum_training_jobs": 6,
+  "parallel_training_jobs": 2,
+  "stage_order": [
+    "gate",
+    "A/B seed42",
+    "C/D seed42",
+    "qualified winner vs A extra9k",
+    "if confirmed paired seed43"
+  ],
+  "stop_after": "replication; prepare formal transfer separately",
+  "total_with_conditional_replication_max_h200_hours": 100,
+  "training_configs": 8
+}

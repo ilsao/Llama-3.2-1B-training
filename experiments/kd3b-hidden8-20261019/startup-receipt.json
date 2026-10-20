@@ -1,0 +1,60 @@
+{
+  "status": "training_started",
+  "timestamp": "2026-10-19T20:00:32.418198+08:00",
+  "jobs": {
+    "575376": {
+      "elapsed_seconds": 126,
+      "end": "Unknown",
+      "node": "25a-hgpn027",
+      "start": "2026-10-19T19:58:26",
+      "state": "RUNNING"
+    },
+    "575377": {
+      "elapsed_seconds": 126,
+      "end": "Unknown",
+      "node": "25a-hgpn035",
+      "start": "2026-10-19T19:58:26",
+      "state": "RUNNING"
+    }
+  },
+  "latest": {
+    "timestamp": 1792411226.585047,
+    "train/global_step": 70,
+    "train/grad_norm": 1.8894237279891968,
+    "train/hidden_wait_seconds_cumulative_max_rank": 3.157927989959717,
+    "train/loss": 7.663291758083494,
+    "train/teacher_inference_inputs": 13631488,
+    "train/tokens_per_second": 167992.5066166499,
+    "train/total_tokens_seen": 9175040
+  },
+  "student_initialization_from_random": true,
+  "seed": 42,
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "hidden_projection_checks_passed": 8,
+  "stdlib_tests_passed": 11,
+  "teacher_1k_perplexity": 7.873496786327301,
+  "recent_student_step_tokens_per_second_median": 167992.5066166499,
+  "teacher_progress": {
+    "local_backpressure_seconds": 0.0,
+    "local_write_seconds": 20.750164214055985,
+    "produced_updates": 110,
+    "rank_payloads": 220,
+    "service_seconds_max_rank": 48.75950622558594,
+    "service_tokens_per_second": 295694.5448400455,
+    "teacher_inputs": 14417920,
+    "timestamp": 1792411229.4884608,
+    "wall_seconds": 62.32060480117798
+  },
+  "wandb": {
+    "id": "82e6b67d45e6444ba2dcdb77dc387282",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/82e6b67d45e6444ba2dcdb77dc387282"
+  },
+  "allocation_end_taipei": "2026-10-20T01:58:26+08:00",
+  "monitor": "Every2minutes; status/accounting only; no submit/retry/resume; self-retires when both jobs terminal",
+  "never_allocated_cancelled_job_ids": [
+    "575359",
+    "575360"
+  ],
+  "never_allocated_cost_h200_hours": 0
+}

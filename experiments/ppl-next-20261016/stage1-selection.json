@@ -1,0 +1,15 @@
+{
+  "checkpoint_training_load": false,
+  "control_run": "ppl-next-20261016-s1-intradoc",
+  "criterion": "lower raw final mean NLL on fixed 1000 docs at exact 1B inputs; exact tie dense",
+  "mask": "intradoc",
+  "mean_nll": {
+    "ppl-next-20261016-s1-dense": 3.0059100117679267,
+    "ppl-next-20261016-s1-intradoc": 2.966682658503671
+  },
+  "ppl": {
+    "ppl-next-20261016-s1-dense": 20.20459415103959,
+    "ppl-next-20261016-s1-intradoc": 19.427365375709286
+  },
+  "practically_small_gap": false
+}

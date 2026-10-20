@@ -1,0 +1,25 @@
+{
+  "automatic_retry": false,
+  "combined_h200_hours_limit": 80,
+  "combined_seconds_limit": 36000,
+  "failed_job": "566121",
+  "fixes": [
+    "Use original pinned data-py311 interpreter for canonical tail preparation",
+    "Include original requirements-data.txt and verify archived Preparation fingerprint",
+    "Allow existing empty overlay directory from failed startup; refuse any nonempty unpublished artifacts"
+  ],
+  "previous_allocation_seconds": 5,
+  "requested_new_allocation_seconds": 35940,
+  "script": "/home/asciibase64/Llama-3.2-1B-training/slurm/raw6b-normuon-adam2x-recovery.sbatch",
+  "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v2",
+  "status": "approved_preparing_submission",
+  "training_checkpoint_load": false,
+  "training_config_digest": "92b99288eb9afdfba6749bdd03058a42d27279f0b83765ec9424cb67da8c5f9b",
+  "completed_checks": [
+    "Recovery batch shell syntax passed",
+    "All source-v2 Python syntax passed",
+    "Original pinned data environment distribution checks passed",
+    "Exact archived Preparation fingerprint reproduced without loading data or model"
+  ],
+  "preparation_fingerprint": "3b38ab98b5a62f3620a2ae2a5adb8d366baf129604725d330e6ff131425b289a"
+}

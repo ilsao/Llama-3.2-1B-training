@@ -1,0 +1,81 @@
+{
+  "comparison_note": "Matched training token budget, seed42 and fixed 1k subset; auxiliary AdamW LR x2; eval cadence 1900 versus 1908",
+  "confirmation_evaluation": {
+    "all_variants": {
+      "raw": {
+        "eval/documents": 9000,
+        "eval/length_0_256_nll": 636724.3368272781,
+        "eval/length_0_256_perplexity": 15.91879256968336,
+        "eval/length_0_256_prediction_tokens": 230072,
+        "eval/length_1024_4096_nll": 12724130.066345215,
+        "eval/length_1024_4096_perplexity": 13.691987603184106,
+        "eval/length_1024_4096_prediction_tokens": 4862457,
+        "eval/length_256_1024_nll": 6543013.547721863,
+        "eval/length_256_1024_perplexity": 13.624886936370752,
+        "eval/length_256_1024_prediction_tokens": 2505080,
+        "eval/length_4096_inf_nll": 16038307.368286133,
+        "eval/length_4096_inf_perplexity": 14.049295332580693,
+        "eval/length_4096_inf_prediction_tokens": 6069203,
+        "eval/nll": 35942175.31918049,
+        "eval/perplexity": 13.872206425392553,
+        "eval/prediction_tokens": 13666812,
+        "eval/sequences": 9405,
+        "evaluation_slots": [
+          1000,
+          10000
+        ],
+        "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/export-step-19080-64b42711",
+        "global_step": 19080,
+        "kernel_calls": {
+          "dense": 18816,
+          "varlen": 0
+        },
+        "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+        "slurm_job_id": "563624",
+        "training_global_step": 19080,
+        "variant": "raw"
+      }
+    },
+    "eval/documents": 9000,
+    "eval/length_0_256_nll": 636724.3368272781,
+    "eval/length_0_256_perplexity": 15.91879256968336,
+    "eval/length_0_256_prediction_tokens": 230072,
+    "eval/length_1024_4096_nll": 12724130.066345215,
+    "eval/length_1024_4096_perplexity": 13.691987603184106,
+    "eval/length_1024_4096_prediction_tokens": 4862457,
+    "eval/length_256_1024_nll": 6543013.547721863,
+    "eval/length_256_1024_perplexity": 13.624886936370752,
+    "eval/length_256_1024_prediction_tokens": 2505080,
+    "eval/length_4096_inf_nll": 16038307.368286133,
+    "eval/length_4096_inf_perplexity": 14.049295332580693,
+    "eval/length_4096_inf_prediction_tokens": 6069203,
+    "eval/nll": 35942175.31918049,
+    "eval/perplexity": 13.872206425392553,
+    "eval/prediction_tokens": 13666812,
+    "eval/sequences": 9405,
+    "evaluation_slots": [
+      1000,
+      10000
+    ],
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/export-step-19080-64b42711",
+    "global_step": 19080,
+    "kernel_calls": {
+      "dense": 18816,
+      "varlen": 0
+    },
+    "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+    "slurm_job_id": "563624",
+    "training_global_step": 19080,
+    "variant": "raw"
+  },
+  "confirmation_perplexity": 13.872206425392553,
+  "delta_subset_ppl_vs_previous_4b": -0.20907022998273028,
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/export-step-19080-64b42711",
+  "job_id": "563624",
+  "previous_4b_subset_perplexity": 13.860357447857169,
+  "run_id": "raw4b-normuon-adam2x-20261017",
+  "subset_perplexity": 13.651287217874438,
+  "tokens": 4000055296,
+  "updates": 19080,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/0c10adbe104d46be86a515dcf149b408"
+}

@@ -1,0 +1,58 @@
+{
+  "critical-batch-20261020-c0-shadow": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 9,
+      "end": "2026-10-20T13:48:27",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "31a714d7f4d894edeae93a5f724e8a0425b96fc33c9b91caccc61d9578013cb4",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.02,
+      "job_id": "587032",
+      "nodes": "25a-hgpn024",
+      "start": "2026-10-20T13:48:18",
+      "state": "FAILED"
+    },
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020-recovery1/configs/c0-shadow.json",
+    "job_id": "587032",
+    "output": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement1",
+    "reservation": "critical-batch-20261020-c0-shadow-startup-replacement1-41e4e1488e3149eaa174dec08caee00f",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587032\n"
+    },
+    "slurm_state": "FAILED",
+    "status": "reconciled"
+  },
+  "critical-batch-20261020-c1-cbs-half": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 12,
+      "end": "2026-10-20T13:48:30",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "be4649a9e653f0e259c3943599158da13c9aa62764c6f63964c73b917681d00e",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.02666666666666667,
+      "job_id": "587033",
+      "nodes": "25a-hgpn064",
+      "start": "2026-10-20T13:48:18",
+      "state": "FAILED"
+    },
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020-recovery1/configs/c1-cbs-half.json",
+    "job_id": "587033",
+    "output": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement1",
+    "reservation": "critical-batch-20261020-c1-cbs-half-startup-replacement1-0643670fd30d47689d1f1436e48263d0",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587033\n"
+    },
+    "slurm_state": "FAILED",
+    "status": "reconciled"
+  }
+}

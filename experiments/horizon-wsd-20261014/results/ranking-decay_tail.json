@@ -1,0 +1,58 @@
+{
+  "best": {
+    "candidate": "decay60",
+    "nll": 3.1196607596227777,
+    "perplexity": 22.638698379773537,
+    "physical_h200_hours": 4.937777777777778,
+    "training_tokens": 700055552,
+    "value": 0.6,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d5f8148cb57146a3902f30df3db635fe"
+  },
+  "observations": [
+    {
+      "candidate": "decay60",
+      "nll": 3.1196607596227777,
+      "perplexity": 22.638698379773537,
+      "physical_h200_hours": 4.937777777777778,
+      "training_tokens": 700055552,
+      "value": 0.6,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/d5f8148cb57146a3902f30df3db635fe"
+    },
+    {
+      "candidate": "decay50",
+      "nll": 3.1219575595143083,
+      "perplexity": 22.69075469834568,
+      "physical_h200_hours": 4.8933333333333335,
+      "training_tokens": 700055552,
+      "value": 0.5,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/868399dd687141a0bf886649ebb5f563"
+    },
+    {
+      "candidate": "decay40",
+      "nll": 3.129557132296104,
+      "perplexity": 22.86385163846821,
+      "physical_h200_hours": 4.924444444444444,
+      "training_tokens": 700055552,
+      "value": 0.4,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/be178e8c2eec495b80d8f3fcc3b2feb0"
+    },
+    {
+      "candidate": "decay20",
+      "nll": 3.169062461983459,
+      "perplexity": 23.785174394619144,
+      "physical_h200_hours": 4.957777777777777,
+      "training_tokens": 700055552,
+      "value": 0.2,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/182b8abc572547cb937836edeb12d610"
+    },
+    {
+      "candidate": "decay10",
+      "nll": 3.2192287523074468,
+      "perplexity": 25.00882474313655,
+      "physical_h200_hours": 4.98,
+      "training_tokens": 700055552,
+      "value": 0.1,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1d85ec1d2d53433bb5d2206afea2c2df"
+    }
+  ]
+}

@@ -1,0 +1,1173 @@
+{
+  "A1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "adamuon",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "A1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "AdaMuon v3 sign / elementwise adaptivity; replicated implementation",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "C1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "cce",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "C1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Exact CCE loss kernel, same N0 optimizer and schedule",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "D025-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "dion025",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "D025",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Official Dion3 fraction=.25; fixed NS5; LR x2 vs D1",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "D1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "dion1",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "D1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Official Dion3 full fraction=1 bridge; fixed NS5",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "F1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "average_weight": "lr_squared",
+      "evaluation_weights": "average_x",
+      "feedback_beta": 0.9,
+      "fixed_recipe": true,
+      "matrix_momentum": 0.95,
+      "name": "sf",
+      "schedule": "single token warmup then constant; no phase restart or cooldown",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "F1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "SF-NorMuon + SF-AdamW with averaged-weight feedback",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "F2-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "average_weight": "lr_squared",
+      "evaluation_weights": "average_x",
+      "feedback_beta": 0.9,
+      "fixed_recipe": true,
+      "matrix_momentum": 0.95,
+      "name": "observer",
+      "schedule": "single token warmup then constant; no phase restart or cooldown",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "F2",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Same inner updates and constant LR, average for eval only",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "K1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "logit_chunk": 128,
+      "name": "kd",
+      "teacher": {
+        "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+        "manifest_sha256": "39c3618d4a8e96830ca236d844830c1335e89cf469ee788878a219f29110624a"
+      },
+      "teacher_weight": 0.25,
+      "temperature": 1.0,
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "K1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Frozen existing 6B-trained teacher, .75 CE + .25 forward KL, T=1",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "N0-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "native",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "N0",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Current intradoc NS5 NorMuon + AdamW x2 control",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "S1-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "name": "soap",
+      "training_checkpoint_load": false
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "S1",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Full SOAP matrix preconditioning, frequency 10",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "K3-seed42": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parallel_method": {
+      "fixed_recipe": true,
+      "logit_chunk": 1024,
+      "name": "kd",
+      "teacher": {
+        "export": "/work/asciibase64/Llama-3.2-1B-training/caches/kd-teachers/llama32-3b-13afe512-pipeline-20261019",
+        "manifest_sha256": "bf1dec0109c97ad0d00d5714127aca10a6046edbd0b35e0d4c1a55fb2f192507",
+        "model_id": "meta-llama/Llama-3.2-3B",
+        "revision": "13afe5124825b4f3751f836b40dafda64c1ed062"
+      },
+      "teacher_weight": 0.25,
+      "temperature": 1.0,
+      "training_checkpoint_load": false,
+      "pipeline": {
+        "slots": 2,
+        "overlap": true,
+        "scope": "within_optimizer_window"
+      }
+    },
+    "parent_runs": [
+      "ppl-next-20261017-B-seed42"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "K3",
+      "cautious_decay": false,
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 1
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "methods-parallel-20261019",
+    "sweep_purpose": "Official pretrained Llama-3.2-3B online two-stream KD; random 1B student; same seed42 1B token-clock recipe",
+    "sweep_stage": "independent",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "id": "methods-validation-20261019",
+  "status": "designed_not_implemented_not_submitted",
+  "objective": "Validate structural training methods against a strong matched-token NorMuon baseline, separating migration, algorithm, supervision and systems effects.",
+  "execution_ready": false,
+  "allocation_reserved": false,
+  "automatic_stage_promotion": false,
+  "default_parallel_jobs": 1,
+  "common": {
+    "architecture": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "sequence_length": 8192,
+    "preparation": "dolma-raw-baseline-20261008",
+    "fresh_random_initialization": "residual_half",
+    "training_checkpoint_load": false,
+    "seed_screen": 42,
+    "seed_confirm": 43,
+    "world_size": 8,
+    "cpus_total": 8,
+    "microbatch_size": 1,
+    "target_nonpadding_inputs": 1000079360,
+    "actual_updates": 4775,
+    "reference_batch_tokens": 131072,
+    "batch_switch_inputs": 500039680,
+    "phase_split_inputs": 833355776,
+    "global_batch_sequences": [
+      16,
+      64
+    ],
+    "boundary_batches": "Use ALL archived rows, including widths 16/32/48 at knots.",
+    "phase_second_peak_ratio": 0.1,
+    "warmup_reference_units_per_phase": 170,
+    "schedule_clock": "nonpadding_inputs",
+    "tail_fraction_per_phase": 0.4,
+    "tail_ramp_hold_final": [
+      4,
+      1,
+      1
+    ],
+    "plateau_ratio": 0.2,
+    "mask": "intradoc_document_spans",
+    "attention_backend": "flash_attention_3",
+    "parameter_dtype": "float32",
+    "autocast_dtype": "bfloat16",
+    "activation_checkpointing": true,
+    "global_clip": 0.5,
+    "matrix_peak_lr_reference": 0.008614891542046706,
+    "aux_adam_peak_lr": 0.0005168934925228023,
+    "aux_betas": [
+      0.9,
+      0.95
+    ],
+    "aux_eps": 1e-08,
+    "aux_weight_decay": 0,
+    "matrix_reference_wd": 0.1,
+    "matrix_decay_policy": "External pre-update decay q(t)=1-reference_matrix_peak_lr*0.1*schedule(t), fixed across LR multipliers; native optimizer WD disabled. SF exception: decay on z, documented separately.",
+    "optimizer_groups": {
+      "hidden_matrices": 973078528,
+      "shared_embedding_and_norms": 262735872
+    },
+    "tied_embedding_updated_once": true,
+    "evaluation": {
+      "fixed_subset_documents": 1000,
+      "every_updates": 400,
+      "also": "archived token/batch/phase knots and endpoint",
+      "confirmation_slots": [
+        1000,
+        10000
+      ]
+    },
+    "wandb_project": "lab5-training-llama",
+    "logging_steps": 10,
+    "checkpoint_policy": "final_only",
+    "auto_retry_resume_requeue": false
+  },
+  "immutable_references": {
+    "experiments/ppl-next-20261017/configs/B-seed42.json": "678641f1b0d052c77afcbbb8eb3c344509417c36adea4a6c63d704f11fa60481",
+    "experiments/ppl-next-20261017/batch-plan.json": "7ad438b2c8418aba859b24070c98f6b9615eb4c495fd154bc9a5c996a2bb8c92",
+    "experiments/methods-research-20261019/evidence.json": "2ae33b792801024c8c777a3cc0f89684e024f7b3b6810e70796b7f1c6f230527"
+  },
+  "base_configuration_snapshot": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 500039680,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "pilot",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 400,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.0005168934925228023,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 16,
+    "max_steps": 7630,
+    "max_training_tokens": 1000079360,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.008614891542046706,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parent_runs": [
+      "ppl-next-20261016-s2-nor",
+      "raw4b-intradoc-normuon-20261017"
+    ],
+    "phase_schedule": [
+      {
+        "end": 6358,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 7630,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 6358,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "stage": 1,
+      "arm": "B",
+      "mask": "intradoc",
+      "matrix": "nor",
+      "cautious_decay": false
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 7630,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "ppl-next-20261017",
+    "sweep_purpose": "Fixed 2x2 auxiliary AdamW LR x cautious decay; fresh intradoc NS5 NorMuon",
+    "sweep_stage": "medium",
+    "target_training_tokens": 1000079360,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "calibration": {
+    "input_target": 200015872,
+    "actual_updates": 1526,
+    "global_batch_sequences": 16,
+    "warmup_updates": 50,
+    "eval_steps": 152,
+    "schedule": "single-phase token-clock 40% tail, same 4:1:1 shape; SF/constant families instead preserve their constant-LR definition",
+    "seed": 42,
+    "lr_factors": [
+      0.7,
+      1,
+      1.4
+    ],
+    "trials_per_method": 3,
+    "cap_minutes_per_trial": 20,
+    "scope": "numerical and LR-scale screen; short-horizon NLL is not evidence of superiority",
+    "selection": "minimum final fixed-1k mean NLL among complete finite trials; ties within .002 choose factor closest to 1; edge optimum flagged as under-calibrated",
+    "freeze_before_1b": true,
+    "v0_evaluation_cadence": "For any short model-training check, eval at least every max(1,floor(planned_actual_updates/10)) updates, at endpoint, and every update for very short checks",
+    "aux_lr": "fixed at base 1B value except full SF family mapping",
+    "wd": "fixed reference shrinkage, not candidate-LR times .1",
+    "target_adjustment": "If projected runtime cannot fit before any family trial, pre-register one lower shared target for the whole comparison; never change after observing NLL."
+  },
+  "gate_thresholds_proposed": {
+    "tiny_fp64_reference_loss_atol": 1e-06,
+    "tiny_reference_grad_relative_l2_max": 1e-05,
+    "full_bf16_ce_loss_abs_max": 0.0002,
+    "full_bf16_ce_grad_relative_l2_max": 0.01,
+    "full_bf16_ce_grad_cosine_min": 0.999,
+    "gram_ns_bf16_direction_relative_l2_max": 0.05,
+    "gram_ns_bf16_direction_cosine_min": 0.995,
+    "diagnostics_step_overhead_max": 0.03,
+    "runtime_projection_with_margin_minutes_max": 110,
+    "memory_free_fraction_min": 0.1,
+    "nonfinite_allowed": 0,
+    "interpretation": "engineering gates fixed before measurements; failing exactness does not permit relabeling an approximation as exact"
+  },
+  "quality_decision": {
+    "primary_metric": "sum document NLL / sum valid prediction tokens",
+    "delta": "candidate minus control",
+    "practical_mean_delta_max": -0.005,
+    "seed42_screen": true,
+    "confirmation_documents": 9000,
+    "document_bootstrap_resamples": 10000,
+    "core_contrasts": [
+      "D025-N0",
+      "D025-D1"
+    ],
+    "core_simultaneous_ci_level_each": 0.975,
+    "geometry_simultaneous_ci_level_each": 0.975,
+    "single_locked_contrast_ci_level": 0.95,
+    "quality_confirmation": "paired interval upper < 0; practical delta <= -.005; fresh seed43 same direction; mean across seeds <= -.005",
+    "speed_noninferiority": "paired interval upper < +.002 and >=5% reduction in actual comparable allocation cost; label efficiency result, not quality improvement",
+    "cost_increase_policy": "over 5% cost increase is a Pareto tradeoff until compute-matched confirmation",
+    "multiple_methods": "lock one winner per family before seed43; retain all failed and nonwinning runs",
+    "uncertainty": "document CI is conditional on trained weights; two seeds do not establish population-level seed confidence"
+  },
+  "teacher_accounting": {
+    "student_training_cap": 1000079360,
+    "teacher_forward_inputs": "separately charged and reported",
+    "student_cap_counts_repeated_student_forward_passes": true,
+    "combined_processing_reported": true,
+    "conservative_logical_input_charge": "student forwards + teacher forwards + any extra model forward on training data",
+    "conservative_logical_input_cap": 6000000000,
+    "schedule_clock": "student nonpadding inputs; distinct from conservative logical charge",
+    "teacher_historical_training_h200_hours": 64.70666666666668,
+    "teacher_historical_training_inputs": 6000082944,
+    "teacher_cost_not_erased_or_recharged_as_new_allocation": true
+  },
+  "budget_totals_h200_hours_caps": {
+    "core": 80.0,
+    "geometry": 78.0,
+    "distillation": 54.0,
+    "schedule_free": 78.0,
+    "replication_per_winner": 34.0,
+    "cce": 38.0,
+    "distillation_mechanism": 28.0,
+    "interaction": 68.0,
+    "compute_matched_pair": 26.0
+  },
+  "recommended_first_decision_cap_h200_hours": 80,
+  "recommended_first_decision_with_one_replication_cap_h200_hours": 114,
+  "first_decision_estimate_assumptions": {
+    "historical_1b_N0_h200_hours": 10.726666666666667,
+    "three_1b_arms_if_similar_cost": 32.18,
+    "three_runtime_validation_jobs_max": 6,
+    "nine_calibration_jobs_max": 24,
+    "confirmation_max": 2,
+    "illustrative_total_if_training_costs_match_N0": 64.18,
+    "not_a_measured_new_method_cost": true
+  },
+  "optional_modules_not_automatically_summed_or_activated": true,
+  "ledger_snapshot_reference": "experiments/raw6b-normuon-adam2x-20261018/ledger-latest.json",
+  "historical_measured_h200_hours_at_snapshot": 1194.6611111111113,
+  "remaining_authorized_campaign_budget": null,
+  "authorization_scope": "Design only. Historical run-specific exceptions do not authorize these new allocations.",
+  "slurm_reference": "slurm/ppl-factorial-train.sbatch",
+  "implementation_contract": [
+    "Keep original source-v3 and preparation immutable",
+    "Isolated source snapshot and environment",
+    "Do not emit runnable train configs until method adapters and LR mappings are resolved",
+    "Full-model checks run through Slurm",
+    "Every allocation, including failure and compilation, enters shared ledger",
+    "No automatic retry/resume/requeue, HF publication or cleanup"
+  ],
+  "deferred_methods": [
+    {
+      "method": "Newton-Muon",
+      "experiment": "fresh N0 versus activation-covariance preconditioned direction; activate only after covariance diagnosis and use same geometry-module cost gates"
+    },
+    {
+      "method": "DoReMi/DoGE",
+      "experiment": "train-only proxy learns frozen domain mixture, then compare fresh uniform/native-mixture and learned-mixture students at matched tokens; original split untouched; proxy and packing separate charged costs",
+      "requires": "new data-mixture protocol; not included in core or given a fabricated cost estimate"
+    },
+    {
+      "method": "MARS",
+      "experiment": "compare approximate one-gradient implementation with N0; exact variant needs an explicit repeated-input and compute budget",
+      "requires": "separate method adapter and resource design"
+    },
+    {
+      "method": "Cautious optimizer",
+      "experiment": "change auxiliary Adam update mask only; preserve ordinary weight decay; compare to fresh N0",
+      "requires": "separate bounded module"
+    },
+    {
+      "method": "multi-token prediction",
+      "experiment": "same backbone with additional training heads, masked across document boundaries",
+      "requires": "architecture-scope change; excluded from current fixed-architecture core"
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/html/2608.11612v1",
+    "https://github.com/microsoft/dion",
+    "https://arxiv.org/html/2507.11005v3",
+    "https://raw.githubusercontent.com/nikhilvyas/SOAP/main/soap.py",
+    "https://arxiv.org/html/2605.23061v1",
+    "https://arxiv.org/abs/2502.08606",
+    "https://github.com/apple-aiml-research/ml-cross-entropy"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "allocation": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 5,
+    "end": "2026-10-18T18:35:04",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "fc90c4fac69fabd51b9d01b27e6240fde88ef0bcbc7b525e5f7ac3ad1d4d6952",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.011111111111111112,
+    "job_id": "566121",
+    "nodes": "25a-hgpn070",
+    "start": "2026-10-18T18:34:59",
+    "state": "FAILED"
+  },
+  "job_id": "566121",
+  "original_data_unchanged": true,
+  "overlay_published": false,
+  "processed_training_tokens": 0,
+  "reason": "Data preparation ran in training environment without fasttext distribution metadata; failed before tokenization or model initialization.",
+  "retry_submitted": false,
+  "training_started": false
+}

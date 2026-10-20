@@ -1,0 +1,112 @@
+{
+  "hold_schedule": {
+    "after": {
+      "final_decay_ratio": 0.05,
+      "first_decay_ratio": 0.2,
+      "hold_ratio": 0.05,
+      "plateau_lr_ratio": 0.2
+    },
+    "before": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    }
+  },
+  "max_steps": {
+    "after": 19080,
+    "before": 30518
+  },
+  "parent_runs": {
+    "after": [
+      "raw4b-normuon-adam2x-20261017"
+    ],
+    "before": [
+      "raw4b-intradoc-normuon-20261017",
+      "ppl-next-20261017-B-seed42",
+      "ppl-next-20261017-B-seed43"
+    ]
+  },
+  "phase_schedule": {
+    "after": [
+      {
+        "end": 17804,
+        "hold_schedule": {
+          "final_decay_ratio": 0.05,
+          "first_decay_ratio": 0.2,
+          "hold_ratio": 0.05,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 19080,
+        "hold_schedule": {
+          "final_decay_ratio": 0.05,
+          "first_decay_ratio": 0.2,
+          "hold_ratio": 0.05,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 17804,
+        "warmup_steps": 170
+      }
+    ],
+    "before": [
+      {
+        "end": 25431,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 30518,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 25431,
+        "warmup_steps": 170
+      }
+    ]
+  },
+  "schedule_clock": {
+    "after": "optimizer_updates",
+    "before": "nonpadding_tokens"
+  },
+  "scheduler_steps": {
+    "after": 19080,
+    "before": 30518
+  },
+  "sweep_id": {
+    "after": "raw4b-normuon-adam2x-step30-20261018",
+    "before": "raw4b-normuon-adam2x-20261017"
+  },
+  "sweep_purpose": {
+    "after": "Fresh 4B matched to formal15 except last30 percent actual optimizer-update decay per phase; preserve token warmup, phase token split, batch trajectory and intradoc NorMuon",
+    "before": "Approved fresh 4B token transfer of B winner: original 4B table matrix LR, auxiliary AdamW LR x2, ordinary WD"
+  },
+  "sweep_stage": {
+    "after": "formal-4b-step30",
+    "before": "formal-4b-adam2x"
+  },
+  "warmup_clock": {
+    "after": "nonpadding_tokens",
+    "before": null
+  },
+  "wsd_decay_ratio": {
+    "after": 0.3,
+    "before": 0.4
+  }
+}

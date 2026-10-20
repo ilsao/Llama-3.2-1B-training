@@ -1,0 +1,71 @@
+{
+  "allocation_seconds": 1800,
+  "cpus": 8,
+  "expected_parent_commit": "31263a8083032293231b6e52eb91609dcd09344d",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef",
+  "export_file_stats": {
+    "config.json": {
+      "mtime_ns": 1792191616330604309,
+      "size": 838
+    },
+    "generation_config.json": {
+      "mtime_ns": 1792191616330992693,
+      "size": 143
+    },
+    "model-00001-of-00003.safetensors": {
+      "mtime_ns": 1792191618075563145,
+      "size": 1956695880
+    },
+    "model-00002-of-00003.safetensors": {
+      "mtime_ns": 1792191619807522288,
+      "size": 1946296312
+    },
+    "model-00003-of-00003.safetensors": {
+      "mtime_ns": 1792191620812498881,
+      "size": 1040282032
+    },
+    "model.safetensors.index.json": {
+      "mtime_ns": 1792191620817498748,
+      "size": 12003
+    },
+    "special_tokens_map.json": {
+      "mtime_ns": 1792191621244686149,
+      "size": 301
+    },
+    "tokenizer.json": {
+      "mtime_ns": 1792191621364486042,
+      "size": 17209920
+    },
+    "tokenizer_config.json": {
+      "mtime_ns": 1792191621243488853,
+      "size": 50526
+    },
+    "training-metadata.json": {
+      "mtime_ns": 1792191621367486040,
+      "size": 35269
+    }
+  },
+  "full_perplexity": 13.838020960959888,
+  "global_step": 19080,
+  "gpu_count": 1,
+  "immutable_inputs": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-intradoc-normuon-20261017/audited-results.json": "1fe0708a10ccb030799f9e501bc09b5ceb7962edfa5be6545ba9409efa2b259c",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/data-provenance.json": "e8450e86a77dd2d9aeb8833e0ee072aa1802744f92ed5975709cac84e33fadd3",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/execution-identity.json": "2e3aae53c9bda397bff19da2f2f3d6b0b66230edf1684c03a2d9e7a25f03f020",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export.json": "d63fe6eafacc2d86568809446911949868a41ddc8e02de5c81899fa127893dad",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/full-evaluation.json": "ea5023e008559356a9b34a1d4d0c28a1c38daa511defaef4df451bca195df2e3",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/initialization.json": "deb2f9199c739faa6d5fc13480c254bc0f11b0a839e8f7873cb1f9fd3a319b8a",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/optimizer-groups.json": "86880249fe360a0b082d89048e3c9bbe6f899f9f12ec7023091f65ee2c6576c7",
+    "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/summary.json": "0748d023d903be31c3a59ace7a31ab1ef57e766c9ca819fb3605ecb56b0e6bd9"
+  },
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_accounting": "Independent complete endpoint audit because historical shared ledger was emptied; do not fabricate or overwrite historical records",
+  "parent_run": "raw4b-intradoc-normuon-20261017",
+  "preserve_history": true,
+  "preserve_public_visibility": true,
+  "previous_target_confirmation": "Prior publication explicitly confirmed this same public model repository; latest request authorizes uploading this4B endpoint",
+  "run_id": "hf-raw4b-20261017",
+  "status": "approved_for_submission",
+  "training_tokens": 4000055296,
+  "user_authorization": "\u5e6b\u6211\u628a\u9019\u500b checkpoint \u4e0a\u50b3; use the established public Hugging Face model repository from prior uploads, updating main while preserving history"
+}

@@ -1,0 +1,28 @@
+{
+  "checkpoint_training_load": false,
+  "maximum_new_submissions": 1,
+  "new_seal": "e9e695ef06a2a48a0ae716c1c5b65cb4d3529c68bc27f530ff99fccf7deaf19b",
+  "old_seal": "261e1ff6d938b295b4d296f4dd0edce86b3b952367c591c8f8bc602fc9e5e756",
+  "only_allowed_cancel": "572036",
+  "original": {
+    "batch_budget_h200_hours": 128,
+    "config_digest": "359dba2384c07deb5d71bc6038e21b98e356f016a1ed10a9126088208017c0f1",
+    "cpu_count": 8,
+    "error": "Bound job may remain held: Unspecified error for job 572036",
+    "gpu_count": 8,
+    "key": "D1-seed42",
+    "phase": "bound_held",
+    "recovery_required": true,
+    "requested_seconds": 7200,
+    "reservation": "mp-c9dd4340904a41b2b97306fa6b8bedf3",
+    "returned_job_id": "572036",
+    "run_id": "methods-parallel-20261019-d1-seed42",
+    "seal_sha256": "261e1ff6d938b295b4d296f4dd0edce86b3b952367c591c8f8bc602fc9e5e756",
+    "submission_started_utc": "2026-10-19T05:49:13.187141+00:00",
+    "submission_tag": "mp-c9dd4340904a41b2b97306fa6b8bedf3"
+  },
+  "original_authorization_sha256": "bc1aee0c79a7f1e008925f810f293da71f4d6d5eb384677c5fe8a9b79b1d48ca",
+  "queue": "572036|mp-c9dd4340904a41b2b97306fa6b8bedf3\n",
+  "reason": "Slurm release failed twice; never-allocated submission repair under user start instruction",
+  "snapshot": "JobId=572036 JobName=mp-D1-seed42 UserId=asciibase64(44781) GroupId=ACD115198(110673) MCS_label=N/A Priority=0 Nice=0 Account=acd115198 QOS=normal JobState=PENDING Reason=JobHeldUser Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=02:00:00 TimeMin=N/A SubmitTime=2026-10-19T13:49:13 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-19T13:49:13 Scheduler=Main Partition=8gpus AllocNode:Sid=25a-lgn05:3891269 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=200G,node=1,billing=8,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=200G MinTmpDiskNode=0 Features=H200 DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/asciibase64/Llama-3.2-1B-training/slurm/methods-parallel.sbatch SubmitLine=sbatch --parsable --hold --comment=mp-c9dd4340904a41b2b97306fa6b8bedf3 --job-name=mp-D1-seed42 --export=ALL,TRAIN_SOURCE_ROOT=/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/source /home/asciibase64/Llama-3.2-1B-training/slurm/methods-parallel.sbatch methods-parallel-20261019-d1-seed42 D1-seed42 WorkDir=/home/asciibase64/Llama-3.2-1B-training Comment=mp-c9dd4340904a41b2b97306fa6b8bedf3 StdErr=/work/asciibase64/Llama-3.2-1B-training/logs/mp-D1-seed42-572036.err StdIn=/dev/null StdOut=/work/asciibase64/Llama-3.2-1B-training/logs/mp-D1-seed42-572036.out TresPerNode=gres/gpu:8 TresPerTask=cpu=8\n"
+}

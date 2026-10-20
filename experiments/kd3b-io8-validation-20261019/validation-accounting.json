@@ -1,0 +1,32 @@
+{
+  "consumer": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 53,
+    "end": "2026-10-19T19:21:19",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "75805dff926c0d62ef5765aefcb341161750c7b486c4c1f693c4d0d8fde3d21d",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.11777777777777777,
+    "job_id": "575178",
+    "nodes": "25a-hgpn027",
+    "start": "2026-10-19T19:20:26",
+    "state": "FAILED"
+  },
+  "producer": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 67,
+    "end": "2026-10-19T19:21:19",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "5f88b351d6ac7a389b7bafd36f6a11ae4cfb6f7911ac8fc6c7ed0494f86c429a",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 0.14888888888888888,
+    "job_id": "575177",
+    "nodes": "25a-hgpn017",
+    "start": "2026-10-19T19:20:12",
+    "state": "FAILED"
+  }
+}

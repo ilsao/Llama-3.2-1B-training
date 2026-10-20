@@ -1,0 +1,148 @@
+{
+  "accounting_evidence": "Independent Slurm record, startup reservation and audited-results; shared historical ledger currently unavailable",
+  "allocation_failure_stage": "post-run historical-ledger guard; training, export and full evaluation independently verified",
+  "allocation_seconds": 19005,
+  "allocation_state": "FAILED",
+  "checkpoint_loaded_for_training": false,
+  "cpus": 8,
+  "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+  "evaluation_indices_sha256": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3",
+  "export_reload_verified": true,
+  "full_eval_documents": 50000,
+  "full_eval_prediction_tokens": 76930208,
+  "full_perplexity": 13.838020960959888,
+  "global_step": 19080,
+  "gpu_count": 8,
+  "gpu_type": "NVIDIA H200",
+  "initialization": "random weights; residual_half; seed42",
+  "normuon": {
+    "beta2": 0.95,
+    "orthogonalizer": "NS5",
+    "preserve_update_frobenius_norm": true,
+    "state_dtype": "float32"
+  },
+  "pack_settings": {
+    "evaluation_loss": "independent documents, stride 8191; each within-document target once",
+    "pad_token_id": 128001,
+    "training_attention": "ordinary causal attention across EOS-separated training documents",
+    "training_loss": "ignore structural BOS, first input position of each sequence, and padding"
+  },
+  "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+  "pretrained_weights_loaded": false,
+  "run_id": "raw4b-intradoc-normuon-20261017",
+  "runtime_training_attention": "document-span internal causal attention",
+  "subset_eval_documents": 1000,
+  "subset_perplexity": 13.860357447857169,
+  "training_config": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 2000027648,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "full",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 1908,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.00014986841480417473,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 56,
+    "max_steps": 30518,
+    "max_training_tokens": 4000055296,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.004995613826805825,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parent_runs": [
+      "raw3b-bs64-wsd40-20261016",
+      "ppl-next-20261016-s2-nor"
+    ],
+    "phase_schedule": [
+      {
+        "end": 25431,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 30518,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 25431,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "nor",
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 3
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 30518,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "raw4b-intradoc-normuon-20261017",
+    "sweep_purpose": "User-approved fresh4B: 1B-winning intradoc causal mask and NorMuon NS5,3B SOTA recipe and4B table LR",
+    "sweep_stage": "formal-4b-intradoc-normuon",
+    "target_training_tokens": 4000055296,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "training_h200_hours": 42.233333333333334,
+  "training_tokens": 4000055296,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/302d493de0854a3b816a2bee7b5d2a4f"
+}

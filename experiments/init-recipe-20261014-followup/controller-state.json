@@ -1,0 +1,39 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 11837,
+    "end": "2026-10-15T03:50:05",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "3ab57bca350efda20d2c899bddc9410902cfa41bc5af9c342869c2956d8a7564",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 26.304444444444446,
+    "job_id": "544451",
+    "nodes": "25a-hgpn031",
+    "start": "2026-10-15T00:32:48",
+    "state": "COMPLETED"
+  },
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--time=240",
+    "--job-name=rh-resplit-2b",
+    "--comment=followup-130228d6fec441fda23db8ae35b4c0ee",
+    "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn071,25a-hgpn151,25a-hgpn083",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014-followup/source/slurm/followup.sbatch",
+    "init-recipe-20261014-followup-rh-resplit-2b",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014-followup/resolved-config.json"
+  ],
+  "job_id": "544451",
+  "reservation": "followup-130228d6fec441fda23db8ae35b4c0ee",
+  "run_id": "init-recipe-20261014-followup-rh-resplit-2b",
+  "slurm_state": "COMPLETED",
+  "stage": "complete",
+  "status": "reconciled",
+  "submission_receipt": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "544451\n"
+  }
+}

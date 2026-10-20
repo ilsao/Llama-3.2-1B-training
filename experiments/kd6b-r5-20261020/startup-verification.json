@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-10-19T18:16:12.574482+00:00",
+  "job_id": "578615",
+  "real_training_updates_verified": 70,
+  "confirmed_student_tokens": 9175040,
+  "fresh_random_initialization_verified": true,
+  "all_preflight_gates_passed": true,
+  "formal_run_number": 19,
+  "historical_formal_count_preserved": 18,
+  "allocation_count": 1,
+  "reserved_h200_hours": 72,
+  "study_actual_plus_reserved_h200_hours": 248.1786111111111,
+  "wandb": {
+    "id": "58970e70c88c",
+    "mode": "online",
+    "online_error": null,
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/58970e70c88c"
+  },
+  "training_deadline_epoch": 1792464845
+}

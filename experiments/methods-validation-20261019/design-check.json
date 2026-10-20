@@ -1,0 +1,23 @@
+{
+  "status": "static_design_checks_passed",
+  "batch_rows_validated": 4775,
+  "target_tokens": 1000079360,
+  "eval_interval_valid": true,
+  "unique_arm_ids": 18,
+  "all_comparison_references_resolved": true,
+  "budget_caps_recomputed": {
+    "core": 80.0,
+    "geometry": 78.0,
+    "distillation": 54.0,
+    "schedule_free": 78.0,
+    "replication_per_winner": 34.0,
+    "cce": 38.0,
+    "distillation_mechanism": 28.0,
+    "interaction": 68.0,
+    "compute_matched_pair": 26.0
+  },
+  "core_plus_replication_h200_hours": 114.0,
+  "models_loaded": false,
+  "jobs_submitted": 0,
+  "new_method_runtime_checks": "not performed"
+}

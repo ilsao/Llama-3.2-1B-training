@@ -1,0 +1,24 @@
+{
+  "approved": true,
+  "user_instruction": "\u5141\u8a31\u516d\u7d44\u5404\u88dc\u4ea4\u4e00\u6b21",
+  "recorded_utc": "2026-10-19T05:58:45.987240+00:00",
+  "plan_sha256": "c6bf11640bb6cdffb1e5fbf670fd94d2f65dd14659e52d85b3faf69e8d6c6e29",
+  "exact_failed_jobs": [
+    "572065",
+    "572067",
+    "572070",
+    "572071",
+    "572072",
+    "572073"
+  ],
+  "excluded_node": "25a-hgpn001",
+  "per_job_seconds": 7140,
+  "per_job_gpus": 8,
+  "per_job_cpus": 8,
+  "maximum_replacement_allocations_per_run": 1,
+  "source_and_config_unchanged": true,
+  "maximum_study_h200_hours_inclusive": 127.23555555555556,
+  "preserve_all_historical_and_failed_costs": true,
+  "training_checkpoint_load": false,
+  "further_automatic_retry": false
+}

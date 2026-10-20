@@ -1,0 +1,17 @@
+{
+  "approval_scope": "Reviewed 4B configuration; per-run exception to three-formal-run and 120-minute gates",
+  "approved": true,
+  "automatic_resume": false,
+  "automatic_retry": false,
+  "configuration_digest": "3f12b71e61585347c61a17ca4e369e2a1abdc8eb41c3402685102ae4b4d9db2f",
+  "cpus": 8,
+  "formal_run_number": 15,
+  "fresh_random_initialization": true,
+  "gpus": 8,
+  "hf_upload": false,
+  "maximum_allocations": 1,
+  "maximum_h200_hours": 56,
+  "requested_seconds": 25200,
+  "run_id": "raw4b-normuon-adam2x-20261017",
+  "user_instruction": "\u5141\u8a31\uff0c\u958b\u59cb\u8a13\u7df4; \u91cd\u65b0\u5617\u8a66"
+}

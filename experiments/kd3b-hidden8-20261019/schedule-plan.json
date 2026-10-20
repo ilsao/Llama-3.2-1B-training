@@ -1,0 +1,30 @@
+{
+  "config_digest": "79976ae5a2093ded5eab07e4439688293fd6111122c28799a0119344d7ef79ea",
+  "optimizer_updates": 14312,
+  "endpoint_inputs": 3000107008,
+  "batch_counts": {
+    "16": 11451,
+    "64": 2858,
+    "32": 3
+  },
+  "switch_inputs": 1499987968,
+  "phase_inputs": 2500067328,
+  "phase_zero_lr_verified": true,
+  "first_window": {
+    "update": 1,
+    "start_tokens": 0,
+    "end_tokens": 131072,
+    "width": 16,
+    "accumulation": 2,
+    "lr_multiplier": 0.0058823529411764705
+  },
+  "last_window": {
+    "update": 14312,
+    "start_tokens": 2999975936,
+    "end_tokens": 3000107008,
+    "width": 16,
+    "accumulation": 2,
+    "lr_multiplier": 0.0
+  },
+  "evaluation_max_interval": 1431
+}

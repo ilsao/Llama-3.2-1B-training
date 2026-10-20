@@ -1,0 +1,25 @@
+{
+  "actual_elapsed_seconds": 20,
+  "actual_h200_hours": 0.044444444444444446,
+  "added_unchanged_upstream_files": {
+    "third_party/DCLM-LICENSE.txt": "f6f22e7ddf73c6acc94c82555d60f33f26df2aea3be34d65c2f10c9d9c95e3ff",
+    "third_party/dclm_fasttext.py": "9fdf98ee83480a84fe695d9ed8ebcc436b607a3945c1d369b2ee0bb03e7681d9"
+  },
+  "automatic_owner_retired": true,
+  "current_source_seal_sha256": "74257ebaf96e4c272cda537ac565383841d7d5292b706092725e288a62cea483",
+  "failed_job_id": "553561",
+  "failed_source_seal": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/failed-source-seal-553561.json",
+  "failure": "Missing third_party package in isolated source; dataset.py import failed before model/data initialization and before any training inputs",
+  "proposed_one_time_fresh_restart": {
+    "checkpoint_training_load": false,
+    "configuration_changes": false,
+    "maximum_remaining_allocation_seconds": 21580,
+    "maximum_remaining_h200_hours": 47.955555555555556,
+    "preserve_failed_allocation_and_run_records": true,
+    "requires_user_approval": true,
+    "run_id": "raw3b-sota-wsd20-20261015"
+  },
+  "retry_submitted": false,
+  "timestamp_utc": "2026-10-15T15:29:48.398372+00:00",
+  "training_tokens_processed": 0
+}

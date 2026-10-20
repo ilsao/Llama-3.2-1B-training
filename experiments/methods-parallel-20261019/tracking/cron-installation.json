@@ -1,0 +1,17 @@
+{
+  "installed_utc": "2026-10-19T09:02:18.318616+00:00",
+  "line": "*/5 * * * * /usr/bin/timeout 55s /usr/bin/python3 /home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/tracking/monitor.py --tick >> /work/asciibase64/Llama-3.2-1B-training/runs/methods-tracking-20261019/monitor.log 2>&1 # llama-methods-tracking-20261019",
+  "cadence_minutes": 5,
+  "prior_entries_preserved": 9,
+  "prior_crontab_sha256": "d5d5c0bccfc38cd45c5fc46830781a48eb5563d68f8b0bc54c1ff10a1d52da8d",
+  "monitor_sha256": "eaa94e335310065a3d56e86f5386b521ebf8d456699686031159c24074e604b1",
+  "stop": "All tracked jobs terminal and reconciled, or 2026-10-19 22:00 Asia/Taipei; remove only own cron marker",
+  "capabilities": [
+    "read scalar run metadata",
+    "query Slurm",
+    "reconcile already-registered terminal allocations",
+    "update local report"
+  ],
+  "no_submission_cancel_resume_or_model_loading": true,
+  "stdlib_tests_passed": 4
+}

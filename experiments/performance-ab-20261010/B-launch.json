@@ -1,0 +1,46 @@
+{
+  "accounting": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 512,
+    "end": "2026-10-10T22:14:21",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "a42b03b4d074370fd6b8824fc2b65da3deaefcc0b2a99fcf86f7a3deb8644079",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 1.1377777777777778,
+    "job_id": "524313",
+    "nodes": "25a-hgpn032",
+    "start": "2026-10-10T22:05:49",
+    "state": "COMPLETED"
+  },
+  "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/performance-ab-20261010/B.json",
+  "configuration_sha256": "70ddcf7061aefb0846ca742dcd2f31af3bc043d5d48b93a79fc3c7408ad2332f",
+  "job_id": "524313",
+  "measurement_launcher": "/home/asciibase64/Llama-3.2-1B-training/slurm/performance_entry.py",
+  "measurement_launcher_sha256": "cee1955c3e830f68d5adea3aae7b7ea0c2209e5a51145f11ef059e6dfa588dcf",
+  "reservation": "performance-6ff0a7f8317d4490b08d607c130057f2",
+  "run_id": "performance-ab-20261010-b",
+  "slurm_state": "COMPLETED",
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/source-b",
+  "stage": "B",
+  "started_utc": "2026-10-10T14:01:46.526547+00:00",
+  "status": "reconciled",
+  "submission_command": [
+    "sbatch",
+    "--parsable",
+    "--comment=performance-6ff0a7f8317d4490b08d607c130057f2",
+    "--time=45",
+    "--job-name=perf-B",
+    "--dependency=afterok:524312",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/source-b/slurm/performance-ab.sbatch",
+    "performance-ab-20261010-b",
+    "B",
+    "/home/asciibase64/Llama-3.2-1B-training/configs/performance-ab-20261010/B.json"
+  ],
+  "submission_result": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "524313\n"
+  }
+}

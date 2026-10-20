@@ -1,0 +1,46 @@
+{
+  "authorization": {
+    "approved": true,
+    "exact_failed_jobs": [
+      "572065",
+      "572067",
+      "572070",
+      "572071",
+      "572072",
+      "572073"
+    ],
+    "excluded_node": "25a-hgpn001",
+    "further_automatic_retry": false,
+    "maximum_replacement_allocations_per_run": 1,
+    "maximum_study_h200_hours_inclusive": 127.23555555555556,
+    "per_job_cpus": 8,
+    "per_job_gpus": 8,
+    "per_job_seconds": 7140,
+    "plan_sha256": "c6bf11640bb6cdffb1e5fbf670fd94d2f65dd14659e52d85b3faf69e8d6c6e29",
+    "preserve_all_historical_and_failed_costs": true,
+    "recorded_utc": "2026-10-19T05:58:45.987240+00:00",
+    "source_and_config_unchanged": true,
+    "training_checkpoint_load": false,
+    "user_instruction": "\u5141\u8a31\u516d\u7d44\u5404\u88dc\u4ea4\u4e00\u6b21"
+  },
+  "continuations": [
+    {
+      "already_submitted": [
+        {
+          "job_id": "572102",
+          "key": "D1-seed42"
+        }
+      ],
+      "pending_keys": [
+        "D025-seed42",
+        "K1-seed42",
+        "F1-seed42",
+        "F2-seed42",
+        "C1-seed42"
+      ],
+      "submitter_sha256": "4aee6d715b37e1989795a12ac49dc0aac59ee5695d04a2e5330c899482a17570",
+      "timestamp": "2026-10-19T06:00:41.600572+00:00"
+    }
+  ],
+  "plan_sha256": "c6bf11640bb6cdffb1e5fbf670fd94d2f65dd14659e52d85b3faf69e8d6c6e29"
+}

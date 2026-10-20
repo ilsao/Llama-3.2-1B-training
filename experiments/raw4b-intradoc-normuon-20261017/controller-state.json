@@ -1,0 +1,43 @@
+{
+  "audited_results": "audited-results.json",
+  "job": {
+    "independent_slurm_accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 19005,
+      "end": "2026-10-17T07:03:55",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "1846fb89208a29f7cd6de8da73d8263e465f65d37386e1cdb7dfef34d5583aec",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 42.233333333333334,
+      "job_id": "560415",
+      "nodes": "25a-hgpn084",
+      "start": "2026-10-17T01:47:10",
+      "state": "FAILED"
+    },
+    "job_id": "560415",
+    "reservation": "raw4b-intradoc-normuon-20261017-66c60df540ca454382ec2a3395c26d0a",
+    "returned_job_id": "560415",
+    "slurm_state": "FAILED",
+    "status": "failed",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=raw4b-intradoc-normuon-20261017-66c60df540ca454382ec2a3395c26d0a",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/raw4b-intradoc-normuon.sbatch",
+      "raw4b-intradoc-normuon-20261017",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-intradoc-normuon-20261017/config.json"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "560415\n"
+    },
+    "submission_started_utc": "2026-10-16T17:47:09.145890+00:00",
+    "submission_tag": "raw4b-intradoc-normuon-20261017-66c60df540ca454382ec2a3395c26d0a"
+  },
+  "ledger_anomaly": "ledger-anomaly.json",
+  "status": "failed"
+}

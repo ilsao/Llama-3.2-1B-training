@@ -1,0 +1,27 @@
+{
+  "approved": true,
+  "reason": "Explicit approval of second one-time startup replacement after JOB_RECORD export failure; preserve every cost and charged token",
+  "source_seal_sha256": "6d80db4c8fa9d7541ac8e02cbb8bc864bf357fbf8fe7db68bba1b6194d3c21c8",
+  "configs": {
+    "critical-batch-20261020-c0-shadow": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "critical-batch-20261020-c1-cbs-half": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25"
+  },
+  "logical_input_cap_per_role": 1000210432,
+  "user_quote": "允許，兩組再各補交一次",
+  "approved_at_utc": "2026-10-20T05:51:13.110449+00:00",
+  "failed_jobs": {
+    "critical-batch-20261020-c0-shadow": [
+      "587009",
+      "587032"
+    ],
+    "critical-batch-20261020-c1-cbs-half": [
+      "587010",
+      "587033"
+    ]
+  },
+  "replacement_seconds": 7080,
+  "replacement_count": 2,
+  "max_campaign_h200_hours": 48.028888888888886,
+  "no_automatic_retry": true,
+  "no_training_checkpoint_load": true
+}

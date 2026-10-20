@@ -1,0 +1,12 @@
+{
+  "pure_tests_passed": 8,
+  "controller_seals": "passed",
+  "shell_syntax": "passed",
+  "tensor_data_eval_code": "byte-identical to repaired original",
+  "configuration": "unchanged",
+  "fresh_initialization": true,
+  "checkpoint_training_load": false,
+  "allocation_seconds": 21580,
+  "combined_allocation_seconds_cap": 21600,
+  "combined_h200_hours_cap": 48
+}

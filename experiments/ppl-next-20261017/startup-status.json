@@ -1,0 +1,115 @@
+{
+  "checked_utc": "2026-10-17T05:34:16.359740+00:00",
+  "gate": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 27,
+      "end": "2026-10-17T13:32:13",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "e0a64f3f257f57faff6c6ebbb3b9336f64e554d2204e10091b5eaadacc3fb62e",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.06,
+      "job_id": "561622",
+      "nodes": "25a-hgpn143",
+      "start": "2026-10-17T13:31:46",
+      "state": "COMPLETED"
+    },
+    "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/validation-config.json",
+    "job_id": "561622",
+    "kind": "gate",
+    "reservation": "ppl-next-20261017-gate-fe2a147e0f964dedbfd7b856c5e4bede",
+    "returned_job_id": "561622",
+    "slurm_state": "COMPLETED",
+    "status": "complete",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--time=15",
+      "--job-name=pf17-gate",
+      "--comment=ppl-next-20261017-gate-fe2a147e0f964dedbfd7b856c5e4bede",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-eval.sbatch",
+      "ppl-next-20261017-gate",
+      "gate"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "561622\n"
+    },
+    "submission_started_utc": "2026-10-17T05:31:45.135870+00:00",
+    "submission_tag": "ppl-next-20261017-gate-fe2a147e0f964dedbfd7b856c5e4bede"
+  },
+  "runs": {
+    "A": {
+      "job_id": "561623",
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/80ce5ae38b4b4d79bb40976ec0eb6ab3",
+      "pretrained_weights_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "last_metrics": {
+        "train/grad_norm_adamw_no_decay": 0.738899290561676,
+        "train/grad_norm_muon": 1.6541035175323486,
+        "train/clip_limit": 0.5,
+        "train/grad_norm": 1.8116375207901,
+        "train/learning_rate": 7.601374890041211e-05,
+        "train/lr_adamw_decay": 7.601374890041211e-05,
+        "train/lr_adamw_no_decay": 7.601374890041211e-05,
+        "train/lr_muon": 0.002533791630013737,
+        "train/decay_factor_adamw_decay": 0.9999923986251099,
+        "train/decay_factor_adamw_no_decay": 1.0,
+        "train/decay_factor_muon": 0.9997466208369986,
+        "train/tokens_per_second": 207963.534188172,
+        "train/step_seconds": 0.6302643418312073,
+        "train/total_tokens_seen": 6553600,
+        "train/budget_tokens_charged": 6553600,
+        "train/step_input_tokens": 131072,
+        "train/step_prediction_tokens": 131001,
+        "train/global_batch_sequences": 16,
+        "train/gradient_accumulation_steps": 2,
+        "train/adamw_beta2": 0.95,
+        "train/reference_update": 50,
+        "train/h200_hours_so_far_estimate": 0.18267525513966879,
+        "train/loss": 8.58936191144069,
+        "train/global_step": 50,
+        "job_id": "561623",
+        "timestamp": 1792215250.2171082
+      }
+    },
+    "B": {
+      "job_id": "561624",
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/0563e4e627654e34ae4f7a8f621d656f",
+      "pretrained_weights_loaded": false,
+      "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+      "last_metrics": {
+        "train/grad_norm_adamw_no_decay": 0.834507167339325,
+        "train/grad_norm_muon": 1.9510283470153809,
+        "train/clip_limit": 0.5,
+        "train/grad_norm": 2.122007131576538,
+        "train/learning_rate": 0.00015202749780082422,
+        "train/lr_adamw_decay": 0.00015202749780082422,
+        "train/lr_adamw_no_decay": 0.00015202749780082422,
+        "train/lr_muon": 0.002533791630013737,
+        "train/decay_factor_adamw_decay": 0.9999847972502199,
+        "train/decay_factor_adamw_no_decay": 1.0,
+        "train/decay_factor_muon": 0.9997466208369986,
+        "train/tokens_per_second": 209606.31656128794,
+        "train/step_seconds": 0.6253246665000916,
+        "train/total_tokens_seen": 6553600,
+        "train/budget_tokens_charged": 6553600,
+        "train/step_input_tokens": 131072,
+        "train/step_prediction_tokens": 131001,
+        "train/global_batch_sequences": 16,
+        "train/gradient_accumulation_steps": 2,
+        "train/adamw_beta2": 0.95,
+        "train/reference_update": 50,
+        "train/h200_hours_so_far_estimate": 0.18566355917188856,
+        "train/loss": 8.015467384267371,
+        "train/global_step": 50,
+        "job_id": "561624",
+        "timestamp": 1792215251.5505073
+      }
+    }
+  }
+}

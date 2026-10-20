@@ -1,0 +1,9 @@
+{
+  "all_costs_verified_against_sacct": true,
+  "applied": true,
+  "formal_runs": 15,
+  "jobs": 242,
+  "measured_h200_hours": 1084.627777777778,
+  "reason_empty_ledger": "unknown",
+  "runs": 217
+}

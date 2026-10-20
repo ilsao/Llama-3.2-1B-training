@@ -1,0 +1,13 @@
+{
+  "actual_training_status": "startup_failed_553561_reconciled_no_retry_submitted",
+  "configuration_digest": "efd9b2a00aa2d225d9bc6b84e433384093288ed8ed266417591b46f8f432b5a7",
+  "controller_seals": "passed",
+  "gpu_smoke_job_submitted": false,
+  "post_repair_dependency_imports": "dataset and train import successfully without torch/datasets/pyarrow/fasttext",
+  "post_repair_pure_tests_passed": 7,
+  "post_repair_seals": "passed",
+  "pure_tests_passed": 6,
+  "shell_syntax": "passed",
+  "tensor_data_eval_runtime": "byte-identical to original SOTA",
+  "timestamp_utc": "2026-10-15T15:27:18.933303+00:00"
+}

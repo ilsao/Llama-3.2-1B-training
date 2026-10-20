@@ -1,0 +1,10 @@
+{
+  "unit_tests_passed": 11,
+  "python_ast_passed": true,
+  "sbatch_syntax_passed": true,
+  "source_seal_passed": true,
+  "original_c2_source_seal_passed": true,
+  "configuration_digests_unchanged": true,
+  "compiled_cuda_smoke": "prepared; not run",
+  "replacement_jobs_submitted": []
+}

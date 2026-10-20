@@ -1,0 +1,297 @@
+{
+  "status": "four_complete_one_partial_no_jobs_running",
+  "recorded_utc": "2026-10-10T05:36:53.555163+00:00",
+  "submission_authorized": true,
+  "sweep_id": "training-diagnosis-20261010",
+  "purpose": "Explore four matched-horizon cooldown/decay cells plus a low-LR hold and zero-finish schedule; no new formal run",
+  "stage": "short",
+  "repository": "/home/asciibase64/Llama-3.2-1B-training",
+  "storage_root": "/work/asciibase64/Llama-3.2-1B-training",
+  "preparation_id": "dolma-raw-baseline-20261008",
+  "global_input_tokens_per_update": 131072,
+  "planned_updates": 3051,
+  "matched_training_input_tokens": 399900672,
+  "allocation_minutes": 45,
+  "gpus": 8,
+  "cpus_total": 8,
+  "checkpoint_training_resume_allowed": false,
+  "execution_policy": "User authorized concurrent submission of A, B, C, BC, E on 2026-10-10. Five independent jobs, no dependencies; each 8 H200/8 CPUs, 45 minutes. Seed-43 confirmation remains deferred; no automatic retries or continuations.",
+  "budget_snapshot": {
+    "training_reserved_or_measured_h200_hours": 120.14027777777781,
+    "preprocessing_measured_h200_hours": 25.326111111111114,
+    "total_h200_hours": 145.46638888888893,
+    "conservative_aggregate_ceiling_h200_hours": 192,
+    "conservative_remaining_h200_hours": 30.53361111111107,
+    "formal_runs_committed": 3,
+    "outstanding_training_allocations": 0,
+    "interpretation": "192 is a conservative planning envelope, not a declaration of fresh authorization or the course accounting interpretation",
+    "unresolved_preprocessing_reserved_h200_hours": 16.0,
+    "unresolved_preprocessing_tags": [
+      "preprocessing-9a75955247f8473aaa8eccbeb14f5121"
+    ],
+    "total_with_unresolved_reservations_h200_hours": 161.46638888888893
+  },
+  "budget_plan": {
+    "ranking_h200_hours": 30,
+    "confirmation_h200_hours": 0,
+    "diagnostic_design_only_h200_hours": 0.5,
+    "maximum_total_h200_hours": 30.5,
+    "confirmation_jobs_maximum": 2,
+    "conditional_confirmation_h200_hours": 12,
+    "maximum_total_with_conditional_confirmation_h200_hours": 42.5,
+    "confirmation_status": "deferred_not_reserved; requires reconciled budget headroom for both jobs"
+  },
+  "promotion": {
+    "minimum_confirmed_pairwise_nll_improvement_nats": 0.03,
+    "minimum_seed42_control_improvement_nats": 0.03,
+    "endpoint": "last evaluation at exactly 3051 updates and 399900672 non-padding inputs; never best checkpoint",
+    "selection_order_for_near_ties": [
+      "B-earlier-decay",
+      "C-weaker-decay",
+      "A-combined",
+      "E-hold-zero"
+    ],
+    "near_tie_nats": 0.005,
+    "confirmation": "If a modified candidate beats the original control by >=0.03 nats at seed 42 and budget permits both jobs, train seed-43 control plus the selected winner from random weights. Improvement must be positive in both seeds and average >=0.03 nats.",
+    "inconclusive": "Incomplete endpoint cells do not enter the factorial contrast. No qualifying winner, insufficient confirmation budget, or seed rank reversal stops promotion. No automatic extra seeds, medium stage, or formal training.",
+    "identifiability": "All four cells identify short-horizon conditional effects and descriptive factorial interaction on endpoint NLL. Cooldown changes both optimizer LR histories and integrated decay; single-seed interaction is not a replicated estimate or a 2B result."
+  },
+  "source_hashes": {
+    "train.py": "511ca4452b55faed69ddb11346b9261d4ed5abf79660486127be869ac204072d",
+    "training_state.py": "5708b8ae3e570e2edc8115f4d7143de4fcafda4e3e2795645cc96a51a9bf1007",
+    "optimizers.py": "44d52edd358c3823663419ea480cc886236bb44fde6f9a4345cbff269d535991",
+    "attention_backend.py": "e382c5cd1490198a650a96f48973f3b333ede5e76295a2aa7f3ccfb53e631dba",
+    "raw_baseline.py": "b79ca20d480d8ba144543905de77a2c3dde8cceccc769eae818bb49e725f3462",
+    "slurm/train.sbatch": "c8d9a534093e1295a61d6ebaa4fa582c0a13fe9f688c623df2eac86bcb09137c",
+    "slurm/submit_training.py": "18028af59e76f9274fb6e6834fdb121ce7f118fbb48c48faea2a1b27ba9cb76c",
+    "slurm/training-common.sh": "bf2aa81d5ae211126807918e6397d1780cf2c5f134bbbbe317b504bc010bc104",
+    "slurm/common.sh": "c9c474c296c32f266560d3bef068c89853a268e47fa8eb0f78be3e24ffcd8cca",
+    "slurm/plan_training_diagnosis.py": "603466f5b54ce48255b952585cc78565f5d8e7008b59f2f649fe7176d48fd0f9",
+    "tests/test_hold_schedule.py": "3c80b032779a149f4b1d2936ca623a3fdcb030515a18fb67bb05e37ea586987a",
+    "tests/test_submission_cli.py": "f51184de5006c4b6b6748b4ecbe45104c64aa0ae505ea28312591c57393a39a1"
+  },
+  "candidates": [
+    {
+      "candidate": "A-control",
+      "seed": 42,
+      "run_id": "td-20261010-a-control-s42",
+      "config": "configs/training-diagnosis-20261010/a-control-seed42.json",
+      "config_sha256": "efc1f97c2ecd86fa3f30172582d84faf86dad14f0c500e168298d0db81611e2d",
+      "stage": "ranking",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "B-earlier-decay",
+      "seed": 42,
+      "run_id": "td-20261010-b-earlier-decay-s42",
+      "config": "configs/training-diagnosis-20261010/b-earlier-decay-seed42.json",
+      "config_sha256": "2ad660b6c2fff458d2d1b37a93b182b4843f62bf06f6d920c5596bcda0d85c17",
+      "stage": "ranking",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "C-weaker-decay",
+      "seed": 42,
+      "run_id": "td-20261010-c-weaker-decay-s42",
+      "config": "configs/training-diagnosis-20261010/c-weaker-decay-seed42.json",
+      "config_sha256": "44fd960bb4dc9fbe40f8d59b05c5fa286e12d6f4d63d62aae7e56f2607ac820c",
+      "stage": "ranking",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "D-lower-update-lr",
+      "seed": 42,
+      "run_id": "td-20261010-d-lower-update-lr-s42",
+      "config": "configs/training-diagnosis-20261010/d-lower-update-lr-seed42.json",
+      "config_sha256": "f1241daceca541c5b10c3c33a30e958c1f2e5bd91693a5ba118e93ebaf9def07",
+      "stage": "deferred_not_in_budget",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "A-control",
+      "seed": 43,
+      "run_id": "td-20261010-a-control-s43",
+      "config": "configs/training-diagnosis-20261010/a-control-seed43.json",
+      "config_sha256": "9d74059a405488fb55ba3bafc76e0b26fae801e08976411b76f6016600d6e885",
+      "stage": "confirmation_template",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "B-earlier-decay",
+      "seed": 43,
+      "run_id": "td-20261010-b-earlier-decay-s43",
+      "config": "configs/training-diagnosis-20261010/b-earlier-decay-seed43.json",
+      "config_sha256": "8d0739628033d7df22e52b26772283e703036e8d9c1d867219e742700053d03e",
+      "stage": "confirmation_template",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "C-weaker-decay",
+      "seed": 43,
+      "run_id": "td-20261010-c-weaker-decay-s43",
+      "config": "configs/training-diagnosis-20261010/c-weaker-decay-seed43.json",
+      "config_sha256": "2c62f5c85ce30b3d99c4a1000cbbb6d3b43650b558f5029b422474d8120baeed",
+      "stage": "confirmation_template",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "D-lower-update-lr",
+      "seed": 43,
+      "run_id": "td-20261010-d-lower-update-lr-s43",
+      "config": "configs/training-diagnosis-20261010/d-lower-update-lr-seed43.json",
+      "config_sha256": "645fba234772c3f0e487aa1dfd545b472174e8924f973b2d024a4579ae3367d3",
+      "stage": "deferred_not_in_budget",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "A-combined",
+      "seed": 42,
+      "run_id": "td-20261010-a-combined-s42",
+      "config": "configs/training-diagnosis-20261010/a-combined-seed42.json",
+      "config_sha256": "ced4045813faa101b083295ca62258937577a7edd199b0a5f3d0149eccf479bc",
+      "stage": "ranking",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "A-combined",
+      "seed": 43,
+      "run_id": "td-20261010-a-combined-s43",
+      "config": "configs/training-diagnosis-20261010/a-combined-seed43.json",
+      "config_sha256": "68f29aaee390afb85225ed76570943d76c80664ab17327728c41c14d8e02f864",
+      "stage": "confirmation_template",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "E-hold-zero",
+      "seed": 42,
+      "run_id": "td-20261010-e-hold-zero-s42",
+      "config": "configs/training-diagnosis-20261010/e-hold-zero-seed42.json",
+      "config_sha256": "2e39a4393e4e06d32137af28ab223dcddd21dcb380b1a9d0d1c3b58d27428b05",
+      "stage": "ranking",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    },
+    {
+      "candidate": "E-hold-zero",
+      "seed": 43,
+      "run_id": "td-20261010-e-hold-zero-s43",
+      "config": "configs/training-diagnosis-20261010/e-hold-zero-seed43.json",
+      "config_sha256": "9c4c9df553c3925ececc5b932a8484c14674c177bd0127b57f3bd85efdf8a9f5",
+      "stage": "confirmation_template",
+      "allocation_minutes": 45,
+      "allocation_h200_hours": 6
+    }
+  ],
+  "ranking_candidates": [
+    "A-control",
+    "B-earlier-decay",
+    "C-weaker-decay",
+    "A-combined",
+    "E-hold-zero"
+  ],
+  "deferred_candidates": [
+    "D-lower-update-lr"
+  ],
+  "launch_preconditions": [
+    "Explicit launch authorization",
+    "Recover/reconcile retained uncertain preprocessing reservation; never assume it is free",
+    "Fresh ledger and Slurm snapshot plus no overlapping campaign submission",
+    "Pinned code/environment/preparation checks"
+  ],
+  "reference_candidates": [],
+  "historical_reference": {
+    "run_id": "muon-wsd-raw-2b-20261010",
+    "source_directory": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-raw-2b-20261010",
+    "training_tokens": 2000027648,
+    "full_perplexity": 22.40346126037556,
+    "scope": "Context only: a 2B horizon does not provide a cooled endpoint control at 399900672 tokens; no interpolation or causal baseline-improvement claim"
+  },
+  "display_labels": {
+    "A-control": "A original control",
+    "B-earlier-decay": "B earlier cooldown",
+    "C-weaker-decay": "C weaker decay",
+    "A-combined": "BC combined",
+    "E-hold-zero": "E staged cooldown, hold, zero"
+  },
+  "factorial_analysis": {
+    "control": "A-control",
+    "schedule_only": "B-earlier-decay",
+    "decay_only": "C-weaker-decay",
+    "combined": "A-combined",
+    "schedule_mean_loss_change": "((L_B - L_A) + (L_BC - L_C)) / 2",
+    "decay_mean_loss_change": "((L_C - L_A) + (L_BC - L_B)) / 2",
+    "interaction_loss_contrast": "L_BC - L_B - L_C + L_A",
+    "interpretation": "Negative loss changes are better; negative interaction means greater-than-additive NLL improvement. These are descriptive contrasts from a single initialization seed."
+  },
+  "additional_schedule_analysis": {
+    "candidate": "E-hold-zero",
+    "comparison": "B-earlier-decay",
+    "muon_peak_lr": 0.02,
+    "muon_weight_decay": 0.1,
+    "auxiliary_adamw_peak_lr": 0.0003,
+    "phase_start_indices": [
+      1831,
+      2441,
+      2746
+    ],
+    "phase_end_index_exclusive": 3051,
+    "plateau_ratio": 0.1,
+    "terminal_ratio": 0,
+    "interpretation": "Same warmup, stable period, peak LRs and WD as B; tests the entire alternative cooldown/hold/zero policy. Cannot attribute its effect independently to hold duration or terminal zero."
+  },
+  "launch_authorization": {
+    "recorded_utc": "2026-10-10T05:45:40+00:00",
+    "user_request": "可以讓這五組實驗平行開始實驗嗎？",
+    "jobs": 5,
+    "maximum_simultaneous_gpus": 40,
+    "maximum_simultaneous_cpus": 40,
+    "per_job_gpus": 8,
+    "per_job_cpus": 8,
+    "ranking_h200_hours_cap": 30
+  },
+  "launch_record": "experiments/training-diagnosis-20261010/launch.json",
+  "failed_launch_h200_hours_measured": 0.35333333333333333,
+  "corrective_restart_policy": {
+    "reason": "Snapshot omitted third_party; source package copied unchanged from repository",
+    "checkpoint_loading_allowed": false,
+    "initialization": "Random weights; no initialization, assets, checkpoint, token journal or W&B identity existed in any first attempt",
+    "logical_run_accounting": "Same run IDs/configuration; retain reconciled first-attempt GPU-hours. Existing resume CLI flag only permits the pre-existing config/ledger; no checkpoint exists to load",
+    "total_failed_h200_hours": 0.35333333333333333,
+    "static_local_dependency_files_checked": [
+      "attention_backend.py",
+      "dataset.py",
+      "optimizers.py",
+      "preparation_parallel.py",
+      "raw_baseline.py",
+      "third_party/dclm_fasttext.py",
+      "train.py",
+      "training_state.py"
+    ],
+    "planned_restart_minutes": {
+      "A-control": 44,
+      "B-earlier-decay": 43,
+      "C-weaker-decay": 44,
+      "A-combined": 44,
+      "E-hold-zero": 44
+    }
+  },
+  "launch_accounting": {
+    "failed_or_stalled_allocations_h200_hours_measured": 0.7422222222222222,
+    "active_allocations_h200_hours_reserved": 0,
+    "training_total_reserved_or_measured_h200_hours": 29.54222222222222,
+    "diagnostic_design_only_h200_hours": 0.5,
+    "total_reserved_or_measured_plus_diagnostic_design_h200_hours": 30.04222222222222,
+    "training_h200_hours_actual_all_attempts": 24.362222222222222
+  },
+  "results": "experiments/training-diagnosis-20261010/results.json"
+}

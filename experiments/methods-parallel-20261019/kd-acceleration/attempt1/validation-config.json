@@ -1,0 +1,32 @@
+{
+  "model_id": "meta-llama/Llama-3.2-1B",
+  "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+  "seed": 42,
+  "sequence_length": 8192,
+  "world_size": 8,
+  "microbatch_size": 1,
+  "gradient_accumulation_steps": 2,
+  "max_steps": 100,
+  "max_training_tokens": 20000000,
+  "max_h200_hours": 1.3333333333333333,
+  "category": "validation",
+  "learning_rate": 0.0003,
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "epsilon": 1e-08,
+  "weight_decay": 0.1,
+  "max_grad_norm": 1.0,
+  "warmup_steps": 0,
+  "min_lr_ratio": 0.1,
+  "logging_steps": 1,
+  "eval_steps": 1,
+  "eval_documents": 1,
+  "activation_checkpointing": true,
+  "stop_margin_seconds": 90,
+  "wandb_project": "lab5-training-llama",
+  "wandb_mode": "offline",
+  "sweep_id": "kd-acceleration-20261019",
+  "sweep_purpose": "Paired full-vocabulary KD numerical/performance validation; zero learning rate; no training restart"
+}

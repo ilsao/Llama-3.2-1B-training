@@ -10,7 +10,7 @@ def fa3_forward(module, query, key, value, attention_mask, dropout=0.0,
     from flash_attn_3.flash_attn_interface import flash_attn_func, flash_attn_varlen_func
     if dropout != 0 or kwargs.get('output_attentions', False):
         raise ValueError('FA3 requires zero attention dropout and no attention weights')
-    if query.device.type != 'cuda' or torch.cuda.get_device_capability(query.device)[0] != 9:
+    if not torch.compiler.is_compiling() and (query.device.type != 'cuda' or torch.cuda.get_device_capability(query.device)[0] != 9):
         raise RuntimeError('FA3 requires an allocated Hopper GPU')
     if query.shape[-2] != key.shape[-2]:
         raise ValueError('Training FA3 adapter does not support KV-cache decoding')
@@ -24,7 +24,8 @@ def fa3_forward(module, query, key, value, attention_mask, dropout=0.0,
     if q.dtype != torch.bfloat16 or k.dtype != q.dtype or v.dtype != q.dtype:
         raise ValueError('This FA3 build supports BF16 QKV only')
     if attention_mask is None:
-        CALLS['dense'] += 1
+        if not torch.compiler.is_compiling():
+            CALLS['dense'] += 1
         return flash_attn_func(q, k, v, softmax_scale=scaling, causal=True), None
     if attention_mask.ndim != 2 or attention_mask.shape != q.shape[:2]:
         raise ValueError('FA3 expects a 2D right-padding input mask')
@@ -63,6 +64,9 @@ def configure_attention(model, backend):
         raise ValueError('Unknown attention backend/model')
     from transformers import AttentionInterface
     from flash_attn_3 import flash_attn_interface  # fail closed before training
+    import torch
+    if not torch.cuda.is_available() or torch.cuda.get_device_capability()[0] != 9:
+        raise RuntimeError('FA3 requires an allocated Hopper GPU')
     if model.config.attention_dropout != 0 or model.config.use_cache:
         raise ValueError('FA3 adapter requires zero dropout and disabled cache')
     AttentionInterface.register(backend, fa3_forward)

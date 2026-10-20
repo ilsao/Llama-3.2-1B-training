@@ -1,0 +1,36 @@
+{
+  "automatic_retry": false,
+  "automatic_stage2": true,
+  "cpus_per_job": 8,
+  "excluded_nodes": [
+    "25a-hgpn001",
+    "25a-hgpn027",
+    "25a-hgpn031",
+    "25a-hgpn039",
+    "25a-hgpn062",
+    "25a-hgpn071",
+    "25a-hgpn083",
+    "25a-hgpn151"
+  ],
+  "gpus_per_job": 8,
+  "max_concurrent_cpus": 16,
+  "max_concurrent_gpus": 16,
+  "maximum_h200_hours": 64,
+  "maximum_jobs": 4,
+  "parallel_jobs_per_stage": 2,
+  "planned_updates": 4775,
+  "preflight_seconds_cap_inside_job": 600,
+  "seconds_per_job": 7200,
+  "stage1": [
+    "dense",
+    "intradoc"
+  ],
+  "stage2": [
+    "pe",
+    "nor"
+  ],
+  "stage2_mask": "strict lower raw endpoint PPL winner from stage1",
+  "study": "ppl-next-20261016",
+  "target_inputs_per_run": 1000079360,
+  "training_checkpoint_load": false
+}

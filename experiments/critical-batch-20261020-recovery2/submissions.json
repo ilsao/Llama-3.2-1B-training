@@ -1,0 +1,26 @@
+{
+  "critical-batch-20261020-c0-shadow": {
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020-recovery2/configs/c0-shadow.json",
+    "job_id": "587039",
+    "output": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2",
+    "reservation": "critical-batch-20261020-c0-shadow-startup-replacement2-184023f82146442bbe1f4092a823a7d3",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587039\n"
+    },
+    "status": "submitted"
+  },
+  "critical-batch-20261020-c1-cbs-half": {
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020-recovery2/configs/c1-cbs-half.json",
+    "job_id": "587050",
+    "output": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2",
+    "reservation": "critical-batch-20261020-c1-cbs-half-startup-replacement2-d92785db32fe47ba95e29820b4c1f56e",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587050\n"
+    },
+    "status": "submitted"
+  }
+}

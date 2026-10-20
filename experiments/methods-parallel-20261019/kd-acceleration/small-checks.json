@@ -1,0 +1,112 @@
+[
+  {
+    "all_ignored": false,
+    "bf16": false,
+    "identical_teacher": false,
+    "lam": 0.0,
+    "relative_l2": [
+      1.102176696576862e-07,
+      7.093286313875069e-08
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": false,
+    "bf16": false,
+    "identical_teacher": false,
+    "lam": 0.25,
+    "relative_l2": [
+      1.6766378507782065e-07,
+      1.00124808000146e-07
+    ],
+    "scale": 3e-05
+  },
+  {
+    "all_ignored": false,
+    "bf16": false,
+    "identical_teacher": false,
+    "lam": 1.0,
+    "relative_l2": [
+      2.9314469429664314e-07,
+      3.391273537545203e-07
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": true,
+    "bf16": false,
+    "identical_teacher": false,
+    "lam": 0.25,
+    "relative_l2": [
+      0.0,
+      0.0
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": false,
+    "bf16": false,
+    "identical_teacher": true,
+    "lam": 0.25,
+    "relative_l2": [
+      1.4062446496154735e-07,
+      8.994315692234522e-08
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": false,
+    "bf16": true,
+    "identical_teacher": false,
+    "lam": 0.0,
+    "relative_l2": [
+      0.0,
+      0.0022613797336816788
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": false,
+    "bf16": true,
+    "identical_teacher": false,
+    "lam": 0.25,
+    "relative_l2": [
+      0.00313757685944438,
+      0.0032229821663349867
+    ],
+    "scale": 3e-05
+  },
+  {
+    "all_ignored": false,
+    "bf16": true,
+    "identical_teacher": false,
+    "lam": 1.0,
+    "relative_l2": [
+      0.0,
+      0.0022955499589443207
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": true,
+    "bf16": true,
+    "identical_teacher": false,
+    "lam": 0.25,
+    "relative_l2": [
+      0.0,
+      0.0
+    ],
+    "scale": 1.0
+  },
+  {
+    "all_ignored": false,
+    "bf16": true,
+    "identical_teacher": true,
+    "lam": 0.25,
+    "relative_l2": [
+      0.0,
+      0.0020227849017828703
+    ],
+    "scale": 1.0
+  }
+]

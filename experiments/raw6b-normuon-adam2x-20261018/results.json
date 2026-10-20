@@ -1,0 +1,116 @@
+{
+  "allocation": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 29016,
+    "end": "2026-10-19T06:22:47",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "85dd1ab0a9d39b7f1f6da449bd259f779c3a34f61080d190c7729e0e986ddc42",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 64.48,
+    "job_id": "567077",
+    "nodes": "25a-hgpn015",
+    "start": "2026-10-18T22:19:11",
+    "state": "COMPLETED"
+  },
+  "comparison_note": "Different token budgets (6B versus4B), same seed42 and fixed1k subset;6B lookup LRs with AdamW x2; eval cadence2800 versus1900",
+  "confirmation_evaluation": {
+    "all_variants": {
+      "raw": {
+        "eval/documents": 9000,
+        "eval/length_0_256_nll": 617883.435151577,
+        "eval/length_0_256_perplexity": 14.667131026782627,
+        "eval/length_0_256_prediction_tokens": 230072,
+        "eval/length_1024_4096_nll": 12371572.73236084,
+        "eval/length_1024_4096_perplexity": 12.734372196919818,
+        "eval/length_1024_4096_prediction_tokens": 4862457,
+        "eval/length_256_1024_nll": 6359074.277698517,
+        "eval/length_256_1024_perplexity": 12.660305365419312,
+        "eval/length_256_1024_prediction_tokens": 2505080,
+        "eval/length_4096_inf_nll": 15624353.266601562,
+        "eval/length_4096_inf_perplexity": 13.123001928785602,
+        "eval/length_4096_inf_prediction_tokens": 6069203,
+        "eval/nll": 34972883.711812496,
+        "eval/perplexity": 12.922426349966036,
+        "eval/prediction_tokens": 13666812,
+        "eval/sequences": 9405,
+        "evaluation_slots": [
+          1000,
+          10000
+        ],
+        "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+        "global_step": 28619,
+        "kernel_calls": {
+          "dense": 18816,
+          "varlen": 0
+        },
+        "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+        "slurm_job_id": "567077",
+        "training_global_step": 28619,
+        "variant": "raw"
+      }
+    },
+    "eval/documents": 9000,
+    "eval/length_0_256_nll": 617883.435151577,
+    "eval/length_0_256_perplexity": 14.667131026782627,
+    "eval/length_0_256_prediction_tokens": 230072,
+    "eval/length_1024_4096_nll": 12371572.73236084,
+    "eval/length_1024_4096_perplexity": 12.734372196919818,
+    "eval/length_1024_4096_prediction_tokens": 4862457,
+    "eval/length_256_1024_nll": 6359074.277698517,
+    "eval/length_256_1024_perplexity": 12.660305365419312,
+    "eval/length_256_1024_prediction_tokens": 2505080,
+    "eval/length_4096_inf_nll": 15624353.266601562,
+    "eval/length_4096_inf_perplexity": 13.123001928785602,
+    "eval/length_4096_inf_prediction_tokens": 6069203,
+    "eval/nll": 34972883.711812496,
+    "eval/perplexity": 12.922426349966036,
+    "eval/prediction_tokens": 13666812,
+    "eval/sequences": 9405,
+    "evaluation_slots": [
+      1000,
+      10000
+    ],
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+    "global_step": 28619,
+    "kernel_calls": {
+      "dense": 18816,
+      "varlen": 0
+    },
+    "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+    "slurm_job_id": "567077",
+    "training_global_step": 28619,
+    "variant": "raw"
+  },
+  "confirmation_perplexity": 12.922426349966036,
+  "delta_subset_ppl_vs_previous_4b": -0.8773512674642863,
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+  "h200_hours": 64.70666666666668,
+  "job_id": "567077",
+  "previous_4b_subset_perplexity": 13.651287217874438,
+  "previous_failed_jobs": [
+    "566121",
+    "567063"
+  ],
+  "run_id": "raw6b-normuon-adam2x-20261018",
+  "schedule_audit": {
+    "complete": true,
+    "decay_clock": "nonpadding_tokens",
+    "decay_ratio": 0.4,
+    "last_logged_step": 28619,
+    "last_logged_tokens": 6000082944,
+    "logged_updates": 2862,
+    "passed": true
+  },
+  "subset_perplexity": 12.773935950410152,
+  "tokens": 6000082944,
+  "training_tail": {
+    "manifest": "/work/asciibase64/Llama-3.2-1B-training/runs/data-overlays/raw6b-normuon-adam2x-20261018/manifest.json",
+    "run_id": "raw6b-normuon-adam2x-20261018",
+    "sha256": "ef0316b6bf2b3cef89e973aac0e33a9e36e706e9b06ecebdcaa6ab340aa51098",
+    "target_tokens": 6000082944
+  },
+  "updates": 28619,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/3dccd801892342459af12b46727fa908"
+}

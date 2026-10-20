@@ -1,0 +1,637 @@
+#!/usr/bin/env python3
+"""Bounded campaign orchestration on login; tensors/data run only in sbatch."""
+import argparse
+import copy
+import datetime as dt
+import json
+import math
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import uuid
+
+REPO = Path(__file__).resolve().parents[1]
+CAMPAIGN = 'horizon-wsd-20261014'
+DIRECTORY = REPO / 'experiments' / CAMPAIGN
+SOURCE = DIRECTORY / 'source-v2'
+CONFIGS = REPO / 'configs' / CAMPAIGN
+sys.path.insert(0, str(REPO/'slurm'))
+from horizon_owner import require_owner
+sys.path.insert(0, str(SOURCE))
+from training_state import (DEFAULT_ROOT, ExperimentLedger, TERMINAL, atomic_json,
+                            digest, file_digest, load_config, locked, read_json)
+from horizon_contracts import (BATCH_TOKENS, SWEEP_STEPS, FINAL_STEPS, PREFIX_STEP,
+                               FINAL_SPLIT, scaled_lr, tail_settings)
+
+PLAN = DIRECTORY / 'plan.json'
+STATE = DIRECTORY / 'controller-state.json'
+DISABLED = DIRECTORY / 'disabled'
+MARKER = '# horizon-wsd-20261014-controller'
+from resplit_lr_runtime import SCALES as TAIL_SCALES
+BRANCH_KEYS = ('decay60', 'decay50', 'decay40', 'decay20', 'decay10')
+
+
+def decay_run_name(key, device_recovery=False):
+    if key not in BRANCH_KEYS:
+        raise ValueError('Unknown authorized decay branch')
+    if device_recovery and key != 'decay60':
+        raise ValueError('Device recovery restricted to decay60')
+    return 'decay-' + key.removeprefix('decay') + ('-recovery2' if device_recovery else '-recovery1')
+
+
+def stamp():
+    return dt.datetime.now(dt.timezone.utc).isoformat()
+
+
+def plan():
+    return read_json(PLAN)
+
+
+def state():
+    return read_json(STATE) if STATE.exists() else dict(campaign=CAMPAIGN, stage='validation', jobs={}, selections={}, created_utc=stamp())
+
+
+def check():
+    p = plan()
+    lr_plan=read_json(DIRECTORY/'resplit-lr-plan.json')
+    for name,expected in lr_plan['source_hashes'].items():
+        if file_digest(REPO/name)!=expected:
+            raise ValueError('Resplit LR source/configuration changed: '+name)
+    for filename,field in [('training-state.json','checkpoint_state_sha256'),('complete.json','checkpoint_complete_sha256')]:
+        if file_digest(Path(lr_plan['checkpoint'])/filename)!=lr_plan[field]:
+            raise ValueError('Frozen first-phase checkpoint metadata changed')
+    owner_plan = read_json(DIRECTORY/'owner-recovery-plan.json')
+    for name, expected in owner_plan['source_hashes'].items():
+        if file_digest(REPO/name) != expected:
+            raise ValueError('Owner recovery source changed: '+name)
+    def historical_source(name):
+        return REPO/owner_plan['historical_sources'].get(name, name)
+    recovery = read_json(DIRECTORY/'branch-recovery-plan.json')
+    for name, expected in recovery['source_hashes'].items():
+        if file_digest(historical_source(name)) != expected:
+            raise ValueError('Branch recovery source changed: '+name)
+    for name, expected in read_json(DIRECTORY/'recovery-plan.json')['source_hashes'].items():
+        if file_digest(historical_source(name)) != expected:
+            raise ValueError('Recovery source changed: '+name)
+    for name, expected in p['source_hashes'].items():
+        if file_digest(historical_source(name)) != expected:
+            raise ValueError('Sealed source changed: ' + name)
+    for name, expected in p['metadata_hashes'].items():
+        if file_digest(name) != expected:
+            raise ValueError('Pinned preparation/environment/reference changed: ' + name)
+    progress = read_json(DEFAULT_ROOT/'preprocessed'/p['preparation_id']/'raw/progress.json')
+    if sum(i['rows'] for i in progress['train_files']) < FINAL_STEPS * 16:
+        raise ValueError('Raw packed prefix insufficient for both final arms')
+    for name, expected in p['initial_configuration_hashes'].items():
+        if file_digest(REPO/name) != expected:
+            raise ValueError('Initial configuration changed')
+        load_config(REPO/name)
+    if p['sweep_tokens'] != SWEEP_STEPS * BATCH_TOKENS or p['final_tokens'] != FINAL_STEPS * BATCH_TOKENS:
+        raise ValueError('Token horizons changed')
+    print('Seals, metadata, environment, canonical prefix, and 0.7B/2B contracts passed.')
+
+
+def config_for(name, lr_ratio=1, clipping=1, tail=.6, final=False, resplit=False):
+    cfg = copy.deepcopy(plan()['base_configuration'])
+    steps = FINAL_STEPS if final else SWEEP_STEPS
+    cfg.update(max_steps=steps, scheduler_steps=steps, max_training_tokens=steps*BATCH_TOKENS,
+        target_training_tokens=steps*BATCH_TOKENS, category='full' if final else 'pilot',
+        max_h200_hours=32 if final else 16, eval_steps=max(1, steps//10),
+        export_on_completion=final, retain_all_checkpoints=True,
+        final_evaluation_reserve_seconds=600 if final else 120, stop_margin_seconds=180,
+        sweep_id=CAMPAIGN, sweep_purpose='Token-scaled LR, clipping, shared-prefix decay, then two final arms',
+        sweep_stage='final' if final else 'short', max_grad_norm=clipping,
+        parent_runs=[CAMPAIGN+'-stable-prefix'] if name.startswith('decay') else ['cg-20261010-be60p20-s42'], hold_schedule=tail_settings(tail), wsd_decay_ratio=tail)
+    horizon = (FINAL_SPLIT if resplit else steps) * BATCH_TOKENS
+    cfg['learning_rate'] = scaled_lr(.0003,399900672,horizon,lr_ratio)
+    cfg['muon']['learning_rate'] = scaled_lr(.02,399900672,horizon,lr_ratio)
+    if resplit:
+        cfg['phase_schedule'] = [
+            dict(start=0,end=FINAL_SPLIT,peak_ratio=1.,warmup_steps=170,hold_schedule=tail_settings(tail)),
+            dict(start=FINAL_SPLIT,end=FINAL_STEPS,
+                 peak_ratio=((FINAL_STEPS-FINAL_SPLIT)/FINAL_SPLIT)**(-.32),
+                 warmup_steps=170,hold_schedule=tail_settings(tail))]
+    path=CONFIGS/(name+'.json')
+    if path.exists() and read_json(path)!=cfg:
+        raise ValueError('Resolved candidate configuration changed')
+    atomic_json(path,cfg)
+    return path,load_config(path)
+
+
+def submit(s, key, run_name, path, cfg, minutes, mode='fresh', pause=0, parent='-', full_eval=False, test_only=False):
+    if not require_owner(__file__, 'submit'):
+        raise ValueError('Only the shared registered controller host may submit')
+    run_id=CAMPAIGN+'-'+run_name
+    if key in s['jobs']:
+        return
+    check()
+    if not test_only and not (DIRECTORY/'branch-recovery-protocol-commit.json').exists():
+        raise ValueError('Commit the authorized branch recovery protocol before compute')
+    if not test_only and not (DIRECTORY/'protocol-commit.json').exists():
+        raise ValueError('Commit protocol before any compute')
+    if mode=='fresh' and (DEFAULT_ROOT/'runs/experiments'/run_id).exists():
+        raise ValueError('Run already initialized; no automatic retry')
+    tag='horizon-'+uuid.uuid4().hex
+    command=['sbatch','--parsable',f'--time={minutes}', '--comment='+tag,
+             '--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn062,25a-hgpn151',
+             '--job-name=hw-'+key, str(REPO/('slurm/resplit-lr.sbatch' if key in TAIL_SCALES else 'slurm/horizon-wsd-v2.sbatch')),run_id,str(path),mode,str(pause),parent,'1' if full_eval else '0']
+    env={**os.environ,'DATA_ROOT':str(DEFAULT_ROOT),'TRAIN_SOURCE_ROOT':str(SOURCE),
+         'HORIZON_CONTROLLER':str(Path(__file__).resolve()),'HORIZON_REPO':str(REPO)}
+    if test_only:
+        result=subprocess.run(command[:1]+['--test-only']+command[1:],env=env,capture_output=True,text=True,timeout=30,check=True)
+        print(result.stdout+result.stderr)
+        return
+    ledger=ExperimentLedger(DEFAULT_ROOT)
+    DEFAULT_ROOT.joinpath('logs').mkdir(parents=True,exist_ok=True)
+    with ledger.transaction() as data:
+        consumed_or_held = sum(j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values()
+            if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind') == 'horizon_wsd_campaign')
+    if consumed_or_held + minutes*8/60 > plan()['allocation_cap_h200_hours'] + 1e-12:
+        raise ValueError('Campaign actual cost plus held reservations exceeds approved205.333333H200-hours; preserve costs and stop')
+    fresh_recovery = (key == 'final-standard-a' and bool(s.get('standard_recovery_applied')) and mode == 'fresh')
+    # Reserve against the existing formal identity; fresh initialization remains
+    # explicit and no training checkpoint is loaded for this recovered allocation.
+    ledger.reserve(tag,run_id,cfg,minutes*60,8,mode=='resume' or fresh_recovery)
+    if parent!='-':
+        with ledger.transaction() as data:
+            original=data['runs'][parent]
+            if original.get('budget_exceeded') or any('h200_hours' not in j for j in data['jobs'].values() if j['run_id']==parent):
+                raise ValueError('Parent must be reconciled')
+            inherited=original['h200_hours_measured']
+            if key in BRANCH_KEYS:
+                failed = s['jobs'][key+'-failed-original']
+                inherited += failed['accounting']['h200_hours']
+                if key == 'decay60' and s.get('device_recovery_applied'):
+                    inherited += s['jobs']['decay60-failed-recovery1']['accounting']['h200_hours']
+            if inherited+minutes*8/60>cfg['max_h200_hours']:
+                raise ValueError('Logical branch resource cap exceeded')
+            data['runs'][run_id].update(inherited_h200_hours=inherited,parent_run=parent,
+                shared_prefix_cost='Parent and original failed allocation physically charged once; included in recovery branch logical cap',
+                recovery_of=s['jobs'][key+'-failed-original']['run_id'] if key in BRANCH_KEYS else None)
+    record=dict(run_id=run_id,reservation=tag,status='submission_uncertain',mode=mode,pause=pause,parent=parent,
+                full_eval=full_eval,configuration=str(path),configuration_sha256=file_digest(path),
+                minutes=minutes,command=command,started_utc=stamp())
+    s['jobs'][key]=record
+    atomic_json(STATE,s)
+    with ledger.transaction() as data:
+        data['jobs'][tag].update(submission_tag=tag,submission_command=command,submission_started_utc=record['started_utc'],
+            allocation_kind='horizon_wsd_campaign',source_root=str(SOURCE),
+            fresh_uninitialized_recovery=fresh_recovery,
+            controller_script=str(Path(__file__).resolve()), controller_host=read_json(DIRECTORY/'submission-owner.json')['hostname'],
+            authorization='User explicitly requested four frozen resplit phase1 LR forks at scales1.0/0.7/0.5/0.3 relative to initial peak; resplit-lr-authorization.json; standard final5 remains authorized')
+    try:
+        result=subprocess.run(command,env=env,capture_output=True,text=True,timeout=30)
+    except OSError:
+        ledger.cancel_reservation(tag)
+        record['status']='submission_not_executed'
+        atomic_json(STATE,s)
+        raise
+    except subprocess.TimeoutExpired:
+        raise ValueError('Uncertain submission; preserve reservation and recover, never retry')
+    record['receipt']=dict(stdout=result.stdout,stderr=result.stderr,returncode=result.returncode)
+    atomic_json(STATE,s)
+    job=result.stdout.strip().split(';')[0]
+    if result.returncode or not re.fullmatch(r'\d+',job):
+        raise ValueError('Uncertain sbatch outcome; reservation retained')
+    with ledger.transaction() as data:
+        data['jobs'][tag]['returned_job_id']=job
+    ledger.bind(tag,job)
+    record.update(job_id=job,status='submitted')
+    atomic_json(STATE,s)
+    print('Submitted',key,job,run_id)
+
+
+def reconcile(s):
+    sys.path.insert(0,str(REPO))
+    from slurm.submission import find_submission_job
+    ledger=ExperimentLedger(DEFAULT_ROOT)
+    for record in s['jobs'].values():
+        if record['status'] in ('reconciled','submission_not_executed'):
+            continue
+        if not record.get('job_id'):
+            with ledger.transaction() as data:
+                reservation=data['jobs'][record['reservation']]
+            job=find_submission_job(reservation,DEFAULT_ROOT)
+            ledger.bind(record['reservation'],job)
+            record.update(job_id=job,status='submitted')
+            atomic_json(STATE,s)
+        result=subprocess.run(['sacct','-X','-j',record['job_id'],'--noheader','--parsable2',
+            '--format=JobIDRaw,State%30'],capture_output=True,text=True,check=True,timeout=30)
+        rows=[r.split('|') for r in result.stdout.splitlines()]
+        record['slurm_state']=next((r[1].split()[0].rstrip('+') for r in rows if r[0]==record['job_id']),'UNKNOWN')
+        if record['slurm_state'] in TERMINAL:
+            record['accounting']=ledger.reconcile(record['job_id'])
+            record['status']='reconciled'
+        atomic_json(STATE,s)
+
+
+def verify_job(run_id, pause=0):
+    path=DEFAULT_ROOT/'runs/experiments'/run_id
+    summary=read_json(path/'summary.json')
+    cfg=summary['configuration']
+    endpoint=pause or cfg['max_steps']
+    if (summary['global_step']!=endpoint or summary['attempted_updates']!=endpoint or
+            summary['last_eval_step']!=endpoint or summary['total_tokens_seen']!=endpoint*BATCH_TOKENS or
+            summary['budget_tokens_charged']!=summary['total_tokens_seen'] or
+            summary['cursor']!=endpoint*16 or summary['initialization']['pretrained_weights_loaded'] or
+            summary['stop_reason']!=('validation_pause' if pause else 'training_token_target')):
+        raise ValueError('Incomplete/mismatched endpoint; stop promotion, no retry')
+    ev=summary['last_evaluation']
+    if (ev['eval/prediction_tokens']<=0 or not math.isfinite(ev['eval/perplexity']) or
+            ev['eval/documents']!=1000):
+        raise ValueError('Invalid endpoint evaluation')
+    return summary
+
+
+def completed(s, keys):
+    if not all(k in s['jobs'] and s['jobs'][k]['status']=='reconciled' for k in keys):
+        return False
+    for key in keys:
+        r=s['jobs'][key]
+        if r.get('slurm_state')!='COMPLETED':
+            raise ValueError('Stage failed: '+key+'; diagnose without automatic retry')
+        if file_digest(r['configuration'])!=r['configuration_sha256']:
+            raise ValueError('Configuration changed')
+        verify_job(r['run_id'],r['pause'])
+    return True
+
+
+def choose(s, keys, field, values):
+    observations=[]
+    provenance=None
+    for key,value in zip(keys,values):
+        r=s['jobs'][key]
+        summary=verify_job(r['run_id'])
+        identity=summary['data_provenance']
+        if provenance is None:provenance=identity
+        if provenance!=identity:raise ValueError('Endpoint evaluation identities differ')
+        ev=summary['last_evaluation']
+        observations.append(dict(candidate=key,value=value,nll=ev['eval/nll']/ev['eval/prediction_tokens'],
+            perplexity=ev['eval/perplexity'],training_tokens=summary['total_tokens_seen'],
+            physical_h200_hours=r['accounting']['h200_hours'],wandb_url=summary['wandb_url']))
+    # Strict endpoint argmin; deterministic listed order for exact numeric ties.
+    best=min(observations,key=lambda x:x['nll'])
+    s['selections'][field]=best['value']
+    s['trajectory']=[r for r in s.get('trajectory',[]) if r['candidate'] not in keys]+observations
+    with (REPO/'research-log.md').open('a') as stream:
+        stream.write(f'\n{stamp()} — {CAMPAIGN} completed {field} ranking: selected {best["value"]}; endpoint NLL {best["nll"]:.9f}, PPL {best["perplexity"]:.6f}. All compared candidates completed/reconciled at matched tokens. Single-seed exploratory transfer interpretation; no significance claim.\n')
+    atomic_json(DIRECTORY/'results'/('ranking-'+field+'.json'),dict(best=best,observations=observations))
+    report(s)
+
+
+def report(s):
+    rows=s.get('trajectory',[])
+    lines=['# Horizon-scaled WSD campaign','',f'Stage: {s["stage"]}; selections: {s["selections"]}','',
+           '| Candidate | PPL | Inputs | Physical H200-hours |','|---|---:|---:|---:|']
+    for row in rows:
+        lines.append(f'| {row["candidate"]} | {row["perplexity"]:.6f} | {row["training_tokens"]} | {row["physical_h200_hours"]:.6f} |')
+    lines+=['','Matched endpoint held-out NLL determines winners. Shared prefix is physically charged once; branches retain inherited tokens and compute.','No significance claim from a single seed. Final 50,000-document evaluation is separate from tuning.']
+    (REPO/'to_human'/('horizon-wsd-20261014.md')).write_text('\n'.join(lines)+'\n')
+    import html
+    physical=sum(r.get('accounting',{}).get('h200_hours',0) for r in s['jobs'].values())
+    reserved=sum(r['minutes']*8/60 for r in s['jobs'].values() if r['status']!='reconciled')
+    summary={'state':s['stage'],'controller':'slurm/horizon_campaign_v5.py',
+        'sweep_tokens':SWEEP_STEPS*BATCH_TOKENS,'final_tokens':FINAL_STEPS*BATCH_TOKENS,
+        'allocation_cap_h200_hours':plan()['allocation_cap_h200_hours'],
+        'physical_h200_hours_reconciled':physical,'outstanding_h200_hours_reserved':reserved,
+        'selections':s['selections'],'jobs':{k:r.get('job_id') for k,r in s['jobs'].items()},
+        'updated_utc':stamp(),'continuity':'enabled20-minute sole-owner controller' if not DISABLED.exists() else 'new submissions disabled'}
+    research=REPO/'research-state.yaml'
+    if research.exists():
+        value=read_json(research);value.setdefault('campaigns',{}).setdefault(CAMPAIGN,{}).update(summary)
+        atomic_json(research,value)
+    narrative=(f'Current stage: {s["stage"]}. Selected settings: {s["selections"]}. '
+        f'Measured physical cost {physical:.6f} H200-hours, outstanding reservations {reserved:.6f}. '
+        'Endpoint NLL determines stage winners; beta0.32 remains a tested transfer heuristic, not a fitted WSD exponent. '
+        'The original NCCL failure and all historical costs remain charged. No automatic retries.')
+    memory=REPO/'findings.md'
+    if memory.exists():
+        start='<!-- horizon-wsd-20261014-live-start -->';end='<!-- horizon-wsd-20261014-live-end -->'
+        old=memory.read_text();block=start+'\n## Horizon WSD live synthesis\n\n'+narrative+'\n'+end
+        if start in old and end in old:
+            a=old.index(start);b=old.index(end,a)+len(end);old=old[:a]+block+old[b:]
+        else:old+='\n'+block+'\n'
+        memory.write_text(old)
+    atomic_json(DIRECTORY/'results/trajectory.json',rows)
+    body='<h1>WSD horizon autoresearch</h1><p>'+html.escape(narrative)+'</p>'
+    body+='<p>0.7B sweep →2B finals. Same seed42, canonical split,8192 context, global batch16. Tuning:1,000 fixed reserved docs; finals:50,000 reserved docs.</p>'
+    body+='<table><tr><th>Allocation</th><th>Job</th><th>Status</th></tr>'
+    for key,r in s['jobs'].items():
+        body+='<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in (key,r.get('job_id','uncertain'),r.get('slurm_state',r['status'])))+'</tr>'
+    body+='</table><h2>Completed matched-token endpoints</h2><table><tr><th>Candidate</th><th>PPL</th><th>NLL</th><th>Inputs</th></tr>'
+    for row in rows:
+        body+='<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in (row['candidate'],round(row['perplexity'],6),round(row['nll'],9),row['training_tokens']))+'</tr>'
+    body+='</table>'
+    if s.get('final_full_results'):
+        body+='<h2>Final full reserved-set results</h2><pre>'+html.escape(json.dumps(s['final_full_results'],indent=2))+'</pre>'
+    style='body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:24px;background:#f8f9fb;color:#17202f}table{border-collapse:collapse;width:100%;background:white;margin:24px 0}td,th{padding:10px;text-align:left;border-bottom:1px solid #ddd}'
+    (REPO/'to_human/horizon-wsd-20261014.html').write_text('<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>WSD research</title><style>'+style+'</style>'+body+'</html>')
+
+
+
+def run_once():
+    if not require_owner(__file__, 'run-once'):
+        return
+    with locked(DIRECTORY/'.controller.lock',blocking=False):
+        s=state()
+        reconcile(s)
+        if DISABLED.exists():
+            report(s);return
+        check()
+        if s['stage']=='validation':
+            cfg=copy.deepcopy(plan()['base_configuration'])
+            cfg.update(category='validation',max_steps=20,scheduler_steps=20,warmup_steps=1,
+                eval_steps=1,max_training_tokens=20*BATCH_TOKENS,target_training_tokens=20*BATCH_TOKENS,
+                max_grad_norm=0,max_h200_hours=1.5,wandb_mode='offline',
+                export_on_completion=False,retain_all_checkpoints=True,
+                hold_schedule=tail_settings(.6),wsd_decay_ratio=.6,
+                stop_margin_seconds=180,final_evaluation_reserve_seconds=30,sweep_id=CAMPAIGN,sweep_stage='runtime')
+            path=CONFIGS/'validation-recovery1.json';atomic_json(path,cfg)
+            submit(s,'validation','validation-recovery1',path,load_config(path),10)
+            if completed(s,['validation']):s['stage']='lr'
+        if s['stage']=='lr':
+            keys=['lr05','lr10','lr20'];ratios=[.5,1.,2.]
+            for key,ratio in zip(keys,ratios):
+                path,cfg=config_for(key,lr_ratio=ratio)
+                submit(s,key,key,path,cfg,79 if key=='lr05' else 90)
+            if completed(s,keys):
+                choose(s,keys,'lr_ratio',ratios);s['stage']='clipping'
+        if s['stage']=='clipping':
+            keys=['clip05','clip10','clip20','clipoff'];values=[.5,1.,2.,0]
+            for key,value in zip(keys,values):
+                path,cfg=config_for(key,lr_ratio=s['selections']['lr_ratio'],clipping=value)
+                submit(s,key,key,path,cfg,79 if key=='lr05' else 90)
+            if completed(s,keys):
+                choose(s,keys,'clipping',values);s['stage']='prefix'
+        if s['stage']=='prefix':
+            path,cfg=config_for('stable-prefix',lr_ratio=s['selections']['lr_ratio'],clipping=s['selections']['clipping'])
+            submit(s,'prefix','stable-prefix',path,cfg,45,pause=PREFIX_STEP)
+            if completed(s,['prefix']):s['stage']='decay'
+        if s['stage']=='decay':
+            keys=['decay60','decay50','decay40','decay20','decay10'];values=[.6,.5,.4,.2,.1]
+            for key,value in zip(keys,values):
+                path,cfg=config_for(key,lr_ratio=s['selections']['lr_ratio'],clipping=s['selections']['clipping'],tail=value)
+                if not s.get('branch_recovery_applied'):
+                    raise ValueError('Apply the explicitly authorized branch recovery before submission')
+                submit(s,key,decay_run_name(key, device_recovery=key=='decay60' and bool(s.get('device_recovery_applied'))),
+                       path,load_config(path),75,parent=CAMPAIGN+'-stable-prefix')
+            if completed(s,keys):
+                choose(s,keys,'decay_tail',values);s['stage']='final'
+        if s['stage']=='final':
+            if not s.get('resplit_lr_sweep_applied'):
+                raise ValueError('Prepare the explicit LR sweep before continuation')
+            name='final-standard'
+            path,cfg=config_for(name,lr_ratio=s['selections']['lr_ratio'],clipping=s['selections']['clipping'],
+                tail=s['selections']['decay_tail'],final=True,resplit=False)
+            submit(s,name+'-a',name,path,cfg,179,pause=FINAL_SPLIT)
+            if completed(s,[name+'-a']):
+                submit(s,name+'-b',name,path,cfg,60,mode='resume',full_eval=True)
+            for key,scale in TAIL_SCALES.items():
+                path=CONFIGS/(key+'.json');cfg=load_config(path)
+                submit(s,key,key,path,cfg,55,parent=CAMPAIGN+'-final-resplit',full_eval=True)
+            keys=list(TAIL_SCALES)
+            if completed(s,keys):
+                results=[]
+                for key in keys:
+                    record=s['jobs'][key]
+                    full=read_json(DEFAULT_ROOT/'runs/experiments'/record['run_id']/'full-evaluation.json')
+                    if full['training_global_step']!=FINAL_STEPS or full['eval/documents']!=50000:
+                        raise ValueError('LR sweep full evaluation incomplete')
+                    results.append(dict(candidate=key,scale=TAIL_SCALES[key],perplexity=full['eval/perplexity'],
+                        nll=full['eval/nll']/full['eval/prediction_tokens'],wandb_url=verify_job(record['run_id'])['wandb_url']))
+                winner=min(results,key=lambda r:r['nll'])
+                s['resplit_lr_results']=results;s['selections']['resplit_lr_scale']=winner['scale']
+                s['selections']['resplit_lr_candidate']=winner['candidate']
+                atomic_json(DIRECTORY/'results/resplit-lr-full.json',dict(winner=winner,observations=results))
+                if completed(s,['final-standard-b']):
+                    record=s['jobs']['final-standard-b']
+                    full=read_json(DEFAULT_ROOT/'runs/experiments'/record['run_id']/'full-evaluation.json')
+                    if full['training_global_step']!=FINAL_STEPS or full['eval/documents']!=50000:
+                        raise ValueError('Standard full evaluation incomplete')
+                    standard=dict(candidate='final-standard-b',perplexity=full['eval/perplexity'],
+                        nll=full['eval/nll']/full['eval/prediction_tokens'],wandb_url=verify_job(record['run_id'])['wandb_url'])
+                    s['final_full_results']=[standard,winner]
+                    s['selections']['final_arm']=min(s['final_full_results'],key=lambda r:r['nll'])['candidate']
+                    atomic_json(DIRECTORY/'results/final-full.json',s['final_full_results'])
+                    s['stage']='complete';DISABLED.touch()
+        s['updated_utc']=stamp();atomic_json(STATE,s);report(s)
+        print(json.dumps(dict(stage=s['stage'],selections=s['selections'],jobs={k:r.get('slurm_state',r['status']) for k,r in s['jobs'].items()})))
+
+
+def recover_decay():
+    """One user-authorized recovery; archive failures without removing costs."""
+    with locked(DIRECTORY/'.controller.lock', blocking=False):
+        check()
+        authorization = read_json(DIRECTORY/'branch-recovery-authorization.json')
+        receipt = read_json(DIRECTORY/'branch-recovery-protocol-commit.json')
+        if authorization['user_reply'] != '修復並繼續' or not receipt['commit']:
+            raise ValueError('Explicit branch recovery approval and committed protocol required')
+        s = state()
+        if s.get('branch_recovery_applied'):
+            print('Branch recovery already applied; no new retry authorized.')
+            return
+        if s['stage'] != 'decay':
+            raise ValueError('Recovery restricted to failed decay stage')
+        reconcile(s)
+        recovery = read_json(DIRECTORY/'branch-recovery-plan.json')
+        for key in BRANCH_KEYS:
+            failed = s['jobs'][key]
+            if (failed['job_id'] != recovery['failed_jobs'][key] or
+                    failed['status'] != 'reconciled' or failed['slurm_state'] != 'FAILED'):
+                raise ValueError('Failed decay allocation identity/accounting mismatch')
+        with ExperimentLedger(DEFAULT_ROOT).transaction() as data:
+            charged = sum(j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values()
+                if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind') == 'horizon_wsd_campaign')
+        if charged + 114 > plan()['allocation_cap_h200_hours']:
+            raise ValueError('Recovery and original finals exceed campaign allocation cap')
+        atomic_json(DIRECTORY/'branch-recovery-original-state.json', s)
+        for key in BRANCH_KEYS:
+            s['jobs'][key+'-failed-original'] = s['jobs'].pop(key)
+        s['branch_recovery_applied'] = dict(authorization='branch-recovery-authorization.json',
+            applied_utc=stamp(), additional_allocations=5, total_planned_allocations=24,
+            failed_costs_retained=True, sealed_training_source_unchanged=True)
+        s['updated_utc'] = stamp()
+        atomic_json(STATE, s)
+        report(s)
+        print('Archived all five failed allocations; enabled exactly five named recovery branches.')
+
+
+def recover_device():
+    """Diagnosed manual replacement of one pre-training device failure."""
+    with locked(DIRECTORY/'.controller.lock', blocking=False):
+        check()
+        read_json(DIRECTORY/'device-recovery-protocol-commit.json')
+        s = state()
+        if s.get('device_recovery_applied'):
+            print('Device recovery already applied; no automatic retry.')
+            return
+        if s['stage'] != 'decay' or not s.get('branch_recovery_applied'):
+            raise ValueError('Device recovery restricted to current decay recovery')
+        reconcile(s)
+        failed = s['jobs']['decay60']
+        if (failed['job_id'] != '539630' or failed['status'] != 'reconciled' or
+                failed['slurm_state'] != 'FAILED' or failed['accounting']['elapsed_seconds'] != 17):
+            raise ValueError('Device failure identity/accounting mismatch')
+        run = DEFAULT_ROOT/'runs/experiments'/failed['run_id']
+        if (run/'token-journal.json').exists() or (run/'latest.json').exists():
+            raise ValueError('Device recovery cannot reset processed tokens/checkpoints')
+        log = DEFAULT_ROOT/'logs/hw-decay60-539630.err'
+        if 'device=7, num_gpus=7' not in log.read_text():
+            raise ValueError('Expected diagnosed CUDA device failure missing')
+        with ExperimentLedger(DEFAULT_ROOT).transaction() as data:
+            held = sum(j.get('h200_hours', j['reserved_h200_hours']) for j in data['jobs'].values()
+                if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind') == 'horizon_wsd_campaign')
+        if held + 10 + 64 > plan()['allocation_cap_h200_hours']:
+            raise ValueError('Device replacement and final reservations exceed campaign cap')
+        atomic_json(DIRECTORY/'device-recovery-original-state.json', s)
+        s['jobs']['decay60-failed-recovery1'] = s['jobs'].pop('decay60')
+        s['device_recovery_applied'] = dict(failed_job='539630', applied_utc=stamp(),
+            excluded_node='25a-hgpn027', replacement_run_id=CAMPAIGN+'-decay-60-recovery2',
+            authorization='User repair-and-continue request; device-recovery-protocol.md',
+            total_planned_allocations=25, failed_costs_retained=True)
+        s['updated_utc'] = stamp()
+        atomic_json(STATE, s)
+        report(s)
+        print('Archived diagnosed CUDA startup failure; enabled one manual decay60 replacement.')
+
+
+def activate_owner():
+    import socket
+    check()
+    receipt = read_json(DIRECTORY/'resplit-lr-protocol-commit.json')
+    authorization = read_json(DIRECTORY/'resplit-lr-authorization.json')
+    if not receipt['commit'] or authorization['user_reply'] != '重新從 ckp 訓練，sweep lr scale = [1.0, 0.7, 0.5, 0.3]':
+        raise ValueError('Committed owner recovery and explicit user request required')
+    hostname = socket.gethostname().split('.')[0]
+    if hostname != authorization['owner_hostname']:
+        raise ValueError('Owner installation must run on the designated login host')
+    with locked(DIRECTORY/'.controller.lock', blocking=False):
+        atomic_json(DIRECTORY/'submission-owner.json', dict(script=str(Path(__file__).resolve()),
+            sha256=file_digest(Path(__file__)), hostname=hostname, activated_utc=stamp(),
+            protocol_commit=receipt['commit']))
+    print('Shared submission owner activated on '+hostname)
+
+
+def recover_standard():
+    with locked(DIRECTORY/'.controller.lock', blocking=False):
+        check()
+        read_json(DIRECTORY/'owner-recovery-protocol-commit.json')
+        s=state()
+        if s.get('standard_recovery_applied'):
+            print('Standard recovery already applied; no additional retry.')
+            return
+        if s['stage'] != 'final':
+            raise ValueError('Recovery restricted to current final stage')
+        reconcile(s)
+        failed=s['jobs']['final-standard-a']
+        if (failed['job_id'] != '539819' or failed['status'] != 'reconciled' or
+                failed['slurm_state'] != 'FAILED' or failed['accounting']['elapsed_seconds'] != 15):
+            raise ValueError('Original failed standard allocation mismatch')
+        run=DEFAULT_ROOT/'runs/experiments'/failed['run_id']
+        if run.exists():
+            raise ValueError('Fresh recovery requires no model/run initialization')
+        with ExperimentLedger(DEFAULT_ROOT).transaction() as data:
+            jobs=[j for j in data['jobs'].values() if j['run_id']==failed['run_id']]
+            if len(jobs)!=1 or jobs[0]['job_id']!='539819' or jobs[0]['state']!='FAILED':
+                raise ValueError('Unexpected prior standard allocation')
+            cfg=load_config(failed['configuration'])
+            if data['runs'][failed['run_id']]['config_digest'] != digest(cfg):
+                raise ValueError('Formal run configuration mismatch')
+            cost=jobs[0]['h200_hours']
+            if cost+179*8/60+8>32:
+                raise ValueError('Recovered formal run exceeds original32 H200-hour cap')
+            held=sum(j.get('h200_hours',j['reserved_h200_hours']) for j in data['jobs'].values()
+                if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind')=='horizon_wsd_campaign')
+            if held+179*8/60+16>plan()['allocation_cap_h200_hours']:
+                raise ValueError('Remaining two final continuations exceed campaign cap')
+        log=DEFAULT_ROOT/'logs/hw-final-standard-a-539819.err'
+        if 'device=7, num_gpus=7' not in log.read_text():
+            raise ValueError('Diagnosed pre-training CUDA error missing')
+        atomic_json(DIRECTORY/'owner-recovery-original-state.json',s)
+        s['jobs']['final-standard-a-failed-original']=s['jobs'].pop('final-standard-a')
+        s['standard_recovery_applied']=dict(failed_job='539819', applied_utc=stamp(),
+            same_formal_run=5, run_id=failed['run_id'], fresh_weights=True,
+            first_allocation_minutes=179, second_allocation_minutes=60,
+            formal_h200_hour_upper_bound=cost+179*8/60+8,
+            original_failed_cost_retained=True, resplit_unchanged=True,
+            authorization='owner-recovery-authorization.json')
+        s['updated_utc']=stamp();atomic_json(STATE,s);report(s)
+        print('Preserved formal run5 and failed allocation; enabled one fresh179-minute replacement.')
+
+
+def prepare_lr_sweep():
+    with locked(DIRECTORY/'.controller.lock',blocking=False):
+        check();read_json(DIRECTORY/'resplit-lr-protocol-commit.json')
+        s=state()
+        if s.get('resplit_lr_sweep_applied'):
+            print('Requested LR sweep already prepared; no additional forks.')
+            return
+        reconcile(s)
+        record=s['jobs']['final-resplit-b']
+        if record['job_id']!='540582' or record['status']!='reconciled' or record['slurm_state']!='CANCELLED':
+            raise ValueError('Superseded resplit allocation must be cancelled and reconciled')
+        with ExperimentLedger(DEFAULT_ROOT).transaction() as data:
+            parent=data['runs'][CAMPAIGN+'-final-resplit']
+            if parent['budget_exceeded'] or parent['h200_hours_measured']+55*8/60>32:
+                raise ValueError('Inherited original/incorrect-tail cost exceeds branch32-hour cap')
+            held=sum(j.get('h200_hours',j['reserved_h200_hours']) for j in data['jobs'].values()
+                if j['run_id'].startswith(CAMPAIGN+'-') and j.get('allocation_kind')=='horizon_wsd_campaign')
+            if held+4*55*8/60+8>plan()['allocation_cap_h200_hours']:
+                raise ValueError('Four LR forks plus standard continuation exceed campaign cap')
+        atomic_json(DIRECTORY/'resplit-lr-original-state.json',s)
+        s['jobs']['final-resplit-b-superseded']=s['jobs'].pop('final-resplit-b')
+        s['resplit_lr_sweep_applied']=dict(scales=list(TAIL_SCALES.values()),checkpoint=read_json(DIRECTORY/'resplit-lr-plan.json')['checkpoint'],
+            lr_reference='first phase peak',applied_utc=stamp(),superseded_job='540582',all_prior_costs_retained=True,
+            checkpoint_input_tokens=FINAL_SPLIT*BATCH_TOKENS,new_input_tokens_per_branch=(FINAL_STEPS-FINAL_SPLIT)*BATCH_TOKENS)
+        s['stage']='final';s['updated_utc']=stamp();atomic_json(STATE,s);report(s)
+        print('Prepared exactly four frozen-checkpoint LR comparisons; original standard continues.')
+
+
+def install():
+    if not require_owner(__file__, 'install'):
+        return
+    import shlex
+    old=subprocess.run(['crontab','-l'],capture_output=True,text=True)
+    if old.returncode not in (0,1):raise ValueError('Cannot inspect crontab')
+    lines=[line for line in old.stdout.splitlines() if not line.rstrip().endswith(MARKER)]
+    log=DEFAULT_ROOT/'runs'/CAMPAIGN/'controller.log';log.parent.mkdir(parents=True,exist_ok=True)
+    lines.append('*/20 * * * * '+shlex.join(['/usr/bin/python3',str(Path(__file__).resolve()),'run-once'])+' >> '+shlex.quote(str(log))+' 2>&1 '+MARKER)
+    desired='\n'.join(lines)+'\n'
+    subprocess.run(['crontab','-'],input=desired,text=True,check=True)
+    actual=subprocess.run(['crontab','-l'],capture_output=True,text=True,check=True).stdout
+    if actual!=desired:raise ValueError('Schedule verification failed')
+    DISABLED.unlink(missing_ok=True)
+    print('Installed bounded controller, every 20 minutes; preserved other schedules.')
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('action',choices=['check','run-once','status','install','disable','verify-job','test-only','recover-decay','recover-device','activate-owner','recover-standard','prepare-lr'])
+    parser.add_argument('run_id',nargs='?');parser.add_argument('--pause',type=int,default=0)
+    args=parser.parse_args()
+    if args.action in ('install', 'run-once') and not (DIRECTORY/'recovery-authorization.json').exists():
+        raise ValueError('One additional recovery allocation requires explicit approval recorded in recovery-authorization.json')
+    if args.action in ('install', 'run-once', 'recover-decay') and not (DIRECTORY/'branch-recovery-authorization.json').exists():
+        raise ValueError('Branch repair requires explicit recorded user approval')
+    if args.action != 'activate-owner' and not require_owner(__file__, args.action):
+        return
+    if args.action=='activate-owner':activate_owner()
+    elif args.action=='prepare-lr':prepare_lr_sweep()
+    elif args.action=='recover-standard':recover_standard()
+    elif args.action=='recover-device':recover_device()
+    elif args.action=='recover-decay':recover_decay()
+    elif args.action=='check':check()
+    elif args.action=='run-once':run_once()
+    elif args.action=='verify-job':verify_job(args.run_id,args.pause)
+    elif args.action=='status':
+        with locked(DIRECTORY/'.controller.lock',blocking=False):
+            s=state();reconcile(s);atomic_json(STATE,s);report(s);print(json.dumps(s,indent=2))
+    elif args.action=='install':check();install()
+    elif args.action=='disable':DISABLED.touch();print('New submissions disabled; status still reconciles terminal jobs.')
+    else:
+        s=state();path,cfg=config_for('lr10');submit(s,'lr10','lr10',path,cfg,90,test_only=True)
+
+
+if __name__=='__main__':main()

@@ -1,0 +1,54 @@
+{
+  "budget": {
+    "maximum_after_submission": 98.50305555555555,
+    "new_max_h200_hours": 4.8,
+    "preserved_jobs": [
+      "572036",
+      "572065",
+      "572067",
+      "572068",
+      "572069",
+      "572070",
+      "572071",
+      "572072",
+      "572073",
+      "572102",
+      "572113",
+      "572114",
+      "572115",
+      "572116",
+      "572119",
+      "572264",
+      "572265",
+      "573035",
+      "573586",
+      "573687",
+      "573750",
+      "573794",
+      "574250",
+      "575056",
+      "575057",
+      "575177",
+      "575178"
+    ],
+    "prior_h200_hours": 93.70305555555555,
+    "study_cap": 128
+  },
+  "config_digest": "ee420c21517d9ac4799fab10900521081cf071f042f27e60f81f42729dc3a86f",
+  "created": "2026-10-19T11:26:56.299769+00:00",
+  "roles": {
+    "consumer": {
+      "excluded_producer_node": "25a-hgpn008",
+      "job_id": "575197",
+      "phase": "submitted",
+      "reservation": "kd3bio8repair-1633e68e72de49bbb5864da180cc404a",
+      "run_id": "kd3b-io8-validation-20261019-consumer"
+    },
+    "producer": {
+      "job_id": "575196",
+      "phase": "submitted",
+      "reservation": "kd3bio8repair-f36265ffb9564c0da53ccabfc1e19da3",
+      "run_id": "kd3b-io8-validation-20261019-producer"
+    }
+  }
+}

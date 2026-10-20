@@ -1,0 +1,19 @@
+{
+  "combined_allocation_cap_h200_hours": 47.91111111111111,
+  "configuration_unchanged": true,
+  "data_provenance_matches_sota": true,
+  "formal_run_number": 11,
+  "initialization_signature_matches_sota": true,
+  "job_id": "553634",
+  "latest_logged_step": 80,
+  "latest_logged_tokens": 10485760,
+  "optimizer_groups_match_sota": true,
+  "pretrained_weights_loaded": false,
+  "prior_failed_jobs": [
+    "553561",
+    "553577"
+  ],
+  "timestamp_utc": "2026-10-15T15:49:56.888321+00:00",
+  "wall_time": "05:59:00",
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9d2b5f1a1ffc477f9be6b0862d36a15d"
+}

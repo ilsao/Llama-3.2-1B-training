@@ -1,0 +1,15 @@
+{
+  "combined_max_h200_hours": 1.3111111111111111,
+  "diagnosis": "Compare repeat inline and pipeline with deterministic FA3 backward; timing restores original backward setting",
+  "next_allocation_seconds": 480,
+  "observed_cosine": 0.999997615814209,
+  "observed_default_backward_relative_l2": 0.002209641505032778,
+  "original_cap_h200_hours": 1.6,
+  "prior_allocation_seconds": 110,
+  "prior_jobs": [
+    "573687",
+    "573750"
+  ],
+  "strict_gate_unchanged": true,
+  "training_checkpoint_load": false
+}

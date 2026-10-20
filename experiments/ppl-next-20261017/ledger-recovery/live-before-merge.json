@@ -1,0 +1,49 @@
+{
+  "jobs": {
+    "561525": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+      "allocation_kind": "validation_and_publication",
+      "authorization": "User explicitly requested uploading the current best model to HF; use existing public repository and preserve Git history",
+      "elapsed_seconds": 368,
+      "end": "2026-10-17T13:00:25",
+      "gpu_count": 1,
+      "gpu_type_evidence": {
+        "sha256": "cadcb5fb2677cbbce18f0c126c07ff900e024dc49a17e782c3bf75f609ce3a4a",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.10222222222222223,
+      "job_id": "561525",
+      "nodes": "25a-hgpn022",
+      "parent_run": "raw4b-intradoc-normuon-20261017",
+      "requested_seconds": 1800,
+      "reserved_h200_hours": 0.5,
+      "returned_job_id": "561525",
+      "run_id": "hf-raw4b-20261017",
+      "start": "2026-10-17T12:54:17",
+      "state": "COMPLETED",
+      "status": "reconciled",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--comment=hf-raw4b-20261017-3c2df0af950144a3859c0828de8c6889",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw4b-20261017/source/slurm/hf-raw4b-upload.sbatch",
+        "hf-raw4b-20261017"
+      ],
+      "submission_started_utc": "2026-10-17T04:54:17.085501+00:00",
+      "submission_tag": "hf-raw4b-20261017-3c2df0af950144a3859c0828de8c6889"
+    }
+  },
+  "runs": {
+    "hf-raw4b-20261017": {
+      "budget_exceeded": false,
+      "category": "validation",
+      "config_digest": "ae10fb7f0ba9ea47b9a257b4c15deba925affc653c4b2a1e0849d8ab264beca9",
+      "created": 1792212857.0836515,
+      "h200_hours_measured": 0.10222222222222223,
+      "logical_h200_hours_measured": 0.10222222222222223,
+      "max_h200_hours": 0.5
+    }
+  },
+  "total_h200_hours_measured": 0.10222222222222223,
+  "total_h200_hours_reserved_or_measured": 0.10222222222222223
+}

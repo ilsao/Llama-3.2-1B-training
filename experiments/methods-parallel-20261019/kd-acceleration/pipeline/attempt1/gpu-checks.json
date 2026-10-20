@@ -1,0 +1,82 @@
+{
+  "different_teacher_hidden_size": 48,
+  "discard_accounting": true,
+  "loss_cases": [
+    {
+      "bf16": false,
+      "ignored": false,
+      "lam": 0.0,
+      "relative_l2": [
+        9.147983348611888e-08,
+        8.14867320286794e-08
+      ]
+    },
+    {
+      "bf16": false,
+      "ignored": false,
+      "lam": 0.25,
+      "relative_l2": [
+        1.8493142306397203e-07,
+        1.1964188217916671e-07
+      ]
+    },
+    {
+      "bf16": false,
+      "ignored": false,
+      "lam": 1.0,
+      "relative_l2": [
+        2.51343635682133e-07,
+        2.7305844696456916e-07
+      ]
+    },
+    {
+      "bf16": false,
+      "ignored": true,
+      "lam": 0.25,
+      "relative_l2": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "bf16": true,
+      "ignored": false,
+      "lam": 0.0,
+      "relative_l2": [
+        0.0,
+        0.0020226663909852505
+      ]
+    },
+    {
+      "bf16": true,
+      "ignored": false,
+      "lam": 0.25,
+      "relative_l2": [
+        0.0026682212483137846,
+        0.002843802096322179
+      ]
+    },
+    {
+      "bf16": true,
+      "ignored": false,
+      "lam": 1.0,
+      "relative_l2": [
+        0.0,
+        0.002362889237701893
+      ]
+    },
+    {
+      "bf16": true,
+      "ignored": true,
+      "lam": 0.25,
+      "relative_l2": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "ordering_and_mutation_checks": true,
+  "reuse_without_overwrite": true,
+  "student_hidden_size": 32,
+  "two_slot_bound": true
+}

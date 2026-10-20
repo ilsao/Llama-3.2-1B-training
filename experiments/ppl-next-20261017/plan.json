@@ -1,0 +1,169 @@
+{
+  "status": "authorized_implementation_in_progress",
+  "objective": "Reduce matched-token held-out NLL from current intradoc NS5 NorMuon recipe",
+  "control_reference": "experiments/ppl-next-20261016/configs/s2-nor-intradoc.json",
+  "common": {
+    "fresh_random_initialization": "residual_half",
+    "seed": 42,
+    "architecture": "meta-llama/Llama-3.2-1B",
+    "sequence_length": 8192,
+    "preparation": "dolma-raw-baseline-20261008",
+    "target_nonpadding_inputs": 1000079360,
+    "actual_updates": 4775,
+    "reference_batch_tokens": 131072,
+    "phase_split_inputs": 833355776,
+    "phase2_peak_ratio": 0.1,
+    "warmup_reference_units_each_phase": 170,
+    "tail_fraction_each_phase": 0.4,
+    "tail_ramp_hold_final_ratio": [
+      4,
+      1,
+      1
+    ],
+    "hold_lr_ratio": 0.2,
+    "batch_switch_inputs": 500039680,
+    "global_batch_sequences": [
+      16,
+      64
+    ],
+    "world_size": 8,
+    "microbatch": 1,
+    "accumulation": [
+      2,
+      8
+    ],
+    "attention": "intradoc via archived document spans",
+    "matrix_optimizer": "NorMuon after NS5, native outer update",
+    "muon_peak_lr": 0.008614891542046706,
+    "aux_peak_lr": 0.00025844674626140116,
+    "matrix_weight_decay": 0.1,
+    "aux_weight_decay": 0,
+    "max_grad_norm": 0.5,
+    "momentum": 0.95,
+    "adamw_betas": [
+      0.9,
+      0.95
+    ],
+    "normuon_beta2": 0.95,
+    "averaging": false,
+    "eval_documents": 1000,
+    "eval_steps_max": 400,
+    "additional_evals": "10% token knots, phase/batch boundaries, final endpoint",
+    "checkpoint_training_load": false
+  },
+  "arms": [
+    {
+      "id": "A",
+      "wave": 1,
+      "aux_lr_multiplier": 1,
+      "matrix_decay": "ordinary"
+    },
+    {
+      "id": "B",
+      "wave": 1,
+      "aux_lr_multiplier": 2,
+      "matrix_decay": "ordinary"
+    },
+    {
+      "id": "C",
+      "wave": 2,
+      "aux_lr_multiplier": 1,
+      "matrix_decay": "cautious"
+    },
+    {
+      "id": "D",
+      "wave": 2,
+      "aux_lr_multiplier": 2,
+      "matrix_decay": "cautious"
+    }
+  ],
+  "design": "Fixed 2x2 factorial; wave 2 retains both LR levels rather than selecting one from wave 1",
+  "cautious_decay": {
+    "reference": "https://arxiv.org/html/2510.12402v1",
+    "mask": "M=(W_before*u_after_NorMuon >= 0), elementwise; no mask mean normalization",
+    "update": "W_new=W_before-lr_base*0.1*M*W_before-lr_shape_adjusted*u_after_NorMuon",
+    "scope": "hidden 2D matrices only; tied embedding/head/norms stay AdamW without decay",
+    "gates": [
+      "all-one mask recovers ordinary update",
+      "zero decay recovers old update",
+      "mask uses pre-update weights and post-normalization descent direction",
+      "no double decay; retain base LR for decay and shape-adjusted LR only for gradient update",
+      "optimizer state serialization and eight-rank parity",
+      "finite model updates, memory and projected full-horizon runtime"
+    ]
+  },
+  "analysis": {
+    "main_effects": [
+      "B-A",
+      "C-A",
+      "D-B",
+      "D-C"
+    ],
+    "interaction_nll": "NLL_D-NLL_B-NLL_C+NLL_A",
+    "minimum_practical_delta_nll": -0.005,
+    "minimum_practical_ppl_at_historical_control": 19.053654728226938,
+    "replication": "lock winner; fresh seed43 A versus winner",
+    "confirmation": "fixed reserved subset up to 10k total, additional 9k; length and document-prefix breakdown; paired document bootstrap in Slurm",
+    "promotion": "NLL direction holds on 9k and paired seed43; no >5% allocation cost increase without explicit quality/cost tradeoff",
+    "full_evaluation": "locked final candidate only; do not rank different token horizons"
+  },
+  "cost_caps": {
+    "correctness_gate_h200_hours": 2,
+    "four_training_allocations_h200_hours": 64,
+    "training_each_gpus": 8,
+    "training_each_cpus": 8,
+    "training_each_minutes": 120,
+    "confirmation_evaluation_h200_hours": 2,
+    "first_decision_max_h200_hours": 68,
+    "first_decision_estimate_h200_hours": [
+      44,
+      50
+    ],
+    "seed43_pair_additional_max_h200_hours": 32,
+    "historical_costs_excluded_from_new_caps_but_retained": true
+  },
+  "conditional_followups": [
+    {
+      "method": "CWD mechanism control",
+      "condition": "CWD positive",
+      "comparison": "ordinary WD=.05 at winning auxiliary LR; diagnostic only, not exactly decay-matched; any mechanism claim needs stronger matched-decay control"
+    },
+    {
+      "method": "longer token-clock tail",
+      "comparison": "fresh 1B 40% vs 60% per-phase tail; fixed batch switch at 50%, same warmup and second peak",
+      "confounding": "changes integrated LR and decay, so proves recipe effect only; do not claim pure cooldown mechanism"
+    },
+    {
+      "method": "separate tied-embedding vs norm LR",
+      "condition": "auxiliary x2 wins",
+      "comparison": "embedding-only x2 vs norm-only x2; tied head shares exactly one parameter"
+    },
+    {
+      "method": "fresh 4B transfer",
+      "comparison": "locked winning recipe vs existing 4B control; rerun control if provenance/runtime changes; seed43 short replication cannot replace 4B transfer evidence"
+    },
+    {
+      "method": "fresh 5B score run",
+      "estimate_h200_hours": 52.8,
+      "note": "estimate from measured 4B allocation; use exact endpoint planner, buffer availability and new reviewed cap; not a proven gain, do not continue old checkpoint"
+    }
+  ],
+  "not_prioritized": [
+    "repeat PE-only unchanged",
+    "repeat phase-local averaging unchanged",
+    "SOAP before low-overhead hypotheses",
+    "uncontrolled data filtering",
+    "architecture/context changes"
+  ],
+  "sources": [
+    "https://arxiv.org/html/2510.12402v1",
+    "https://arxiv.org/abs/2410.05192",
+    "https://arxiv.org/abs/2409.19913v3",
+    "https://arxiv.org/abs/2510.05491"
+  ],
+  "execution_constraints": [
+    "No job submitted or reserved by this design",
+    "Recover and audit shared historical cost ledger before new allocation",
+    "New formal or >120-minute run requires its own reviewed authorization; prior 4B exception not reused"
+  ]
+}

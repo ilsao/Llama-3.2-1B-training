@@ -1,0 +1,56 @@
+{
+  "checked_utc": "2026-10-19T08:53:31.221528+00:00",
+  "job_id": "574250",
+  "run_id": "kd3b-online-pipeline-20261019-seed42",
+  "state": "training_updates_confirmed",
+  "latest_training": {
+    "train/grad_norm": 0.9141865372657776,
+    "train/tokens_per_second": 125584.886178807,
+    "train/step_seconds": 1.0436924695968628,
+    "train/total_tokens_seen": 62914560,
+    "train/loss": 4.246118745690994,
+    "train/global_step": 480,
+    "timestamp": 1792400002.2161407
+  },
+  "latest_evaluation": {
+    "eval/perplexity": 120.05641089776452,
+    "eval/nll": 7082841.352962494,
+    "eval/prediction_tokens": 1479302,
+    "eval/total_training_tokens_seen": 52428800,
+    "train/global_step": 400,
+    "timestamp": 1792399919.2658083
+  },
+  "student_input_journal": {
+    "charged_tokens": 64094208,
+    "confirmed_tokens": 63963136,
+    "limit": 1000079360,
+    "next_transaction": 489,
+    "pending": {
+      "488": 131072
+    }
+  },
+  "teacher_input_journal": {
+    "charged_tokens": 64094208,
+    "confirmed_tokens": 63963136,
+    "limit": 1000079360,
+    "next_transaction": 489,
+    "pending": {
+      "488": 131072
+    }
+  },
+  "matched_step400_ppl": {
+    "official_3b_pipeline": 120.05641089776452,
+    "historical_N0": 131.99954207467079,
+    "old_local_teacher_K1": 116.90452712983337
+  },
+  "skipped_or_nonfinite_records": [],
+  "limit_seconds": 7200,
+  "limit_H200_hours": 16,
+  "slurm_latest_observed": "RUNNING",
+  "slurm_node": "25a-hgpn008",
+  "wandb": {
+    "id": "40581342ab8c4f3ea1d6e976aa4895be",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/40581342ab8c4f3ea1d6e976aa4895be"
+  }
+}

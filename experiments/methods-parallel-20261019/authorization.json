@@ -1,0 +1,66 @@
+{
+  "user_instruction": "開始實驗",
+  "authorization_scope": "Launch the reviewed eight independent seed42 method pilots; reuse existing historical N0 control.",
+  "recorded_utc": "2026-10-19T05:49:12.262548+00:00",
+  "study": "methods-parallel-20261019",
+  "category": "pilot",
+  "seed": 42,
+  "max_new_h200_hours": 128,
+  "per_job": {
+    "h200_gpus": 8,
+    "cpus_total": 8,
+    "seconds": 7200,
+    "max_h200_hours": 16
+  },
+  "jobs": [
+    {
+      "key": "D1-seed42",
+      "run_id": "methods-parallel-20261019-d1-seed42",
+      "config_digest": "359dba2384c07deb5d71bc6038e21b98e356f016a1ed10a9126088208017c0f1"
+    },
+    {
+      "key": "D025-seed42",
+      "run_id": "methods-parallel-20261019-d025-seed42",
+      "config_digest": "5ff753831f75439fc2cae24f5f24f607b2c1699d9229003f6b8cd1adc6f3ff61"
+    },
+    {
+      "key": "A1-seed42",
+      "run_id": "methods-parallel-20261019-a1-seed42",
+      "config_digest": "3370255abb94fbd83171bfc346f720fdf35004e384e737e7a685c71a2653632f"
+    },
+    {
+      "key": "S1-seed42",
+      "run_id": "methods-parallel-20261019-s1-seed42",
+      "config_digest": "bef3d99dbad2dc38139d75f083bec309c697bc15579497742dfb32d1e0dcf02f"
+    },
+    {
+      "key": "K1-seed42",
+      "run_id": "methods-parallel-20261019-k1-seed42",
+      "config_digest": "40321d7771262b7b52a74d795ec19889a02d6218ac7fa2d7aba07946130ede50"
+    },
+    {
+      "key": "F1-seed42",
+      "run_id": "methods-parallel-20261019-f1-seed42",
+      "config_digest": "5eed5e5f368614d10163fa46b1456d50b7beb32d263ef1e287e57be013348d09"
+    },
+    {
+      "key": "F2-seed42",
+      "run_id": "methods-parallel-20261019-f2-seed42",
+      "config_digest": "b1ad914346d1329ef781bb126917005f4764d0b54e088698c09230a52a3fa261"
+    },
+    {
+      "key": "C1-seed42",
+      "run_id": "methods-parallel-20261019-c1-seed42",
+      "config_digest": "96d44c489f94a8351efe6c5dad0ac57d7284d99eafa82966cfc38e5f9714d5fd"
+    }
+  ],
+  "seal_sha256": "261e1ff6d938b295b4d296f4dd0edce86b3b952367c591c8f8bc602fc9e5e756",
+  "historical_control": "ppl-next-20261017-B-seed42",
+  "training_checkpoint_load": false,
+  "automatic_retry": false,
+  "resume": false,
+  "requeue": false,
+  "cleanup": false,
+  "hf_upload": false,
+  "preserve_all_historical_costs": true
+}

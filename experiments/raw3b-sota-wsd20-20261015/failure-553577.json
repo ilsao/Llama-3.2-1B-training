@@ -1,0 +1,44 @@
+{
+  "blocked": true,
+  "job": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 0,
+      "end": "2026-10-15T23:33:22",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "1d7537b0b3877462fa1997872a3dced92a81d8266b0856d665433ca69dec484f",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.0,
+      "job_id": "553577",
+      "nodes": "25a-hgpn141",
+      "start": "2026-10-15T23:33:22",
+      "state": "FAILED"
+    },
+    "job_id": "553577",
+    "reservation": "raw3b-sota-wsd20-20261015-fe013a9c8c814262840eb7a4eab5c85c",
+    "returned_job_id": "553577",
+    "slurm_state": "FAILED",
+    "status": "reconciled",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--time=05:59:40",
+      "--comment=raw3b-sota-wsd20-20261015-fe013a9c8c814262840eb7a4eab5c85c",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/source-restart1/slurm/sota3b.sbatch",
+      "raw3b-sota-wsd20-20261015",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/config.json",
+      "dolma-raw-baseline-20261008"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "553577\n"
+    },
+    "submission_started_utc": "2026-10-15T15:33:21.101114+00:00",
+    "submission_tag": "raw3b-sota-wsd20-20261015-fe013a9c8c814262840eb7a4eab5c85c"
+  },
+  "stage": "incomplete_no_retry"
+}

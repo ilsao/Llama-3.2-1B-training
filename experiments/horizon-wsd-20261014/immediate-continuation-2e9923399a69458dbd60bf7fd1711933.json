@@ -1,0 +1,20 @@
+{
+  "finished_utc": "2026-10-14T05:53:50.423892+00:00",
+  "original_owner": {
+    "activated_utc": "2026-10-14T04:18:48.370933+00:00",
+    "hostname": "25a-lgn04",
+    "protocol_commit": "960f315bef51d4b40362fb3aeec4193e32cb0493",
+    "script": "/home/asciibase64/Llama-3.2-1B-training/slurm/horizon_campaign_v4.py",
+    "sha256": "29654ec2efa3b90c8b9c0aa78109859aaab0057e1e983dd87e4d6a4493d0945d"
+  },
+  "request_id": "2e9923399a69458dbd60bf7fd1711933",
+  "returncode": 0,
+  "scheduled_owner_restored": true,
+  "scope": "One bounded cycle of the already approved controller for immediate resplit phase2; restore scheduled owner afterward. No new logical run, extra retry or schedule.",
+  "started_utc": "2026-10-14T05:53:49.197664+00:00",
+  "status": "cycle_completed",
+  "stderr": "",
+  "stdout": "Seals, metadata, environment, canonical prefix, and 0.7B/2B contracts passed.\nSeals, metadata, environment, canonical prefix, and 0.7B/2B contracts passed.\nSubmitted final-resplit-b 540582 horizon-wsd-20261014-final-resplit\n{\"stage\": \"final\", \"selections\": {\"clipping\": 0.5, \"decay_tail\": 0.6, \"lr_ratio\": 0.5}, \"jobs\": {\"clip05\": \"COMPLETED\", \"clip10\": \"COMPLETED\", \"clip20\": \"COMPLETED\", \"clipoff\": \"COMPLETED\", \"decay10\": \"COMPLETED\", \"decay10-failed-original\": \"FAILED\", \"decay20\": \"COMPLETED\", \"decay20-failed-original\": \"FAILED\", \"decay40\": \"COMPLETED\", \"decay40-failed-original\": \"FAILED\", \"decay50\": \"COMPLETED\", \"decay50-failed-original\": \"FAILED\", \"decay60\": \"COMPLETED\", \"decay60-failed-original\": \"FAILED\", \"decay60-failed-recovery1\": \"FAILED\", \"final-resplit-a\": \"COMPLETED\", \"final-standard-a\": \"RUNNING\", \"final-standard-a-failed-original\": \"FAILED\", \"lr05\": \"COMPLETED\", \"lr10\": \"COMPLETED\", \"lr20\": \"COMPLETED\", \"prefix\": \"COMPLETED\", \"validation\": \"COMPLETED\", \"validation-original\": \"TIMEOUT\", \"final-resplit-b\": \"submitted\"}}\n",
+  "temporary_host": "25a-lgn05",
+  "user_request": "\u73fe\u5728\u958b\u59cb\u53ef\u4ee5\u55ce"
+}

@@ -1,0 +1,89 @@
+{
+  "best_measured": {
+    "adamw_lr": 0.000351523375265955,
+    "job_id": "551793",
+    "mean_nll": 3.2494163204098894,
+    "muon_lr": 0.0117174458421985,
+    "perplexity": 25.775291014457313,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44f07395e86547ebaa7205263dd50197"
+  },
+  "bracketed": true,
+  "local_quadratic": {
+    "adamw_lr": 0.00038249687257085755,
+    "coefficients_centered": [
+      0.11182562815102415,
+      -0.018886066276892263,
+      3.2494163204098903
+    ],
+    "curvature": 0.11182562815102415,
+    "log_lr_center": -4.446676450136831,
+    "muon_lr": 0.01274989575236192,
+    "points": [
+      [
+        0.008285485413204676,
+        3.2693934722253526
+      ],
+      [
+        0.0117174458421985,
+        3.2494163204098894
+      ],
+      [
+        0.01657097082640935,
+        3.2563026486336564
+      ]
+    ],
+    "r_squared": 1.0
+  },
+  "lr_ratio": 0.03,
+  "observations": [
+    {
+      "adamw_lr": 0.00012428228119807012,
+      "job_id": "550805",
+      "mean_nll": 3.3642053595809625,
+      "muon_lr": 0.004142742706602337,
+      "perplexity": 28.91051470529056,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ad3594be016d4f90a45aa492cdc53998"
+    },
+    {
+      "adamw_lr": 0.00017576168763297747,
+      "job_id": "550806",
+      "mean_nll": 3.310593631340522,
+      "muon_lr": 0.00585872292109925,
+      "perplexity": 27.40138696683644,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/4f2e3ee24f334e3fa8f325615c3719c6"
+    },
+    {
+      "adamw_lr": 0.00024856456239614024,
+      "job_id": "550807",
+      "mean_nll": 3.2693934722253526,
+      "muon_lr": 0.008285485413204676,
+      "perplexity": 26.29538562384208,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ed135ecedf4247a1bca00f292130226c"
+    },
+    {
+      "adamw_lr": 0.000351523375265955,
+      "job_id": "551793",
+      "mean_nll": 3.2494163204098894,
+      "muon_lr": 0.0117174458421985,
+      "perplexity": 25.775291014457313,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44f07395e86547ebaa7205263dd50197"
+    },
+    {
+      "adamw_lr": 0.0004971291247922805,
+      "job_id": "551794",
+      "mean_nll": 3.2563026486336564,
+      "muon_lr": 0.01657097082640935,
+      "perplexity": 25.95340068542102,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7edf083847724a3a99bdc38e5fc720ef"
+    },
+    {
+      "adamw_lr": 0.00070304675053191,
+      "job_id": "551795",
+      "mean_nll": 3.286675215053371,
+      "muon_lr": 0.023434891684397,
+      "perplexity": 26.753765105726252,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1a7762a2b7224abea04ddcbd5d67cc95"
+    }
+  ],
+  "target_tokens": 400031744
+}

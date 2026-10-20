@@ -1,0 +1,8 @@
+{
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/configuration.json": "bf9ccde28ccc1d63654c0ae07b02aee60b556f31e5db7c62272f91762670a6b7",
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/raw/ready.json": "2ff73402ce41bec675e6fffcf7924c3e5d6d4999913c37ac213537df1c4eebfe",
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/raw/producer-state.json": "b6b2c562e55724542763d5d4b441ed9ae72b1a78228d12d05382cf0a1253ce44",
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-raw-baseline-20261008/raw/progress.json": "9b0b282b5571cfe7fe99b8574bdbb9fc339e6ffd3ad9c1d7b466d8e9305d7cca",
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/configuration.json": "eeb7479eb86929bb09f3e9f245116e28364fba8b03fcff4692435f9cfb5acd84",
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessed/dolma-dclm10-005/split/manifest.json": "f2581ce073a7713848bee8c273b6c7aab95a78d41ad32d492c36d9c443564c97"
+}

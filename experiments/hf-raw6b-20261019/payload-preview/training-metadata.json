@@ -1,0 +1,140 @@
+{
+  "run_id": "raw6b-normuon-adam2x-20261018",
+  "global_step": 28619,
+  "training_tokens": 6000082944,
+  "pretrained_weights_loaded": false,
+  "checkpoint_loaded_for_training": false,
+  "initialization": "random residual_half seed42",
+  "runtime_training_attention": "intradoc document-span causal attention",
+  "matrix_optimizer": "NorMuon after NS5; beta2 .95; FP32 per-neuron variance; restore update Frobenius norm",
+  "adamw_lr_multiplier": 2,
+  "training_config": {
+    "activation_checkpointing": true,
+    "adamw_beta2_policy": "fixed",
+    "attention_backend": "flash_attention_3",
+    "batch_switch_tokens": 3000107008,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "category": "full",
+    "checkpoint_interval_seconds": 1200,
+    "checkpoint_policy": "final_only",
+    "clipping": "global",
+    "ema": [],
+    "epsilon": 1e-08,
+    "eval_documents": 1000,
+    "eval_steps": 2800,
+    "export_on_completion": true,
+    "final_evaluation_reserve_seconds": 900,
+    "fixed_horizon": true,
+    "gradient_accumulation_steps": 2,
+    "hold_schedule": {
+      "final_decay_ratio": 0.06666666666666667,
+      "first_decay_ratio": 0.26666666666666666,
+      "hold_ratio": 0.06666666666666667,
+      "plateau_lr_ratio": 0.2
+    },
+    "initialization": "residual_half",
+    "learning_rate": 0.000255576675878199,
+    "logging_steps": 10,
+    "lr_scheduler": "wsd_hold_zero",
+    "max_grad_norm": 0.5,
+    "max_h200_hours": 80,
+    "max_steps": 45777,
+    "max_training_tokens": 6000082944,
+    "microbatch_size": 1,
+    "min_lr_ratio": 0,
+    "model_id": "meta-llama/Llama-3.2-1B",
+    "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+    "muon": {
+      "adjust_lr_fn": "original",
+      "epsilon": 1e-07,
+      "learning_rate": 0.00425961126463665,
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "ns_steps": 5,
+      "weight_decay": 0.1
+    },
+    "optimizer": "muon",
+    "parent_runs": [
+      "raw4b-normuon-adam2x-20261017"
+    ],
+    "phase_schedule": [
+      {
+        "end": 38147,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 1.0,
+        "start": 0,
+        "warmup_steps": 170
+      },
+      {
+        "end": 45777,
+        "hold_schedule": {
+          "final_decay_ratio": 0.06666666666666667,
+          "first_decay_ratio": 0.26666666666666666,
+          "hold_ratio": 0.06666666666666667,
+          "plateau_lr_ratio": 0.2
+        },
+        "peak_ratio": 0.1,
+        "start": 38147,
+        "warmup_steps": 170
+      }
+    ],
+    "ppl": {
+      "arm": "nor",
+      "mask": "intradoc",
+      "matrix": "nor",
+      "stage": 3
+    },
+    "reference_batch_tokens": 131072,
+    "retain_all_checkpoints": true,
+    "schedule_clock": "nonpadding_tokens",
+    "scheduler_steps": 45777,
+    "seed": 42,
+    "sequence_length": 8192,
+    "snapshot_tokens": [],
+    "stop_margin_seconds": 300,
+    "sweep_id": "raw6b-normuon-adam2x-20261018",
+    "sweep_purpose": "Proposed fresh 6B transfer of 4B SOTA; 6B lookup LRs and auxiliary AdamW x2; preserve schedule proportions",
+    "sweep_stage": "formal-6b-adam2x",
+    "target_training_tokens": 6000082944,
+    "wandb_mode": "online",
+    "wandb_project": "lab5-training-llama",
+    "warmup_steps": 170,
+    "weight_decay": 0.1,
+    "world_size": 8,
+    "wsd_decay_ratio": 0.4
+  },
+  "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+  "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+  "canonical_split": "Full train document split globally shuffled with seed42; last50000 held out before tokenization",
+  "context_length": 8192,
+  "fixed_1k_perplexity": 12.773935950410152,
+  "additional_9k_perplexity": 12.922426349966036,
+  "combined_10k_perplexity": 12.9078477387367,
+  "combined_eval_prediction_tokens": 15146114,
+  "full_50k_evaluation_performed": false,
+  "training_h200_hours": 64.70666666666668,
+  "allocation_h200_hours": 64.48,
+  "allocation_seconds": 29016,
+  "gpu_type": "NVIDIA H200",
+  "gpu_count": 8,
+  "cpus": 8,
+  "previous_failed_jobs": [
+    "566121",
+    "567063"
+  ],
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/3dccd801892342459af12b46727fa908",
+  "export_reload_verified": true
+}

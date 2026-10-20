@@ -1,0 +1,9 @@
+# Install only into the separate FA3 training environment, through Slurm.
+ninja==1.13.0
+einops==0.8.1
+wheel==0.45.1
+packaging==26.3
+psutil==7.2.2
+setuptools==83.0.0
+# flash_attn_3: build official Hopper source at
+# 94e22c906678e5483fa0e9e24d8e787bc2c0ed4c with slurm/fa3_setup.py.

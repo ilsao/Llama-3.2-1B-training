@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-10-19T17:11:17.661377+00:00",
+  "python_ast": [
+    "experiments/kd6b-lossless-20261020/analyze.py",
+    "experiments/kd6b-lossless-20261020/benchmark.py",
+    "experiments/kd6b-lossless-20261020/fused_kd.py",
+    "experiments/kd6b-lossless-20261020/launch.py"
+  ],
+  "shell_syntax": true,
+  "execution_seal_verified": true,
+  "gpu_job": "577467",
+  "gpu_state": "COMPLETED",
+  "actual_h200_hours": 0.8,
+  "loss_and_gradient_gates_passed": true,
+  "formal_6b_run_started": false
+}

@@ -1,0 +1,58 @@
+{
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export-step-28619-2c5a9317",
+  "files": {
+    "config.json": {
+      "git_sha1": "dbe98aff8354a0c7b0d1672e0a19e632119b149a",
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+      "size": 838
+    },
+    "generation_config.json": {
+      "git_sha1": "e381c682311b55a600b6c588d39957bbed3dd069",
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+      "size": 143
+    },
+    "model-00001-of-00003.safetensors": {
+      "git_sha1": "c1261989ef8c4afea947eb595c91c586635fdc17",
+      "sha256": "f523aa4efbb8892a37165aa5a03d2024742bd666091b553f19fb7fdcd961bfa9",
+      "size": 1956695880
+    },
+    "model-00002-of-00003.safetensors": {
+      "git_sha1": "875a12d664288803dba879b9c6bf208e656f1100",
+      "sha256": "c769848bc56e6993172f57c4eaaceb22f402cb0f91eed0a125d7c77588cc19dc",
+      "size": 1946296312
+    },
+    "model-00003-of-00003.safetensors": {
+      "git_sha1": "ac08789714b7aaed166f612af3979a05565e7f66",
+      "sha256": "64f6e0391625cb6cb0e300ab9ce067902c9be3ae5e3a26a425ac80b2d6ecc28d",
+      "size": 1040282032
+    },
+    "model.safetensors.index.json": {
+      "git_sha1": "d56ab3a5f0708d688f6b5df5455008ce120f555a",
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+      "size": 12003
+    },
+    "special_tokens_map.json": {
+      "git_sha1": "cfabacc2620186cd3dd4b1dde9a37e057208636e",
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+      "size": 301
+    },
+    "tokenizer.json": {
+      "git_sha1": "475b31150454dc05e90b9c4c1adbd699f4e2774b",
+      "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b",
+      "size": 17209920
+    },
+    "tokenizer_config.json": {
+      "git_sha1": "795f75993a20250b35fee4a0685d080b1a01ab2b",
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+      "size": 50526
+    },
+    "training-metadata.json": {
+      "sha256": "4279eb7b9f048f40abaeda639f05934eeb3758d75ecd4e7ce50915dc953d418b",
+      "size": 35246
+    }
+  },
+  "historical_training_h200_hours": 64.70666666666668,
+  "historical_training_tokens": 6000082944,
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "revision": "13125ad091ca25c914e1528af6dce22d5f6efa3a"
+}

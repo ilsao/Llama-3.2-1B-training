@@ -1,0 +1,95 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr010-hardware-r1/checkpoints/checkpoint-015259-fbcbb55454f4",
+  "checkpoint_complete_sha256": "c5e7b13cd6a2f995ef4f779b85235808dd75db133e03b9ae885cb5d42a368433",
+  "config_sha256": "6753a65fc59db0c49271cc92f5ca17951ef28c8c1c73f5a3f94c5c3813fcf0ad",
+  "cursor": 244144,
+  "ema_evaluations": {},
+  "evaluation": {
+    "eval/documents": 1000,
+    "eval/nll": 4196743.254211426,
+    "eval/perplexity": 17.064073915523124,
+    "eval/prediction_tokens": 1479302,
+    "eval/sequences": 1044
+  },
+  "evaluation_identity": {
+    "dataset_revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+    "evaluation_indices_sha256": "e9292c1448076bbcc83baf40fda6d79a461475b1310afad1aced4c80e5bb57a3",
+    "evaluation_loss": "independent documents, stride 8191; each within-document target once",
+    "pad_token_id": 128001
+  },
+  "full_evaluation": {
+    "all_variants": {
+      "raw": {
+        "eval/documents": 50000,
+        "eval/length_0_256_nll": 4154555.446943283,
+        "eval/length_0_256_perplexity": 23.483936852468744,
+        "eval/length_0_256_prediction_tokens": 1316267,
+        "eval/length_1024_4096_nll": 75280958.87042236,
+        "eval/length_1024_4096_perplexity": 17.537130461925074,
+        "eval/length_1024_4096_prediction_tokens": 26282311,
+        "eval/length_256_1024_nll": 40426913.32634735,
+        "eval/length_256_1024_perplexity": 18.16649937893385,
+        "eval/length_256_1024_prediction_tokens": 13942338,
+        "eval/length_4096_inf_nll": 98286250.13725853,
+        "eval/length_4096_inf_perplexity": 16.07536272375721,
+        "eval/length_4096_inf_prediction_tokens": 35389292,
+        "eval/nll": 218148677.78097153,
+        "eval/perplexity": 17.041813353653176,
+        "eval/prediction_tokens": 76930208,
+        "eval/sequences": 52515,
+        "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr010-hardware-r1/export-step-15259-c0af664d",
+        "global_step": 15259,
+        "kernel_calls": {
+          "dense": 105040,
+          "varlen": 0
+        },
+        "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+        "slurm_job_id": "542339",
+        "training_global_step": 15259,
+        "variant": "raw"
+      }
+    },
+    "eval/documents": 50000,
+    "eval/length_0_256_nll": 4154555.446943283,
+    "eval/length_0_256_perplexity": 23.483936852468744,
+    "eval/length_0_256_prediction_tokens": 1316267,
+    "eval/length_1024_4096_nll": 75280958.87042236,
+    "eval/length_1024_4096_perplexity": 17.537130461925074,
+    "eval/length_1024_4096_prediction_tokens": 26282311,
+    "eval/length_256_1024_nll": 40426913.32634735,
+    "eval/length_256_1024_perplexity": 18.16649937893385,
+    "eval/length_256_1024_prediction_tokens": 13942338,
+    "eval/length_4096_inf_nll": 98286250.13725853,
+    "eval/length_4096_inf_perplexity": 16.07536272375721,
+    "eval/length_4096_inf_prediction_tokens": 35389292,
+    "eval/nll": 218148677.78097153,
+    "eval/perplexity": 17.041813353653176,
+    "eval/prediction_tokens": 76930208,
+    "eval/sequences": 52515,
+    "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-tail-lr010-hardware-r1/export-step-15259-c0af664d",
+    "global_step": 15259,
+    "kernel_calls": {
+      "dense": 105040,
+      "varlen": 0
+    },
+    "preparation_fingerprint": "3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec",
+    "slurm_job_id": "542339",
+    "training_global_step": 15259,
+    "variant": "raw"
+  },
+  "job_id": "542339",
+  "run_id": "init-recipe-20261014-tail-lr010-hardware-r1",
+  "step": 15259,
+  "tokens": 2000027648,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/13316ba29c9045bda5d9b268884b523f",
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

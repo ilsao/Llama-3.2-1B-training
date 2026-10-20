@@ -1,0 +1,67 @@
+{
+  "files": {
+    "README.md": {
+      "sha256": "50f6bffe1b21f4997329974155548a68ee33a72dfca5083c26ffb8fe13710826",
+      "size": 4279,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw4b-20261017/payload-preview/README.md"
+    },
+    "config.json": {
+      "sha256": "308e018c6b239046ce0c40cd4d9f48ad397c3251a03f69ec0c30e55da19af2f5",
+      "size": 838,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/config.json"
+    },
+    "generation_config.json": {
+      "sha256": "2991ea10f6dfc7d8f3926d23d2abdc70192f47d4f0a3e1bb22c0bdd89482f6ed",
+      "size": 143,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/generation_config.json"
+    },
+    "model-00001-of-00003.safetensors": {
+      "size": 1956695880,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/model-00001-of-00003.safetensors"
+    },
+    "model-00002-of-00003.safetensors": {
+      "size": 1946296312,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/model-00002-of-00003.safetensors"
+    },
+    "model-00003-of-00003.safetensors": {
+      "size": 1040282032,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/model-00003-of-00003.safetensors"
+    },
+    "model.safetensors.index.json": {
+      "sha256": "f3bf1a8284d782b1c95ad3169b60f78115826e1ab1bbfee22230b343fa5ec821",
+      "size": 12003,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/model.safetensors.index.json"
+    },
+    "resolved-training-config.json": {
+      "sha256": "2ce020f50e5ee914981dfdf1e97c89071bb5a29d4b02cc4971346faa3123ac43",
+      "size": 2892,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw4b-20261017/payload-preview/resolved-training-config.json"
+    },
+    "special_tokens_map.json": {
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535",
+      "size": 301,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/special_tokens_map.json"
+    },
+    "tokenizer.json": {
+      "size": 17209920,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/tokenizer.json"
+    },
+    "tokenizer_config.json": {
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793",
+      "size": 50526,
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef/tokenizer_config.json"
+    },
+    "training-details.json": {
+      "sha256": "d1ae892687c3eedb6e8563af1fc843bb65e075cc573595ee04812cab13dc5048",
+      "size": 14080,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw4b-20261017/payload-preview/training-details.json"
+    },
+    "training-metadata.json": {
+      "sha256": "61a62189f69f7d5604efcc87ab0820ca23cdd4b53be82b26a0ee680dd3476482",
+      "size": 4968,
+      "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-raw4b-20261017/payload-preview/training-metadata.json"
+    }
+  },
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "status": "prepared from explicit upload request"
+}

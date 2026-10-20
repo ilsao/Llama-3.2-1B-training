@@ -1,0 +1,43 @@
+{
+  "endpoint": 1000079360,
+  "unit_tests_passed": 8,
+  "python_ast_passed": true,
+  "sbatch_syntax_passed": true,
+  "source_seal_verified": true,
+  "matched_evaluation_events": 90,
+  "window_trajectories": [
+    {
+      "batch_sequences": 16,
+      "updates": 7630,
+      "max_eval_gap": 95
+    },
+    {
+      "batch_sequences": 32,
+      "updates": 3861,
+      "max_eval_gap": 48
+    },
+    {
+      "batch_sequences": 64,
+      "updates": 1964,
+      "max_eval_gap": 25
+    },
+    {
+      "batch_sequences": 128,
+      "updates": 1018,
+      "max_eval_gap": 14
+    }
+  ],
+  "prior_unapproved_submission_test": "passed; retained in prepared-600m-history",
+  "gpu_gate": "passed,8rank gradient max abs error0",
+  "jobs_submitted": [
+    "586995",
+    "587009",
+    "587010",
+    "587011"
+  ],
+  "full_model_probe_correctness": "C2 first probe completed; not a full-model equivalence comparison",
+  "gpu_validation_job": "586995",
+  "c0_state": "FAILED before first confirmed update",
+  "c1_state": "FAILED before first confirmed update",
+  "c2_state": "RUNNING"
+}

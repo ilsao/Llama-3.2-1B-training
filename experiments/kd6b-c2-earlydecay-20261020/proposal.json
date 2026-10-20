@@ -1,0 +1,156 @@
+{
+  "status": "approved_implementation_validated",
+  "run_id": "kd6b-c2-earlydecay-20261020-seed42",
+  "formal_number_if_approved": 20,
+  "fresh_random_seed": 42,
+  "training_checkpoint_load": false,
+  "base_recipe": "experiments/kd6b-r5-20261020/config.json",
+  "lr_provenance": {
+    "path": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/calibration-result.json",
+    "sha256": "61bee230efaa6e02154b6554efaad7f27db25174b390a66a3c36cf6b9769cd20",
+    "nominal_tokens": 6000000000,
+    "lookup_muon_lr": 0.00425961126463665,
+    "lookup_adamw_lr": 0.0001277883379390995,
+    "adamw_multiplier": 2,
+    "status": "unvalidated_extrapolation"
+  },
+  "peak_lrs": {
+    "muon": 0.00425961126463665,
+    "adamw_table": 0.0001277883379390995,
+    "adamw_multiplier": 2,
+    "adamw_actual": 0.000255576675878199
+  },
+  "cbs": {
+    "mode": "adaptive",
+    "fraction": 1.0,
+    "max_units": 8,
+    "probe_interval_tokens": 16777216,
+    "estimator": "rank-local gradients at same weights before clipping/DDP; valid-target-token noise proxy",
+    "ema_beta": 0.9,
+    "minimum_observations": 8,
+    "hysteresis": 0.2
+  },
+  "batch": {
+    "initial": 16,
+    "choices": [
+      16,
+      32,
+      64,
+      128
+    ],
+    "microbatch_per_rank": 2,
+    "world_size": 8,
+    "accumulation": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "forced_3b_switch": false,
+    "lr_batch_scaling": false
+  },
+  "decay_anchor": {
+    "reference_wandb_run": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/58970e70c88c",
+    "verified_from": "local W&B protobuf history plus metrics.jsonl",
+    "wandb_internal_step": 1841,
+    "record_type": "evaluation",
+    "reference_optimizer_updates": 18310,
+    "nonpadding_input_tokens": 2399928320,
+    "new_run_trigger": "cumulative nonpadding inputs, independent of optimizer update count and logging index"
+  },
+  "schedule_clock": "nonpadding_inputs",
+  "phases": [
+    {
+      "start_tokens": 0,
+      "warmup_end_tokens": 22282240,
+      "peak_ratio": 1.0,
+      "decay_start_tokens": 2399928320,
+      "plateau_start_tokens": 4133355520,
+      "final_decay_start_tokens": 4566679552,
+      "end_tokens": 5000003584,
+      "plateau_ratio_of_phase_peak": 0.2,
+      "tail_segment_reference_units": [
+        13225,
+        3306,
+        3306
+      ]
+    },
+    {
+      "start_tokens": 5000003584,
+      "end_tokens": 6000082944,
+      "peak_ratio": 0.1,
+      "warmup_end_tokens": 5022285824,
+      "decay_start_tokens": 5599920128,
+      "plateau_start_tokens": 5866651648,
+      "final_decay_start_tokens": 5933367296
+    }
+  ],
+  "execution": {
+    "student_parameters": "FP32",
+    "teacher_parameters": "BF16 frozen",
+    "autocast": "BF16",
+    "loss": "0.75 CE + 0.25 KL(teacher || student)",
+    "temperature": 1.0,
+    "vocab_size": 128256,
+    "loss_chunk_tokens": 1024,
+    "fused_full_vocab_ce_kl": true,
+    "compile_modules": [
+      "teacher/student RMSNorm",
+      "teacher/student MLP",
+      "RoPE"
+    ],
+    "compile_options": {
+      "fullgraph": true,
+      "dynamic": false,
+      "cudagraphs": false
+    },
+    "student_attention": "existing pinned FA3 head_dim64",
+    "teacher_attention": "existing pinned torch2.9.1 ATen flash varlen head_dim128",
+    "optimizer_distribution": "whole NorMuon matrix owners, FP32 all-gather; replicated fused AdamW",
+    "global_gradient_clipping": 0.5,
+    "evaluation": "same eager evaluator for all comparisons"
+  },
+  "kd": {
+    "teacher": "meta-llama/Llama-3.2-3B",
+    "teacher_revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+    "objective": "0.75 CE + 0.25 full-vocabulary KL(teacher || student)",
+    "temperature": 1.0
+  },
+  "endpoint": {
+    "nominal": 6000000000,
+    "proposed_complete_window": 6000082944,
+    "excess": 82944,
+    "requires_new_run_specific_exception": true,
+    "student_teacher_accounted_separately": true
+  },
+  "resources_proposed": {
+    "h200": 8,
+    "cpus_total": 8,
+    "seconds": 32400,
+    "max_h200_hours": 72,
+    "includes": "startup gates, training, evaluation, checkpoint, export verification and idle allocation",
+    "new_budget_scope_required": true,
+    "automatic_retry_resume_requeue": false
+  },
+  "evaluation": {
+    "fixed_documents": 1000,
+    "final_additional_documents": 9000,
+    "maximum_update_gap": 570,
+    "also_at": "10% token milestones, decay/phase boundaries, endpoint",
+    "project": "lab5-training-llama"
+  },
+  "checkpoint": {
+    "events_tokens": [
+      599916544,
+      1199964160,
+      1800011776,
+      2399928320,
+      3000107008,
+      5000003584,
+      6000082944
+    ],
+    "save_all_owned_optimizer_states": true,
+    "final_export_reload_verification": true
+  },
+  "implementation_status": "20 pure tests passed; source seal/submission pending"
+}

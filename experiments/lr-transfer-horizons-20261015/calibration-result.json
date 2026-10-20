@@ -1,0 +1,324 @@
+{
+  "actual_wsd_calibration_only": true,
+  "direct_wsd_law": {
+    "beta": -0.393085338116096,
+    "log_muon_lr_at_1b": -4.754262998513099,
+    "muon_lr_at_1b": 0.008614891542046706,
+    "points": [
+      [
+        200015872,
+        0.016028060997653092
+      ],
+      [
+        400031744,
+        0.01274989575236192
+      ],
+      [
+        600047616,
+        0.010320623003538705
+      ]
+    ],
+    "r_squared": 0.9839122953691796
+  },
+  "errors": {},
+  "horizon_fits": {
+    "200015872": {
+      "best_measured": {
+        "job_id": "552019",
+        "mean_nll": 3.5363814749727815,
+        "muon_lr": 0.01657097082640935,
+        "perplexity": 34.34242515937931,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1870da3ebc65408c8be65c0d4b837719"
+      },
+      "local_fit": {
+        "adamw_lr": 0.0004808418299295927,
+        "coefficients_centered": [
+          0.1424856634851963,
+          0.009492799750250087,
+          3.5363814749727833
+        ],
+        "curvature": 0.1424856634851963,
+        "log_lr_center": -4.100102859856858,
+        "muon_lr": 0.016028060997653092,
+        "points": [
+          [
+            0.0117174458421985,
+            3.55020593789693
+          ],
+          [
+            0.01657097082640935,
+            3.5363814749727815
+          ],
+          [
+            0.023434891684397,
+            3.5567858452794363
+          ]
+        ],
+        "r_squared": 1.0
+      }
+    },
+    "400031744": {
+      "best_measured": {
+        "adamw_lr": 0.000351523375265955,
+        "job_id": "551793",
+        "mean_nll": 3.2494163204098894,
+        "muon_lr": 0.0117174458421985,
+        "perplexity": 25.775291014457313,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44f07395e86547ebaa7205263dd50197"
+      },
+      "local_fit": {
+        "adamw_lr": 0.00038249687257085755,
+        "coefficients_centered": [
+          0.11182562815102415,
+          -0.018886066276892263,
+          3.2494163204098903
+        ],
+        "curvature": 0.11182562815102415,
+        "log_lr_center": -4.446676450136831,
+        "muon_lr": 0.01274989575236192,
+        "points": [
+          [
+            0.008285485413204676,
+            3.2693934722253526
+          ],
+          [
+            0.0117174458421985,
+            3.2494163204098894
+          ],
+          [
+            0.01657097082640935,
+            3.2563026486336564
+          ]
+        ],
+        "r_squared": 1.0
+      }
+    },
+    "600047616": {
+      "best_measured": {
+        "job_id": "552023",
+        "mean_nll": 3.1232115208298956,
+        "muon_lr": 0.0117174458421985,
+        "perplexity": 22.71922587410467,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/edd62590c79c4449aae2846dd5ae0d6c"
+      },
+      "local_fit": {
+        "adamw_lr": 0.00030961869010616113,
+        "coefficients_centered": [
+          0.06983034698173896,
+          0.017727788576915336,
+          3.123211520829896
+        ],
+        "curvature": 0.06983034698173896,
+        "log_lr_center": -4.446676450136831,
+        "muon_lr": 0.010320623003538705,
+        "points": [
+          [
+            0.008285485413204676,
+            3.1254550876626532
+          ],
+          [
+            0.0117174458421985,
+            3.1232115208298956
+          ],
+          [
+            0.01657097082640935,
+            3.1377430543323053
+          ]
+        ],
+        "r_squared": 1.0
+      }
+    }
+  },
+  "leave_one_horizon_out": [
+    {
+      "local_fitted_muon_lr": 0.016028060997653092,
+      "predicted_muon_lr": 0.01829957487459498,
+      "relative_lr_error": 0.14172106515407523,
+      "tokens": 200015872
+    },
+    {
+      "local_fitted_muon_lr": 0.01274989575236192,
+      "predicted_muon_lr": 0.012141237239076001,
+      "relative_lr_error": 0.047738312932728455,
+      "tokens": 400031744
+    },
+    {
+      "local_fitted_muon_lr": 0.010320623003538705,
+      "predicted_muon_lr": 0.011152606110015317,
+      "relative_lr_error": 0.08061365153938316,
+      "tokens": 600047616
+    }
+  ],
+  "observations": {
+    "200015872": [
+      {
+        "job_id": "552017",
+        "mean_nll": 3.6042042463187323,
+        "muon_lr": 0.008285485413204676,
+        "perplexity": 36.75242633934421,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9cddf7a089ef41bbb043815dadadb45f"
+      },
+      {
+        "job_id": "552018",
+        "mean_nll": 3.55020593789693,
+        "muon_lr": 0.0117174458421985,
+        "perplexity": 34.820487607264916,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/9a93d1c443ae45cf84022b713a0119c5"
+      },
+      {
+        "job_id": "552019",
+        "mean_nll": 3.5363814749727815,
+        "muon_lr": 0.01657097082640935,
+        "perplexity": 34.34242515937931,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1870da3ebc65408c8be65c0d4b837719"
+      },
+      {
+        "job_id": "552020",
+        "mean_nll": 3.5567858452794363,
+        "muon_lr": 0.023434891684397,
+        "perplexity": 35.05035862638394,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ccbf7a4b04c440bcbedd349ebdd96ca6"
+      },
+      {
+        "job_id": "552073",
+        "mean_nll": 3.6222932350147974,
+        "muon_lr": 0.0331419416528187,
+        "perplexity": 37.42328989281049,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/2dfa9fce448541459e8667828ed50215"
+      }
+    ],
+    "400031744": [
+      {
+        "adamw_lr": 0.00012428228119807012,
+        "job_id": "550805",
+        "mean_nll": 3.3642053595809625,
+        "muon_lr": 0.004142742706602337,
+        "perplexity": 28.91051470529056,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ad3594be016d4f90a45aa492cdc53998"
+      },
+      {
+        "adamw_lr": 0.00017576168763297747,
+        "job_id": "550806",
+        "mean_nll": 3.310593631340522,
+        "muon_lr": 0.00585872292109925,
+        "perplexity": 27.40138696683644,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/4f2e3ee24f334e3fa8f325615c3719c6"
+      },
+      {
+        "adamw_lr": 0.00024856456239614024,
+        "job_id": "550807",
+        "mean_nll": 3.2693934722253526,
+        "muon_lr": 0.008285485413204676,
+        "perplexity": 26.29538562384208,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ed135ecedf4247a1bca00f292130226c"
+      },
+      {
+        "adamw_lr": 0.000351523375265955,
+        "job_id": "551793",
+        "mean_nll": 3.2494163204098894,
+        "muon_lr": 0.0117174458421985,
+        "perplexity": 25.775291014457313,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/44f07395e86547ebaa7205263dd50197"
+      },
+      {
+        "adamw_lr": 0.0004971291247922805,
+        "job_id": "551794",
+        "mean_nll": 3.2563026486336564,
+        "muon_lr": 0.01657097082640935,
+        "perplexity": 25.95340068542102,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/7edf083847724a3a99bdc38e5fc720ef"
+      },
+      {
+        "adamw_lr": 0.00070304675053191,
+        "job_id": "551795",
+        "mean_nll": 3.286675215053371,
+        "muon_lr": 0.023434891684397,
+        "perplexity": 26.753765105726252,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1a7762a2b7224abea04ddcbd5d67cc95"
+      }
+    ],
+    "600047616": [
+      {
+        "job_id": "552021",
+        "mean_nll": 3.1533400878221136,
+        "muon_lr": 0.00585872292109925,
+        "perplexity": 23.414139401860098,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/e3b3116ab6a3427d91c374d9007f96c1"
+      },
+      {
+        "job_id": "552022",
+        "mean_nll": 3.1254550876626532,
+        "muon_lr": 0.008285485413204676,
+        "perplexity": 22.770255198186177,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/172f4be5c6f34c398814c2d160feb8e3"
+      },
+      {
+        "job_id": "552023",
+        "mean_nll": 3.1232115208298956,
+        "muon_lr": 0.0117174458421985,
+        "perplexity": 22.71922587410467,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/edd62590c79c4449aae2846dd5ae0d6c"
+      },
+      {
+        "job_id": "552024",
+        "mean_nll": 3.1377430543323053,
+        "muon_lr": 0.01657097082640935,
+        "perplexity": 23.05178148554645,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1e981df55487433e88e21f26f0369619"
+      },
+      {
+        "job_id": "552025",
+        "mean_nll": 3.1795968354186783,
+        "muon_lr": 0.023434891684397,
+        "perplexity": 24.03706070677378,
+        "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/a92ba2b2abd74e23a73e6979694e7027"
+      }
+    ]
+  },
+  "predictions": [
+    {
+      "adamw_lr": 0.000282140202802759,
+      "muon_lr": 0.009404673426758634,
+      "status": "unvalidated_extrapolation",
+      "tokens": 800000000
+    },
+    {
+      "adamw_lr": 0.00025844674626140116,
+      "muon_lr": 0.008614891542046706,
+      "status": "unvalidated_extrapolation",
+      "tokens": 1000000000
+    },
+    {
+      "adamw_lr": 0.00019680702267320892,
+      "muon_lr": 0.006560234089106964,
+      "status": "unvalidated_extrapolation",
+      "tokens": 2000000000
+    },
+    {
+      "adamw_lr": 0.00016781149220143396,
+      "muon_lr": 0.005593716406714465,
+      "status": "unvalidated_extrapolation",
+      "tokens": 3000000000
+    },
+    {
+      "adamw_lr": 0.00014986841480417473,
+      "muon_lr": 0.004995613826805825,
+      "status": "unvalidated_extrapolation",
+      "tokens": 4000000000
+    },
+    {
+      "adamw_lr": 0.00013728282530714263,
+      "muon_lr": 0.004576094176904755,
+      "status": "unvalidated_extrapolation",
+      "tokens": 5000000000
+    },
+    {
+      "adamw_lr": 0.0001277883379390995,
+      "muon_lr": 0.00425961126463665,
+      "status": "unvalidated_extrapolation",
+      "tokens": 6000000000
+    }
+  ],
+  "validated": false,
+  "warning": "Three calibration horizons and one seed; local three-point R2 is not independent evidence;0.8/1B not tested; EMA transfer not validated"
+}

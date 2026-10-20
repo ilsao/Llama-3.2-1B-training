@@ -1,0 +1,213 @@
+{
+  "checked_utc": "2026-10-20T05:46:48.472545+00:00",
+  "target_tokens": 1000079360,
+  "gpu_gate": {
+    "configuration_digest": "7bf82cc111bba474a5eb58ac57bde845c0a8d5561470f728834c13b73d4c08e4",
+    "gradient_max_abs_error": 0.0,
+    "moments": {
+      "adamw": {
+        "mean_norm2": 0.0,
+        "noise": 0.0,
+        "signal": 0.0,
+        "weighted_local_norm2": 0.0
+      },
+      "global": {
+        "mean_norm2": 3.8520597452297807,
+        "noise": 46.926289551185604,
+        "signal": 2.785553164521017,
+        "weighted_local_norm2": 11.317605810191127
+      },
+      "muon": {
+        "mean_norm2": 3.8520597452297807,
+        "noise": 46.926289551185604,
+        "signal": 2.785553164521017,
+        "weighted_local_norm2": 11.317605810191127
+      }
+    },
+    "passed": true,
+    "source_seal_sha256": "a76abcef8f0b16c10cc48c8cd541a347d38ced09b82d2717ac8527af466f6491",
+    "subsequent_ddp_sync_verified": true,
+    "unequal_target_counts": true,
+    "world_size": 8
+  },
+  "submissions": {
+    "critical-batch-20261020-c0-shadow": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 99,
+        "end": "2026-10-20T13:40:09",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "31a714d7f4d894edeae93a5f724e8a0425b96fc33c9b91caccc61d9578013cb4",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.22,
+        "job_id": "587009",
+        "nodes": "25a-hgpn024",
+        "start": "2026-10-20T13:38:30",
+        "state": "FAILED"
+      },
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c0-shadow.json",
+      "config_digest": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+      "job_id": "587009",
+      "reservation": "critical-batch-20261020-c0-shadow-6d36e76dc0d84f73b94ab7882eb553c0",
+      "result": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "587009\n"
+      },
+      "slurm_state": "FAILED",
+      "status": "reconciled"
+    },
+    "critical-batch-20261020-c1-cbs-half": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 107,
+        "end": "2026-10-20T13:40:17",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "a3901b5fb71a2b56eef43877292f13448869112ea3d31128affbe70db1a96377",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.23777777777777778,
+        "job_id": "587010",
+        "nodes": "25a-hgpn121",
+        "start": "2026-10-20T13:38:30",
+        "state": "FAILED"
+      },
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c1-cbs-half.json",
+      "config_digest": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25",
+      "job_id": "587010",
+      "reservation": "critical-batch-20261020-c1-cbs-half-d6b3caa6bfbd478ca3d93ebe295fcc6d",
+      "result": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "587010\n"
+      },
+      "slurm_state": "FAILED",
+      "status": "reconciled"
+    },
+    "critical-batch-20261020-c2-cbs-one": {
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c2-cbs-one.json",
+      "config_digest": "86a31b0551446bfba6ef5a27f2c1142821f9a69d2c2adea91abb6b7e38829830",
+      "job_id": "587011",
+      "reservation": "critical-batch-20261020-c2-cbs-one-15275c60cdf64a5e93b709451105c43c",
+      "result": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "587011\n"
+      },
+      "slurm_state": "RUNNING",
+      "status": "submitted"
+    },
+    "critical-batch-20261020-gpu-gate": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 26,
+        "end": "2026-10-20T13:37:39",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "aa967317bb3e4ad3bfdb594c7f4cae8a3b940b8b20e8b96cdd75dc7d7a1fd37b",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 0.057777777777777775,
+        "job_id": "586995",
+        "nodes": "25a-hgpn010",
+        "start": "2026-10-20T13:37:13",
+        "state": "COMPLETED"
+      },
+      "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/gpu-gate.json",
+      "config_digest": "7bf82cc111bba474a5eb58ac57bde845c0a8d5561470f728834c13b73d4c08e4",
+      "job_id": "586995",
+      "reservation": "critical-batch-20261020-gpu-gate-3b6c0ebc3a754ee0abda7dc874e06b66",
+      "result": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "586995\n"
+      },
+      "slurm_state": "COMPLETED",
+      "status": "reconciled"
+    }
+  },
+  "c2_progress": {
+    "compute_seconds": 390.4551428441191,
+    "confirmed_tokens": 77332480,
+    "data_cursor": 9440,
+    "eval_seconds": 20.415538853034377,
+    "global_step": 590,
+    "peak_allocated_bytes": 60353370112.0,
+    "target_tokens": 1000079360,
+    "timestamp": 1792475202.0234776,
+    "timing_by_width": {
+      "16": {
+        "compute_seconds": 390.4551428441191,
+        "inputs": 77332480,
+        "seconds": 411.9358848967822,
+        "steps": 590
+      }
+    },
+    "train_seconds": 411.9358848967822,
+    "wandb": {
+      "id": "90db6ed5d7a4",
+      "mode": "online",
+      "online_error": null,
+      "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/90db6ed5d7a4"
+    }
+  },
+  "c2_probe_records": 4,
+  "c2_last_probe": {
+    "global_step_before_update": 511,
+    "window_start_tokens": 66977792,
+    "window_end_tokens": 67108864,
+    "local_batch_sequences": 2,
+    "valid_targets": 130954,
+    "moments": {
+      "global": {
+        "signal": 0.1687055403756929,
+        "noise": 49985.46611998688,
+        "weighted_local_norm2": 3.2223253531335696,
+        "mean_norm2": 0.5504080169704275
+      },
+      "muon": {
+        "signal": 0.13938180546585277,
+        "noise": 37343.72241632881,
+        "weighted_local_norm2": 2.420715551137085,
+        "mean_norm2": 0.42454852367475676
+      },
+      "adamw": {
+        "signal": 0.029323734909840707,
+        "noise": 12641.74370365805,
+        "weighted_local_norm2": 0.8016098019964849,
+        "mean_norm2": 0.12585949329567123
+      }
+    },
+    "controller": {
+      "valid": true,
+      "ready": false,
+      "signal_ema": 1.2878074193156401,
+      "noise_ema": 89924.12807497378,
+      "noise_scale_target_tokens": 69827.31014452518,
+      "noise_scale_sequence_equivalent": 8.52954389608494,
+      "target_sequences": 8.52954389608494,
+      "units": 1,
+      "changed": false
+    },
+    "probe_seconds": 0.34022092598024756,
+    "state": {
+      "mode": "adaptive",
+      "fraction": 1.0,
+      "beta": 0.9,
+      "minimum_observations": 8,
+      "hysteresis": 0.2,
+      "max_units": 8,
+      "units": 1,
+      "observations": 4,
+      "signal_ema": 0.4428769715026486,
+      "noise_ema": 30924.907644983483,
+      "targets_per_sequence_ema": 2815.3453749999994
+    }
+  },
+  "replacement_plan": "experiments/critical-batch-20261020-recovery1/plan.json",
+  "replacement_submitted": false,
+  "original_source_seal_verified": true
+}

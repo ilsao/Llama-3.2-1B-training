@@ -1,0 +1,18 @@
+{
+  "commit_url": "https://huggingface.co/asciibase64/Llama-3.2-1B-dolma3_mix/commit/1b62848efb2a8881483d880778208d17699d3b9b",
+  "finished_utc": "2026-10-17T05:00:24.546962+00:00",
+  "full_perplexity": 13.838020960959888,
+  "global_step": 19080,
+  "local_export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_revision": "31263a8083032293231b6e52eb91609dcd09344d",
+  "parent_run": "raw4b-intradoc-normuon-20261017",
+  "public_unauthenticated_access": true,
+  "public_weight_shard_access_verified": true,
+  "remote_config_tokenizer_load_verified": true,
+  "remote_file_checksums_verified": true,
+  "revision": "1b62848efb2a8881483d880778208d17699d3b9b",
+  "slurm_job_id": "561525",
+  "status": "complete",
+  "training_tokens": 4000055296
+}

@@ -1,0 +1,26 @@
+{
+  "job": {
+    "job_id": "553561",
+    "reservation": "raw3b-sota-wsd20-20261015-3028a275f4f047f4b89e934a7b8f1b16",
+    "returned_job_id": "553561",
+    "status": "submitted",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--comment=raw3b-sota-wsd20-20261015-3028a275f4f047f4b89e934a7b8f1b16",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/source/slurm/sota3b.sbatch",
+      "raw3b-sota-wsd20-20261015",
+      "/home/asciibase64/Llama-3.2-1B-training/experiments/raw3b-sota-wsd20-20261015/config.json",
+      "dolma-raw-baseline-20261008"
+    ],
+    "submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "553561\n"
+    },
+    "submission_started_utc": "2026-10-15T15:27:19.164335+00:00",
+    "submission_tag": "raw3b-sota-wsd20-20261015-3028a275f4f047f4b89e934a7b8f1b16"
+  },
+  "stage": "training"
+}

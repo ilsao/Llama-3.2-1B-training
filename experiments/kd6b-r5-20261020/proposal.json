@@ -1,0 +1,246 @@
+{
+  "status": "proposal_only_not_submitted",
+  "run_id": "kd6b-r5-20261020-seed42",
+  "formal_number_if_authorized": 19,
+  "training_configuration": "training-config.proposed.json",
+  "training_configuration_sha256": "3080c174a87a531814a8e26b5caf122b66806046c51c57cf9b58329278ecc24c",
+  "selection": {
+    "arm": "R5_combined",
+    "criterion": "fastest tested arm passing strict short-prefix PPL screen",
+    "validation_steps": 128,
+    "validation_student_tokens": 16777216,
+    "endpoint_ppl": 805.8367264115652,
+    "full6b_quality_proven": false,
+    "new_6b_lr_schedule_quality_unmeasured": true
+  },
+  "horizon_transfer": {
+    "source": "existing raw6B table and event-aware schedule",
+    "note": "6B LRs differ from the 3B warmup-prefix benchmark; this is explicit horizon transfer, not an acceleration-only comparison",
+    "matrix_peak_lr": 0.00425961126463665,
+    "adamw_peak_lr": 0.000255576675878199,
+    "adamw_table_multiplier": 2,
+    "nominal_tokens": 6000000000,
+    "proposed_complete_batch_endpoint": 6000082944,
+    "excess_inputs": 82944,
+    "endpoint_exception_not_yet_granted": true
+  },
+  "batch_plan": {
+    "actual_updates": 28619,
+    "phase_actual_updates": [
+      26708,
+      1911
+    ],
+    "reference_unit_tokens": 131072,
+    "reference_units": 45777,
+    "global_sequence_counts": {
+      "16": 22897,
+      "32": 3,
+      "48": 2,
+      "64": 5717
+    },
+    "microbatch_per_gpu": 2,
+    "gpu_count": 8,
+    "accumulation_by_global_batch": {
+      "16": 1,
+      "64": 4,
+      "32": 2,
+      "48": 3
+    },
+    "batch_switch_tokens": 3000107008,
+    "schedule_events_tokens": [
+      0,
+      22282240,
+      2999975936,
+      3000107008,
+      4333371392,
+      4666687488,
+      4999872512,
+      5000003584,
+      5022285824,
+      5599920128,
+      5866651648,
+      5933367296,
+      5999951872,
+      6000082944
+    ],
+    "additional_eval_events_tokens": [
+      599916544,
+      1199964160,
+      1800011776,
+      2399928320,
+      2999975936,
+      3000107008,
+      3600023552,
+      4199940096,
+      4799987712,
+      5000003584,
+      5400035328,
+      6000082944
+    ],
+    "phases": [
+      {
+        "start_tokens": 0,
+        "end_tokens": 5000003584,
+        "peak_ratio": 1.0,
+        "warmup_end_tokens": 22282240,
+        "decay_start_tokens": 2999975936,
+        "plateau_start_tokens": 4333371392,
+        "final_decay_start_tokens": 4666687488,
+        "actual_updates": 26708
+      },
+      {
+        "start_tokens": 5000003584,
+        "end_tokens": 6000082944,
+        "peak_ratio": 0.1,
+        "warmup_end_tokens": 5022285824,
+        "decay_start_tokens": 5599920128,
+        "plateau_start_tokens": 5866651648,
+        "final_decay_start_tokens": 5933367296,
+        "actual_updates": 1911
+      }
+    ],
+    "final_update": {
+      "update": 28619,
+      "start_tokens": 5999951872,
+      "end_tokens": 6000082944,
+      "width": 16,
+      "accumulation": 2,
+      "lr_multiplier": 0.0
+    },
+    "final_update_accumulation_micro2": 1,
+    "event_windows_equal_to_existing_6b": true
+  },
+  "execution": {
+    "student_parameters": "FP32",
+    "teacher_parameters": "BF16 frozen",
+    "autocast": "BF16",
+    "loss": "0.75 CE + 0.25 KL(teacher || student)",
+    "temperature": 1.0,
+    "vocab_size": 128256,
+    "loss_chunk_tokens": 1024,
+    "fused_full_vocab_ce_kl": true,
+    "compile_modules": [
+      "teacher/student RMSNorm",
+      "teacher/student MLP",
+      "RoPE"
+    ],
+    "compile_options": {
+      "fullgraph": true,
+      "dynamic": false,
+      "cudagraphs": false
+    },
+    "student_attention": "existing pinned FA3 head_dim64",
+    "teacher_attention": "existing pinned torch2.9.1 ATen flash varlen head_dim128",
+    "optimizer_distribution": "whole NorMuon matrix owners, FP32 all-gather; replicated fused AdamW",
+    "global_gradient_clipping": 0.5,
+    "evaluation": "same eager evaluator for all comparisons"
+  },
+  "parameter_groups": {
+    "muon": {
+      "parameters": 973078528,
+      "assignment": "all hidden attention/MLP Linear weights",
+      "momentum": 0.95,
+      "nesterov": true,
+      "ns_steps": 5,
+      "neuron_ema_beta": 0.95,
+      "ns_coefficients": [
+        3.4445,
+        -4.775,
+        2.0315
+      ],
+      "eps": 1e-07,
+      "ordinary_weight_decay": 0.1,
+      "decay_lr": "nominal matrix LR times scheduler multiplier",
+      "shape_lr_adjustment": "original, unchanged"
+    },
+    "adamw_no_decay": {
+      "parameters": 262735872,
+      "assignment": "tied embedding/head once, RMSNorm and any biases",
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "epsilon": 1e-08,
+      "weight_decay": 0.0
+    },
+    "adamw_decay": {
+      "parameters": 0
+    }
+  },
+  "data": {
+    "dataset": "allenai/dolma3_mix-150B-1025",
+    "revision": "afa92bfb22366821c5e6cd427cdd036b34b713ef",
+    "preparation": "dolma-raw-baseline-20261008",
+    "split": "full canonical train document shuffle seed42, last50000 reserved",
+    "training": "canonical unfiltered order, no repeats",
+    "sequence_length": 8192,
+    "attention": "intradoc document-span causal",
+    "labels": "ignore structural BOS, first sequence position and padding; retain EOS targets",
+    "tail_overlay": "/work/asciibase64/Llama-3.2-1B-training/runs/data-overlays/raw6b-normuon-adam2x-20261018",
+    "tail_policy": "read-only reuse after original manifest/checksum and actual 8-rank TailDataset preflight"
+  },
+  "evaluation": {
+    "fixed_documents": 1000,
+    "eval_steps": 2800,
+    "extra_token_boundary_evaluations": true,
+    "endpoint_additional_documents": 9000,
+    "combined_endpoint_documents": 10000,
+    "full_reserved_50000_evaluation": false,
+    "teacher_not_needed": true
+  },
+  "checkpoint": {
+    "policy": "final or early wall-time stop",
+    "contents": [
+      "student weights",
+      "all owner matrix optimizer states with ownership map",
+      "replicated AdamW state once",
+      "scheduler",
+      "each rank RNG",
+      "data cursor",
+      "teacher and student token journals",
+      "W&B identity",
+      "cumulative resource ledger"
+    ],
+    "export": "HF-compatible student weights/config/tokenizer; reload verification inside allocation",
+    "upload": false,
+    "automatic_resume": false,
+    "automatic_retry": false,
+    "automatic_requeue": false
+  },
+  "resources": {
+    "proposed_gpus": 8,
+    "proposed_cpus_total": 8,
+    "nodes": 1,
+    "launcher_tasks": 1,
+    "rank_threads": 1,
+    "memory": "200G",
+    "account": "ACD115198",
+    "partition": "8gpus",
+    "constraint": "H200",
+    "proposed_seconds": 32400,
+    "proposed_h200_hours": 72,
+    "currently_requested_h200_ceiling": 64,
+    "resource_exception_not_yet_granted": true,
+    "predicted_compute_only_h200_hours": 60.854033224160275,
+    "conservative_full_run_h200_hours": 70.9394365465763,
+    "stopping_margin_seconds": 300,
+    "final_evaluation_reserve_seconds": 900,
+    "study_used_h200_hours": 176.1786111111111,
+    "study_existing_cap": 191.419,
+    "proposed_study_maximum": 248.1786111111111,
+    "prior_acceleration_validation_h200_hours": 3.0888888888888886
+  },
+  "environment": {
+    "torch": "2.9.1+cu126",
+    "transformers": "4.51.3",
+    "accelerate": "1.6.0",
+    "fa3_commit": "94e22c906678e5483fa0e9e24d8e787bc2c0ed4c",
+    "path": "/work/asciibase64/Llama-3.2-1B-training/environments/training-muon-torch291-fa3-94e22c9"
+  },
+  "validation_remaining": [
+    "formal runner integration and owner checkpoint/export support",
+    "end-to-end runtime including data/journal/evaluation/checkpoint overhead",
+    "6B endpoint quality; short 3B-schedule-prefix screen is not proof"
+  ],
+  "authorization_note": "No allocation reserved or submitted. The old 3B/6B exceptions are scoped and are not inherited by this proposal."
+}

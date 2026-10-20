@@ -1,0 +1,32 @@
+{
+  "attention_mask": "intradoc",
+  "checked_utc": "2026-10-18T14:21:01.702899+00:00",
+  "combined_reservation_h200_hours": 79.96,
+  "configuration_matches": true,
+  "cpus": 8,
+  "gpu_node": "25a-hgpn015",
+  "gpus": 8,
+  "job_id": "567077",
+  "lr_and_token_audit": {
+    "complete": false,
+    "decay_clock": "nonpadding_tokens",
+    "decay_ratio": 0.4,
+    "last_logged_step": 30,
+    "last_logged_tokens": 3932160,
+    "logged_updates": 3,
+    "passed": true
+  },
+  "matrix_method": "nor",
+  "previous_cost_h200_hours": 0.22666666666666666,
+  "previous_failed_jobs": [
+    "566121",
+    "567063"
+  ],
+  "random_seed42_matches_sota": true,
+  "slurm_state": "RUNNING",
+  "wandb": {
+    "id": "3dccd801892342459af12b46727fa908",
+    "mode": "online",
+    "url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/3dccd801892342459af12b46727fa908"
+  }
+}

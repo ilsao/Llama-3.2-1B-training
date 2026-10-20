@@ -1,0 +1,23 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--comment=kd6br5-d36a8c8ba1ff454bbd775528b4ffd711",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/kd6b-r5-20261020.sbatch"
+  ],
+  "configuration_digest": "3080c174a87a531814a8e26b5caf122b66806046c51c57cf9b58329278ecc24c",
+  "h200_hours_maximum": 72,
+  "job_id": "578615",
+  "phase": "submitted",
+  "prior": {
+    "formal_count": 18,
+    "historical_identity_digest": "bb0984384b8a0a1945e8ef0709508c9b2931a3365c7c894a76414bc98b4ba94b",
+    "job_count": 282,
+    "run_count": 239,
+    "study_cost": 176.1786111111111
+  },
+  "requested_seconds": 32400,
+  "reservation": "kd6br5-d36a8c8ba1ff454bbd775528b4ffd711",
+  "run_id": "kd6b-r5-20261020-seed42",
+  "timestamp": 1792433633.4486053
+}

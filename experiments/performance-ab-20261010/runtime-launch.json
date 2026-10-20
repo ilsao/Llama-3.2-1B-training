@@ -1,0 +1,28 @@
+{
+  "configuration": "/home/asciibase64/Llama-3.2-1B-training/configs/performance-ab-20261010/runtime.json",
+  "configuration_sha256": "d389915717eb2957ef3f05ec7c2d647b0a2c6ba2ee1b77f1caa21904673d8066",
+  "last_recovery_error": "Recovery found 0 matching jobs; reservation remains charged; do not retry submission",
+  "last_recovery_utc": "2026-10-10T15:36:43.917403+00:00",
+  "reservation": "performance-1ddc24fb79124b6a924beb2c3e179861",
+  "run_id": "performance-ab-20261010-runtime",
+  "source_root": "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/source-b",
+  "stage": "runtime",
+  "started_utc": "2026-10-10T13:00:23.064675+00:00",
+  "status": "submission_uncertain",
+  "submission_command": [
+    "sbatch",
+    "--parsable",
+    "--comment=performance-1ddc24fb79124b6a924beb2c3e179861",
+    "--time=30",
+    "--job-name=perf-runtime",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/source-b/slurm/performance-ab.sbatch",
+    "performance-ab-20261010-runtime",
+    "runtime",
+    "/home/asciibase64/Llama-3.2-1B-training/configs/performance-ab-20261010/runtime.json"
+  ],
+  "submission_result": {
+    "returncode": 1,
+    "stderr": "sbatch: error: Batch job submission failed: Socket timed out on send/recv operation\n",
+    "stdout": ""
+  }
+}

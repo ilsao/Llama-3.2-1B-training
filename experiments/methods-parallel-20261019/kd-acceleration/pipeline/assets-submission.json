@@ -1,0 +1,9 @@
+{
+  "cost_classification": "preprocessing_teacher_asset_download",
+  "gpu_count": 1,
+  "job_id": "573586",
+  "requested_seconds": 600,
+  "reservation": "kd-pipeline-assets-20261019-allocation1",
+  "run_id": "kd-pipeline-assets-20261019",
+  "state": "submitted"
+}

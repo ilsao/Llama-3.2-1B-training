@@ -1,0 +1,122 @@
+{
+  "automatic_retry": false,
+  "budget": {
+    "maximum_after_submission": 191.4186111111111,
+    "new_reserved_h200_hours": 96,
+    "preserved_formal_run_ids": [
+      "baseline-fa3-20261009-baseline",
+      "baseline-muon-wsd-raw-20261009",
+      "be60p20-lrscaled-2b-20261010",
+      "horizon-wsd-20261014-final-resplit",
+      "horizon-wsd-20261014-final-standard",
+      "init-recipe-20261014-final-2b",
+      "init-recipe-20261014-followup-rh-resplit-2b",
+      "muon-wsd-filtered-2b-20261009",
+      "raw-filtered-3b-20261015-raw",
+      "raw3b-bs64-stepwsd40-20261016",
+      "raw3b-bs64-wsd40-20261016",
+      "raw3b-sota-20261015",
+      "raw3b-sota-wsd20-20261015",
+      "raw4b-intradoc-normuon-20261017",
+      "raw4b-normuon-adam2x-20261017",
+      "raw4b-normuon-adam2x-step30-20261018",
+      "raw6b-normuon-adam2x-20261018"
+    ],
+    "preserved_job_ids": [
+      "572036",
+      "572065",
+      "572067",
+      "572068",
+      "572069",
+      "572070",
+      "572071",
+      "572072",
+      "572073",
+      "572102",
+      "572113",
+      "572114",
+      "572115",
+      "572116",
+      "572119",
+      "572264",
+      "572265",
+      "573035",
+      "573586",
+      "573687",
+      "573750",
+      "573794",
+      "574250",
+      "575056",
+      "575057",
+      "575177",
+      "575178",
+      "575196",
+      "575197"
+    ],
+    "prior_h200_hours": 95.4186111111111,
+    "study_cap_h200_hours": 191.419
+  },
+  "checkpoint_load": false,
+  "config_digest": "4708d68da93669704ce5b593b738863c6967b9ed891fbc6b31fa4637a25cb3d5",
+  "created_utc": "2026-10-19T11:54:58.530526+00:00",
+  "error": "CalledProcessError(1, ['scontrol', 'release', '575359,575360'])",
+  "execution_seal_sha256": "1b0500210608c7a8b0014a544e58804cc64edd7fdfde288ae3a270e1db23db59",
+  "never_allocated_recovery": {
+    "evidence": {
+      "consumer": {
+        "alloc_tres": "",
+        "elapsed_seconds": 0,
+        "end": "2026-10-19T19:57:32",
+        "gpu_count": 0,
+        "gpu_type_evidence": "typed AllocTRES",
+        "h200_hours": 0.0,
+        "job_id": "575360",
+        "nodes": "None assigned",
+        "start": "None",
+        "state": "CANCELLED by 44781"
+      },
+      "producer": {
+        "alloc_tres": "",
+        "elapsed_seconds": 0,
+        "end": "2026-10-19T19:57:32",
+        "gpu_count": 0,
+        "gpu_type_evidence": "typed AllocTRES",
+        "h200_hours": 0.0,
+        "job_id": "575359",
+        "nodes": "None assigned",
+        "start": "None",
+        "state": "CANCELLED by 44781"
+      }
+    },
+    "original_roles": {
+      "consumer": {
+        "job_id": "575360",
+        "phase": "bound_held",
+        "reservation": "kd3bh8-consumer-c78f4b880a8e444fade05695a7156372"
+      },
+      "producer": {
+        "job_id": "575359",
+        "phase": "bound_held",
+        "reservation": "kd3bh8-producer-c9597cb32d8d4361ba971752168e8fa7"
+      }
+    },
+    "reason": "Slurm refused release of held jobs; both original IDs cancelled before any allocation",
+    "script_sha256": "4b862716a4be4b85ceccd226f4cd03b9afa27e984dbb46a3fbee49bd4124bcb1",
+    "timestamp_utc": "2026-10-19T11:58:24.820706+00:00"
+  },
+  "phase": "submitted",
+  "recovery_required": false,
+  "roles": {
+    "consumer": {
+      "job_id": "575377",
+      "phase": "submitted",
+      "reservation": "kd3bh8-direct-consumer-5a52d849882a4de4be6decac203c5f60"
+    },
+    "producer": {
+      "job_id": "575376",
+      "phase": "submitted",
+      "reservation": "kd3bh8-direct-producer-b203f0d5163c4ce293ff1088926b845f"
+    }
+  },
+  "run_id": "kd3b-hidden8-20261019-seed42"
+}

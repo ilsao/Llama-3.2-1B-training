@@ -1,0 +1,56 @@
+{
+  "created_utc": "2026-10-19T10:37:57.828889+00:00",
+  "status": "design_only_not_submitted",
+  "dtype": "BF16",
+  "predicted_positions_per_sequence": 8191,
+  "vocabulary": 128256,
+  "teacher_final_hidden_width": 3072,
+  "rows": [
+    {
+      "sequences": 1,
+      "logits_bytes": 2101089792,
+      "logits_GiB": 1.9567923545837402,
+      "hidden_bytes": 50325504,
+      "hidden_GiB": 0.04686927795410156,
+      "two_logit_slots_GiB": 3.9135847091674805,
+      "two_hidden_slots_GiB": 0.09373855590820312
+    },
+    {
+      "sequences": 8,
+      "logits_bytes": 16808718336,
+      "logits_GiB": 15.654338836669922,
+      "hidden_bytes": 402604032,
+      "hidden_GiB": 0.3749542236328125,
+      "two_logit_slots_GiB": 31.308677673339844,
+      "two_hidden_slots_GiB": 0.749908447265625
+    },
+    {
+      "sequences": 16,
+      "logits_bytes": 33617436672,
+      "logits_GiB": 31.308677673339844,
+      "hidden_bytes": 805208064,
+      "hidden_GiB": 0.749908447265625,
+      "two_logit_slots_GiB": 62.61735534667969,
+      "two_hidden_slots_GiB": 1.49981689453125
+    },
+    {
+      "sequences": 64,
+      "logits_bytes": 134469746688,
+      "logits_GiB": 125.23471069335938,
+      "hidden_bytes": 3220832256,
+      "hidden_GiB": 2.9996337890625,
+      "two_logit_slots_GiB": 250.46942138671875,
+      "two_hidden_slots_GiB": 5.999267578125
+    }
+  ],
+  "ratio": 41.75,
+  "teacher_output_head_GiB": 0.73388671875,
+  "at_one_BS16_update_per_second": {
+    "logit_write_GBps": 33.617436672,
+    "logit_read_GBps": 33.617436672,
+    "hidden_write_GBps": 0.805208064,
+    "hidden_read_GBps": 0.805208064
+  },
+  "bandwidth_measured_on_nano4": false,
+  "source": "Current pinned teacher/student config and implemented teacher.model -> final hidden -> lm_head path; arithmetic only"
+}

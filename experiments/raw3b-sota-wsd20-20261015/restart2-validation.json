@@ -1,0 +1,8 @@
+{
+  "pure_tests_passed": 9,
+  "source_and_inputs_sealed": true,
+  "shell_syntax": "passed",
+  "sbatch_test_only": "passed with --time=359; no allocation",
+  "real_submission": false,
+  "approval_pending": true
+}

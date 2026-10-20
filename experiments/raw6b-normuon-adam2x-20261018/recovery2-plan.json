@@ -1,0 +1,17 @@
+{
+  "status": "approved_preparing_submission",
+  "failed_jobs": [
+    "566121",
+    "567063"
+  ],
+  "processed_training_tokens": 0,
+  "source": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/source-v3",
+  "fix": "Move shared provenance write from per-rank TailDataset constructor into on_main; exercise real tail in8rank preflight",
+  "static_regression_passed": true,
+  "heavy_preflight": "prepared, not run",
+  "measured_h200_hours": 0.22666666666666666,
+  "requested_new_seconds": 35880,
+  "combined_h200_hours_cap": 80,
+  "preserve_existing_data_overlay": true,
+  "no_training_checkpoint_load": true
+}

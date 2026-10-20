@@ -1,0 +1,158 @@
+{
+  "actual_or_reserved_h200_hours": 35.077222222222225,
+  "state": {
+    "blocked": true,
+    "error": "Historical formal run identities changed",
+    "filtered_cancellation_utc": "2026-10-15T09:23:07.641091+00:00",
+    "filtered_cancelled_by_user": true,
+    "jobs": {
+      "raw": {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+          "elapsed_seconds": 15713,
+          "end": "2026-10-15T21:56:00",
+          "gpu_count": 8,
+          "gpu_type_evidence": {
+            "sha256": "add82c9c6b601aff1ba08b40d94727ac689e229d414b78635a1482c591c4ac5e",
+            "source": "startup nvidia-smi for allocated devices"
+          },
+          "h200_hours": 34.91777777777778,
+          "job_id": "552612",
+          "nodes": "25a-hgpn146",
+          "start": "2026-10-15T17:34:07",
+          "state": "COMPLETED"
+        },
+        "configuration": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/raw.json",
+        "endpoint": {
+          "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/checkpoints/checkpoint-022889-9f1892677883",
+          "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/export-step-22889-4f085276",
+          "full_perplexity": 15.579936997983262,
+          "job_id": "552612",
+          "run_id": "raw-filtered-3b-20261015-raw",
+          "subset_perplexity": 15.536772715200494,
+          "tokens": 3000107008,
+          "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/ecf909bb7e7f48a6aa24c8f0a8f2e149"
+        },
+        "gpu_count": 8,
+        "job_id": "552612",
+        "kind": "training",
+        "minutes": 360,
+        "returned_job_id": "552612",
+        "run_id": "raw-filtered-3b-20261015-raw",
+        "slurm_state": "COMPLETED",
+        "status": "reconciled",
+        "submission_command": [
+          "sbatch",
+          "--parsable",
+          "--time=360",
+          "--job-name=p3-raw",
+          "--comment=raw-filtered-3b-20261015-d73020a8eec440e681a91dca3502f4f8",
+          "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/pair3b-train.sbatch",
+          "raw-filtered-3b-20261015-raw",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/configs/raw.json",
+          "dolma-raw-baseline-20261008"
+        ],
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "552612\n"
+        },
+        "submission_started_utc": "2026-10-15T09:34:01.804237+00:00",
+        "submission_tag": "raw-filtered-3b-20261015-d73020a8eec440e681a91dca3502f4f8",
+        "tag": "raw-filtered-3b-20261015-d73020a8eec440e681a91dca3502f4f8"
+      },
+      "rawprep": {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+          "elapsed_seconds": 228,
+          "end": "2026-10-15T17:33:30",
+          "gpu_count": 1,
+          "gpu_type_evidence": {
+            "sha256": "dd0352b7f79166b10dd8700689cb86e3b1c74fb7a1b59ea6dfea8aec4dc68e7f",
+            "source": "startup nvidia-smi for allocated devices"
+          },
+          "h200_hours": 0.06333333333333334,
+          "job_id": "552564",
+          "nodes": "25a-hgpn014",
+          "start": "2026-10-15T17:29:42",
+          "state": "COMPLETED"
+        },
+        "gpu_count": 1,
+        "job_id": "552564",
+        "kind": "preprocessing",
+        "minutes": 240,
+        "returned_job_id": "552564",
+        "slurm_state": "COMPLETED",
+        "status": "reconciled",
+        "submission_command": [
+          "sbatch",
+          "--parsable",
+          "--time=240",
+          "--job-name=p3-rawprep",
+          "--comment=raw-filtered-3b-20261015-9baa7f5777f24310a4e0242abbdddac0",
+          "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/pair3b-data.sbatch",
+          "rawprep",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension-r2.json"
+        ],
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "552564\n"
+        },
+        "submission_started_utc": "2026-10-15T09:29:41.220528+00:00",
+        "submission_tag": "raw-filtered-3b-20261015-9baa7f5777f24310a4e0242abbdddac0",
+        "tag": "raw-filtered-3b-20261015-9baa7f5777f24310a4e0242abbdddac0"
+      },
+      "rawprep-cancelled-552535": {
+        "accounting": {
+          "alloc_tres": "billing=8,cpu=8,gres/gpu=1,mem=200G,node=1",
+          "elapsed_seconds": 346,
+          "end": "2026-10-15T17:26:35",
+          "gpu_count": 1,
+          "gpu_type_evidence": {
+            "sha256": "41fc5552bcd58c38449eb303412206b17338b80b5f17df66fa48d8817432429e",
+            "source": "startup nvidia-smi for allocated devices"
+          },
+          "h200_hours": 0.0961111111111111,
+          "job_id": "552535",
+          "nodes": "25a-hgpn003",
+          "start": "2026-10-15T17:20:49",
+          "state": "CANCELLED by 44781"
+        },
+        "gpu_count": 1,
+        "job_id": "552535",
+        "kind": "preprocessing",
+        "minutes": 240,
+        "returned_job_id": "552535",
+        "slurm_state": "CANCELLED",
+        "status": "reconciled",
+        "submission_command": [
+          "sbatch",
+          "--parsable",
+          "--time=240",
+          "--job-name=p3-rawprep",
+          "--comment=raw-filtered-3b-20261015-14025cdfba3740f6a75f80793e0fbbe2",
+          "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/pair3b-data.sbatch",
+          "rawprep",
+          "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/raw-extension.json"
+        ],
+        "submission_receipt": {
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "552535\n"
+        },
+        "submission_started_utc": "2026-10-15T09:20:27.188960+00:00",
+        "submission_tag": "raw-filtered-3b-20261015-14025cdfba3740f6a75f80793e0fbbe2",
+        "tag": "raw-filtered-3b-20261015-14025cdfba3740f6a75f80793e0fbbe2"
+      }
+    },
+    "raw_extension_cancellation_utc": "2026-10-15T09:26:35.577409+00:00",
+    "raw_extension_cancelled_by_user": true,
+    "raw_extension_resume_utc": "2026-10-15T09:28:48.374112+00:00",
+    "raw_extension_resumed_by_user": true,
+    "stage": "complete_raw_only"
+  }
+}

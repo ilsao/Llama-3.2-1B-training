@@ -1,0 +1,22 @@
+{
+  "automatic_further_retry": false,
+  "cpu_count": 8,
+  "diagnostic": "Small cross-rank differences under compiled official update; compiler/root cause not fully isolated. Eager execution and explicit identical-gradient strict parameter/state tests must pass inside each job.",
+  "excluded_node": "25a-hgpn001",
+  "execution_seal_sha256": "c6f28853856df8c5836ab381cac3915473b7f88a14687d95018c8d932f888422",
+  "gpu_count": 8,
+  "logical_run_cap_h200_hours": 16,
+  "other_six_jobs_unchanged": true,
+  "prior_failed_jobs": {
+    "D025-seed42": "572113",
+    "D1-seed42": "572102"
+  },
+  "recorded_utc": "2026-10-19T06:13:42.598171+00:00",
+  "requested_seconds": 7080,
+  "scope": "Exactly one fresh eager-mode retry for each of D1 and D025 after failed numerical gates",
+  "seed": 42,
+  "static_validation": "Python AST, shell syntax, frozen original/new source seals and ledger identity/budget guards passed; no model imported on login",
+  "study_cap_h200_hours": 128,
+  "training_checkpoint_load": false,
+  "user_instruction": "\u91cd\u8a66\u5931\u6557\u7684"
+}

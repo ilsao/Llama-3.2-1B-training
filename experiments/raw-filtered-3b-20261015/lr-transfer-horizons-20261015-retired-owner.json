@@ -1,0 +1,6 @@
+{
+  "hostname": "25a-lgn04",
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/source/slurm/horizon_transfer_controller.py",
+  "sha256": "2618a1b9e0c3f3567f0894871cc73ce330223765999188cbae26071ab3a84a6f",
+  "source_commit": "8b36e33287367887e63a7e604057a61a1a173f85"
+}

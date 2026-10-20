@@ -1,0 +1,31 @@
+{
+  "capacity_bytes": 1000000000000,
+  "capacity_TB": 1,
+  "BF16_logit_bytes_per_position": 256512,
+  "theoretical_logit_positions": 3898453,
+  "theoretical_hidden_positions": 162760416,
+  "latest_training_step": 4357,
+  "latest_student_tokens_per_second": 151128.06772829976,
+  "latest_metric_timestamp": 1792405438.707149,
+  "logit_seconds_at_130k_inputs_per_second": 29.991761825372105,
+  "hidden_seconds_at_130k_inputs_per_second": 1252.1560562092855,
+  "logit_write_GBps_at_130k_inputs_per_second": 33.342489375,
+  "hidden_write_GBps_at_130k_inputs_per_second": 0.7986225,
+  "queue_drain_seconds_if_teacher_100k_student_130k": 129.96430124327912,
+  "batch_capacity": [
+    {
+      "global_batch": 16,
+      "bytes_per_batch": 33617436672,
+      "complete_batch_slots": 29,
+      "student_inputs_covered": 3801088,
+      "total_slot_bytes": 974905663488
+    },
+    {
+      "global_batch": 64,
+      "bytes_per_batch": 134469746688,
+      "complete_batch_slots": 7,
+      "student_inputs_covered": 3670016,
+      "total_slot_bytes": 941288226816
+    }
+  ]
+}

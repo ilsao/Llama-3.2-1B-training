@@ -1,0 +1,6 @@
+{
+  "script": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw-filtered-3b-20261015/source/slurm/pair3b_controller.py",
+  "sha256": "52c01abe8b634743d00f203b4c6a96513bb913ac06527e77b0ef1ba4429ff047",
+  "hostname": "25a-lgn01",
+  "source_commit": "c35034f66a719451481e031a672625f9f39c306f"
+}

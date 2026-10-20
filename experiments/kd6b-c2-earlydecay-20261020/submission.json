@@ -1,0 +1,24 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--comment=kd6bc2-255e7467f1294992a7adb7b887fa71f3",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/kd6b-c2-earlydecay-20261020.sbatch",
+    "kd6b-c2-earlydecay-20261020-seed42"
+  ],
+  "configuration_digest": "6aec35618cbc60da734f7d9de459e8b831a09a80638328baf0c28ec53f6856c3",
+  "job_id": "587783",
+  "phase": "submitted",
+  "prior": {
+    "job_count": 292,
+    "jobs_digest": "0c2fba44ee9eec21ecd3d50309771105ebd00cdea56b96fe4f12370c74771f95",
+    "run_count": 245,
+    "runs_digest": "bfe2c651ee221a5a90498874e0aab80aed73de93ccd3db7dc42a7485e9630f4d",
+    "shared_total": 1473.525,
+    "study_total": 278.65416666666664
+  },
+  "requested_seconds": 32400,
+  "reservation": "kd6bc2-255e7467f1294992a7adb7b887fa71f3",
+  "run_id": "kd6b-c2-earlydecay-20261020-seed42",
+  "timestamp": 1792483320.8384073
+}

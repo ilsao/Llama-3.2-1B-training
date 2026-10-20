@@ -1,0 +1,7 @@
+{
+  "approved": true,
+  "maximum_h200_hours": 64,
+  "maximum_jobs": 4,
+  "scope": "Four fresh1B pilots, two parallel sbatches per stage, stage2 selects raw-PPL-winning mask; embedded correctness gates within existing8H200/8CPU/120min job caps; no retry/resume/HF upload/cleanup",
+  "user_instruction": "\u9019\u6a23\u5427\uff0c\u5206\u5169\u500b\u968e\u6bb5\u3002\u7b2c\u4e00\u500b\u968e\u6bb5\u5be6\u9a57 causal mask\uff0c\u7b2c\u4e8c\u968e\u6bb5\u505a PE, NorMuon \u7684\u5c0d\u6bd4\u3002\u7b2c\u4e8c\u968e\u6bb5\u61c9\u8a72\u4f7f\u7528\u7b2c\u4e00\u968e\u6bb5 PPL \u66f4\u4f73\u8005\u7684\u8a2d\u5b9a\u3002\u6bcf\u500b\u968e\u6bb5\u958b\u5169\u500b sbatch \u5e73\u884c run\u3002"
+}

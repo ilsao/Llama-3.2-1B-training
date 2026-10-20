@@ -1,0 +1,32 @@
+{
+  "activation_checkpointing": true,
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "category": "validation",
+  "epsilon": 1e-08,
+  "eval_documents": 1,
+  "eval_steps": 1,
+  "gradient_accumulation_steps": 2,
+  "learning_rate": 0.0003,
+  "logging_steps": 1,
+  "max_grad_norm": 1.0,
+  "max_h200_hours": 2.6666666666666665,
+  "max_steps": 100,
+  "max_training_tokens": 20000000,
+  "microbatch_size": 1,
+  "min_lr_ratio": 0.1,
+  "model_id": "meta-llama/Llama-3.2-1B",
+  "model_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+  "seed": 42,
+  "sequence_length": 8192,
+  "stop_margin_seconds": 150,
+  "sweep_id": "kd3b-io8-validation-20261019",
+  "sweep_purpose": "User-requested8 teacher+8 student cross-node throughput at matched global BS16/64; LR0, no full-run submission",
+  "wandb_mode": "offline",
+  "wandb_project": "lab5-training-llama",
+  "warmup_steps": 0,
+  "weight_decay": 0.1,
+  "world_size": 8
+}

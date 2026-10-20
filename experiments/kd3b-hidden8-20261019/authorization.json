@@ -1,0 +1,32 @@
+{
+  "status": "approved",
+  "user_reply": "好，開始訓練",
+  "approved_context": "Immediately after the reviewed8+8hidden-state3B-token proposal:6h per role,96H200-hours combined; user authorizes implementation and launch",
+  "run_id": "kd3b-hidden8-20261019-seed42",
+  "config_digest": "4708d68da93669704ce5b593b738863c6967b9ed891fbc6b31fa4637a25cb3d5",
+  "formal_run_number": 18,
+  "category": "full",
+  "roles": [
+    "producer",
+    "consumer"
+  ],
+  "allocations_per_role": 1,
+  "seconds_per_role": 21600,
+  "gpus_per_role": 8,
+  "cpus_per_role": 8,
+  "max_h200_hours_combined": 96,
+  "study_cap_h200_hours": 191.419,
+  "prior_study_measured_h200_hours": 95.4186111111111,
+  "student_input_endpoint": 3000107008,
+  "teacher_input_endpoint": 3000107008,
+  "random_initialization": true,
+  "checkpoint_load_for_training": false,
+  "automatic_retry_resume_requeue": false,
+  "cleanup": "Only newly generated consumed hidden payloads/ready files; retain historical and unconsumed artifacts",
+  "overrides": [
+    "64H logical-run ceiling for this exact96H run",
+    "three-formal-run and120-minute gates for formal18",
+    "128H methods-study cap to191.419H for this run including all historical costs",
+    "16 simultaneous H200 across two8GPU/8CPU jobs"
+  ]
+}

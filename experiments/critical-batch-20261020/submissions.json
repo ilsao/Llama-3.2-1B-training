@@ -1,0 +1,99 @@
+{
+  "critical-batch-20261020-c0-shadow": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 99,
+      "end": "2026-10-20T13:40:09",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "31a714d7f4d894edeae93a5f724e8a0425b96fc33c9b91caccc61d9578013cb4",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.22,
+      "job_id": "587009",
+      "nodes": "25a-hgpn024",
+      "start": "2026-10-20T13:38:30",
+      "state": "FAILED"
+    },
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c0-shadow.json",
+    "config_digest": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "job_id": "587009",
+    "reservation": "critical-batch-20261020-c0-shadow-6d36e76dc0d84f73b94ab7882eb553c0",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587009\n"
+    },
+    "slurm_state": "FAILED",
+    "status": "reconciled"
+  },
+  "critical-batch-20261020-c1-cbs-half": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 107,
+      "end": "2026-10-20T13:40:17",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "a3901b5fb71a2b56eef43877292f13448869112ea3d31128affbe70db1a96377",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.23777777777777778,
+      "job_id": "587010",
+      "nodes": "25a-hgpn121",
+      "start": "2026-10-20T13:38:30",
+      "state": "FAILED"
+    },
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c1-cbs-half.json",
+    "config_digest": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25",
+    "job_id": "587010",
+    "reservation": "critical-batch-20261020-c1-cbs-half-d6b3caa6bfbd478ca3d93ebe295fcc6d",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587010\n"
+    },
+    "slurm_state": "FAILED",
+    "status": "reconciled"
+  },
+  "critical-batch-20261020-c2-cbs-one": {
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/c2-cbs-one.json",
+    "config_digest": "86a31b0551446bfba6ef5a27f2c1142821f9a69d2c2adea91abb6b7e38829830",
+    "job_id": "587011",
+    "reservation": "critical-batch-20261020-c2-cbs-one-15275c60cdf64a5e93b709451105c43c",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "587011\n"
+    },
+    "slurm_state": "RUNNING",
+    "status": "submitted"
+  },
+  "critical-batch-20261020-gpu-gate": {
+    "accounting": {
+      "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+      "elapsed_seconds": 26,
+      "end": "2026-10-20T13:37:39",
+      "gpu_count": 8,
+      "gpu_type_evidence": {
+        "sha256": "aa967317bb3e4ad3bfdb594c7f4cae8a3b940b8b20e8b96cdd75dc7d7a1fd37b",
+        "source": "startup nvidia-smi for allocated devices"
+      },
+      "h200_hours": 0.057777777777777775,
+      "job_id": "586995",
+      "nodes": "25a-hgpn010",
+      "start": "2026-10-20T13:37:13",
+      "state": "COMPLETED"
+    },
+    "config": "/home/asciibase64/Llama-3.2-1B-training/experiments/critical-batch-20261020/configs/gpu-gate.json",
+    "config_digest": "7bf82cc111bba474a5eb58ac57bde845c0a8d5561470f728834c13b73d4c08e4",
+    "job_id": "586995",
+    "reservation": "critical-batch-20261020-gpu-gate-3b6c0ebc3a754ee0abda7dc874e06b66",
+    "result": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "586995\n"
+    },
+    "slurm_state": "COMPLETED",
+    "status": "reconciled"
+  }
+}

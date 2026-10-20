@@ -1,0 +1,24 @@
+{
+  "approved": true,
+  "user_text": "\u53ef",
+  "approved_utc": "2026-10-18T14:18:35.580262+00:00",
+  "run_id": "raw6b-normuon-adam2x-20261018",
+  "configuration_digest": "92b99288eb9afdfba6749bdd03058a42d27279f0b83765ec9424cb67da8c5f9b",
+  "failed_jobs": [
+    "566121",
+    "567063"
+  ],
+  "maximum_replacement_allocations": 1,
+  "replacement_seconds": 35880,
+  "gpus": 8,
+  "cpus": 8,
+  "combined_h200_hours": 80,
+  "formal_run_number": 17,
+  "no_training_checkpoint_load": true,
+  "permitted_metadata_hashes": {
+    "training-tail-provenance.json": "fba24874e55841b56deb986d9b9e20459ec15a8f6db079742dc64147eb4e0ed3",
+    "resolved-config.json": "8a64ce7325074ff1b9e613e77f18a72f1bec8602e8b40690473de24bc65dc56b",
+    "data-provenance.json": "e8450e86a77dd2d9aeb8833e0ee072aa1802744f92ed5975709cac84e33fadd3"
+  },
+  "reason": "Explicit user approval for one further startup replacement; rank0-only tail provenance write and real8rank TailDataset preflight; no further automatic retry"
+}

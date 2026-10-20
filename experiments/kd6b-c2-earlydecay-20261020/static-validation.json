@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tests": 20,
+  "full_model_or_gpu_tests_on_login": false,
+  "shell_syntax": true,
+  "python_ast": true,
+  "gpu_gates": "run inside the same approved allocation before training",
+  "token_decay_anchor": 2399928320
+}

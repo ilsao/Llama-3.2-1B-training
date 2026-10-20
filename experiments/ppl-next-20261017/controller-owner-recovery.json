@@ -1,0 +1,6 @@
+{
+  "authorization": "User: \u4fee\u5fa9",
+  "legacy_submission_disabled": true,
+  "owner": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/controller_recovery.py",
+  "state": "controller-state-recovery.json"
+}

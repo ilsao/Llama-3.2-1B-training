@@ -1,0 +1,33 @@
+{
+  "status": "approved for exactly one replacement allocation per failed arm",
+  "reason": "C0/C1 failed during compiled CUDA kernel loading before first completed update; shared compiler-cache visibility/race suspected, not proven",
+  "failed_jobs": {
+    "critical-batch-20261020-c0-shadow": "587009",
+    "critical-batch-20261020-c1-cbs-half": "587010"
+  },
+  "failed_h200_hours": 0.4577777777777778,
+  "original_source_seal_sha256": "a76abcef8f0b16c10cc48c8cd541a347d38ced09b82d2717ac8527af466f6491",
+  "configuration_digests": {
+    "critical-batch-20261020-c0-shadow": "41231aa8d0f2638fa337682a61bda25a465c0a4ed4e697d9692ee04ba7a567d6",
+    "critical-batch-20261020-c1-cbs-half": "c2a9c2ac6707cdc43279017d51bc710f0d989349402fccbb5c0e69bc06fe3b25"
+  },
+  "replacement_seconds": 7080,
+  "replacement_count": 2,
+  "replacement_gpu_count": 8,
+  "replacement_cpu_count": 8,
+  "max_campaign_h200_hours_including_prior_and_c2": 47.98222222222222,
+  "original_campaign_cap_h200_hours": 49.333333333333336,
+  "prior_charged_inputs_per_role": 131072,
+  "fresh_attempt_target_inputs": 1000079360,
+  "logical_input_cap_per_role": 1000210432,
+  "changes": [
+    "rank-private Inductor/Triton/CUDA/TMP directories configured before torch import",
+    "compiled CUDA forward/backward and DDP smoke inside each replacement allocation",
+    "fresh initialization in unique attempt directory; no checkpoint load"
+  ],
+  "prohibited": [
+    "modifying running C2 source/config",
+    "removing failed artifacts or resetting costs",
+    "automatic retries or additional replacements"
+  ]
+}

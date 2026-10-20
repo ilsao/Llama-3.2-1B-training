@@ -1,0 +1,21 @@
+{
+  "job_id": "573794",
+  "seconds_per_step": {
+    "inline": 1.042551214331373,
+    "pipeline": 1.0284278315763609,
+    "serial_buffer": 1.0448865025828127
+  },
+  "throughput_gain_percent": 1.3732983804380483,
+  "peak_GiB": {
+    "inline": 33.63647127151489,
+    "pipeline": 37.5034122467041,
+    "serial_buffer": 37.5034122467041
+  },
+  "extra_peak_GiB": 3.866940975189209,
+  "complete_allocation_student_inputs": 5898240,
+  "complete_allocation_teacher_inputs": 5898240,
+  "cumulative_input_reservation_upper_bound_including_failed_attempts": 6291456,
+  "input_accounting_note": "Raw results student_inputs/teacher_inputs include conservative reservations from failed attempts; current complete allocation processed 45 full fixed windows. No weight updates.",
+  "total_h200_hours": 0.5841666666666666,
+  "formal_training_started": false
+}

@@ -1,0 +1,80 @@
+{
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "parent_run": "kd6b-r5-20261020-seed42",
+  "expected_parent_commit": "13125ad091ca25c914e1528af6dce22d5f6efa3a",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/export-step-28619-cfa436bf",
+  "export_stats": {
+    "model-00001-of-00003.safetensors": {
+      "size": 1956695880,
+      "mtime_ns": 1792462755084872598
+    },
+    "tokenizer_config.json": {
+      "size": 50526,
+      "mtime_ns": 1792462758053813290
+    },
+    "tokenizer.json": {
+      "size": 17209920,
+      "mtime_ns": 1792462758182810713
+    },
+    "training-metadata.json": {
+      "size": 23207,
+      "mtime_ns": 1792462758184810707
+    },
+    "model.safetensors.index.json": {
+      "size": 12003,
+      "mtime_ns": 1792462757606822219
+    },
+    "generation_config.json": {
+      "size": 143,
+      "mtime_ns": 1792462753416905918
+    },
+    "model-00003-of-00003.safetensors": {
+      "size": 1040282032,
+      "mtime_ns": 1792462757599822376
+    },
+    "config.json": {
+      "size": 838,
+      "mtime_ns": 1792462753415905938
+    },
+    "special_tokens_map.json": {
+      "size": 301,
+      "mtime_ns": 1792462758054813270
+    },
+    "model-00002-of-00003.safetensors": {
+      "size": 1946296312,
+      "mtime_ns": 1792462756744839438
+    }
+  },
+  "payload_files": [
+    "README.md",
+    "config.json",
+    "generation_config.json",
+    "model-00001-of-00003.safetensors",
+    "model-00002-of-00003.safetensors",
+    "model-00003-of-00003.safetensors",
+    "model.safetensors.index.json",
+    "resolved-training-config.json",
+    "special_tokens_map.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "training-details.json",
+    "training-metadata.json"
+  ],
+  "sealed_inputs": {
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/publish.py": "c749c1108f0101eb92282f7f375fd152163074ed84fb2c2e9b7ed33ab307ad8a",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/validation-config.json": "0a9ebbe9ac6ab105c35e76cda34b1999ecd700356574f562aaa233ccc1ff85bf",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/payload/resolved-training-config.json": "d5c273030f721cb31bb13a015beac0ba65797f2113d636344b481cbab64ed66a",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/payload/training-details.json": "fc93331647771400549ea4b4c0334b2f55497870cf29f68adff1b69e7e95275b",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/payload/README.md": "43a7c31f392f1e5aa92418276d86887ddd9c3bd93ad49e1badb86be81f56e5b0",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/hf-kd6b-r5-20261020/payload/training-metadata.json": "7cbfea629ab28fc99c7bad15a4b6f762ce6e1f6ba5a670ffbe1c50973f00b05a",
+    "/home/asciibase64/Llama-3.2-1B-training/slurm/hf-kd6b-r5-upload.sbatch": "c3d924be35c6588d0674be3342b7319b1a120bd9c0f310209a9837696b2db9ea",
+    "/home/asciibase64/Llama-3.2-1B-training/experiments/kd6b-r5-20261020/completion-status.json": "2145fa22491e00779d4994412062d3d53f36bf5b51a1d2d33b4fb2497801f32f"
+  },
+  "authorization": "User: 幫我上傳到 huggingface",
+  "allocation": {
+    "h200": 1,
+    "cpus": 8,
+    "seconds": 1800,
+    "maximum_h200_hours": 0.5
+  }
+}

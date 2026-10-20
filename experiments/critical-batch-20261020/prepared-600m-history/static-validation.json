@@ -1,0 +1,38 @@
+{
+  "unit_tests_passed": 8,
+  "python_ast_passed": true,
+  "sbatch_syntax_passed": true,
+  "source_seal_verified": true,
+  "endpoint": 599916544,
+  "matched_evaluation_events": 90,
+  "window_trajectories": [
+    {
+      "global_batch_sequences": 16,
+      "updates": 4577,
+      "largest_eval_gap_updates": 57
+    },
+    {
+      "global_batch_sequences": 32,
+      "updates": 2331,
+      "largest_eval_gap_updates": 29
+    },
+    {
+      "global_batch_sequences": 64,
+      "updates": 1208,
+      "largest_eval_gap_updates": 16
+    },
+    {
+      "global_batch_sequences": 128,
+      "updates": 646,
+      "largest_eval_gap_updates": 9
+    }
+  ],
+  "unapproved_submission_fails_before_reservation": true,
+  "shared_ledger_unchanged": true,
+  "gpu_gate": "prepared; not run",
+  "full_model_probe_correctness": "not measured",
+  "memory": "not measured",
+  "throughput": "not measured",
+  "perplexity_effect": "not measured",
+  "jobs_submitted": []
+}

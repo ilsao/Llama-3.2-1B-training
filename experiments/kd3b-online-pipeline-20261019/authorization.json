@@ -1,0 +1,20 @@
+{
+  "run_id": "kd3b-online-pipeline-20261019-seed42",
+  "user_instruction": "啟動訓練",
+  "date": "2026-10-19",
+  "config_digest": "f7cdb530df617a4227dc97ddb5f4681beafcb475c0e79c60feb503bc18434ab9",
+  "category": "pilot",
+  "allocation": {
+    "H200": 8,
+    "CPUs": 8,
+    "seconds": 7200,
+    "maximum_H200_hours": 16
+  },
+  "study_total_cap_H200_hours": 128,
+  "scope": "Official pretrained 3B online two-stream pipeline; fresh seed42 1B student; one allocation",
+  "training_checkpoint_load": false,
+  "automatic_retry": false,
+  "previous_validation_job": "573794",
+  "target_inputs": 1000079360,
+  "updates": 4775
+}

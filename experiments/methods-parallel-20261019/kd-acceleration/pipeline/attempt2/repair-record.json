@@ -1,0 +1,13 @@
+{
+  "combined_max_h200_hours": 1.4533333333333331,
+  "fix": "Pinned torch2.9.1 built-in flash varlen for frozen teacher; preserve intradoc mask and test against FP32 SDPA before loading models",
+  "no_checkpoint_load": true,
+  "original_cap_h200_hours": 1.6,
+  "prior_h200_hours": 0.12,
+  "prior_input_reservations_preserved": true,
+  "prior_job": "573687",
+  "reason": "Existing FA3 installation supports head_dim<=64; official 3B teacher requires128",
+  "replacement_seconds": 600,
+  "same_logical_validation_run": true,
+  "student_weights_updated": false
+}

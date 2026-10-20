@@ -1,0 +1,14 @@
+{
+  "approved": true,
+  "cleanup": false,
+  "config_digest": "ed7d3b6317bd308ce76d1bcecc5db4c3332d8db2568ad56cdee1118bb0ab19bf",
+  "formal_run_number": 14,
+  "hf_upload": false,
+  "resume": false,
+  "retry": false,
+  "reviewed_configuration": "1B SOTA intradoc mask and NorMuon NS5 +3B SOTA remaining recipe,4B table LR;8H200/8CPU,one7h/56H allocation",
+  "run_id": "raw4b-intradoc-normuon-20261017",
+  "scope": "Named override of three-formal-run and120-minute gates only; all previous run/job costs preserved",
+  "training_checkpoint_load": false,
+  "user_instruction": "\u5141\u8a31\uff0c\u63d0\u4ea4"
+}

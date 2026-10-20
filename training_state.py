@@ -17,6 +17,8 @@ import time
 
 DEFAULT_ROOT = Path('/work/asciibase64/Llama-3.2-1B-training')
 PROJECT = Path(__file__).resolve().parent
+BE60P20_2B_RUN_ID = 'be60p20-lrscaled-2b-20261010'
+BE60P20_2B_CONFIG_DIGEST = 'c2ec561c2bae73988d292fa9fe1bc7093265a3c1a6f401930dceedea40da46bf'
 TERMINAL = {'COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY',
             'NODE_FAIL', 'PREEMPTED', 'BOOT_FAIL', 'DEADLINE', 'REVOKED'}
 
@@ -46,6 +48,12 @@ def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
+def be60p20_2b_authorized(run_id, config, resume=False):
+    """Explicitly approved fourth formal run, exact config and fresh weights only."""
+    return (run_id == BE60P20_2B_RUN_ID and not resume
+            and digest(config) == BE60P20_2B_CONFIG_DIGEST)
+
+
 def file_digest(path):
     result = hashlib.sha256()
     with Path(path).open('rb') as stream:
@@ -70,10 +78,24 @@ def storage_root(value):
 def load_config(path):
     cfg = read_json(path)
     required = set(read_json(PROJECT / 'configs/train-pilot.json'))
-    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs', 'lr_scheduler', 'wsd_decay_ratio', 'fixed_horizon', 'checkpoint_policy', 'export_on_completion', 'retain_all_checkpoints', 'sweep_calibration_digest', 'sweep_environment_digest', 'target_training_tokens'}
+    optional = {'attention_backend', 'checkpoint_interval_seconds', 'final_evaluation_reserve_seconds', 'campaign_id', 'sweep_stage', 'scheduler_steps', 'optimizer', 'muon', 'sweep_id', 'sweep_purpose', 'parent_runs', 'lr_scheduler', 'wsd_decay_ratio', 'fixed_horizon', 'checkpoint_policy', 'export_on_completion', 'retain_all_checkpoints', 'sweep_calibration_digest', 'sweep_environment_digest', 'target_training_tokens', 'hold_schedule'}
+    optional.add('performance')
+    if 'performance' in cfg:
+        performance = cfg['performance']
+        if (not isinstance(performance, dict) or set(performance) !=
+                {'model_compile', 'compile_mode', 'muon_compile', 'async_transfer'}):
+            raise ValueError('Require a complete performance configuration')
+        if any(type(performance[key]) is not bool for key in
+               ('model_compile', 'muon_compile', 'async_transfer')):
+            raise ValueError('Performance switches must be boolean')
+        if performance['compile_mode'] not in {
+                'default', 'reduce-overhead', 'max-autotune', 'max-autotune-no-cudagraphs'}:
+            raise ValueError('Unsupported compile mode')
+        if performance['muon_compile'] and cfg.get('optimizer') != 'muon':
+            raise ValueError('Muon compilation requires native Muon')
     if not required <= set(cfg) or set(cfg) - required - optional:
         raise ValueError(f'Configuration keys mismatch: missing={required - set(cfg)}, extra={set(cfg) - required}')
-    if cfg.get('lr_scheduler', 'cosine') not in {'linear', 'cosine', 'wsd'}:
+    if cfg.get('lr_scheduler', 'cosine') not in {'linear', 'cosine', 'wsd', 'wsd_hold_zero'}:
         raise ValueError('Unsupported LR scheduler')
     decay_ratio = cfg.get('wsd_decay_ratio', 0.2)
     if type(decay_ratio) not in (int, float) or not math.isfinite(decay_ratio) or not 0 < decay_ratio < 1:
@@ -156,6 +178,17 @@ def load_config(path):
         decay_steps = round(horizon * decay_ratio)
         if not 2 <= decay_steps <= horizon - cfg['warmup_steps']:
             raise ValueError('WSD needs a nonoverlapping stable/decay horizon with at least two decay updates')
+    if cfg.get('lr_scheduler') == 'wsd_hold_zero':
+        if not cfg.get('fixed_horizon', False) or cfg['min_lr_ratio'] != 0:
+            raise ValueError('Hold/zero schedule requires a fixed horizon and terminal LR zero')
+        settings = cfg.get('hold_schedule')
+        hold_schedule_boundaries(horizon, cfg['warmup_steps'], settings)
+        if not math.isclose(sum(settings[key] for key in
+                                ('first_decay_ratio', 'hold_ratio', 'final_decay_ratio')),
+                            decay_ratio, rel_tol=0, abs_tol=1e-12):
+            raise ValueError('wsd_decay_ratio must equal the complete cooldown/hold/zero tail')
+    elif 'hold_schedule' in cfg:
+        raise ValueError('hold_schedule is only valid with wsd_hold_zero')
     return cfg
 
 
@@ -168,13 +201,46 @@ def training_target_reached(cfg, journal_data):
 def schedule_multiplier(update_index, cfg):
     return lr_multiplier(update_index, cfg.get('scheduler_steps', cfg['max_steps']),
                          cfg['warmup_steps'], cfg['min_lr_ratio'],
-                         cfg.get('lr_scheduler', 'cosine'), cfg.get('wsd_decay_ratio', 0.2))
+                         cfg.get('lr_scheduler', 'cosine'), cfg.get('wsd_decay_ratio', 0.2),
+                         cfg.get('hold_schedule'))
 
 
-def lr_multiplier(update_index, max_steps, warmup_steps, min_ratio, scheduler='cosine', decay_ratio=0.2):
+def hold_schedule_boundaries(max_steps, warmup_steps, settings):
+    """Return zero-based starts for first decay, hold, and final zero decay."""
+    keys = {'first_decay_ratio', 'hold_ratio', 'final_decay_ratio', 'plateau_lr_ratio'}
+    if not isinstance(settings, dict) or set(settings) != keys:
+        raise ValueError('Hold/zero schedule requires explicit phase ratios and plateau LR')
+    if any(type(value) not in (int, float) or not math.isfinite(value)
+           or not 0 < value < 1 for value in settings.values()):
+        raise ValueError('Hold/zero ratios must be finite and strictly between zero and one')
+    ratios = [settings[key] for key in ('first_decay_ratio', 'hold_ratio', 'final_decay_ratio')]
+    if sum(ratios) >= 1:
+        raise ValueError('Hold/zero tail must leave room for warmup and stable training')
+    first, hold, final = [round(max_steps * ratio) for ratio in ratios]
+    start = max_steps - first - hold - final
+    if first < 2 or hold < 1 or final < 2 or start < warmup_steps:
+        raise ValueError('Hold/zero phases overlap warmup or contain too few updates')
+    return start, start + first, start + first + hold, max_steps
+
+
+def lr_multiplier(update_index, max_steps, warmup_steps, min_ratio, scheduler='cosine',
+                  decay_ratio=0.2, hold_schedule=None):
     """LR for zero-based *next* successful optimizer update; first update is nonzero."""
     if update_index < warmup_steps:
         return (update_index + 1) / warmup_steps
+    if scheduler == 'wsd_hold_zero':
+        start, hold_start, final_start, end = hold_schedule_boundaries(
+            max_steps, warmup_steps, hold_schedule)
+        plateau = hold_schedule['plateau_lr_ratio']
+        if update_index < start:
+            return 1.0
+        if update_index < hold_start:
+            progress = (update_index - start) / (hold_start - start - 1)
+            return 1.0 + (plateau - 1.0) * progress
+        if update_index < final_start:
+            return plateau
+        progress = min(1.0, (update_index - final_start) / (end - final_start - 1))
+        return plateau * (1.0 - progress)
     progress = min(1.0, (update_index - warmup_steps) / max(1, max_steps - warmup_steps - 1))
     if scheduler == 'linear':
         return min_ratio + (1 - min_ratio) * (1 - progress)
@@ -313,12 +379,15 @@ class ExperimentLedger:
     def reserve(self, reservation, run_id, config, seconds, gpus, resume, *, uninitialized_retry=False):
         identifier(run_id)
         hours = gpus * seconds / 3600
+        be60p20_authorization = be60p20_2b_authorized(run_id, config, resume)
         filtered_authorization = (run_id == 'muon-wsd-filtered-2b-20261009' and (not resume or uninitialized_retry) and
             config.get('category') == 'full' and config.get('sweep_id') == run_id and
             config.get('target_training_tokens') == 2_000_000_000 and
             config.get('max_training_tokens') == 2_000_027_648 and
             config.get('max_h200_hours') == 64 and config.get('world_size') == 8)
         seconds_limit, hours_limit = (28800, 64) if filtered_authorization else (7200, 16)
+        if be60p20_authorization:
+            seconds_limit, hours_limit = 14400, 32
         if seconds > seconds_limit or hours > hours_limit or not 1 <= gpus <= 8:
             raise ValueError(f'Maximum {seconds_limit} seconds and {hours_limit} H200-hours per sbatch')
         if gpus != config['world_size'] or seconds <= config['stop_margin_seconds']:
@@ -339,7 +408,9 @@ class ExperimentLedger:
             else:
                 if resume:
                     raise ValueError('Unknown run cannot resume')
-                if config['category'] == 'full' and sum(r['category'] == 'full' for r in runs.values()) >= 3:
+                full_runs = sum(r['category'] == 'full' for r in runs.values())
+                if (config['category'] == 'full' and full_runs >= 3
+                        and not (be60p20_authorization and full_runs == 3)):
                     raise ValueError('Three committed full runs already exist in the shared ledger')
             previous = [j for j in jobs.values() if j['run_id'] == run_id]
             if any('h200_hours' not in j for j in previous):
@@ -351,6 +422,9 @@ class ExperimentLedger:
                                      'max_h200_hours': config['max_h200_hours'], 'created': time.time()})
             jobs[reservation] = {'run_id': run_id, 'reserved_h200_hours': hours, 'gpu_count': gpus,
                                  'requested_seconds': seconds, 'status': 'reserved'}
+            if be60p20_authorization:
+                runs[run_id]['formal_run_number'] = 4
+                jobs[reservation]['authorization'] = 'User explicitly approved on 2026-10-10: fourth formal BE60P20 2B run, 8 H200/8 CPUs, max 4h/32 H200-hours, fresh weights only'
 
     def bind(self, reservation, job_id):
         if not re.fullmatch(r'\d+', job_id):

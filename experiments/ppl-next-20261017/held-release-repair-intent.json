@@ -1,0 +1,121 @@
+{
+  "authorization": "User: \u4fee\u5fa9",
+  "discovery": {
+    "accounting": {
+      "command": [
+        "sacct",
+        "-X",
+        "-n",
+        "-P",
+        "--user",
+        "asciibase64",
+        "-S",
+        "2026-10-17T14:52:19",
+        "--format=JobIDRaw,JobName%100,State,Submit,Start,ElapsedRaw"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "561623|pf17-A-seed42|COMPLETED|2026-10-17T13:32:47|2026-10-17T13:32:48|4815\n561624|pf17-B-seed42|COMPLETED|2026-10-17T13:32:47|2026-10-17T13:32:48|4827\n561891|pf17-D-seed42|RUNNING|2026-10-17T14:55:32|2026-10-17T14:55:33|526\n"
+    },
+    "ambiguous": [],
+    "checked_utc": "2026-10-17T07:04:19.281051+00:00",
+    "matches": [
+      "561910"
+    ],
+    "queue": {
+      "command": [
+        "squeue",
+        "--noheader",
+        "--user",
+        "asciibase64",
+        "--format=%i|%j|%T|%k"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "561910|pf17-C-seed42|PENDING|ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1\n561891|pf17-D-seed42|RUNNING|ppl-next-20261017-D-seed42-575c8b170da547a3a8a47e6c1680f07e\n"
+    },
+    "startup_receipts": []
+  },
+  "held_job": "561910",
+  "held_snapshot": {
+    "command": [
+      "scontrol",
+      "show",
+      "job",
+      "561910",
+      "-o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "JobId=561910 JobName=pf17-C-seed42 UserId=asciibase64(44781) GroupId=ACD115198(110673) MCS_label=N/A Priority=0 Nice=0 Account=acd115198 QOS=normal JobState=PENDING Reason=JobHeldUser Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=02:00:00 TimeMin=N/A SubmitTime=2026-10-17T15:01:06 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-17T15:01:06 Scheduler=Main Partition=8gpus AllocNode:Sid=25a-lgn05:2575441 ReqNodeList=(null) ExcNodeList=25a-hgpn[001,027,031,039,062,071,083,151] NodeList= NumNodes=1-1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=200G,node=1,billing=8,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=200G MinTmpDiskNode=0 Features=H200 DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch SubmitLine=sbatch --hold --parsable --time=120 --job-name=pf17-C-seed42 --comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1 --exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151 /home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch ppl-next-20261017-C-seed42 C-seed42 WorkDir=/home/asciibase64/Llama-3.2-1B-training Comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1 StdErr=/work/asciibase64/Llama-3.2-1B-training/logs/pf17-C-seed42-561910.err StdIn=/dev/null StdOut=/work/asciibase64/Llama-3.2-1B-training/logs/pf17-C-seed42-561910.out TresPerNode=gres/gpu:8 TresPerTask=cpu=8\n"
+  },
+  "original_state": {
+    "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/configs/C-seed42.json",
+    "job_id": "561910",
+    "kind": "train",
+    "manual_repair_attempt": {
+      "authorization": "User: \u4fee\u5fa9",
+      "mode": "one held submission after zero observed jobs; original reservation retained",
+      "time_utc": "2026-10-17T07:01:06.447062+00:00"
+    },
+    "release_intent_utc": "2026-10-17T07:01:36.199249+00:00",
+    "repair_held_job_id": "561910",
+    "repair_submission_command": [
+      "sbatch",
+      "--hold",
+      "--parsable",
+      "--time=120",
+      "--job-name=pf17-C-seed42",
+      "--comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch",
+      "ppl-next-20261017-C-seed42",
+      "C-seed42"
+    ],
+    "repair_submission_receipt": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "561910\n"
+    },
+    "reservation": "ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1",
+    "returned_job_id": "561910",
+    "slurm_state": "PENDING",
+    "status": "held_verified",
+    "submission_command": [
+      "sbatch",
+      "--parsable",
+      "--time=120",
+      "--job-name=pf17-C-seed42",
+      "--comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1",
+      "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+      "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch",
+      "ppl-next-20261017-C-seed42",
+      "C-seed42"
+    ],
+    "submission_error": "Command '['sbatch', '--parsable', '--time=120', '--job-name=pf17-C-seed42', '--comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1', '--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151', '/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch', 'ppl-next-20261017-C-seed42', 'C-seed42']' timed out after 30 seconds",
+    "submission_history": [
+      {
+        "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/configs/C-seed42.json",
+        "kind": "train",
+        "reservation": "ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1",
+        "status": "submission_uncertain",
+        "submission_command": [
+          "sbatch",
+          "--parsable",
+          "--time=120",
+          "--job-name=pf17-C-seed42",
+          "--comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1",
+          "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+          "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch",
+          "ppl-next-20261017-C-seed42",
+          "C-seed42"
+        ],
+        "submission_error": "Command '['sbatch', '--parsable', '--time=120', '--job-name=pf17-C-seed42', '--comment=ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1', '--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151', '/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-factorial-train.sbatch', 'ppl-next-20261017-C-seed42', 'C-seed42']' timed out after 30 seconds",
+        "submission_started_utc": "2026-10-17T06:54:19.996712+00:00",
+        "submission_tag": "ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1"
+      }
+    ],
+    "submission_started_utc": "2026-10-17T06:54:19.996712+00:00",
+    "submission_tag": "ppl-next-20261017-C-seed42-7103ba3e52a34e4389981a2a5a6c3ee1"
+  }
+}

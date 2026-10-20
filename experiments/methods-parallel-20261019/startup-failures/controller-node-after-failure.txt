@@ -1,0 +1,17 @@
+NodeName=25a-hgpn001 Arch=x86_64 CoresPerSocket=56 
+   CPUAlloc=0 CPUEfctv=104 CPUTot=112 CPULoad=0.05
+   AvailableFeatures=H200
+   ActiveFeatures=H200
+   Gres=gpu:H200:8
+   NodeAddr=172.21.100.1 NodeHostName=25a-hgpn001 Version=25.11.4
+   OS=Linux 5.14.0-570.116.1.el9_6.x86_64 #1 SMP PREEMPT_DYNAMIC Tue May 19 08:44:54 EDT 2026 
+   RealMemory=1900000 AllocMem=0 FreeMem=2046403 Sockets=2 Boards=1
+   CoreSpecCount=8 CPUSpecList=52,53,54,55,108,109,110,111 
+   State=IDLE ThreadsPerCore=1 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=dev,8gpus,16gpus,32gpus,64gpus,256gpus 
+   BootTime=2026-10-16T08:45:34 SlurmdStartTime=2026-10-16T08:48:00
+   LastBusyTime=2026-10-19T13:55:56 ResumeAfterTime=None
+   CfgTRES=cpu=104,mem=1900000M,billing=104,gres/gpu=8
+   AllocTRES=
+   CurrentWatts=0 AveWatts=0
+

@@ -1,0 +1,10 @@
+{
+  "host": "25a-lgn01",
+  "job_id": "565259",
+  "submission": "one manual invocation completed; no submission controller scheduled",
+  "scheduled_script": "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-step30-20261018/accounting_only.py",
+  "script_sha256": "448e72f9650b777321e13cdac557881cfe9c0c2afbc5691ba5387733021f58b6",
+  "cron_marker": "# raw4b-step30-565259-accounting-only",
+  "mode": "accounting-only; only sacct and JSON accounting for existing565259; no sbatch/retry/resume",
+  "other_cron_entries_preserved": true
+}

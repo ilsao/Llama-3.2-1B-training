@@ -1,0 +1,20 @@
+{
+  "checked_utc": "2026-10-19T10:39:58.893022+00:00",
+  "teacher": "meta-llama/Llama-3.2-3B",
+  "teacher_hidden_size": 3072,
+  "global_training_input_tokens": 6000000000,
+  "last_hidden_only": true,
+  "BF16_bytes": 36864000000000,
+  "BF16_TB": 36.864,
+  "BF16_TiB": 33.52761268615723,
+  "FP32_TB": 73.728,
+  "eight_bit_payload_TB": 18.432,
+  "eight_bit_note": "Quantized approximation; excludes scale metadata; numerical validation needed",
+  "mount": "/work",
+  "filesystem": "wekafs",
+  "df_visible_total_bytes": 10995116277760,
+  "df_visible_available_bytes": 5575036108800,
+  "df_available_TiB": 5.070465803146362,
+  "BF16_tokens_fit_without_headroom": 907395200,
+  "capacity_note": "df mount-view values, not a verified individual quota; no files removed and no cache-generation job submitted"
+}

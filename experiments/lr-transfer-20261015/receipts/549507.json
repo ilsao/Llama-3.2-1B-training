@@ -1,0 +1,50 @@
+{
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-transfer-validation-r1/checkpoints/checkpoint-000032-a1df47bee383",
+  "config_digest": "bde63dd1b2da657b13cd44c5d7cb084cd24c8fb274aa0bc43178c39c16a34e43",
+  "ema_evaluations": {
+    "0.6": {
+      "eval/documents": 16,
+      "eval/length_0_256_nll": 5042.777893066406,
+      "eval/length_0_256_perplexity": 2205.9147328052577,
+      "eval/length_0_256_prediction_tokens": 655,
+      "eval/length_1024_4096_nll": 86055.62890625,
+      "eval/length_1024_4096_perplexity": 1924.9795303503513,
+      "eval/length_1024_4096_prediction_tokens": 11379,
+      "eval/length_256_1024_nll": 21384.97265625,
+      "eval/length_256_1024_perplexity": 2552.4719365536694,
+      "eval/length_256_1024_prediction_tokens": 2726,
+      "eval/nll": 112483.3794555664,
+      "eval/perplexity": 2040.2449769452362,
+      "eval/prediction_tokens": 14760,
+      "eval/sequences": 16
+    }
+  },
+  "evaluation": {
+    "eval/documents": 16,
+    "eval/ema_0.6_nll": 112483.3794555664,
+    "eval/ema_0.6_perplexity": 2040.2449769452362,
+    "eval/ema_0.6_prediction_tokens": 14760,
+    "eval/ema_last_snapshot_tokens": 4194304,
+    "eval/ema_updates": 16,
+    "eval/length_0_256_nll": 5018.806457519531,
+    "eval/length_0_256_perplexity": 2126.6429490927717,
+    "eval/length_0_256_prediction_tokens": 655,
+    "eval/length_1024_4096_nll": 85765.0634765625,
+    "eval/length_1024_4096_perplexity": 1876.447009007744,
+    "eval/length_1024_4096_prediction_tokens": 11379,
+    "eval/length_256_1024_nll": 21209.32958984375,
+    "eval/length_256_1024_perplexity": 2393.196093759526,
+    "eval/length_256_1024_prediction_tokens": 2726,
+    "eval/nll": 111993.19952392578,
+    "eval/perplexity": 1973.6011420876466,
+    "eval/prediction_tokens": 14760,
+    "eval/sequences": 16
+  },
+  "evaluation_identity": "f9cde63b2bdeec1d8d414966e665b1deed280907f80ada7d6172fcf2eede5829",
+  "global_step": 32,
+  "initialization_signature": "32b43fc6e5c34a787fc02db6674dde1afc341123e39d48abb60b5d84e932a05d",
+  "job_id": "549507",
+  "run_id": "init-recipe-20261014-transfer-validation-r1",
+  "tokens": 4194304,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/09a1262b21524a59ab7aa197dcbf7ade"
+}

@@ -1,0 +1,40 @@
+{
+  "all_source_hashes_verified": true,
+  "all_training_rank_exit_codes_zero": true,
+  "allocation": {
+    "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+    "elapsed_seconds": 19005,
+    "end": "2026-10-17T07:03:55",
+    "gpu_count": 8,
+    "gpu_type_evidence": {
+      "sha256": "1846fb89208a29f7cd6de8da73d8263e465f65d37386e1cdb7dfef34d5583aec",
+      "source": "startup nvidia-smi for allocated devices"
+    },
+    "h200_hours": 42.233333333333334,
+    "job_id": "560415",
+    "nodes": "25a-hgpn084",
+    "start": "2026-10-17T01:47:10",
+    "state": "FAILED"
+  },
+  "comparison_note": "Different token budgets and single seed; not an isolated method ablation",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export-step-19080-bb77b2ef",
+  "full_documents": 50000,
+  "full_perplexity": 13.838020960959888,
+  "full_ppl_recomputed": true,
+  "full_prediction_tokens": 76930208,
+  "h200_hours": 42.233333333333334,
+  "hf_reload_verified": true,
+  "job_id": "560415",
+  "ppl_reduction_percent": 9.030426412882854,
+  "previous_3b_full_perplexity": 15.21170256746107,
+  "run_id": "raw4b-intradoc-normuon-20261017",
+  "shared_ledger_reconciliation": "blocked: empty global ledger",
+  "slurm_state": "FAILED",
+  "status": "training_and_full_eval_verified_accounting_guard_failed",
+  "subset_perplexity": 13.860357447857169,
+  "training_check_passed": true,
+  "training_resumed": false,
+  "training_tokens": 4000055296,
+  "updates": 19080,
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/302d493de0854a3b816a2bee7b5d2a4f"
+}

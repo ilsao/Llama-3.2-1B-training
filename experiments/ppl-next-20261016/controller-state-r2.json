@@ -1,0 +1,169 @@
+{
+  "jobs": {
+    "ppl-next-20261016-s1-dense": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 4824,
+        "end": "2026-10-17T00:01:28",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "2a7da2ad3461a3195b4af71d03053c3cf5e3134cad714ec608248b392ab64e06",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 10.72,
+        "job_id": "559883",
+        "nodes": "25a-hgpn057",
+        "start": "2026-10-16T22:41:04",
+        "state": "COMPLETED"
+      },
+      "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s1-dense.json",
+      "job_id": "559883",
+      "reservation": "ppl-next-20261016-s1-dense-b96515b546404da686ad26836a1fc4e9",
+      "returned_job_id": "559883",
+      "slurm_state": "COMPLETED",
+      "status": "complete",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--time=118",
+        "--job-name=ppl-s1-dense-r2",
+        "--comment=ppl-next-20261016-s1-dense-b96515b546404da686ad26836a1fc4e9",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-next.sbatch",
+        "ppl-next-20261016-s1-dense",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s1-dense.json"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "559883\n"
+      },
+      "submission_started_utc": "2026-10-16T14:41:02.826538+00:00",
+      "submission_tag": "ppl-next-20261016-s1-dense-b96515b546404da686ad26836a1fc4e9"
+    },
+    "ppl-next-20261016-s1-intradoc": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 4813,
+        "end": "2026-10-17T00:01:17",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "add82c9c6b601aff1ba08b40d94727ac689e229d414b78635a1482c591c4ac5e",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 10.695555555555556,
+        "job_id": "559884",
+        "nodes": "25a-hgpn146",
+        "start": "2026-10-16T22:41:04",
+        "state": "COMPLETED"
+      },
+      "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s1-intradoc.json",
+      "job_id": "559884",
+      "reservation": "ppl-next-20261016-s1-intradoc-7d3cdd7fbc66409ea678b6ecec4e1d00",
+      "returned_job_id": "559884",
+      "slurm_state": "COMPLETED",
+      "status": "complete",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--time=118",
+        "--job-name=ppl-s1-intradoc-r2",
+        "--comment=ppl-next-20261016-s1-intradoc-7d3cdd7fbc66409ea678b6ecec4e1d00",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-next.sbatch",
+        "ppl-next-20261016-s1-intradoc",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s1-intradoc.json"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "559884\n"
+      },
+      "submission_started_utc": "2026-10-16T14:41:03.730417+00:00",
+      "submission_tag": "ppl-next-20261016-s1-intradoc-7d3cdd7fbc66409ea678b6ecec4e1d00"
+    },
+    "ppl-next-20261016-s2-nor": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 4867,
+        "end": "2026-10-17T01:23:11",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "2a7da2ad3461a3195b4af71d03053c3cf5e3134cad714ec608248b392ab64e06",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 10.815555555555555,
+        "job_id": "560143",
+        "nodes": "25a-hgpn057",
+        "start": "2026-10-17T00:02:04",
+        "state": "COMPLETED"
+      },
+      "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s2-nor-intradoc.json",
+      "job_id": "560143",
+      "reservation": "ppl-next-20261016-s2-nor-6636625d5cf346fb9898e2b6ddc7e7e1",
+      "returned_job_id": "560143",
+      "slurm_state": "COMPLETED",
+      "status": "complete",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--time=120",
+        "--job-name=ppl-s2-nor-r2",
+        "--comment=ppl-next-20261016-s2-nor-6636625d5cf346fb9898e2b6ddc7e7e1",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-next.sbatch",
+        "ppl-next-20261016-s2-nor",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s2-nor-intradoc.json"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "560143\n"
+      },
+      "submission_started_utc": "2026-10-16T16:02:03.916539+00:00",
+      "submission_tag": "ppl-next-20261016-s2-nor-6636625d5cf346fb9898e2b6ddc7e7e1"
+    },
+    "ppl-next-20261016-s2-pe": {
+      "accounting": {
+        "alloc_tres": "billing=8,cpu=8,gres/gpu=8,mem=200G,node=1",
+        "elapsed_seconds": 4876,
+        "end": "2026-10-17T01:23:20",
+        "gpu_count": 8,
+        "gpu_type_evidence": {
+          "sha256": "d7d2b283e892092192f9fa6ad728de550b7a56b9e84e0b3f5252a66e9c4dcec0",
+          "source": "startup nvidia-smi for allocated devices"
+        },
+        "h200_hours": 10.835555555555555,
+        "job_id": "560141",
+        "nodes": "25a-hgpn042",
+        "start": "2026-10-17T00:02:04",
+        "state": "COMPLETED"
+      },
+      "config_path": "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s2-pe-intradoc.json",
+      "job_id": "560141",
+      "reservation": "ppl-next-20261016-s2-pe-7a644a875ad940d385ded456e316aa99",
+      "returned_job_id": "560141",
+      "slurm_state": "COMPLETED",
+      "status": "complete",
+      "submission_command": [
+        "sbatch",
+        "--parsable",
+        "--time=120",
+        "--job-name=ppl-s2-pe-r2",
+        "--comment=ppl-next-20261016-s2-pe-7a644a875ad940d385ded456e316aa99",
+        "--exclude=25a-hgpn001,25a-hgpn027,25a-hgpn031,25a-hgpn039,25a-hgpn062,25a-hgpn071,25a-hgpn083,25a-hgpn151",
+        "/home/asciibase64/Llama-3.2-1B-training/slurm/ppl-next.sbatch",
+        "ppl-next-20261016-s2-pe",
+        "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/configs/s2-pe-intradoc.json"
+      ],
+      "submission_receipt": {
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "560141\n"
+      },
+      "submission_started_utc": "2026-10-16T16:02:02.691029+00:00",
+      "submission_tag": "ppl-next-20261016-s2-pe-7a644a875ad940d385ded456e316aa99"
+    }
+  },
+  "status": "complete"
+}

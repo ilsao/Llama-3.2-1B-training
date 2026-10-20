@@ -1,0 +1,39 @@
+{
+  "observations": [
+    {
+      "candidate": "tail-lr100",
+      "nll": 2.9985489499600058,
+      "perplexity": 20.056412939321106,
+      "scale": 1.0,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/a32fe208444f4ffd9a8ab5652989ac8b"
+    },
+    {
+      "candidate": "tail-lr070",
+      "nll": 2.9572214647295874,
+      "perplexity": 19.244426084049884,
+      "scale": 0.7,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/1ca9908422404b8089d05517470ec52b"
+    },
+    {
+      "candidate": "tail-lr050",
+      "nll": 2.919757003289871,
+      "perplexity": 18.536782535255682,
+      "scale": 0.5,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/5871de47793b47bf89de13c988cc005e"
+    },
+    {
+      "candidate": "tail-lr030",
+      "nll": 2.8735250331046833,
+      "perplexity": 17.699298979273298,
+      "scale": 0.3,
+      "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/02c96475697742c38b9d7a21a1d67e64"
+    }
+  ],
+  "winner": {
+    "candidate": "tail-lr030",
+    "nll": 2.8735250331046833,
+    "perplexity": 17.699298979273298,
+    "scale": 0.3,
+    "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/02c96475697742c38b9d7a21a1d67e64"
+  }
+}

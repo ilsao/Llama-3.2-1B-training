@@ -1,0 +1,479 @@
+{
+  "status": "design_blueprints_not_training_configs",
+  "common_reference": "plan.json#/common",
+  "arms": [
+    {
+      "id": "N0",
+      "module": "core",
+      "method": "current native NS5 NorMuon + AdamW x2",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {},
+      "hypothesis": "Reproduce the current method in the new sealed environment.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "D1",
+      "module": "core",
+      "method": "Dion3 NorMuon flavor f=1 bridge",
+      "controls": [
+        "N0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "fraction": 1,
+        "momentum": 0.95,
+        "row_second_moment_beta": 0.95,
+        "ns_steps": 5,
+        "ns_coefficients": [
+          3.4445,
+          -4.775,
+          2.0315
+        ],
+        "implementation": "author implementation; document momentum and scaling mapping",
+        "aux_optimizer": "same local AdamW"
+      },
+      "hypothesis": "Measure implementation migration; equivalence to N0 is a test, not an assumption.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "D025",
+      "module": "core",
+      "method": "Dion3 NorMuon flavor f=1/4",
+      "controls": [
+        "N0",
+        "D1"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "fraction": 0.25,
+        "momentum": 0.95,
+        "row_second_moment_beta": 0.95,
+        "ns_steps": 5,
+        "ns_coefficients": [
+          3.4445,
+          -4.775,
+          2.0315
+        ],
+        "error_feedback": true,
+        "aux_optimizer": "same local AdamW",
+        "lr_center": "D1 matched RMS center / sqrt(f), applied after translating author units"
+      },
+      "hypothesis": "Fractional updates improve quality or cost beyond the full-update bridge.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "A0",
+      "module": "geometry",
+      "method": "fresh native NorMuon control",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {},
+      "hypothesis": "Concurrent control for geometry module.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "A1",
+      "module": "geometry",
+      "method": "AdaMuon v3",
+      "controls": [
+        "A0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "version": "2507.11005v3",
+        "sign_before_ns": true,
+        "elementwise_second_moment": true,
+        "rms_alignment": true,
+        "momentum": 0.95,
+        "second_moment_beta": 0.95,
+        "aux_optimizer": "unchanged"
+      },
+      "hypothesis": "Coordinate-wise adaptive updates improve over row-wise normalization.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "S1",
+      "module": "geometry",
+      "method": "full SOAP on hidden matrices",
+      "controls": [
+        "A0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "betas": [
+          0.95,
+          0.95
+        ],
+        "shampoo_beta": 0.95,
+        "precondition_frequency": 10,
+        "max_precond_dim": 10000,
+        "merge_dims": false,
+        "precondition_1d": false,
+        "normalize_grads": false,
+        "correct_bias": true,
+        "aux_optimizer": "unchanged",
+        "first_gradient_only_initializes_basis": "charge tokens; no replacement batch"
+      },
+      "hypothesis": "Historical rotated geometry offsets its time and memory cost.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "K0",
+      "module": "distillation",
+      "method": "fresh native NorMuon hard-CE control",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {},
+      "hypothesis": "Control for teacher supervision.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "K1",
+      "module": "distillation",
+      "method": "hard CE plus forward KL from existing teacher",
+      "controls": [
+        "K0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "lambda": 0.25,
+        "temperature": 1,
+        "teacher_run": "raw6b-normuon-adam2x-20261018",
+        "teacher_revision": "13125ad091ca25c914e1528af6dce22d5f6efa3a",
+        "teacher_frozen": true,
+        "student_initialization": "random",
+        "kl": "teacher || student",
+        "mask": "same shifted valid labels and intradoc context",
+        "implementation": "full-vocabulary chunked exact KL first",
+        "input_token_counters": [
+          "student_training_inputs",
+          "teacher_inference_inputs",
+          "total_model_input_processing"
+        ]
+      },
+      "hypothesis": "Context-dependent soft targets improve student sample efficiency.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "K2",
+      "module": "distillation_mechanism",
+      "method": "hard CE plus uniform smoothing",
+      "controls": [
+        "K0",
+        "K1"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "K1 wins; separate followup budget",
+      "overrides": {
+        "epsilon": 0.1,
+        "lambda_or_entropy_matching": false,
+        "interpretation": "generic smoothing control, not entropy-matched causal isolation"
+      },
+      "hypothesis": "Determine whether simple smoothing explains part of a positive KD result.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "F0",
+      "module": "schedule_free",
+      "method": "fresh scheduled native NorMuon control",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {},
+      "hypothesis": "Fixed-horizon endpoint control.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "F1",
+      "module": "schedule_free",
+      "method": "SF-NorMuon hidden matrices + SF-AdamW auxiliary",
+      "controls": [
+        "F0",
+        "F2"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "beta_interpolation": 0.9,
+        "matrix_momentum": 0.95,
+        "second_moment_beta": 0.95,
+        "eta_scale": 0.2,
+        "warmup_reference_units": 170,
+        "schedule": "one warmup, then constant LR; no second-phase restart or cooldown",
+        "averaging_clock": "optimizer updates, weight proportional to lr squared; no reset at batch switch",
+        "matrix_decay_coefficient": "q(t)=1-reference_matrix_peak_lr*0.1*warmup(t), external on z; fixed across LR factors",
+        "eval_weights": "x",
+        "training_weights": "y",
+        "decay_location": "z",
+        "method_label": "local 1B adaptation, not an exact reproduction of paper defaults"
+      },
+      "hypothesis": "Feedback averaging yields useful anytime checkpoints with acceptable endpoint regret.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "F2",
+      "module": "schedule_free",
+      "method": "constant-LR bridge plus observer averaging",
+      "controls": [
+        "F0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "inner_update": "same momentum/RMS-scaled matrix direction and Adam direction as F1",
+        "schedule": "same warmup then constant LR as F1",
+        "matrix_decay_coefficient": "same q(t) as F1, on fast weights",
+        "gradient_location": "current fast weights, not interpolated y",
+        "observer": "same lr-squared average, never fed back",
+        "evaluation_variants": [
+          "live",
+          "observer"
+        ],
+        "shared_budget": "two evaluations from one training run"
+      },
+      "hypothesis": "Separate observer averaging from the feedback effect of SF training.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "C0",
+      "module": "cce",
+      "method": "native CE with native NorMuon",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {},
+      "hypothesis": "Loss-kernel equivalence control.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "C1",
+      "module": "cce",
+      "method": "cce_exact with native NorMuon",
+      "controls": [
+        "C0"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "module selected and correctness gates pass",
+      "overrides": {
+        "cross_entropy": "cce_kahan_full_c_full_e",
+        "gradient_filtering": false,
+        "microbatch_size": 1,
+        "global_batch": "same archived rows"
+      },
+      "hypothesis": "Reduce memory/time while preserving the full objective and gradients.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "I00",
+      "module": "interaction",
+      "method": "baseline",
+      "controls": [],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "D025 and K1 independently confirmed",
+      "overrides": {},
+      "hypothesis": "2x2 interaction reference.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "I10",
+      "module": "interaction",
+      "method": "confirmed optimizer only",
+      "controls": [
+        "I00"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "D025 and K1 independently confirmed",
+      "overrides": {
+        "optimizer": "locked D025 winner"
+      },
+      "hypothesis": "Optimizer main effect.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "I01",
+      "module": "interaction",
+      "method": "confirmed distillation only",
+      "controls": [
+        "I00"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "D025 and K1 independently confirmed",
+      "overrides": {
+        "distillation": "locked K1"
+      },
+      "hypothesis": "Distillation main effect.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    },
+    {
+      "id": "I11",
+      "module": "interaction",
+      "method": "confirmed optimizer plus distillation",
+      "controls": [
+        "I00",
+        "I10",
+        "I01"
+      ],
+      "status": "design_only",
+      "execution_ready": false,
+      "activation": "D025 and K1 independently confirmed",
+      "overrides": {
+        "optimizer": "locked D025 winner",
+        "distillation": "locked K1"
+      },
+      "hypothesis": "Test whether independent gains combine.",
+      "source_commit": null,
+      "resolved_lr_mapping": null,
+      "unresolved_before_execution": [
+        "Pin adapter/source and dependencies",
+        "Resolve method-specific LR units on training-only gradients",
+        "Pass eight-rank numerical/memory/timing gates",
+        "Seal full resolved configuration and accounting reservation"
+      ]
+    }
+  ]
+}

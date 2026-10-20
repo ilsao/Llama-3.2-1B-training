@@ -1,0 +1,27 @@
+{
+  "user_instruction": "取消現在的蒸餾任務後，給出具體配置、分析性能瓶頸，嘗試加速",
+  "category": "validation",
+  "purpose": "Numerical correctness and paired speed benchmark only; no resumed or new training campaign",
+  "gpu_count": 8,
+  "cpu_count": 8,
+  "seconds": 600,
+  "max_h200_hours": 1.3333333333333333,
+  "student": "fresh random residual_half seed42",
+  "teacher": "immutable K1 teacher",
+  "learning_rate": 0,
+  "training_checkpoint_load": false,
+  "automatic_retry": false,
+  "variants": [
+    "recompute128",
+    "recompute1024",
+    "pregrad128",
+    "pregrad1024"
+  ],
+  "predeclared_full_gradient_gate": {
+    "relative_l2_max": 0.02,
+    "cosine_min": 0.999,
+    "loss_absolute_error_max": 0.0001
+  },
+  "maximum_student_input_tokens": 20000000,
+  "study_cap_h200_hours": 128
+}

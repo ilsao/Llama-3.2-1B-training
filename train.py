@@ -293,7 +293,8 @@ def evaluate(model, evaluation, cfg, accelerator):
                     raise ValueError('Evaluation window must contain at least two real input tokens')
                 batch = {key: value[:, :length].to(accelerator.device) for key, value in batch.items()}
                 with accelerator.autocast():
-                    nll = causal_loss_sum(unwrapped, batch)
+                    from performance import eager_loss_model
+                    nll = causal_loss_sum(eager_loss_model(unwrapped), batch)
                 totals[0] += nll.detach().double()
                 totals[1] += (batch['labels'][:, 1:] != -100).sum().double()
         totals = accelerator.reduce(totals, reduction='sum')
@@ -459,6 +460,9 @@ def run(args, cfg):
         raise RuntimeError('Initialization/data verification exhausted this allocation; no training started')
     model, initialization = build_model(cfg, run_path, provenance, accelerator)
     raw_optimizers, group_metadata = build_optimizers(model, cfg)
+    from performance import TrainingPerformance
+    performance = TrainingPerformance(cfg)
+    model = performance.configure(model)
     schedulers = [torch.optim.lr_scheduler.LambdaLR(optimizer, lambda step: schedule_multiplier(step, cfg))
                   for optimizer in raw_optimizers]
     prepared = accelerator.prepare(model, *raw_optimizers)
@@ -473,6 +477,7 @@ def run(args, cfg):
         PROJECT / 'requirements-training.txt', PROJECT / 'preparation_parallel.py')}
     if cfg.get('optimizer', 'adamw') == 'muon':
         source['optimizers.py'] = file_digest(PROJECT / 'optimizers.py')
+    source['performance.py'] = file_digest(PROJECT / 'performance.py')
     if cfg.get('attention_backend') == 'flash_attention_3':
         source['attention_backend.py'] = file_digest(PROJECT / 'attention_backend.py')
         build = Path(os.environ['TRAIN_ENV_PREFIX']) / 'fa3-build.json'
@@ -673,26 +678,33 @@ def run(args, cfg):
         learning_rates = [group['lr'] for group in learning_groups]
         torch.cuda.synchronize()
         started = time.monotonic()
+        performance.step_begin()
+        staged = performance.stage(local, accelerator.device) if performance.enabled else None
         for micro, batch in enumerate(local):
-            batch = {name: value.to(accelerator.device) for name, value in batch.items()}
+            if staged is None:
+                batch = {name: value.to(accelerator.device) for name, value in batch.items()}
+            else:
+                batch, ready = staged[micro]
+                if ready is not None:
+                    torch.cuda.current_stream().wait_event(ready)
             # DDP averages grads across W ranks. Each micro contributes W*NLL/
             # global_window_targets; no extra accumulation division is applied.
             sync = contextlib.nullcontext() if micro == len(local) - 1 else accelerator.no_sync(model)
-            with sync:
+            with sync, performance.forward_context(model, accelerator, batch):
                 loss = causal_loss_sum(model, batch)
                 nll += loss.detach().double()
                 accelerator.backward(loss * (cfg['world_size'] / targets))
         grad_norm = accelerator.clip_grad_norm_(model.parameters(), cfg['max_grad_norm'])
-        nonfinite = torch.tensor(int(not bool(torch.isfinite(grad_norm).item()) or
-                                     not bool(torch.isfinite(nll).item())), device=accelerator.device)
+        nonfinite = (~(torch.isfinite(grad_norm) & torch.isfinite(nll))).to(torch.int64)
         finite = not bool(reduce_max(nonfinite, accelerator).item())
-        torch.cuda.synchronize()
-        optimizer_started = time.monotonic()
+        optimizer_events = (torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True))
+        optimizer_events[0].record()
         if finite:
             for optimizer in optimizers:
                 optimizer.step()
+        optimizer_events[1].record()
         torch.cuda.synchronize()
-        optimizer_elapsed = time.monotonic() - optimizer_started
+        optimizer_elapsed = optimizer_events[0].elapsed_time(optimizer_events[1]) / 1000
         timings['optimizer_seconds'] += optimizer_elapsed
         elapsed = time.monotonic() - started
         timings['training_seconds'] += elapsed
@@ -705,7 +717,7 @@ def run(args, cfg):
         timings['journal_seconds'] += time.monotonic() - journal_started
         state['cursor'] += width
         state['attempted_updates'] += 1
-        state['step_seconds'] = max(state['step_seconds'], duration)
+        state['step_seconds'] = performance.observe(duration, state['step_seconds'])
         if finite and not accelerator.optimizer_step_was_skipped:
             state['global_step'] += 1
             for scheduler in schedulers:
@@ -776,6 +788,8 @@ def run(args, cfg):
                'unused_training_sequences': len(train) - state['cursor'], 'checkpoint': latest,
                'h200_hours_so_far_estimate': compute_used(), 'slurm_job_id': job_id,
                'h200_hours_final': 'pending Slurm accounting reconciliation'}
+    summary['performance'] = performance.diagnostics()
+    on_main(accelerator, lambda: atomic_json(run_path / 'performance.json', summary['performance']))
     if 'target_training_tokens' in cfg:
         summary['training_token_target_reached'] = training_target_reached(cfg, journal_data)
     if stop_reason != 'validation_pause' and cfg.get('export_on_completion', True):
@@ -819,6 +833,8 @@ def main():
     cfg = load_config(args.config)
     if args.resume and args.run_id == 'muon-wsd-filtered-2b-20261009':
         parser.error('This filtered training request requires random initialization; checkpoint resume is unauthorized')
+    if args.resume and args.run_id == 'be60p20-lrscaled-2b-20261010':
+        parser.error('This BE60P20 2B request requires random initialization; checkpoint resume is unauthorized')
     if args.stop_after_step and cfg['category'] != 'validation':
         parser.error('Validation controls are restricted to validation configurations')
     if args.stop_after_step is not None and not 0 < args.stop_after_step < cfg['max_steps']:

@@ -1,0 +1,23 @@
+{
+  "approved_utc": "2026-10-15T15:32:52.131854+00:00",
+  "automatic_further_retry": false,
+  "checkpoint_training_load": false,
+  "configuration_digest": "efd9b2a00aa2d225d9bc6b84e433384093288ed8ed266417591b46f8f432b5a7",
+  "failed_allocation_seconds": 20,
+  "failed_h200_hours": 0.044444444444444446,
+  "failed_job_id": "553561",
+  "failed_metadata_files": {
+    ".run.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "resolved-config.json": "33c5b58b4b6d64e902347ea7ec4c90db04a2c62245e7e48df94450b2eaaf4a9e",
+    "resource-accounting.json": "19095cc0132de190c84fed371e18dcf954c5f966b5b96f47e8d2774313442601"
+  },
+  "formal_run_number": 11,
+  "fresh_random_initialization": true,
+  "maximum_cumulative_allocation_seconds": 21600,
+  "maximum_cumulative_h200_hours": 48,
+  "maximum_restart_seconds": 21580,
+  "one_time_only": true,
+  "run_id": "raw3b-sota-wsd20-20261015",
+  "training_tokens_previously_processed": 0,
+  "user_reply": "\u662f"
+}
