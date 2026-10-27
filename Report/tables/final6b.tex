@@ -1,0 +1,16 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Six-billion-input recipe comparison at the identical 6,000,082,944-input endpoint, seed42 and evaluation provenance.}
+\label{tab:final6b}
+\begin{tabular}{lrrrrr}
+\toprule
+Recipe & Updates & 1k PPL & Extra 9k & Combined 10k & H200-h \\
+\midrule
+6B non-KD & 28,619 & 12.7739 & 12.9224 & 12.9078 & 64.707 \\
+6B R5 KD & 28,619 & 12.2678 & 12.4132 & 12.3989 & 64.711 \\
+6B C2 + early decay & 22,060 & 12.3953 & 12.5535 & 12.5380 & 65.009 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{minipage}{\linewidth}\footnotesize The 10k metric is $\exp[(\mathrm{NLL}_{1k}+\mathrm{NLL}_{9k})/(N_{1k}+N_{9k})]$, not an average of perplexities. Runtime implementation differs between non-KD and R5. C2 also changes the first decay boundary; it is a combined intervention.\end{minipage}
+\end{table}

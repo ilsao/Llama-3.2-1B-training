@@ -1,0 +1,578 @@
+{
+  "/work/asciibase64/Llama-3.2-1B-training/experiment-ledger.json": {
+    "sha256": "9abb0a7085bbd54651f5eeaea046d04f18a47e2f89cb3838bfb8b500498cf19f",
+    "bytes": 615411
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/preprocessing-ledger.json": {
+    "sha256": "41cb41b4482755d9d2c798920b0516b2237ee83108ee2d7d3a52609222ac1f3d",
+    "bytes": 23024
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/summary.json": {
+    "sha256": "bb35a33b96651350dbd4e3b903344bd1c7f4a7177ca8c4c4b81d59afced1fdaa",
+    "bytes": 24786
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/resolved-config.json": {
+    "sha256": "a5b75272774210d7a4bd3bab34024c234f7615416c0857f80a34e26077321598",
+    "bytes": 951
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/full-evaluation.json": {
+    "sha256": "e67054473fad11386eb348d2f80f1b6efed72a832864ac90c164bddd2135ec84",
+    "bytes": 540
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/metrics.jsonl": {
+    "sha256": "f7e7a63e1a9634bc1c872a8a9b7970171abd0348682db7fff477156750e7cf56",
+    "bytes": 5211542
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-fa3-20261009-baseline/export.json": {
+    "sha256": "c5d70fb28be712023397926f445ae018bbd34542402214e9c05cd9dec2c11946",
+    "bytes": 158
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/summary.json": {
+    "sha256": "dbf2155319e4f06334f8e3bcd6657dced4cba5e5375174cb1cf295ffe508e48c",
+    "bytes": 26612
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/resolved-config.json": {
+    "sha256": "133091d6f737d6d7c348f0988e72ed55f29a73be9a904f7b40cd89f0edcfccf9",
+    "bytes": 1747
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/full-evaluation.json": {
+    "sha256": "e37d3cad4682e1235400001e7186c9df1a6f53412c676ae4eb9f2703fd406cc7",
+    "bytes": 541
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/metrics.jsonl": {
+    "sha256": "5f78a2381ba097f715675e4e5f593f9aae837fadc480df969d91d4941177ba30",
+    "bytes": 9944188
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/baseline-muon-wsd-raw-20261009/export.json": {
+    "sha256": "da11e22c41c195d1e651274d546da2008132658d18cffb84f3e87105fae5fe8a",
+    "bytes": 159
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/summary.json": {
+    "sha256": "ed25d021e9c468f5637075849b54240060f37269887e87ddd5713877b51e0e40",
+    "bytes": 25747
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/resolved-config.json": {
+    "sha256": "a78bed9a9660fafcea3c077bad2d97392146b8560ab78e92bd35b3199ef7f0f4",
+    "bytes": 1795
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/full-evaluation.json": {
+    "sha256": "0eeca665adc6cd0acb58640512c596a9fbb2ccfbf7b2f9b0000ef2072d3f47a3",
+    "bytes": 542
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/metrics.jsonl": {
+    "sha256": "837e72161173a7b5900b529cfaed3c707f5fa772aea1cb680853305e756f66ce",
+    "bytes": 10869374
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/muon-wsd-filtered-2b-20261009/export.json": {
+    "sha256": "85a0297cf3f9974eecf0d7b453ecb6c6c19b4dae8d4967986fc74b767ff25adc",
+    "bytes": 157
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/summary.json": {
+    "sha256": "a33b0a8ec4b27d60745e62f68c01eb31c0429b987c31d860ad0474a99d15184b",
+    "bytes": 26482
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/resolved-config.json": {
+    "sha256": "e407e5d272c785d63e45edf8bbee5f2cc2287ee566ff3d2ae50c9bbe0397dd17",
+    "bytes": 1978
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/metrics.jsonl": {
+    "sha256": "20e0c0628e0dcc778c6741859a70a2a396a5c1b81c876d8f6cd82ede235ac392",
+    "bytes": 11916953
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/be60p20-lrscaled-2b-20261010/export.json": {
+    "sha256": "36d6fcb03c347999156b32c483ae2ff99471325ea0905d9777b91d1dd6305708",
+    "bytes": 156
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/summary.json": {
+    "sha256": "bc2490d7cb1fea25655c6083c26a7172ca7294795030a524737c8384470c799b",
+    "bytes": 26733
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/resolved-config.json": {
+    "sha256": "d772a93444b6bbb9d2895a05b2aca7e0f19bbb20cca0ec1e687173a5177804d9",
+    "bytes": 1995
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/full-evaluation.json": {
+    "sha256": "cf7c2d7ae72aa2c68a8124115476aa393c21a09a6a8e29e904060c5252244944",
+    "bytes": 548
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/metrics.jsonl": {
+    "sha256": "e806dd6a075adecdd226a837bf991cf2de445ca9aa514d927189da27a322ea11",
+    "bytes": 11893935
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-standard/export.json": {
+    "sha256": "fe85682266ef07b148443c8e58eb269b6d0685b6af3ed58f8b2d581d7f2c59ad",
+    "bytes": 163
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/summary.json": {
+    "sha256": "62006d489cd97c54f774cf31ef4e8d3559258ecc36528c6010ea6d76985fd9c7",
+    "bytes": 27449
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/resolved-config.json": {
+    "sha256": "08af20de4bae3fb700081b87d58dc86e8fd4f94af1025a90587f8b04139bd269",
+    "bytes": 2662
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/metrics.jsonl": {
+    "sha256": "245ee7b9e3713c130185e3a48d854f983a1ffb8ecaaa83815062774ec49d371d",
+    "bytes": 11890362
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/horizon-wsd-20261014-final-resplit/export.json": {
+    "sha256": "83a6e422fcd927fde317e5b229083f158e78e052b5aa2e917808c3719518ebb3",
+    "bytes": 162
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/summary.json": {
+    "sha256": "61d13ba4dd1473c6dcf103db2684b7780f2e485c8c32bec6f837cc6bcb313d88",
+    "bytes": 34483
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/resolved-config.json": {
+    "sha256": "b026005dfa221a1b2c84b99b352d1b7f5352c10e5d142cc717a843d6f83ecbd3",
+    "bytes": 2041
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/full-evaluation.json": {
+    "sha256": "248e2b848aa65df63b0b9c9f427f1c4b22a422a73006ef6424b780ea7ebad434",
+    "bytes": 2538
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/metrics.jsonl": {
+    "sha256": "5f7fa1642c796c656a69f3bfb0d6acad12b7007673ae2a2dfe4251c9655e6560",
+    "bytes": 18197058
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-final-2b/export.json": {
+    "sha256": "1135c5423a13ffef2a415839f357ef271a5529b752233b9cd54db0a8f8e63c16",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/summary.json": {
+    "sha256": "28b6e28830f1e2d21afdceb164c37a52eebbd1292499b2987f80ae48c5ee3830",
+    "bytes": 35314
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/resolved-config.json": {
+    "sha256": "afc6a67b6e9fa619d1f11125b95061e03ddaa03472f85b38fe59198043efc551",
+    "bytes": 2735
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/full-evaluation.json": {
+    "sha256": "e9e4f1ba1e2aef9ab2844aaf81a09418690476856608b11bf6a047a60c527dbd",
+    "bytes": 2562
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/metrics.jsonl": {
+    "sha256": "7b33ee485b2759fccce1133c3f01abb7e757fef9dc827767b16a28fc1bfc46c9",
+    "bytes": 18200591
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/init-recipe-20261014-followup-rh-resplit-2b/export.json": {
+    "sha256": "74d0798f5b16e30ed489c8f85fb160b70e1a6b27bad0c2b80367032404c923d3",
+    "bytes": 191
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/summary.json": {
+    "sha256": "d45ce9e550dd40300a8c86cb4e9f3664fdb896d553e6f05ad31e7d742d2ce2f9",
+    "bytes": 35164
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/resolved-config.json": {
+    "sha256": "472c91406af88e1c5b1dae23d1ddef68bb4ea0b83841221fb1cd5866092086ce",
+    "bytes": 2207
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/full-evaluation.json": {
+    "sha256": "83f32cd6151f4e1c5e07130672be1f6871b2ed23f4f628f571dde2f9e7ccdb30",
+    "bytes": 2530
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/metrics.jsonl": {
+    "sha256": "2079a40dac55e5bf3db45e1dbc8319678819bb5a17b570a7ca8e6b237a163e54",
+    "bytes": 8662005
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw-filtered-3b-20261015-raw/export.json": {
+    "sha256": "8b86b45d748aea139cd34b02bf96f49fa54cbd61deb5c24324148dfc9e7be0f6",
+    "bytes": 176
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/summary.json": {
+    "sha256": "290c1e20cadbd7c82950b17c5fc861a4d01abd260f00a79d324119c076e4e923",
+    "bytes": 35283
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/resolved-config.json": {
+    "sha256": "12bfcbdaccf91e2f7a7c9eee2515a47aea729959359a80e6131fb0da2552ec87",
+    "bytes": 2772
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/full-evaluation.json": {
+    "sha256": "08ef8a56a0a71da59755b1134eab100705851c3d1c2c512901c95fe88697a8a1",
+    "bytes": 2514
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/metrics.jsonl": {
+    "sha256": "7b3e632335f84013001c066fe8e92231515adbee42afca16aaecba8a2fda41b3",
+    "bytes": 8665641
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-20261015/export.json": {
+    "sha256": "f9685c5f7913fc789d8fbff5c9d5d8d3e9fe838070b7f14e282270200fd45c19",
+    "bytes": 167
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/summary.json": {
+    "sha256": "77a76fe1e500cc83683922b9cf7a40f64e8aa8f03d768114e6f606b571e5e72d",
+    "bytes": 35365
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/resolved-config.json": {
+    "sha256": "33c5b58b4b6d64e902347ea7ec4c90db04a2c62245e7e48df94450b2eaaf4a9e",
+    "bytes": 2818
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/full-evaluation.json": {
+    "sha256": "c138d6916285a87db113e086aa0439140750508d7e5e0e2f47c045fc2982755f",
+    "bytes": 2526
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/metrics.jsonl": {
+    "sha256": "66bdacf4d9f22dc2c77e835fe5aa333d6e0e562be075dd43bb114263d6b92a42",
+    "bytes": 8662944
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-sota-wsd20-20261015/export.json": {
+    "sha256": "94e96eb99809b19ad94facdb8af0cc0e4cee090b243f3661462dd857863dcd73",
+    "bytes": 173
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/summary.json": {
+    "sha256": "7bc39222479dfe870d6f21169a62b8ec92e737c432e1ddbecf94b22a4c1638ce",
+    "bytes": 35527
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/resolved-config.json": {
+    "sha256": "6d3fdb1e72f077f3bcb71c98b7d247cc626f2732b36053105162c65906823c23",
+    "bytes": 2834
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/full-evaluation.json": {
+    "sha256": "4c9559e8d3104fb40450420da9554b80f8d4e760afa03e6a38ed209e0303cb22",
+    "bytes": 2532
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/metrics.jsonl": {
+    "sha256": "4f363ea506c6cd479e44b93a37793384eade6eba367ae4d213195493ecebec02",
+    "bytes": 5629829
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-wsd40-20261016/export.json": {
+    "sha256": "8cfb6d777943ba88b75d31eea9150f4016c8348d6a565ae2e205aa5f7a4abae8",
+    "bytes": 173
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/summary.json": {
+    "sha256": "c66b7c64d5e0ea3c61217f18acf357c5356c003644c52be1e9d8aa0b598985f2",
+    "bytes": 35564
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/resolved-config.json": {
+    "sha256": "d9b5803737fb4e9d74f57228ebb03c8c52cbed7e2361af6e04ffd6705bc92f60",
+    "bytes": 2819
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/full-evaluation.json": {
+    "sha256": "5d6d90903f1e2d369e30ef204d08d47523760c146ac4320a91e83ea414e99a57",
+    "bytes": 2536
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/metrics.jsonl": {
+    "sha256": "14a0d697565e4d552558443358f7464b0d3fa083474ba9299fb929b8a2d1db97",
+    "bytes": 5692832
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw3b-bs64-stepwsd40-20261016/export.json": {
+    "sha256": "cf94ae59b595a572568f19f198dd6720c6921b105dc78f8ec325cfab8e8a2a57",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/summary.json": {
+    "sha256": "0748d023d903be31c3a59ace7a31ab1ef57e766c9ca819fb3605ecb56b0e6bd9",
+    "bytes": 35488
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/resolved-config.json": {
+    "sha256": "2ce020f50e5ee914981dfdf1e97c89071bb5a29d4b02cc4971346faa3123ac43",
+    "bytes": 2892
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/full-evaluation.json": {
+    "sha256": "ea5023e008559356a9b34a1d4d0c28a1c38daa511defaef4df451bca195df2e3",
+    "bytes": 2536
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/metrics.jsonl": {
+    "sha256": "88eeedc93b10a49337652b1898240adc839672f2d7e6f1a7e795c457da833248",
+    "bytes": 7483866
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-intradoc-normuon-20261017/export.json": {
+    "sha256": "d63fe6eafacc2d86568809446911949868a41ddc8e02de5c81899fa127893dad",
+    "bytes": 179
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/summary.json": {
+    "sha256": "7f269e8b8c33f5a390b0b096cca4e0c3b48d8e5e2aa47e2510a5f2544c1f4db4",
+    "bytes": 35635
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/resolved-config.json": {
+    "sha256": "ce855ea286c3c499a56d9a0a5ed07c9f5060130cd6710bb2e577d0adc6c38557",
+    "bytes": 2931
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/confirmation-evaluation.json": {
+    "sha256": "60795c95240d05775f140dbb31e96f1f7c3b95e4d2e3c897a07180993b5a80e3",
+    "bytes": 2640
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/metrics.jsonl": {
+    "sha256": "bd4ea7bc82ad7972b654c6b48f7fd06c76c007dca05eeccfa1eb6c4bfed626e7",
+    "bytes": 7482110
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-20261017/export.json": {
+    "sha256": "3f1b2ac6bbb9ba908c85b010bc657ff6d4c29f86d598ea2bff7f19d84890c469",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/summary.json": {
+    "sha256": "89175aefa7618886478eca9bf6c8cd5f0f019564e3ff8fbc6c46a623511ae052",
+    "bytes": 35568
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/resolved-config.json": {
+    "sha256": "248d020e32a07d5d42bfb158b87325486e8ebd0aeb6f901f18fef51362a72540",
+    "bytes": 2831
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/confirmation-evaluation.json": {
+    "sha256": "580a23eb00ec42f1e7854ace08ebc373ee5b6b8e295eebb13a0523854abcce7e",
+    "bytes": 2654
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/metrics.jsonl": {
+    "sha256": "b02b3478f5e9900bcb817c0b852433ce896a5093aaecbc302fd9865b4fa6eb9c",
+    "bytes": 7483061
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw4b-normuon-adam2x-step30-20261018/export.json": {
+    "sha256": "724b42d5879f82da821504720bb5e7fe28075be5e133bb438430b0e0c262dc7e",
+    "bytes": 184
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/summary.json": {
+    "sha256": "8c6483a22cc6c5cf667b294ad5487acc38cfffd43152243ef80d4d8882db216b",
+    "bytes": 35584
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/resolved-config.json": {
+    "sha256": "8a64ce7325074ff1b9e613e77f18a72f1bec8602e8b40690473de24bc65dc56b",
+    "bytes": 2855
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/confirmation-evaluation.json": {
+    "sha256": "2aecdb7e7f92f9a31c7e38ebe9b96aa9490dd928f088688153ff177e804761bb",
+    "bytes": 2640
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/metrics.jsonl": {
+    "sha256": "1081b8e0c8a2506a590f8a144e70fe84f4bae84bfb7481a808de0abae37c2bf9",
+    "bytes": 11230763
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/export.json": {
+    "sha256": "79e175165deaf4dd300d068eff5d22f65b6c8ad7afdbacd49893b75fa4ae3035",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd3b-hidden8-20261019-seed42/summary.json": {
+    "sha256": "b5fcf376041f51e78dc95e23dfe8e91d15257da9b1f46c465ee434aa28c709a0",
+    "bytes": 36965
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd3b-hidden8-20261019-seed42/resolved-config.json": {
+    "sha256": "8c6d6a8410ab831b58fdef2971c9b4f474508d7bd7fc135de0cd2d7becea4920",
+    "bytes": 3601
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd3b-hidden8-20261019-seed42/confirmation-evaluation.json": {
+    "sha256": "cb92fa1f304ed6d2765b3e1f1f94ede3ddc4e57b5983d7051fa024aacbffa9c2",
+    "bytes": 2632
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd3b-hidden8-20261019-seed42/metrics.jsonl": {
+    "sha256": "54acf774af6ee59c2579e364b91790dec38003627248764545a92bd7a8d95187",
+    "bytes": 6409544
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd3b-hidden8-20261019-seed42/export.json": {
+    "sha256": "346b2d7f33dce01540d4940e6af7b69ad97d6785e91ffd54e2e93a3c244c1299",
+    "bytes": 176
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/summary.json": {
+    "sha256": "3fc9330a856865e93b685c6f19fc45d38ea4f2b45ab14e24b2996443a0711fbc",
+    "bytes": 23720
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/resolved-config.json": {
+    "sha256": "f41f0419bd4769c4b5b55e61bc65c25c259d446162eab33cef9b546e57ea19cf",
+    "bytes": 3623
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/additional9k.json": {
+    "sha256": "7113982cb1eb548dda51401b545957b0d07e1fb5a919d7a67db84a77a8edc3f4",
+    "bytes": 834
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/combined10k.json": {
+    "sha256": "fc85db890fe6c777935868bc86f25696714bf37b01c72b837bfb18d1fbd4e37c",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/evaluations.json": {
+    "sha256": "7b77fd6369ae4fc06db22d430ea191eddd54359e163e92d4a397531dfb7401a1",
+    "bytes": 20704
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/metrics.jsonl": {
+    "sha256": "babd8b1ecf62be33568b475fa66e4ae06503c309bf4c272bf8ebc71bd02ad8a7",
+    "bytes": 1801065
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/export.json": {
+    "sha256": "2c69a691c11fa7be0c41e26c8dc50269e0c8e26661717b9ba530df9ea408b009",
+    "bytes": 151
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/summary.json": {
+    "sha256": "ba0b2afefbb6ef6ecea88b9b9792f094e926da469054b51208dd995c899a07cf",
+    "bytes": 27227
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/resolved-config.json": {
+    "sha256": "7d610167ddb0df136a1222bc940bf231304a30f5918490c094cc29cb9e0f5ebb",
+    "bytes": 5410
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/additional9k.json": {
+    "sha256": "0855e6ce3bf821a18368385c5754d3c848ec2d97172930ae5ce037dce2026774",
+    "bytes": 836
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/combined10k.json": {
+    "sha256": "b1ee0855141f7900473828a4f96379dc5bb9aa6073142d220f6a771e9ab3e63c",
+    "bytes": 180
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/evaluations.json": {
+    "sha256": "b2c82f880de24d3c76722b3aa3b8c414090a5ca324e11509076e9214dcdd9053",
+    "bytes": 90345
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/metrics.jsonl": {
+    "sha256": "0d05f1a5cc445a3873d5b85679efac5cedd3b49e9dbb3f162c944700979823e2",
+    "bytes": 2480513
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/export.json": {
+    "sha256": "ed1be16b371b242281184b22a84577d25af55e2cdde66edb80c3c34a488c0f20",
+    "bytes": 162
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/summary.json": {
+    "sha256": "cb7474c3ab4d835445bbcca536400805b2e47f90b686f535d9ec7489cc05bfc7",
+    "bytes": 25221
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/resolved-config.json": {
+    "sha256": "74d5683605e89b4d41a03c576ad2fdb76a3bb98008ae5bb33042d9fa720f0340",
+    "bytes": 4294
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/additional9k.json": {
+    "sha256": "f0f8e03c52e0334bb4b53e01e413119a8b698ae048b312325794ae239f6ac770",
+    "bytes": 835
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/combined10k.json": {
+    "sha256": "a90d1a83408b6bace6c086eabe32bfd9650fcfa1f6f4be0c237af078e7453b20",
+    "bytes": 178
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/evaluations.json": {
+    "sha256": "4de9cc50ee0781f51781df72b74a2cec7f751685dd7b3a9dbf3cb9d8ff2aebff",
+    "bytes": 84465
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/metrics.jsonl": {
+    "sha256": "cb3c740427f56d00d10c1ec7306be06edaedf87c54f6c12e693de0729ac6c3a2",
+    "bytes": 830135
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/export.json": {
+    "sha256": "fe4b3fd2fbee1df96aa46ea67a2c0821294c22dcd4b678b8e0e0922746c172b2",
+    "bytes": 181
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/summary.json": {
+    "sha256": "709b49aa47708ba796ef89270e1b76bc46f271b67c75206bcb19277c5132d394",
+    "bytes": 25248
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/resolved-config.json": {
+    "sha256": "e8d61db1e92732bbd924490cde263d070196c90ef49ab86a5ea41f884bcf4695",
+    "bytes": 4300
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/additional9k.json": {
+    "sha256": "8035d918b91785fe9d3c9a4fe94f2cd3214cff8344a56fc6ec871d39cd1498f7",
+    "bytes": 836
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/combined10k.json": {
+    "sha256": "39688360fcea2c0b2feba9584e8d36bbad526064f6c739b44b0881cb14ead915",
+    "bytes": 177
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/evaluations.json": {
+    "sha256": "851697cf7939770c3c12c2d3b0af9c56590eeabdc5f475231dc9cfdbe9aa39b2",
+    "bytes": 84498
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/metrics.jsonl": {
+    "sha256": "b38edc922aeee8e612b158a7b08f770144abbaafc3024d20bf1190f2a5c0a82b",
+    "bytes": 830380
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/export.json": {
+    "sha256": "1f3feb15b801aa484d26ed64c2cb02325e9eccf19650cfd9f1bc927e3f0dac6a",
+    "bytes": 183
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/summary.json": {
+    "sha256": "82385ac21fc4de9bc0cc73fe614b93a68ffe16c7c1389bfe9a257b94576f88a7",
+    "bytes": 24575
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/resolved-config.json": {
+    "sha256": "7248ff5822f75981883cb4a4f684bee89639c989812904b0fb09512cb944c505",
+    "bytes": 4298
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/additional9k.json": {
+    "sha256": "8be863b58e62375e00e0e6cfe63b5f424b0b3e1db82037fa18e732cc70696b89",
+    "bytes": 832
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/combined10k.json": {
+    "sha256": "a3d80e93ff9d0d7483a2ed29ca548a4c6ea65fd1de7861c98350d1e8632a2752",
+    "bytes": 178
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/evaluations.json": {
+    "sha256": "6a3e54fd688717383fd29510e8abaed30c85671434011959f76d39a525dcf5df",
+    "bytes": 84423
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/metrics.jsonl": {
+    "sha256": "8b24ea103bc51c79c2c4554ef7af0e4619d03fc72a9b22c157de5b34f68069a4",
+    "bytes": 707063
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/export.json": {
+    "sha256": "bc923cdffc29a2ed179005ca41375ba434fb3dca41a6eff56a678dd3fedc4884",
+    "bytes": 161
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/be60p20-lrscaled-2b-20261010/results.json": {
+    "sha256": "c9f4acfc206d11b7c6a3c76e9083a479d1baf835e9db855b6124134b3cd8af48",
+    "bytes": 3245
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-20261017/results.json": {
+    "sha256": "9e42bc524c3e9873d62c35cd979c14523816ff02ce6600b50c3cbf7deb6bcfb0",
+    "bytes": 4029
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/raw4b-normuon-adam2x-step30-20261018/results.json": {
+    "sha256": "a467e5627088c847b0cd25182c8c7dfdb5b12fbfc668d5c20783611a58ab81d8",
+    "bytes": 4596
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/raw6b-normuon-adam2x-20261018/results.json": {
+    "sha256": "660fa5b3a94aee4a571e7930b993323ea3aeda5630ca72974365db8ce46f2002",
+    "bytes": 4629
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/optimizer-sweep/optimizer-scheduler-raw-20261008/summary.json": {
+    "sha256": "9f64a3e04dee60e97b78abe7e618182d85407ba8859b7b4693bda0de3430c348",
+    "bytes": 201472
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/init-recipe-20261014/results/ranking.json": {
+    "sha256": "58a985e6f028abe1ce523b1e1013b53c1333fa1811c0e9c64eda5276bc7a1f60",
+    "bytes": 65068
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261016/results.json": {
+    "sha256": "a18b558c01857adc35071bc75acb0dd739ce5b873d468cb04b9d56f0b38af5cb",
+    "bytes": 103238
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/ppl-next-20261017/replication.json": {
+    "sha256": "e134609fd28837812cd60ff1a14834e719e0f22fa67295c473737896f3f6f405",
+    "bytes": 42915
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/critical-batch.jsonl": {
+    "sha256": "6021a15d6d46d07aa03b0865305e186b1002190af5f4b677204645ca0b1eb357",
+    "bytes": 433310
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c0-shadow-startup-replacement2/critical-batch.jsonl": {
+    "sha256": "37f39cd1abef75d59dc3947fe82149da2ceb265e5aa87518e059ee3a3ee225a8",
+    "bytes": 71127
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c1-cbs-half-startup-replacement2/critical-batch.jsonl": {
+    "sha256": "8173ec9f3732057b9610723fc3cb95f13e1214ddbc35bd53c6d651c969b8d76d",
+    "bytes": 71272
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/critical-batch-20261020-c2-cbs-one/critical-batch.jsonl": {
+    "sha256": "f0023a3828abb436bd8da056d3b9a7084cba7548fbf1f46719dc28e6689dc25f",
+    "bytes": 71246
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/lr-transfer-horizons-20261015/calibration-result.json": {
+    "sha256": "61bee230efaa6e02154b6554efaad7f27db25174b390a66a3c36cf6b9769cd20",
+    "bytes": 10209
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/performance-ab-20261010/results.json": {
+    "sha256": "6d6f87a51aefee18b19d0948903187f1168c3a5bc46fd5df7e59443c735168e2",
+    "bytes": 27432
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/configs/dataset.json": {
+    "sha256": "be5b1cf548f464f9a54b22139a4b08a2b65911a5d852f76dbad13ed50dddaa49",
+    "bytes": 846
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/batch-normuon-1b-20261016/results.json": {
+    "sha256": "89befcbc41203f48306e323422ea0b299b4d8e0f137d1ee5d80a44107fa870ef",
+    "bytes": 93689
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/methods-parallel-20261019/tracking/status.json": {
+    "sha256": "0717b7cc3a2561a228af85d9cad1a560a267cdf5b07bef2039ebdea6ce9633ac",
+    "bytes": 58072
+  },
+  "/home/asciibase64/Llama-3.2-1B-training/experiments/horizon-wsd-20261014/results/resplit-lr-full.json": {
+    "sha256": "000ab5eb30906d080582c9fda6fd8f3cf4b881ddd32227174ff3dc0c80740ade",
+    "bytes": 1267
+  },
+  "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/decay-start-phase1.json": {
+    "sha256": "9b290a1272a57da6192071b9056202194ae1b595789406c2ba5faf181b2dc41f",
+    "bytes": 1997
+  }
+}

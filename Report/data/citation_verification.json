@@ -1,0 +1,101 @@
+{
+  "adamw": {
+    "arxiv": "1711.05101",
+    "doi": "10.48550/arxiv.1711.05101",
+    "title": "Decoupled Weight Decay Regularization",
+    "bibtex_url": "https://arxiv.org/bibtex/1711.05101",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.1711.05101",
+    "bibtex_sha256": "6d14d48a13a014b150a643f2b93103e5622084865862d7065fcf2c809488fc03",
+    "verified_utc": "2026-10-20T17:18:49.232582+00:00"
+  },
+  "muon": {
+    "arxiv": "2502.16982",
+    "doi": "10.48550/arxiv.2502.16982",
+    "title": "Muon is Scalable for LLM Training",
+    "bibtex_url": "https://arxiv.org/bibtex/2502.16982",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2502.16982",
+    "bibtex_sha256": "819db5f3c866f715a01584e20c0b43bf3ad09a2530d9d317c74ddece0179712f",
+    "verified_utc": "2026-10-20T17:18:49.246286+00:00"
+  },
+  "wsd": {
+    "arxiv": "2410.05192",
+    "doi": "10.48550/arxiv.2410.05192",
+    "title": "Understanding Warmup-Stable-Decay Learning Rates: A River Valley Loss Landscape Perspective",
+    "bibtex_url": "https://arxiv.org/bibtex/2410.05192",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2410.05192",
+    "bibtex_sha256": "3f121df6e4ed25534fc3b45305abd1003b55252c7ed13afcef91ce287aa45fd6",
+    "verified_utc": "2026-10-20T17:18:49.377227+00:00"
+  },
+  "lrhorizon": {
+    "arxiv": "2409.19913",
+    "doi": "10.48550/arxiv.2409.19913",
+    "title": "Scaling Optimal LR Across Token Horizons",
+    "bibtex_url": "https://arxiv.org/bibtex/2409.19913",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2409.19913",
+    "bibtex_sha256": "1e4657cc138e49ce045f6646076360ec01ca10662a5f7f5d3b2362559f45755b",
+    "verified_utc": "2026-10-20T17:18:50.742973+00:00"
+  },
+  "gns": {
+    "arxiv": "1812.06162",
+    "doi": "10.48550/arxiv.1812.06162",
+    "title": "An Empirical Model of Large-Batch Training",
+    "bibtex_url": "https://arxiv.org/bibtex/1812.06162",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.1812.06162",
+    "bibtex_sha256": "90ab0508af3cd853c2e117c60eb54875fbcf08cde215d5fe1123966747ea3aa4",
+    "verified_utc": "2026-10-20T17:18:50.703683+00:00"
+  },
+  "distillation": {
+    "arxiv": "1503.02531",
+    "doi": "10.48550/arxiv.1503.02531",
+    "title": "Distilling the Knowledge in a Neural Network",
+    "bibtex_url": "https://arxiv.org/bibtex/1503.02531",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.1503.02531",
+    "bibtex_sha256": "6da8bd4bf22f7d6f24e17727b491ce8d9f6bd4274bfef6769257658c3be44c1d",
+    "verified_utc": "2026-10-20T17:18:50.737443+00:00"
+  },
+  "dclm": {
+    "arxiv": "2406.11794",
+    "doi": "10.48550/arxiv.2406.11794",
+    "title": "DataComp-LM: In search of the next generation of training sets for language models",
+    "bibtex_url": "https://arxiv.org/bibtex/2406.11794",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2406.11794",
+    "bibtex_sha256": "55518bc85cbe07eb84c9d4b62891e3bb3afc6ca34e22452e934df65bc690de5b",
+    "verified_utc": "2026-10-20T17:18:52.166870+00:00"
+  },
+  "soap": {
+    "arxiv": "2409.11321",
+    "doi": "10.48550/arxiv.2409.11321",
+    "title": "SOAP: Improving and Stabilizing Shampoo using Adam",
+    "bibtex_url": "https://arxiv.org/bibtex/2409.11321",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2409.11321",
+    "bibtex_sha256": "f56bb0f93ee12899a16d4a3111ee8e9d60aac874938f108761622a4a45568c1b",
+    "verified_utc": "2026-10-20T17:18:52.243145+00:00"
+  },
+  "cce": {
+    "arxiv": "2411.09009",
+    "doi": "10.48550/arxiv.2411.09009",
+    "title": "Cut Your Losses in Large-Vocabulary Language Models",
+    "bibtex_url": "https://arxiv.org/bibtex/2411.09009",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2411.09009",
+    "bibtex_sha256": "30ab123ad7a71da5b40f6f391829f76f6c4c47780190a0d118067203f5531356",
+    "verified_utc": "2026-10-20T17:18:52.193504+00:00"
+  },
+  "adamuon": {
+    "arxiv": "2507.11005",
+    "doi": "10.48550/arxiv.2507.11005",
+    "title": "AdaMuon: Adaptive Muon Optimizer",
+    "bibtex_url": "https://arxiv.org/bibtex/2507.11005",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2507.11005",
+    "bibtex_sha256": "c959e9656de5c4b76a1a7ed7fd5dc78014f6a1f2e2d35d17388930c34110dbe1",
+    "verified_utc": "2026-10-20T17:18:53.732728+00:00"
+  },
+  "dion3": {
+    "arxiv": "2608.11612",
+    "doi": "10.48550/arxiv.2608.11612",
+    "title": "Dion3: Full-Stack Orthogonal Updates",
+    "bibtex_url": "https://arxiv.org/bibtex/2608.11612",
+    "verification_url": "https://api.datacite.org/dois/10.48550/arXiv.2608.11612",
+    "bibtex_sha256": "243028f547f86b11f3827ebcaeb182c1ce6c5c4691c8349877a3ddcae6cd9e6e",
+    "verified_utc": "2026-10-20T17:18:53.669632+00:00"
+  }
+}

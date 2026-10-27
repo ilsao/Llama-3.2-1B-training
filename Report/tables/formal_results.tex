@@ -1,0 +1,33 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Registry of all 20 formal identities. PPL columns retain their distinct evaluation scopes; lower is better. B denotes billions of nonpadding student input tokens.}
+\label{tab:formal}
+\begin{tabular}{rlrrrrr}
+\toprule
+ID & Recipe & Inputs (B) & 1k PPL & 10k PPL & 50k PPL & H200-h \\
+\midrule
+1 & AdamW baseline & 1.160 & 25.0172 & -- & 25.1114 & 12.81 \\
+2 & Raw Muon + continuation & 1.798 & 20.9399 & -- & -- & 21.80 \\
+3 & Filtered Muon & 2.000 & 26.2214 & -- & 26.1433 & 24.12 \\
+4 & BE60P20 + LR scaling & 2.000 & 17.7476 & -- & -- & 22.86 \\
+5 & WSD standard & 2.000 & 17.2432 & -- & 17.2127 & 23.58 \\
+6 & WSD resplit identity & 2.000 & 21.3847 & -- & -- & 23.54 \\
+7 & Initialization recipe & 2.000 & 16.8864 & -- & 16.8542 & 23.32 \\
+8 & Residual-half + resplit & 2.000 & 16.6517 & -- & 16.6065 & 26.30 \\
+9 & Raw 3B reference & 3.000 & 15.5368 & -- & 15.5799 & 34.92 \\
+10 & 3B selected recipe & 3.000 & 15.2239 & -- & 15.2777 & 34.71 \\
+11 & 3B WSD20 & 3.000 & 15.8347 & -- & 15.9123 & 34.58 \\
+12 & 3B batch + token40 & 3.000 & 15.2132 & -- & 15.2117 & 31.95 \\
+13 & 3B batch + update40 & 3.000 & 15.4107 & -- & 15.3713 & 31.75 \\
+14 & 4B intradoc + NorMuon & 4.000 & 13.8604 & -- & 13.8380 & 42.23 \\
+15 & 4B AdamW LR $2\times$ & 4.000 & 13.6513 & 13.8505 & -- & 42.11 \\
+16 & 4B update-tail30 & 4.000 & 13.7769 & 13.9818 & -- & 45.33 \\
+17 & 6B non-KD & 6.000 & 12.7739 & 12.9078 & -- & 64.71 \\
+18 & 3B KD, 8+8 GPUs & 3.000 & 13.7320 & 13.9469 & -- & 77.67 \\
+19 & 6B R5 KD & 6.000 & 12.2678 & 12.3989 & -- & 64.71 \\
+20 & 6B C2 + early decay & 6.000 & 12.3953 & 12.5380 & -- & 65.01 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{minipage}{\linewidth}\footnotesize Inputs refer to the exported checkpoint; all processed inputs remain charged. ID 1 processed 1.166934016B but exported the earlier best checkpoint at 1.159725056B. ID 2\textquotesingle s stored 50k result belongs to step 8500, not its final export at step 13717, and is omitted here. ID 6 includes checkpoint forks. ID 18 includes both teacher and student allocations. Missing scopes were not measured or not checkpoint-aligned.\end{minipage}
+\end{table}

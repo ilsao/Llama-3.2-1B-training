@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "all 20 formal identities are preserved",
+      "passed": true
+    },
+    {
+      "check": "three final6B student endpoints match",
+      "passed": true
+    },
+    {
+      "check": "R5 is better than nonKD on the same10k scope",
+      "passed": true
+    },
+    {
+      "check": "C2 is worse than R5 despite fewer updates",
+      "passed": true
+    },
+    {
+      "check": "C2 does not reduce allocated cost",
+      "passed": true
+    },
+    {
+      "check": "old Muon50k checkpoint is explicitly unmatched",
+      "passed": true
+    },
+    {
+      "check": "the authorized earlyMuon continuation remains explicit",
+      "passed": true
+    },
+    {
+      "check": "early AdamW export differs from final processed count",
+      "passed": true
+    },
+    {
+      "check": "final6B full50k scores are absent",
+      "passed": true
+    },
+    {
+      "check": "both finalKD exports passed reload checks",
+      "passed": true
+    },
+    {
+      "check": "formal15 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "formal16 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "formal17 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "formal18 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "formal19 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "formal20 combines NLL with valid-token weights",
+      "passed": true
+    },
+    {
+      "check": "every allocation is independently Slurm verified",
+      "passed": true
+    },
+    {
+      "check": "allocation IDs are unique",
+      "passed": true
+    },
+    {
+      "check": "all-inclusive allocated hours agree with CSV",
+      "passed": true
+    },
+    {
+      "check": "decay is bound to exact input tokens",
+      "passed": true
+    },
+    {
+      "check": "no manuscript TODOs or citation placeholders",
+      "passed": true
+    },
+    {
+      "check": "all14 planned core and supplementary figures exist",
+      "passed": true
+    },
+    {
+      "check": "every manuscript citation has an arXiv/DataCite receipt",
+      "passed": true
+    },
+    {
+      "check": "report style is unchanged",
+      "passed": true
+    },
+    {
+      "check": "no unresolved citations or cross references",
+      "passed": true
+    },
+    {
+      "check": "no LaTeX overfull boxes",
+      "passed": true
+    },
+    {
+      "check": "compiled PDF contains complete report and appendices",
+      "passed": true
+    },
+    {
+      "check": "no blank PDF pages",
+      "passed": true
+    }
+  ],
+  "pdf_pages": 24,
+  "pdf_bytes": 734323,
+  "figure_count": 14,
+  "verified_citations": 11
+}

@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Method exploration with the later NorMuon baseline. Only complete matched 1B endpoints receive a combined-10k PPL.}
+\label{tab:methods}
+\begin{tabular}{llrrr}
+\toprule
+Method & Outcome & Inputs (B) & 10k PPL & H200-h \\
+\midrule
+NorMuon reference & Historical & 1.000 & 18.9156 & 10.727 \\
+Dion3 full & Completed & 1.000 & 19.1512 & 11.422 \\
+Dion3 fraction 0.25 & Cancelled & 0.681 & -- & 7.102 \\
+AdaMuon & Completed & 1.000 & 19.7128 & 11.136 \\
+SOAP & Cancelled & 0.161 & -- & 9.578 \\
+Initial local teacher & Cancelled & 0.408 & -- & 8.784 \\
+Schedule-free feedback & Cancelled & 0.769 & -- & 8.787 \\
+Weight-average observer & Cancelled & 0.781 & -- & 8.776 \\
+CCE exact & Completed & 1.000 & 18.9105 & 13.233 \\
+Official-teacher pipeline & Failed & 0.784 & -- & 13.411 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{minipage}{\linewidth}\footnotesize N0 is a historical control already charged elsewhere; it is not charged a second time to this campaign. Early stops and implementation failures do not establish an endpoint quality ranking or the theoretical failure of a method.\end{minipage}
+\end{table}

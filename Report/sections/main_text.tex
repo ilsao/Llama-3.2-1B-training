@@ -1,0 +1,277 @@
+\section{Introduction}
+\label{sec:introduction}
+
+This report documents how a randomly initialized Llama 3.2 1B student was improved through successive experiments on \texttt{allenai/dolma3\_mix-150B-1025}. The architecture and 8192-token training context were fixed, while the optimizer, initialization, data selection, learning-rate schedule, batch policy, document attention mask, and supervision were investigated. The study began with an AdamW baseline and ended with full-vocabulary online knowledge distillation (KD). Its contribution is an auditable account of the experimental decisions and their evidence, rather than a claim that the final recipe is a new optimizer or a universally optimal training configuration.
+
+Three questions organize the investigation. First, which interventions reduce held-out negative log-likelihood (NLL) at a matched input-token endpoint? Second, which implementation changes improve useful training throughput after accounting for startup, evaluation, saving, and failure costs? Third, how reliably do short experiments inform decisions at longer training horizons? These questions require separate measurements: lower training loss, fewer optimizer updates, and faster kernels do not by themselves establish better held-out quality or lower allocation cost.
+
+The strongest verified 6B-token result is the R5 KD recipe: combined-10k perplexity (PPL) of 12.3989, compared with 12.9078 for the preceding non-KD recipe at the same 6,000,082,944 student input tokens. The relative PPL reduction is \KDImprovement\%, and the complete logical-run costs are 64.711 and 64.707 H200-hours, respectively. A later adaptive-batch plus early-decay candidate completes fewer updates but reaches a worse 10k PPL of 12.5380 at 65.009 H200-hours. This negative outcome makes the distinction between update efficiency and useful training efficiency concrete.
+
+\Needspace{6\baselineskip}
+The report makes three contributions:
+\begin{itemize}
+  \item A reproducible progression from baseline construction to optimizer, schedule, initialization, data, and attention experiments, retaining the observations that motivated each subsequent decision.
+  \item Controlled comparisons where they exist, alongside an explicit separation of cross-budget recipe comparisons, historical controls, shared-checkpoint branches, and incomplete experiments.
+  \item An end-to-end accounting of 20 formal identities and 327 allocations, including failures, preprocessing, teacher computation, and evaluation provenance.
+\end{itemize}
+
+Figure~\ref{fig:history} summarizes the progression. Every student originates from random initialization; the report explicitly identifies later checkpoint continuations and forks. The KD teacher, in contrast, is an external pretrained model. Thus, ``from scratch'' describes the student's origin, not the absence of pretrained supervision in every experiment.
+
+\reportfigure{history}{fig:history}{Experimental progression and decision points. Calendar ranges overlap because some studies ran concurrently. Horizontal arrows indicate recipe influence, not necessarily checkpoint loading. Dashed branches record decisions to recalibrate, stop, or retain a method. The complete formal registry appears in Appendix~\ref{app:registry}.}
+
+\section{Experimental Setup and Evaluation Protocol}
+\label{sec:setup}
+
+\subsection{Model, initialization, and hardware}
+
+The student uses the official Llama 3.2 1B architecture and tokenizer configuration, pinned to revision \texttt{4e20de362430cd3b72f300e6b0f18e50e7166e08}. The instantiated model has 1,235,814,400 trainable parameters, 16 transformer layers, hidden dimension 2048, MLP dimension 8192, 32 query heads, 8 key/value heads, and a vocabulary of 128,256 tokens. Its input embedding and output head share weights. The architecture's positional capacity of 131,072 is distinct from the training sequence length, which remains 8192 throughout. The architecture and tokenizer are reused; the student's pretrained weights are not loaded for initialization.
+
+Most comparisons use seed 42; selected confirmation experiments use seed 43. The later residual-half initializer scales randomly initialized attention output and MLP down-projection matrices by one half. It changes initialization, not architecture or parameter count. The infrastructure is predominantly one node with eight H200 GPUs and eight CPUs, BF16 model computation, and distributed data parallelism with one rank per GPU. The explicitly scoped hidden-state KD experiment uses two eight-GPU allocations, one for each role. Full resolved configurations distinguish exceptions and implementation revisions; Table~\ref{tab:setup} summarizes the common protocol and late recipe.
+
+\input{tables/setup}
+
+\subsection{Document split, packing, and held-out scopes}
+
+The dataset revision is \texttt{afa92bfb22366821c5e6cd427cdd036b34b713ef}. The canonical document split contains 104,020,922 documents. A global map-style shuffle with seed 42 is applied before filtering, tokenization, or packing. The last 50,000 shuffled documents are reserved, leaving 103,970,922 training documents. Filtering never changes membership in this reserved set. Figure~\ref{fig:data} shows how the preparations share this split.
+
+Training documents receive explicit BOS and EOS tokens and are packed into 8192-token sequences. Document spans are retained for the later intradoc attention implementation. Structural BOS labels and padding are ignored in the prediction loss, while actual BOS/EOS inputs still count toward the input budget. Padding uses the EOS identifier with its attention mask set to zero; a real EOS is not treated as padding. Evaluation documents are tokenized independently. Long evaluation documents use windows of length 8192 and stride 8191, so that each within-document prediction is scored once without crossing document boundaries.
+
+Three scopes must remain distinct. The fixed first 1,000 reserved documents provide development curves. The next 9,000 documents provide additional confirmation; summing their NLL and valid predictions with the first 1,000 yields the combined-10k result. Some earlier final candidates also have full-50k evaluations. These sets overlap and were reused during development; the additional 9k are not an untouched test set. Missing full-50k results are not estimated from 1k or 10k values.
+
+\reportfigure{data_protocol}{fig:data}{Data preparation and evaluation provenance. The split precedes every training-only transformation. Fixed 1k and additional 9k are disjoint subsets of the same reserved 50k; their union is the combined 10k evaluation. The remaining 40k are included in full 50k evaluations when those are recorded. Evaluation documents never enter training packing.}
+
+\subsection{Metrics, token clocks, and comparison rules}
+
+For a held-out set with valid next-token targets $\mathcal{V}$, we report
+\begin{equation}
+  \overline{\ell}=\frac{\sum_{i\in\mathcal{V}}-\log p_\theta(y_i\mid x_{<i})}{|\mathcal{V}|},
+  \qquad \mathrm{PPL}=\exp(\overline{\ell}).
+\end{equation}
+We sum NLL and valid prediction counts across batches and ranks; we do not average batch perplexities. The late fixed 1k and additional 9k contain 1,479,302 and 13,666,812 valid predictions, respectively. Their combined denominator is 15,146,114. The complete 50k evaluation contains 76,930,208 valid predictions under this preparation.
+
+Student input tokens count all nonpadding input positions actually processed across ranks and microbatches, including repeats, skipped optimizer updates, and authorized continuations. Valid prediction tokens are a different quantity because of ignored labels and the causal shift. Evaluation tokens are separate. KD maintains a second journal for teacher inputs, including production ahead of the student. Logs retain optimizer-update steps, but token-aligned comparisons use cumulative input counts rather than W\&B's internal logging-record index.
+
+Training logs use project \texttt{lab5-training-llama}. The loss is a valid-target-weighted average over the preceding logging interval; KD also logs CE and KL separately. The gradient norm is global and measured before clipping. The late recipe's primary logged LR is auxiliary AdamW, with matrix LR logged separately. Throughput uses the current update's actual nonpadding inputs and measured duration, excluding evaluation; R5 additionally separates compute-only timing from the exposed data/journal path. Run links are preserved in the registry. Evaluation cadence also matters for inclusive cost: R5 evaluates at most every 2,800 updates plus token events, while the later C2 run uses at most 570 updates plus common token milestones and scheduler events.
+
+We use three levels of evidence. A matched-token comparison holds the relevant data prefix and evaluation scope fixed; it may still be a combined recipe intervention if multiple settings change. A matched-compute claim additionally requires comparable total allocation cost. A cross-budget milestone comparison describes the practical progression but cannot isolate a single method's effect. Historical runtime measurements are not substituted for a simultaneous speed comparison. Likewise, a short numerical parity test does not establish full-horizon quality noninferiority.
+
+\subsection{Checkpoint alignment and resource scope}
+
+Evaluation belongs to a specific checkpoint, not merely to a run name. The first AdamW run processed 1,166,934,016 inputs but exported its earlier best checkpoint at 1,159,725,056 inputs. The early raw Muon run's stored full 50k PPL of 24.4493 belongs to step 8500; its later exported step 13717 has fixed 1k PPL 20.9399 and no aligned stored full 50k result. We therefore omit the older 50k value from the final-export comparison table. This avoids presenting an improvement that combines different checkpoints or evaluation scopes.
+
+Allocation cost is GPU count times allocation duration, including startup, evaluation, checkpointing, export, and idle time. The original three-formal-run, nominal 6B, and 64-H200-hour limits were subsequently expanded by explicit experiment-specific authorizations. The history therefore contains 20 formal identities, rounded whole-window endpoints, and some runs above 64H. These outcomes should not be described as satisfying the original unmodified assignment budget. The report's accounting snapshot preserves every recorded job and verifies it against Slurm without changing the source ledgers.
+
+\section{Data Preparation and Early Baselines}
+\label{sec:baseline}
+
+\subsection{Establishing a trustworthy data path}
+
+The first experimental question was operational: could training begin on the intended document split with reproducible membership and masking? The raw corpus consisted of 6,081 canonical compressed shards. A read-only audit found one damaged local compressed stream; the other 6,080 decoded and matched their historical manifests. The repair used an isolated copy authenticated against the pinned upstream content, preserving the damaged blob and previous preparation identities. This episode showed why a locally recorded download checksum was insufficient evidence of upstream integrity.
+
+The verified canonical split was reused by an append-only raw training preparation, \texttt{dolma-raw-baseline-20261008}. This allowed the AdamW baseline to proceed without waiting for the longer quality-scoring pipeline. Ordered, bounded preprocessing workers and later reader/prefetch fixes preserved the published data prefix and document order. The relevant lesson is procedural: producing the right number of tokens does not establish the right document membership. Split, ordering, tokenizer, and packing receipts had to be checked together before optimization results were interpretable.
+
+\subsection{AdamW first, then an optimizer--scheduler screen}
+
+AdamW provided the initial baseline, following the separation of gradient updates and weight decay proposed by \citet{adamw}. It used a peak LR of $3\times 10^{-4}$, betas$(0.9,0.95)$, weight decay 0.1, global gradient clip 1.0, microbatch 1, and global batch 16 on eight GPUs. Its exported best checkpoint obtained fixed 1k PPL 25.0172 and full 50k PPL 25.1114 at a complete logical-run cost of 12.807H. This baseline did not demonstrate the initial PPL$\leq 20$ target. Later development results must not be used to retrospectively claim that the original deadline target was met.
+
+The next question was whether optimizer direction and schedule shape were limiting the early learning trajectory. An 18-candidate grid compared AdamW LRs $\{3,6,12\}\times 10^{-4}$ and Muon LRs$\{0.02,0.04,0.08\}$ under cosine, linear, and WSD schedules. The Muon candidates retained an auxiliary AdamW group and the sweep's prescribed LR--weight-decay treatment. Complete short-stage endpoints were aligned at 104,857,600 input tokens. Muon LR 0.02 with WSD had the best endpoint NLL,4.01540, or PPL 55.4453, among this grid. The purpose was to select a starting recipe, not to establish optimizer dominance across horizons or equally tuned future variants. Muon's matrix-orthogonalization motivation is described by \citet{muon}.
+
+Figure~\ref{fig:sweep} exposes the full grid rather than reporting only the winner. This mattered because the numerical LR ranges are optimizer-specific and a raw comparison of equal LR values would be meaningless. The selected raw Muon run, including its explicitly authorized continuation, later reached fixed 1k PPL 20.9399 at 1,797,914,624 processed inputs. Its 21.802H cost retains both allocations.
+
+\reportfigure{initial_sweep}{fig:sweep}{Initial optimizer--scheduler screen at 104,857,600 inputs and the fixed 1k evaluation. Color represents mean NLL; cell labels show PPL. AdamW and Muon have different LR grids, and the latter includes auxiliary AdamW. Every cell comes from a complete measured short-stage endpoint; no missing cell is imputed. This screen selects a recipe for further study, not a universal optimizer ordering.}
+
+\subsection{Why the filtered route was not promoted}
+
+The filtered preparation used the pinned DCLM classifier implementation and a global document-count ranking of eligible Common Crawl documents, retaining the top 10\%; eligible documents from other sources were retained. Exact deduplication, scoring, and selection affected training only. This is a particular filter and source mixture, inspired by the broader data-selection literature \citep{dclm}, rather than a reproduction of all DCLM training conditions.
+
+The formal filtered 2B run reached full 50k PPL 26.1433. Its poor result made that recipe unattractive, but a direct comparison with the raw Muon continuation is confounded by horizon and schedule. A later matched 388,759,552-input recipe screen provided more specific local evidence: the raw short baseline had fixed 1k PPL 30.1530, while the filtered candidate had 34.6743. The decision was to continue with raw data, while retaining filtering as an unresolved interaction with source composition and token availability. The planned filtered arm of the later 3B raw/filtered study was cancelled; it is not reported as a completed paired 3B experiment.
+
+\section{Improving Training Throughput}
+\label{sec:systems}
+
+The systems question was whether a fixed token budget could be processed with less useful training time, leaving more room for experiments and evaluation. The changes included ordered reader/prefetch improvements, asynchronous transfer, model and Muon-core compilation, and microbatch/accumulation experiments. These modifications were checked against data order, loss masks, gradient semantics, parameter coverage, and export loading before they informed longer runs.
+
+A controlled October 10 A/B benchmark measured 100 updates, or 13,107,200 input tokens, on the same node. The training-interval input throughput increased from 197,109 to 262,408 tokens/s, a 1.331$\times$ ratio. Median update time fell from 0.6524s to 0.4985s. Peak allocated memory decreased from 32.85GiB to 30.71GiB, while peak reserved memory increased from 38.62GiB to 44.92GiB. Figure~\ref{fig:performance} reports both memory quantities rather than selecting only the favorable one.
+
+These measurements do not establish an allocation-level 1.331$\times$ speedup. The optimized job had a larger cold-start compilation cost: its full allocation lasted 512s, compared with 214s for the original. The stored break-even estimate was approximately 2,114 updates; it was a projection, not a separate end-to-end measurement at every horizon. Endpoint PPLs were 912.8527 and 912.2017 after this very short test. Their numerical proximity supports a limited implementation check but cannot prove long-run convergence equivalence.
+
+The resulting decision was to amortize compilation where the horizon justified it and to keep interval timing separate from total allocation accounting. Later KD changes were validated on their own execution path. In particular, the R5 implementation combined local compilation, microbatch 2, disabled activation checkpointing, whole-matrix NorMuon ownership, and fused exact full-vocabulary CE/KL. Its resource behavior cannot be attributed to the earlier A/B measurement alone.
+
+\reportfigure{performance}{fig:performance}{Controlled short A/B performance experiment on one node. A is the original implementation and B the integrated optimization. Throughput measures the 100-update training interval, including its exposed data path, and excludes cold compilation and finalization; it is not total-allocation throughput. Peak reserved memory rises even though peak allocated memory falls. These short measurements do not establish full-horizon quality equivalence.}
+
+\section{Learning-Rate Schedules and Horizon Transfer}
+\label{sec:schedules}
+
+\subsection{Cooldown shape, phase splitting, and reheating}
+
+Once the optimizer direction was selected, the next hypothesis was that the endpoint depended strongly on how the stable trajectory was cooled. WSD separates warmup, a stable region, and decay; its motivation and horizon flexibility are studied by \citet{wsd}. The local experiments investigated the tail fraction, an intermediate plateau, a final decay to zero, and the second phase's peak LR. The BE 60P20 family used a substantial cooldown and a 20\%-of-peak plateau. A2B run that scaled peak LRs with token horizon reached fixed 1k PPL 17.7476 on October 10. This was a subset result, not a newly measured full 50k value.
+
+The October 14 campaign then tuned LR, clipping, and tail length using shared-prefix branches and complete endpoints. These branches inherit optimizer, RNG, and data-cursor state; they are not independent fresh seeds. The standard 2B final recipe achieved full 50k PPL 17.2127. Reheating and resplitting were not automatically beneficial: the stored tail-scale comparison favored 0.3 over 1.0,0.7, and 0.5, while the later initialization study's tail branches favored an even lower second peak. The final resplit identity was intervened upon and forked, so its registry record is retained without treating it as a clean two-run causal comparison.
+
+The long-horizon recipe eventually used a first phase covering approximately five sixths of the token horizon, followed by a second phase with peak LR 0.1 times the first peak. Each phase used 170 warmup reference units, with each unit equal to 131,072 input tokens. The standard late cooldown covered 40\% of each phase, split into a 4:1:1 ramp, plateau, and final ramp with plateau LR 0.2 times that phase's peak. These are choices supported within this campaign, not a general theorem about optimal WSD shape.
+
+\subsection{Initialization and independent auxiliary learning rates}
+
+The initialization campaign asked whether early signal could be improved by scaling residual projections, embeddings, or hidden matrices, and whether the auxiliary AdamW LR was independently limiting learning. At 150,077,440 inputs, a higher auxiliary-LR candidate had PPL 54.5608 versus 65.1887 for the Gaussian reference; residual-depth and residual-half candidates had 56.3822 and 59.8427. These early numbers did not establish an additive gain from combining changes.
+
+At 388,759,552 inputs, the promoted auxiliary-LR candidate reached 28.1088, while promoted residual-half reached 29.3374. The combined and reranked candidates differed again, demonstrating why the early winner was not simply assumed to remain best after other settings changed. A final 2B recipe reached full 50k PPL 16.8542; a fresh residual-half plus resplit follow-up reached 16.6065 at the same endpoint. The latter changes more than one design choice and is reported as a recipe-level improvement. EMA variants and several smaller weight-decay choices were retained as negative or unpromoted outcomes rather than silently removed.
+
+\subsection{A failed proxy and a revised calibration}
+
+The horizon-transfer question was motivated by the dependence of a useful LR on training duration \citep{lrhorizon}. An initial stable-proxy procedure, with observer averaging for measurement, produced a transfer estimate that did not pass the subsequent complete-WSD check. Its proposed LR table therefore remained unvalidated. A narrower bracket was established at 400M inputs, followed by explicit complete-WSD calibration at approximately 200M,400M, and 600M inputs. This revised procedure measured the objective used for final selection rather than relying only on a stable-prefix proxy.
+
+The revised local fits gave matrix-LR optima 0.0160281,0.0127499, and 0.0103206. A power fit over those three fitted optima gave
+\begin{equation}
+  \eta_{\mathrm{matrix}}(D)=0.00861489\,(D/10^9)^{-0.393085}.
+  \label{eq:lr-law}
+\end{equation}
+The auxiliary AdamW LR initially retained its fixed ratio to the matrix LR. Values for 1--6B horizons were extrapolations, not independently tuned optima at each horizon. Figure~\ref{fig:calibration} distinguishes measured observations, local fitted optima, and extrapolation. The three-point local quadratic fits do not provide statistical confidence intervals, even when their algebraic fit is exact. The late independent AdamW-LR doubling further changes the one-dimensional proportional-LR assumption.
+
+\reportfigure{lr_calibration}{fig:calibration}{Revised learning-rate calibration using complete WSD horizons. Left: observed NLL relative to the best measured value within each horizon, with separate 200M,400M,600M curves. Right: power-law fit to local fitted optima, solid inside the calibration range and dashed for extrapolation. Neither the fitted points nor the extrapolated 1--6B values represent independently measured global optima or confidence intervals.}
+
+\section{Batch Policy, Attention Masking, and Optimizer Refinement}
+\label{sec:refinement}
+
+\subsection{Batch switching changes more than throughput}
+
+The batch study asked whether more frequent small-batch updates early and larger batches later improved the quality/cost tradeoff. In the October 16 matched 1B study, switching at approximately 50\% of the horizon while retaining fixed LR gave fixed 1k PPL 19.9787, versus 20.4452 for the control. A scaled-LR variant reached 20.1214; later or pre-decay switches were less favorable. These observations supported investigating a 16-to 64 policy, but they did not establish that a larger batch is intrinsically better at every point.
+
+Changing batch affects optimizer-update count per token, momentum memory in token units, and ordinary per-update weight decay. For example, the cumulative shrinkage contribution is a product of terms $(1-\eta_t\lambda)$ over updates, so changing update frequency changes that product even with the same token-indexed LR curve. The experiments did not silently rescale every optimizer statistic to keep all such effects invariant. The batch policy is therefore the intervention, with these coupled dynamics included.
+
+This led to a crucial distinction between token-clock and update-clock schedules. At 3B inputs, the batch-plus-token 40 recipe obtained full 50k PPL 15.2117 at 31.947H, whereas the update 40 counterpart obtained 15.3713 at 31.753H. The earlier selected 3B recipe had 15.2777 at 34.713H. Comparisons that change both batch and tail are combined recipe comparisons; the token 40 versus update 40 pair gives a narrower clock comparison. The report does not infer the isolated mechanism of a sharp PPL decrease from a curve segment where batch and cooldown also change.
+
+\subsection{Document boundaries as an explicit modeling choice}
+
+With packed training sequences, ordinary causal attention permits a token to attend to earlier documents in the same sequence. The intradoc hypothesis was that this context differs from the document-isolated evaluation setting and introduces unhelpful cross-document dependence. The implementation uses retained document spans to construct block-diagonal causal attention; it does not infer boundaries by scanning token IDs. Labels, nonpadding inputs, and valid prediction counts are preserved, and position IDs are not simultaneously reset.
+
+The first matched 1B experiment reduced fixed 1k PPL from 20.2046 with dense causal attention to 19.4274 with intradoc attention, a mean-NLL change of$-0.03923$. Correctness checks compared outputs and gradients with an explicit block-diagonal reference and checked that perturbing one document did not alter a later document's outputs. Figure~\ref{fig:masks} explains the structural change. This experiment supports the masking choice under the local recipe; it does not imply that cross-document attention is harmful for every packed corpus or evaluation task.
+
+\reportfigure{attention_masks}{fig:masks}{Exact mask structures for three packed documents. Blue entries are allowed query--key connections and gray entries are blocked. Intradoc attention removes cross-document connections while retaining within-document causality. This is a binary schematic, not an empirical attention-weight heatmap; both variants process the same example inputs and loss labels.}
+
+\subsection{Matrix updates and the auxiliary parameter group}
+
+The mixed optimizer assigns 973,078,528 hidden-matrix parameters to Muon/NorMuon and 262,735,872 parameters to AdamW. The latter consists of the tied embedding/head and normalization parameters; the AdamW decay group is empty in the late recipe. Matrix updates use five Newton--Schulz iterations, momentum 0.95, Nesterov, and the preserved native shape scaling. The local NorMuon variant adds a row-wise second moment of the orthogonalized update, with coefficient 0.95, and restores the prescribed overall update norm. Matrix weight decay is 0.1; the auxiliary group has no weight decay. Figure~\ref{fig:routing} makes this routing explicit.
+
+In the first-stage selected-mask comparison, NorMuon reduced fixed 1k PPL from 19.4274 to 19.1492; the PE orthogonalization variant reached 19.4488. The locked candidate's seed 43 confirmation reduced PPL from 19.1315 to 18.7454, with $\Delta\overline{\ell}=-0.02039$. This is limited replication, not a precise estimate of seed variance. A later NorMuon control used in the method study reached 18.6995 on fixed 1k and 18.9156 on combined 10k; it belongs to that later control identity and should not replace the first-stage numbers.
+
+The 4B auxiliary-AdamW LR doubling reduced fixed 1k PPL from 13.8604 to 13.6513 at the same 4,000,055,296 inputs. This group-level intervention is especially relevant because the shared embedding/head accounts for about one fifth of model parameters. It does not show that every parameter benefits from doubling its LR, nor does it isolate embedding effects from normalization effects. Figure~\ref{fig:ablations} summarizes these controlled and explicitly scoped recipe comparisons.
+
+\reportfigure{optimizer_routing}{fig:routing}{Parameter routing in the later mixed-optimizer student. Solid arrows indicate the forward path; dashed arrows indicate optimizer assignment. The input embedding and LM head share one parameter tensor and are counted once. Normalization parameters inside transformer blocks also use AdamW. The hidden projections use Muon/NorMuon; whole-matrix ownership in R5 changes state distribution, not these parameter-group definitions.}
+
+\subsection{Scaling and negative findings}
+
+The recipe progression reached full 50k PPL 15.5799 for the raw 3B reference,15.2777 for the selected 3B recipe,15.2117 for the batch/token 40 recipe, and 13.8380 for the 4B intradoc/NorMuon transfer. These milestones change token budgets and sometimes multiple settings. They describe progress; the 3B-to 4B difference cannot be attributed to intradoc or NorMuon alone. The 4B run's training, evaluation, and export were verified even though its allocation later ended with a failed accounting guard. We retain that operational outcome and its cost rather than discarding a valid model evaluation or relabeling the job as completed.
+
+Shortening the 4B cooldown to the last 30\% of actual optimizer updates did not improve the selected token 40 recipe. Combined 10k PPL worsened from 13.8505 to 13.9818, while allocation cost increased from 42.113H to 45.327H. At 3B, the 20\%-tail recipe also underperformed the earlier selected recipe on full 50k,15.9123 versus 15.2777. These are useful negative results because they motivated retaining the token-indexed schedule for the later 6B transfer.
+
+The non-KD 6B run then reached fixed 1k PPL 12.7739 and combined 10k PPL 12.9078 at 6,000,082,944 inputs. Its 64.707H logical cost includes two failed startups. The endpoint is an explicitly approved whole-window rounding above nominal 6B, and the cost exceeds the original 64H target. Averaging, PE, and additional decay variants were not assumed to compound positively merely because each was plausible in isolation.
+
+\reportfigure{ablations}{fig:ablations}{Changes in mean held-out NLL relative to each explicitly named control; negative is better. Every row specifies its training horizon and evaluation scope. Rows do not share a universal baseline and should not be added together. Points are observed single-seed effects, except the separately labeled seed 43 confirmation; there are no inferred cross-seed confidence intervals. The C2 row changes both batch policy and first-phase decay.}
+
+\section{Further Method Exploration and Knowledge Distillation}
+\label{sec:distillation}
+
+\subsection{Testing alternatives against a stronger baseline}
+
+After the 6B non-KD result, the question shifted from choosing between an initial AdamW and Muon configuration to improving an already tuned intradoc/NorMuon baseline. The October 19 study investigated Dion3 \citep{dion3}, AdaMuon \citep{adamuon}, SOAP \citep{soap}, schedule-free feedback, a weight-average observer, exact cut cross-entropy \citep{cce}, and teacher supervision. Literature results motivated these implementations; they were not treated as evidence that the local short-horizon setting would improve. Table~\ref{tab:methods} retains both complete and stopped arms.
+
+The complete 1B comparisons gave combined 10k PPL 18.9156 for the historical NorMuon control,19.1512 for Dion3 full,19.7128 for AdaMuon, and 18.9105 for CCE exact. The small CCE difference did not establish a quality improvement, and its measured logical allocation cost was 13.233H versus 10.727H for the historical control. Because runtime conditions were not a simultaneous controlled A/B experiment, these totals are retained as observed costs rather than a precise implementation speed ratio. The local evidence did not justify replacing NorMuon on endpoint quality.
+
+SOAP, partial Dion3, schedule-free feedback, the average observer, and an initial local-teacher arm were stopped at different token counts. The official 3B-teacher pipeline failed after 783,548,416 charged student inputs. Those partial outcomes are important to the research history and its 95.419H allocation cost, but their latest PPLs cannot be ranked against complete 1B endpoints. A stopped implementation also does not refute the underlying method. This distinction was the reason to separate engineering feasibility from quality selection in subsequent KD work.
+
+\input{tables/methods}
+
+\subsection{Teacher choice and the distillation objective}
+
+The supervision hypothesis was that a richer next-token target could improve learning at the same student input budget. The early use of a local trained teacher was followed by the official pretrained base \texttt{meta-llama/Llama-3.2-3B}, revision \texttt{13afe5124825b4f3751f836b40dafda64c1ed062}. The teacher is frozen and sees the same document-isolated input context as the student. The student remains randomly initialized. Distillation follows the soft-target principle of \citet{distillation}, with the local objective
+\begin{equation}
+  \mathcal{L}_{\mathrm{KD}}=0.75\,\mathrm{CE}(y,p_S)
+                  +0.25\,T^2\mathrm{KL}(p_{T,T}\Vert p_{S,T}),\qquad T=1.
+  \label{eq:kd}
+\end{equation}
+The subscript $T,T$ denotes the teacher distribution at temperature$T$; $p_{S,T}$ is the corresponding student distribution. The KL covers the complete 128,256-token vocabulary. Chunking 1024 prediction positions limits intermediates but does not truncate the vocabulary. The teacher's parameters are outside the student optimizer, and the teacher's forward pass is charged separately in its input journal. Held-out evaluation always uses ordinary next-token NLL, enabling comparisons even though training-loss definitions differ between KD and non-KD.
+
+\subsection{From producer--consumer transport to R5}
+
+The first completed long KD run used a teacher producer and student consumer on separate eight-H200 nodes. Rather than writing full logits, the teacher transported BF16 final normalized hidden states with 3072 features for 8191 prediction positions per sequence. The consumer applied the frozen teacher output head to reconstruct the target distribution. READY manifests bound each payload to its exact input, labels, masks, rank, and preparation identity; ACKs and a bounded spool controlled lifecycle and capacity. Teacher/student input journals and allocation clocks remained separate.
+
+That fresh 3B-token KD run reached combined 10k PPL 13.9469 at 77.671H across both roles. It demonstrated that the longer KD pipeline could complete and export a student, while exposing the cost of communication, transport, and two simultaneous allocations. It was not a controlled comparison of transport formats at a fixed total GPU budget. Its larger resource scope should not be hidden by reporting only the student node's duration.
+
+The R5 execution path moved the frozen teacher and student onto the same eight GPUs. It used microbatch 2, disabled activation checkpointing, local compilation of RMSNorm/MLP/RoPE operations, whole-matrix NorMuon state owners with FP32 all-gather, and fused full-vocabulary CE/KL. Figure~\ref{fig:kd} shows the systems change without implying that the student architecture or optimizer formula changed. Startup gates checked compiled forward/backward, DDP accumulation, complete owner-state serialization, and the real eight-rank data reader before initialization. These checks support execution correctness; they do not replace a full unaccelerated 6B KD reference.
+
+R5 completed 28,619 updates and 6,000,082,944 confirmed student inputs. The teacher journal confirmed the same input count, with no pending transaction at completion. Final export reload and all owner-optimizer receipts were verified inside the allocation. Its combined 10k PPL 12.3989 improves over the non-KD 6B recipe by\KDImprovement\% at almost the same observed logical-run cost. Table~\ref{tab:final6b} retains 1k, additional 9k, and combined 10k values separately. This is a comparison of the completed recipes; no full 6B unaccelerated KD reference exists to prove acceleration losslessness, and the 72H authorization does not convert the 64.711H result into a successful original 64H run.
+
+\reportfigure{kd_architecture}{fig:kd}{KD execution designs. Left: eight teacher GPUs publish BF16 hidden states through an authenticated bounded spool to eight student GPUs, where a frozen teacher output head reconstructs supervision. Right: R5 runs the frozen teacher and trainable student on the same eight GPUs with fused full-vocabulary CE/KL. Only the student receives optimizer updates. Both designs account for teacher inputs and resources; the external teacher's original pretraining cost is unknown.}
+
+\input{tables/final6b}
+
+\subsection{Adaptive batch: promising short evidence, a negative final result}
+
+The next question was whether online gradient-noise measurements could choose a more useful batch than the fixed 16-to 64 rule. The gradient-noise-scale literature motivates such a proxy \citep{gns}, but raw-gradient noise is not an exact critical batch for nonlinear Muon/AdamW updates. The local estimator reuses regular training windows, with no extra teacher or student forward/backward passes. Probes are aligned every 16,777,216 input tokens and measure pre-clipping moments. The global statistic controls the policy; hidden-matrix and embedding/norm statistics are also logged.
+
+Three fresh 1B screens shared the original 6B LR schedule prefix. C0 estimated noise but retained the fixed policy, C1 targeted half the smoothed noise proxy, and C2 targeted the full proxy. Physical choices were 16,32,64,128 sequences, with a minimum of eight valid observations, separate 0.9 EMAs of signal and noise,20\% hysteresis, and at most a 2$\times$ change per observation. Warmup paused decisions. Invalid/nonpositive smoothed signal retained the previous state. These rules constrained policy churn; they did not preserve per-token momentum memory or weight decay across batch choices.
+
+At the common 1,000,079,360 confirmed-input endpoint, combined 10k PPLs were 23.6441,23.6138, and 21.1817 for C0,C1,C2. Table~\ref{tab:cbs} includes startup-replacement costs and the distinction between confirmed inputs and retained earlier uncertain charges. C2's short result was favorable within this prefix comparison, but these runs did not compress an entire 6B cooldown into 1B. Their PPLs must not be compared with the fully cooled 1B method-screen endpoints in Table~\ref{tab:methods} as though they used the same horizon.
+
+\input{tables/critical_screen}
+
+The subsequent fresh 6B candidate combined C2 with a first decay beginning at exactly 2,399,928,320 cumulative nonpadding input tokens, while retaining the 5,000,003,584-input phase split and second-phase schedule. The trigger was chosen from a prior R5 evaluation record. It was bound to tokens, not W\&B record 1841 or local update 18310. The recorded receipt confirms a next update beginning at that exact token boundary, with the peak LR at the boundary and a lower LR subsequently. The candidate reached the full endpoint in 22,060 updates, a\CtwoUpdateReduction\% reduction relative to R5, and verified its final export.
+
+The final outcome did not support promotion: combined 10k PPL was 12.5380,\CtwoRegression\% above R5, and cost was 65.009H,\CtwoCostIncrease\% higher. Fewer optimizer updates did not produce a better observed quality/cost tradeoff. The more frequent C2 evaluations and additional branch saves are included in this outcome, so the small cost difference is not a controlled estimate of batch-policy or kernel speed. Because both batch policy and first-phase decay changed, the quality result also does not isolate either factor or establish a controlled short-to-long ranking reversal for C2 alone. Figure~\ref{fig:schedule} shows the actual update, LR, and batch trajectories; Appendix~\ref{app:additional} includes the probe diagnostic.
+
+\reportfigure{token_schedule}{fig:schedule}{Logged LR, batch, and optimizer-update trajectories for R5 and C2 plus early decay, aligned by student inputs. The first-peak matrix LR normalizes the upper panel; the second phase retains its 0.1 peak ratio. Vertical lines mark 2.399928320B,3.000107008B,and 5.000003584B input events. Logged widths can be shortened at exact event boundaries. The scheduler receipt, rather than a logging index, establishes the exact early-decay trigger.}
+
+\section{Consolidated Results and Decision Analysis}
+\label{sec:results}
+
+\subsection{Milestones versus causal evidence}
+
+Table~\ref{tab:formal} preserves all 20 formal identities, including unsuccessful recipes and the intervened resplit identity. It separates evaluation scopes and associates values with their exported checkpoints. Figure~\ref{fig:progress} provides the complementary view: learning curves on the fixed development subset, with separately scoped endpoint panels. The observed progression from the AdamW baseline to later 2B/3B/4B/6B recipes is substantial, but it contains more tokens, new schedules, initialization changes, masking changes, and teacher supervision. The entire trajectory is not an ablation of any one choice.
+
+The strongest local decision evidence came from comparisons that held more of the experiment fixed: removing cross-document attention at 1B; adding the local NorMuon normalization after the mask was selected; independently increasing auxiliary AdamW LR at 4B; retaining token-indexed rather than the tested update-indexed tail; and rejecting the final C2-plus-early-decay recipe relative to R5. Even these findings are mostly single-seed and use adaptively reused development subsets. They should be read as useful engineering evidence within the recorded setting.
+
+\input{tables/formal_results}
+
+\reportfigure{training_progress}{fig:progress}{Quality progression. Left: selected measured fixed 1k learning curves; initial values above 110 are outside the displayed log-axis range and remain in the CSV. Right: combined 10k and full 50k export endpoints, shown on separate axes because their scopes differ. Point numerals identify formal runs. No full 50k value is inferred from a smaller subset, and ID 2's earlier unmatched full 50k checkpoint is excluded. Cross-budget milestones are descriptive rather than single-method effects.}
+
+\subsection{Token efficiency and allocation efficiency}
+
+The non-KD 6B,R5,and C2 comparison isolates the practical final choice more closely than the entire historical sequence: student input endpoint, seed, tokenizer, and held-out provenance match. R5 has the best observed 10k result among those three recipes. Both KD recipes also consume teacher inputs; these are reported separately rather than added to student tokens on the learning-curve axis. Distillation therefore improves quality per student input in this recipe comparison, while using additional pretrained supervision and a different execution path.
+
+Figure~\ref{fig:costquality} relates quality to complete logical-run allocation cost, with separate axes for 1k,10k,50k. The 3B hidden-state KD point includes both eight-GPU roles. The scatter shows observed tradeoffs at the available budgets; it does not establish which configuration would win if every candidate were independently optimized under the same fixed compute cap. No line interpolates a missing model endpoint. The R5/C2 result also shows why counting optimizer updates alone can give the wrong operational decision.
+
+\reportfigure{quality_cost}{fig:costquality}{Quality versus allocated logical-run H200-hours. Evaluation scopes are separate panels; numerals identify formal identities. Squares denote KD and circles non-KD. Teacher allocations are included for the 8+8 run, and startup failures remain charged to their run. These cross-budget observations are not a matched-compute scaling experiment or a claim of a universal Pareto optimum.}
+
+\subsection{What the complete research process cost}
+
+The frozen accounting snapshot contains 293 experiment-ledger jobs and 34 disjoint preprocessing-ledger jobs, all checked against \texttt{sacct}. The experiment allocations total\ExperimentHours{} H200-hours; the separately recorded preprocessing allocations total\PreprocessingHours{} H200-hours. Their all-inclusive union is\CombinedHours{} H200-hours. The difference between these totals is a scope distinction, not a reason to omit preprocessing. The external 3B teacher's original pretraining cost is unknown and is not included in these local project totals.
+
+The source experiment ledger still carried its pre-C2 measured total of 1,473.525H when captured. The report adds the completed C2 job's Slurm-derived 65.008889H in its own immutable accounting view, producing\ExperimentHours{}H; it does not rewrite that shared ledger. The experiment ledger's 1,545.525H measured-plus-reserved scope is not an all-inclusive total of both ledgers. If ``shared cap'' is interpreted to include both sources, the combined cost is larger; this report makes no blanket budget-compliance claim based on the smaller subtotal. Figure~\ref{fig:allocation} shows the resource distribution, including non-completed job states.
+
+The final R5 allocation is therefore only one part of the cost of finding the recipe. Quoting 64.711H as the cost of the whole research process would omit the optimizer screens, initialization and schedule branches, data preparation, failed pipelines, validation, and unsuccessful later candidates. A useful report should make that search cost visible even when its final recipe is efficient.
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+\paragraph{What the decision process established.}
+The experiments support a local sequence of decisions: build a verified raw baseline; tune schedule endpoints rather than only stable-prefix losses; revisit auxiliary LR independently of the matrix optimizer; align schedules to tokens when batch changes; match attention context to the document-isolated evaluation protocol; and evaluate teacher supervision together with its implementation cost. The failed LR proxy, unpromoted filtering recipe, partial method arms, and negative final C2 result are part of that evidence. They prevented plausible hypotheses from being presented as established improvements.
+
+\paragraph{Limited replication and adaptive evaluation.}
+Most long runs use one seed. A seed 43 confirmation supports consistency for one locked local comparison, but does not quantify variance of every final recipe. We therefore report observed points without invented error bars or significance claims. A document bootstrap, if performed later from per-document records, would address document-sampling uncertainty rather than replace training-seed replication. The 1k,9k,and 50k scopes were repeatedly inspected and used in decisions. They are validation evidence, not a pristine held-out benchmark after the entire search.
+
+\paragraph{Incomplete factorial coverage.}
+Several interventions combine batch, tail, initialization, or runtime changes. The final C2 experiment changes both batch policy and early decay, so its result does not identify which caused the regression. Cross-budget 3B/4B/6B milestones do not separate additional training from method changes. Data filtering changes source composition and available tokens as well as an abstract quality score. Consequently, conclusions are restricted to the measured recipes and controls; many interaction mechanisms remain unresolved.
+
+\paragraph{External supervision and generalization.}
+The official teacher has pretrained knowledge unavailable to the random student at initialization. Its original training compute and overlap with evaluation text are not fully audited here. Canonical document-index disjointness also does not prove absence of duplicate or near-duplicate text across splits; this report did not perform a new content-overlap audit. The result is a useful student-training outcome with external supervision, not evidence that a purely self-contained scratch pretraining process learned the same information more cheaply. Moreover, document-level next-token PPL is the only task-level quality measure in this report. No downstream reasoning, instruction-following, factuality, or generation-safety improvement is claimed.
+
+\paragraph{Systems measurements and operational failures.}
+Compiler timings are nested, memory allocation differs from reservation, and historical nodes and environments differ. The report therefore uses complete update and allocation boundaries, and labels projections. A short parity check or an exact mathematical loss objective does not prove full-training trajectory equivalence. Slurm state is also not a perfect proxy for whether a model artifact is scientifically useful: the 4B accounting-guard failure occurred after verified evaluation and export. Conversely, a successful job submission or a partial curve is not a completed endpoint.
+
+\paragraph{Reproducibility and resource interpretation.}
+Source/configuration hashes, journals, run links, complete-state checkpoint receipts, and export reload checks make the observations traceable. The report packages a frozen numerical snapshot and deterministic figure scripts so it can be rendered without accessing large checkpoints or the corpus. It does not retroactively validate unmeasured evaluation scopes, remove failed costs, or imply that the later expanded study satisfied the original three-run/64H constraints.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The study developed a stronger Llama 3.2 1B student through verified data preparation, iterative optimization and schedule experiments, explicit document attention boundaries, and full-vocabulary teacher supervision. The best verified 6B recipe reached combined 10k PPL 12.3989 at 64.711H, compared with 12.9078 for its preceding non-KD recipe. The later adaptive-batch plus early-decay candidate reduced update count but reached 12.5380 at 65.009H, illustrating why update savings and short-prefix promise must be checked against complete endpoint quality and allocation cost. The report's broader result is the experimental record: controlled improvements, failed hypotheses, checkpoint-aligned evaluation scopes, and an all-inclusive local accounting of\CombinedHours{}H across 327 allocations. These details define what the final result demonstrates and what remains to be tested.

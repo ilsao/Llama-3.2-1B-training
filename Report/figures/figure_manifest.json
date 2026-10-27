@@ -1,0 +1,142 @@
+[
+  {
+    "name": "history",
+    "kind": "vector schematic",
+    "source": "outline.tex; data/formal_runs.csv; experimental protocols",
+    "outputs": [
+      "fig_history.pdf",
+      "fig_history.svg",
+      "fig_history.png"
+    ]
+  },
+  {
+    "name": "data_protocol",
+    "kind": "vector schematic",
+    "source": "data/evidence.json: dataset_config; canonical split metadata",
+    "outputs": [
+      "fig_data_protocol.pdf",
+      "fig_data_protocol.svg",
+      "fig_data_protocol.png"
+    ]
+  },
+  {
+    "name": "optimizer_routing",
+    "kind": "vector schematic",
+    "source": "resolved configurations and optimizer-groups.json receipts",
+    "outputs": [
+      "fig_optimizer_routing.pdf",
+      "fig_optimizer_routing.svg",
+      "fig_optimizer_routing.png"
+    ]
+  },
+  {
+    "name": "attention_masks",
+    "kind": "exact binary schematic",
+    "source": "document-span mask definition; no empirical attention values",
+    "outputs": [
+      "fig_attention_masks.pdf",
+      "fig_attention_masks.svg",
+      "fig_attention_masks.png"
+    ]
+  },
+  {
+    "name": "kd_architecture",
+    "kind": "vector schematic",
+    "source": "kd3b-hidden8 and kd6b-r5 protocols; data/evidence.json configs",
+    "outputs": [
+      "fig_kd_architecture.pdf",
+      "fig_kd_architecture.svg",
+      "fig_kd_architecture.png"
+    ]
+  },
+  {
+    "name": "training_progress",
+    "kind": "data chart",
+    "source": "data/evaluation_curves.csv; data/formal_runs.csv; numerals denote formal IDs",
+    "outputs": [
+      "fig_training_progress.pdf",
+      "fig_training_progress.svg",
+      "fig_training_progress.png"
+    ]
+  },
+  {
+    "name": "initial_sweep",
+    "kind": "data chart",
+    "source": "data/initial_sweep.csv; all endpoints 104,857,600 inputs, fixed1k",
+    "outputs": [
+      "fig_initial_sweep.pdf",
+      "fig_initial_sweep.svg",
+      "fig_initial_sweep.png"
+    ]
+  },
+  {
+    "name": "lr_calibration",
+    "kind": "data chart",
+    "source": "data/evidence.json: calibration; fitted curves are explicitly distinguished",
+    "outputs": [
+      "fig_lr_calibration.pdf",
+      "fig_lr_calibration.svg",
+      "fig_lr_calibration.png"
+    ]
+  },
+  {
+    "name": "token_schedule",
+    "kind": "data chart",
+    "source": "data/training_metrics.csv; C2 exact token trigger receipt in evidence.json",
+    "outputs": [
+      "fig_token_schedule.pdf",
+      "fig_token_schedule.svg",
+      "fig_token_schedule.png"
+    ]
+  },
+  {
+    "name": "ablations",
+    "kind": "data chart",
+    "source": "data/evidence.json: ablations; formal endpoint comparisons; distinct controls and evaluation scopes",
+    "outputs": [
+      "fig_ablations.pdf",
+      "fig_ablations.svg",
+      "fig_ablations.png"
+    ]
+  },
+  {
+    "name": "quality_cost",
+    "kind": "data chart",
+    "source": "data/formal_runs.csv; all teacher allocations included for formal18; no cross-subset ranking",
+    "outputs": [
+      "fig_quality_cost.pdf",
+      "fig_quality_cost.svg",
+      "fig_quality_cost.png"
+    ]
+  },
+  {
+    "name": "performance",
+    "kind": "data chart",
+    "source": "performance-ab-20261010; 100 measured updates; compile startup excluded from interval throughput",
+    "outputs": [
+      "fig_performance.pdf",
+      "fig_performance.svg",
+      "fig_performance.png"
+    ]
+  },
+  {
+    "name": "critical_batch",
+    "kind": "data chart",
+    "source": "data/critical_batch_probes.json; common 1B prefix of the original 6B schedule; no compressed cooldown",
+    "outputs": [
+      "fig_critical_batch.pdf",
+      "fig_critical_batch.svg",
+      "fig_critical_batch.png"
+    ]
+  },
+  {
+    "name": "allocation_costs",
+    "kind": "data chart",
+    "source": "data/allocations.csv; 327 disjoint job IDs individually verified against sacct",
+    "outputs": [
+      "fig_allocation_costs.pdf",
+      "fig_allocation_costs.svg",
+      "fig_allocation_costs.png"
+    ]
+  }
+]

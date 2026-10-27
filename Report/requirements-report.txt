@@ -1,0 +1,6 @@
+matplotlib==3.9.4
+numpy==2.4.6
+Pillow==11.3.0
+PyMuPDF==1.26.5
+# requests is needed only when recollecting bibliography entries.
+requests==2.32.5

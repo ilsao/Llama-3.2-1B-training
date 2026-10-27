@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{cerulean_report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,array}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{placeins}
+\usepackage{needspace}
+\hypersetup{pdftitle={Training Llama 3.2 1B from Scratch: Experimental History, Optimization, and Distillation},pdfauthor={asciibase64}}
+\urlstyle{tt}
+\reporttype{Technical Report}
+\title{Training Llama 3.2 1B from Scratch}
+\author{\textbf{asciibase64}\\21 October 2026}
+\input{numbers}
+\newcommand{\reportfigure}[3]{%
+  \begin{figure}[tbp]\centering
+  \includegraphics[width=\linewidth]{figures/fig_#1.pdf}
+  \caption{#3}\label{#2}
+  \end{figure}%
+}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{document}
+\raggedbottom
+\maketitle
+
+\begin{abstract}
+We document an iterative study of randomly initialized Llama 3.2 1B students trained on Dolma with a fixed 8192-token context, tracing how optimizer, schedule, initialization, data-selection, attention-mask, and supervision experiments changed subsequent decisions.
+The central challenge is comparing recipes fairly when batch size changes the update clock, evaluation subsets overlap, shared-checkpoint branches inherit training, and startup failures consume resources.
+The study progresses from AdamW through a tuned intradoc NorMuon recipe to full-vocabulary online distillation from a frozen pretrained 3B teacher, retaining negative results and checkpoint-aligned provenance.
+The best verified six-billion-input recipe achieves combined-10k perplexity 12.3989 versus 12.9078 for its preceding non-distilled recipe, a \KDImprovement\% reduction at 64.711 H200-hours; a later adaptive-batch plus early-decay candidate uses \CtwoUpdateReduction\% fewer updates but yields worse perplexity 12.5380 at 65.009 H200-hours.
+The report preserves 20 formal identities and all 327 recorded allocations, totaling \CombinedHours{} local H200-hours including separately recorded preprocessing, and distinguishes these observed results from unmeasured full-50k performance, statistical significance, and universal method claims.
+\end{abstract}
+\input{sections/main_text}
+\FloatBarrier
+\bibliographystyle{plainnat}
+\bibliography{references}
+\clearpage
+\input{sections/appendix}
+\FloatBarrier
+\end{document}

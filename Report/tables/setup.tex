@@ -1,0 +1,26 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Common protocol and the late selected recipe. Earlier baselines differ as described in the text; architecture positional capacity is not the training context length.}
+\label{tab:setup}
+\begin{tabular}{p{.23\linewidth}p{.69\linewidth}}
+\toprule
+Item & Setting \\
+\midrule
+Architecture & Llama 3.2 1B; 1,235,814,400 trainable parameters \\
+Layers / dimensions & 16 layers; hidden 2048; MLP 8192; 32 query / 8 KV heads \\
+Vocabulary / context & 128,256 tokens; training context fixed at 8192 \\
+Shared parameters & Tied embedding / LM head; AdamW group counted once \\
+Canonical split & 104,020,922 documents; seed42 global shuffle; final 50,000 held out \\
+Evaluation & Fixed first 1k; next 9k confirmation; full 50k when recorded \\
+Raw preparation & \texttt{dolma-raw-baseline-20261008} \\
+Late initialization & Fresh Gaussian origin; residual output projections scaled by $1/2$ \\
+Late matrix optimizer & NorMuon, NS5, momentum 0.95, Nesterov, row second moment 0.95 \\
+Late AdamW & Betas (0.9, 0.95); epsilon $10^{-8}$; no decay in this group \\
+Matrix decay / clipping & Ordinary decoupled WD 0.1; global gradient clip 0.5 \\
+6B peak LRs & Matrix 0.0042596113; auxiliary AdamW 0.0002555767 \\
+R5 resources & 8 H200 / 8 CPUs; teacher shares the same devices \\
+KD objective & $0.75\,\mathrm{CE}+0.25\,\mathrm{KL}(p_T\Vert p_S)$; temperature 1 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,107 @@
+\appendix
+\section{Formal Run Registry and Evidence Snapshot}
+\label{app:registry}
+
+The source of record for the numerical report is \path{data/evidence.json}, captured after the October 20 C2 run completed. The collection script reads small metadata and metric files, never model weights, optimizer checkpoint tensors, or corpus shards. It records the repository commit separately from each run's production configuration digest. The existing working tree also contains experiment metadata changes; a report snapshot is not a claim that all production code ran from the report's current commit.
+
+Table~\ref{tab:registry} preserves all formal logical identities and persistent W\&B links. The CSV additionally records input counts, export and checkpoint paths, configuration digests, and the distinction between the latest training checkpoint and the selected export. Formal identities 1--3 and 14 are reconstructed from the documented ordering where older ledger records lack a numeric index; the original names and costs are unchanged. Identity 2 includes its explicitly authorized one-hour continuation. Identity 6 includes shared-checkpoint interventions. These records must not be treated as 20 independent random seeds or as 20 identical compute budgets.
+
+\begingroup\footnotesize
+\input{tables/registry}
+\endgroup
+
+\subsection{Packaged data files}
+\label{app:evidence}
+
+The report includes the following independently useful artifacts:
+\begin{itemize}
+  \item \path{data/formal_runs.csv}: checkpoint-aligned result scopes, tokens, costs, and all formal identities.
+  \item \path{data/evaluation_curves.csv}: every captured fixed 1k evaluation for the selected formal and critical-batch runs, with its actual input-token count.
+  \item \path{data/training_metrics.csv}: a deterministic regular sample of at most approximately 400 records per run, supplemented by all observed batch transitions and endpoints. This sample is used for LR, batch, and update-count diagrams, not to estimate unobserved quality measurements.
+  \item \path{data/initial_sweep.csv}: all 18 complete short-stage optimizer/scheduler endpoints.
+  \item \path{data/critical_batch_probes.json}: recorded probe windows, moments, EMA/controller states, timing, and batch decisions.
+  \item \path{data/allocations.csv}:327 disjoint job IDs, archived and Slurm-derived costs, states, start/end times, and verification flags.
+  \item \path{data/source_manifest.json}: SHA 256 and byte size for every metadata source read by the collector.
+  \item \path{data/citation_verification.json}: retrieved bibliography URLs and independent DataCite DOI/title checks.
+\end{itemize}
+
+Large run artifacts remain under \path{/work/asciibase64/Llama-3.2-1B-training/}; the report does not duplicate them. All plot sources are frozen in the small report snapshot, and their provenance is mapped in \path{figures/figure_manifest.json}. A reproducible report build therefore does not need to load a model or rerun an experiment. Recollecting evidence from the cluster is a separate, explicit action and changes the snapshot date.
+
+\section{Resolved Recipe and Search Details}
+\label{app:config}
+
+\subsection{Architecture and parameter coverage}
+
+The official student configuration has vocabulary 128,256, hidden dimension 2048, intermediate dimension 8192,16 layers,32 attention heads,8 KV heads, SiLU activation, RMSNorm epsilon$10^{-5}$, no attention or MLP biases, tied embeddings, and RoPE theta 500,000. Its positional capacity is 131,072, while every training preparation and comparison uses 8192 positions. The pinned tokenizer uses BOS 128000 and EOS 128001. Normalization parameters and the tied embedding/head are assigned exactly once to auxiliary AdamW, and hidden projection matrices to the matrix optimizer.
+
+The late matrix optimizer retains native ``original'' shape scaling, Nesterov momentum 0.95, NS5 coefficients$(3.4445,-4.775,2.0315)$, epsilon$10^{-7}$, and ordinary decoupled WD 0.1. The local normalization records a second moment over each output row after orthogonalization, using beta 2$=0.95$, rescales rows, and restores the overall update norm. The name NorMuon refers to this sealed implementation and parameter routing. It should not be read as a claim that all numerical choices reproduce every external optimizer variant with a similar name. The auxiliary AdamW group uses betas$(0.9,0.95)$ and epsilon$10^{-8}$. Its learning rate is the required primary logged LR; matrix LR is also logged explicitly.
+
+R5 distributes complete matrix ownership across eight ranks and all-gathers updated matrices in FP32. Replicated parameter gradients and global gradient norm must be counted once, not once per optimizer owner. Checkpoint receipts cover each owned optimizer state, replicated AdamW, per-rank RNG, scheduler, cursor, accounting journals, W\&B identity, and the export. Successful standard-model export reload does not by itself prove that every optimizer state could be restored; the latter has a separate serializer/reload gate.
+
+\subsection{Schedule and batch conventions}
+
+The 6B table matrix peak LR is 0.00425961126463665 and the auxiliary AdamW peak after doubling is 0.000255576675878199. Reference batch 16 at length 8192 corresponds to 131,072 inputs. The rounded target 6,000,082,944 is 45,777 reference units; the phase split 5,000,003,584 is 38,147 units. Warmup 170 reference units is 22,282,240 inputs in each phase. The second phase's peak is 0.1 times the first phase's peak. Baseline R5 switches its planned batch at 3,000,107,008 inputs, but exact event windows can be shorter than the steady-state batch.
+
+The C2 candidate retains the second-phase boundaries: warmup ends at 5,022,285,824, decay begins at 5,599,920,128, plateau begins at 5,866,651,648, and final decay begins at 5,933,367,296 inputs. Its first decay begins at 2,399,928,320; its first-phase plateau begins at 4,133,355,520 and final ramp at 4,566,679,552. The recorded trigger is the cumulative student-input count at the start of update 11,718, not the later input total at the end of that update. Therefore the sparse plotted logs need not contain a row whose ending-token coordinate equals the trigger. The boundary receipt in the snapshot gives the exact state.
+
+The 4B update-tail 30 experiment uses the last 30\% of actual updates per phase, comprising 20\% initial ramp,5\% plateau,5\% final ramp. It is intentionally a different clock from the standard last 40\% token tail, while warmup remains token-based. Its recorded decay starts after completed updates 12,463 and 18,697. Using the same nominal percentage without preserving the clock would not reproduce this comparison.
+
+\subsection{Search scope and reuse}
+
+The initial 18-cell grid has three optimizer-specific LRs and three schedules per optimizer. Later initialization screens use 150,077,440-input and 388,759,552-input endpoints; their Gaussian, residual-half, residual-depth, fan-in, orthogonal, and embedding-half alternatives preserve architecture but change initial scaling. Auxiliary-LR, Muon-LR, clipping, batch, decay, filtered-data, and EMA variants are recorded in the frozen initialization rows with stage and seed. Candidate promotion was adaptive, so these rows are not a pre-registered factorial sample. The complete-WSD LR calibration uses three observed token horizons and a fixed optimizer-LR ratio before later independent auxiliary-LR tuning.
+
+Shared-prefix tail and batch branches inherit both tokens and states. A branch's incremental allocation cost is not its complete scientific cost if it reuses an expensive prefix. The local ledger preserves the physical allocation charges, and branch metadata separately identifies inherited tokens. This distinction prevents a cheap-looking tail experiment from being presented as an independently trained 2B model at only its incremental tail cost.
+
+\section{Additional Diagnostics and Allocation Accounting}
+\label{app:additional}
+
+\subsection{Gradient-noise proxy and adaptive control}
+
+For rank$r$, let $n_r$ denote its valid prediction count, $N=\sum_r n_r$, $K=8$, and $g_r$ its local mean gradient. With weighted local norm $L=\sum_r(n_r/N)\lVert g_r\rVert^2$ and mean-gradient norm $M=\lVert\sum_r(n_r/N)g_r\rVert^2$, the local estimator uses
+\begin{equation}
+  \widehat{\mathrm{tr}\Sigma}=\frac{N(L-M)}{K-1},\qquad
+  \widehat{G^2}=M-\widehat{\mathrm{tr}\Sigma}/N.
+\end{equation}
+The controller smooths signal and noise separately and takes their ratio, then converts valid-target units to sequence equivalents using a smoothed targets-per-sequence count. The conversion is a proxy: neighboring predictions and sequences are correlated, and Muon/AdamW preconditioning and curvature are not represented. Negative individual signal estimates enter the EMA rather than being individually clamped to an arbitrarily large batch. A nonpositive smoothed denominator holds the current policy.
+
+Probe windows are regular consumed training data, with no intervening update between the local gradient samples. The probe uses accumulation without synchronization followed by one manual averaged gradient reduction. The measured synchronization time includes necessary gradient communication and must not be called pure incremental overhead. C2's 6B record contains 357 probes; this does not mean it performed 357 extra forward/backward passes. Figure~\ref{fig:cbs} illustrates why the measured noise proxy, controller target, actual shortened batch width, and resulting held-out NLL should be distinguished.
+
+\reportfigure{critical_batch}{fig:cbs}{Adaptive-batch diagnostics for the three completed 1B screens. Top: the smoothed gradient-noise proxy in sequence equivalents; middle: chosen steady-state controller batch; bottom: measured fixed 1k NLL, zoomed to the late range 2.9--3.7 (earlier values remain in the CSV). The controller has warmup and minimum-observation guards; a plotted probe ratio is not itself a validated optimizer-specific critical batch. All three curves are prefixes of the original 6B schedule.}
+
+\subsection{Failed attempts and uncertain token charges}
+
+The two failed raw 6B startups consumed 5s and 97s, together 0.226667H, and remain included in formal 17's cost. The C0 startups consumed 99s and 9s; the C1 startups 107s and 12s. Their original 131,072 pending inputs per role were retained as charged-but-unconfirmed reservations. The successful replacement attempts each confirmed 1,000,079,360 new inputs, while their logical charged upper bound remains 1,000,210,432. This accounting does not claim that the unconfirmed windows definitely completed, nor does it erase their possible processing.
+
+The allocation CSV retains failures from earlier preparation, validation, distributed startup, serialization, and KD transport. Cost grouping in Figure~\ref{fig:allocation} is exhaustive: the preprocessing ledger, formal logical runs in the 20-ID registry, and all other experiment-ledger allocations. Within each group, the figure separates Slurm COMPLETED from other terminal states. The second category is not synonymous with wasted computation: formal 14's numerically verified evaluation survived a later accounting-guard failure. The classification is an operational accounting view, not a judgement of scientific validity.
+
+\reportfigure{allocation_costs}{fig:allocation}{All 327 allocations, counted once across disjoint experiment and preprocessing ledgers. Complete and other terminal Slurm states are shown separately. Logical formal-run costs include their earlier failed attempts, and formal 18 includes both teacher and student. All bars include initialization, evaluation, saving, and idle allocation time; unclassified timing inside a job is not invented as a separate subcomponent. The combined total is\CombinedHours{}H.}
+
+\subsection{Provenance revisions and unresolved limits}
+
+The raw preparation fingerprint is
+\begin{quote}\small\ttfamily
+3537f29d901e92770050265e8553adc81b7accb8bbb205644b874db8bf202eec
+\end{quote}
+Dataset and tokenizer revisions are recorded in Section~\ref{sec:setup}. The frozen official 3B teacher manifest hash is
+\begin{quote}\small\ttfamily
+bf1dec0109c97ad0d00d5714127aca10a6046edbd0b35e0d4c1a55fb2f192507
+\end{quote}
+The report does not infer absence of teacher pretraining overlap from these hashes; they establish file identity, not dataset independence. Likewise, a source seal establishes which implementation ran, not that every scientific hypothesis behind it was correct.
+
+The canonical 50k set has not been evaluated for the final R5 or C2 exports in this snapshot. Their 12.3989 and 12.5380 results are combined 10k values. No new full 50k evaluation, training continuation, upload, or allocation was launched to fill this gap while writing the report. This limitation is visible in the result table, rather than hidden by reusing an earlier model's full 50k score.
+
+\section{Reproducing the Report}
+\label{app:reproduce}
+
+The complete rendering workflow is provided by \path{build.sh}. It generates LaTeX tables and numeric macros from the frozen snapshot, regenerates 14 figures as PDF/SVG/PNG, and compiles the existing Cerulean report template. The layout uses the supplied report style unchanged. The original formatting example and template assets are preserved in \path{template-original/}. A portable Tectonic engine was used for this build; ordinary \texttt{latexmk -pdf main.tex} is also supported in an environment with the required TeX packages.
+
+\begin{verbatim}
+cd Report
+python generate_tables.py
+python figures/gen_fig_report.py
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+\end{verbatim}
+
+These commands render only the small snapshot. Updating it on nano 4 requires a separate read-only invocation of \path{collect_evidence.py}; it queries Slurm and reads metadata under the configured work root. Bibliographic entries were fetched from arXiv and their DOI/title metadata checked through DataCite using \path{fetch_references.py}; the receipts and fetched BibTeX are included so a normal report build needs no literature network access.
+
+All diagrams use deterministic editable vector primitives because the report environment has no configured Gemini credential. Binary mask diagrams are constructed exactly from the declared logical mask. Numerical charts use Matplotlib and a colorblind-safe palette with explicit labels and markers. No generated bitmap is used as evidence for a measured curve. Figure captions distinguish observations, fitted summaries, extrapolations, and missing evaluations. The final document was checked for unresolved references, figure assets, numerical scope mismatches, and page rendering. Codex assisted with evidence collation, drafting, and plotting; this writing process did not run new model experiments.

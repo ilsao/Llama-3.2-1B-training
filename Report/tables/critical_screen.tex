@@ -1,0 +1,16 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Adaptive-batch screen: all attempts finish at 1,000,079,360 confirmed student inputs using the original 6B schedule prefix, without a compressed cooldown.}
+\label{tab:cbs}
+\begin{tabular}{lrrrr}
+\toprule
+Arm & Updates & 1k PPL & Combined 10k & Logical H200-h \\
+\midrule
+C0 shadow & 7,630 & 23.1893 & 23.6441 & 12.733 \\
+C1 half & 7,630 & 23.2315 & 23.6138 & 12.767 \\
+C2 one & 6,390 & 20.8447 & 21.1817 & 12.207 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{minipage}{\linewidth}\footnotesize C0/C1 costs include both earlier failed startups. Each retains 131,072 prior charged-but-unconfirmed inputs per role in addition to its successful attempt. The three-arm correctness gate costs another 0.05778 H200-h. These endpoints must not be ranked against complete 1B schedules from other studies.\end{minipage}
+\end{table}

@@ -1,0 +1,174 @@
+% Technical report outline -- proposed structure, not a completed manuscript.
+% Author-confirmed emphasis: full experimental history and decision rationale.
+% This is a section fragment for the existing Report/main.tex template.
+% Chinese comments are writing notes; they introduce no LaTeX dependencies.
+% Prepared from repository evidence available on 2026-10-21 (Asia/Taipei).
+%
+% Proposed title:
+% Training Llama 3.2 1B from Scratch: An Experimental Study of Optimization,
+% Token Efficiency, and Compute Cost
+%
+% 已確認的敘事主線：從隨機初始化開始，記錄每輪改善 held-out perplexity
+% 的問題、假說、對照、結果與下一步決策。依實驗階段組織，保留負面結果。
+% 正文呈現影響後續決策的實驗；完整時間線、所有候選與成本放附錄。
+%
+% Abstract writing plan (write after results are reconciled):
+% 問題與限制 -> 逐階段研究方式 -> 主要結果 -> token/compute 取捨 -> 限制。
+% 不將最終配方的多項變更寫成某個單一方法的因果增益。
+
+\section{Introduction}
+\label{sec:introduction}
+% 動機：在固定 Llama 架構、8192 context 與有限訓練 tokens 下改善泛化。
+% 說明隨機初始化學生、預訓練教師與 checkpoint continuation 的區別。
+% 貢獻定位為可追溯的實驗研究、決策分析與可重現配方；不預設演算法新穎性。
+\subsection{Research Questions and Objectives}
+% 哪些變更改善相同 tokens 的 NLL？哪些降低成本？短程排序能否轉移到長程？
+\subsection{Overview of the Experimental Progression}
+% 用一張實驗演進圖標示各階段、關鍵分支與採用／停止的理由。
+
+\section{Experimental Setup and Evaluation Protocol}
+\label{sec:setup}
+\subsection{Model, Tokenizer, and Random Initialization}
+% 記錄實際參數量、架構、tied embedding/head、tokenizer revision、seed 與8192 context。
+% 初始化分布的消融放後續實驗章；此處先交代共同設定。
+\subsection{Canonical Data Split and Evaluation Subsets}
+% 完整 train 文件先 canonical shuffle(seed42)，最後50000篇保留，再 tokenize/pack。
+% 分清固定1k、額外9k、合併10k與full50k；列出各階段使用情形與重用情形。
+\subsection{Metrics and Comparison Criteria}
+% 主指標為 sum(NLL)/sum(valid predictions)，PPL取其指數。
+% 分開比較相同token endpoint、相同compute budget、完整allocation成本與step throughput。
+% 區分 input tokens、loss-bearing prediction tokens、teacher tokens 與eval tokens。
+\subsection{Experiment Categories and Resource Accounting}
+% 區分fresh run、pilot、共享checkpoint分支及明確授權的continuation。
+% 說明原始預算與後續擴充；記錄實際rounded endpoints、失敗allocation及總搜尋成本。
+% 不把超過原始64H的例外run描述為達成64H目標。
+
+\section{Data Preparation and Early Baselines}
+\label{sec:baseline}
+\subsection{Data Integrity, Tokenization, and Packing}
+% 精簡交代canonical ordering、損壞shard修復、split驗證、BOS/EOS及padding/loss mask。
+% 將具體故障、hash與恢復時間線移至附錄；正文說明對實驗有效性的影響。
+\subsection{AdamW Baseline and Initial Optimizer--Scheduler Screening}
+% 從最早AdamW基線，接到Muon及cosine/linear/WSD比較。
+% 報告匹配token endpoint、搜尋範圍、seed與評估口徑；不直接比較不等長短跑。
+\subsection{Raw versus Filtered Training Data}
+% 說明DCLM篩選動機、實際保留規則、來源組成與raw/filtered對照。
+% 僅納入確實完成的比較；raw-filtered-3b的filtered arm已取消，不能當完整雙臂結果。
+% 討論來源分布與token availability，避免概括成「品質篩選普遍無效」。
+
+\section{Improving Training Throughput}
+\label{sec:systems}
+\subsection{Profiling and Implementation Changes}
+% 沿時間線介紹資料reader/prefetch、microbatch/accumulation、compile、attention與optimizer實作。
+% 逐項確認變更是否保留目標、mask、資料順序與梯度語義。
+\subsection{Correctness Checks and Measured Speedups}
+% 以完整update、冷啟動、峰值記憶體及allocation成本呈現，保持計時口徑一致。
+% performance-ab-20261010/results.md可作早期短程測量，不能外推為6B品質等價證明。
+\subsection{How Efficiency Changed the Experiment Plan}
+% 說明節省的成本如何支援後續候選數／訓練長度；實測與投影分列。
+
+\section{Learning-Rate Schedules and Training-Horizon Transfer}
+\label{sec:schedules}
+\subsection{WSD, Cooldown Shape, and Phase Splitting}
+% 說明各輪tail比例、plateau、第二phase/reheating，以及觀察如何改變下一輪設計。
+\subsection{Learning Rate, Gradient Clipping, and Initialization Studies}
+% 依實際先後交代LR/clipping研究與初始化配方sweep，涵蓋residual-half與組合確認。
+% 單因素改善、組合結果與seed43確認分開呈現。
+\subsection{Proxy Failure and Revised Horizon Calibration}
+% 保留stable proxy與完整WSD不一致的經驗，交代為何重做bracket與true-horizon校準。
+% 區分實測、擬合及1--6B外推；fit-window敏感度不可稱統計信賴區間。
+
+\section{Batch Policy, Attention Masking, and Optimizer Refinement}
+\label{sec:refinement}
+\subsection{Batch-Size Transitions and Schedule Clocks}
+% 固定batch對照與BS16->64的切換時機；比較固定／縮放LR。
+% 明確區分token-clock與update-clock；batch與decay同時變動時承認混淆因素。
+\subsection{Intra-Document Attention}
+% 從document_spans定義block-diagonal causal mask，不從token ID推測邊界。
+% 展示matched-token對照、文件長度分桶、seed43確認及3B/4B轉移證據。
+\subsection{Muon, NorMuon, and Auxiliary AdamW Learning Rates}
+% 交代矩陣與embedding/head/norm分組、NS5、normalization與auxiliary AdamW LR x2。
+% 將PE-only/NorMuon-only和組合比較分開，不把複合變更歸因給單一項。
+\subsection{Weight Averaging, Weight Decay, and Negative Findings}
+% 納入EMA/有限窗口平均及WD相關對照，呈現未採用的原因與適用範圍。
+\subsection{Scaling the Selected Recipe to 3B, 4B, and 6B Tokens}
+% 完整交代每次fresh初始化、LR、batch、phase與實際tokens；3B/4B/6B是訓練量。
+% 相同token的4B AdamW x2與step-tail30可作重點；跨token預算曲線僅描述整體演進。
+
+\section{Further Method Exploration and Knowledge Distillation}
+\label{sec:distillation}
+\subsection{Alternative Optimizers and Training Objectives}
+% 納入Dion3、AdaMuon、SOAP、schedule-free與CCE等實際研究。
+% 完成1B、提早停止、程式故障與未執行提案分列；不以不同endpoint硬排名。
+\subsection{From the Initial Teacher to the Official 3B Teacher}
+% 說明教師選擇改變的動機、學生隨機初始化、CE+KL目標、temperature與teacher權重。
+% 教師預訓練屬於外部資源，不能描述成整個訓練流程只使用random weights。
+\subsection{Producer--Consumer Transport and Single-Allocation KD}
+% 交代8+8 hidden-state transport、pipeline限制及後續R5融合CE/KL的設計決策。
+% 品質與工程可靠性分開討論；含失敗成本及師生各自處理tokens。
+\subsection{The 6B KD Result and Its Cost}
+% 已核實R5：6000082944 student inputs；combined10k PPL=12.3989218778246。
+% 相同10k上的non-KD6B=12.9078477387367；PPL相對降低約3.94%。
+% R5實際64.711111H，屬72H授權；不是原64H目標內完成。
+% 沒有matched unaccelerated6B KD reference，不能據此宣稱加速完全無損。
+\subsection{Adaptive Critical Batch and Token-Bound Early Decay}
+% 交代C0 shadow/C1 half/C2 one及後續6B C2 early-decay的假說與設計。
+% First decay綁2399928320累積nonpadding input tokens，不綁W&B/local updates。
+% 目前已讀到的C2檔案僅startup-status；正文數字需另核實最終checkpoint/eval/accounting。
+
+\section{Consolidated Results and Decision Analysis}
+\label{sec:results}
+\subsection{Milestones in the Training Recipe}
+% 一張里程碑表：日期、parent/control、變更、tokens、eval subset、NLL/PPL、allocation成本與決策。
+% 另列formal identities與分支關係，避免將共享prefix當獨立重跑。
+\subsection{Token Efficiency and Compute Efficiency}
+% 在同一eval口徑畫PPL vs student inputs與PPL vs H200-hours。
+% KD顯式加入teacher allocation；分開單次run成本、搜尋成本與歷史teacher成本。
+\subsection{Which Findings Changed Subsequent Decisions?}
+% 選3--5個有控制證據的結論，逐一連結假說、觀察與採用／停止理由。
+% 加入短程排序轉移、組合非加成、mask與batch/schedule交互作用的限制。
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+\subsection{What Generalizes Beyond This Experiment?}
+% 將可重用的方法論與本資料／token horizon下的觀察區分。
+\subsection{Statistical and Experimental Limitations}
+% 大多single-seed、有限seed43確認、反覆重用eval subsets與自適應選擇。
+% 文件bootstrap不能取代training seed變異；缺少控制格就明說。
+% PPL不等同downstream能力；外部預訓練teacher與資料重疊風險不能略去。
+\subsection{Operational Failures and Reproducibility}
+% 精選會改變成本或結果可信度的案例；其餘job細節放附錄。
+
+\section{Conclusion}
+\label{sec:conclusion}
+% 回答引言研究問題：哪些實驗有效、哪些未支持假說、最終配方的品質／成本。
+% 僅以已核實終點總結，不將尚未完成或未核實的候選描述為改善。
+
+% Related work plan:
+% 將背景按pretraining/optimizer/schedule/data selection/KD分主題引用，
+% 放各章開頭或整合為短獨立章。正式成稿時逐筆查證文獻與BibTeX。
+% 現有references.bib是template示例，不是本研究的已驗證參考文獻。
+
+\appendix
+\section{Complete Experiment Timeline and Run Registry}
+% 所有formal/pilot/branch/failed/cancelled identities、日期、W&B與artifact位置。
+\section{Resolved Configurations and Hyperparameter Search Spaces}
+% 對照表、初始化、optimizer routing、scheduler與batch planner公式／pseudocode。
+\section{Data and Evaluation Provenance}
+% pinned revisions、split/index hashes、packing/document spans、subset與NLL聚合方式。
+\section{Additional Ablations and Learning Curves}
+% 全部候選、seed43、文件長度／來源分析與未採用方法。
+\section{Resource Ledger, Failures, and Recovery Records}
+% 實際Slurm allocation、預算修訂、失敗／取消成本、teacher與student分帳。
+\section{Checkpoint, Export, and Reproduction Details}
+% 完整state保存、HF reload驗證、source/config seals與可重現指令。
+
+% Priority figures/tables:
+% F1: 實驗演進與決策圖。
+% F2: 同eval下PPL vs cumulative student input tokens。
+% F3: LR與batch對tokens的曲線，標註phase/decay/batch事件。
+% F4: 關鍵matched-token消融與有限seed replication。
+% F5: PPL vs allocation H200-hours，KD包含teacher成本。
+% T1: 共同實驗設定與評估口徑。
+% T2: 配方演進里程碑與採用／停止決策。
+% T3: 最終non-KD/KD及已核實adaptive-batch結果。
