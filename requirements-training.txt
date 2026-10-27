@@ -1,15 +1,1 @@
-# Separate Python 3.11 environment; do not install into data-py311.
-numpy==1.26.4
-pyarrow==19.0.1
-datasets==3.6.0
-huggingface-hub==0.30.2
-transformers==4.51.3
-tokenizers==0.21.1
-torch==2.9.1
-accelerate==1.6.0
-wandb==0.19.10
-safetensors==0.5.3
-
-# FA3 builds use requirements-fa3-build.txt and pinned hopper source in
-# slurm/fa3_setup.py, in a separate environment. Do not install flash-attn
-# from PyPI here as a substitute for FlashAttention 3.
+requirements/training.txt

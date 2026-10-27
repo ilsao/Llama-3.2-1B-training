@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "run_id": "kd6b-r5-20261020-seed42",
+  "formal_id": 19,
+  "selection": "results/6b-comparison.json",
+  "configuration": "experiments/kd6b-r5-20261020/config.json",
+  "configuration_digest": "3080c174a87a531814a8e26b5caf122b66806046c51c57cf9b58329278ecc24c",
+  "source_seal": "experiments/kd6b-r5-20261020/execution-seal.json",
+  "completion": "experiments/kd6b-r5-20261020/completion-status.json",
+  "publication": "experiments/hf-kd6b-r5-20261020/upload.json",
+  "model_id": "asciibase64/Llama-3.2-1B-dolma3_mix",
+  "model_revision": "3f9196e11f990ed2cb60fcf558d5f1f07a7a36d6",
+  "checkpoint": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/checkpoints/checkpoint-028619-1e1949360f",
+  "export": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/export-step-28619-cfa436bf",
+  "wandb_url": "https://wandb.ai/cerulean-labs/lab5-training-llama/runs/58970e70c88c",
+  "aliases": {
+    "recipes/sota6b/implementation": "experiments/kd6b-r5-20261020",
+    "recipes/sota6b/runtime": "experiments/kd3b-hidden8-20261019/source",
+    "recipes/sota6b/config.json": "experiments/kd6b-r5-20261020/config.json",
+    "recipes/sota6b/fused_kd.py": "experiments/kd6b-lossless-20261020/fused_kd.py",
+    "recipes/sota6b/accelerations.py": "experiments/kd6b-lossless2-20261020/accelerations.py",
+    "recipes/sota6b/job.sbatch": "slurm/kd6b-r5-20261020.sbatch"
+  }
+}

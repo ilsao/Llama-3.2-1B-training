@@ -1,0 +1,61 @@
+{
+  "selection_metric": "combined_10k_ppl",
+  "evaluation_documents": 10000,
+  "full_50k_evaluated": false,
+  "selected_run": "kd6b-r5-20261020-seed42",
+  "runs": [
+    {
+      "run_id": "raw6b-normuon-adam2x-20261018",
+      "label": "6B non-KD",
+      "formal_id": 17,
+      "training_tokens": 6000082944,
+      "updates": 28619,
+      "fixed_1k_ppl": 12.773935950410152,
+      "additional_9k_ppl": 12.922426349966036,
+      "combined_10k_ppl": 12.9078477387367,
+      "nll": 38741267.746617794,
+      "prediction_tokens": 15146114,
+      "summary": "results/evidence/raw6b-normuon-adam2x-20261018-summary.json"
+    },
+    {
+      "run_id": "kd6b-r5-20261020-seed42",
+      "label": "6B R5 KD",
+      "formal_id": 19,
+      "training_tokens": 6000082944,
+      "updates": 28619,
+      "fixed_1k_ppl": 12.267813744534845,
+      "additional_9k_ppl": 12.413196856614316,
+      "combined_10k_ppl": 12.3989218778246,
+      "nll": 38132000.85033035,
+      "prediction_tokens": 15146114,
+      "summary": "results/evidence/kd6b-r5-20261020-seed42-summary.json"
+    },
+    {
+      "run_id": "kd6b-c2-earlydecay-20261020-seed42",
+      "label": "6B C2 + early decay",
+      "formal_id": 20,
+      "training_tokens": 6000082944,
+      "updates": 22060,
+      "fixed_1k_ppl": 12.395327945639037,
+      "additional_9k_ppl": 12.553537776482536,
+      "combined_10k_ppl": 12.537997051419381,
+      "nll": 38300944.758737564,
+      "prediction_tokens": 15146114,
+      "summary": "results/evidence/kd6b-c2-earlydecay-20261020-seed42-summary.json"
+    }
+  ],
+  "evidence": {
+    "results/evidence/raw6b-normuon-adam2x-20261018-summary.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/raw6b-normuon-adam2x-20261018/summary.json",
+      "sha256": "8c6483a22cc6c5cf667b294ad5487acc38cfffd43152243ef80d4d8882db216b"
+    },
+    "results/evidence/kd6b-r5-20261020-seed42-summary.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-r5-20261020-seed42/summary.json",
+      "sha256": "3fc9330a856865e93b685c6f19fc45d38ea4f2b45ab14e24b2996443a0711fbc"
+    },
+    "results/evidence/kd6b-c2-earlydecay-20261020-seed42-summary.json": {
+      "source": "/work/asciibase64/Llama-3.2-1B-training/runs/experiments/kd6b-c2-earlydecay-20261020-seed42/summary.json",
+      "sha256": "ba0b2afefbb6ef6ecea88b9b9792f094e926da469054b51208dd995c899a07cf"
+    }
+  }
+}
